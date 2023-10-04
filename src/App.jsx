@@ -24,8 +24,6 @@ const App = () => {
 
   const dispatch = useDispatch()
 
-  const [authUser, setAuthUser] = useState(null);
-
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       dispatch({
@@ -34,18 +32,19 @@ const App = () => {
       })
       if (currentUser) {
         window.localStorage.setItem("auth", "true")
-        // currentUser.getIdToken().then(token => {  
-        //   console.log(token)
-        //   window.localStorage.setItem("auth", "true")
-        // })
-        
+        currentUser.getIdToken().then(token => {  
+          console.log(token)    
+        }) 
       }
+  
     });
     return () => {
       unsubscribe();
     }
   }, []);
 
+
+  
   return (
     <>
       <BrowserRouter>
@@ -58,7 +57,7 @@ const App = () => {
           <Route path='/resetpassword' element={<ResetpasswordPage />} />
           <Route path='/dashboard' element={
             <ProtectedRoute>
-              <DashboardPage />
+              <DashboardPage/>
             </ProtectedRoute>} />
 
           <Route path="/barber/barberform" element={<BarberformPage />} />

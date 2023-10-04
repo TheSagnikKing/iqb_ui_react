@@ -1,4 +1,4 @@
-import { USER_LOGOUT_FAIL, USER_LOGOUT_REQ, USER_LOGOUT_SUCCESS, USER_SIGNIN_FAIL, USER_SIGNIN_REQ, USER_SIGNIN_RESET, USER_SIGNIN_SUCCESS, USER_SIGNUP_FAIL, USER_SIGNUP_REQ, USER_SIGNUP_SUCCESS } from "../constants/userConstants"
+import { USER_LOGOUT_FAIL, USER_LOGOUT_REQ, USER_LOGOUT_RESET, USER_LOGOUT_SUCCESS, USER_SIGNIN_FAIL, USER_SIGNIN_REQ, USER_SIGNIN_RESET, USER_SIGNIN_SUCCESS, USER_SIGNUP_FAIL, USER_SIGNUP_REQ, USER_SIGNUP_SUCCESS } from "../constants/userConstants"
 
 export const signupReducer = (state = {}, action) => {
     switch(action.type){
@@ -36,6 +36,8 @@ export const logoutReducer = (state = {}, action) => {
             return {success:true}
         case USER_LOGOUT_FAIL:
             return {loading:false, error:action.payload}
+        case USER_LOGOUT_RESET:
+            return {}
         default:
             return state
     }

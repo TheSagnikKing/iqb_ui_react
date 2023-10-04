@@ -9,7 +9,7 @@ import {
     confirmPasswordReset
 } from "firebase/auth";
 
-import { GOOGLE_SIGNIN_REQ, USER_LOGOUT_FAIL, USER_LOGOUT_REQ, USER_LOGOUT_SUCCESS, USER_SIGNIN_FAIL, USER_SIGNIN_REQ, USER_SIGNIN_RESET, USER_SIGNIN_SUCCESS, USER_SIGNUP_FAIL, USER_SIGNUP_REQ, USER_SIGNUP_SUCCESS } from "../constants/userConstants";
+import { GOOGLE_SIGNIN_REQ, USER_LOGOUT_FAIL, USER_LOGOUT_REQ, USER_LOGOUT_RESET, USER_LOGOUT_SUCCESS, USER_SIGNIN_FAIL, USER_SIGNIN_REQ, USER_SIGNIN_RESET, USER_SIGNIN_SUCCESS, USER_SIGNUP_FAIL, USER_SIGNUP_REQ, USER_SIGNUP_SUCCESS } from "../constants/userConstants";
 
 
 export const signupAction = (email, password) => async (dispatch) => {
@@ -88,6 +88,8 @@ export const logoutAction = () => async (dispatch) => {
         dispatch({
             type:USER_LOGOUT_SUCCESS
         })
+
+        dispatch({type:USER_LOGOUT_RESET})
 
     } catch (error) {
         dispatch({
