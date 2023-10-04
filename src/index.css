@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background-color: #F1F6FC;
+}
+
+.demo_menu {
+  padding: 30px;
+}
+
+.demo_menu h1 {
+  font-weight: 400;
+}
+
+.demo_menu div {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 30px;
+}
+
+.demo_menu div h4 {
+  font-weight: 400;
+}
+
+.rdt_TableRow {
+  background-color: #F1F6Fc !important;
+  border: none !important;
+  border-radius: 6px;
+
+}
+
+.loader {
+  margin-top: 200px;
+}
+
+.flt-input {
+  display: flex;
+  gap: .3rem;
+  padding: 30px;
+}
+
+.flt-input input {
+  border-radius: 3px;
+  border: 1px solid black;
+  padding-inline: 15px;
+}
+
+.flt-input button {
+  background-color: #f1f6fc;
+  padding-inline: 25px;
+  border-radius: 3px;
+  border: 1px solid black !important;
+}
+
+.rdt_TableHeadRow {
+  min-height: 0 !important;
+  border-bottom: none !important;
+}
+
+.rdt_TableBody {
+  border-radius: 10px !important;
+  background-color: white !important;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 20px 30px;
+}
+
+.rdt_Table {
+  background-color: #F1F6FC !important;
+}
+
+.rdt_Pagination {
+  border-top: none !important;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.rdt_Pagination>span:nth-child(1) {
+  display: none;
+}
+
+.rdt_Pagination>div:nth-child(2) {
+  display: none;
+}
+
+.rdt_TableCell{
+  -webkit-flex-basis:auto !important;
+} 

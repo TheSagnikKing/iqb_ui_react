@@ -1,0 +1,175 @@
+/* right_div_top styling starts */
+
+.br-right_main_div{
+    height: auto;
+    width: 100%;
+    padding:2.4% 2.8%;
+    background-color: #F1F6FC;
+    margin-left: 265px;
+    width: calc(100% - 265px);
+    position: absolute;
+    top: 90px;
+}
+
+.br-right_main_div .br-right_main_head{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: rgba(0,0,0,0.6);
+}
+
+.br-right_main_div .br-right_main_head p:nth-child(1){
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.br-right_main_div .br-right_main_head div:nth-child(2){
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+
+.br-right_main_div .br-right_main_head .br-btn_box > div:nth-child(1){
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    font-size: 15px;
+    padding: 11px 16px;
+    border-radius: 6px;
+    background-color: white;
+    cursor: pointer;
+}
+
+.br-right_main_div .br-right_main_head .br-btn_box > div:nth-child(1) div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.br-right_main_div .br-right_main_head .br-btn_box > div:nth-child(2){
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(0,0,0,0.6);
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.br-right_main_form{
+    background-color: white;
+    border-radius: 8px;
+    width: 100%;
+    margin-block: 18px;
+    padding: 5.3% 4.2%;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 3.5rem;
+}
+
+.br-right_main_form .br-left{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.br-right_main_form .br-left div{
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.br-right_main_form .br-left div input{
+    width: 100%;
+    height: 45px;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    background-color: #F1F6FC;
+    padding: 0px 15px;
+    color: rgba(0,0,0,0.6);
+}
+
+.br-right_main_form .br-left div label{
+    font-size: 12px;
+    color: rgba(0,0,0,0.6);
+}
+
+.br-right_main_form .br-right{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.br-right_main_form .br-right > div{
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.br-right_main_form .br-right > div label{
+    font-size: 12px;
+    color: rgba(0,0,0,0.6);
+}
+
+.br-right_main_form .br-right > div input{
+    width: 100%;
+    height: 45px;
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    background-color: #F1F6FC;
+    padding: 0px 15px;
+    color: rgba(0,0,0,0.6);
+}
+
+.br-salonid .br-saloninput{
+    display: flex;
+    position: relative;
+}
+
+.br-salonid .br-saloninput div{
+    position: absolute;
+    top: 50%;
+    right: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: rgba(0,0,0,0.6);
+    cursor: pointer;
+}
+.br-salonid .br-saloninput input::placeholder{
+    color: rgba(0,0,0,0.2);
+    font-size: 12px;
+}
+
+.br-right_main_form .br-right .br-btn_box{
+    display: flex;
+    flex-direction: row ;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.br-right_main_form .br-right .br-btn_box button:nth-child(1){
+    padding: 14px 45px;
+    color: rgba(0,0,0,0.6);
+    border-radius: 8px;
+    background-color: #F1F6FC;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.br-right_main_form .br-right .br-btn_box button:nth-child(2){
+    padding: 14px 45px;
+    color: rgba(0,0,0,0.6);
+    border-radius: 8px;
+    background-color: white;
+    border: 1px solid rgba(0,0,0,0.6);
+    outline: none;
+    cursor: pointer;
+}
