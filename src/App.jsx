@@ -12,39 +12,12 @@ import CustomerformPage from './pages/customer/CustomerformPage'
 import Dashboard3Page from './pages/customer/Dashboard3Page'
 import InitialPage from './pages/InitialPage'
 import BarberDashboardPage from './pages/barberDashboard/BarberDashboardPage'
-
-import { auth } from "./config.js/firebase.config"
-import { onAuthStateChanged } from 'firebase/auth'
-
-import { USER_SIGNIN_SUCCESS } from './redux/constants/userConstants'
-import { useDispatch } from 'react-redux'
 import ProtectedRoute from './components/authentification/ProtectedRoute'
+import ResetNewPassword from './components/authentification/ResetNewPassword'
 
 const App = () => {
 
-  const dispatch = useDispatch()
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      dispatch({
-        type: USER_SIGNIN_SUCCESS,
-        payload: currentUser,
-      })
-      if (currentUser) {
-        window.localStorage.setItem("auth", "true")
-        currentUser.getIdToken().then(token => {  
-          console.log(token)    
-        }) 
-      }
-  
-    });
-    return () => {
-      unsubscribe();
-    }
-  }, []);
-
-
-  
   return (
     <>
       <BrowserRouter>
@@ -55,20 +28,42 @@ const App = () => {
           <Route path="/signin" element={<SigninPage />} />
           <Route path='/verifyemail' element={<VerifyemailPage />} />
           <Route path='/resetpassword' element={<ResetpasswordPage />} />
+          <Route path="/resetnewpassword" element={<ResetNewPassword/>}/>
           <Route path='/dashboard' element={
             <ProtectedRoute>
-              <DashboardPage/>
+              <DashboardPage />
             </ProtectedRoute>} />
 
-          <Route path="/barber/barberform" element={<BarberformPage />} />
-          <Route path="/barber/dashboard2" element={<Dashboard2Page />} />
+          <Route path="/barber/barberform" element={
+            <ProtectedRoute>
+              <BarberformPage />
+            </ProtectedRoute>
+          } />
+          <Route path="/barber/dashboard2" element={
+            <ProtectedRoute>
+              <Dashboard2Page />
+            </ProtectedRoute>
+          } />
 
-          <Route path="/customer/customerform" element={<CustomerformPage />} />
-          <Route path="/customer/dashboard3" element={<Dashboard3Page />} />
+          <Route path="/customer/customerform" element={
+            <ProtectedRoute>
+              <CustomerformPage />
+            </ProtectedRoute>
+          } />
+          <Route path="/customer/dashboard3" element={
+            <ProtectedRoute>
+              <Dashboard3Page />
+            </ProtectedRoute>
+          } />
 
 
           {/* //BarberDashboard */}
-          <Route path="/barberdashboard" element={<BarberDashboardPage />} />
+          <Route path="/barberdashboard" element={
+            <ProtectedRoute>
+              <BarberDashboardPage />
+              </ProtectedRoute>
+          } />
+          <Route path="*" element={<h1>404 Page Not Found !!</h1>}/>
         </Routes>
       </BrowserRouter>
     </>

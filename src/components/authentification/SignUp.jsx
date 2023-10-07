@@ -11,9 +11,10 @@ import { RiErrorWarningLine } from 'react-icons/ri'
 import { FaRegUser } from "react-icons/fa"
 import { ColorRing } from 'react-loader-spinner'
 import { Link, useNavigate } from 'react-router-dom'
-
-import { googleSigninAction, signupAction } from '../../redux/actions/userAction'
-import { useDispatch, useSelector } from 'react-redux'
+import { googleSignIn, signup } from '../../redux/actions/userAction'
+import { auth } from '../../config.js/firebase.config'
+//authentication
+import { validateSigninUser } from '../../utils/ValidateUser'
 
 const SignUp = () => {
 
@@ -23,41 +24,70 @@ const SignUp = () => {
         setCheck(!check)
     }
 
-    const [username, setUsername] = useState("")
+    // const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [email, setEmail] = useState("")
     const [visible, setVisible] = useState(false)
     const [error, setError] = useState(true)
 
-    const dispatch = useDispatch()
-    const signin = useSelector(state => state.signin)
-    const navigate = useNavigate()
+    //authentication starts
 
-    const authUser = window.localStorage.getItem("auth")
+    //User 
+    const [user, setUser] = useState(true);
+
+
+    const navigate = useNavigate();
+
+    const authObject = { isAdmin: 'false', isUser: 'true' };
+    const authJSON = JSON.stringify(authObject);
 
     useEffect(() => {
-      if(authUser === "true"){
-        navigate("/dashboard")
-      }
-    },[authUser,navigate])
 
-    useEffect(() => {
-        if(signin?.error){
-            setError(signin.error)
-        }
-        if(signin?.success === true){
-            window.localStorage.setItem("auth","true")
-            navigate("/dashboard")
-        }
-    },[signin,navigate,window])
+        const unsubscribe = auth.onAuthStateChanged((userCred) => {
+            if (userCred) {
+                userCred.getIdToken().then(async(token) => {
+                    console.log("user signup", token)
+                    validateSigninUser(token, user).then((data) => {
+                        window.localStorage.setItem('auth', authJSON);
+                        console.log("validateSignup", data);
+                        navigate('/dashboard');
+                    });
+                });
+            } else {
+                window.localStorage.setItem('auth', 'false');
+            }
+        });
 
-    const submitHandler = async() => {
-        dispatch(signupAction(email,password))
+        return () => {
+            unsubscribe()
+        }
+    }, []);
+
+
+    const submitHandler = async () => {
+        try {
+            if (!email) {
+                alert("Email Required")
+            } else if (!password) {
+                alert("Password required")
+            } else {
+                const currentuser = await signup(email, password)
+                console.log(currentuser)
+            }
+        } catch (error) {
+            console.log(error.message)
+        }
     }
 
-    const googleSigninHandler = () => {
-        dispatch(googleSigninAction())
+    
+    const googleSigninHandler = async () => {
+        try {
+            await googleSignIn();
+        } catch (error) {
+            console.log(error.message);
+        }
     }
+
     return (
         <>
             <main className="signup">
@@ -74,7 +104,7 @@ const SignUp = () => {
 
                         <div className="divtwo">
 
-                            <div className="input_container">
+                            {/* <div className="input_container">
                                 <div>
                                     <FaRegUser />
                                 </div>
@@ -82,7 +112,7 @@ const SignUp = () => {
                                     value={username}
                                     onChange={(e) => setUsername(e.target.value)}
                                 />
-                            </div>
+                            </div> */}
 
                             <div className="input_container">
                                 <div>

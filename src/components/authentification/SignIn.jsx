@@ -11,8 +11,11 @@ import { RiErrorWarningLine } from 'react-icons/ri'
 
 import { ColorRing } from 'react-loader-spinner'
 import { Link, useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { googleSignIn, googleSigninAction, signinAction } from '../../redux/actions/userAction'
+import { auth } from '../../config.js/firebase.config'
+import { googleSignIn, signin } from '../../redux/actions/userAction'
+
+import { validateSigninUser } from '../../utils/ValidateUser'
+
 
 
 //This is sign-in page not sign-up
@@ -30,36 +33,60 @@ const SignIn = () => {
     const [visible, setVisible] = useState(false)
     const [error, setError] = useState(true)
 
-    const dispatch = useDispatch()
-    const signin = useSelector(state => state.signin)
-    const navigate = useNavigate()
+    //authentication starts
 
-    const authUser = window.localStorage.getItem("auth") === "true"
+    //User 
+    const [user, setUser] = useState(true);
 
-    useEffect(() => {
-      if(authUser){
-        navigate("/dashboard")
-      }
-    },[authUser,navigate])
+    const navigate = useNavigate();
+
+    const authObject = { isAdmin: 'false', isUser: 'true' };
+    const authJSON = JSON.stringify(authObject);
 
     useEffect(() => {
-        if (signin?.error) {
-            setError(signin.error)
+
+        const unsubscribe = auth.onAuthStateChanged((userCred) => {
+            if (userCred) {
+                userCred.getIdToken().then(async (token) => {
+                    console.log("user signin", token)
+                    validateSigninUser(token, user).then((data) => {
+                        window.localStorage.setItem('auth', authJSON);
+                        console.log("validateSignin", data);
+                        navigate("/dashboard")
+                       
+                    });
+                });
+            } else {
+                window.localStorage.setItem('auth', 'false');
+            }
+        });
+
+        return () => {
+            unsubscribe()
         }
-        if (signin?.success === true) {
-            window.localStorage.setItem("auth", "true")
-            navigate("/dashboard")
-        }
-    }, [signin, navigate, window])
+    }, []);
+
 
     const submitHandler = async () => {
-
-        dispatch(signinAction(email, password))
-
+        try {
+            if (!email) {
+                alert('Email Required');
+            } else if (!password) {
+                alert('Password required');
+            } else {
+                await signin(email, password);
+            }
+        } catch (error) {
+            console.log(error);
+        }
     }
 
-    const googleSigninHandler = async() => {
-        await googleSignIn()
+    const googleSigninHandler = async () => {
+        try {
+            await googleSignIn();
+        } catch (error) {
+            console.log(error.message);
+        }
     }
 
     return (

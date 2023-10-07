@@ -1,11 +1,13 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import thunk from "redux-thunk";
-import { logoutReducer, signinReducer, signupReducer } from "./reducers/userReducer";
+import { logoutReducer, newPasswordResetReducer, passwordResetEmailReducer, signinReducer, signupReducer } from "./reducers/userReducer";
 
 const rootReducer = combineReducers({
   signup:signupReducer,
   signin:signinReducer,
-  logout:logoutReducer
+  logout:logoutReducer,
+  passwordResetEmail:passwordResetEmailReducer,
+  newPasswordReset:newPasswordResetReducer
 });
 
 const initialState = {};

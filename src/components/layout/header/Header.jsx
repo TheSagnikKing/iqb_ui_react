@@ -11,8 +11,9 @@ import { FaUserCircle } from "react-icons/fa"
 import { MdKeyboardArrowDown } from "react-icons/md"
 import { BiLogOutCircle } from "react-icons/bi"
 import { RiAccountCircleFill } from "react-icons/ri"
-import { useDispatch } from 'react-redux'
-import { logoutAction } from '../../../redux/actions/userAction'
+import { useNavigate } from 'react-router-dom'
+import { logout } from '../../../redux/actions/userAction'
+
 
 
 const Header = ({ title }) => {
@@ -21,10 +22,17 @@ const Header = ({ title }) => {
 
   const [dropdown, setDropdown] = useState(false)
 
-  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
-  const logoutHandler = () => {
-    dispatch(logoutAction())
+  const logoutHandler = async() => {
+    try {
+      await logout()
+      window.localStorage.setItem("auth", "false");
+      navigate("/")
+    } catch (error) {
+      // Handle any errors that occur during sign-out
+      console.error('Logout error:', error);
+    }
   }
 
   return (

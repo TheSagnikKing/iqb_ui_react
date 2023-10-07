@@ -1,20 +1,68 @@
-import React, { useEffect} from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { USER_SIGNIN_SUCCESS } from '../../redux/constants/userConstants'
+import { auth } from '../../config.js/firebase.config'
+import { validateSigninUser } from '../../utils/ValidateUser'
 import { useNavigate } from 'react-router-dom'
 
-const ProtectedRoute = ({children}) => {
+
+const ProtectedRoute = ({ children }) => {
+  const dispatch = useDispatch()
   const navigate = useNavigate()
-  const logout = useSelector(state => state.logout)
-  const authUser = window.localStorage.getItem("auth") === "true"
+
+  const authValue = window.localStorage.getItem("auth") === "false"
+
+  const [user, setUser] = useState(false)
+  // const [admin, setAdmin] = useState(false)
+
+  const storedAuthJSON = localStorage.getItem("auth");
+  const storedAuthObject = JSON.parse(storedAuthJSON);
+
+
+  const authObject = { isAdmin: "false", isUser: "true" };
+  const authJSON = JSON.stringify(authObject);
+
+  // const authAdminObject = { isAdmin: "true", isUser: "false" };
+  // const authAdminJSON = JSON.stringify(authAdminObject)
 
   useEffect(() => {
-    if(logout?.success === true){
-      navigate("/signin")
+
+      let isMounted = true
+
+      if (storedAuthObject.isUser == "true") {
+        auth.onAuthStateChanged((userCred) => {
+          if (userCred) {
+            userCred.getIdToken().then(token => {
+              console.log("userrrrrr", token)
+
+              validateSigninUser(token, user).then(data => {
+                window.localStorage.setItem("auth", authJSON)
+                console.log(data)
+                dispatch({ type: USER_SIGNIN_SUCCESS, payload: data })
+
+              })
+        
+            })
+          } else {
+            navigate("/")
+            window.localStorage.setItem("auth", "false")
+          }
+        })
+      } 
+
+    return () => {
+      isMounted = false;
     }
-    if(!authUser){
-      navigate("/signin")
+
+  }, []);
+
+
+  useEffect(() => {
+    if (authValue) {
+        navigate("/")
     }
-  },[navigate,logout,authUser])
+  }, [authValue, navigate])
+
   return (
     children
   )

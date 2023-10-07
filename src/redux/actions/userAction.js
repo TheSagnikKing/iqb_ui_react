@@ -9,97 +9,68 @@ import {
     confirmPasswordReset
 } from "firebase/auth";
 
-import { GOOGLE_SIGNIN_REQ, USER_LOGOUT_FAIL, USER_LOGOUT_REQ, USER_LOGOUT_RESET, USER_LOGOUT_SUCCESS, USER_SIGNIN_FAIL, USER_SIGNIN_REQ, USER_SIGNIN_RESET, USER_SIGNIN_SUCCESS, USER_SIGNUP_FAIL, USER_SIGNUP_REQ, USER_SIGNUP_SUCCESS } from "../constants/userConstants";
+import { NEW_PASSWORD_RESET_FAIL, NEW_PASSWORD_RESET_REQ, NEW_PASSWORD_RESET_SUCCESS, PASSWORD_RESET_EMAIL_FAIL, PASSWORD_RESET_EMAIL_REQ, PASSWORD_RESET_EMAIL_SUCCESS} from "../constants/userConstants";
 
 
-export const signupAction = (email, password) => async (dispatch) => {
-    dispatch({ type: USER_SIGNUP_REQ });
 
-    try {
-        const currentuser = await createUserWithEmailAndPassword(auth, email, password);
-        window.localStorage.setItem("auth","true")
-        dispatch({
-            type:USER_SIGNUP_SUCCESS,
-            payload:currentuser
-        })
-        dispatch({
-            type:USER_SIGNIN_SUCCESS,
-            payload:currentuser
-        })
-        dispatch({type:USER_SIGNIN_RESET})
-    } catch (error) {
-        dispatch({
-            type: USER_SIGNUP_FAIL,
-            payload: error.message,
-        });
-    }
-};
+export const signin = (email, password) => {
+    return signInWithEmailAndPassword(auth, email, password);
+}
 
-export const signinAction = (email, password) => async (dispatch) => {
-    dispatch({ type: USER_SIGNIN_REQ });
+export const signup = (email, password) => {
+    return createUserWithEmailAndPassword(auth, email, password);
+}
 
-    try {
-        const currentuser = await signInWithEmailAndPassword(auth, email, password);
-        window.localStorage.setItem("auth","true")
-        dispatch({
-            type:USER_SIGNIN_SUCCESS,
-            payload:currentuser
-        })
-        dispatch({type:USER_SIGNIN_RESET})
-    } catch (error) {
-        dispatch({
-            type: USER_SIGNIN_FAIL,
-            payload: error.message,
-        });
-    }
-};
-
-export const googleSigninAction = () => async (dispatch) => {
-    dispatch({ type: GOOGLE_SIGNIN_REQ });
-
-    try {
-        const googleAuthProvider = new GoogleAuthProvider()
-        await signInWithPopup(auth,googleAuthProvider)
-        // window.localStorage.setItem("auth","true")
-        // dispatch({
-        //     type:USER_SIGNIN_SUCCESS,
-        //     payload:currentuser
-        // })
-        dispatch({type:USER_SIGNIN_RESET})
-    } catch (error) {
-        dispatch({
-            type: USER_SIGNIN_FAIL,
-            payload: error.message,
-        });
-    }
-};
+export const logout = () => {
+     return signOut(auth)
+}
 
 export const googleSignIn = () => {
     const googleAuthProvider = new GoogleAuthProvider()
     return signInWithPopup(auth,googleAuthProvider)
 }
 
-export const logoutAction = () => async (dispatch) => {
-    dispatch({ type: USER_LOGOUT_REQ });
+
+export const passwordResetEmailAction = (email) => async (dispatch) => {
+    dispatch({ type: PASSWORD_RESET_EMAIL_REQ });
 
     try {
-        await signOut(auth)
-        window.localStorage.setItem("auth","false")
-        dispatch({
-            type:USER_LOGOUT_SUCCESS
+        await sendPasswordResetEmail(auth, email, {
+            url: "http://localhost:5173"
         })
 
-        dispatch({type:USER_LOGOUT_RESET})
+        dispatch({
+            type: PASSWORD_RESET_EMAIL_SUCCESS,
+            payload: "Email has been sent to your mailbox."
+        })
 
     } catch (error) {
         dispatch({
-            type: USER_LOGOUT_FAIL,
+            type: PASSWORD_RESET_EMAIL_FAIL,
             payload: error.message,
         });
     }
 };
 
 
+export const newPasswordResetAction = (oobcode,newPassword) => async (dispatch) => {
+    dispatch({ type: NEW_PASSWORD_RESET_REQ });
+
+    try {
+        await confirmPasswordReset(auth,oobcode,newPassword)
+
+        dispatch({
+            type: NEW_PASSWORD_RESET_SUCCESS,
+            payload: "Password has been changed successfully"
+        })
+
+    } catch (error) {
+        dispatch({
+            type: NEW_PASSWORD_RESET_FAIL,
+            payload: error.message,
+        });
+    }
+};
 
 
 
