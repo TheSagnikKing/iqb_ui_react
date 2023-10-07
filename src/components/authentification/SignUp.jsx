@@ -33,12 +33,12 @@ const SignUp = () => {
     //authentication starts
 
     //User 
-    const [user, setUser] = useState(true);
+    const [barber, setBarber] = useState(true);
 
 
     const navigate = useNavigate();
 
-    const authObject = { isAdmin: 'false', isUser: 'true' };
+    const authObject = { isAdmin: 'false', isBarber: 'true' };
     const authJSON = JSON.stringify(authObject);
 
     useEffect(() => {
@@ -46,8 +46,8 @@ const SignUp = () => {
         const unsubscribe = auth.onAuthStateChanged((userCred) => {
             if (userCred) {
                 userCred.getIdToken().then(async(token) => {
-                    console.log("user signup", token)
-                    validateSigninUser(token, user).then((data) => {
+                    console.log("barber signup", token)
+                    validateSigninUser(token, barber).then((data) => {
                         window.localStorage.setItem('auth', authJSON);
                         console.log("validateSignup", data);
                         navigate('/dashboard');

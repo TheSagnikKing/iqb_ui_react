@@ -1,6 +1,6 @@
 const mongoose = require("mongoose")
 
-const userSchema = mongoose.Schema({
+const barberSchema = mongoose.Schema({
     name:{
         type:String,
         // required:true
@@ -30,12 +30,12 @@ const userSchema = mongoose.Schema({
         default:false
     },
 
-    isUser:{
+    isBarber:{
         type:Boolean,
         default:false
     }
 },{timestamps:true})
 
-const User = mongoose.model("User",userSchema)
+const Barber = mongoose.model("Barber",barberSchema)
 
-module.exports = User
+module.exports = Barber

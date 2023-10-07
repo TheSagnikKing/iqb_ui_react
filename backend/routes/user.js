@@ -1,7 +1,9 @@
 const express = require("express")
 const router = express.Router()
 const admin = require("../config/firebase.config")
-const User = require("../models/Users")
+
+const Barber = require("../models/Barber")
+
 const Admin = require("../models/Admin")
 
 
@@ -25,10 +27,11 @@ const auth = async (req, res, next) => {
             })
         }
 
-        const userdata = req.body.user || false
+        const barberdata = req.body.barber || false
         const admindata = req.body.admin || false
 
-        req.user = {decodeValue:decodeValue, user:userdata,admin:admindata }   
+        req.user = {decodeValue:decodeValue, barber:barberdata,admin:admindata }   
+
         next()
 
     } catch (error) {
@@ -39,24 +42,23 @@ const auth = async (req, res, next) => {
     }
 }
 
-
 router.post("/login", auth, async (req, res) => {
     try {
         const newuser = req.user
 
-        const userExists = await User.findOne({ userId: newuser.decodeValue.user_id })
+        const userExists = await Barber.findOne({ userId: newuser.decodeValue.user_id })
 
         if (!userExists) {
             //create new user
             try {
-                const newUser = new User({
+                const newUser = new Barber({
                     name: newuser.decodeValue.name,
                     email: newuser.decodeValue.email,
                     userId: newuser.decodeValue.user_id,
                     email_verified: newuser.decodeValue.email_verified,
                     auth_time: newuser.decodeValue.auth_time,
                     isAdmin: newuser.admin,
-                    isUser:newuser.user
+                    isBarber:newuser.barber
                 })
 
                 const savedUser = await newUser.save()
@@ -81,7 +83,7 @@ router.post("/login", auth, async (req, res) => {
                     new: true
                 }
 
-                const result = await User.findOneAndUpdate(filter, {
+                const result = await Barber.findOneAndUpdate(filter, {
                     $set: {
                         auth_time: newuser.decodeValue.auth_time
                     }
@@ -109,6 +111,7 @@ router.post("/login", auth, async (req, res) => {
 })
 
 
+
 router.post("/admin/login", auth, async (req, res) => {
     try {
         const newuser = req.user
@@ -125,7 +128,7 @@ router.post("/admin/login", auth, async (req, res) => {
                     email_verified: newuser.decodeValue.email_verified,
                     auth_time: newuser.decodeValue.auth_time,
                     isAdmin: newuser.admin,
-                    isUser:newuser.user
+                    isBarber:newuser.barber
                 })
 
                 const savedUser = await newUser.save()

@@ -12,14 +12,14 @@ const ProtectedRoute = ({ children }) => {
 
   const authValue = window.localStorage.getItem("auth") === "false"
 
-  const [user, setUser] = useState(false)
+  const [barber, setBarber] = useState(false)
   // const [admin, setAdmin] = useState(false)
 
   const storedAuthJSON = localStorage.getItem("auth");
   const storedAuthObject = JSON.parse(storedAuthJSON);
 
 
-  const authObject = { isAdmin: "false", isUser: "true" };
+  const authObject = { isAdmin: "false", isBarber: "true" };
   const authJSON = JSON.stringify(authObject);
 
   // const authAdminObject = { isAdmin: "true", isUser: "false" };
@@ -33,9 +33,9 @@ const ProtectedRoute = ({ children }) => {
         auth.onAuthStateChanged((userCred) => {
           if (userCred) {
             userCred.getIdToken().then(token => {
-              console.log("userrrrrr", token)
+              console.log("barberrrrrrr", token)
 
-              validateSigninUser(token, user).then(data => {
+              validateSigninUser(token, barber).then(data => {
                 window.localStorage.setItem("auth", authJSON)
                 console.log(data)
                 dispatch({ type: USER_SIGNIN_SUCCESS, payload: data })
