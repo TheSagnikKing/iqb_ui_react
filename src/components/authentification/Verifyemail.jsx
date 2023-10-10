@@ -41,7 +41,7 @@ const Verifyemail = () => {
                             <p>Thank you, check your email for instructions to reset your password</p>
                         </div>
 
-                        <Link to="/signin" className="divthree">Skip Now</Link>
+                        <Link to="/" className="divthree">Skip Now</Link>
 
                         <p className="divfour">Don't receive an email?<strong onClick={resendEmailHandler} style={{cursor:"pointer"}}>Resend</strong></p>
                     </div>

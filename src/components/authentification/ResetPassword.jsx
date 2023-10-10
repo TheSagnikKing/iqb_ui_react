@@ -57,9 +57,9 @@ const ResetPassword = () => {
                             onClick={resetEmailHandler}
                         >Continue</button>
 
-                        <p className="divfour"><Link to="/signin" style={{ color: "black", textDecoration: "none" }}><strong>Back to sign in</strong></Link></p>
+                        <p className="divfour"><Link to="/" style={{ color: "black", textDecoration: "none" }}><strong>Back to sign in</strong></Link></p>
 
-                        <p className="divfive">Don't have an account? <Link to="/signup" style={{ textDecoration: "none", color: "black" }}><strong>Sign Up</strong></Link></p>
+                        <p className="divfive">Don't have an account? <Link to="/" style={{ textDecoration: "none", color: "black" }}><strong>Sign Up</strong></Link></p>
 
                     </div>
                 </div>

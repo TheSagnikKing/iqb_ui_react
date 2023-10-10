@@ -96,3 +96,11 @@ body {
 .rdt_TableCell{
   -webkit-flex-basis:auto !important;
 } 
+
+.lazy-loader{
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

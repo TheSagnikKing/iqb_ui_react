@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import './SignIn.css'
+import './SignUp.css'
 import { AiOutlineMail } from 'react-icons/ai'
 import { RiLockPasswordLine } from 'react-icons/ri'
 import { FcGoogle } from 'react-icons/fc'
@@ -9,25 +9,21 @@ import { BiShow } from 'react-icons/bi'
 import { BiHide } from 'react-icons/bi'
 import { RiErrorWarningLine } from 'react-icons/ri'
 
-import { ColorRing } from 'react-loader-spinner'
 import { Link, useNavigate } from 'react-router-dom'
+import { googleSignIn, signup } from '../../redux/actions/userAction'
 import { auth } from '../../config.js/firebase.config'
-import { googleSignIn, signin } from '../../redux/actions/userAction'
+//authentication
+import { validateSigninAdmin } from '../../utils/ValidateUser'
 
-import { validateSigninUser } from '../../utils/ValidateUser'
+const SignUp = () => {
 
-
-
-//This is sign-in page not sign-up
-
-const SignIn = () => {
     const [check, setCheck] = useState(false)
-    const [loader, setLoader] = useState(false)
 
     const isChecked = () => {
         setCheck(!check)
     }
 
+    // const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [email, setEmail] = useState("")
     const [visible, setVisible] = useState(false)
@@ -35,26 +31,24 @@ const SignIn = () => {
 
     //authentication starts
 
-    //User 
-    const [barber, setBarber] = useState(true);
+    //Admin
+    const [admin, setAdmin] = useState(true);
 
     const navigate = useNavigate();
 
-    const authObject = { isAdmin: 'false', isBarber: 'true' };
+    const authObject = { isAdmin: 'true', isBarber: 'false' };
     const authJSON = JSON.stringify(authObject);
 
     useEffect(() => {
 
         const unsubscribe = auth.onAuthStateChanged((userCred) => {
             if (userCred) {
-                userCred.getIdToken().then(async (token) => {
-                    console.log("barber signin", token)
-
-                    validateSigninUser(token, barber).then((data) => {
+                userCred.getIdToken().then(async(token) => {
+                    console.log("Admin signup", token)
+                    validateSigninAdmin(token, admin).then((data) => {
                         window.localStorage.setItem('auth', authJSON);
-                        console.log("validateSignin", data);
-                        navigate("/dashboard")
-                       
+                        console.log("validateSignup Admin", data);
+                        navigate('/admin-dashboard');
                     });
                 });
             } else {
@@ -71,17 +65,19 @@ const SignIn = () => {
     const submitHandler = async () => {
         try {
             if (!email) {
-                alert('Email Required');
+                alert("Email Required")
             } else if (!password) {
-                alert('Password required');
+                alert("Password required")
             } else {
-                await signin(email, password);
+                const currentuser = await signup(email, password)
+                console.log(currentuser)
             }
         } catch (error) {
-            console.log(error);
+            console.log(error.message)
         }
     }
 
+    
     const googleSigninHandler = async () => {
         try {
             await googleSignIn();
@@ -97,17 +93,25 @@ const SignIn = () => {
                     <img src="https://img.freepik.com/free-vector/computer-login-concept-illustration_114360-7962.jpg?w=2000"
                         alt="signup" />
                 </div>
-
                 <div className="right">
                     <div className="right_inner_container">
 
                         <div className="divone">
-                            <h1>Sign In to your Account</h1>
-                            <p>Welcome back! please enter your detail</p>
+                            <h1>Sign Up Admin for an Account</h1>
                         </div>
 
                         <div className="divtwo">
-                            {error && <p>{error}</p>}
+
+                            {/* <div className="input_container">
+                                <div>
+                                    <FaRegUser />
+                                </div>
+                                <input type="text" placeholder='Username'
+                                    value={username}
+                                    onChange={(e) => setUsername(e.target.value)}
+                                />
+                            </div> */}
+
                             <div className="input_container">
                                 <div>
                                     <AiOutlineMail />
@@ -142,22 +146,21 @@ const SignIn = () => {
                                 <p>Your password is not strong enough.Use atleast 8 charecters.</p>
                             </div>
 
-                            <div className="lg-input_container_end">
-                                <div>
-                                    <div style={{ color: "white", backgroundColor: check ? "black" : "" }}
-                                        onClick={isChecked}>
-                                        <BsCheckLg />
-                                    </div>
-                                    <p>Remember me</p>
+                            <div className="input_container_end">
+
+                                <div style={{ color: "white", backgroundColor: check ? "black" : "" }}
+                                    onClick={isChecked}>
+                                    <BsCheckLg />
                                 </div>
 
-                                <Link to="/resetpassword" style={{ textDecoration: "none" }}><p>Forgot Password?</p></Link>
+                                <p>By creating an account means you agree to the
+                                    <span style={{ color: "black" }}> Terms & Conditions</span> and our <span style={{ color: "black" }}> Privacy Policy</span></p>
                             </div>
                         </div>
 
                         <button className="divthree"
                             onClick={submitHandler}
-                        >Sign In</button>
+                        >Sign Up</button>
 
                         <div className="divfour">
                             <div>
@@ -185,7 +188,7 @@ const SignIn = () => {
                             </div>
                         </div>
 
-                        <p className="divsix">Don't have an account? <Link to="/signup" className="link"><strong>Sign Up</strong></Link></p>
+                        <p className="divsix">Already have an account? <Link to="/admin-signin" className="link"><strong>Log In</strong></Link> </p>
                     </div>
                 </div>
             </main>
@@ -193,7 +196,4 @@ const SignIn = () => {
     )
 }
 
-export default SignIn
-
-
-// https://iqb-frontend.netlify.app/
+export default SignUp

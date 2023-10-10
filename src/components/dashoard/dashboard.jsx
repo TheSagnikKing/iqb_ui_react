@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from 'react'
+import React,{useEffect, useState,Suspense} from 'react'
 import './dashboard.css'
 import { IoMdAdd } from 'react-icons/io'
 import { IoNotificationsOutline } from 'react-icons/io5'
@@ -7,13 +7,14 @@ import { BsCheckLg, BsThreeDotsVertical } from 'react-icons/bs'
 import { FiMoreHorizontal } from 'react-icons/fi'
 import { BiChevronRight } from 'react-icons/bi'
 import CustomerDetail from '../customerDetail/CustomerDetail'
-import Chart from "../chart/Chart"
+const Chart = React.lazy(() => import( "../chart/Chart"))
 import { customerDetail } from '../data'
 import { reports } from '../data'
 import { ColorRing } from 'react-loader-spinner'
 import Layout from '../layout/Layout'
 
 import Calender from '../calender/Calender'
+
 
 
 const dashboard = () => {
@@ -311,7 +312,9 @@ const dashboard = () => {
                             </div>
 
                             <div>
+                            <Suspense fallback={<div>Loading...</div>}>
                                 <Chart />
+                            </Suspense>
                             </div>
                         </div>
                     </div>

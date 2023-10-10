@@ -14,15 +14,12 @@ import { Link, useNavigate } from 'react-router-dom'
 import { auth } from '../../config.js/firebase.config'
 import { googleSignIn, signin } from '../../redux/actions/userAction'
 
-import { validateSigninUser } from '../../utils/ValidateUser'
-
-
+import { validateSigninAdmin } from '../../utils/ValidateUser'
 
 //This is sign-in page not sign-up
 
 const SignIn = () => {
     const [check, setCheck] = useState(false)
-    const [loader, setLoader] = useState(false)
 
     const isChecked = () => {
         setCheck(!check)
@@ -34,13 +31,12 @@ const SignIn = () => {
     const [error, setError] = useState(true)
 
     //authentication starts
-
-    //User 
-    const [barber, setBarber] = useState(true);
+    //Admin
+    const [admin, setAdmin] = useState(true);
 
     const navigate = useNavigate();
 
-    const authObject = { isAdmin: 'false', isBarber: 'true' };
+    const authObject = { isAdmin: 'true', isBarber: 'false' };
     const authJSON = JSON.stringify(authObject);
 
     useEffect(() => {
@@ -48,12 +44,12 @@ const SignIn = () => {
         const unsubscribe = auth.onAuthStateChanged((userCred) => {
             if (userCred) {
                 userCred.getIdToken().then(async (token) => {
-                    console.log("barber signin", token)
+                    console.log("admin signin", token)
 
-                    validateSigninUser(token, barber).then((data) => {
+                    validateSigninAdmin(token, admin).then((data) => {
                         window.localStorage.setItem('auth', authJSON);
-                        console.log("validateSignin", data);
-                        navigate("/dashboard")
+                        console.log("validateSigninAdmin", data);
+                        navigate("/admin-dashboard")
                        
                     });
                 });
@@ -102,8 +98,8 @@ const SignIn = () => {
                     <div className="right_inner_container">
 
                         <div className="divone">
-                            <h1>Sign In to your Account</h1>
-                            <p>Welcome back! please enter your detail</p>
+                            <h1>Sign In to your Admin Account</h1>
+                            <p>Welcome back Admin! please enter your detail</p>
                         </div>
 
                         <div className="divtwo">
@@ -185,7 +181,7 @@ const SignIn = () => {
                             </div>
                         </div>
 
-                        <p className="divsix">Don't have an account? <Link to="/signup" className="link"><strong>Sign Up</strong></Link></p>
+                        <p className="divsix">Don't have an account? <Link to="/admin-signup" className="link"><strong>Sign Up</strong></Link></p>
                     </div>
                 </div>
             </main>

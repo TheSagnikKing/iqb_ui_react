@@ -14,6 +14,9 @@ const InitialPage = () => {
       <Link to="/dashboard"><h4>Dashboard</h4></Link>
       <Link to="/barber/dashboard2"><h4>Dashboard2</h4></Link>
       <Link to="/customer/dashboard3"><h4>Dashboard3</h4></Link>
+
+      <Link to="/admin-signin"><h4>Admin Signin</h4></Link>
+      <Link to="/admin-signup"><h4>Admin Signup</h4></Link>
     </div>
     </main>
     </>
