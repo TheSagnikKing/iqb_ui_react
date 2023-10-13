@@ -29,6 +29,7 @@ const Header = ({ title }) => {
       await logout()
       window.localStorage.setItem("auth", "false");
       navigate("/")
+      window.location.reload()
     } catch (error) {
       // Handle any errors that occur during sign-out
       console.error('Logout error:', error);

@@ -14,6 +14,7 @@ import { googleSignIn, signup } from '../../redux/actions/userAction'
 import { auth } from '../../config.js/firebase.config'
 //authentication
 import { validateSigninAdmin } from '../../utils/ValidateUser'
+import { FaRegUser } from 'react-icons/fa'
 
 const SignUp = () => {
 
@@ -23,11 +24,17 @@ const SignUp = () => {
         setCheck(!check)
     }
 
-    // const [username, setUsername] = useState("")
+    const [name, setName] = useState("")
     const [password, setPassword] = useState("")
     const [email, setEmail] = useState("")
     const [visible, setVisible] = useState(false)
     const [error, setError] = useState(true)
+
+     //=============
+     const handleNameChange = (e) => {
+        setName(e.target.value)
+        localStorage.setItem("name",name)
+    }
 
     //authentication starts
 
@@ -45,9 +52,12 @@ const SignUp = () => {
             if (userCred) {
                 userCred.getIdToken().then(async(token) => {
                     console.log("Admin signup", token)
-                    validateSigninAdmin(token, admin).then((data) => {
+                    const username = localStorage.getItem("name")
+
+                    validateSigninAdmin(token, admin,username).then((data) => {
                         window.localStorage.setItem('auth', authJSON);
                         console.log("validateSignup Admin", data);
+                        localStorage.removeItem("name")
                         navigate('/admin-dashboard');
                     });
                 });
@@ -69,8 +79,8 @@ const SignUp = () => {
             } else if (!password) {
                 alert("Password required")
             } else {
+                window.localStorage.setItem("name", name)
                 const currentuser = await signup(email, password)
-                console.log(currentuser)
             }
         } catch (error) {
             console.log(error.message)
@@ -102,15 +112,15 @@ const SignUp = () => {
 
                         <div className="divtwo">
 
-                            {/* <div className="input_container">
+                            <div className="input_container">
                                 <div>
                                     <FaRegUser />
                                 </div>
-                                <input type="text" placeholder='Username'
-                                    value={username}
-                                    onChange={(e) => setUsername(e.target.value)}
+                                <input type="text" placeholder='Name'
+                                    value={name}
+                                    onChange={handleNameChange}
                                 />
-                            </div> */}
+                            </div>
 
                             <div className="input_container">
                                 <div>

@@ -37,7 +37,6 @@ const ProtectedRoute = ({ children }) => {
 
               validateSigninUser(token,barber).then(data => {
                 window.localStorage.setItem("auth", authJSON)
-                console.log("problemmm")
                 console.log(data)
                 dispatch({ type: USER_SIGNIN_SUCCESS, payload: data })
 

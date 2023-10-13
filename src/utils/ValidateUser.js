@@ -5,7 +5,7 @@ const baseURL = "http://localhost:8080"
 
 export const validateSigninUser = async(token,barber,name) => {
     const res = await axios.post(
-        `http://localhost:8080/api/barber/login`,
+        `${baseURL}/api/barber/login`,
         {barber,name},
         {
             headers: {
@@ -18,10 +18,10 @@ export const validateSigninUser = async(token,barber,name) => {
     return res.data
 }
 
-export const validateSigninAdmin = async(token,admin) => {
+export const validateSigninAdmin = async(token,admin,name) => {
     const res = await axios.post(
         `${baseURL}/api/admin/login`,
-        { admin},
+        { admin,name},
         {
             headers: {
                 authorization: `Bearer ${token}`,
