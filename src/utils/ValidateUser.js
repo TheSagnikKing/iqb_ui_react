@@ -1,11 +1,12 @@
 import axios from "axios"
 
-const baseURL = "http://localhost:8000"
+// const baseURL = "https://iqb-backend2.onrender.com"
+const baseURL = "http://localhost:8080"
 
-export const validateSigninUser = async(token,barber) => {
+export const validateSigninUser = async(token,barber,name) => {
     const res = await axios.post(
-        `${baseURL}/api/login`,
-        { barber},
+        `http://localhost:8080/api/barber/login`,
+        {barber,name},
         {
             headers: {
                 authorization: `Bearer ${token}`,

@@ -4,6 +4,7 @@
     height: 65px;
     border-radius: 8px;
     padding-inline: 15px;
+    padding-block: 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;

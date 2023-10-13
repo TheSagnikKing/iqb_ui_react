@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import './SignUp.css'
 import { AiOutlineMail } from 'react-icons/ai'
 import { RiLockPasswordLine } from 'react-icons/ri'
@@ -24,11 +24,17 @@ const SignUp = () => {
         setCheck(!check)
     }
 
-    // const [username, setUsername] = useState("")
+    const [name, setName] = useState("")
     const [password, setPassword] = useState("")
     const [email, setEmail] = useState("")
     const [visible, setVisible] = useState(false)
     const [error, setError] = useState(true)
+
+    //=============
+    const handleNameChange = (e) => {
+        setName(e.target.value)
+        localStorage.setItem("name",name)
+    }
 
     //authentication starts
 
@@ -41,15 +47,20 @@ const SignUp = () => {
     const authObject = { isAdmin: 'false', isBarber: 'true' };
     const authJSON = JSON.stringify(authObject);
 
+    // const username = localStorage.getItem("name")
+
     useEffect(() => {
 
         const unsubscribe = auth.onAuthStateChanged((userCred) => {
             if (userCred) {
-                userCred.getIdToken().then(async(token) => {
+                userCred.getIdToken().then(async (token) => {
                     console.log("barber signup", token)
-                    validateSigninUser(token, barber).then((data) => {
+                    const username = localStorage.getItem("name")
+
+                    validateSigninUser(token,barber,username).then((data) => {
                         window.localStorage.setItem('auth', authJSON);
                         console.log("validateSignup", data);
+                        localStorage.removeItem("name")
                         navigate('/dashboard');
                     });
                 });
@@ -71,15 +82,15 @@ const SignUp = () => {
             } else if (!password) {
                 alert("Password required")
             } else {
+                window.localStorage.setItem("name", name)
                 const currentuser = await signup(email, password)
-                console.log(currentuser)
             }
         } catch (error) {
             console.log(error.message)
         }
     }
 
-    
+
     const googleSigninHandler = async () => {
         try {
             await googleSignIn();
@@ -104,15 +115,15 @@ const SignUp = () => {
 
                         <div className="divtwo">
 
-                            {/* <div className="input_container">
+                            <div className="input_container">
                                 <div>
                                     <FaRegUser />
                                 </div>
-                                <input type="text" placeholder='Username'
-                                    value={username}
-                                    onChange={(e) => setUsername(e.target.value)}
+                                <input type="text" placeholder='Name'
+                                    value={name}
+                                    onChange={handleNameChange}
                                 />
-                            </div> */}
+                            </div>
 
                             <div className="input_container">
                                 <div>

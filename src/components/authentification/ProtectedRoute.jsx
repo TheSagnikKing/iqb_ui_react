@@ -35,8 +35,9 @@ const ProtectedRoute = ({ children }) => {
             userCred.getIdToken().then(token => {
               console.log("barberrrrrrr", token)
 
-              validateSigninUser(token, barber).then(data => {
+              validateSigninUser(token,barber).then(data => {
                 window.localStorage.setItem("auth", authJSON)
+                console.log("problemmm")
                 console.log(data)
                 dispatch({ type: USER_SIGNIN_SUCCESS, payload: data })
 
