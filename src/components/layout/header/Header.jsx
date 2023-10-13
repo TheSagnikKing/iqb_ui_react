@@ -41,7 +41,7 @@ const Header = ({ title }) => {
       <section className="nav1">
         <div className="nav1left">
           <div className="nav1left_header">
-            <p><span>IGB</span>iqueuebarbers</p>
+            <p><span>IGB</span>iqueuebarberss</p>
           </div>
 
           <div className="nav1wrapper">
