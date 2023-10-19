@@ -71,6 +71,9 @@ const SignUp = () => {
         }
     }, []);
 
+    // getAdditionalUserInfo(result)
+
+
 
     const submitHandler = async () => {
         try {

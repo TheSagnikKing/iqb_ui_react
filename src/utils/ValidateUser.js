@@ -1,7 +1,7 @@
 import axios from "axios"
 
-// const baseURL = "https://iqb-backend2.onrender.com"
-const baseURL = "http://localhost:8080"
+const baseURL = "https://iqb-backend2.onrender.com"
+// const baseURL = "http://localhost:8080"
 
 export const validateSigninUser = async(token,barber,name) => {
     const res = await axios.post(

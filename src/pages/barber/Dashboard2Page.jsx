@@ -6,8 +6,6 @@ const dashboard2 = () => {
   return (
     <>
     <Layout title="Barber"/>
-
-    {/* <BarberList/> */}
     <BarberListTable/>
 
     </>

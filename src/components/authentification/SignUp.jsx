@@ -33,7 +33,7 @@ const SignUp = () => {
     //=============
     const handleNameChange = (e) => {
         setName(e.target.value)
-        localStorage.setItem("name",name)
+        localStorage.setItem("name", name)
     }
 
     //authentication starts
@@ -46,8 +46,6 @@ const SignUp = () => {
 
     const authObject = { isAdmin: 'false', isBarber: 'true' };
     const authJSON = JSON.stringify(authObject);
-
-    // const username = localStorage.getItem("name")
 
     useEffect(() => {
 
@@ -75,6 +73,34 @@ const SignUp = () => {
     }, []);
 
 
+    // useEffect(() => {
+
+    //     const unsubscribe = auth.onAuthStateChanged((userCred) => {
+    //         if (userCred) {
+    //             userCred.getIdToken().then(async (token) => {
+    //                 console.log("barber signup", token)
+    //                 // const username = localStorage.getItem("name")
+
+    //                 // validateSigninUser(token,barber,username).then((data) => {
+    //                 //     window.localStorage.setItem('auth', authJSON);
+    //                 //     console.log("validateSignup", data);
+    //                 //     localStorage.removeItem("name")
+    //                 //     navigate('/dashboard');
+    //                 // });
+    //             });
+    //         } else {
+    //             window.localStorage.setItem('auth', 'false');
+    //         }
+    //     });
+
+    //     return () => {
+    //         unsubscribe()
+    //     }
+    // }, []);
+
+    // // getAdditionalUserInfo(result)
+
+
     const submitHandler = async () => {
         try {
             if (!email) {
@@ -98,6 +124,7 @@ const SignUp = () => {
             console.log(error.message);
         }
     }
+
 
     return (
         <>

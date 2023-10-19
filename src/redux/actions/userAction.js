@@ -1,4 +1,5 @@
 import { auth } from "../../config.js/firebase.config"
+import { getAdditionalUserInfo } from "firebase/auth";
 import {
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
@@ -10,7 +11,6 @@ import {
 } from "firebase/auth";
 
 import { NEW_PASSWORD_RESET_FAIL, NEW_PASSWORD_RESET_REQ, NEW_PASSWORD_RESET_SUCCESS, PASSWORD_RESET_EMAIL_FAIL, PASSWORD_RESET_EMAIL_REQ, PASSWORD_RESET_EMAIL_SUCCESS} from "../constants/userConstants";
-
 
 
 export const signin = (email, password) => {
@@ -29,6 +29,24 @@ export const googleSignIn = () => {
     const googleAuthProvider = new GoogleAuthProvider()
     return signInWithPopup(auth,googleAuthProvider)
 }
+
+// export const googleSignIn = () => {
+//     const googleAuthProvider = new GoogleAuthProvider();
+//     return signInWithPopup(auth, googleAuthProvider).then((result) => {
+//       const additionalUserInfo2 = getAdditionalUserInfo(result);
+  
+//       console.log(additionalUserInfo2);
+//     //   const profile = additionalUserInfo.getProfile();
+  
+
+//       // const name = profile.name;
+  
+
+  
+
+
+//     });
+//   };
 
 
 export const passwordResetEmailAction = (email) => async (dispatch) => {
