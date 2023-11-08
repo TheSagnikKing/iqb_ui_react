@@ -11,10 +11,8 @@ const Chart = React.lazy(() => import( "../chart/Chart"))
 import { customerDetail } from '../data'
 import { reports } from '../data'
 import { ColorRing } from 'react-loader-spinner'
-import Layout from '../layout/Layout'
 
 import Calender from '../calender/Calender'
-
 
 
 const dashboard = () => {
@@ -32,7 +30,6 @@ const dashboard = () => {
 
     return (
         <>
-        <Layout />
         <div className="right_main_div">
                 <div className="right_div_top">
 

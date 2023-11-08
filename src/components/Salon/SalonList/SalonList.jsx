@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import "./SalonList.css"
 import { useSelector } from 'react-redux'
-import Layout from '../../layout/Layout'
 import { GrAdd } from 'react-icons/gr'
 import { BsThreeDotsVertical } from 'react-icons/bs'
-import { AiOutlineSearch } from 'react-icons/ai'
+import { AiFillEdit, AiOutlineSearch } from 'react-icons/ai'
 import axios from 'axios'
 import { PuffLoader } from 'react-spinners'
+import { Link, useNavigate } from 'react-router-dom'
+import { RiSettings3Fill } from 'react-icons/ri'
+import AdminLayout from '../../layout/Admin/AdminLayout'
 
 const SalonList = () => {
     const signin = useSelector(state => state.signin)
@@ -28,12 +30,18 @@ const SalonList = () => {
     }
 
     console.log(salonList)
-    
+
+    const navigate = useNavigate()
+
+    const addSalonNavigate = () => {
+        navigate("/salon/createsalon")
+    }
+ 
   return (
     <>
     {
         user?.isAdmin ? (<>
-        <Layout/>
+        <AdminLayout/>
         <div className="wrapper">
                 <div className="header">
                     <p>Salons List</p>
@@ -50,7 +58,7 @@ const SalonList = () => {
                             <button onClick={searchHandler}><AiOutlineSearch/></button>
                         </div>
 
-                        <div >
+                        <div onClick={addSalonNavigate}>
                             <GrAdd />
                         </div>
                     </div>
@@ -90,6 +98,14 @@ const SalonList = () => {
                                 <p>City</p>
                                 <p>{salon.city}</p>
                             </div>
+
+                            <Link to={`/salon/updatesalon/${salon.salonId}`}>
+                                <AiFillEdit/>
+                            </Link>
+
+                            <Link to="#">
+                                <RiSettings3Fill/>
+                            </Link>
 
                         </div>
                     )) : <p className='salon-search'>Search Your Salons</p>

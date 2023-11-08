@@ -7,6 +7,7 @@ import axios from 'axios'
 import { MdDelete } from 'react-icons/md'
 
 import {updateBarberAction} from "../../redux/actions/barberAction"
+import AdminLayout from '../layout/Admin/AdminLayout'
 
 const UpdateBarber = () => {
     const signin = useSelector(state => state.signin)
@@ -61,7 +62,7 @@ const UpdateBarber = () => {
         <>
             {
                 user?.isAdmin ? (<>
-                    <Layout />
+                    <AdminLayout/>
                     <div className='upd-wrapper'>
                         <p>Update Barber</p>
 

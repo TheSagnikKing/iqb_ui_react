@@ -1,0 +1,43 @@
+.quebarberserv-wrapper{
+    width: 82% !important;
+    position: absolute;
+    top: 90px;
+    left: 265px;
+    margin-left: 35px;
+    margin-top: 30px;
+
+    background: #fff;
+    height: 80vh;
+    padding: 20px;
+}
+
+.quebarberserv-wrapper>div:nth-child(2){
+    background-color: #f1f6fc;
+    padding: 10px 20px;
+    border-radius: 10px;
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(4,1fr);
+    margin-block: 20px;
+}
+
+.quebarberserv-content{
+    background-color: #f1f6fc;
+    padding: 10px 20px;
+    border-radius: 10px;
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(4,1fr);
+    margin-bottom: 15px;
+}
+
+.quebarberserv-content>button{
+    background-color:#fff;
+    box-shadow: 0px 0px 4px rgba(0,0,0,0.4);
+    border: none;
+    outline: none;
+    height: 30px;
+    width: 130px;
+    border-radius: 4px;
+    cursor: pointer;
+}

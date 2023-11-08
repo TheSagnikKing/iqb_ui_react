@@ -1,4 +1,4 @@
-import { CREATE_SALON_FAIL, CREATE_SALON_REQ, CREATE_SALON_SUCCESS, GET_SALONLIST_FAIL, GET_SALONLIST_REQ, GET_SALONLIST_SUCCESS, UPDATE_SALON_FAIL, UPDATE_SALON_REQ, UPDATE_SALON_SUCCESS } from "../constants/salonConstants";
+import { CREATE_SALON_FAIL, CREATE_SALON_REQ, CREATE_SALON_SUCCESS, GET_ALL_SALON_SERVICES_FAIL, GET_ALL_SALON_SERVICES_REQ, GET_ALL_SALON_SERVICES_SUCCESS, GET_SALONLIST_FAIL, GET_SALONLIST_REQ, GET_SALONLIST_SUCCESS, UPDATE_SALON_FAIL, UPDATE_SALON_REQ, UPDATE_SALON_SUCCESS } from "../constants/salonConstants";
 
 export const createSalonReducer = (state = {},action) => {
     switch(action.type){
@@ -33,6 +33,19 @@ export const updateSalonReducer = (state = {},action) => {
         case UPDATE_SALON_SUCCESS:
             return {loading:false,...action.payload}
         case UPDATE_SALON_FAIL:
+            return {loading:false,error:action.payload}
+        default:
+            return state
+    }
+}
+
+export const getAllSalonServicesReducer = (state = {},action) => {
+    switch(action.type){
+        case GET_ALL_SALON_SERVICES_REQ:
+            return {loading:true}
+        case GET_ALL_SALON_SERVICES_SUCCESS:
+            return {loading:false,...action.payload}
+        case GET_ALL_SALON_SERVICES_FAIL:
             return {loading:false,error:action.payload}
         default:
             return state

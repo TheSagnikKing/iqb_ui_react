@@ -1,8 +1,9 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import thunk from "redux-thunk";
 import { logoutReducer, newPasswordResetReducer, passwordResetEmailReducer, signinReducer, signupReducer } from "./reducers/userReducer";
-import { createSalonReducer, salonListReducer, updateSalonReducer } from "./reducers/salonReducer";
-import { barberListReducer, createBarberReducer, updateBarberReducer } from "./reducers/barberReducer";
+import { createSalonReducer, getAllSalonServicesReducer, salonListReducer, updateSalonReducer } from "./reducers/salonReducer";
+import { barberListReducer, createBarberReducer, getAllBarbersByServiceIdReducer, getBarberServicesBybarberIdReducer, updateBarberReducer } from "./reducers/barberReducer";
+import { autojoinReducer, queueListReducer, singleJoinQueueReducer } from "./reducers/joinqueueReducer";
 
 const rootReducer = combineReducers({
   signup:signupReducer,
@@ -15,7 +16,13 @@ const rootReducer = combineReducers({
   barberList:barberListReducer,
   createBarber:createBarberReducer,
   updateBarber:updateBarberReducer,
-  updateSalon:updateSalonReducer
+  updateSalon:updateSalonReducer,
+  getBarberServicesBybarberId:getBarberServicesBybarberIdReducer,
+  singleJoinQueue:singleJoinQueueReducer,
+  getAllSalonServices:getAllSalonServicesReducer,
+  getAllBarbersByServiceId:getAllBarbersByServiceIdReducer,
+  queueList:queueListReducer,
+  autojoin:autojoinReducer
 });
 
 const initialState = {};

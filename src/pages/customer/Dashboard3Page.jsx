@@ -1,14 +1,13 @@
 import Dashboard3 from "../../components/dashboard3/Dashboard3"
-import Layout from "../../components/layout/Layout"
+import AdminLayout from "../../components/layout/Admin/AdminLayout"
 import React from 'react'
 
 const Dashboard3Page = () => {
 
   return (
      <>
-     <Layout title="CustomerInformation">
+     <AdminLayout title="CustomerInformation"/>
      <Dashboard3/>
-     </Layout>
      </>
   )
 }

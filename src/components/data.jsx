@@ -8,6 +8,7 @@ import { TbMessageCircle } from 'react-icons/tb'
 import { VscRepoForked } from 'react-icons/vsc'
 import { SiTurborepo } from 'react-icons/si'
 import { TbReportSearch } from 'react-icons/tb'
+import { MdQueue } from 'react-icons/md'
 
 export const menudata = [
   {
@@ -26,40 +27,10 @@ export const menudata = [
     ]
   },
   {
-    id: 6,
+    id: 2,
     menu_logo: <FaCalendarAlt />,
     menu_title: "Calender",
     menu_link: "",
-    category: [
-      {
-        id: 6,
-        list_logo: <BsCheckCircle />,
-        list: "List",
-        message_logo: <TbMessageCircle />,
-        message_title: "Send mail / Notification"
-      }
-    ]
-  },
-  {
-    id: 3,
-    menu_logo: <RiScissors2Fill />,
-    menu_title: "Salons",
-    menu_link: "",
-    category: [
-      {
-        id: 3,
-        list_logo: <BsCheckCircle />,
-        list: "List",
-        message_logo: <TbMessageCircle />,
-        message_title: "Send mail / Notification"
-      }
-    ]
-  },
-  {
-    id: 2,
-    menu_logo: <ImUserPlus />,
-    menu_title: "Barbers",
-    menu_link: "/barber/dashboard2",
     category: [
       {
         id: 2,
@@ -70,30 +41,14 @@ export const menudata = [
       }
     ]
   },
-
   {
-    id: 7,
-    menu_logo: <RiDashboardFill />,
-    menu_title: "Customers",
-    menu_link: "/customer/dashboard3",
-    category: [
-      {
-        id: 7,
-        list_logo: <BsCheckCircle />,
-        list: "List",
-        message_logo: <TbMessageCircle />,
-        message_title: "Send mail / Notification"
-      }
-    ]
-  },
-  {
-    id: 5,
+    id: 3,
     menu_logo: <GiPieChart />,
     menu_title: "Reports",
     menu_link: "",
     category: [
       {
-        id: 5,
+        id: 3,
         list_logo: <BsCheckCircle />,
         list: "List",
         message_logo: <TbMessageCircle />,
@@ -116,7 +71,147 @@ export const menudata = [
       }
     ]
   },
+  {
+    id: 5,
+    menu_logo: <MdQueue />,
+    menu_title: "Queue",
+    menu_link: "/queue",
+    category: [
+      {
+        id: 5,
+        list_logo: <BsCheckCircle />,
+        list: "List",
+        message_logo: <TbMessageCircle />,
+        message_title: "Send mail / Notification"
+      }
+    ]
+  },
 
+]
+
+
+export const adminmenudata = [
+  {
+    id: 1,
+    menu_logo: <RiDashboardFill />,
+    menu_title: "Dashboard",
+    menu_link: "/admin-dashboard",
+    category: [
+      {
+        id: 1,
+        list_logo: <BsCheckCircle />,
+        list: "List",
+        message_logo: <TbMessageCircle />,
+        message_title: "Send mail / Notification"
+      }
+    ]
+  },
+  {
+    id: 2,
+    menu_logo: <FaCalendarAlt />,
+    menu_title: "Calender",
+    menu_link: "",
+    category: [
+      {
+        id: 2,
+        list_logo: <BsCheckCircle />,
+        list: "List",
+        message_logo: <TbMessageCircle />,
+        message_title: "Send mail / Notification"
+      }
+    ]
+  },
+  {
+    id: 3,
+    menu_logo: <RiScissors2Fill />,
+    menu_title: "Salons",
+    menu_link: "/salon/salonlist",
+    category: [
+      {
+        id: 3,
+        list_logo: <BsCheckCircle />,
+        list: "List",
+        message_logo: <TbMessageCircle />,
+        message_title: "Send mail / Notification"
+      }
+    ]
+  },
+  {
+    id: 4,
+    menu_logo: <ImUserPlus />,
+    menu_title: "Barbers",
+    menu_link: "/barber/dashboard2",
+    category: [
+      {
+        id: 4,
+        list_logo: <BsCheckCircle />,
+        list: "List",
+        message_logo: <TbMessageCircle />,
+        message_title: "Send mail / Notification"
+      }
+    ]
+  },
+
+  {
+    id: 5,
+    menu_logo: <RiDashboardFill />,
+    menu_title: "Customers",
+    menu_link: "/customer/dashboard3",
+    category: [
+      {
+        id: 5,
+        list_logo: <BsCheckCircle />,
+        list: "List",
+        message_logo: <TbMessageCircle />,
+        message_title: "Send mail / Notification"
+      }
+    ]
+  },
+  {
+    id: 6,
+    menu_logo: <GiPieChart />,
+    menu_title: "Reports",
+    menu_link: "",
+    category: [
+      {
+        id: 6,
+        list_logo: <BsCheckCircle />,
+        list: "List",
+        message_logo: <TbMessageCircle />,
+        message_title: "Send mail / Notification"
+      }
+    ]
+  },
+  {
+    id: 7,
+    menu_logo: <RiDashboardFill />,
+    menu_title: "Custom",
+    menu_link: "",
+    category: [
+      {
+        id: 7,
+        list_logo: <BsCheckCircle />,
+        list: "List",
+        message_logo: <TbMessageCircle />,
+        message_title: "Send mail / Notification"
+      }
+    ]
+  },
+  {
+    id: 8,
+    menu_logo: <MdQueue />,
+    menu_title: "Queue",
+    menu_link: "/queue",
+    category: [
+      {
+        id: 8,
+        list_logo: <BsCheckCircle />,
+        list: "List",
+        message_logo: <TbMessageCircle />,
+        message_title: "Send mail / Notification"
+      }
+    ]
+  },
 
 ]
 

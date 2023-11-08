@@ -8,7 +8,7 @@ import { GrAdd } from 'react-icons/gr'
 import { AiOutlineArrowLeft, AiOutlineArrowRight, AiOutlineSearch, AiOutlineArrowUp, AiOutlineArrowDown, AiFillEdit } from 'react-icons/ai'
 import { AiOutlineReload } from 'react-icons/ai'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const BarberListTable = () => {
     const signin = useSelector(state => state.signin)
@@ -99,6 +99,12 @@ const BarberListTable = () => {
         setLoading(false)
     }
 
+    const navigate = useNavigate()
+
+    const createBarberNavigate = () => {
+        navigate("/barber/createbarber")
+    }
+
     return (
         <>
             {
@@ -122,7 +128,7 @@ const BarberListTable = () => {
                                     <button onClick={searchHandler} className='search-btn'><AiOutlineSearch /></button>
                                 </div>
 
-                                <div >
+                                <div onClick={createBarberNavigate}>
                                     <GrAdd />
                                 </div>
                                 {/* 

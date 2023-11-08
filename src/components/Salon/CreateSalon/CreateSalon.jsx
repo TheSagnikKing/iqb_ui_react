@@ -4,12 +4,15 @@ import { MdKeyboardArrowDown } from "react-icons/md"
 import Layout from '../../layout/Layout'
 import { useDispatch, useSelector } from 'react-redux'
 import { createSalonAction } from '../../../redux/actions/salonAction'
+import AdminLayout from '../../layout/Admin/AdminLayout'
 
 const CreateSalon = () => {
 
     const [latitude, setLatitude] = useState(null);
     const [longitude, setLongitude] = useState(null);
     const [error, setError] = useState(null);
+
+    const [image,setImage] = useState("")
 
     useEffect(() => {
         if ("geolocation" in navigator) {
@@ -71,10 +74,11 @@ const CreateSalon = () => {
                     longitude: Number(longitude),
                     latitude: Number(latitude)
                 }
-            }, country, postCode, contactTel, salonType, webLink, services
+            }, country, postCode, contactTel, salonType, webLink, services,image
         }
 
-        dispatch(createSalonAction(salonData))
+        console.log(salonData)
+        // dispatch(createSalonAction(salonData))
 
         setAdminEmail("")
         setUsername("")
@@ -125,7 +129,7 @@ const CreateSalon = () => {
     return (
         <>
             {
-                user?.isAdmin ? (<> <Layout />
+                user?.isAdmin ? (<> <AdminLayout/>
                     <div className="sa-br-right_main_div">
 
                         <div className="sa-br-right_main_head">
@@ -247,6 +251,14 @@ const CreateSalon = () => {
                                         value={webLink}
                                         onChange={(e) => setWebLink(e.target.value)}
                                     />
+                                </div>
+
+                                <div>
+                                    <label htmlFor="">Select Salon Images</label>
+                                    <input type="file" id="file" value={image} onChange={(e) => setImage(e.target.value)}/>
+                                    <label htmlFor="file" className='file'>
+                                        Choose a Photo
+                                    </label>
                                 </div>
 
                                 <div className='services'>

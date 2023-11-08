@@ -1,0 +1,78 @@
+.queue-wrapper{
+    width: 82% !important;
+    position: absolute;
+    top: 90px;
+    left: 265px;
+    margin-left: 35px;
+    margin-top: 30px;
+}
+
+.joins{
+    background-color:none;
+    margin-block: 15px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.joins>div{
+    position: relative;
+}
+
+.joins>div>p{
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 6px;
+    box-shadow: 0px 0px 3px rgba(0,0,0,0.4);
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.joins-dropdown{
+    position: absolute;
+    top: 60px;
+    left: 0px;
+    background-color: #fff;
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 10px;
+    border-radius: 4px;
+    box-shadow: 0px 0px 3px rgba(0,0,0,0.4);
+}
+
+.queue-list-table{
+    background-color: #fff;
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 4px;
+    font-size: 14px;
+    height: 80vh;
+    overflow-y: scroll;
+}
+
+.que-lst-head{
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(7,1fr);
+    background-color: #f1f6fc;
+    font-size: 14px;
+    height: 45px;
+    padding-inline: 10px;
+    border-radius: 6px;
+    margin-block: 20px;
+}
+
+.que-lst-content{
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(7,1fr);
+    background-color: #f1f6fc;
+    font-size: 14px;
+    height: 45px;
+    padding-inline: 10px;
+    border-radius: 6px;
+    margin-block: 20px;
+}

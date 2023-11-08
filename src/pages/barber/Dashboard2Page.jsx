@@ -1,11 +1,11 @@
 import React from 'react'
 import BarberListTable from "../../components/dashboard2/barberlistTable/BarberListTable"
-import Layout from '../../components/layout/Layout'
+import AdminLayout from '../../components/layout/Admin/AdminLayout'
 
 const dashboard2 = () => {
   return (
     <>
-    <Layout title="Barber"/>
+    <AdminLayout title="Barber"/>
     <BarberListTable/>
 
     </>

@@ -7,6 +7,7 @@ import axios from 'axios'
 import { MdDelete } from 'react-icons/md'
 
 import {createBarberAction} from "../../redux/actions/barberAction"
+import AdminLayout from '../layout/Admin/AdminLayout'
 
 const CreateBarber = () => {
     const signin = useSelector(state => state.signin)
@@ -61,7 +62,7 @@ const CreateBarber = () => {
         <>
             {
                 user?.isAdmin ? (<>
-                    <Layout />
+                    <AdminLayout />
                     <div className='crt-wrapper'>
                         <p>Create Barber</p>
 
