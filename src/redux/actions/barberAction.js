@@ -1,5 +1,5 @@
 import axios from "axios"
-import { CREATE_BARBER_FAIL, CREATE_BARBER_REQ, CREATE_BARBER_SUCCESS, GETALLBARBERS_BYSERVICEID_FAIL, GETALLBARBERS_BYSERVICEID_REQ, GETALLBARBERS_BYSERVICEID_SUCCESS, GET_BARBERLIST_FAIL, GET_BARBERLIST_REQ, GET_BARBERLIST_SUCCESS, GET_BARBER_SERVICES_FAIL, GET_BARBER_SERVICES_REQ, GET_BARBER_SERVICES_SUCCESS, UPDATE_BARBER_FAIL, UPDATE_BARBER_REQ, UPDATE_BARBER_SUCCESS } from "../constants/barberConstants"
+import { BARBER_SERVED_QUEUE_FAIL, BARBER_SERVED_QUEUE_REQ, BARBER_SERVED_QUEUE_SUCCESS, CREATE_BARBER_FAIL, CREATE_BARBER_REQ, CREATE_BARBER_SUCCESS, GETALLBARBERS_BYSERVICEID_FAIL, GETALLBARBERS_BYSERVICEID_REQ, GETALLBARBERS_BYSERVICEID_SUCCESS, GET_BARBERLIST_FAIL, GET_BARBERLIST_REQ, GET_BARBERLIST_SUCCESS, GET_BARBER_SERVICES_FAIL, GET_BARBER_SERVICES_REQ, GET_BARBER_SERVICES_SUCCESS, UPDATE_BARBER_FAIL, UPDATE_BARBER_REQ, UPDATE_BARBER_SUCCESS } from "../constants/barberConstants"
 
 export const barberListAction = () => async(dispatch) => {
     try {
@@ -86,6 +86,24 @@ export const getAllBarbersByServiceIdAction = (serviceid) => async(dispatch) => 
     } catch (error) {
         dispatch({
             type:GETALLBARBERS_BYSERVICEID_FAIL,
+            payload: error.response.data
+        })
+    }
+}
+
+export const  barberServedQueueAction = (infodata) => async(dispatch) => {
+    try {
+        dispatch({type:BARBER_SERVED_QUEUE_REQ})
+
+        const {data} = await axios.post("https://iqb-backend2.onrender.com/api/queue/barberServedQueue",infodata)
+
+        dispatch({
+            type:BARBER_SERVED_QUEUE_SUCCESS,
+            payload:data
+        })
+    } catch (error) {
+        dispatch({
+            type:BARBER_SERVED_QUEUE_FAIL,
             payload: error.response.data
         })
     }

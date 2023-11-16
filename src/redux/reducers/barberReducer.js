@@ -1,4 +1,4 @@
-import { CREATE_BARBER_FAIL, CREATE_BARBER_REQ, CREATE_BARBER_SUCCESS, GETALLBARBERS_BYSERVICEID_FAIL, GETALLBARBERS_BYSERVICEID_REQ, GETALLBARBERS_BYSERVICEID_SUCCESS, GET_BARBERLIST_FAIL, GET_BARBERLIST_REQ, GET_BARBERLIST_SUCCESS, GET_BARBER_SERVICES_FAIL, GET_BARBER_SERVICES_REQ, GET_BARBER_SERVICES_SUCCESS, UPDATE_BARBER_FAIL, UPDATE_BARBER_REQ, UPDATE_BARBER_SUCCESS } from "../constants/barberConstants"
+import { BARBER_SERVED_QUEUE_FAIL, BARBER_SERVED_QUEUE_REQ, BARBER_SERVED_QUEUE_SUCCESS, CREATE_BARBER_FAIL, CREATE_BARBER_REQ, CREATE_BARBER_SUCCESS, GETALLBARBERS_BYSERVICEID_FAIL, GETALLBARBERS_BYSERVICEID_REQ, GETALLBARBERS_BYSERVICEID_SUCCESS, GET_BARBERLIST_FAIL, GET_BARBERLIST_REQ, GET_BARBERLIST_SUCCESS, GET_BARBER_SERVICES_FAIL, GET_BARBER_SERVICES_REQ, GET_BARBER_SERVICES_SUCCESS, UPDATE_BARBER_FAIL, UPDATE_BARBER_REQ, UPDATE_BARBER_SUCCESS } from "../constants/barberConstants"
 
 export const barberListReducer = (state = {},action) => {
     switch(action.type){
@@ -59,6 +59,19 @@ export const getAllBarbersByServiceIdReducer = (state = {},action) => {
         case GETALLBARBERS_BYSERVICEID_SUCCESS:
             return {loading:false,...action.payload}
         case GETALLBARBERS_BYSERVICEID_FAIL:
+            return {loading:false,error:action.payload}
+        default:
+            return state
+    }
+}
+
+export const barberServedQueueReducer = (state = {},action) => {
+    switch(action.type){
+        case BARBER_SERVED_QUEUE_REQ:
+            return {loading:true}
+        case BARBER_SERVED_QUEUE_SUCCESS:
+            return {loading:false,...action.payload}
+        case BARBER_SERVED_QUEUE_FAIL:
             return {loading:false,error:action.payload}
         default:
             return state

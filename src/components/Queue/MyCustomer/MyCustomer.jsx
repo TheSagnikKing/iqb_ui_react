@@ -1,31 +1,32 @@
-import React, { useEffect, useState } from 'react'
-import "./Queue.css"
-import AdminLayout from '../layout/Admin/AdminLayout'
+import React, { useEffect } from 'react'
+import "./MyCustomer.css"
+import AdminLayout from '../../layout/Admin/AdminLayout'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { queueListAction } from '../../redux/actions/joinQueueAction'
+import { queueListAction } from '../../../redux/actions/joinQueueAction'
+import { barberServedQueueAction } from '../../../redux/actions/barberAction'
+import { PiQueueBold } from 'react-icons/pi'
 
-import { PiQueueBold } from "react-icons/pi";
-import { barberServedQueueAction } from '../../redux/actions/barberAction'
-
-const Queue = () => {
+const MyCustomer = () => {
 
     const signin = useSelector(state => state.signin)
     const { user } = signin
 
-    const [singledrop, setSingleDrop] = useState(false)
-
-    console.log(singledrop)
+    const dispatch = useDispatch()
 
     const salonid = 3
-
-    const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch(queueListAction(salonid))
     }, [dispatch])
 
     const queueList = useSelector(state => state.queueList)
+
+    const barberId = 2;
+
+    const mycustomers = queueList?.response?.filter((f) => f.barberId === barberId)
+
+    // console.log("filterdsjkvknjsldvds",mycustomers)
+
 
     const serverHandler = (barberId,serviceId,customerid) => {
 
@@ -38,33 +39,13 @@ const Queue = () => {
 
         dispatch(barberServedQueueAction(infodata))
     } 
-
-    return (
-        <>
+  return (
+    <>
             {
                 user?.isAdmin ? (<>
                     <AdminLayout />
                     <div className='queue-wrapper'>
-                        <p>Select Your Joins</p>
-
-                        <div className='joins'>
-                            <div><p>Group Join</p></div>
-                            <div>
-                                <p onClick={() => setSingleDrop((prev) => !prev)}>Single Join</p>
-
-                                {
-                                    singledrop && <div className='joins-dropdown'>
-                                        <Link to="/queue/barberlist">Select Barber</Link>
-                                        <Link to="/queue/selectservices">Select Services</Link>
-                                    </div>
-                                }
-
-                            </div>
-                            <div><p><Link to="/queue/autoqueservices">Auto Join</Link></p></div>
-
-                            <div><p style={{marginLeft:"10px"}}><Link to="/queue/mycustomer">My Customers</Link></p></div>
-                        </div>
-
+                        
                         <div className='queue-list-table'>
                             <p>Queue List</p>
 
@@ -80,7 +61,7 @@ const Queue = () => {
                             </div>
 
                             {
-                                queueList?.response?.map((c) => (
+                                mycustomers?.map((c) => (
                                     <div className='que-lst-content' key={c._id}>
                                         <p>{c.userName}</p>
                                         <p>{c.name}</p>
@@ -95,14 +76,13 @@ const Queue = () => {
                                     </div>
                                 ))
                             }
-
-
+                    
                         </div>
                     </div>
                 </>) : (<h1>Only Admins can access this page</h1>)
             }
         </>
-    )
+  )
 }
 
-export default Queue
+export default MyCustomer

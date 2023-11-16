@@ -30,6 +30,7 @@ import QueuebarberServices from './components/Queue/QueuebarberServices/Queuebar
 import QueueselectServices from './components/Queue/QueueselectServices/QueueselectServices';
 import QueueselectBarber from './components/Queue/QueueselectBarber/QueueselectBarber';
 import Queautojoinservices from './components/Queue/AutoJoine/Queautojoinservices/Queautojoinservices';
+import MyCustomer from './components/Queue/MyCustomer/MyCustomer';
 
 const AdminSignin = React.lazy(() => import("./components/admin_authentication/Signin"))
 const AdminSignup = React.lazy(() => import("./components/admin_authentication/SignUp"))
@@ -217,7 +218,15 @@ const App = () => {
           <Route path="/queue/autoqueservices" element={
             <ProtectedRoute>
               <Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}>
-                <Queautojoinservices/>
+                <Queautojoinservices />
+              </Suspense>
+            </ProtectedRoute>
+          } />
+
+          <Route path="/queue/mycustomer" element={
+            <ProtectedRoute>
+              <Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}>
+                <MyCustomer />
               </Suspense>
             </ProtectedRoute>
           } />

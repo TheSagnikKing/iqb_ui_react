@@ -2,7 +2,7 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import thunk from "redux-thunk";
 import { logoutReducer, newPasswordResetReducer, passwordResetEmailReducer, signinReducer, signupReducer } from "./reducers/userReducer";
 import { createSalonReducer, getAllSalonServicesReducer, salonListReducer, updateSalonReducer } from "./reducers/salonReducer";
-import { barberListReducer, createBarberReducer, getAllBarbersByServiceIdReducer, getBarberServicesBybarberIdReducer, updateBarberReducer } from "./reducers/barberReducer";
+import { barberListReducer, barberServedQueueReducer, createBarberReducer, getAllBarbersByServiceIdReducer, getBarberServicesBybarberIdReducer, updateBarberReducer } from "./reducers/barberReducer";
 import { autojoinReducer, queueListReducer, singleJoinQueueReducer } from "./reducers/joinqueueReducer";
 
 const rootReducer = combineReducers({
@@ -22,7 +22,8 @@ const rootReducer = combineReducers({
   getAllSalonServices:getAllSalonServicesReducer,
   getAllBarbersByServiceId:getAllBarbersByServiceIdReducer,
   queueList:queueListReducer,
-  autojoin:autojoinReducer
+  autojoin:autojoinReducer,
+  barberServedQueue:barberServedQueueReducer
 });
 
 const initialState = {};
