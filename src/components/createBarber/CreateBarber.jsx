@@ -10,9 +10,7 @@ import {createBarberAction} from "../../redux/actions/barberAction"
 import AdminLayout from '../layout/Admin/AdminLayout'
 
 const CreateBarber = () => {
-    const signin = useSelector(state => state.signin)
-    const { user } = signin
-
+ 
     const [dropdown,setDropdown] = useState(false)
 
     const [name,setName] = useState("")
@@ -60,8 +58,7 @@ const CreateBarber = () => {
  
     return (
         <>
-            {
-                user?.isAdmin ? (<>
+
                     <AdminLayout />
                     <div className='crt-wrapper'>
                         <p>Create Barber</p>
@@ -223,8 +220,7 @@ const CreateBarber = () => {
 
                         </div>
                     </div>
-                </>) : (<h1>Only Admins can access this page</h1>)
-            }
+                
         </>
     )
 }

@@ -10,11 +10,8 @@ import { BiHide } from 'react-icons/bi'
 import { RiErrorWarningLine } from 'react-icons/ri'
 
 import { Link, useNavigate } from 'react-router-dom'
-import { googleSignIn, signup } from '../../redux/actions/userAction'
-import { auth } from '../../config.js/firebase.config'
-//authentication
-import { validateSigninAdmin } from '../../utils/ValidateUser'
-import { FaRegUser } from 'react-icons/fa'
+import { useDispatch } from 'react-redux'
+import { AdminRegisterAction } from '../../redux/actions/AdminAuthAction'
 
 const SignUp = () => {
 
@@ -24,56 +21,13 @@ const SignUp = () => {
         setCheck(!check)
     }
 
-    const [name, setName] = useState("")
     const [password, setPassword] = useState("")
     const [email, setEmail] = useState("")
     const [visible, setVisible] = useState(false)
     const [error, setError] = useState(true)
 
-     //=============
-     const handleNameChange = (e) => {
-        setName(e.target.value)
-        localStorage.setItem("name",name)
-    }
-
-    //authentication starts
-
-    //Admin
-    const [admin, setAdmin] = useState(true);
-
-    const navigate = useNavigate();
-
-    const authObject = { isAdmin: 'true', isBarber: 'false' };
-    const authJSON = JSON.stringify(authObject);
-
-    useEffect(() => {
-
-        const unsubscribe = auth.onAuthStateChanged((userCred) => {
-            if (userCred) {
-                userCred.getIdToken().then(async(token) => {
-                    console.log("Admin signup", token)
-                    const username = localStorage.getItem("name")
-
-                    validateSigninAdmin(token, admin,username).then((data) => {
-                        window.localStorage.setItem('auth', authJSON);
-                        console.log("validateSignup Admin", data);
-                        localStorage.removeItem("name")
-                        navigate('/admin-dashboard');
-                    });
-                });
-            } else {
-                window.localStorage.setItem('auth', 'false');
-            }
-        });
-
-        return () => {
-            unsubscribe()
-        }
-    }, []);
-
-    // getAdditionalUserInfo(result)
-
-
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
 
     const submitHandler = async () => {
         try {
@@ -82,8 +36,8 @@ const SignUp = () => {
             } else if (!password) {
                 alert("Password required")
             } else {
-                window.localStorage.setItem("name", name)
-                const currentuser = await signup(email, password)
+                const signupdata = {email,password}
+                dispatch(AdminRegisterAction(signupdata,navigate))
             }
         } catch (error) {
             console.log(error.message)
@@ -91,14 +45,7 @@ const SignUp = () => {
     }
 
     
-    const googleSigninHandler = async () => {
-        try {
-            await googleSignIn();
-        } catch (error) {
-            console.log(error.message);
-        }
-    }
-
+ 
     return (
         <>
             <main className="signup">
@@ -114,16 +61,6 @@ const SignUp = () => {
                         </div>
 
                         <div className="divtwo">
-
-                            <div className="input_container">
-                                <div>
-                                    <FaRegUser />
-                                </div>
-                                <input type="text" placeholder='Name'
-                                    value={name}
-                                    onChange={handleNameChange}
-                                />
-                            </div>
 
                             <div className="input_container">
                                 <div>
@@ -186,7 +123,7 @@ const SignUp = () => {
                         </div>
 
                         <div className="divfive">
-                            <div className="social_button" onClick={googleSigninHandler}>
+                            <div className="social_button" onClick={() => {}}>
                                 <div>
                                     <FcGoogle />
                                 </div>

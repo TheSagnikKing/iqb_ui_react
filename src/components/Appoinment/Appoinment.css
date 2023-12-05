@@ -1,0 +1,28 @@
+.queue-wrapper-app{
+    width: 82% !important;
+    position: absolute;
+    top: 90px;
+    left: 265px;
+    margin-left: 35px;
+    margin-top: 30px;
+}
+
+.queue-wrapper-app>div:nth-child(2){
+    display:flex;
+    gap: 2rem;
+    margin-top: 30px;
+    height: 45px;
+    align-items: center;
+}
+
+.queue-wrapper-app>div:nth-child(2)>a{
+    background-color: #fff;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0px 0px 6px rgba(0,0,0,0.3);
+    padding-inline: 20px;
+}

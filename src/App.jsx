@@ -16,7 +16,6 @@ const InitialPage = React.lazy(() => import('./pages/InitialPage'))
 const BarberDashboardPage = React.lazy(() => import('./pages/barberDashboard/BarberDashboardPage'))
 const ResetNewPassword = React.lazy(() => import('./components/authentification/ResetNewPassword'))
 
-import ProtectedRoute from './components/authentification/ProtectedRoute'
 import CreateSalon from './components/Salon/CreateSalon/CreateSalon';
 import AdminDashboardPage from './pages/AdminDashboardPage';
 import SalonList from './components/Salon/SalonList/SalonList';
@@ -31,11 +30,15 @@ import QueueselectServices from './components/Queue/QueueselectServices/Queuesel
 import QueueselectBarber from './components/Queue/QueueselectBarber/QueueselectBarber';
 import Queautojoinservices from './components/Queue/AutoJoine/Queautojoinservices/Queautojoinservices';
 import MyCustomer from './components/Queue/MyCustomer/MyCustomer';
+import Appoinment from './components/Appoinment/Appoinment';
+import AppointBarber from './components/Appoinment/AppointBarber/AppointBarber';
+import AppointBarberServices from './components/Appoinment/AppointBarberServices/AppointBarberServices';
+import AppointSelectServices from './components/Appoinment/AppointSelectServices/AppointSelectServices';
+import AppointmentSelectBarber from './components/Appoinment/AppointmentSelectBarber/AppointmentSelectBarber';
 
 const AdminSignin = React.lazy(() => import("./components/admin_authentication/Signin"))
 const AdminSignup = React.lazy(() => import("./components/admin_authentication/SignUp"))
 
-const AdminDashboard = React.lazy(() => import("./components/Admin/dashboard/Dashboard"))
 
 const App = () => {
 
@@ -74,60 +77,60 @@ const App = () => {
             </Suspense>
           } />
           <Route path='/dashboard' element={
-            <ProtectedRoute>
-              <Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}>
-                <DashboardPage />
-              </Suspense>
-            </ProtectedRoute>} />
+
+            <Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}>
+              <DashboardPage />
+            </Suspense>
+          } />
 
           <Route path="/barber/dashboard2" element={
-            <ProtectedRoute>
-              <Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}>
-                <Dashboard2Page />
-              </Suspense>
-            </ProtectedRoute>
+
+            <Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}>
+              <Dashboard2Page />
+            </Suspense>
+
           } />
 
           <Route path="/barber/updatebarber" element={
-            <ProtectedRoute>
-              <Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}>
-                <UpdateBarber />
-              </Suspense>
-            </ProtectedRoute>
+
+            <Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}>
+              <UpdateBarber />
+            </Suspense>
+
           } />
 
           <Route path="/barber/createbarber" element={
-            <ProtectedRoute>
-              <Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}>
-                <CreateBarber />
-              </Suspense>
-            </ProtectedRoute>
+
+            <Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}>
+              <CreateBarber />
+            </Suspense>
+
           } />
 
 
           <Route path="/customer/customerform" element={
-            <ProtectedRoute>
-              <Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}>
-                <CustomerformPage />
-              </Suspense>
-            </ProtectedRoute>
+
+            <Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}>
+              <CustomerformPage />
+            </Suspense>
+
           } />
           <Route path="/customer/dashboard3" element={
-            <ProtectedRoute>
-              <Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}>
-                <Dashboard3Page />
-              </Suspense>
-            </ProtectedRoute>
+
+            <Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}>
+              <Dashboard3Page />
+            </Suspense>
+
           } />
 
 
           {/* //BarberDashboard */}
           <Route path="/barberdashboard" element={
-            <ProtectedRoute>
-              <Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}>
-                <BarberDashboardPage />
-              </Suspense>
-            </ProtectedRoute>
+
+            <Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}>
+              <BarberDashboardPage />
+            </Suspense>
+
           } />
 
 
@@ -145,92 +148,131 @@ const App = () => {
           } />
 
           <Route path='/admin-dashboard' element={
-            <ProtectedRoute>
-              <Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}>
-                <AdminDashboardPage />
-              </Suspense>
-            </ProtectedRoute>} />
+
+            <Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}>
+              <AdminDashboardPage />
+            </Suspense>
+          } />
 
           <Route path="/salon/createsalon" element={
-            <ProtectedRoute>
-              <Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}>
-                <CreateSalon />
-              </Suspense>
-            </ProtectedRoute>
+
+            <Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}>
+              <CreateSalon />
+            </Suspense>
+
           } />
 
           <Route path="/salon/salonlist" element={
-            <ProtectedRoute>
-              <Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}>
-                <SalonList />
-              </Suspense>
-            </ProtectedRoute>
+
+            <Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}>
+              <SalonList />
+            </Suspense>
+
           } />
 
           <Route path="/salon/updateSalon/:salonId" element={
-            <ProtectedRoute>
-              <Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}>
-                <UpdateSalon />
-              </Suspense>
-            </ProtectedRoute>
+
+            <Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}>
+              <UpdateSalon />
+            </Suspense>
+
           } />
 
           <Route path="/queue" element={
-            <ProtectedRoute>
-              <Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}>
-                <Queue />
-              </Suspense>
-            </ProtectedRoute>
+
+            <Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}>
+              <Queue />
+            </Suspense>
+
           } />
 
           <Route path="/queue/barberlist" element={
-            <ProtectedRoute>
-              <Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}>
-                <QueuebarberList />
-              </Suspense>
-            </ProtectedRoute>
+
+            <Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}>
+              <QueuebarberList />
+            </Suspense>
+
           } />
 
           <Route path="/queue/barberservices/:barberid/:barbername" element={
-            <ProtectedRoute>
-              <Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}>
-                <QueuebarberServices />
-              </Suspense>
-            </ProtectedRoute>
+
+            <Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}>
+              <QueuebarberServices />
+            </Suspense>
+
           } />
 
           <Route path="/queue/selectservices" element={
-            <ProtectedRoute>
-              <Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}>
-                <QueueselectServices />
-              </Suspense>
-            </ProtectedRoute>
+
+            <Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}>
+              <QueueselectServices />
+            </Suspense>
+
           } />
 
           <Route path="/queue/selectservicebarber/:serviceid" element={
-            <ProtectedRoute>
-              <Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}>
-                <QueueselectBarber />
-              </Suspense>
-            </ProtectedRoute>
+
+            <Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}>
+              <QueueselectBarber />
+            </Suspense>
+
           } />
 
           <Route path="/queue/autoqueservices" element={
-            <ProtectedRoute>
-              <Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}>
-                <Queautojoinservices />
-              </Suspense>
-            </ProtectedRoute>
+
+            <Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}>
+              <Queautojoinservices />
+            </Suspense>
+
           } />
 
           <Route path="/queue/mycustomer" element={
-            <ProtectedRoute>
-              <Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}>
-                <MyCustomer />
-              </Suspense>
-            </ProtectedRoute>
+
+            <Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}>
+              <MyCustomer />
+            </Suspense>
+
           } />
 
+          <Route path="/appoinment" element={
+
+            <Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}>
+              <Appoinment />
+            </Suspense>
+
+          } />
+
+          <Route path="/appointment/barber" element={
+
+            <Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}>
+              <AppointBarber />
+            </Suspense>
+
+          } />
+
+          <Route path="/appointment/barberservices/:barberid/:barbername" element={
+
+            <Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}>
+              <AppointBarberServices />
+            </Suspense>
+
+          } />
+
+          <Route path="/appoinment/service" element={
+
+            <Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}>
+              <AppointSelectServices />
+            </Suspense>
+
+          } />
+
+          <Route path="/appointment/selectservicebarber/:serviceid" element={
+
+            <Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}>
+              <AppointmentSelectBarber />
+            </Suspense>
+
+          } />
 
         </Routes>
       </BrowserRouter>

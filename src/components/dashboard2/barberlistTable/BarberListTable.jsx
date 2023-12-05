@@ -11,8 +11,6 @@ import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
 
 const BarberListTable = () => {
-    const signin = useSelector(state => state.signin)
-    const { user } = signin
 
     const [barbersList, setBarbersList] = useState([])
     const [currentPage, setCurrentPage] = useState(null)
@@ -107,8 +105,7 @@ const BarberListTable = () => {
 
     return (
         <>
-            {
-                user?.isAdmin ? (<>
+
 
                     <div className="wrapper">
                         <div className="header">
@@ -213,8 +210,8 @@ const BarberListTable = () => {
                         </div>
 
                     </div>
-                </>) : (<h1>Only Admins can access this page</h1>)
-            }
+              
+            
         </>
     )
 }

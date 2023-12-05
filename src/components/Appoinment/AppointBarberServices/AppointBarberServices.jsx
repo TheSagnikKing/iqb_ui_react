@@ -1,5 +1,14 @@
+// import React from 'react'
+
+// const AppointBarberServices = () => {
+//   return (
+//     <div>AppointBarberServices</div>
+//   )
+// }
+
+// export default AppointBarberServices
+
 import React, { useEffect } from 'react'
-import "./QueuebarberServices.css"
 import { useSelector, useDispatch } from 'react-redux'
 import AdminLayout from '../../layout/Admin/AdminLayout'
 
@@ -7,7 +16,7 @@ import { useParams } from "react-router-dom"
 import { getbarberServicesbyBarberIdAction } from '../../../redux/actions/barberAction'
 import { singleJoinQueueAction } from '../../../redux/actions/joinQueueAction'
 
-const QueuebarberServices = () => {
+const AppointBarberServices = () => {
 
   const { barberid, barbername } = useParams()
 
@@ -66,4 +75,4 @@ const QueuebarberServices = () => {
   )
 }
 
-export default QueuebarberServices
+export default AppointBarberServices

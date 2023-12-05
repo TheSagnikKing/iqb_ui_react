@@ -1,12 +1,22 @@
+// import React from 'react'
+
+// const AppointmentSelectBarber = () => {
+//   return (
+//     <div>AppointmentSelectBarber</div>
+//   )
+// }
+
+// export default AppointmentSelectBarber
+
 import React, { useEffect } from 'react'
-import "./QueueselectBarber.css"
+
 import AdminLayout from '../../layout/Admin/AdminLayout'
 import { useDispatch, useSelector } from 'react-redux'
 import { getAllBarbersByServiceIdAction } from '../../../redux/actions/barberAction'
 import { useParams } from 'react-router-dom'
 import { singleJoinQueueAction } from '../../../redux/actions/joinQueueAction'
 
-const QueueselectBarber = () => {
+const AppointmentSelectBarber = () => {
 
     const { serviceid } = useParams()
     console.log(serviceid)
@@ -18,6 +28,8 @@ const QueueselectBarber = () => {
     }, [dispatch])
 
     const getAllBarbersByServiceId = useSelector(state => state.getAllBarbersByServiceId)
+
+    const {error} = getAllBarbersByServiceId;
 
     const joinQueueHandler = (barberid,name) => {
         const queuedata = {
@@ -62,10 +74,13 @@ const QueueselectBarber = () => {
                             ))
                         }
 
+{error?.message}
                     </div>
+
+                   
                 
         </>
     )
 }
 
-export default QueueselectBarber
+export default AppointmentSelectBarber

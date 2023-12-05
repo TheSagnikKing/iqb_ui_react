@@ -10,8 +10,6 @@ import {updateBarberAction} from "../../redux/actions/barberAction"
 import AdminLayout from '../layout/Admin/AdminLayout'
 
 const UpdateBarber = () => {
-    const signin = useSelector(state => state.signin)
-    const { user } = signin
 
     const [dropdown,setDropdown] = useState(false)
 
@@ -24,13 +22,23 @@ const UpdateBarber = () => {
     const [barberServices,setBarberServices] = useState([])
     const [isActive,setIsActive] = useState("")
 
-    useEffect(() => {
-        const getServices = async() => {
-            const {data} = await axios.get(`https://iqb-backend2.onrender.com/api/salon/allSalonServices?salonId=11`)
-            setBarberServices(data)
-        }
+    const [error1,setError1] = useState("")
 
-        getServices()
+    console.log(error1)
+
+    useEffect(() => {
+        try {
+            const getServices = async() => {
+                const {data} = await axios.get(`https://iqb-backend2.onrender.com/api/salon/allSalonServices?salonId=11`)
+                setBarberServices(data)
+                setError1(data.message)
+            }
+    
+            getServices()
+        } catch (error) {
+            console.log(error)
+        }
+        
     },[])
 
     const [selectedService,setSelectedService] = useState([])
@@ -60,8 +68,7 @@ const UpdateBarber = () => {
  
     return (
         <>
-            {
-                user?.isAdmin ? (<>
+
                     <AdminLayout/>
                     <div className='upd-wrapper'>
                         <p>Update Barber</p>
@@ -174,6 +181,7 @@ const UpdateBarber = () => {
                                                 <p>servicePrice</p>
                                                 <p>300</p>
                                             </div>
+                                            <p>{error1 && error1}</p>
                                         </div>
                                         )) : <p>No services present</p>
                                        }
@@ -223,8 +231,7 @@ const UpdateBarber = () => {
 
                         </div>
                     </div>
-                </>) : (<h1>Only Admins can access this page</h1>)
-            }
+                
         </>
     )
 }

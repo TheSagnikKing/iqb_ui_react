@@ -1,12 +1,39 @@
+// import React from 'react'
+// import "./AppointBarber.css"
+// import { useSelector } from 'react-redux'
+// import AdminLayout from '../../layout/Admin/AdminLayout'
+
+// const AppointBarber = () => {
+
+//     const signin = useSelector(state => state.signin)
+//     const { user } = signin
+
+//   return (
+//     <>
+//             {
+//                 user?.isAdmin ? (<>
+//                     <AdminLayout />
+//                     <div className='queue-wrapper-app'>
+//                         <p>Select Your Barber</p>
+                        
+                      
+//                     </div>
+//                 </>) : (<h1>Only Admins can access this page</h1>)
+//             }
+//         </>
+//   )
+// }
+
+// export default AppointBarber
+
+
 import React, { useEffect } from 'react'
-import "./QueuebarberList.css"
 import { useSelector, useDispatch } from 'react-redux'
 import AdminLayout from '../../layout/Admin/AdminLayout'
 import { barberListAction } from '../../../redux/actions/barberAction'
 import {useNavigate} from "react-router-dom"
 
-const QueuebarberList = () => {
-
+const AppointBarber = () => {
 
   const dispatch = useDispatch()
 
@@ -19,7 +46,7 @@ const QueuebarberList = () => {
   const navigate = useNavigate()
 
   const routechangeHandler = (barberId,name) => {
-    navigate(`/queue/barberservices/${barberId}/${name}`)
+    navigate(`/appointment/barberservices/${barberId}/${name}`)
   }
   return (
     <>
@@ -56,9 +83,9 @@ const QueuebarberList = () => {
 
 
           </div>
-       
+        
     </>
   )
 }
 
-export default QueuebarberList
+export default AppointBarber;

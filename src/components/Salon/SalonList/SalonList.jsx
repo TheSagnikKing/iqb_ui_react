@@ -11,8 +11,6 @@ import { RiSettings3Fill } from 'react-icons/ri'
 import AdminLayout from '../../layout/Admin/AdminLayout'
 
 const SalonList = () => {
-    const signin = useSelector(state => state.signin)
-    const { user } = signin
 
     const [search,setSearch] = useState("")
     const [salonList,setSalonList] = useState([])
@@ -39,8 +37,7 @@ const SalonList = () => {
  
   return (
     <>
-    {
-        user?.isAdmin ? (<>
+
         <AdminLayout/>
         <div className="wrapper">
                 <div className="header">
@@ -113,8 +110,7 @@ const SalonList = () => {
                 </div>
 
             </div>
-        </>) : (<h1>Only Admins can access this page</h1>)
-    }
+        
     </>
   )
 }

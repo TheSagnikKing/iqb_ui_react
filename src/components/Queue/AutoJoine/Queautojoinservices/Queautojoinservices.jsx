@@ -6,8 +6,6 @@ import { getAllSalonServicesAction } from '../../../../redux/actions/salonAction
 import { autojoinAction } from '../../../../redux/actions/joinQueueAction'
 
 const Queautojoinservices = () => {
-    const signin = useSelector(state => state.signin)
-    const { user } = signin
 
     const dispatch = useDispatch()
 
@@ -35,8 +33,7 @@ const Queautojoinservices = () => {
 
     return (
         <>
-            {
-                user?.isAdmin ? (<>
+
                     <AdminLayout />
                     <div className="queselectauto-wrapper">
                         <p>Select Service</p>
@@ -64,8 +61,7 @@ const Queautojoinservices = () => {
                         }
 
                     </div>
-                </>) : (<h1>Only Admins can access this page</h1>)
-            }
+               
         </>
     )
 }

@@ -213,6 +213,22 @@ export const adminmenudata = [
     ]
   },
 
+  {
+    id: 8,
+    menu_logo: <MdQueue />,
+    menu_title: "Appoinment",
+    menu_link: "/appoinment",
+    category: [
+      {
+        id: 8,
+        list_logo: <BsCheckCircle />,
+        list: "List",
+        message_logo: <TbMessageCircle />,
+        message_title: "Send mail / Notification"
+      }
+    ]
+  },
+
 ]
 
 export const reports = [

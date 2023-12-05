@@ -10,8 +10,6 @@ import { AiOutlineReload } from 'react-icons/ai'
 import axios from 'axios'
 
 const Dashboard3 = () => {
-    const signin = useSelector(state => state.signin)
-    const { user } = signin
 
     const [customersList, setCustomersList] = useState([])
     const [currentPage, setCurrentPage] = useState(null)
@@ -100,8 +98,6 @@ const Dashboard3 = () => {
 
     return (
         <>
-            {
-                user?.isAdmin ? (<>
 
                     <div className="cst-wrapper">
                         <div className="cst-header">
@@ -213,8 +209,7 @@ const Dashboard3 = () => {
                         </div>
 
                     </div>
-                </>) : (<h1>Only Admins can access this page</h1>)
-            }
+                
         </>
     )
 }

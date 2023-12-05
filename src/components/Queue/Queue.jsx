@@ -10,9 +10,6 @@ import { barberServedQueueAction } from '../../redux/actions/barberAction'
 
 const Queue = () => {
 
-    const signin = useSelector(state => state.signin)
-    const { user } = signin
-
     const [singledrop, setSingleDrop] = useState(false)
 
     console.log(singledrop)
@@ -41,8 +38,7 @@ const Queue = () => {
 
     return (
         <>
-            {
-                user?.isAdmin ? (<>
+
                     <AdminLayout />
                     <div className='queue-wrapper'>
                         <p>Select Your Joins</p>
@@ -99,8 +95,7 @@ const Queue = () => {
 
                         </div>
                     </div>
-                </>) : (<h1>Only Admins can access this page</h1>)
-            }
+
         </>
     )
 }

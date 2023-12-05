@@ -8,9 +8,6 @@ import { PiQueueBold } from 'react-icons/pi'
 
 const MyCustomer = () => {
 
-    const signin = useSelector(state => state.signin)
-    const { user } = signin
-
     const dispatch = useDispatch()
 
     const salonid = 3
@@ -41,8 +38,7 @@ const MyCustomer = () => {
     } 
   return (
     <>
-            {
-                user?.isAdmin ? (<>
+
                     <AdminLayout />
                     <div className='queue-wrapper'>
                         
@@ -79,8 +75,7 @@ const MyCustomer = () => {
                     
                         </div>
                     </div>
-                </>) : (<h1>Only Admins can access this page</h1>)
-            }
+               
         </>
   )
 }

@@ -8,13 +8,11 @@ import { BsCheckLg } from 'react-icons/bs'
 import { BiShow } from 'react-icons/bi'
 import { BiHide } from 'react-icons/bi'
 import { RiErrorWarningLine } from 'react-icons/ri'
-
-import { ColorRing } from 'react-loader-spinner'
 import { Link, useNavigate } from 'react-router-dom'
-import { auth } from '../../config.js/firebase.config'
-import { googleSignIn, signin } from '../../redux/actions/userAction'
+import { GoogleLogin } from '@react-oauth/google';
 
-import { validateSigninAdmin } from '../../utils/ValidateUser'
+import { AdminLoginAction,AdminGoogleloginAction } from '../../redux/actions/AdminAuthAction'
+import { useDispatch } from 'react-redux'
 
 //This is sign-in page not sign-up
 
@@ -30,39 +28,9 @@ const SignIn = () => {
     const [visible, setVisible] = useState(false)
     const [error, setError] = useState(true)
 
-    //authentication starts
-    //Admin
-    const [admin, setAdmin] = useState(true);
 
     const navigate = useNavigate();
-
-    const authObject = { isAdmin: 'true', isBarber: 'false' };
-    const authJSON = JSON.stringify(authObject);
-
-    useEffect(() => {
-
-        const unsubscribe = auth.onAuthStateChanged((userCred) => {
-            if (userCred) {
-                userCred.getIdToken().then(async (token) => {
-                    console.log("admin signin", token)
-
-                    validateSigninAdmin(token, admin).then((data) => {
-                        window.localStorage.setItem('auth', authJSON);
-                        console.log("validateSigninAdmin", data);
-                        navigate("/admin-dashboard")
-                       
-                    });
-                });
-            } else {
-                window.localStorage.setItem('auth', 'false');
-            }
-        });
-
-        return () => {
-            unsubscribe()
-        }
-    }, []);
-
+    const dispatch = useDispatch()
 
     const submitHandler = async () => {
         try {
@@ -71,20 +39,23 @@ const SignIn = () => {
             } else if (!password) {
                 alert('Password required');
             } else {
-                await signin(email, password);
+                const signindata = {email,password}
+                dispatch(AdminLoginAction(signindata,navigate))
             }
         } catch (error) {
             console.log(error);
         }
     }
 
-    const googleSigninHandler = async () => {
-        try {
-            await googleSignIn();
-        } catch (error) {
-            console.log(error.message);
-        }
-    }
+    //Google Admin Action
+    const responseMessage = async(response) => {
+        dispatch(AdminGoogleloginAction(response.credential,navigate))
+    };
+  
+    const errorMessage = (error) => {
+        console.log(error);
+    };
+
 
     return (
         <>
@@ -166,19 +137,28 @@ const SignIn = () => {
                         </div>
 
                         <div className="divfive">
-                            <div className="social_button" onClick={googleSigninHandler}>
+                        <GoogleLogin
+            onSuccess={responseMessage}
+            onError={errorMessage}
+            size='large'
+            shape='circle'
+            width={400}
+            logo_alignment='left'
+            text='continue_with'
+          />
+                            {/* <div className="social_button" onClick={() => {}}>
                                 <div>
                                     <FcGoogle />
                                 </div>
                                 <p>Google</p>
-                            </div>
+                            </div> */}
 
-                            <div className="social_button">
+                            {/* <div className="social_button">
                                 <div>
                                     <BsFacebook />
                                 </div>
                                 <p>facebook</p>
-                            </div>
+                            </div> */}
                         </div>
 
                         <p className="divsix">Don't have an account? <Link to="/admin-signup" className="link"><strong>Sign Up</strong></Link></p>
