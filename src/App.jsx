@@ -35,6 +35,7 @@ import AppointBarber from './components/Appoinment/AppointBarber/AppointBarber';
 import AppointBarberServices from './components/Appoinment/AppointBarberServices/AppointBarberServices';
 import AppointSelectServices from './components/Appoinment/AppointSelectServices/AppointSelectServices';
 import AppointmentSelectBarber from './components/Appoinment/AppointmentSelectBarber/AppointmentSelectBarber';
+import Auth from './components/admin_authentication/Auth';
 
 const AdminSignin = React.lazy(() => import("./components/admin_authentication/Signin"))
 const AdminSignup = React.lazy(() => import("./components/admin_authentication/SignUp"))
@@ -71,7 +72,7 @@ const App = () => {
               <ResetpasswordPage />
             </Suspense>
           } />
-          <Route path="/resetnewpassword" element={
+          <Route path="/resetnewpassword/:token" element={
             <Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}>
               <ResetNewPassword />
             </Suspense>
@@ -79,7 +80,10 @@ const App = () => {
           <Route path='/dashboard' element={
 
             <Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}>
+            
               <DashboardPage />
+        
+              
             </Suspense>
           } />
 
@@ -150,7 +154,9 @@ const App = () => {
           <Route path='/admin-dashboard' element={
 
             <Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}>
+              <Auth>
               <AdminDashboardPage />
+              </Auth>
             </Suspense>
           } />
 

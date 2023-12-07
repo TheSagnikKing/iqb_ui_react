@@ -23,14 +23,22 @@ const SignIn = () => {
         setCheck(!check)
     }
 
+    const navigate = useNavigate();
+    const dispatch = useDispatch()
+
+    const userLoggedIn = localStorage.getItem("userLoggedIn")
+
+    useEffect(() => {
+        if( userLoggedIn == "true"){
+          navigate("/admin-dashboard")
+        }
+      },[navigate,userLoggedIn])
+
     const [password, setPassword] = useState("")
     const [email, setEmail] = useState("")
     const [visible, setVisible] = useState(false)
     const [error, setError] = useState(true)
 
-
-    const navigate = useNavigate();
-    const dispatch = useDispatch()
 
     const submitHandler = async () => {
         try {
@@ -142,7 +150,7 @@ const SignIn = () => {
             onError={errorMessage}
             size='large'
             shape='circle'
-            width={400}
+            // width={400}
             logo_alignment='left'
             text='continue_with'
           />

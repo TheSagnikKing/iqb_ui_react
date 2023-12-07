@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
+import "./ResetNewPassword.css"
 import { RiLockPasswordLine } from 'react-icons/ri'
 import { BiShow } from 'react-icons/bi'
 import { BiHide } from 'react-icons/bi'
 import { useDispatch } from 'react-redux'
-import { newPasswordResetAction } from '../../redux/actions/userAction'
-import { useLocation } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
+import { AdminResetPasswordAction } from '../../redux/actions/AdminAuthAction'
 
 //This is sign-in page not sign-up
 
@@ -14,11 +15,8 @@ const ResetNewPassword = () => {
     const [password,setPassword] = useState("")
     const [confirmPassword,setConfirmPassword] = useState("")
 
-    const location = useLocation()
-    const query = new URLSearchParams(location.search)
-
-    const oobCode = query.get('oobCode')
-
+    const {token} = useParams()
+    const navigate = useNavigate()
     const dispatch = useDispatch()
 
     const resetnewpasswordHandler = () => {
@@ -27,8 +25,7 @@ const ResetNewPassword = () => {
         }else if(password !== confirmPassword){
             alert("Password donot match")
         }else{
-            dispatch(newPasswordResetAction(oobCode,password))
-            alert("Password changed successfully")
+            dispatch(AdminResetPasswordAction(token,password,navigate))
         }
     }
 
