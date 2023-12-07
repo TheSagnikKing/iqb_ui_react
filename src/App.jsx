@@ -43,6 +43,7 @@ const AdminSignup = React.lazy(() => import("./components/admin_authentication/S
 
 import QueueGroupBarberList from "./components/Queue/GroupJoin/QueuebarberList/QueuebarberList"
 import QueueGroupBarberServices from "./components/Queue/GroupJoin/QueuebarberServices/QueuebarberServices"
+import GroupJoinCustomer from './components/Queue/GroupJoin/GroupJoinCustomer/GroupJoinCustomer';
 
 const App = () => {
 
@@ -223,6 +224,7 @@ const App = () => {
 
           } />
 
+          <Route path="/queue/group/customers" element={<GroupJoinCustomer/>}/>
           <Route path="/queue/group/barberlist" element={<QueueGroupBarberList/>}/>
           <Route path="/queue/group/barberservices/:barberid/:barbername" element={<QueueGroupBarberServices/>}/>
 
