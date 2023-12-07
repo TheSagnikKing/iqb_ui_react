@@ -1,10 +1,10 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import thunk from "redux-thunk";
 import { logoutReducer, newPasswordResetReducer, passwordResetEmailReducer, signinReducer, signupReducer } from "./reducers/userReducer";
-import { createSalonReducer, getAllSalonServicesReducer, salonListReducer, updateSalonReducer } from "./reducers/salonReducer";
-import { barberListReducer, barberServedQueueReducer, createBarberReducer, getAllBarbersByServiceIdReducer, getBarberServicesBybarberIdReducer, updateBarberReducer } from "./reducers/barberReducer";
-import { autojoinReducer, queueListReducer, singleJoinQueueReducer } from "./reducers/joinqueueReducer";
-import { AdminGoogleLoginReducer, AdminLoginReducer, AdminLogoutReducer, AdminRegisterReducer } from "./reducers/AdminAuthReducer";
+import { createSalonReducer, deleteSalonReducer, getAllSalonServicesReducer, salonListReducer, updateSalonReducer } from "./reducers/salonReducer";
+import { approveBarberReducer, barberListReducer, barberServedQueueReducer, createBarberReducer, deleteBarberReducer, getAllBarbersByServiceIdReducer, getBarberServicesBybarberIdReducer, updateBarberReducer } from "./reducers/barberReducer";
+import { GroupJoinSelectedBarberServiceReducer, autojoinReducer, queueListReducer, singleJoinQueueReducer } from "./reducers/joinqueueReducer";
+import { AdminForgetPasswordReducer, AdminGoogleLoginReducer, AdminLoginReducer, AdminLogoutReducer, AdminRegisterReducer, AdminResetPasswordReducer, LoggedOutMiddlewareReducer, updateAdminReducer } from "./reducers/AdminAuthReducer";
 
 const rootReducer = combineReducers({
   signup:signupReducer,
@@ -30,7 +30,20 @@ const rootReducer = combineReducers({
   AdminRegister:AdminRegisterReducer,
   AdminLogin:AdminLoginReducer,
   AdminLogout:AdminLogoutReducer,
-  AdminGoogleLogin:AdminGoogleLoginReducer
+  AdminGoogleLogin:AdminGoogleLoginReducer,
+  AdminForgetPassword:AdminForgetPasswordReducer,
+  AdminResetPassword:AdminResetPasswordReducer,
+
+  //middleware
+  LoggedOutMiddleware:LoggedOutMiddlewareReducer,
+
+  deleteBarber:deleteBarberReducer,
+  approveBarber:approveBarberReducer,
+  deleteSalon:deleteSalonReducer,
+
+  updateAdmin:updateAdminReducer,
+
+  GroupJoinSelectedBarberService:GroupJoinSelectedBarberServiceReducer
 });
 
 const initialState = {};

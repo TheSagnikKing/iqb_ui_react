@@ -11,7 +11,7 @@ import { FaUserCircle } from "react-icons/fa"
 import { MdKeyboardArrowDown } from "react-icons/md"
 import { BiLogOutCircle } from "react-icons/bi"
 import { RiAccountCircleFill } from "react-icons/ri"
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { logout } from '../../../../redux/actions/userAction'
 import { useDispatch } from 'react-redux'
 import { AdminLogoutAction } from '../../../../redux/actions/AdminAuthAction'
@@ -136,6 +136,11 @@ const AdminHeader = ({ title }) => {
                   <div>
                     <div><RiAccountCircleFill/></div>
                     <p>My Account</p>
+                  </div>
+
+                  <div>
+                    <div><RiAccountCircleFill/></div>
+                    <Link to="/admin/updateprofile">Update Profile</Link>
                   </div>
 
                   <div>

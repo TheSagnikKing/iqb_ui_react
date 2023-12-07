@@ -99,8 +99,8 @@
 .salon-item{
     background-color:#F1F6FC;
     display: grid;
-    grid-template-columns: repeat(8,1fr);
-    gap: 1rem;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 0.4fr 0.4fr 0.4fr;
+    gap: 2.5rem;
     padding: 10px;
     border-radius: 5px;
     font-size: 12px;

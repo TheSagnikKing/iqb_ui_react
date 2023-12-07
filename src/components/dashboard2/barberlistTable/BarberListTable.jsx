@@ -3,12 +3,15 @@ import React, { useEffect, useState } from 'react'
 import PuffLoader from "react-spinners/PuffLoader"
 
 import "./BarberListTable.css"
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { GrAdd } from 'react-icons/gr'
 import { AiOutlineArrowLeft, AiOutlineArrowRight, AiOutlineSearch, AiOutlineArrowUp, AiOutlineArrowDown, AiFillEdit } from 'react-icons/ai'
 import { AiOutlineReload } from 'react-icons/ai'
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
+
+import { MdDelete } from "react-icons/md";
+import { approveBarberAction, deleteBarberAction } from '../../../redux/actions/barberAction'
 
 const BarberListTable = () => {
 
@@ -42,15 +45,15 @@ const BarberListTable = () => {
     }, [])
 
     const searchHandler = async () => {
-        if(search === ""){
-           
-        }else{
+        if (search === "") {
+
+        } else {
             setLoading(true)
             const { data } = await axios.post(`https://iqb-backend2.onrender.com/api/barber/getAllBarberBySalonId?name=${search}&email=${search}`)
             setBarbersList(data)
             setLoading(false)
         }
-       
+
     }
 
 
@@ -103,115 +106,136 @@ const BarberListTable = () => {
         navigate("/barber/createbarber")
     }
 
+    const dispatch = useDispatch()
+
+    const deletebarberHandler = (salonId,email) => {
+        dispatch(deleteBarberAction(salonId,email))
+    }
+
+    const approveHandler = (salonId,email) => {
+        const approvedata = {
+            salonId,
+            email,
+            isApproved:true
+        }
+
+        dispatch(approveBarberAction(approvedata))
+    }
+
     return (
         <>
+            <div className="wrapper">
+                <div className="header">
+                    <p>Barbers List</p>
 
+                    <div>
+                        <button onClick={reloadHandler} className='reload'><AiOutlineReload /></button>
+                        <div>
+                            <input
+                                className='search'
+                                type="text"
+                                placeholder='Search'
+                                value={search}
+                                onChange={(e) => setSearch(e.target.value)}
+                            />
 
-                    <div className="wrapper">
-                        <div className="header">
-                            <p>Barbers List</p>
+                            <button onClick={searchHandler} className='search-btn'><AiOutlineSearch /></button>
+                        </div>
 
-                            <div>
-                                <button onClick={reloadHandler} className='reload'><AiOutlineReload /></button>
-                                <div>
-                                    <input
-                                        className='search'
-                                        type="text"
-                                        placeholder='Search'
-                                        value={search}
-                                        onChange={(e) => setSearch(e.target.value)}
-                                    />
-
-                                    <button onClick={searchHandler} className='search-btn'><AiOutlineSearch /></button>
-                                </div>
-
-                                <div onClick={createBarberNavigate}>
-                                    <GrAdd />
-                                </div>
-                                {/* 
+                        <div onClick={createBarberNavigate}>
+                            <GrAdd />
+                        </div>
+                        {/* 
                                 <div>
                                     <BsThreeDotsVertical />
                                 </div> */}
-                            </div>
-                        </div>
-
-                        {/* Table  */}
-                        <div className='table'>
-                            {
-                                loading ? <div className='puff-loader-box'><PuffLoader/></div> : barbersList && barbersList.getAllBarbers ? barbersList?.getAllBarbers.map((barber, index) => <main className="barberitem" key={index}>
-                                    <div>
-                                        <div>
-                                            <p>Salon ID</p>
-                                            <div>
-                                                <div onClick={() => sortHandler("salonId", "asc")}><AiOutlineArrowUp /></div>
-                                                <div onClick={() => sortHandler("salonId", "des")}><AiOutlineArrowDown /></div>
-                                            </div>
-                                        </div>
-                                        <p>{barber.salonId}</p>
-                                    </div>
-
-                                    <div>
-                                        <div>
-                                            <p>Name</p>
-                                            <div>
-                                                <div onClick={() => sortHandler("name", "asc")}><AiOutlineArrowUp /></div>
-                                                <div onClick={() => sortHandler("name", "des")}><AiOutlineArrowDown /></div>
-                                            </div>
-                                        </div>
-                                        <p>{barber.name}</p>
-                                    </div>
-
-                                    <div>
-                                        <div>
-                                            <p>Email</p>
-                                            <div>
-                                                <div><AiOutlineArrowUp /></div>
-                                                <div><AiOutlineArrowDown /></div>
-                                            </div>
-                                        </div>
-                                        <p>{barber.email}</p>
-                                    </div>
-
-                                    <div>
-                                        <div>
-                                            <p>Date of Birth</p>
-                                            <div>
-                                                <div><AiOutlineArrowUp /></div>
-                                                <div><AiOutlineArrowDown /></div>
-                                            </div>
-                                        </div>
-                                        <p>{barber.dateOfBirth}</p>
-                                    </div>
-
-                                    <div>
-                                        <div>
-                                            <p>is Active</p>
-                                            <div>
-                                                <div><AiOutlineArrowUp /></div>
-                                                <div><AiOutlineArrowDown /></div>
-                                            </div>
-                                        </div>
-                                        <p>{barber.isActive ? "True" : "false"}</p>
-                                    </div>
-
-                                    <div>
-                                        <Link to="/barber/updatebarber"><AiFillEdit/></Link>
-                                    </div>
-
-                                </main>) : <div className='no-barber-box'><p>No Barbers Present</p></div>
-                            }
-                        </div>
-
-                        <div className='barber-pagination'>
-                            <div>
-                                <div onClick={PrevHandler}><AiOutlineArrowLeft /></div>
-                                <div onClick={NextHandler}><AiOutlineArrowRight /></div>
-                            </div>
-                        </div>
-
                     </div>
-              
-            
+                </div>
+
+                {/* Table  */}
+                <div className='table'>
+                    {
+                        loading ? <div className='puff-loader-box'><PuffLoader /></div> : barbersList && barbersList.getAllBarbers ? barbersList?.getAllBarbers.map((barber, index) => <main className="barberitem" key={index}>
+                            <div>
+                                <div>
+                                    <p>Salon ID</p>
+                                    <div>
+                                        <div onClick={() => sortHandler("salonId", "asc")}><AiOutlineArrowUp /></div>
+                                        <div onClick={() => sortHandler("salonId", "des")}><AiOutlineArrowDown /></div>
+                                    </div>
+                                </div>
+                                <p>{barber.salonId}</p>
+                            </div>
+
+                            <div>
+                                <div>
+                                    <p>Name</p>
+                                    <div>
+                                        <div onClick={() => sortHandler("name", "asc")}><AiOutlineArrowUp /></div>
+                                        <div onClick={() => sortHandler("name", "des")}><AiOutlineArrowDown /></div>
+                                    </div>
+                                </div>
+                                <p>{barber.name}</p>
+                            </div>
+
+                            <div>
+                                <div>
+                                    <p>Email</p>
+                                    <div>
+                                        <div><AiOutlineArrowUp /></div>
+                                        <div><AiOutlineArrowDown /></div>
+                                    </div>
+                                </div>
+                                <p>{barber.email}</p>
+                            </div>
+
+                            <div>
+                                <div>
+                                    <p>Date of Birth</p>
+                                    <div>
+                                        <div><AiOutlineArrowUp /></div>
+                                        <div><AiOutlineArrowDown /></div>
+                                    </div>
+                                </div>
+                                <p>{barber.dateOfBirth}</p>
+                            </div>
+
+                            <div>
+                                <div>
+                                    <p>is Active</p>
+                                    <div>
+                                        <div><AiOutlineArrowUp /></div>
+                                        <div><AiOutlineArrowDown /></div>
+                                    </div>
+                                </div>
+                                <p>{barber.isActive ? "True" : "false"}</p>
+                            </div>
+
+                            {/* <div>
+                                <Link to="/barber/updatebarber"><AiFillEdit /></Link>
+                            </div> */}
+
+
+                                <button className='approve-bbr' onClick={() => approveHandler(barber.salonId,barber.email)}>Approve</button>
+                                <Link to="/barber/updatebarber" className='edit-bbr'><AiFillEdit /></Link>
+
+
+                                <button className='del-bbr' onClick={() => deletebarberHandler(barber.salonId,barber.email)}><MdDelete /></button>
+
+                        </main>) : <div className='no-barber-box'><p>No Barbers Present</p></div>
+                    }
+                </div>
+
+                <div className='barber-pagination'>
+                    <div>
+                        <div onClick={PrevHandler}><AiOutlineArrowLeft /></div>
+                        <div onClick={NextHandler}><AiOutlineArrowRight /></div>
+                    </div>
+                </div>
+
+            </div>
+
+
         </>
     )
 }

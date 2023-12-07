@@ -39,9 +39,6 @@ const UpdateSalon = () => {
 
     // ==========================================
 
-    const signin = useSelector(state => state.signin)
-    const { user } = signin
-
     const [adminEmail, setAdminEmail] = useState("")
     const [userName, setUsername] = useState("")
     const [salonName, setSalonName] = useState("")
@@ -131,8 +128,7 @@ const UpdateSalon = () => {
 
     return (
         <>
-            {
-                user?.isAdmin ? (<> <AdminLayout/>
+ <AdminLayout/>
                     <div className="sa-br-right_main_div">
 
                         <div className="sa-br-right_main_head">
@@ -318,9 +314,7 @@ const UpdateSalon = () => {
 
                             </div>
                         </div>
-                    </div></>) : (<h1>Only Admins can access this page</h1>)
-            }
-
+                    </div>
         </>
     )
 }

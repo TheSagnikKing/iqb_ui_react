@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import "./SalonList.css"
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { GrAdd } from 'react-icons/gr'
 import { BsThreeDotsVertical } from 'react-icons/bs'
 import { AiFillEdit, AiOutlineSearch } from 'react-icons/ai'
@@ -9,22 +9,24 @@ import { PuffLoader } from 'react-spinners'
 import { Link, useNavigate } from 'react-router-dom'
 import { RiSettings3Fill } from 'react-icons/ri'
 import AdminLayout from '../../layout/Admin/AdminLayout'
+import { MdDelete } from 'react-icons/md'
+import { deleteSalonAction } from '../../../redux/actions/salonAction'
 
 const SalonList = () => {
 
-    const [search,setSearch] = useState("")
-    const [salonList,setSalonList] = useState([])
-    const [loading,setLoading] = useState(false)
+    const [search, setSearch] = useState("")
+    const [salonList, setSalonList] = useState([])
+    const [loading, setLoading] = useState(false)
 
-    const searchHandler = async() => {
-        if(search === ""){
+    const searchHandler = async () => {
+        if (search === "") {
 
-        }else{
+        } else {
             setLoading(true)
-            const {data} = await axios.get(`https://iqb-backend2.onrender.com/api/salon/getAllSalonsByAdminEmail?adminEmail=${search}`)
+            const { data } = await axios.get(`https://iqb-backend2.onrender.com/api/salon/getAllSalonsByAdminEmail?adminEmail=${search}`)
             setSalonList(data)
             setLoading(false)
-        }  
+        }
     }
 
     console.log(salonList)
@@ -34,12 +36,17 @@ const SalonList = () => {
     const addSalonNavigate = () => {
         navigate("/salon/createsalon")
     }
- 
-  return (
-    <>
 
-        <AdminLayout/>
-        <div className="wrapper">
+    const dispatch = useDispatch()
+
+    const deleteSalonHandler = (salonId) => {
+        dispatch(deleteSalonAction(salonId))
+    }
+    return (
+        <>
+
+            <AdminLayout />
+            <div className="wrapper">
                 <div className="header">
                     <p>Salons List</p>
 
@@ -52,7 +59,7 @@ const SalonList = () => {
                                 onChange={(e) => setSearch(e.target.value)}
                             />
 
-                            <button onClick={searchHandler}><AiOutlineSearch/></button>
+                            <button onClick={searchHandler}><AiOutlineSearch /></button>
                         </div>
 
                         <div onClick={addSalonNavigate}>
@@ -63,56 +70,58 @@ const SalonList = () => {
 
                 {/* Table  */}
                 <div className='table'>
-                 {
-                    loading ? <div className='salon-puff-loader-box'><PuffLoader/></div> : salonList && salonList.response ? salonList.response.map((salon,index) => (
-                        <div key={index} className='salon-item'>
-                            <div>
-                                <p>Salon ID</p>
-                                <p>{salon.salonId}</p>
+                    {
+                        loading ? <div className='salon-puff-loader-box'><PuffLoader /></div> : salonList && salonList.response ? salonList.response.map((salon, index) => (
+                            <div key={index} className='salon-item'>
+                                <div>
+                                    <p>Salon ID</p>
+                                    <p>{salon.salonId}</p>
+                                </div>
+
+                                <div>
+                                    <p>Salon Code</p>
+                                    <p>{salon.salonCode}</p>
+                                </div>
+
+                                <div>
+                                    <p>Salon Name</p>
+                                    <p>{salon.salonName}</p>
+                                </div>
+
+                                <div>
+                                    <p>Admin Email</p>
+                                    <p>{salon.adminEmail}</p>
+                                </div>
+
+                                <div>
+                                    <p>Address</p>
+                                    <p>{salon.address}</p>
+                                </div>
+
+                                <div>
+                                    <p>City</p>
+                                    <p>{salon.city}</p>
+                                </div>
+
+                                <Link to={`/salon/updatesalon/${salon.salonId}`}>
+                                    <AiFillEdit />
+                                </Link>
+
+                                <button className='del-bbr' onClick={() => deleteSalonHandler(salon.salonId)}><MdDelete /></button>
+
+                                <Link to="#">
+                                    <RiSettings3Fill />
+                                </Link>
+
                             </div>
-
-                            <div>
-                                <p>Salon Code</p>
-                                <p>{salon.salonCode}</p>
-                            </div>
-
-                            <div>
-                                <p>Salon Name</p>
-                                <p>{salon.salonName}</p>
-                            </div>
-
-                            <div>
-                                <p>Admin Email</p>
-                                <p>{salon.adminEmail}</p>
-                            </div>
-
-                            <div>
-                                <p>Address</p>
-                                <p>{salon.address}</p>
-                            </div>
-
-                            <div>
-                                <p>City</p>
-                                <p>{salon.city}</p>
-                            </div>
-
-                            <Link to={`/salon/updatesalon/${salon.salonId}`}>
-                                <AiFillEdit/>
-                            </Link>
-
-                            <Link to="#">
-                                <RiSettings3Fill/>
-                            </Link>
-
-                        </div>
-                    )) : <p className='salon-search'>Search Your Salons</p>
-                 }
+                        )) : <p className='salon-search'>Search Your Salons</p>
+                    }
                 </div>
 
             </div>
-        
-    </>
-  )
+
+        </>
+    )
 }
 
 export default SalonList

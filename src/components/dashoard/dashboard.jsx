@@ -10,10 +10,10 @@ import CustomerDetail from '../customerDetail/CustomerDetail'
 const Chart = React.lazy(() => import( "../chart/Chart"))
 import { customerDetail } from '../data'
 import { reports } from '../data'
-import { ColorRing } from 'react-loader-spinner'
 
 import Calender from '../calender/Calender'
 
+import api from "../../redux/api/Api"
 
 const dashboard = () => {
 
@@ -27,6 +27,14 @@ const dashboard = () => {
     const checkboxhandler = () => {
         setCheckbox(!checkbox)
     }
+
+    useEffect(() => {
+        const d = async() => {
+            const {data} = await api.get("http://localhost:8080/api/admin/profile")
+            console.log(data)
+        }
+        d()
+    },[])
 
     return (
         <>

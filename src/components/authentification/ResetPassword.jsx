@@ -3,7 +3,7 @@ import './ResetPassword.css'
 import { AiOutlineMail } from 'react-icons/ai'
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { passwordResetEmailAction } from '../../redux/actions/userAction'
+import { AdminForgetPasswordAction } from '../../redux/actions/AdminAuthAction'
 
 //This is sign-up page not sign-in
 
@@ -19,8 +19,8 @@ const ResetPassword = () => {
         if (!email) {
             alert("Please Enter Email")
         } else {
-            dispatch(passwordResetEmailAction(email))
-            navigate("/verifyemail", { state: email })
+            dispatch(AdminForgetPasswordAction(email,navigate))
+            // navigate("/verifyemail", { state: email })
         }
     }
 

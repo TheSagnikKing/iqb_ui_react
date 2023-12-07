@@ -36,10 +36,13 @@ import AppointBarberServices from './components/Appoinment/AppointBarberServices
 import AppointSelectServices from './components/Appoinment/AppointSelectServices/AppointSelectServices';
 import AppointmentSelectBarber from './components/Appoinment/AppointmentSelectBarber/AppointmentSelectBarber';
 import Auth from './components/admin_authentication/Auth';
+import UpdateAdminprofile from './components/UpdateAdminprofile/UpdateAdminprofile';
 
 const AdminSignin = React.lazy(() => import("./components/admin_authentication/Signin"))
 const AdminSignup = React.lazy(() => import("./components/admin_authentication/SignUp"))
 
+import QueueGroupBarberList from "./components/Queue/GroupJoin/QueuebarberList/QueuebarberList"
+import QueueGroupBarberServices from "./components/Queue/GroupJoin/QueuebarberServices/QueuebarberServices"
 
 const App = () => {
 
@@ -90,7 +93,9 @@ const App = () => {
           <Route path="/barber/dashboard2" element={
 
             <Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}>
+              {/* <Auth> */}
               <Dashboard2Page />
+              {/* </Auth> */}
             </Suspense>
 
           } />
@@ -160,6 +165,8 @@ const App = () => {
             </Suspense>
           } />
 
+          <Route path="/admin/updateprofile" element={<UpdateAdminprofile/>}/>
+
           <Route path="/salon/createsalon" element={
 
             <Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}>
@@ -216,6 +223,10 @@ const App = () => {
 
           } />
 
+          <Route path="/queue/group/barberlist" element={<QueueGroupBarberList/>}/>
+          <Route path="/queue/group/barberservices/:barberid/:barbername" element={<QueueGroupBarberServices/>}/>
+
+
           <Route path="/queue/selectservicebarber/:serviceid" element={
 
             <Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}>
@@ -239,6 +250,8 @@ const App = () => {
             </Suspense>
 
           } />
+
+         
 
           <Route path="/appoinment" element={
 

@@ -1,5 +1,5 @@
 import axios from "axios"
-import { BARBER_SERVED_QUEUE_FAIL, BARBER_SERVED_QUEUE_REQ, BARBER_SERVED_QUEUE_SUCCESS, CREATE_BARBER_FAIL, CREATE_BARBER_REQ, CREATE_BARBER_SUCCESS, GETALLBARBERS_BYSERVICEID_FAIL, GETALLBARBERS_BYSERVICEID_REQ, GETALLBARBERS_BYSERVICEID_SUCCESS, GET_BARBERLIST_FAIL, GET_BARBERLIST_REQ, GET_BARBERLIST_SUCCESS, GET_BARBER_SERVICES_FAIL, GET_BARBER_SERVICES_REQ, GET_BARBER_SERVICES_SUCCESS, UPDATE_BARBER_FAIL, UPDATE_BARBER_REQ, UPDATE_BARBER_SUCCESS } from "../constants/barberConstants"
+import { APPROVE_BARBER_FAIL, APPROVE_BARBER_REQ, APPROVE_BARBER_SUCCESS, BARBER_SERVED_QUEUE_FAIL, BARBER_SERVED_QUEUE_REQ, BARBER_SERVED_QUEUE_SUCCESS, CREATE_BARBER_FAIL, CREATE_BARBER_REQ, CREATE_BARBER_SUCCESS, DELETE_BARBER_FAIL, DELETE_BARBER_REQ, DELETE_BARBER_SUCCESS, GETALLBARBERS_BYSERVICEID_FAIL, GETALLBARBERS_BYSERVICEID_REQ, GETALLBARBERS_BYSERVICEID_SUCCESS, GET_BARBERLIST_FAIL, GET_BARBERLIST_REQ, GET_BARBERLIST_SUCCESS, GET_BARBER_SERVICES_FAIL, GET_BARBER_SERVICES_REQ, GET_BARBER_SERVICES_SUCCESS, UPDATE_BARBER_FAIL, UPDATE_BARBER_REQ, UPDATE_BARBER_SUCCESS } from "../constants/barberConstants"
 
 export const barberListAction = () => async(dispatch) => {
     try {
@@ -104,6 +104,43 @@ export const  barberServedQueueAction = (infodata) => async(dispatch) => {
     } catch (error) {
         dispatch({
             type:BARBER_SERVED_QUEUE_FAIL,
+            payload: error.response.data
+        })
+    }
+}
+
+
+export const deleteBarberAction = (salonId,email) => async(dispatch) => {
+    try {
+        dispatch({type:DELETE_BARBER_REQ})
+
+        const {data} = await axios.post(`https://iqb-backend2.onrender.com/api/barber/deleteBarberByEmail?salonId=${salonId}`,{email:email})
+
+        dispatch({
+            type:DELETE_BARBER_SUCCESS,
+            payload:data
+        })
+    } catch (error) {
+        dispatch({
+            type:DELETE_BARBER_FAIL,
+            payload: error.response.data
+        })
+    }
+}
+
+export const approveBarberAction = (approvedata) => async(dispatch) => {
+    try {
+        dispatch({type:APPROVE_BARBER_REQ})
+
+        const {data} = await axios.post(`https://iqb-backend2.onrender.com/api/admin/approvedBarber`,approvedata)
+
+        dispatch({
+            type:APPROVE_BARBER_SUCCESS,
+            payload:data
+        })
+    } catch (error) {
+        dispatch({
+            type:APPROVE_BARBER_FAIL,
             payload: error.response.data
         })
     }

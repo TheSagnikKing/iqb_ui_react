@@ -33,35 +33,34 @@ const Queautojoinservices = () => {
 
     return (
         <>
+            <AdminLayout />
+            <div className="queselectauto-wrapper">
+                <p>Select Service</p>
 
-                    <AdminLayout />
-                    <div className="queselectauto-wrapper">
-                        <p>Select Service</p>
+                <div className='queselectauto-head'>
+                    <p>Service ID</p>
+                    <p>Service Name</p>
+                    <p>Service Desc</p>
+                    <p>Service Price</p>
+                    <p>Service EWT</p>
+                    <p>Action</p>
+                </div>
 
-                        <div className='queselectauto-head'>
-                            <p>Service ID</p>
-                            <p>Service Name</p>
-                            <p>Service Desc</p>
-                            <p>Service Price</p>
-                            <p>Service EWT</p>
-                            <p>Action</p>
+                {
+                    getAllSalonServices?.response?.map((s) => (
+                        <div className='queselectauto-content' key={s._id}>
+                            <p>{s.serviceId}</p>
+                            <p>{s.serviceName}</p>
+                            <p>{s.serviceDesc}</p>
+                            <p>{s.servicePrice}</p>
+                            <p>{s.serviceEWT}</p>
+                            <button onClick={() => autojoinHandler(s.serviceId)}>Join Queue</button>
                         </div>
+                    ))
+                }
 
-                        {
-                            getAllSalonServices?.response?.map((s) => (
-                                <div className='queselectauto-content' key={s._id}>
-                                    <p>{s.serviceId}</p>
-                                    <p>{s.serviceName}</p>
-                                    <p>{s.serviceDesc}</p>
-                                    <p>{s.servicePrice}</p>
-                                    <p>{s.serviceEWT}</p>
-                                    <button onClick={() => autojoinHandler(s.serviceId)}>Join Queue</button>
-                                </div>
-                            ))
-                        }
+            </div>
 
-                    </div>
-               
         </>
     )
 }

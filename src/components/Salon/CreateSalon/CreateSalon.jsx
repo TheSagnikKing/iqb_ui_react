@@ -5,6 +5,7 @@ import Layout from '../../layout/Layout'
 import { useDispatch, useSelector } from 'react-redux'
 import { createSalonAction } from '../../../redux/actions/salonAction'
 import AdminLayout from '../../layout/Admin/AdminLayout'
+import axios from 'axios'
 
 const CreateSalon = () => {
 
@@ -12,34 +13,31 @@ const CreateSalon = () => {
     const [longitude, setLongitude] = useState(null);
     const [error, setError] = useState(null);
 
-    const [image,setImage] = useState("")
+    const [image, setImage] = useState("")
 
     useEffect(() => {
         if ("geolocation" in navigator) {
-          navigator.geolocation.getCurrentPosition(
-            (position) => {
-              const latitude = position.coords.latitude;
-              const longitude = position.coords.longitude;
-              setLatitude(latitude);
-              setLongitude(longitude);
-            },
-            (error) => {
-              if (error.code === error.PERMISSION_DENIED) {
-                setError("You denied access to your geolocation. Please enable it in your browser settings.");
-              } else {
-                setError("Error accessing geolocation: " + error.message);
-              }
-            }
-          );
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const latitude = position.coords.latitude;
+                    const longitude = position.coords.longitude;
+                    setLatitude(latitude);
+                    setLongitude(longitude);
+                },
+                (error) => {
+                    if (error.code === error.PERMISSION_DENIED) {
+                        setError("You denied access to your geolocation. Please enable it in your browser settings.");
+                    } else {
+                        setError("Error accessing geolocation: " + error.message);
+                    }
+                }
+            );
         } else {
             setError("Geolocation is not available in your browser.");
         }
-      }, []);
+    }, []);
 
     // ==========================================
-
-    const signin = useSelector(state => state.signin)
-    const { user } = signin
 
     const [adminEmail, setAdminEmail] = useState("")
     const [userName, setUsername] = useState("")
@@ -66,7 +64,57 @@ const CreateSalon = () => {
 
     const dispatch = useDispatch()
 
-    const submitHandler = () => {
+    //post images to both db and cloud
+    const [selectedFiles, setSelectedFiles] = useState(null);
+    const [images, setImages] = useState([])
+
+    const handleFileChange = (e) => {
+        setSelectedFiles(e.target.files);
+    };
+
+    const createSalon = useSelector(state => state.createSalon)
+    const { response } = createSalon
+
+    console.log(response?.salonId)
+
+
+    useEffect(() => {
+        if (response?.salonId) {
+            const uploadImageHandler = async () => {
+                if (selectedFiles != null) {
+                    const formData = new FormData();
+
+                    const SalonId = response?.salonId;
+                    formData.append('salonId', SalonId);
+
+                    for (const file of selectedFiles) {
+                        formData.append('profile', file);
+                    }
+
+                    try {
+                        const imageResponse = await axios.post('https://iqb-backend2.onrender.com/api/salon/uploadSalonImage', formData, {
+                            headers: {
+                                'Content-Type': 'multipart/form-data',
+                            },
+                        });
+
+                        console.log('Upload success:', imageResponse.data);
+                        setImages(imageResponse.data?.StudentImage?.profile);
+                        setSelectedFiles(null);
+                        alert("Image uploaded Successfully")
+                    } catch (error) {
+                        console.error('Image upload failed:', error);
+                        // Handle error as needed
+                    }
+                }
+            };
+
+            uploadImageHandler();
+        }
+    }, [response?.salonId]);
+
+
+    const submitHandler = async () => {
         const salonData = {
             adminEmail, userName, salonName, address, city, location: {
                 type: "Point",
@@ -74,11 +122,12 @@ const CreateSalon = () => {
                     longitude: Number(longitude),
                     latitude: Number(latitude)
                 }
-            }, country, postCode, contactTel, salonType, webLink, services,image
+            }, country, postCode, contactTel, salonType, webLink, services, image
         }
 
-        console.log(salonData)
-        // dispatch(createSalonAction(salonData))
+        dispatch(createSalonAction(salonData))
+
+        console.log(response?.salonId)
 
         setAdminEmail("")
         setUsername("")
@@ -118,216 +167,213 @@ const CreateSalon = () => {
         setServiceDesc(currentService.serviceDesc)
         setServicePrice(currentService.servicePrice)
 
-        
+
         const updatedServices = [...services];
         updatedServices.splice(ind, 1);
-    
+
         setServices(updatedServices);
     }
 
 
     return (
         <>
-            {
-                user?.isAdmin ? (<> <AdminLayout/>
-                    <div className="sa-br-right_main_div">
+            <AdminLayout />
+            <div className="sa-br-right_main_div">
 
-                        <div className="sa-br-right_main_head">
-                            <p>Crud</p>
+                <div className="sa-br-right_main_head">
+                    <p>Crud</p>
+                </div>
+
+                <div className="sa-br-right_main_form">
+                    <div className="sa-br-left">
+                        <div>
+                            <label htmlFor="">Admin Email</label>
+                            <input
+                                type="text"
+                                value={adminEmail}
+                                onChange={(e) => setAdminEmail(e.target.value)}
+                            />
                         </div>
 
-                        <div className="sa-br-right_main_form">
-                            <div className="sa-br-left">
-                                <div>
-                                    <label htmlFor="">Admin Email</label>
-                                    <input
-                                        type="text"
-                                        value={adminEmail}
-                                        onChange={(e) => setAdminEmail(e.target.value)}
-                                    />
-                                </div>
-
-                                <div>
-                                    <label htmlFor="">User Name</label>
-                                    <input
-                                        type="text"
-                                        value={userName}
-                                        onChange={(e) => setUsername(e.target.value)}
-                                    />
-                                </div>
-
-                                <div>
-                                    <label htmlFor="">Salon Name</label>
-                                    <input
-                                        type="text"
-                                        value={salonName}
-                                        onChange={(e) => setSalonName(e.target.value)}
-                                    />
-                                </div>
-
-                                <div>
-                                    <label htmlFor="">Address</label>
-                                    <input
-                                        type="text"
-                                        value={address}
-                                        onChange={(e) => setAddress(e.target.value)}
-                                    />
-                                </div>
-
-                                <div>
-                                    <label htmlFor="">City</label>
-                                    <input
-                                        type="text"
-                                        value={city}
-                                        onChange={(e) => setCity(e.target.value)}
-                                    />
-                                </div>
-
-                                <div>
-                                    <label htmlFor="">latitude</label>
-                                    <input
-                                        type="number"
-                                        value={latitude}
-                                        onChange={(e) => setLatitude(e.target.value)}
-                                    />
-                                </div>
-
-                                <div>
-                                    <label htmlFor="">longitude</label>
-                                    <input
-                                        type="number"
-                                        value={longitude}
-                                        onChange={(e) => setLongitude(e.target.value)}
-                                    />
-                                </div>
-
-
-                                <div>
-                                    <label htmlFor="">Country</label>
-                                    <input
-                                        type="text"
-                                        value={country}
-                                        onChange={(e) => setCountry(e.target.value)}
-                                    />
-                                </div>
-
-                                <div>
-                                    <label htmlFor="">Postal Code</label>
-                                    <input
-                                        type="text"
-                                        value={postCode}
-                                        onChange={(e) => setPostCode(e.target.value)}
-                                    />
-                                </div>
-
-                            </div>
-
-                            <div className="sa-br-right">
-
-                               
-
-                                <div>
-                                    <label htmlFor="">Contact Tel</label>
-                                    <input
-                                        type="text"
-                                        value={contactTel}
-                                        onChange={(e) => setContactTel(e.target.value)}
-                                    />
-                                </div>
-
-                                <div>
-                                    <label htmlFor="">Salon Type</label>
-                                    <input
-                                        type="text"
-                                        value={salonType}
-                                        onChange={(e) => setSalonType(e.target.value)}
-                                    />
-                                </div>
-
-                                <div>
-                                    <label htmlFor="">Web Link</label>
-                                    <input
-                                        type="text"
-                                        value={webLink}
-                                        onChange={(e) => setWebLink(e.target.value)}
-                                    />
-                                </div>
-
-                                <div>
-                                    <label htmlFor="">Select Salon Images</label>
-                                    <input type="file" id="file" value={image} onChange={(e) => setImage(e.target.value)}/>
-                                    <label htmlFor="file" className='file'>
-                                        Choose a Photo
-                                    </label>
-                                </div>
-
-                                <div className='services'>
-                                    <label className='serv-title'>Add Your Services</label>
-
-                                    <div>
-                                        <label htmlFor="">Service Name</label>
-                                        <input
-                                            type="text"
-                                            value={serviceName}
-                                            onChange={(e) => setServiceName(e.target.value)}
-                                        />
-                                    </div>
-
-                                    <div>
-                                        <label htmlFor="">Service Desc</label>
-                                        <input
-                                            type="text"
-                                            value={serviceDesc}
-                                            onChange={(e) => setServiceDesc(e.target.value)}
-                                        />
-                                    </div>
-
-                                    <div>
-                                        <label htmlFor="">Service Price</label>
-                                        <input
-                                            type="text"
-                                            value={servicePrice}
-                                            onChange={(e) => setServicePrice(e.target.value)}
-                                        />
-                                    </div>
-
-                                    <button onClick={addServiceHandler}>Add Service</button>
-
-                                </div>
-
-                                <div className='services-data'>
-                                    {services.map((service, index) => (
-                                        <div key={index} className='ser-table' onClick={() => serviceEditHandler(index)}>
-                                            <div>
-                                                <label>Service Name</label>
-                                                <label>{service.serviceName}</label>
-                                            </div>
-
-                                            <div>
-                                                <label>Service Des</label>
-                                                <label>{service.serviceDesc}</label>
-                                            </div>
-
-                                            <div>
-                                                <label>Service Price</label>
-                                                <label>{service.servicePrice}</label>
-                                            </div>
-
-                                        </div>
-                                    ))}
-                                </div>
-
-                                <div className="sa-br-btn_box">
-                                    <button onClick={submitHandler}>
-                                        Submit
-                                    </button>
-                                </div>
-
-                            </div>
+                        <div>
+                            <label htmlFor="">User Name</label>
+                            <input
+                                type="text"
+                                value={userName}
+                                onChange={(e) => setUsername(e.target.value)}
+                            />
                         </div>
-                    </div></>) : (<h1>Only Admins can access this page</h1>)
-            }
 
+                        <div>
+                            <label htmlFor="">Salon Name</label>
+                            <input
+                                type="text"
+                                value={salonName}
+                                onChange={(e) => setSalonName(e.target.value)}
+                            />
+                        </div>
+
+                        <div>
+                            <label htmlFor="">Address</label>
+                            <input
+                                type="text"
+                                value={address}
+                                onChange={(e) => setAddress(e.target.value)}
+                            />
+                        </div>
+
+                        <div>
+                            <label htmlFor="">City</label>
+                            <input
+                                type="text"
+                                value={city}
+                                onChange={(e) => setCity(e.target.value)}
+                            />
+                        </div>
+
+                        <div>
+                            <label htmlFor="">latitude</label>
+                            <input
+                                type="number"
+                                value={latitude}
+                                onChange={(e) => setLatitude(e.target.value)}
+                            />
+                        </div>
+
+                        <div>
+                            <label htmlFor="">longitude</label>
+                            <input
+                                type="number"
+                                value={longitude}
+                                onChange={(e) => setLongitude(e.target.value)}
+                            />
+                        </div>
+
+
+                        <div>
+                            <label htmlFor="">Country</label>
+                            <input
+                                type="text"
+                                value={country}
+                                onChange={(e) => setCountry(e.target.value)}
+                            />
+                        </div>
+
+                        <div>
+                            <label htmlFor="">Postal Code</label>
+                            <input
+                                type="text"
+                                value={postCode}
+                                onChange={(e) => setPostCode(e.target.value)}
+                            />
+                        </div>
+
+                    </div>
+
+                    <div className="sa-br-right">
+
+                        <div>
+                            <label htmlFor="">Contact Tel</label>
+                            <input
+                                type="text"
+                                value={contactTel}
+                                onChange={(e) => setContactTel(e.target.value)}
+                            />
+                        </div>
+
+                        <div>
+                            <label htmlFor="">Salon Type</label>
+                            <input
+                                type="text"
+                                value={salonType}
+                                onChange={(e) => setSalonType(e.target.value)}
+                            />
+                        </div>
+
+                        <div>
+                            <label htmlFor="">Web Link</label>
+                            <input
+                                type="text"
+                                value={webLink}
+                                onChange={(e) => setWebLink(e.target.value)}
+                            />
+                        </div>
+
+                        <div>
+                            <label htmlFor="">Select Salon Images</label>
+                            {/* <input type="file" multiple onChange={handleFileChange} />
+                            <label htmlFor="file" className='file'>
+                                Choose a Photo
+                            </label> */}
+                            <input type="file" multiple onChange={handleFileChange} />
+
+                        </div>
+
+                        <div className='services'>
+                            <label className='serv-title'>Add Your Services</label>
+
+                            <div>
+                                <label htmlFor="">Service Name</label>
+                                <input
+                                    type="text"
+                                    value={serviceName}
+                                    onChange={(e) => setServiceName(e.target.value)}
+                                />
+                            </div>
+
+                            <div>
+                                <label htmlFor="">Service Desc</label>
+                                <input
+                                    type="text"
+                                    value={serviceDesc}
+                                    onChange={(e) => setServiceDesc(e.target.value)}
+                                />
+                            </div>
+
+                            <div>
+                                <label htmlFor="">Service Price</label>
+                                <input
+                                    type="text"
+                                    value={servicePrice}
+                                    onChange={(e) => setServicePrice(e.target.value)}
+                                />
+                            </div>
+
+                            <button onClick={addServiceHandler}>Add Service</button>
+
+                        </div>
+
+                        <div className='services-data'>
+                            {services.map((service, index) => (
+                                <div key={index} className='ser-table' onClick={() => serviceEditHandler(index)}>
+                                    <div>
+                                        <label>Service Name</label>
+                                        <label>{service.serviceName}</label>
+                                    </div>
+
+                                    <div>
+                                        <label>Service Des</label>
+                                        <label>{service.serviceDesc}</label>
+                                    </div>
+
+                                    <div>
+                                        <label>Service Price</label>
+                                        <label>{service.servicePrice}</label>
+                                    </div>
+
+                                </div>
+                            ))}
+                        </div>
+
+                        <div className="sa-br-btn_box">
+                            <button onClick={submitHandler}>
+                                Submit
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
         </>
     )
 }

@@ -7,7 +7,6 @@ const dashboard2 = () => {
     <>
     <AdminLayout title="Barber"/>
     <BarberListTable/>
-
     </>
   )
 }
