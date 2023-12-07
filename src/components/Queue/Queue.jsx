@@ -11,7 +11,6 @@ import { barberServedQueueAction } from '../../redux/actions/barberAction'
 const Queue = () => {
 
     const [singledrop, setSingleDrop] = useState(false)
-    const [groupdrop, setGroupDrop] = useState(false)
 
     const salonid = 3
 
@@ -42,16 +41,7 @@ const Queue = () => {
                 <p>Select Your Joins</p>
 
                 <div className='joins'>
-                    <div>
-                        <p onClick={() => setGroupDrop((prev) => !prev)}>Group Join</p>
-
-                        {
-                            groupdrop && <div className='joins-dropdown'>
-                                <Link to="/queue/group/barberlist">Select Barber</Link>                         
-                            </div>
-                        }
-
-                    </div>
+                    <Link to="/queue/group/customers">Group Join</Link>
 
                     <div>
                         <p onClick={() => setSingleDrop((prev) => !prev)}>Single Join</p>

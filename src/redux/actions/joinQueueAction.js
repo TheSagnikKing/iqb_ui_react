@@ -1,5 +1,5 @@
 import axios from "axios"
-import { AUTOJOIN_FAIL, AUTOJOIN_REQ, AUTOJOIN_SUCCESS, QUELIST_FAIL, QUELIST_REQ, QUELIST_SUCCESS, SINGLE_JOINQUEUE_FAIL, SINGLE_JOINQUEUE_REQ, SINGLE_JOINQUEUE_SUCCESS } from "../constants/joinQueueConstants"
+import { AUTOJOIN_FAIL, AUTOJOIN_REQ, AUTOJOIN_SUCCESS, GROUP_JOIN_FAIL, GROUP_JOIN_REQ, GROUP_JOIN_SUCCESS, QUELIST_FAIL, QUELIST_REQ, QUELIST_SUCCESS, SINGLE_JOINQUEUE_FAIL, SINGLE_JOINQUEUE_REQ, SINGLE_JOINQUEUE_SUCCESS } from "../constants/joinQueueConstants"
 
 export const singleJoinQueueAction = (singlejoindata) => async(dispatch) => {
     try {
@@ -51,6 +51,31 @@ export const autojoinAction = (joindata) => async(dispatch) => {
     } catch (error) {
         dispatch({
             type:AUTOJOIN_FAIL,
+            payload: error.response.data
+        })
+    }
+}
+
+
+export const groupjoinAction = (groupjoindata) => async(dispatch) => {
+    try {
+        dispatch({type:GROUP_JOIN_REQ})
+
+        const {data} = await axios.post(`https://iqb-backend2.onrender.com/api/queue/groupJoinQueue`, {
+            salonId:3,
+            groupInfo:groupjoindata
+        })
+
+        localStorage.clear();
+
+        dispatch({
+            type:GROUP_JOIN_SUCCESS,
+            payload:data
+        })
+        
+    } catch (error) {
+        dispatch({
+            type:GROUP_JOIN_FAIL,
             payload: error.response.data
         })
     }

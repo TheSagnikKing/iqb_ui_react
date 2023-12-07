@@ -3,7 +3,7 @@ import thunk from "redux-thunk";
 import { logoutReducer, newPasswordResetReducer, passwordResetEmailReducer, signinReducer, signupReducer } from "./reducers/userReducer";
 import { createSalonReducer, deleteSalonReducer, getAllSalonServicesReducer, salonListReducer, updateSalonReducer } from "./reducers/salonReducer";
 import { approveBarberReducer, barberListReducer, barberServedQueueReducer, createBarberReducer, deleteBarberReducer, getAllBarbersByServiceIdReducer, getBarberServicesBybarberIdReducer, updateBarberReducer } from "./reducers/barberReducer";
-import { GroupJoinSelectedBarberServiceReducer, autojoinReducer, queueListReducer, singleJoinQueueReducer } from "./reducers/joinqueueReducer";
+import { autojoinReducer, groupjoinReducer, queueListReducer, singleJoinQueueReducer } from "./reducers/joinqueueReducer";
 import { AdminForgetPasswordReducer, AdminGoogleLoginReducer, AdminLoginReducer, AdminLogoutReducer, AdminRegisterReducer, AdminResetPasswordReducer, LoggedOutMiddlewareReducer, updateAdminReducer } from "./reducers/AdminAuthReducer";
 
 const rootReducer = combineReducers({
@@ -42,8 +42,7 @@ const rootReducer = combineReducers({
   deleteSalon:deleteSalonReducer,
 
   updateAdmin:updateAdminReducer,
-
-  GroupJoinSelectedBarberService:GroupJoinSelectedBarberServiceReducer
+  groupjoin:groupjoinReducer
 });
 
 const initialState = {};

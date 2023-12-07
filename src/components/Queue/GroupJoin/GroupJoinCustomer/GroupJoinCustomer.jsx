@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import AdminLayout from '../../../layout/Admin/AdminLayout'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { groupjoinAction } from '../../../../redux/actions/joinQueueAction'
+import "./GroupJoinCustomer.css"
 
 const GroupJoinCustomer = () => {
 
@@ -52,14 +55,19 @@ const GroupJoinCustomer = () => {
 
     console.log(allbarbers)
 
+    const dispatch = useDispatch()
+
     const gpjoinHandler = () => { 
-        console.log("hello")
+        dispatch(groupjoinAction(allbarbers))
+        alert("successfull")
+        window.location.reload()
     }
 
   return (
     <>
     <AdminLayout/>
-    <div className="quebarber-wrapper">
+    <div className="cs-gj-quebarber-wrapper">
+        <h1>Customers</h1>
         <div>
             <input 
             type="text" 
@@ -67,9 +75,7 @@ const GroupJoinCustomer = () => {
             value={name}
             onChange={(e) => setName(e.target.value)}
             />
-        </div>
 
-        <div>
             <input 
             type="text" 
             placeholder='Enter Customer Username'
