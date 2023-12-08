@@ -209,12 +209,7 @@ const CreateBarber = () => {
 
                                         <div>
                                             <p>serviceEWT</p>
-                                            <input
-                                                type="number"
-                                                value={ser.serviceEWT}
-                                                // onChange={(e) => updateServiceEWT(ser.serviceId, e.target.value)}
-                                            />
-                                            {/* <p>{}</p> */}
+                                            <p>{ser.serviceEWT}</p>                               
                                         </div>
 
                                         <div onClick={() => selectedServiceDelete(ser)}><MdDelete /></div>

@@ -10,6 +10,7 @@ const UpdateAdminprofile = () => {
     const [mobileNumber,setMobileNumber] = useState("")
     const [name,setName] = useState("")
     const [gender,setGender] = useState("")
+    const [dob,setDob] = useState("")
 
     const dispatch = useDispatch()
 
@@ -84,6 +85,15 @@ const UpdateAdminprofile = () => {
                                 type="text"
                                 value={gender}
                                 onChange={(e) => setGender(e.target.value)}
+                            />
+                        </div>
+
+                        <div>
+                            <label htmlFor="">Date of Birth</label>
+                            <input 
+                            type="date" 
+                            value={dob}
+                            onChange={(e) => setDob(e.target.value)}
                             />
                         </div>
 
