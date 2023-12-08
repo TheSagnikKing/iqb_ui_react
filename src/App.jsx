@@ -30,7 +30,7 @@ import QueueselectServices from './components/Queue/QueueselectServices/Queuesel
 import QueueselectBarber from './components/Queue/QueueselectBarber/QueueselectBarber';
 import Queautojoinservices from './components/Queue/AutoJoine/Queautojoinservices/Queautojoinservices';
 import MyCustomer from './components/Queue/MyCustomer/MyCustomer';
-import Appoinment from './components/Appoinment/Appoinment';
+import Appoinmentacbd from './components/Appoinment/Appoinmentacbd';
 import AppointBarber from './components/Appoinment/AppointBarber/AppointBarber';
 import AppointBarberServices from './components/Appoinment/AppointBarberServices/AppointBarberServices';
 import AppointSelectServices from './components/Appoinment/AppointSelectServices/AppointSelectServices';
@@ -44,6 +44,9 @@ const AdminSignup = React.lazy(() => import("./components/admin_authentication/S
 import QueueGroupBarberList from "./components/Queue/GroupJoin/QueuebarberList/QueuebarberList"
 import QueueGroupBarberServices from "./components/Queue/GroupJoin/QueuebarberServices/QueuebarberServices"
 import GroupJoinCustomer from './components/Queue/GroupJoin/GroupJoinCustomer/GroupJoinCustomer';
+import Month from './components/Appoinment/Month/Month';
+import CalenderEvent from './components/Appoinment/CalenderEvent/CalenderEvent';
+import CalenderList from './components/Appoinment/CalenderList/CalenderList'
 
 const App = () => {
 
@@ -83,11 +86,8 @@ const App = () => {
           } />
           <Route path='/dashboard' element={
 
-            <Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}>
-            
-              <DashboardPage />
-        
-              
+            <Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}>       
+              <DashboardPage />         
             </Suspense>
           } />
 
@@ -184,7 +184,7 @@ const App = () => {
 
           } />
 
-          <Route path="/salon/updateSalon/:salonId" element={
+          <Route path="/salon/updateSalon" element={
 
             <Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}>
               <UpdateSalon />
@@ -254,11 +254,14 @@ const App = () => {
           } />
 
          
+          <Route path="/appoinment" element={<Month/>}/>
+          <Route path="/appoinment/calender" element={<CalenderEvent/>}/>
+          <Route path="/appoinment/calender/list" element={<CalenderList/>}/>
 
-          <Route path="/appoinment" element={
+          <Route path="/appoinment/abcd" element={
 
             <Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}>
-              <Appoinment />
+              {/* <Appoinment /> */}
             </Suspense>
 
           } />

@@ -21,7 +21,7 @@ const Queautojoinservices = () => {
             name: "Arghya Ghosh",
             joinedQType: "Auto-Join",
             methodUsed: "Walk-In",
-            salonId: 1,
+            salonId: 3,
             serviceId: serviceId,
             isOnline: true
         }

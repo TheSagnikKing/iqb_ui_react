@@ -20,11 +20,8 @@ const UpdateBarber = () => {
     const [dateOfBirth,setDateOfBirth] = useState("")
     const [salonId,setSalonId] = useState("")
     const [barberServices,setBarberServices] = useState([])
-    const [isActive,setIsActive] = useState("")
-
     const [error1,setError1] = useState("")
 
-    console.log(error1)
 
     useEffect(() => {
         try {
@@ -60,7 +57,7 @@ const UpdateBarber = () => {
 
     const submitHandler = () => {
         const barberdata = {
-            name,email,userName,mobileNumber,dateOfBirth,salonId,isActive,barberServices:selectedService
+            name,email,userName,mobileNumber,dateOfBirth,salonId,barberServices:selectedService
         }
         dispatch(updateBarberAction(barberdata))
         alert("update barber successfully")
@@ -131,16 +128,6 @@ const UpdateBarber = () => {
                                 placeholder='Enter Salon ID'
                                 value={salonId}
                                 onChange={(e) => setSalonId(e.target.value)}
-                                />
-                            </div>
-
-                            <div>
-                                <label>Active</label>
-                                <input 
-                                type="text" 
-                                placeholder='Enter Name'
-                                value={isActive}
-                                onChange={(e) => setIsActive(e.target.value)}
                                 />
                             </div>
 

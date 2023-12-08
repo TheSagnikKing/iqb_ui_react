@@ -11,6 +11,7 @@ import { RiSettings3Fill } from 'react-icons/ri'
 import AdminLayout from '../../layout/Admin/AdminLayout'
 import { MdDelete } from 'react-icons/md'
 import { deleteSalonAction } from '../../../redux/actions/salonAction'
+import { setSharedSalonData } from '../updateSalon/salonId'
 
 const SalonList = () => {
 
@@ -18,16 +19,16 @@ const SalonList = () => {
     const [salonList, setSalonList] = useState([])
     const [loading, setLoading] = useState(false)
 
-    const searchHandler = async () => {
-        if (search === "") {
-
-        } else {
-            setLoading(true)
-            const { data } = await axios.get(`https://iqb-backend2.onrender.com/api/salon/getAllSalonsByAdminEmail?adminEmail=${search}`)
+    useEffect(() => {
+        //Admin emailer value loggin korar por theke asbe akhon static ache
+        const fetchSalons = async () => {
+            const { data } = await axios.get(`https://iqb-backend2.onrender.com/api/salon/getAllSalonsByAdminEmail?adminEmail=sumit12345@gmail.com`)
             setSalonList(data)
             setLoading(false)
         }
-    }
+
+        fetchSalons()
+    }, [])
 
     console.log(salonList)
 
@@ -42,6 +43,10 @@ const SalonList = () => {
     const deleteSalonHandler = (salonId) => {
         dispatch(deleteSalonAction(salonId))
     }
+
+    const changeRoute = (salonID) => {
+        navigate(`/salon/updatesalon`,{state:{salonId:salonID}})
+    }
     return (
         <>
 
@@ -51,17 +56,6 @@ const SalonList = () => {
                     <p>Salons List</p>
 
                     <div>
-                        <div className='salon-input'>
-                            <input
-                                type="text"
-                                placeholder='Search By Admin Email'
-                                value={search}
-                                onChange={(e) => setSearch(e.target.value)}
-                            />
-
-                            <button onClick={searchHandler}><AiOutlineSearch /></button>
-                        </div>
-
                         <div onClick={addSalonNavigate}>
                             <GrAdd />
                         </div>
@@ -103,9 +97,9 @@ const SalonList = () => {
                                     <p>{salon.city}</p>
                                 </div>
 
-                                <Link to={`/salon/updatesalon/${salon.salonId}`}>
+                                <button onClick={() => changeRoute(salon.salonId)}>
                                     <AiFillEdit />
-                                </Link>
+                                </button>
 
                                 <button className='del-bbr' onClick={() => deleteSalonHandler(salon.salonId)}><MdDelete /></button>
 

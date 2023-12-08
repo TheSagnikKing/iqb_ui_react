@@ -1,0 +1,140 @@
+.calender-event{
+    width: 82% !important;
+    position: absolute;
+    top: 90px;
+    left: 265px;
+    margin-left: 35px;
+    margin-top: 30px;
+
+    background: #fff;
+    /* height: 80vh; */
+    padding: 20px;
+}
+
+.cal-header{
+    width: 100%;
+    height: 40px;
+    /* margin-top: 50px; */
+    /* margin-inline: auto; */
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .cal-header>div{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .cal-header>div>button{
+    width: 80px;
+    height: 35px;
+    border: none;
+    background-color: #28292a;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 3px;
+    font-size: 16px;
+    box-shadow: 0px 0px 5px #28292a;
+    letter-spacing: 1px;
+  }
+
+  .cal-container {
+    width: 100%;
+    height: 80vh;
+    /* margin-inline: auto; */
+    background-color:#FFF;
+    box-shadow: 0px 0px 8px rgba(0,0,0,0.3);
+    border-radius: 8px;
+  }
+  
+  .cal-content {
+    height: 80vh;
+    width: 100%;
+    display: flex;
+    overflow-x:scroll;
+  }
+  
+  .cal-item{
+    min-width: 400px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    border: 1px solid rgba(0,0,0,0.2);
+  }
+
+  .cal-item>div:nth-child(1)>div:nth-child(1){
+    height:50px;
+    width: 50px;
+    border-radius: 50%;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    margin-inline: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 0px 4px rgba(0,0,0,0.3);
+  }
+
+  .cal-item>div:nth-child(1)>div:nth-child(1)>img{
+    width:70%;
+    height: 70%;
+  }
+  
+  .cal-item>div:nth-child(1)>p:nth-child(2){
+    text-align: center;
+    margin-bottom: 10px;
+    color:rgba(0,0,0,0.7);
+    font-weight: 500;
+  }
+
+  .appoin{
+    width: 380px;
+    height: 100px;
+    margin-inline: 5px;
+    margin-bottom: 10px;
+    padding:10px;
+    border-radius: 5px;
+  }
+
+  .appoin>p:nth-child(1){
+    font-weight: bold;
+  }
+
+  .appoin>p:nth-child(2){
+    font-weight: 500;
+  }
+
+  .noappoin{
+    text-align: center;
+    margin-top: 20%;
+    font-size: 18px;
+  }
+
+::-webkit-scrollbar {
+  width: 5px; 
+  height: 7px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #28292a; 
+  border-radius: 5px; 
+}
+
+::-webkit-scrollbar:hover {
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+  @media((min-width:0px) and (max-width:400px)){
+    .cal-header{
+      margin-bottom: 20px;
+    }
+    .cal-item{
+      min-width:100%;
+    }
+  }

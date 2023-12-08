@@ -25,6 +25,8 @@ const BarberListTable = () => {
     const [sortOrdeData, setSortOrderData] = useState("")
     const [sortFieldData, setFieldData] = useState("")
 
+    console.log(barbersList)
+
     useEffect(() => {
         const abortController = new AbortController();
 
@@ -108,16 +110,20 @@ const BarberListTable = () => {
 
     const dispatch = useDispatch()
 
-    const deletebarberHandler = (salonId,email) => {
-        dispatch(deleteBarberAction(salonId,email))
+    const deletebarberHandler = (salonId, email) => {
+        dispatch(deleteBarberAction(salonId, email))
     }
 
-    const approveHandler = (salonId,email) => {
+
+    const [approveBarberMap, setApproveBarberMap] = useState(new Map());
+
+    const approveHandler = (salonId, email) => {
         const approvedata = {
             salonId,
             email,
-            isApproved:true
+            isApproved: true
         }
+        setApproveBarberMap((prevMap) => new Map([...prevMap, [`${salonId}-${email}`, true]]));
 
         dispatch(approveBarberAction(approvedata))
     }
@@ -215,12 +221,20 @@ const BarberListTable = () => {
                                 <Link to="/barber/updatebarber"><AiFillEdit /></Link>
                             </div> */}
 
-
-                                <button className='approve-bbr' onClick={() => approveHandler(barber.salonId,barber.email)}>Approve</button>
-                                <Link to="/barber/updatebarber" className='edit-bbr'><AiFillEdit /></Link>
+                            {/* className='approve-bbr' */}
 
 
-                                <button className='del-bbr' onClick={() => deletebarberHandler(barber.salonId,barber.email)}><MdDelete /></button>
+                            {/* Updated approval button logic */}
+                            {approveBarberMap.get(`${barber.salonId}-${barber.email}`) || barber.isApproved ? (
+                                <button className='approve-bbr' style={{background:"gray"}}>Approved</button>
+                            ) : (
+                                <button className='approve-bbr' onClick={() => approveHandler(barber.salonId, barber.email)}>Approve</button>
+                            )}
+
+                            <Link to="/barber/updatebarber" className='edit-bbr'><AiFillEdit /></Link>
+
+
+                            <button className='del-bbr' onClick={() => deletebarberHandler(barber.salonId, barber.email)}><MdDelete /></button>
 
                         </main>) : <div className='no-barber-box'><p>No Barbers Present</p></div>
                     }

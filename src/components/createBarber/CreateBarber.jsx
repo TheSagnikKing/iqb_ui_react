@@ -20,7 +20,6 @@ const CreateBarber = () => {
     const [dateOfBirth,setDateOfBirth] = useState("")
     const [salonId,setSalonId] = useState("")
     const [barberServices,setBarberServices] = useState([])
-    const [isActive,setIsActive] = useState("")
 
     useEffect(() => {
         const getServices = async() => {
@@ -50,7 +49,7 @@ const CreateBarber = () => {
 
     const submitHandler = () => {
         const barberdata = {
-            name,email,userName,mobileNumber,dateOfBirth,salonId,isActive,barberServices:selectedService
+            name,email,userName,mobileNumber,dateOfBirth,salonId,barberServices:selectedService
         }
         dispatch(createBarberAction(barberdata))
         alert("Barber created successfully")
@@ -121,16 +120,6 @@ const CreateBarber = () => {
                                 placeholder='Enter Salon ID'
                                 value={salonId}
                                 onChange={(e) => setSalonId(e.target.value)}
-                                />
-                            </div>
-
-                            <div>
-                                <label>Active</label>
-                                <input 
-                                type="text" 
-                                placeholder='Enter Name'
-                                value={isActive}
-                                onChange={(e) => setIsActive(e.target.value)}
                                 />
                             </div>
 

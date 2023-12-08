@@ -1,0 +1,105 @@
+.calender-month{
+    width: 82% !important;
+    position: absolute;
+    top: 90px;
+    left: 265px;
+    margin-left: 35px;
+    margin-top: 30px;
+
+    background: #fff;
+    /* height: 80vh; */
+    padding: 20px;
+}
+.fc .fc-scrollgrid{
+    background-color: #fff;
+    /* box-shadow: 0px 0px 10px rgba(0,0,0,0.3); */
+  }
+  
+  .fc-theme-standard td{
+    border: 1px solid rgba(0,0,0,0.1) !important;
+  }
+  
+  tr{
+    background-color: white;
+  }
+  
+  .fc-daygrid-day-frame{
+    background-color: white;
+  }
+  
+  .fc .fc-daygrid-day-frame {
+    padding-inline: 10px;
+    padding-top: 10px;
+    cursor: pointer;
+  }
+  
+  .fc .fc-daygrid-day-frame:hover{
+    background-color:#e8eaed;
+  }
+  
+  .fc-direction-ltr .fc-daygrid-event .fc-event-time {
+    margin-right: 3px;
+    width: 45px;
+    margin-left: 5px;
+  }
+  
+  .fc .fc-button-primary {
+    background-color:#28292a;
+    border-radius: 3px;
+    /* box-shadow: 0px 0px 4px #28292a; */
+  }
+  
+  .fc .fc-button-group {
+    gap: 10px;
+  }
+  @media((min-width:0px) and (max-width:400px)){
+    :root{
+      font-size: 8px;
+    }
+  
+    .fc .fc-toolbar {
+      display: flex;
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 0.5rem;
+  }
+  }
+  
+  @media((min-width:400px) and (max-width:1920px)){
+    :root{
+      font-size: 100%;
+    }
+
+    .fc .fc-scrollgrid{
+      background-color: #fff;
+      /* box-shadow: 0px 0px 6px rgba(0,0,0,0.3); */
+      border-radius:4px;
+      width: 100% !important;
+      height: 80vh !important;
+      margin: auto;
+    }
+    
+    .fc-scrollgrid-sync-table{
+      width:100% !important;
+      /* height: 80vh !important; */
+    }
+    
+    .fc-col-header{
+      width: 100% !important;
+    }
+  
+    .fc .fc-toolbar.fc-header-toolbar {
+      width: 100%;
+      margin: 0px auto 20px auto;
+    }
+  
+    .fc-view{
+      width: 100%;
+      margin: auto;
+      background-color: #fff;
+    }
+  
+    .fc .fc-view-harness{
+      height: 80vh !important;
+    }
+  }

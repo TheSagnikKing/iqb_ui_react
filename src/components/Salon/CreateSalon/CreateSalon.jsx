@@ -39,7 +39,7 @@ const CreateSalon = () => {
 
     // ==========================================
 
-    const [adminEmail, setAdminEmail] = useState("")
+    const [salonEmail, setSalonEmail] = useState("")
     const [userName, setUsername] = useState("")
     const [salonName, setSalonName] = useState("")
     const [address, setAddress] = useState("")
@@ -116,7 +116,9 @@ const CreateSalon = () => {
 
     const submitHandler = async () => {
         const salonData = {
-            adminEmail, userName, salonName, address, city, location: {
+            //Ai admin emailer value loggin theke asbe
+            adminEmail: "sumit12345@gmail.com"
+            , salonEmail, userName, salonName, address, city, location: {
                 type: "Point",
                 coordinates: {
                     longitude: Number(longitude),
@@ -125,9 +127,11 @@ const CreateSalon = () => {
             }, country, postCode, contactTel, salonType, webLink, services, image
         }
 
-        dispatch(createSalonAction(salonData))
+        console.log(salonData)
 
-        console.log(response?.salonId)
+        // dispatch(createSalonAction(salonData))
+
+        // console.log(response?.salonId)
 
         setAdminEmail("")
         setUsername("")
@@ -145,6 +149,7 @@ const CreateSalon = () => {
         setServiceName("")
         setServiceDesc("")
         setServicePrice("")
+        setSalonEmail("")
         alert("Salon created Successfully")
     }
 
@@ -174,6 +179,35 @@ const CreateSalon = () => {
         setServices(updatedServices);
     }
 
+    const geolocHandler = () => {
+        alert("Go to settings to enable your location")
+        if ("geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const latitude = position.coords.latitude;
+                    const longitude = position.coords.longitude;
+                    setLatitude(latitude);
+                    setLongitude(longitude);
+                },
+                (error) => {
+                    if (error.code === error.PERMISSION_DENIED) {
+                        setError("You denied access to your geolocation. Please enable it in your browser settings.");
+                    } else {
+                        setError("Error accessing geolocation: " + error.message);
+                    }
+                }
+            );
+        } else {
+            setError("Geolocation is not available in your browser.");
+        }
+    }
+
+    const [salontypeDropdown,setSalontypeDropdown] = useState(false)
+
+    const handleSalonTypeClick = (selectedSalonType) => {
+        setSalonType(selectedSalonType);
+        setSalontypeDropdown(false); // Close the dropdown after selecting a salon type
+      };
 
     return (
         <>
@@ -186,12 +220,13 @@ const CreateSalon = () => {
 
                 <div className="sa-br-right_main_form">
                     <div className="sa-br-left">
+
                         <div>
-                            <label htmlFor="">Admin Email</label>
+                            <label htmlFor="">Salon Email</label>
                             <input
                                 type="text"
-                                value={adminEmail}
-                                onChange={(e) => setAdminEmail(e.target.value)}
+                                value={salonEmail}
+                                onChange={(e) => setSalonEmail(e.target.value)}
                             />
                         </div>
 
@@ -249,6 +284,8 @@ const CreateSalon = () => {
                             />
                         </div>
 
+                        <button onClick={geolocHandler}>Get Geolocation</button>
+
 
                         <div>
                             <label htmlFor="">Country</label>
@@ -282,11 +319,21 @@ const CreateSalon = () => {
                         </div>
 
                         <div>
-                            <label htmlFor="">Salon Type</label>
+                            <div>
+                                <label htmlFor="">Salon Type</label>
+                                <button onClick={() => setSalontypeDropdown((prev) => !prev)}>dropdown</button>
+                            </div>
+
+                            {
+                                salontypeDropdown && <div>
+                                    <p onClick={() => handleSalonTypeClick('Salon Type 1')}>Salon Type 1</p>
+                                    <p onClick={() => handleSalonTypeClick('Salon Type 2')}>Salon Type 2</p>
+                                    <p onClick={() => handleSalonTypeClick('Salon Type 3')}>Salon Type 3</p>
+                                </div>
+                            }
                             <input
                                 type="text"
                                 value={salonType}
-                                onChange={(e) => setSalonType(e.target.value)}
                             />
                         </div>
 
