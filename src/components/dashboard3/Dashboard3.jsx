@@ -3,8 +3,11 @@ import PuffLoader from "react-spinners/PuffLoader"
 
 import "./Dashboard3.css"
 
-import { useSelector } from 'react-redux'
-import { GrAdd } from 'react-icons/gr'
+
+import { IoIosNotifications } from "react-icons/io";
+import { IoMail } from "react-icons/io5";
+import { MdSms } from "react-icons/md";
+
 import { AiOutlineArrowLeft, AiOutlineArrowRight, AiOutlineSearch, AiOutlineArrowUp, AiOutlineArrowDown } from 'react-icons/ai'
 import { AiOutlineReload } from 'react-icons/ai'
 import axios from 'axios'
@@ -41,15 +44,15 @@ const Dashboard3 = () => {
     }, [])
 
     const searchHandler = async () => {
-        if(search === ""){
-           
-        }else{
+        if (search === "") {
+
+        } else {
             setLoading(true)
             const { data } = await axios.get(`https://iqb-backend2.onrender.com/api/customer/getAllCustomers?name=${search}&email=${search}`)
             setCustomersList(data)
             setLoading(false)
         }
-       
+
     }
 
 
@@ -99,117 +102,123 @@ const Dashboard3 = () => {
     return (
         <>
 
-                    <div className="cst-wrapper">
-                        <div className="cst-header">
-                            <p>Customer List</p>
+            <div className="cst-wrapper">
+                <div className="cst-header">
+                    <p>Customer List</p>
 
-                            <div>
-                                <button onClick={reloadHandler} className='cst-reload'><AiOutlineReload /></button>
-                                <div>
-                                    <input
-                                        className='cst-search'
-                                        type="text"
-                                        placeholder='Search'
-                                        value={search}
-                                        onChange={(e) => setSearch(e.target.value)}
-                                    />
+                    <div>
+                        <button onClick={reloadHandler} className='cst-reload'><AiOutlineReload /></button>
+                        <div>
+                            <input
+                                className='cst-search'
+                                type="text"
+                                placeholder='Search'
+                                value={search}
+                                onChange={(e) => setSearch(e.target.value)}
+                            />
 
-                                    <button onClick={searchHandler} className='cst-search-btn'><AiOutlineSearch /></button>
-                                </div>
+                            <button onClick={searchHandler} className='cst-search-btn'><AiOutlineSearch /></button>
+                        </div>
 
-                                {/* <div >
+                        {/* <div >
                                     <GrAdd />
                                 </div> */}
-                                {/* 
+                        {/* 
                                 <div>
                                     <BsThreeDotsVertical />
                                 </div> */}
-                            </div>
-                        </div>
-
-                        {/* Table  */}
-                        <div className='cst-table'>
-                            {
-                                loading ? <div className='cst-puff-loader-box'><PuffLoader/></div> : customersList && customersList.getAllCustomers ? customersList?.getAllCustomers.map((customer, index) => <main className="cst-barberitem" key={index}>
-                                    <div>
-                                        <div>
-                                            <p>Salon ID</p>
-                                            <div>
-                                                <div onClick={() => sortHandler("salonId", "asc")}><AiOutlineArrowUp /></div>
-                                                <div onClick={() => sortHandler("salonId", "des")}><AiOutlineArrowDown /></div>
-                                            </div>
-                                        </div>
-                                        <p>{customer.salonId}</p>
-                                    </div>
-
-                                    <div>
-                                        <div>
-                                            <p>Name</p>
-                                            <div>
-                                                <div onClick={() => sortHandler("name", "asc")}><AiOutlineArrowUp /></div>
-                                                <div onClick={() => sortHandler("name", "des")}><AiOutlineArrowDown /></div>
-                                            </div>
-                                        </div>
-                                        <p>{customer.name}</p>
-                                    </div>
-
-                                    <div>
-                                        <div>
-                                            <p>Email</p>
-                                            <div>
-                                                <div><AiOutlineArrowUp /></div>
-                                                <div><AiOutlineArrowDown /></div>
-                                            </div>
-                                        </div>
-                                        <p>{customer.email}</p>
-                                    </div>
-
-                                    <div>
-                                        <div>
-                                            <p>Date of Birth</p>
-                                            <div>
-                                                <div><AiOutlineArrowUp /></div>
-                                                <div><AiOutlineArrowDown /></div>
-                                            </div>
-                                        </div>
-                                        <p>{customer.dateOfBirth}</p>
-                                    </div>
-
-                                    <div>
-                                        <div>
-                                            <p>Gender</p>
-                                            <div>
-                                                <div><AiOutlineArrowUp /></div>
-                                                <div><AiOutlineArrowDown /></div>
-                                            </div>
-                                        </div>
-                                        <p>{customer.gender}</p>
-                                    </div>
-
-                                    <div>
-                                        <div>
-                                            <p>Mobile Number</p>
-                                            <div>
-                                                <div><AiOutlineArrowUp /></div>
-                                                <div><AiOutlineArrowDown /></div>
-                                            </div>
-                                        </div>
-                                        <p>{customer.mobileNumber}</p>
-                                    </div>
-
-                                </main>) : <div className='cst-no-barber-box'><p>No Customers Present</p></div>
-                            }
-                        </div>
-
-                        <div className='cst-barber-pagination'>
-                            <div>
-                                <div onClick={PrevHandler}><AiOutlineArrowLeft /></div>
-                                <div onClick={NextHandler}><AiOutlineArrowRight /></div>
-                            </div>
-                        </div>
-
                     </div>
-                
+                </div>
+
+                {/* Table  */}
+                <div className='cst-table'>
+                    {
+                        loading ? <div className='cst-puff-loader-box'><PuffLoader /></div> : customersList && customersList.getAllCustomers ? customersList?.getAllCustomers.map((customer, index) => <main className="cst-barberitem" key={index}>
+                            <div>
+                                <div>
+                                    <p>Salon ID</p>
+                                    <div>
+                                        <div onClick={() => sortHandler("salonId", "asc")}><AiOutlineArrowUp /></div>
+                                        <div onClick={() => sortHandler("salonId", "des")}><AiOutlineArrowDown /></div>
+                                    </div>
+                                </div>
+                                <p>{customer.salonId}</p>
+                            </div>
+
+                            <div>
+                                <div>
+                                    <p>Name</p>
+                                    <div>
+                                        <div onClick={() => sortHandler("name", "asc")}><AiOutlineArrowUp /></div>
+                                        <div onClick={() => sortHandler("name", "des")}><AiOutlineArrowDown /></div>
+                                    </div>
+                                </div>
+                                <p>{customer.name}</p>
+                            </div>
+
+                            <div>
+                                <div>
+                                    <p>Email</p>
+                                    <div>
+                                        <div><AiOutlineArrowUp /></div>
+                                        <div><AiOutlineArrowDown /></div>
+                                    </div>
+                                </div>
+                                <p>{customer.email}</p>
+                            </div>
+
+                            <div>
+                                <div>
+                                    <p>Date of Birth</p>
+                                    <div>
+                                        <div><AiOutlineArrowUp /></div>
+                                        <div><AiOutlineArrowDown /></div>
+                                    </div>
+                                </div>
+                                <p>{customer.dateOfBirth}</p>
+                            </div>
+
+                            <div>
+                                <div>
+                                    <p>Gender</p>
+                                    <div>
+                                        <div><AiOutlineArrowUp /></div>
+                                        <div><AiOutlineArrowDown /></div>
+                                    </div>
+                                </div>
+                                <p>{customer.gender}</p>
+                            </div>
+
+                            <div>
+                                <div>
+                                    <p>Mobile Number</p>
+                                    <div>
+                                        <div><AiOutlineArrowUp /></div>
+                                        <div><AiOutlineArrowDown /></div>
+                                    </div>
+                                </div>
+                                <p>{customer.mobileNumber}</p>
+                            </div>
+
+                            <div className='icons-bbr'><IoIosNotifications/></div>
+
+                            <div className='icons-bbr'><IoMail/></div>
+
+                            <div className='icons-bbr'><MdSms/></div>
+
+                        </main>) : <div className='cst-no-barber-box'><p>No Customers Present</p></div>
+                    }
+                </div>
+
+                <div className='cst-barber-pagination'>
+                    <div>
+                        <div onClick={PrevHandler}><AiOutlineArrowLeft /></div>
+                        <div onClick={NextHandler}><AiOutlineArrowRight /></div>
+                    </div>
+                </div>
+
+            </div>
+
         </>
     )
 }
