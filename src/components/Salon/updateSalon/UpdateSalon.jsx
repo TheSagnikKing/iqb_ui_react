@@ -63,6 +63,7 @@ const UpdateSalon = () => {
     const [serviceName, setServiceName] = useState("")
     const [serviceDesc, setServiceDesc] = useState("")
     const [servicePrice, setServicePrice] = useState("")
+    const [serviceEWT, setServiceEWT] = useState(null)
 
     const dispatch = useDispatch()
 
@@ -102,11 +103,12 @@ const UpdateSalon = () => {
 
     const addServiceHandler = () => {
         setServices(prevServices => [...prevServices, {
-            serviceName, serviceDesc, servicePrice
+            serviceName, serviceDesc, servicePrice,serviceEWT
         }]);
         setServiceName("")
         setServiceDesc("")
         setServicePrice("")
+        setServiceEWT(0)
         console.log(services);
     }
 
@@ -117,7 +119,7 @@ const UpdateSalon = () => {
         setServiceName(currentService.serviceName)
         setServiceDesc(currentService.serviceDesc)
         setServicePrice(currentService.servicePrice)
-
+        setServiceEWT(currentService.serviceEWT)
 
         const updatedServices = [...services];
         updatedServices.splice(ind, 1);
@@ -132,7 +134,8 @@ const UpdateSalon = () => {
     useEffect(() => {
         const fetchAllSalons = async () => {
             const { data } = await axios.get(`https://iqb-backend2.onrender.com/api/salon/getSalonInfoBySalonId?salonId=${currentSalonId}`)
-
+            
+            console.log(data)
             setAdminEmail(data?.response?.salonInfo?.adminEmail)
             setUsername(data?.response?.salonInfo?.userName)
             setSalonName(data?.response?.salonInfo?.salonName)
@@ -150,6 +153,31 @@ const UpdateSalon = () => {
 
         fetchAllSalons()
     }, [])
+
+
+    const geolocHandler = () => {
+        alert("Go to settings to enable your location")
+        if ("geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const latitude = position.coords.latitude;
+                    const longitude = position.coords.longitude;
+                    setLatitude(latitude);
+                    setLongitude(longitude);
+                },
+                (error) => {
+                    if (error.code === error.PERMISSION_DENIED) {
+                        setError("You denied access to your geolocation. Please enable it in your browser settings.");
+                    } else {
+                        setError("Error accessing geolocation: " + error.message);
+                    }
+                }
+            );
+        } else {
+            setError("Geolocation is not available in your browser.");
+        }
+    }
+
 
 
     const [salontypeDropdown, setSalontypeDropdown] = useState(false)
@@ -234,6 +262,7 @@ const UpdateSalon = () => {
                             />
                         </div>
 
+                        <button onClick={geolocHandler}>Get Geolocation</button>
 
                         <div>
                             <label htmlFor="">Country</label>
@@ -335,6 +364,15 @@ const UpdateSalon = () => {
                                 />
                             </div>
 
+                            <div>
+                                <label htmlFor="">Service EWT</label>
+                                <input
+                                    type="text"
+                                    value={serviceEWT}
+                                    onChange={(e) => setServiceEWT(e.target.value)}
+                                />
+                            </div>
+
                             <button onClick={addServiceHandler}>Add Service</button>
 
                         </div>
@@ -356,6 +394,12 @@ const UpdateSalon = () => {
                                         <label>Service Price</label>
                                         <label>{service.servicePrice}</label>
                                     </div>
+
+                                    <div>
+                                        <label>Service EWT</label>
+                                        <label>{service.serviceEWT}</label>
+                                    </div>
+
 
                                 </div>
                             ))}

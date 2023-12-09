@@ -6,6 +6,10 @@
     background-color: white;
 }
 
+.right_inner_container {
+    width: 400px !important;
+}
+
 .left{
     border-right: 1px solid rgba(128, 128, 128, 0.485);
     width: 100%;
@@ -15,6 +19,10 @@
 .left img{
     height: 100%;
     width: 100%;
+}
+
+.divsix{
+    margin-top: 10px;
 }
 
 .right{
@@ -147,6 +155,7 @@
 
 
 .divthree{
+    width: 100%;
     height: 50px;
     background-color: black;
     color: white;
@@ -154,6 +163,7 @@
     border: none;
     outline: none;
     cursor: pointer;
+    margin-bottom: 10px;
 }
 .divfour{
     display: flex;
@@ -177,6 +187,7 @@
     display: flex;
     justify-content: space-between;
     gap: 1rem;
+    margin-top: 10px;
 }
 
 .divfive div:nth-child(1){
@@ -281,3 +292,69 @@
     left: 70%;
     transform: translate(-50%,-50%);
 }
+
+
+/* tab  */
+/* Style the tab */
+.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+  }
+  
+  /* Style the buttons inside the tab */
+  .tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+  }
+  
+  /* Change background color of buttons on hover */
+  .tab button:hover {
+    background-color: #ddd;
+  }
+  
+  /* Create an active/current tablink class */
+  .active3 {
+    background-color: #ccc;
+  }
+  
+.tablinks{
+    width: 100px;
+    height: 30px;
+    margin-right: 20px;
+    cursor: pointer;
+    border: none;
+}
+
+  /* Style the tab content */
+  .tabcontent {
+    display: none;
+    /* padding: 6px 12px; */
+    border: 1px solid #ccc;
+    border-top: none;
+  }
+
+  .lg-input_container_end{
+    font-size: 12px;
+    display: flex !important;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+
+  .lg-input_container_end>div:nth-child(1){
+    display: flex;
+    gap: 1rem;
+  }
+
+  
+  .lg-input_container_end>div:nth-child(1)>div{
+    border: 1px solid rgba(0,0,0,0.6);
+    height: 15px;
+    width: 15px;
+  }

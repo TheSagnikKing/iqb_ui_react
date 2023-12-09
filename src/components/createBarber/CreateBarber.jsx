@@ -64,6 +64,7 @@ const CreateBarber = () => {
         const barberdata = {
             name, email, userName, mobileNumber, dateOfBirth, salonId, barberServices: selectedService
         }
+
         dispatch(createBarberAction(barberdata))
         alert("Barber created successfully")
     }

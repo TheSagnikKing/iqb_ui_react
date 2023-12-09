@@ -4,7 +4,7 @@ import { logoutReducer, newPasswordResetReducer, passwordResetEmailReducer, sign
 import { createSalonReducer, deleteSalonReducer, getAllSalonServicesReducer, salonListReducer, updateSalonReducer } from "./reducers/salonReducer";
 import { approveBarberReducer, barberListReducer, barberServedQueueReducer, createBarberReducer, deleteBarberReducer, getAllBarbersByServiceIdReducer, getBarberServicesBybarberIdReducer, updateBarberReducer } from "./reducers/barberReducer";
 import { autojoinReducer, groupjoinReducer, queueListReducer, singleJoinQueueReducer } from "./reducers/joinqueueReducer";
-import { AdminForgetPasswordReducer, AdminGoogleLoginReducer, AdminLoginReducer, AdminLogoutReducer, AdminRegisterReducer, AdminResetPasswordReducer, LoggedOutMiddlewareReducer, updateAdminReducer } from "./reducers/AdminAuthReducer";
+import { AdminForgetPasswordReducer, AdminGoogleLoginReducer, AdminLoginReducer, AdminLogoutReducer, AdminRegisterReducer, AdminResetPasswordReducer, LoggedOutMiddlewareReducer, updateAdminAccountDetailsReducer, updateAdminReducer } from "./reducers/AdminAuthReducer";
 
 const rootReducer = combineReducers({
   signup:signupReducer,
@@ -42,7 +42,8 @@ const rootReducer = combineReducers({
   deleteSalon:deleteSalonReducer,
 
   updateAdmin:updateAdminReducer,
-  groupjoin:groupjoinReducer
+  groupjoin:groupjoinReducer,
+  updateAdminAccountDetails:updateAdminAccountDetailsReducer
 });
 
 const initialState = {};

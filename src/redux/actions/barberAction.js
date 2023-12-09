@@ -145,3 +145,4 @@ export const approveBarberAction = (approvedata) => async(dispatch) => {
         })
     }
 }
+

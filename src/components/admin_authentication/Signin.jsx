@@ -11,7 +11,7 @@ import { RiErrorWarningLine } from 'react-icons/ri'
 import { Link, useNavigate } from 'react-router-dom'
 import { GoogleLogin } from '@react-oauth/google';
 
-import { AdminLoginAction,AdminGoogleloginAction } from '../../redux/actions/AdminAuthAction'
+import { AdminLoginAction, AdminGoogleloginAction } from '../../redux/actions/AdminAuthAction'
 import { useDispatch } from 'react-redux'
 
 //This is sign-in page not sign-up
@@ -29,10 +29,10 @@ const SignIn = () => {
     const userLoggedIn = localStorage.getItem("userLoggedIn")
 
     useEffect(() => {
-        if( userLoggedIn == "true"){
-          navigate("/admin-dashboard")
+        if (userLoggedIn == "true") {
+            navigate("/admin-dashboard")
         }
-      },[navigate,userLoggedIn])
+    }, [navigate, userLoggedIn])
 
     const [password, setPassword] = useState("")
     const [email, setEmail] = useState("")
@@ -40,30 +40,42 @@ const SignIn = () => {
     const [error, setError] = useState(true)
 
 
-    const submitHandler = async () => {
+    const adminsubmitHandler = async () => {
+
+        console.log("Yes i am admin")
         try {
             if (!email) {
                 alert('Email Required');
             } else if (!password) {
                 alert('Password required');
             } else {
-                const signindata = {email,password}
-                dispatch(AdminLoginAction(signindata,navigate))
+                const signindata = { email, password }
+                dispatch(AdminLoginAction(signindata, navigate))
             }
         } catch (error) {
             console.log(error);
         }
     }
 
+    const barbersubmitHandler = async() => {
+        console.log("Yes i am barber")
+    }
+
     //Google Admin Action
-    const responseMessage = async(response) => {
-        dispatch(AdminGoogleloginAction(response.credential,navigate))
+    const responseMessage = async (response) => {
+        dispatch(AdminGoogleloginAction(response.credential, navigate))
     };
-  
+
     const errorMessage = (error) => {
         console.log(error);
     };
 
+
+    const [activeTab, setActiveTab] = useState("Admin")
+
+    const handleTabClick = (e, cityName) => {
+        setActiveTab(cityName);
+    };
 
     return (
         <>
@@ -76,103 +88,203 @@ const SignIn = () => {
                 <div className="right">
                     <div className="right_inner_container">
 
-                        <div className="divone">
-                            <h1>Sign In to your Admin Account</h1>
-                            <p>Welcome back Admin! please enter your detail</p>
+                        {/* Tab start ==== */}
+                        <div className="tab-buttons">
+                            <button
+                                className={`tablinks ${activeTab === 'Admin' && 'active3'}`}
+                                onClick={(e) => handleTabClick(e, 'Admin')}
+                            >
+                                Admin
+                            </button>
+                            <button
+                                className={`tablinks ${activeTab === 'Barber' && 'active3'}`}
+                                onClick={(e) => handleTabClick(e, 'Barber')}
+                            >
+                                Barber
+                            </button>
                         </div>
+                        {/* Tab end =====  */}
 
-                        <div className="divtwo">
-                            {error && <p>{error}</p>}
-                            <div className="input_container">
-                                <div>
-                                    <AiOutlineMail />
-                                </div>
-                                <input type="email" placeholder='Email'
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                />
-                            </div>
+                        {/* Tab-Content start ==== */}
 
-                            <div className="input_container_password">
-                                <div className="password_icon">
-                                    <RiLockPasswordLine />
-                                </div>
-                                <input
-                                    type={visible ? "text" : "password"}
-                                    placeholder='Password'
-                                    value={password}
-                                    onChange={e => setPassword(e.target.value)}
-                                    className="password"
-                                    style={{ border: error ? "1px solid red" : "" }}
-                                />
-                                <div className="toggle_password" onClick={() => setVisible(!visible)}>
-                                    {visible ? <BiShow /> : <BiHide />}
-                                </div>
-                            </div>
-
-                            <div className="error">
-                                <div>
-                                    <RiErrorWarningLine />
-                                </div>
-                                <p>Your password is not strong enough.Use atleast 8 charecters.</p>
-                            </div>
-
-                            <div className="lg-input_container_end">
-                                <div>
-                                    <div style={{ color: "white", backgroundColor: check ? "black" : "" }}
-                                        onClick={isChecked}>
-                                        <BsCheckLg />
+                        <div className="tab-content">
+                            {
+                                activeTab == "Admin" ? <>
+                                    <div className="divone">
+                                        <h1>Sign In to your Admin Account</h1>
+                                        <p>Welcome back Admin! please enter your detail</p>
                                     </div>
-                                    <p>Remember me</p>
-                                </div>
 
-                                <Link to="/resetpassword" style={{ textDecoration: "none" }}><p>Forgot Password?</p></Link>
-                            </div>
+                                    <div className="divtwo">
+                                        {error && <p>{error}</p>}
+                                        <div className="input_container">
+                                            <div>
+                                                <AiOutlineMail />
+                                            </div>
+                                            <input type="email" placeholder='Email'
+                                                value={email}
+                                                onChange={(e) => setEmail(e.target.value)}
+                                            />
+                                        </div>
+
+                                        <div className="input_container_password">
+                                            <div className="password_icon">
+                                                <RiLockPasswordLine />
+                                            </div>
+                                            <input
+                                                type={visible ? "text" : "password"}
+                                                placeholder='Password'
+                                                value={password}
+                                                onChange={e => setPassword(e.target.value)}
+                                                className="password"
+                                                style={{ border: error ? "1px solid red" : "" }}
+                                            />
+                                            <div className="toggle_password" onClick={() => setVisible(!visible)}>
+                                                {visible ? <BiShow /> : <BiHide />}
+                                            </div>
+                                        </div>
+
+                                        <div className="error">
+                                            <div>
+                                                <RiErrorWarningLine />
+                                            </div>
+                                            <p>Your password is not strong enough.Use atleast 8 charecters.</p>
+                                        </div>
+
+                                        <div className="lg-input_container_end">
+                                            <div>
+                                                <div style={{ color: "white", backgroundColor: check ? "black" : "" }}
+                                                    onClick={isChecked}>
+                                                    <BsCheckLg />
+                                                </div>
+                                                <p>Remember me</p>
+                                            </div>
+
+                                            <Link to="/resetpassword" style={{ textDecoration: "none" }}><p>Forgot Password?</p></Link>
+                                        </div>
+                                    </div>
+
+                                    <button className="divthree"
+                                        onClick={adminsubmitHandler}
+                                    >Sign In </button>
+
+                                    <div className="divfour">
+                                        <div>
+
+                                        </div>
+                                        <p>Or sign in with</p>
+                                        <div>
+
+                                        </div>
+                                    </div>
+
+                                    <div className="divfive">
+                                        <GoogleLogin
+                                            onSuccess={responseMessage}
+                                            onError={errorMessage}
+                                            size='large'
+                                            shape='circle'
+                                            width={400}
+                                            logo_alignment='left'
+                                            text='continue_with'
+                                        />
+
+
+                                    </div>
+
+                                    <p className="divsix">Don't have an account? <Link to="/admin-signup" className="link"><strong>Sign Up</strong></Link></p>
+                                </> :
+                                    <>
+                                        <div className="divone">
+                                            <h1>Sign In to your Barber Account</h1>
+                                            <p>Welcome back Barber! please enter your detail</p>
+                                        </div>
+
+                                        <div className="divtwo">
+                                            {error && <p>{error}</p>}
+                                            <div className="input_container">
+                                                <div>
+                                                    <AiOutlineMail />
+                                                </div>
+                                                <input type="email" placeholder='Email'
+                                                    value={email}
+                                                    onChange={(e) => setEmail(e.target.value)}
+                                                />
+                                            </div>
+
+                                            <div className="input_container_password">
+                                                <div className="password_icon">
+                                                    <RiLockPasswordLine />
+                                                </div>
+                                                <input
+                                                    type={visible ? "text" : "password"}
+                                                    placeholder='Password'
+                                                    value={password}
+                                                    onChange={e => setPassword(e.target.value)}
+                                                    className="password"
+                                                    style={{ border: error ? "1px solid red" : "" }}
+                                                />
+                                                <div className="toggle_password" onClick={() => setVisible(!visible)}>
+                                                    {visible ? <BiShow /> : <BiHide />}
+                                                </div>
+                                            </div>
+
+                                            <div className="error">
+                                                <div>
+                                                    <RiErrorWarningLine />
+                                                </div>
+                                                <p>Your password is not strong enough.Use atleast 8 charecters.</p>
+                                            </div>
+
+                                            <div className="lg-input_container_end">
+                                                <div>
+                                                    <div style={{ color: "white", backgroundColor: check ? "black" : "" }}
+                                                        onClick={isChecked}>
+                                                        <BsCheckLg />
+                                                    </div>
+                                                    <p>Remember me</p>
+                                                </div>
+
+                                                <Link to="/resetpassword" style={{ textDecoration: "none" }}><p>Forgot Password?</p></Link>
+                                            </div>
+                                        </div>
+
+                                        <button className="divthree"
+                                            onClick={barbersubmitHandler}
+                                        >Sign In</button>
+
+                                        <div className="divfour">
+                                            <div>
+
+                                            </div>
+                                            <p>Or sign in with</p>
+                                            <div>
+
+                                            </div>
+                                        </div>
+
+                                        <div className="divfive">
+                                            <GoogleLogin
+                                                onSuccess={responseMessage}
+                                                onError={errorMessage}
+                                                size='large'
+                                                shape='circle'
+                                                width={400}
+                                                logo_alignment='left'
+                                                text='continue_with'
+                                            />
+                                        </div>
+
+                                        <p className="divsix">Don't have an account? <Link to="/admin-signup" className="link"><strong>Sign Up</strong></Link></p></>
+                            }
                         </div>
 
-                        <button className="divthree"
-                            onClick={submitHandler}
-                        >Sign In</button>
+                        {/* Tab-Content end ===== */}
 
-                        <div className="divfour">
-                            <div>
-
-                            </div>
-                            <p>Or sign in with</p>
-                            <div>
-
-                            </div>
-                        </div>
-
-                        <div className="divfive">
-                        <GoogleLogin
-            onSuccess={responseMessage}
-            onError={errorMessage}
-            size='large'
-            shape='circle'
-            // width={400}
-            logo_alignment='left'
-            text='continue_with'
-          />
-                            {/* <div className="social_button" onClick={() => {}}>
-                                <div>
-                                    <FcGoogle />
-                                </div>
-                                <p>Google</p>
-                            </div> */}
-
-                            {/* <div className="social_button">
-                                <div>
-                                    <BsFacebook />
-                                </div>
-                                <p>facebook</p>
-                            </div> */}
-                        </div>
-
-                        <p className="divsix">Don't have an account? <Link to="/admin-signup" className="link"><strong>Sign Up</strong></Link></p>
                     </div>
                 </div>
             </main>
+
         </>
     )
 }
@@ -180,4 +292,5 @@ const SignIn = () => {
 export default SignIn
 
 
-// https://iqb-frontend.netlify.app/
+// // https://iqb-frontend.netlify.app/
+

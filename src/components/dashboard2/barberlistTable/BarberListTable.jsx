@@ -128,6 +128,10 @@ const BarberListTable = () => {
         dispatch(approveBarberAction(approvedata))
     }
 
+    const editHandler = (barberemail) => {
+        navigate("/barber/updatebarber",{state:{barberemail}})
+    }
+
     return (
         <>
             <div className="wrapper">
@@ -231,7 +235,7 @@ const BarberListTable = () => {
                                 <button className='approve-bbr' onClick={() => approveHandler(barber.salonId, barber.email)}>Approve</button>
                             )}
 
-                            <Link to="/barber/updatebarber" className='edit-bbr'><AiFillEdit /></Link>
+                            <button className='edit-bbr' onClick={() => editHandler(barber.email)}><AiFillEdit /></button>
 
 
                             <button className='del-bbr' onClick={() => deletebarberHandler(barber.salonId, barber.email)}><MdDelete /></button>

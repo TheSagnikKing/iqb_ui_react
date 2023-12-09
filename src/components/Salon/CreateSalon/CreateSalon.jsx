@@ -61,6 +61,7 @@ const CreateSalon = () => {
     const [serviceName, setServiceName] = useState("")
     const [serviceDesc, setServiceDesc] = useState("")
     const [servicePrice, setServicePrice] = useState("")
+    const [serviceEWT, setServiceEWT] = useState(null)
 
     const dispatch = useDispatch()
 
@@ -156,22 +157,23 @@ const CreateSalon = () => {
 
     const addServiceHandler = () => {
         setServices(prevServices => [...prevServices, {
-            serviceName, serviceDesc, servicePrice
+            serviceName, serviceDesc, servicePrice,serviceEWT
         }]);
         setServiceName("")
         setServiceDesc("")
         setServicePrice("")
-        console.log(services);
+        setServiceEWT(0)
     }
 
     const serviceEditHandler = (ind) => {
 
         const currentService = services[ind];
+        console.log(currentService)
 
         setServiceName(currentService.serviceName)
         setServiceDesc(currentService.serviceDesc)
         setServicePrice(currentService.servicePrice)
-
+        setServiceEWT(currentService.serviceEWT)
 
         const updatedServices = [...services];
         updatedServices.splice(ind, 1);
@@ -386,6 +388,16 @@ const CreateSalon = () => {
                                 />
                             </div>
 
+
+                            <div>
+                                <label htmlFor="">Service EWT</label>
+                                <input
+                                    type="text"
+                                    value={serviceEWT}
+                                    onChange={(e) => setServiceEWT(e.target.value)}
+                                />
+                            </div>
+
                             <button onClick={addServiceHandler}>Add Service</button>
 
                         </div>
@@ -406,6 +418,11 @@ const CreateSalon = () => {
                                     <div>
                                         <label>Service Price</label>
                                         <label>{service.servicePrice}</label>
+                                    </div>
+
+                                    <div>
+                                        <label>Service EWT</label>
+                                        <label>{service.serviceEWT}</label>
                                     </div>
 
                                 </div>

@@ -47,6 +47,7 @@ import GroupJoinCustomer from './components/Queue/GroupJoin/GroupJoinCustomer/Gr
 import Month from './components/Appoinment/Month/Month';
 import CalenderEvent from './components/Appoinment/CalenderEvent/CalenderEvent';
 import CalenderList from './components/Appoinment/CalenderList/CalenderList'
+import AdminAccountDetail from './components/admin_authentication/AdminAccountDetail';
 
 const App = () => {
 
@@ -84,6 +85,9 @@ const App = () => {
               <ResetNewPassword />
             </Suspense>
           } />
+
+          <Route path="/adminaccountdetail" element={<AdminAccountDetail/>}/>
+
           <Route path='/dashboard' element={
 
             <Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}>       
