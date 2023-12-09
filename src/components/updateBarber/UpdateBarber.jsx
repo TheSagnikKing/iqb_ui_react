@@ -24,12 +24,42 @@ const UpdateBarber = () => {
     const [error1, setError1] = useState("")
 
 
+    const [selectedService, setSelectedService] = useState([])
+
+    const [barberserviceEWTMap, setBarberserviceEWTMap] = useState(new Map());
+
+    const updateServiceEWT = (serviceId, value) => {
+        setBarberserviceEWTMap(new Map(barberserviceEWTMap.set(serviceId, value)));
+    };
+
+    const selectedServiceHandler = (ser) => {
+        const servicepresent = selectedService.find((s) => s._id === ser._id)
+
+        if (!servicepresent) {
+            const serviceWithEWT = { ...ser, serviceEWT: barberserviceEWTMap.get(ser.serviceId) || 0 };
+            
+            setSelectedService([...selectedService, serviceWithEWT])
+        }
+    }
+
+    const selectedServiceDelete = (ser) => {
+        const deleteService = selectedService.filter((f) => f._id !== ser._id)
+        setSelectedService(deleteService)
+    }
+
     useEffect(() => {
         try {
             const getServices = async () => {
-                const { data } = await axios.get(`https://iqb-backend2.onrender.com/api/salon/allSalonServices?salonId=11`)
+                const { data } = await axios.get(`https://iqb-backend2.onrender.com/api/salon/allSalonServices?salonId=3`)
                 setBarberServices(data)
                 setError1(data.message)
+
+                // Set initial values for barberserviceEWTMap
+            const initialBarberserviceEWTMap = new Map();
+            data?.response?.forEach((ser) => {
+                initialBarberserviceEWTMap.set(ser.serviceId, ser.serviceEWT || 0);
+            });
+            setBarberserviceEWTMap(initialBarberserviceEWTMap);
             }
 
             getServices()
@@ -38,21 +68,6 @@ const UpdateBarber = () => {
         }
 
     }, [])
-
-    const [selectedService, setSelectedService] = useState([])
-
-    const selectedServiceHandler = (ser) => {
-        const servicepresent = selectedService.find((s) => s._id === ser._id)
-
-        if (!servicepresent) {
-            setSelectedService([...selectedService, ser])
-        }
-    }
-
-    const selectedServiceDelete = (ser) => {
-        const deleteService = selectedService.filter((f) => f._id !== ser._id)
-        setSelectedService(deleteService)
-    }
 
     const dispatch = useDispatch()
 
@@ -67,26 +82,6 @@ const UpdateBarber = () => {
     const location = useLocation()
     const barberemail = location?.state?.barberemail;
 
-    // useEffect(() => {
-    //     const fetchdetailbarber = async () => {
-    //         const { data } = await axios.post(`https://iqb-backend2.onrender.com/api/barber/getBarberDetailsByEmail`, { email: barberemail })
-
-    //         console.log(data)
-
-            // fetchdetailbarber()
-            // setName(data.name)
-            // setUserName(data.userName)
-            // setEmail(data.email)
-            // setMobileNumber(data.mobileNumber)
-            // setDateOfBirth(data.dateOfBirth)
-            // setSalonId(data.salonId)
-    //     }
-
-    //     fetchdetailbarber()
-
-    // }, [])
-
-
     useEffect(() => {
         const fetchdetailbarber = async () => {
             const { data } = await axios.post(`https://iqb-backend2.onrender.com/api/barber/getBarberDetailsByEmail`, { email: barberemail })
@@ -99,11 +94,13 @@ const UpdateBarber = () => {
             setMobileNumber(data?.response?.mobileNumber)
             setDateOfBirth(data?.response?.dateOfBirth)
             setSalonId(data?.response?.salonId)
-        
+            // setBarberServices(data?.response?.barberServices)
         }
 
         fetchdetailbarber()
     }, [])
+
+    console.log(barberServices)
 
 
     return (
@@ -185,8 +182,8 @@ const UpdateBarber = () => {
                         {
                             dropdown && <div className='barber-dropdown'>
                                 {
-                                    barberServices && barberServices?.response ? barberServices.response.map((ser, index) => (
-                                        <div key={index} onClick={() => selectedServiceHandler(ser, index)}>
+                                    barberServices?.response && barberServices?.response?.length > 0 ? barberServices?.response.map((ser, index) => (
+                                        <div key={index} >
                                             <div>
                                                 <p>serviceId</p>
                                                 <p>111</p>
@@ -203,15 +200,17 @@ const UpdateBarber = () => {
                                             </div>
 
                                             <div>
-                                                <p>serviceDesc</p>
-                                                <p>desc</p>
+                                                <p>serviceEWT</p>
+                                                <input
+                                                    type="number"
+                                                    value={  barberserviceEWTMap.get(ser.serviceId) }
+                                                    onChange={(e) => updateServiceEWT(ser.serviceId, e.target.value)}
+                                                />
+                                                {/* <p>{}</p> */}
                                             </div>
 
-                                            <div>
-                                                <p>servicePrice</p>
-                                                <p>300</p>
-                                            </div>
-                                            <p>{error1 && error1}</p>
+                                            <button onClick={() => selectedServiceHandler(ser, index)}>Add</button>
+                                            {/* <p>{error1 && error1}</p> */}
                                         </div>
                                     )) : <p>No services present</p>
                                 }
@@ -239,13 +238,8 @@ const UpdateBarber = () => {
                                         </div>
 
                                         <div>
-                                            <p>serviceDesc</p>
-                                            <p>desc</p>
-                                        </div>
-
-                                        <div>
-                                            <p>servicePrice</p>
-                                            <p>300</p>
+                                            <p>serviceEWT</p>
+                                            <p>{ser.serviceEWT}</p>                               
                                         </div>
 
                                         <div onClick={() => selectedServiceDelete(ser)}><MdDelete /></div>

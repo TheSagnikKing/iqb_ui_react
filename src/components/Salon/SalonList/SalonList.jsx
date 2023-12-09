@@ -19,10 +19,12 @@ const SalonList = () => {
     const [salonList, setSalonList] = useState([])
     const [loading, setLoading] = useState(false)
 
+    // console.log(salonList)
+
     useEffect(() => {
         //Admin emailer value loggin korar por theke asbe akhon static ache
         const fetchSalons = async () => {
-            const { data } = await axios.get(`https://iqb-backend2.onrender.com/api/salon/getAllSalonsByAdminEmail?adminEmail=sumit12345@gmail.com`)
+            const { data } = await axios.get(`https://iqb-backend2.onrender.com/api/salon/getAllSalonsByAdminEmail?adminEmail=arghyahimanstech@gmail.com`)
             setSalonList(data)
             setLoading(false)
         }
@@ -30,7 +32,7 @@ const SalonList = () => {
         fetchSalons()
     }, [])
 
-    console.log(salonList)
+    // console.log(salonList)
 
     const navigate = useNavigate()
 

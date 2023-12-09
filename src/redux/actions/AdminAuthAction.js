@@ -5,18 +5,19 @@ import axios from "axios";
 
 export const AdminRegisterAction = (signupData,navigate) => async (dispatch) => {
     try {
-        dispatch({
-            type: ADMIN_SIGNUP_REQ
-        });
+        // dispatch({
+        //     type: ADMIN_SIGNUP_REQ
+        // });
 
-        const { data } = await api.post("/api/admin/register", signupData);
+        // const { data } = await api.post("/api/admin/register", signupData);
 
-        dispatch({
-            type: ADMIN_SIGNUP_SUCCESS,
-            payload: data
-        });
+        // dispatch({
+        //     type: ADMIN_SIGNUP_SUCCESS,
+        //     payload: data
+        // });
 
-        navigate("/admin-signin")
+        // navigate("/admin-signin")
+        navigate("/adminaccountdetail")
     } catch (error) {
 
         dispatch({
@@ -205,18 +206,19 @@ export const updateAdminAction = (profiledata) => async (dispatch) => {
 };
 
 
-export const updateAdminAccountDetailsAction = (profiledata) => async (dispatch) => {
+export const updateAdminAccountDetailsAction = (navigate,profiledata) => async (dispatch) => {
     try {
-        dispatch({
-            type: UPDATE_ADMIN_ACCOUNT_DETAILS_REQ
-        })
-        const { data } = await axios.put(`https://iqb-backend2.onrender.com/api/admin/updateAdminAcoountDetails`,profiledata);
+        // dispatch({
+        //     type: UPDATE_ADMIN_ACCOUNT_DETAILS_REQ
+        // })
+        // const { data } = await axios.put(`https://iqb-backend2.onrender.com/api/admin/updateAdminAcoountDetails`,profiledata);
 
-        console.log(data)
-        dispatch({
-            type: UPDATE_ADMIN_ACCOUNT_DETAILS_SUCCESS,
-            payload: data
-        });
+        // console.log(data)
+        // dispatch({
+        //     type: UPDATE_ADMIN_ACCOUNT_DETAILS_SUCCESS,
+        //     payload: data
+        // });
+        navigate("/admin-dashboard")
     } catch (error) {
     
         dispatch({

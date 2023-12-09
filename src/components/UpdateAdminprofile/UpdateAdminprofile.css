@@ -1,0 +1,27 @@
+.admin-profile{
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+}
+
+.admin-profile>img{
+    width: 100%;
+    height: 100%;
+}
+
+.admin-profile>div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.admin-profile>div>button{
+    height: 35px;
+    width: 35px;
+    box-shadow: 0px 0px 6px rgba(0,0,0,0.4);
+    border: none;
+    background: #fff;
+    border-radius: 5px;
+    color: orangered;
+    cursor: pointer;
+}

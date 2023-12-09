@@ -6,7 +6,6 @@ import { updateAdminAccountDetailsAction } from '../../redux/actions/AdminAuthAc
 
 const AdminAccountDetail = () => {
 
-    const [email,setEmail] = useState("")
     const [username, setUsername] = useState("")
     const [mobileNumber, setMobileNumber] = useState("")
     const [name, setName] = useState("")
@@ -17,9 +16,10 @@ const AdminAccountDetail = () => {
     const dispatch = useDispatch()
 
     const submitHandler = () => {
+        //email authentication  theke asbe
         const profiledata = {email,mobileNumber,name,gender,dob,salonId:3};
 
-        dispatch(updateAdminAccountDetailsAction(profiledata))
+        dispatch(updateAdminAccountDetailsAction(navigate,profiledata))
     }
 
     const skipHandler = () => {
@@ -34,15 +34,6 @@ const AdminAccountDetail = () => {
                     <h2>Fill Your Admin Account Details</h2>
                 </div>
                 <div className='admin_account_detail'>
-                    <div>
-                        <label htmlFor="">Email</label>
-                        <input
-                            type="text"
-                            placeholder='Email'
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                        />
-                    </div>
 
                     {/* <div>
                         <label htmlFor="">Salon Id</label>

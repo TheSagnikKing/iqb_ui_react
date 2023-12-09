@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import "./UpdateSalon.css"
 import { MdKeyboardArrowDown } from "react-icons/md"
 import Layout from '../../layout/Layout'
@@ -9,6 +9,8 @@ import AdminLayout from '../../layout/Admin/AdminLayout'
 import axios from 'axios'
 import { getSharedSalonData } from './salonId'
 
+import { MdModeEditOutline } from "react-icons/md";
+import { MdDelete } from "react-icons/md";
 
 const UpdateSalon = () => {
 
@@ -103,7 +105,7 @@ const UpdateSalon = () => {
 
     const addServiceHandler = () => {
         setServices(prevServices => [...prevServices, {
-            serviceName, serviceDesc, servicePrice,serviceEWT
+            serviceName, serviceDesc, servicePrice, serviceEWT
         }]);
         setServiceName("")
         setServiceDesc("")
@@ -131,11 +133,15 @@ const UpdateSalon = () => {
     const locationstate = useLocation()
     const currentSalonId = locationstate?.state?.salonId
 
+    const [fetchimages, setFetchImages] = useState([])
+
     useEffect(() => {
         const fetchAllSalons = async () => {
             const { data } = await axios.get(`https://iqb-backend2.onrender.com/api/salon/getSalonInfoBySalonId?salonId=${currentSalonId}`)
-            
+
             console.log(data)
+
+            setFetchImages(data?.response?.salonInfo?.profile)
             setAdminEmail(data?.response?.salonInfo?.adminEmail)
             setUsername(data?.response?.salonInfo?.userName)
             setSalonName(data?.response?.salonInfo?.salonName)
@@ -187,6 +193,59 @@ const UpdateSalon = () => {
         setSalontypeDropdown(false); // Close the dropdown after selecting a salon type
     };
 
+
+    const imgDeleteHandler = async (publicid, id) => {
+        if (window.confirm("Are you sure you want to delete this image?")) {
+            try {
+                await axios.delete("https://iqb-backend2.onrender.com/api/salon/deleteSalonImages", {
+                    data: {
+                        public_id: publicid,
+                        img_id: id
+                    }
+                })
+
+                window.location.reload()
+            } catch (error) {
+                console.log(error)
+            }
+        }
+    }
+
+
+    const fileInputRef = useRef(null);
+
+    const [public_imgid,setPublic_imgid] = useState("")
+    const [mongoid,setMongoid] = useState("")
+
+    const handleEditButtonClick = (publicid, id) => {
+        fileInputRef.current.click();
+        setPublic_imgid(publicid)
+        setMongoid(id)
+    };
+
+    const handleFileInputChange = async(e) => {
+        const updateImage = e.target.files[0];
+
+        const formData = new FormData();
+
+        formData.append('public_imgid', public_imgid);
+        formData.append('id',mongoid)
+        formData.append('profile',updateImage)
+
+        
+        try {
+            const imageResponse = await axios.put('https://iqb-backend2.onrender.com/api/salon/updateSalonImages', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+
+            console.log('Upload success:', imageResponse.data);
+            window.location.reload()
+        } catch (error) {
+            console.error('Image upload failed:', error);
+        }
+    };
 
     return (
         <>
@@ -332,10 +391,58 @@ const UpdateSalon = () => {
                             </label> */}
                             <input type="file" multiple />
 
+
+                        </div>
+
+                        <div className='img-container'>
+                            {
+                                fetchimages?.map((img) => (
+                                    <div>
+                                        <img src={img.url} alt="" />
+                                        <div>
+                                            <button onClick={() => imgDeleteHandler(img.public_id, img._id)}><MdDelete /></button>
+                                            <button onClick={() => handleEditButtonClick(img.public_id, img._id)}><MdModeEditOutline /></button>
+                                            <input
+                                                type="file"
+                                                ref={fileInputRef}
+                                                style={{ display: 'none' }}
+                                                onChange={handleFileInputChange}
+                                            />
+                                        </div>
+                                    </div>
+                                ))
+                            }
+
+
+                            {/* <div>
+                                <img src="https://i0.wp.com/picjumbo.com/wp-content/uploads/beautiful-nature-mountain-scenery-with-flowers-free-photo.jpg?w=600&quality=80" alt="" />
+                                <div>
+                                    <button><MdDelete /></button>
+                                    <button><MdModeEditOutline /></button>
+                                </div>
+                            </div>
+
+                            <div>
+                                <img src="https://i0.wp.com/picjumbo.com/wp-content/uploads/beautiful-nature-mountain-scenery-with-flowers-free-photo.jpg?w=600&quality=80" alt="" />
+                                <div>
+                                    <button><MdDelete /></button>
+                                    <button><MdModeEditOutline /></button>
+                                </div>
+                            </div>
+
+                            <div>
+                                <img src="https://i0.wp.com/picjumbo.com/wp-content/uploads/beautiful-nature-mountain-scenery-with-flowers-free-photo.jpg?w=600&quality=80" alt="" />
+
+                                <div>
+                                    <button><MdDelete /></button>
+                                    <button><MdModeEditOutline /></button>
+                                </div>
+                            </div> */}
+
                         </div>
 
                         <div className='services'>
-                            <label className='serv-title'>Add Your Services</label>
+                            <label className='serv-title' style={{ marginTop: "20px" }}>Add Your Services</label>
 
                             <div>
                                 <label htmlFor="">Service Name</label>
