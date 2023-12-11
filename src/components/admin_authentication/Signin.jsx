@@ -27,11 +27,15 @@ const SignIn = () => {
     const dispatch = useDispatch()
 
     const userLoggedIn = localStorage.getItem("userLoggedIn")
+    // const barberLoggedIn = false (localStorage theke asbe)
 
     useEffect(() => {
         if (userLoggedIn == "true") {
             navigate("/admin-dashboard")
         }
+        // else if(barberLoggedIn == "true"){
+        //     navigate("/barber-dashboard")
+        // }
     }, [navigate, userLoggedIn])
 
     const [password, setPassword] = useState("")
@@ -57,10 +61,6 @@ const SignIn = () => {
         }
     }
 
-    const barbersubmitHandler = async() => {
-        console.log("Yes i am barber")
-    }
-
     //Google Admin Action
     const responseMessage = async (response) => {
         dispatch(AdminGoogleloginAction(response.credential, navigate))
@@ -76,6 +76,11 @@ const SignIn = () => {
     const handleTabClick = (e, cityName) => {
         setActiveTab(cityName);
     };
+
+    //FOR BARBER
+    const barbersubmitHandler = async() => {
+        console.log("Yes i am barber")
+    }
 
     return (
         <>

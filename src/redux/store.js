@@ -5,6 +5,7 @@ import { createSalonReducer, deleteSalonReducer, getAllSalonServicesReducer, sal
 import { approveBarberReducer, barberListReducer, barberServedQueueReducer, createBarberReducer, deleteBarberReducer, getAllBarbersByServiceIdReducer, getBarberServicesBybarberIdReducer, updateBarberReducer } from "./reducers/barberReducer";
 import { autojoinReducer, groupjoinReducer, queueListReducer, singleJoinQueueReducer } from "./reducers/joinqueueReducer";
 import { AdminForgetPasswordReducer, AdminGoogleLoginReducer, AdminLoginReducer, AdminLogoutReducer, AdminRegisterReducer, AdminResetPasswordReducer, LoggedInMiddlewareReducer, LoggedOutMiddlewareReducer, updateAdminAccountDetailsReducer, updateAdminReducer } from "./reducers/AdminAuthReducer";
+import { barberForgetPasswordReducer, barberGoogleLoginReducer, barberLoginReducer, barberLogoutReducer, barberRegisterReducer, barberResetPasswordReducer, updatebarberAccountDetailsReducer, updatebarberReducer } from "./reducers/BarberAuthReducer";
 
 const rootReducer = combineReducers({
   signup:signupReducer,
@@ -44,7 +45,24 @@ const rootReducer = combineReducers({
 
   updateAdmin:updateAdminReducer,
   groupjoin:groupjoinReducer,
-  updateAdminAccountDetails:updateAdminAccountDetailsReducer
+  updateAdminAccountDetails:updateAdminAccountDetailsReducer,
+
+
+  //barber auth
+  //admin auth
+  BarberRegister:barberRegisterReducer,
+  BarberLogin:barberLoginReducer,
+  BarberLogout:barberLogoutReducer,
+  BarberGoogleLogin:barberGoogleLoginReducer,
+  BarberForgetPassword:barberForgetPasswordReducer,
+  BarberResetPassword:barberResetPasswordReducer,
+
+  //middleware
+  LoggedOutMiddleware:LoggedOutMiddlewareReducer,
+  LoggedInMiddleware:LoggedInMiddlewareReducer,
+
+  updateBarber:updatebarberReducer,
+  updateBarberAccountDetails:updatebarberAccountDetailsReducer
 });
 
 const initialState = {};

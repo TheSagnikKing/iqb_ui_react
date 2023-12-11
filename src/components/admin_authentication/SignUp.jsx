@@ -30,6 +30,17 @@ const SignUp = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
+    const userLoggedIn = localStorage.getItem("userLoggedIn")
+
+    useEffect(() => {
+        if (userLoggedIn == "true") {
+            navigate("/admin-dashboard")
+        }
+        // else if(barberLoggedIn == "true"){
+        //     navigate("/barber-dashboard")
+        // }
+    }, [navigate, userLoggedIn])
+
     const submitHandler = async () => {
         try {
             if (!email) {
