@@ -1,22 +1,21 @@
-import { ADMIN_FORGET_PASSWORD_FAIL, ADMIN_FORGET_PASSWORD_REQ, ADMIN_FORGET_PASSWORD_SUCCESS, ADMIN_GOOGLE_SIGNIN_FAIL, ADMIN_GOOGLE_SIGNIN_REQ, ADMIN_GOOGLE_SIGNIN_SUCCESS, ADMIN_LOGOUT_FAIL, ADMIN_LOGOUT_REQ, ADMIN_LOGOUT_SUCCESS, ADMIN_RESET_PASSWORD_FAIL, ADMIN_RESET_PASSWORD_REQ, ADMIN_RESET_PASSWORD_SUCCESS, ADMIN_SIGNIN_FAIL, ADMIN_SIGNIN_REQ, ADMIN_SIGNIN_SUCCESS, ADMIN_SIGNUP_FAIL, ADMIN_SIGNUP_REQ, ADMIN_SIGNUP_SUCCESS, LOGGED_OUT_MIDDLEWARE_FAIL, LOGGED_OUT_MIDDLEWARE_REQ, LOGGED_OUT_MIDDLEWARE_SUCCESS, UPDATE_ADMIN_ACCOUNT_DETAILS_FAIL, UPDATE_ADMIN_ACCOUNT_DETAILS_REQ, UPDATE_ADMIN_ACCOUNT_DETAILS_SUCCESS, UPDATE_ADMIN_FAIL, UPDATE_ADMIN_REQ, UPDATE_ADMIN_SUCCESS } from "../constants/AdminAuthConstants";
+import { ADMIN_FORGET_PASSWORD_FAIL, ADMIN_FORGET_PASSWORD_REQ, ADMIN_FORGET_PASSWORD_SUCCESS, ADMIN_GOOGLE_SIGNIN_FAIL, ADMIN_GOOGLE_SIGNIN_REQ, ADMIN_GOOGLE_SIGNIN_SUCCESS, ADMIN_GOOGLE_SIGNUP_SUCCESS, ADMIN_LOGOUT_FAIL, ADMIN_LOGOUT_REQ, ADMIN_LOGOUT_SUCCESS, ADMIN_RESET_PASSWORD_FAIL, ADMIN_RESET_PASSWORD_REQ, ADMIN_RESET_PASSWORD_SUCCESS, ADMIN_SIGNIN_FAIL, ADMIN_SIGNIN_REQ, ADMIN_SIGNIN_SUCCESS, ADMIN_SIGNUP_FAIL, ADMIN_SIGNUP_REQ, ADMIN_SIGNUP_SUCCESS, LOGGED_IN_MIDDLEWARE_FAIL, LOGGED_IN_MIDDLEWARE_REQ, LOGGED_IN_MIDDLEWARE_SUCCESS, LOGGED_OUT_MIDDLEWARE_FAIL, LOGGED_OUT_MIDDLEWARE_REQ, LOGGED_OUT_MIDDLEWARE_SUCCESS, UPDATE_ADMIN_ACCOUNT_DETAILS_FAIL, UPDATE_ADMIN_ACCOUNT_DETAILS_REQ, UPDATE_ADMIN_ACCOUNT_DETAILS_SUCCESS, UPDATE_ADMIN_FAIL, UPDATE_ADMIN_REQ, UPDATE_ADMIN_SUCCESS } from "../constants/AdminAuthConstants";
 
 import api from "../api/Api"
 import axios from "axios";
 
 export const AdminRegisterAction = (signupData,navigate) => async (dispatch) => {
     try {
-        // dispatch({
-        //     type: ADMIN_SIGNUP_REQ
-        // });
+        dispatch({
+            type: ADMIN_SIGNUP_REQ
+        });
 
-        // const { data } = await api.post("/api/admin/register", signupData);
+        const { data } = await api.post("/api/admin/register", signupData);
 
-        // dispatch({
-        //     type: ADMIN_SIGNUP_SUCCESS,
-        //     payload: data
-        // });
+        dispatch({
+            type: ADMIN_SIGNUP_SUCCESS,
+            payload: data
+        });
 
-        // navigate("/admin-signin")
         navigate("/adminaccountdetail")
     } catch (error) {
 
@@ -42,11 +41,6 @@ export const AdminLoginAction = (loginData,navigate) => async (dispatch) => {
             payload: data
         });
 
-        // dispatch({
-        //     type: PROFILE_FAIL,
-        //     payload:{}
-        // });
-
         navigate("/admin-dashboard")
     } catch (error) {
 
@@ -69,17 +63,19 @@ export const AdminGoogleloginAction = (token,navigate) => async (dispatch) => {
 
         localStorage.setItem("userLoggedIn","true")
 
-        dispatch({
-            type: ADMIN_GOOGLE_SIGNIN_SUCCESS,
-            payload: data
-        });
-
-        // dispatch({
-        //     type: PROFILE_FAIL,
-        //     payload:{}
-        // });
-
-        navigate("/admin-dashboard")
+        if(data?.message == "Admin registered successfully"){
+            dispatch({
+                type: ADMIN_GOOGLE_SIGNUP_SUCCESS,
+                payload: data
+            });
+            navigate("/adminaccountdetail")
+        }else{
+            dispatch({
+                type: ADMIN_GOOGLE_SIGNIN_SUCCESS,
+                payload: data
+            });
+            navigate("/admin-dashboard")
+        }
     } catch (error) {
 
         dispatch({
@@ -185,6 +181,29 @@ export const LoggedOutMiddlewareAction = (navigate) => async (dispatch) => {
 };
 
 
+export const LoggedInMiddlewareAction = (navigate) => async (dispatch) => {
+    try {
+        dispatch({
+            type:LOGGED_IN_MIDDLEWARE_REQ
+        })
+        const { data } = await api.get(`/api/admin/loggedinmiddleware`);
+
+        console.log(data)
+
+        dispatch({
+            type: LOGGED_IN_MIDDLEWARE_SUCCESS,
+            payload: data
+        });
+    } catch (error) {
+    
+        dispatch({
+            type: LOGGED_IN_MIDDLEWARE_FAIL,
+            payload:error?.response?.data
+        });
+    }
+};
+
+
 export const updateAdminAction = (profiledata) => async (dispatch) => {
     try {
         dispatch({
@@ -208,16 +227,16 @@ export const updateAdminAction = (profiledata) => async (dispatch) => {
 
 export const updateAdminAccountDetailsAction = (navigate,profiledata) => async (dispatch) => {
     try {
-        // dispatch({
-        //     type: UPDATE_ADMIN_ACCOUNT_DETAILS_REQ
-        // })
-        // const { data } = await axios.put(`https://iqb-backend2.onrender.com/api/admin/updateAdminAcoountDetails`,profiledata);
+        dispatch({
+            type: UPDATE_ADMIN_ACCOUNT_DETAILS_REQ
+        })
+        const { data } = await axios.put(`https://iqb-backend2.onrender.com/api/admin/updateAdminAcoountDetails`,profiledata);
 
-        // console.log(data)
-        // dispatch({
-        //     type: UPDATE_ADMIN_ACCOUNT_DETAILS_SUCCESS,
-        //     payload: data
-        // });
+        console.log(data)
+        dispatch({
+            type: UPDATE_ADMIN_ACCOUNT_DETAILS_SUCCESS,
+            payload: data
+        });
         navigate("/admin-dashboard")
     } catch (error) {
     

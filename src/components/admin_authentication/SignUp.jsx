@@ -11,7 +11,8 @@ import { RiErrorWarningLine } from 'react-icons/ri'
 
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { AdminRegisterAction } from '../../redux/actions/AdminAuthAction'
+import { AdminGoogleloginAction, AdminRegisterAction } from '../../redux/actions/AdminAuthAction'
+import { GoogleLogin } from '@react-oauth/google'
 
 const SignUp = () => {
 
@@ -48,6 +49,15 @@ const SignUp = () => {
 
     const handleTabClick = (e, cityName) => {
         setActiveTab(cityName);
+    };
+
+     //Google Admin Action
+     const responseMessage = async (response) => {
+        dispatch(AdminGoogleloginAction(response.credential, navigate))
+    };
+
+    const errorMessage = (error) => {
+        console.log(error);
     };
 
     return (
@@ -148,19 +158,15 @@ const SignUp = () => {
                                 </div>
 
                                 <div className="divfive">
-                                    <div className="social_button" onClick={() => { }}>
-                                        <div>
-                                            <FcGoogle />
-                                        </div>
-                                        <p>Google</p>
-                                    </div>
-
-                                    <div className="social_button">
-                                        <div>
-                                            <BsFacebook />
-                                        </div>
-                                        <p>facebook</p>
-                                    </div>
+                                    <GoogleLogin
+                                        onSuccess={responseMessage}
+                                        onError={errorMessage}
+                                        size='large'
+                                        shape='circle'
+                                        width={400}
+                                        logo_alignment='left'
+                                        text='continue_with'
+                                    />
                                 </div>
 
                                 <p className="divsix">Already have an account? <Link to="/admin-signin" className="link"><strong>Log In</strong></Link> </p>

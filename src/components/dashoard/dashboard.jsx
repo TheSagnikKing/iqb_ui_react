@@ -13,8 +13,6 @@ import { reports } from '../data'
 
 import Calender from '../calender/Calender'
 
-import api from "../../redux/api/Api"
-
 const dashboard = () => {
 
     const [checkbox, setCheckbox] = useState(false)
@@ -27,14 +25,6 @@ const dashboard = () => {
     const checkboxhandler = () => {
         setCheckbox(!checkbox)
     }
-
-    useEffect(() => {
-        const d = async() => {
-            const {data} = await api.get("http://localhost:8080/api/admin/profile")
-            console.log(data)
-        }
-        d()
-    },[])
 
     return (
         <>

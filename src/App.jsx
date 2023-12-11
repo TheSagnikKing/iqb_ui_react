@@ -86,7 +86,7 @@ const App = () => {
             </Suspense>
           } />
 
-          <Route path="/adminaccountdetail" element={<AdminAccountDetail/>}/>
+          <Route path="/adminaccountdetail" element={<Auth><AdminAccountDetail/></Auth>}/>
 
           <Route path='/dashboard' element={
 

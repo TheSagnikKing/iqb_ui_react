@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-// const BASE_URL = 'https://iqb-backend2.onrender.com';
-const BASE_URL = 'http://localhost:8080';
+const BASE_URL = 'https://iqb-backend2.onrender.com';
+// const BASE_URL = 'http://localhost:8080';
 
 export const axiosPrivate = axios.create({
     baseURL: BASE_URL,
@@ -12,7 +12,7 @@ export const axiosPrivate = axios.create({
 const useRefreshToken = async () => {
     try {
         // Send a request to your server to refresh the token using the HTTP-only cookie
-       await axios.post("http://localhost:8080/api/admin/refresh-token",{},{withCredentials:true});
+       await axios.post("https://iqb-backend2.onrender.com/api/admin/refresh-token",{},{withCredentials:true});
 
     } catch (error) {
         console.log(error);

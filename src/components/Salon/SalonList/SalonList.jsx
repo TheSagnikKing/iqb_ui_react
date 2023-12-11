@@ -13,6 +13,8 @@ import { MdDelete } from 'react-icons/md'
 import { deleteSalonAction } from '../../../redux/actions/salonAction'
 import { setSharedSalonData } from '../updateSalon/salonId'
 
+import api from '../../../redux/api/Api'
+
 const SalonList = () => {
 
     const [search, setSearch] = useState("")
@@ -24,12 +26,20 @@ const SalonList = () => {
     useEffect(() => {
         //Admin emailer value loggin korar por theke asbe akhon static ache
         const fetchSalons = async () => {
-            const { data } = await axios.get(`https://iqb-backend2.onrender.com/api/salon/getAllSalonsByAdminEmail?adminEmail=arghyahimanstech@gmail.com`)
-            setSalonList(data)
-            setLoading(false)
+            try {
+                const { data } = await api.get(`https://iqb-backend2.onrender.com/api/salon/getAllSalonsByAdminEmail?adminEmail=arghyahimanstech@gmail.com`)
+                setSalonList(data)
+                setLoading(false)
+            } catch (error) {
+                if(error?.response?.data?.message == "Refresh Token not present.Please Login Again"){
+                    localStorage.setItem("userLoggedIn", "false")
+                    navigate("/admin-signin")
+                }
+            }
         }
 
         fetchSalons()
+
     }, [])
 
     // console.log(salonList)
@@ -47,7 +57,7 @@ const SalonList = () => {
     }
 
     const changeRoute = (salonID) => {
-        navigate(`/salon/updatesalon`,{state:{salonId:salonID}})
+        navigate(`/salon/updatesalon`, { state: { salonId: salonID } })
     }
     return (
         <>

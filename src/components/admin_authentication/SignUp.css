@@ -27,7 +27,7 @@
 
 .right_inner_container{
     height: auto;
-    width: 45%;
+    width: 400px !important;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
@@ -280,3 +280,67 @@
     left: 70%;
     transform: translate(-50%,-50%);
 }
+
+
+.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+  }
+  
+  /* Style the buttons inside the tab */
+  .tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+  }
+  
+  /* Change background color of buttons on hover */
+  .tab button:hover {
+    background-color: #ddd;
+  }
+  
+  /* Create an active/current tablink class */
+  .active3 {
+    background-color: #ccc;
+  }
+  
+.tablinks{
+    width: 100px;
+    height: 30px;
+    margin-right: 20px;
+    cursor: pointer;
+    border: none;
+}
+
+  /* Style the tab content */
+  .tabcontent {
+    display: none;
+    /* padding: 6px 12px; */
+    border: 1px solid #ccc;
+    border-top: none;
+  }
+
+  .lg-input_container_end{
+    font-size: 12px;
+    display: flex !important;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+
+  .lg-input_container_end>div:nth-child(1){
+    display: flex;
+    gap: 1rem;
+  }
+
+  
+  .lg-input_container_end>div:nth-child(1)>div{
+    border: 1px solid rgba(0,0,0,0.6);
+    height: 15px;
+    width: 15px;
+  }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import "./AdminAccountDetail.css"
 import { useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { updateAdminAccountDetailsAction } from '../../redux/actions/AdminAuthAction'
 
 const AdminAccountDetail = () => {
@@ -15,9 +15,11 @@ const AdminAccountDetail = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
+    const LoggedInMiddleware = useSelector(state => state.LoggedInMiddleware)
+
     const submitHandler = () => {
         //email authentication  theke asbe
-        const profiledata = {email,mobileNumber,name,gender,dob,salonId:3};
+        const profiledata = {email:LoggedInMiddleware?.user[0]?.email,mobileNumber,name,gender,dateOfBirth:dob,salonId:LoggedInMiddleware?.user[0]?.salonId,userName:username};
 
         dispatch(updateAdminAccountDetailsAction(navigate,profiledata))
     }

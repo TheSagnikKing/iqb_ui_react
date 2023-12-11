@@ -91,7 +91,7 @@ export const getAllBarbersByServiceIdAction = (serviceid) => async(dispatch) => 
     }
 }
 
-export const  barberServedQueueAction = (infodata) => async(dispatch) => {
+export const barberServedQueueAction = (infodata) => async(dispatch) => {
     try {
         dispatch({type:BARBER_SERVED_QUEUE_REQ})
 

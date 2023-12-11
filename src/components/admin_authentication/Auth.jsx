@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { LoggedOutMiddlewareAction } from '../../redux/actions/AdminAuthAction'
+import { LoggedOutMiddlewareAction,LoggedInMiddlewareAction } from '../../redux/actions/AdminAuthAction'
 
 const Auth = ({ children }) => {
 
@@ -11,6 +11,10 @@ const Auth = ({ children }) => {
     useEffect(() => {
         dispatch(LoggedOutMiddlewareAction(navigate))
     }, [])
+
+    useEffect(() => {
+        dispatch(LoggedInMiddlewareAction())
+    })
 
     return (
         <div>{children}</div>
