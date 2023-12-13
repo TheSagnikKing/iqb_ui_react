@@ -7,22 +7,35 @@ import { autojoinAction } from '../../../../redux/actions/joinQueueAction'
 
 const Queautojoinservices = () => {
 
+    const LoggedInMiddleware = useSelector(state => state.LoggedInMiddleware)
+
+    const currentAdminSalonId = LoggedInMiddleware?.user && LoggedInMiddleware.user[0].salonId
+
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(getAllSalonServicesAction(1))
-    }, [dispatch])
+        if (currentAdminSalonId) {
+            dispatch(getAllSalonServicesAction(currentAdminSalonId))
+        }
+    }, [dispatch, currentAdminSalonId])
 
     const getAllSalonServices = useSelector(state => state.getAllSalonServices)
 
-    const autojoinHandler = (serviceId) => {
+
+    const autojoinHandler = (serviceId,serviceName,serviceEWT) => {
         const joindata = {
             userName: "Arghya",
             name: "Arghya Ghosh",
             joinedQType: "Auto-Join",
             methodUsed: "Walk-In",
-            salonId: 3,
-            serviceId: serviceId,
+            salonId: LoggedInMiddleware?.user && LoggedInMiddleware.user[0].salonId,
+            services: [
+                {
+                    serviceId: serviceId,
+                    barberServiceEWT: Number(serviceEWT),
+                    serviceName: serviceName
+                }
+            ],
             isOnline: true
         }
 
@@ -54,7 +67,7 @@ const Queautojoinservices = () => {
                             <p>{s.serviceDesc}</p>
                             <p>{s.servicePrice}</p>
                             <p>{s.serviceEWT}</p>
-                            <button onClick={() => autojoinHandler(s.serviceId)}>Join Queue</button>
+                            <button onClick={() => autojoinHandler(s.serviceId,s.serviceEWT,s.serviceName)}>Join Queue</button>
                         </div>
                     ))
                 }

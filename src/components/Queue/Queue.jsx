@@ -12,27 +12,29 @@ const Queue = () => {
 
     const [singledrop, setSingleDrop] = useState(false)
 
-    const salonid = 3
+    const LoggedInMiddleware = useSelector(state => state.LoggedInMiddleware)
+
+    const salonId = LoggedInMiddleware?.user && LoggedInMiddleware.user[0].salonId;
 
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(queueListAction(salonid))
+        dispatch(queueListAction(salonId))
     }, [dispatch])
 
     const queueList = useSelector(state => state.queueList)
 
-    const serverHandler = (barberId, serviceId, customerid) => {
+    // const serverHandler = (barberId, serviceId, customerid) => {
 
-        const infodata = {
-            barberId,
-            serviceId,
-            _id: customerid,
-            salonId: salonid
-        }
+    //     const infodata = {
+    //         barberId,
+    //         serviceId,
+    //         _id: customerid,
+    //         salonId: salonid
+    //     }
 
-        dispatch(barberServedQueueAction(infodata))
-    }
+    //     dispatch(barberServedQueueAction(infodata))
+    // }
 
     return (
         <>
@@ -56,7 +58,7 @@ const Queue = () => {
                     </div>
                     <div><p><Link to="/queue/autoqueservices">Auto Join</Link></p></div>
 
-                    <div><p style={{ marginLeft: "10px" }}><Link to="/queue/mycustomer">My Customers</Link></p></div>
+                    {/* <div><p style={{ marginLeft: "10px" }}><Link to="/queue/mycustomer">My Customers</Link></p></div> */}
                 </div>
 
                 <div className='queue-list-table'>

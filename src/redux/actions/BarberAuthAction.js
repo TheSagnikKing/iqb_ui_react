@@ -2,20 +2,20 @@ import {BARBER_FORGET_PASSWORD_FAIL, BARBER_FORGET_PASSWORD_REQ, BARBER_FORGET_P
 
 import api from "../api/Api"
 
-export const AdminRegisterAction = (signupData,navigate) => async (dispatch) => {
+export const BarberRegisterAction = (signupData,navigate) => async (dispatch) => {
     try {
         dispatch({
             type: BARBER_SIGNUP_REQ
         });
 
-        const { data } = await api.post("/api/admin/register", signupData);
+        const { data } = await api.post("/api/barber/register", signupData);
 
         dispatch({
             type: BARBER_SIGNUP_SUCCESS,
             payload: data
         });
 
-        navigate("/adminaccountdetail")
+        navigate("/barberaccountdetail")
     } catch (error) {
 
         dispatch({
@@ -25,22 +25,22 @@ export const AdminRegisterAction = (signupData,navigate) => async (dispatch) => 
     }
 };
 
-export const AdminLoginAction = (loginData,navigate) => async (dispatch) => {
+export const BarberLoginAction = (loginData,navigate) => async (dispatch) => {
     try {
         dispatch({
             type: BARBER_SIGNIN_REQ
         });
 
-        const { data } = await api.post("/api/admin/login", loginData );
+        const { data } = await api.post("/api/barber/login", loginData );
 
-        localStorage.setItem("userLoggedIn","true")
+        localStorage.setItem("barberLoggedIn","true")
 
         dispatch({
             type: BARBER_SIGNIN_SUCCESS,
             payload: data
         });
 
-        navigate("/admin-dashboard")
+        navigate("/barber-dashboard")
     } catch (error) {
 
         dispatch({
@@ -50,30 +50,30 @@ export const AdminLoginAction = (loginData,navigate) => async (dispatch) => {
     }
 };
 
-export const AdminGoogleloginAction = (token,navigate) => async (dispatch) => {
+export const BarberGoogleloginAction = (token,navigate) => async (dispatch) => {
     try {
         dispatch({
             type: BARBER_GOOGLE_SIGNIN_REQ
         });
 
-        const { data } = await api.post("/api/admin/google-login",{token:token});
+        const { data } = await api.post("/api/barber/google-login",{token:token});
 
         console.log(data)
 
-        localStorage.setItem("userLoggedIn","true")
+        localStorage.setItem("barberLoggedIn","true")
 
-        if(data?.message == "Admin registered successfully"){
+        if(data?.message == "Barber registered in successfully"){
             dispatch({
                 type: BARBER_GOOGLE_SIGNUP_SUCCESS,
                 payload: data
             });
-            navigate("/adminaccountdetail")
+            navigate("/barberaccountdetail")
         }else{
             dispatch({
                 type: BARBER_GOOGLE_SIGNIN_SUCCESS,
                 payload: data
             });
-            navigate("/admin-dashboard")
+            navigate("/barber-dashboard")
         }
     } catch (error) {
 
@@ -84,20 +84,20 @@ export const AdminGoogleloginAction = (token,navigate) => async (dispatch) => {
     }
 };
 
-export const AdminLogoutAction = (navigate) => async (dispatch) => {
+export const BarberLogoutAction = (navigate) => async (dispatch) => {
 
     try {
          dispatch({
              type: BARBER_LOGOUT_REQ
          })
 
-         const {data} = await api.post("/api/admin/logout")
+         const {data} = await api.post("/api/barber/logout")
 
          dispatch({
              type: BARBER_LOGOUT_SUCCESS,
              payload:data
          })
-         localStorage.setItem("userLoggedIn","false")
+         localStorage.setItem("barberLoggedIn","false")
          navigate("/admin-signin")
     } catch (error) {
          dispatch({
@@ -107,13 +107,13 @@ export const AdminLogoutAction = (navigate) => async (dispatch) => {
     }
 }
 
-export const AdminForgetPasswordAction = (email,navigate) => async (dispatch) => {
+export const BarberForgetPasswordAction = (email,navigate) => async (dispatch) => {
     try {
         dispatch({
             type: BARBER_FORGET_PASSWORD_REQ
         });
 
-        const { data } = await api.post("/api/admin/forget-password",{email:email});
+        const { data } = await api.post("/api/barber/forget-password",{email:email});
 
         dispatch({
             type: BARBER_FORGET_PASSWORD_SUCCESS,
@@ -130,13 +130,13 @@ export const AdminForgetPasswordAction = (email,navigate) => async (dispatch) =>
     }
 };
 
-export const AdminResetPasswordAction = (token,password,navigate) => async (dispatch) => {
+export const BarberResetPasswordAction = (token,password,navigate) => async (dispatch) => {
     try {
         dispatch({
             type: BARBER_RESET_PASSWORD_REQ
         });
 
-        const { data } = await api.post(`/api/admin/reset-password/${token}`, {password:password});
+        const { data } = await api.post(`/api/barber/reset-password/${token}`, {password:password});
 
         dispatch({
             type: BARBER_RESET_PASSWORD_SUCCESS,
@@ -154,12 +154,12 @@ export const AdminResetPasswordAction = (token,password,navigate) => async (disp
 };
 
 
-export const LoggedOutMiddlewareAction = (navigate) => async (dispatch) => {
+export const BarberLoggedOutMiddlewareAction = (navigate) => async (dispatch) => {
     try {
         dispatch({
             type:LOGGED_OUT_MIDDLEWARE_REQ
         })
-        const { data } = await api.get(`/api/admin/loggedoutmiddleware`);
+        const { data } = await api.get(`/api/barber/barberLoggedoutmiddleware`);
 
         dispatch({
             type: LOGGED_OUT_MIDDLEWARE_SUCCESS,
@@ -173,19 +173,19 @@ export const LoggedOutMiddlewareAction = (navigate) => async (dispatch) => {
         });
 
         if(error?.response?.data?.message == "Refresh Token not present.Please Login Again"){
-            localStorage.setItem("userLoggedIn", "false")
+            localStorage.setItem("barberLoggedIn", "false")
             navigate("/admin-signin")
         }
     }
 };
 
 
-export const LoggedInMiddlewareAction = (navigate) => async (dispatch) => {
+export const BarberLoggedInMiddlewareAction = (navigate) => async (dispatch) => {
     try {
         dispatch({
             type:LOGGED_IN_MIDDLEWARE_REQ
         })
-        const { data } = await api.get(`/api/admin/loggedinmiddleware`);
+        const { data } = await api.get(`/api/barber/barberLoggedinmiddleware`);
 
         console.log(data)
 
@@ -203,12 +203,12 @@ export const LoggedInMiddlewareAction = (navigate) => async (dispatch) => {
 };
 
 
-export const updateAdminAction = (profiledata) => async (dispatch) => {
+export const updateBarberAction = (profiledata) => async (dispatch) => {
     try {
         dispatch({
             type:UPDATE_BARBER_REQ
         })
-        const { data } = await api.put(`https://iqb-backend2.onrender.com/api/admin/updateAdmin`,profiledata);
+        const { data } = await api.put(`/api/barber/updateAdmin`,profiledata);
 
         dispatch({
             type: UPDATE_BARBER_SUCCESS,
@@ -224,19 +224,19 @@ export const updateAdminAction = (profiledata) => async (dispatch) => {
 };
 
 
-export const updateAdminAccountDetailsAction = (navigate,profiledata) => async (dispatch) => {
+export const updateBarberAccountDetailsAction = (navigate,profiledata) => async (dispatch) => {
     try {
         dispatch({
             type: UPDATE_BARBER_ACCOUNT_DETAILS_REQ
         })
-        const { data } = await api.put(`https://iqb-backend2.onrender.com/api/admin/updateAdminAcoountDetails`,profiledata);
+        const { data } = await api.put(`/api/barber/updateBarberAccountDetails`,profiledata);
 
         console.log(data)
         dispatch({
             type: UPDATE_BARBER_ACCOUNT_DETAILS_SUCCESS,
             payload: data
         });
-        navigate("/admin-dashboard")
+        navigate("/barber-dashboard")
     } catch (error) {
     
         dispatch({

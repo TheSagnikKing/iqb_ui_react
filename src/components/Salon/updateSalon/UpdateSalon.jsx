@@ -12,6 +12,8 @@ import { getSharedSalonData } from './salonId'
 import { MdModeEditOutline } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 
+import api from "../../../redux/api/Api"
+
 const UpdateSalon = () => {
 
     const [latitude, setLatitude] = useState(null);
@@ -42,7 +44,7 @@ const UpdateSalon = () => {
 
     // ==========================================
 
-    const [adminEmail, setAdminEmail] = useState("")
+    const [salonEmail, setSalonEmail] = useState("")
     const [userName, setUsername] = useState("")
     const [salonName, setSalonName] = useState("")
     const [address, setAddress] = useState("")
@@ -69,21 +71,24 @@ const UpdateSalon = () => {
 
     const dispatch = useDispatch()
 
+    const LoggedInMiddleware = useSelector(state => state.LoggedInMiddleware)
+
+    const adminSalonId = LoggedInMiddleware.user && LoggedInMiddleware.user[0].salonId
+
     const submitHandler = () => {
         const salonData = {
-            adminEmail, userName, salonName, address, city, location: {
+            adminEmail:LoggedInMiddleware?.user && LoggedInMiddleware.user[0].email , userName, salonName, salonEmail,address, city, location: {
                 type: "Point",
                 coordinates: {
                     longitude: Number(longitude),
                     latitude: Number(latitude)
                 }
-            }, country, postCode, contactTel, salonType, webLink, services, salonId: 11
+                //salonId
+            }, country, postCode, contactTel, salonType, webLink, services, salonId: adminSalonId
         }
-
 
         dispatch(updateSalonAction(salonData))
 
-        setAdminEmail("")
         setUsername("")
         setSalonName("")
         setAddress("")
@@ -99,6 +104,7 @@ const UpdateSalon = () => {
         setServiceName("")
         setServiceDesc("")
         setServicePrice("")
+        setSalonEmail("")
         alert("Salon created Successfully")
     }
 
@@ -137,12 +143,12 @@ const UpdateSalon = () => {
 
     useEffect(() => {
         const fetchAllSalons = async () => {
-            const { data } = await axios.get(`https://iqb-backend2.onrender.com/api/salon/getSalonInfoBySalonId?salonId=${currentSalonId}`)
+            const { data } = await api.get(`/api/salon/getSalonInfoBySalonId?salonId=${currentSalonId}`)
 
             console.log(data)
 
             setFetchImages(data?.response?.salonInfo?.profile)
-            setAdminEmail(data?.response?.salonInfo?.adminEmail)
+            setSalonEmail(data?.response?.salonInfo?.salonEmail)
             setUsername(data?.response?.salonInfo?.userName)
             setSalonName(data?.response?.salonInfo?.salonName)
             setAddress(data?.response?.salonInfo?.address)
@@ -197,7 +203,7 @@ const UpdateSalon = () => {
     const imgDeleteHandler = async (publicid, id) => {
         if (window.confirm("Are you sure you want to delete this image?")) {
             try {
-                await axios.delete("https://iqb-backend2.onrender.com/api/salon/deleteSalonImages", {
+                await api.delete("/api/salon/deleteSalonImages", {
                     data: {
                         public_id: publicid,
                         img_id: id
@@ -234,7 +240,7 @@ const UpdateSalon = () => {
 
         
         try {
-            const imageResponse = await axios.put('https://iqb-backend2.onrender.com/api/salon/updateSalonImages', formData, {
+            const imageResponse = await api.put('/api/salon/updateSalonImages', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
@@ -246,6 +252,52 @@ const UpdateSalon = () => {
             console.error('Image upload failed:', error);
         }
     };
+
+    //for adding more salon images
+
+    const [selectedFiles, setSelectedFiles] = useState(null);
+
+    const handleFileChange = (e) => {
+        setSelectedFiles(e.target.files);
+    };
+
+    const updateSalon = useSelector(state => state.updateSalon)
+    const { response } = updateSalon
+
+    useEffect(() => {
+        if (response?.salonId) {
+            const uploadImageHandler = async () => {
+                if (selectedFiles != null) {
+                    const formData = new FormData();
+
+                    const SalonId = response?.salonId;
+                    formData.append('salonId', SalonId);
+
+                    for (const file of selectedFiles) {
+                        formData.append('profile', file);
+                    }
+
+                    try {
+                        const imageResponse = await api.post('/api/salon/uploadMoreImages', formData, {
+                            headers: {
+                                'Content-Type': 'multipart/form-data',
+                            },
+                        });
+
+                        console.log('Upload success:', imageResponse.data);
+                        // setImages(imageResponse.data?.StudentImage?.profile);
+                        setSelectedFiles(null);
+                        alert("Image uploaded Successfully")
+                    } catch (error) {
+                        console.error('Image upload failed:', error);
+                        // Handle error as needed
+                    }
+                }
+            };
+
+            uploadImageHandler();
+        }
+    }, [response?.salonId]);
 
     return (
         <>
@@ -259,11 +311,11 @@ const UpdateSalon = () => {
                 <div className="sa-br-right_main_form">
                     <div className="sa-br-left">
                         <div>
-                            <label htmlFor="">Admin Email</label>
+                            <label htmlFor="">Salon Email</label>
                             <input
                                 type="text"
-                                value={adminEmail}
-                                onChange={(e) => setAdminEmail(e.target.value)}
+                                value={salonEmail}
+                                onChange={(e) => setSalonEmail(e.target.value)}
                             />
                         </div>
 
@@ -389,7 +441,7 @@ const UpdateSalon = () => {
                             <label htmlFor="file" className='file'>
                                 Choose a Photo
                             </label> */}
-                            <input type="file" multiple />
+                           <input type="file" multiple onChange={handleFileChange} />
 
 
                         </div>

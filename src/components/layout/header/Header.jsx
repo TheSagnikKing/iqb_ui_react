@@ -12,8 +12,8 @@ import { MdKeyboardArrowDown } from "react-icons/md"
 import { BiLogOutCircle } from "react-icons/bi"
 import { RiAccountCircleFill } from "react-icons/ri"
 import { useNavigate } from 'react-router-dom'
-import { logout } from '../../../redux/actions/userAction'
-
+import { BarberLogoutAction } from '../../../redux/actions/BarberAuthAction.js'
+import { useDispatch } from 'react-redux'
 
 
 const Header = ({ title }) => {
@@ -23,18 +23,11 @@ const Header = ({ title }) => {
   const [dropdown, setDropdown] = useState(false)
 
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const logoutHandler = async() => {
-    try {
-      await logout()
-      window.localStorage.setItem("auth", "false");
-      navigate("/")
-      window.location.reload()
-    } catch (error) {
-      // Handle any errors that occur during sign-out
-      console.error('Logout error:', error);
-    }
-  }
+    dispatch(BarberLogoutAction(navigate))
+}
 
   return (
     <>

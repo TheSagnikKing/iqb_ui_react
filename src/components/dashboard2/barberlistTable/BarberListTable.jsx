@@ -7,11 +7,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { GrAdd } from 'react-icons/gr'
 import { AiOutlineArrowLeft, AiOutlineArrowRight, AiOutlineSearch, AiOutlineArrowUp, AiOutlineArrowDown, AiFillEdit } from 'react-icons/ai'
 import { AiOutlineReload } from 'react-icons/ai'
-import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
 
 import { MdDelete } from "react-icons/md";
 import { approveBarberAction, deleteBarberAction } from '../../../redux/actions/barberAction'
+
+import api from "../../../redux/api/Api"
 
 const BarberListTable = () => {
 
@@ -26,13 +27,21 @@ const BarberListTable = () => {
     const [sortFieldData, setFieldData] = useState("")
 
     console.log(barbersList)
+    
+    const LoggedInMiddleware = useSelector(state => state.LoggedInMiddleware)
+
+    //Salon Id dynamic thakbe
+    const salonId = LoggedInMiddleware?.user && LoggedInMiddleware.user[0].salonId;
 
     useEffect(() => {
         const abortController = new AbortController();
 
+
         const getAllBarbersfunc = async () => {
+            //Salon Id dynamic thakbe
+        
             setLoading(true)
-            const { data } = await axios.post(`https://iqb-backend2.onrender.com/api/barber/getAllBarberBySalonId`)
+            const { data } = await api.post(`/api/barber/getAllBarberBySalonId?salonId=${salonId}`)
             setBarbersList(data)
             setCurrentPage(data.currentPage)
             setTotalPages(data.totalPages)
@@ -51,7 +60,7 @@ const BarberListTable = () => {
 
         } else {
             setLoading(true)
-            const { data } = await axios.post(`https://iqb-backend2.onrender.com/api/barber/getAllBarberBySalonId?name=${search}&email=${search}`)
+            const { data } = await api.post(`/api/barber/getAllBarberBySalonId?name=${search}&email=${search}`)
             setBarbersList(data)
             setLoading(false)
         }
@@ -63,7 +72,7 @@ const BarberListTable = () => {
         setLoading(true)
         setSortOrderData(sortOrder)
         setFieldData(sortField)
-        const { data } = await axios.post(`https://iqb-backend2.onrender.com/api/barber/getAllBarberBySalonId?sortField=${sortField}&sortOrder=${sortOrder}`)
+        const { data } = await api.post(`/api/barber/getAllBarberBySalonId?sortField=${sortField}&sortOrder=${sortOrder}`)
         setBarbersList(data)
         setLoading(false)
     }
@@ -73,7 +82,8 @@ const BarberListTable = () => {
         let incpage = currentPage + 1
         if (incpage <= totalPages) {
             setLoading(true)
-            const { data } = await axios.post(`https://iqb-backend2.onrender.com/api/barber/getAllBarberBySalonId?page=${incpage}&sortField=${sortFieldData}&sortOrder=${sortOrdeData}`)
+            //Salon Id dynamic thakbe
+            const { data } = await api.post(`/api/barber/getAllBarberBySalonId?page=${incpage}&sortField=${sortFieldData}&sortOrder=${sortOrdeData}&salonId=${salonId}`)
             setCurrentPage(data.currentPage)
             setBarbersList(data)
             setLoading(false)
@@ -86,7 +96,8 @@ const BarberListTable = () => {
 
         if (decpage > 0) {
             setLoading(true)
-            const { data } = await axios.post(`https://iqb-backend2.onrender.com/api/barber/getAllBarberBySalonId?page=${decpage}&sortField=${sortFieldData}&sortOrder=${sortOrdeData}`)
+            //Salon Id dynamic thakbe
+            const { data } = await api.post(`/api/barber/getAllBarberBySalonId?page=${decpage}&sortField=${sortFieldData}&sortOrder=${sortOrdeData}&salonId=${salonId}`)
             setCurrentPage(data.currentPage)
             setBarbersList(data)
             setLoading(false)
@@ -95,7 +106,7 @@ const BarberListTable = () => {
 
     const reloadHandler = async () => {
         setLoading(true)
-        const { data } = await axios.post(`https://iqb-backend2.onrender.com/api/barber/getAllBarberBySalonId`)
+        const { data } = await api.post(`/api/barber/getAllBarberBySalonId`)
         setBarbersList(data)
         setCurrentPage(data.currentPage)
         setTotalPages(data.totalPages)

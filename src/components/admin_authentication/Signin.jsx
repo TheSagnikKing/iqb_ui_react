@@ -13,6 +13,7 @@ import { GoogleLogin } from '@react-oauth/google';
 
 import { AdminLoginAction, AdminGoogleloginAction } from '../../redux/actions/AdminAuthAction'
 import { useDispatch } from 'react-redux'
+import { BarberGoogleloginAction, BarberLoginAction } from '../../redux/actions/BarberAuthAction'
 
 //This is sign-in page not sign-up
 
@@ -27,22 +28,21 @@ const SignIn = () => {
     const dispatch = useDispatch()
 
     const userLoggedIn = localStorage.getItem("userLoggedIn")
-    // const barberLoggedIn = false (localStorage theke asbe)
+    const barberLoggedIn = localStorage.getItem("barberLoggedIn")
 
     useEffect(() => {
         if (userLoggedIn == "true") {
             navigate("/admin-dashboard")
         }
-        // else if(barberLoggedIn == "true"){
-        //     navigate("/barber-dashboard")
-        // }
-    }, [navigate, userLoggedIn])
+        else if(barberLoggedIn == "true"){
+            navigate("/barber-dashboard")
+        }
+    }, [navigate, userLoggedIn,barberLoggedIn])
 
     const [password, setPassword] = useState("")
     const [email, setEmail] = useState("")
     const [visible, setVisible] = useState(false)
     const [error, setError] = useState(true)
-
 
     const adminsubmitHandler = async () => {
 
@@ -63,6 +63,7 @@ const SignIn = () => {
 
     //Google Admin Action
     const responseMessage = async (response) => {
+        console.log("admin")
         dispatch(AdminGoogleloginAction(response.credential, navigate))
     };
 
@@ -78,9 +79,42 @@ const SignIn = () => {
     };
 
     //FOR BARBER
-    const barbersubmitHandler = async() => {
+
+    const [barberpassword, setBarberPassword] = useState("")
+    const [barberemail, setBarberEmail] = useState("")
+    const [barbervisible, setBarberVisible] = useState(false)
+    const [barbererror, setBarberError] = useState(true)
+
+
+    const barbersubmitHandler = async () => {
+
         console.log("Yes i am barber")
+        try {
+            if (!barberemail) {
+                alert('Email Required');
+            } else if (!barberpassword) {
+                alert('Password required');
+            } else {
+                const signindata = { email: barberemail, password: barberpassword }
+                console.log(signindata)
+                dispatch(BarberLoginAction(signindata, navigate))
+            }
+        } catch (error) {
+            console.log(error);
+        }
     }
+
+    //Google barber Action
+    const responseBarberMessage = async (response) => {
+        console.log("barber")
+        dispatch(BarberGoogleloginAction(response.credential, navigate))
+    };
+
+    const errorBarberMessage = (error) => {
+        console.log(error);
+    };
+
+
 
     return (
         <>
@@ -206,14 +240,14 @@ const SignIn = () => {
                                         </div>
 
                                         <div className="divtwo">
-                                            {error && <p>{error}</p>}
+                                            {barbererror && <p>{barbererror}</p>}
                                             <div className="input_container">
                                                 <div>
                                                     <AiOutlineMail />
                                                 </div>
                                                 <input type="email" placeholder='Email'
-                                                    value={email}
-                                                    onChange={(e) => setEmail(e.target.value)}
+                                                    value={barberemail}
+                                                    onChange={(e) => setBarberEmail(e.target.value)}
                                                 />
                                             </div>
 
@@ -222,15 +256,15 @@ const SignIn = () => {
                                                     <RiLockPasswordLine />
                                                 </div>
                                                 <input
-                                                    type={visible ? "text" : "password"}
+                                                    type={barbervisible ? "text" : "password"}
                                                     placeholder='Password'
-                                                    value={password}
-                                                    onChange={e => setPassword(e.target.value)}
+                                                    value={barberpassword}
+                                                    onChange={e => setBarberPassword(e.target.value)}
                                                     className="password"
                                                     style={{ border: error ? "1px solid red" : "" }}
                                                 />
-                                                <div className="toggle_password" onClick={() => setVisible(!visible)}>
-                                                    {visible ? <BiShow /> : <BiHide />}
+                                                <div className="toggle_password" onClick={() => setBarberVisible(!barbervisible)}>
+                                                    {barbervisible ? <BiShow /> : <BiHide />}
                                                 </div>
                                             </div>
 
@@ -250,7 +284,7 @@ const SignIn = () => {
                                                     <p>Remember me</p>
                                                 </div>
 
-                                                <Link to="/resetpassword" style={{ textDecoration: "none" }}><p>Forgot Password?</p></Link>
+                                                <Link to="/barber-resetpassword" style={{ textDecoration: "none" }}><p>Forgot Password?</p></Link>
                                             </div>
                                         </div>
 
@@ -270,8 +304,8 @@ const SignIn = () => {
 
                                         <div className="divfive">
                                             <GoogleLogin
-                                                onSuccess={responseMessage}
-                                                onError={errorMessage}
+                                                onSuccess={responseBarberMessage}
+                                                onError={errorBarberMessage}
                                                 size='large'
                                                 shape='circle'
                                                 width={400}

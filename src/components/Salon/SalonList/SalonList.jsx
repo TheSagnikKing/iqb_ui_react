@@ -21,17 +21,21 @@ const SalonList = () => {
     const [salonList, setSalonList] = useState([])
     const [loading, setLoading] = useState(false)
 
-    // console.log(salonList)
+    const LoggedInMiddleware = useSelector(state => state.LoggedInMiddleware)
+    const currentAdminEmail = LoggedInMiddleware?.user && LoggedInMiddleware.user[0].email
+
+    console.log(salonList)
 
     useEffect(() => {
         //Admin emailer value loggin korar por theke asbe akhon static ache
         const fetchSalons = async () => {
             try {
-                const { data } = await api.get(`https://iqb-backend2.onrender.com/api/salon/getAllSalonsByAdminEmail?adminEmail=arghyahimanstech@gmail.com`)
+                // arghyahimanstech@gmail.com 
+                const { data } = await api.get(`https://iqb-backend2.onrender.com/api/salon/getAllSalonsByAdminEmail?adminEmail=${currentAdminEmail} `)
                 setSalonList(data)
                 setLoading(false)
             } catch (error) {
-                if(error?.response?.data?.message == "Refresh Token not present.Please Login Again"){
+                if (error?.response?.data?.message == "Refresh Token not present.Please Login Again") {
                     localStorage.setItem("userLoggedIn", "false")
                     navigate("/admin-signin")
                 }
@@ -40,7 +44,7 @@ const SalonList = () => {
 
         fetchSalons()
 
-    }, [])
+    }, [currentAdminEmail])
 
     // console.log(salonList)
 
@@ -53,7 +57,12 @@ const SalonList = () => {
     const dispatch = useDispatch()
 
     const deleteSalonHandler = (salonId) => {
-        dispatch(deleteSalonAction(salonId))
+        const isConfirmed = window.confirm("Are you sure you want to delete this salon?");
+
+        if (isConfirmed) {
+            dispatch(deleteSalonAction(salonId));
+        }
+
     }
 
     const changeRoute = (salonID) => {

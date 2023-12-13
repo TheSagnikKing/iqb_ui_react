@@ -19,17 +19,27 @@ const QueuebarberServices = () => {
 
   const getBarberServicesBybarberId = useSelector(state => state.getBarberServicesBybarberId)
 
-  const joinqueueHandler = (serviceId) => {
+  const LoggedInMiddleware = useSelector(state => state.LoggedInMiddleware)
+
+  const joinqueueHandler = (serviceId,barberServiceEWT,serviceName) => {
     const queuedata = {
-      salonId: 1,
+      salonId: LoggedInMiddleware?.user && LoggedInMiddleware.user[0].salonId,
       name: "Manish Singh",
       userName: "manish",
       joinedQType: "Single-Join",
       methodUsed: "Walk-In",
       barberName: barbername,
       barberId: Number(barberid),
-      serviceId
+      services: [
+       {
+        serviceId: serviceId,
+        barberServiceEWT: barberServiceEWT,
+        serviceName: serviceName
+       }
+      ]
     }
+
+    console.log(queuedata)
 
     dispatch(singleJoinQueueAction(queuedata))
     alert("Joined to the queue successfully")
@@ -38,30 +48,30 @@ const QueuebarberServices = () => {
   return (
     <>
 
-          <AdminLayout />
-          <div className="quebarberserv-wrapper">
-            <p>Barber Services</p>
+      <AdminLayout />
+      <div className="quebarberserv-wrapper">
+        <p>Barber Services</p>
 
-            <div>
-              <p>Service Id</p>
-              <p>Service Name</p>
-              <p>Service EWT</p>
-              <p>Action</p>
+        <div>
+          <p>Service Id</p>
+          <p>Service Name</p>
+          <p>Service EWT</p>
+          <p>Action</p>
+        </div>
+
+        {
+          getBarberServicesBybarberId?.response?.map((b) => (
+            <div className='quebarberserv-content' key={b._id}>
+              <p>{b.serviceId}</p>
+              <p>{b.serviceName}</p>
+              <p>{b.barberServiceEWT}</p>
+              <button onClick={() => joinqueueHandler(b.serviceId,b.barberServiceEWT,b.serviceName)}>Join Queue</button>
             </div>
+          ))
+        }
 
-            {
-              getBarberServicesBybarberId?.response?.map((b) => (
-                <div className='quebarberserv-content' key={b._id}>
-                  <p>{b.serviceId}</p>
-                  <p>{b.serviceName}</p>
-                  <p>{b.serviceEWT}</p>
-                  <button onClick={() => joinqueueHandler(b.serviceId)}>Join Queue</button>
-                </div>
-              ))
-            }
+      </div>
 
-          </div>
-        
     </>
   )
 }

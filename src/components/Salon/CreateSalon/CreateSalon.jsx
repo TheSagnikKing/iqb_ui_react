@@ -5,7 +5,7 @@ import Layout from '../../layout/Layout'
 import { useDispatch, useSelector } from 'react-redux'
 import { createSalonAction } from '../../../redux/actions/salonAction'
 import AdminLayout from '../../layout/Admin/AdminLayout'
-import axios from 'axios'
+import api from "../../../redux/api/Api"
 
 const CreateSalon = () => {
 
@@ -76,8 +76,6 @@ const CreateSalon = () => {
     const createSalon = useSelector(state => state.createSalon)
     const { response } = createSalon
 
-    console.log(response?.salonId)
-
 
     useEffect(() => {
         if (response?.salonId) {
@@ -93,7 +91,7 @@ const CreateSalon = () => {
                     }
 
                     try {
-                        const imageResponse = await axios.post('https://iqb-backend2.onrender.com/api/salon/uploadSalonImage', formData, {
+                        const imageResponse = await api.post('/api/salon/uploadSalonImage', formData, {
                             headers: {
                                 'Content-Type': 'multipart/form-data',
                             },
@@ -114,11 +112,12 @@ const CreateSalon = () => {
         }
     }, [response?.salonId]);
 
+    const LoggedInMiddleware = useSelector(state => state.LoggedInMiddleware)
 
     const submitHandler = async () => {
         const salonData = {
             //Ai admin emailer value loggin theke asbe
-            adminEmail: "sumit12345@gmail.com"
+            adminEmail: LoggedInMiddleware?.user && LoggedInMiddleware.user[0].email 
             , salonEmail, userName, salonName, address, city, location: {
                 type: "Point",
                 coordinates: {
@@ -130,11 +129,8 @@ const CreateSalon = () => {
 
         console.log(salonData)
 
-        // dispatch(createSalonAction(salonData))
+        dispatch(createSalonAction(salonData))
 
-        // console.log(response?.salonId)
-
-        setAdminEmail("")
         setUsername("")
         setSalonName("")
         setAddress("")

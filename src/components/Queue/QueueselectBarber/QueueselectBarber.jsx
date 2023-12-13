@@ -14,14 +14,16 @@ const QueueselectBarber = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(getAllBarbersByServiceIdAction())
+        dispatch(getAllBarbersByServiceIdAction(serviceid))
     }, [dispatch])
 
     const getAllBarbersByServiceId = useSelector(state => state.getAllBarbersByServiceId)
 
+    const LoggedInMiddleware = useSelector(state => state.LoggedInMiddleware)
+
     const joinQueueHandler = (barberid,name) => {
         const queuedata = {
-            salonId: 1,
+            salonId: LoggedInMiddleware?.user && LoggedInMiddleware.user[0].salonId,
             name: "Manish Singh",
             userName: "manish",
             joinedQType: "Single-Join",

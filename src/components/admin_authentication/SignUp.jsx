@@ -13,6 +13,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { AdminGoogleloginAction, AdminRegisterAction } from '../../redux/actions/AdminAuthAction'
 import { GoogleLogin } from '@react-oauth/google'
+import { BarberGoogleloginAction, BarberRegisterAction } from '../../redux/actions/BarberAuthAction'
 
 const SignUp = () => {
 
@@ -31,15 +32,16 @@ const SignUp = () => {
     const dispatch = useDispatch()
 
     const userLoggedIn = localStorage.getItem("userLoggedIn")
+    const barberLoggedIn = localStorage.getItem("barberLoggedIn")
 
     useEffect(() => {
         if (userLoggedIn == "true") {
             navigate("/admin-dashboard")
         }
-        // else if(barberLoggedIn == "true"){
-        //     navigate("/barber-dashboard")
-        // }
-    }, [navigate, userLoggedIn])
+        else if(barberLoggedIn == "true"){
+            navigate("/barber-dashboard")
+        }
+    }, [navigate, userLoggedIn,barberLoggedIn])
 
     const submitHandler = async () => {
         try {
@@ -68,6 +70,38 @@ const SignUp = () => {
     };
 
     const errorMessage = (error) => {
+        console.log(error);
+    };
+
+
+    //BARBER PART 
+    const [barberpassword, setBarberPassword] = useState("")
+    const [barberemail, setBarberEmail] = useState("")
+    const [barbervisible, setBarberVisible] = useState(false)
+
+    const barbersubmitHandler = () => {
+        try {
+            if (!barberemail) {
+                alert("Email Required")
+            } else if (!barberpassword) {
+                alert("Password required")
+            } else {
+                const signupdata = { email:barberemail, password:barberpassword }
+                console.log(signupdata)
+                dispatch(BarberRegisterAction(signupdata, navigate))
+            }
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+
+    //Google barber Action
+    const responseBarberMessage = async (response) => {
+        console.log("barber")
+        dispatch(BarberGoogleloginAction(response.credential, navigate))
+    };
+
+    const errorBarberMessage = (error) => {
         console.log(error);
     };
 
@@ -193,8 +227,8 @@ const SignUp = () => {
                                             <AiOutlineMail />
                                         </div>
                                         <input type="email" placeholder='Email'
-                                            value={email}
-                                            onChange={(e) => setEmail(e.target.value)}
+                                            value={barberemail}
+                                            onChange={(e) => setBarberEmail(e.target.value)}
                                         />
                                     </div>
 
@@ -203,15 +237,15 @@ const SignUp = () => {
                                             <RiLockPasswordLine />
                                         </div>
                                         <input
-                                            type={visible ? "text" : "password"}
+                                            type={barbervisible ? "text" : "password"}
                                             placeholder='Password'
-                                            value={password}
-                                            onChange={e => setPassword(e.target.value)}
+                                            value={barberpassword}
+                                            onChange={e => setBarberPassword(e.target.value)}
                                             className="password"
                                             style={{ border: error ? "1px solid red" : "" }}
                                         />
-                                        <div className="toggle_password" onClick={() => setVisible(!visible)}>
-                                            {visible ? <BiShow /> : <BiHide />}
+                                        <div className="toggle_password" onClick={() => setBarberVisible(!barbervisible)}>
+                                            {barbervisible ? <BiShow /> : <BiHide />}
                                         </div>
                                     </div>
 
@@ -235,7 +269,7 @@ const SignUp = () => {
                                 </div>
 
                                 <button className="divthree"
-                                    onClick={submitHandler}
+                                    onClick={barbersubmitHandler}
                                 >Sign Up</button>
 
                                 <div className="divfour">
@@ -249,19 +283,15 @@ const SignUp = () => {
                                 </div>
 
                                 <div className="divfive">
-                                    <div className="social_button" onClick={() => { }}>
-                                        <div>
-                                            <FcGoogle />
-                                        </div>
-                                        <p>Google</p>
-                                    </div>
-
-                                    <div className="social_button">
-                                        <div>
-                                            <BsFacebook />
-                                        </div>
-                                        <p>facebook</p>
-                                    </div>
+                                <GoogleLogin
+                                        onSuccess={responseBarberMessage}
+                                        onError={errorBarberMessage}
+                                        size='large'
+                                        shape='circle'
+                                        width={400}
+                                        logo_alignment='left'
+                                        text='continue_with'
+                                    />
                                 </div>
 
                                 <p className="divsix">Already have an account? <Link to="/admin-signin" className="link"><strong>Log In</strong></Link> </p>

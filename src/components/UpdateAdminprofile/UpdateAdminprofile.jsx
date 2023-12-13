@@ -1,11 +1,12 @@
 import React, { useRef, useState } from 'react'
 import "./UpdateAdminprofile.css"
 import AdminLayout from '../layout/Admin/AdminLayout'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { updateAdminAction } from '../../redux/actions/AdminAuthAction'
 import { MdDelete } from 'react-icons/md'
 import { FaCamera } from "react-icons/fa";
-import axios from 'axios'
+
+import api from "../../redux/api/Api"
 
 const UpdateAdminprofile = () => {
 
@@ -31,39 +32,42 @@ const UpdateAdminprofile = () => {
     }
 
 
-    const [setprofilepic,Setsetprofilepic] = useState("")
+    const [setprofilepic, Setsetprofilepic] = useState("")
 
     const fileInputRef = useRef(null);
+
+    const LoggedInMiddleware = useSelector(state => state.LoggedInMiddleware)
 
     const handleEditButtonClick = (publicid, id) => {
         fileInputRef.current.click();
     };
 
-    const handleFileInputChange = async(e) => {
+    const handleFileInputChange = async (e) => {
         const uploadImage = e.target.files[0];
         console.log(uploadImage)
 
         const formData = new FormData();
 
-        formData.append('email',"sagnik1@example.com")
-        formData.append('profile',uploadImage)
+        formData.append('email', LoggedInMiddleware?.user[0]?.email)
+        formData.append('profile', uploadImage)
 
         try {
-            const imageResponse = await axios.post('https://iqb-backend2.onrender.com/api/admin/uploadAdminProfilePicture', formData, {
+            const imageResponse = await api.post('/api/admin/uploadAdminProfilePicture', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
             });
 
             console.log('Upload success:', imageResponse.data);
-            Setsetprofilepic(imageResponse?.data?.adminImage?.profile[0]?.url )
+            Setsetprofilepic(imageResponse?.data?.adminImage?.profile[0]?.url)
             alert("Image Uploaded successfully")
         } catch (error) {
             console.error('Image upload failed:', error);
         }
     };
 
-    console.log(setprofilepic)
+
+    // console.log(LoggedInMiddleware?.user[0]?.profile[0]?.url)
 
     return (
         <>
@@ -136,7 +140,18 @@ const UpdateAdminprofile = () => {
                     </div>
 
                     <div className='admin-profile'>
-                        <img src={ setprofilepic ? setprofilepic :"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"} alt="" />
+                        <img
+                            src={
+                                setprofilepic
+                                    ? setprofilepic
+                                    : LoggedInMiddleware?.user &&
+                                        LoggedInMiddleware.user[0]?.profile &&
+                                        LoggedInMiddleware.user[0].profile[0]?.url
+                                        ? LoggedInMiddleware.user[0].profile[0].url
+                                        : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+                            }
+                            alt=""
+                        />
                         <div>
                             {/* <button onClick={() => imgDeleteHandler()}><MdDelete /></button> */}
                             <button onClick={() => handleEditButtonClick()}><FaCamera /></button>

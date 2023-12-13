@@ -10,6 +10,8 @@ import { updateBarberAction } from "../../redux/actions/barberAction"
 import AdminLayout from '../layout/Admin/AdminLayout'
 import { useLocation } from 'react-router-dom'
 
+import api from "../../redux/api/Api"
+
 const UpdateBarber = () => {
 
     const [dropdown, setDropdown] = useState(false)
@@ -25,6 +27,7 @@ const UpdateBarber = () => {
 
 
     const [selectedService, setSelectedService] = useState([])
+    console.log(selectedService)
 
     const [barberserviceEWTMap, setBarberserviceEWTMap] = useState(new Map());
 
@@ -36,7 +39,7 @@ const UpdateBarber = () => {
         const servicepresent = selectedService.find((s) => s._id === ser._id)
 
         if (!servicepresent) {
-            const serviceWithEWT = { ...ser, serviceEWT: barberserviceEWTMap.get(ser.serviceId) || 0 };
+            const serviceWithEWT = { ...ser, barberServiceEWT: barberserviceEWTMap.get(ser.serviceId) || 0 };
             
             setSelectedService([...selectedService, serviceWithEWT])
         }
@@ -47,12 +50,21 @@ const UpdateBarber = () => {
         setSelectedService(deleteService)
     }
 
+    const LoggedInMiddleware = useSelector(state => state.LoggedInMiddleware)
+
+    //Salon Id dynamic thakbe
+    const currentSalonId = LoggedInMiddleware?.user && LoggedInMiddleware.user[0].salonId;
+
     useEffect(() => {
         try {
             const getServices = async () => {
-                const { data } = await axios.get(`https://iqb-backend2.onrender.com/api/salon/allSalonServices?salonId=3`)
+                //salonid will be dynamic
+                const { data } = await api.get(`/api/salon/allSalonServices?salonId=${currentSalonId}`)
                 setBarberServices(data)
                 setError1(data.message)
+            
+
+                // console.log(data)
 
                 // Set initial values for barberserviceEWTMap
             const initialBarberserviceEWTMap = new Map();
@@ -75,6 +87,7 @@ const UpdateBarber = () => {
         const barberdata = {
             name, email, userName, mobileNumber, dateOfBirth, salonId, barberServices: selectedService
         }
+        // console.log(barberdata)
         dispatch(updateBarberAction(barberdata))
         alert("update barber successfully")
     }
@@ -84,9 +97,9 @@ const UpdateBarber = () => {
 
     useEffect(() => {
         const fetchdetailbarber = async () => {
-            const { data } = await axios.post(`https://iqb-backend2.onrender.com/api/barber/getBarberDetailsByEmail`, { email: barberemail })
+            const { data } = await api.post(`/api/barber/getBarberDetailsByEmail`, { email: barberemail })
             
-            console.log(data)
+            console.log("scsdvsdvdsvddssd",data)
 
             setName(data?.response?.name)
             setUserName(data?.response?.userName)
@@ -100,7 +113,7 @@ const UpdateBarber = () => {
         fetchdetailbarber()
     }, [])
 
-    console.log(barberServices)
+    // console.log(barberServices)
 
 
     return (
@@ -166,7 +179,6 @@ const UpdateBarber = () => {
                             type="text"
                             placeholder='Enter Salon ID'
                             value={salonId}
-                            onChange={(e) => setSalonId(e.target.value)}
                         />
                     </div>
                     <div></div>
@@ -186,17 +198,17 @@ const UpdateBarber = () => {
                                         <div key={index} >
                                             <div>
                                                 <p>serviceId</p>
-                                                <p>111</p>
+                                                <p>{ser.serviceId}</p>
                                             </div>
 
                                             <div>
                                                 <p>serviceCode</p>
-                                                <p>saccas</p>
+                                                <p>{ser.serviceCode}</p>
                                             </div>
 
                                             <div>
                                                 <p>serviceName</p>
-                                                <p>ascsajkb</p>
+                                                <p>{ser.serviceName}</p>
                                             </div>
 
                                             <div>
@@ -224,22 +236,22 @@ const UpdateBarber = () => {
                                     <div key={index}>
                                         <div>
                                             <p>serviceId</p>
-                                            <p>111</p>
+                                            <p>{ser.serviceId}</p>
                                         </div>
 
                                         <div>
                                             <p>serviceCode</p>
-                                            <p>saccas</p>
+                                            <p>{ser.serviceCode}</p>
                                         </div>
 
                                         <div>
                                             <p>serviceName</p>
-                                            <p>ascsajkb</p>
+                                            <p>{ser.serviceName}</p>
                                         </div>
 
                                         <div>
                                             <p>serviceEWT</p>
-                                            <p>{ser.serviceEWT}</p>                               
+                                            <p>{ser.barberServiceEWT}</p>                               
                                         </div>
 
                                         <div onClick={() => selectedServiceDelete(ser)}><MdDelete /></div>

@@ -24,7 +24,7 @@ const dashboard = () => {
 
     const checkboxhandler = () => {
         setCheckbox(!checkbox)
-    }
+    } 
 
     return (
         <>

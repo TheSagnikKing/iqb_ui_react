@@ -9,27 +9,48 @@ import { MdDelete } from 'react-icons/md'
 import { createBarberAction } from "../../redux/actions/barberAction"
 import AdminLayout from '../layout/Admin/AdminLayout'
 
+
+import api from "../../redux/api/Api"
+
 const CreateBarber = () => {
 
     const [dropdown, setDropdown] = useState(false)
 
     const [name, setName] = useState("")
+    const [password,setPassword] = useState("")
     const [email, setEmail] = useState("")
     const [userName, setUserName] = useState("")
-    const [mobileNumber, setMobileNumber] = useState("")
+    const [mobileNumber, setMobileNumber] = useState(null)
     const [dateOfBirth, setDateOfBirth] = useState("")
-    const [salonId, setSalonId] = useState("")
+    const [salonId, setSalonId] = useState(null)
     const [barberServices, setBarberServices] = useState([])
 
+    const LoggedInMiddleware = useSelector(state => state.LoggedInMiddleware)
+  
     useEffect(() => {
-        const getServices = async () => {
-            //This are Salon services
-            const { data } = await axios.get(`https://iqb-backend2.onrender.com/api/salon/allSalonServices?salonId=3`)
-            setBarberServices(data)
-        }
+        try {
+            const getServices = async () => {
+                //This are Salon services and salonId will be dynamic
+                const { data } = await api.get(`/api/salon/allSalonServices?salonId=${LoggedInMiddleware?.user && LoggedInMiddleware.user[0].salonId}`)
+                console.log(data)
+                setBarberServices(data)
 
-        getServices()
-    }, [])
+
+                
+                // Set initial values for barberserviceEWTMap
+            const initialBarberserviceEWTMap = new Map();
+            data?.response?.forEach((ser) => {
+                initialBarberserviceEWTMap.set(ser.serviceId, ser.serviceEWT || 0);
+            });
+            setBarberserviceEWTMap(initialBarberserviceEWTMap);
+            }
+    
+            getServices()
+        } catch (error) {
+            console.log(error)
+        }
+        
+    }, [LoggedInMiddleware?.user])
 
     console.log(barberServices)
 
@@ -47,7 +68,7 @@ const CreateBarber = () => {
         const servicepresent = selectedService.find((s) => s._id === ser._id)
 
         if (!servicepresent) {
-            const serviceWithEWT = { ...ser, serviceEWT: barberserviceEWTMap.get(ser.serviceId) || 0 };
+            const serviceWithEWT = { ...ser, barberServiceEWT: barberserviceEWTMap.get(ser.serviceId) || 0 };
 
             setSelectedService([...selectedService, serviceWithEWT]);
         }
@@ -61,15 +82,18 @@ const CreateBarber = () => {
     const dispatch = useDispatch()
 
     const submitHandler = () => {
+        //salonid loggin admin theke 
         const barberdata = {
-            name, email, userName, mobileNumber, dateOfBirth, salonId, barberServices: selectedService
+            name, email, userName,password, mobileNumber, dateOfBirth, salonId:Number(LoggedInMiddleware?.user && LoggedInMiddleware.user[0].salonId), barberServices: selectedService
         }
 
+        console.log(barberdata)
         dispatch(createBarberAction(barberdata))
         alert("Barber created successfully")
     }
 
 
+    console.log(selectedService)
 
 
     return (
@@ -97,6 +121,16 @@ const CreateBarber = () => {
                             placeholder='Enter Email'
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
+                        />
+                    </div>
+
+                    <div>
+                    <label>Password</label>
+                        <input
+                            type="text"
+                            placeholder='Enter Password'
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
                         />
                     </div>
 
@@ -133,16 +167,13 @@ const CreateBarber = () => {
                     <div>
                         <label>Salon ID</label>
                         <input
-                            type="text"
+                            type="number"
                             placeholder='Enter Salon ID'
-                            value={salonId}
-                            onChange={(e) => setSalonId(e.target.value)}
+                            value={LoggedInMiddleware?.user && LoggedInMiddleware.user[0].salonId}
                         />
                     </div>
-                    <div>
 
-                    </div>
-
+                
                     <button onClick={submitHandler}>Create</button>
 
                     <div>
@@ -210,7 +241,7 @@ const CreateBarber = () => {
 
                                         <div>
                                             <p>serviceEWT</p>
-                                            <p>{ser.serviceEWT}</p>                               
+                                            <p>{ser.barberServiceEWT}</p>                               
                                         </div>
 
                                         <div onClick={() => selectedServiceDelete(ser)}><MdDelete /></div>
@@ -232,3 +263,5 @@ const CreateBarber = () => {
 }
 
 export default CreateBarber
+
+// const serviceWithEWT = { serviceId:ser.serviceId, serviceCode:ser.serviceCode,serviceName:ser.serviceName,serviceEWT: barberserviceEWTMap.get(ser.serviceId) || 0 };
