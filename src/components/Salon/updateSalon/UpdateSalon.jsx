@@ -160,6 +160,7 @@ const UpdateSalon = () => {
             // setSalonType(data?.response?.salonInfo?.adminEmail)
             setWebLink(data?.response?.salonInfo?.webLink)
             setPostCode(data?.response?.salonInfo?.postCode)
+            setServices(data?.response?.salonInfo?.services)
 
         }
 
@@ -464,32 +465,6 @@ const UpdateSalon = () => {
                                     </div>
                                 ))
                             }
-
-
-                            {/* <div>
-                                <img src="https://i0.wp.com/picjumbo.com/wp-content/uploads/beautiful-nature-mountain-scenery-with-flowers-free-photo.jpg?w=600&quality=80" alt="" />
-                                <div>
-                                    <button><MdDelete /></button>
-                                    <button><MdModeEditOutline /></button>
-                                </div>
-                            </div>
-
-                            <div>
-                                <img src="https://i0.wp.com/picjumbo.com/wp-content/uploads/beautiful-nature-mountain-scenery-with-flowers-free-photo.jpg?w=600&quality=80" alt="" />
-                                <div>
-                                    <button><MdDelete /></button>
-                                    <button><MdModeEditOutline /></button>
-                                </div>
-                            </div>
-
-                            <div>
-                                <img src="https://i0.wp.com/picjumbo.com/wp-content/uploads/beautiful-nature-mountain-scenery-with-flowers-free-photo.jpg?w=600&quality=80" alt="" />
-
-                                <div>
-                                    <button><MdDelete /></button>
-                                    <button><MdModeEditOutline /></button>
-                                </div>
-                            </div> */}
 
                         </div>
 

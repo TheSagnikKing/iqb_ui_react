@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import "./UpdateAdminprofile.css"
 import AdminLayout from '../layout/Admin/AdminLayout'
 import { useDispatch, useSelector } from 'react-redux'
@@ -69,6 +69,15 @@ const UpdateAdminprofile = () => {
 
     // console.log(LoggedInMiddleware?.user[0]?.profile[0]?.url)
 
+
+    useEffect(() => {
+        setUsername(LoggedInMiddleware?.user && LoggedInMiddleware?.user[0]?.userName)
+        setMobileNumber(LoggedInMiddleware?.user && LoggedInMiddleware?.user[0]?.mobileNumber)
+        setName(LoggedInMiddleware?.user && LoggedInMiddleware?.user[0]?.name)
+        setGender(LoggedInMiddleware?.user && LoggedInMiddleware?.user[0]?.gender)
+        setDob(LoggedInMiddleware?.user && LoggedInMiddleware?.user[0]?.dateOfBirth)
+    },[LoggedInMiddleware?.user])
+
     return (
         <>
             <AdminLayout />
@@ -78,12 +87,13 @@ const UpdateAdminprofile = () => {
                     <p>Crud</p>
                 </div>
 
-                <div className="sa-br-right_main_form">
+                <div className="sa-br-right_main_form-update">
 
                     <div>
                         <label htmlFor="">Email</label>
                         <input
                             type="text"
+                            value={LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].email}
                         />
                     </div>
 
@@ -91,6 +101,7 @@ const UpdateAdminprofile = () => {
                         <label htmlFor="">Salon Id</label>
                         <input
                             type="text"
+                            value={LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId}
                         />
                     </div>
 
@@ -98,7 +109,7 @@ const UpdateAdminprofile = () => {
                         <label htmlFor="">User Name</label>
                         <input
                             type="text"
-                            value={username}
+                            value={ username}
                             onChange={(e) => setUsername(e.target.value)}
                         />
                     </div>
@@ -164,7 +175,7 @@ const UpdateAdminprofile = () => {
                         </div>
                     </div>
 
-                    <div className="sa-br-btn_box">
+                    <div className="sa-br-btn_box-up">
                         <button onClick={submitHandler}>
                             Submit
                         </button>

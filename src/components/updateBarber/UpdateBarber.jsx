@@ -79,7 +79,7 @@ const UpdateBarber = () => {
             console.log(error)
         }
 
-    }, [])
+    }, [currentSalonId])
 
     const dispatch = useDispatch()
 
@@ -107,6 +107,7 @@ const UpdateBarber = () => {
             setMobileNumber(data?.response?.mobileNumber)
             setDateOfBirth(data?.response?.dateOfBirth)
             setSalonId(data?.response?.salonId)
+            setSelectedService(data?.response?.barberServices)
             // setBarberServices(data?.response?.barberServices)
         }
 
@@ -217,6 +218,7 @@ const UpdateBarber = () => {
                                                     type="number"
                                                     value={  barberserviceEWTMap.get(ser.serviceId) }
                                                     onChange={(e) => updateServiceEWT(ser.serviceId, e.target.value)}
+                                                    className='serviceEWT'
                                                 />
                                                 {/* <p>{}</p> */}
                                             </div>
