@@ -55,6 +55,7 @@ const QueuebarberServices = () => {
         <div>
           <p>Service Id</p>
           <p>Service Name</p>
+          {/* <p>Service Code</p> */}
           <p>Service EWT</p>
           <p>Action</p>
         </div>
@@ -64,6 +65,7 @@ const QueuebarberServices = () => {
             <div className='quebarberserv-content' key={b._id}>
               <p>{b.serviceId}</p>
               <p>{b.serviceName}</p>
+              {/* <p>{b.serviceCode}</p> */}
               <p>{b.barberServiceEWT}</p>
               <button onClick={() => joinqueueHandler(b.serviceId,b.barberServiceEWT,b.serviceName)}>Join Queue</button>
             </div>
@@ -77,3 +79,5 @@ const QueuebarberServices = () => {
 }
 
 export default QueuebarberServices
+
+

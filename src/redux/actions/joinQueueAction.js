@@ -12,6 +12,7 @@ export const singleJoinQueueAction = (singlejoindata) => async(dispatch) => {
             type:SINGLE_JOINQUEUE_SUCCESS,
             payload:data
         })
+        alert("Joined to the queue successfully")
     } catch (error) {
         dispatch({
             type:SINGLE_JOINQUEUE_FAIL,
@@ -49,6 +50,8 @@ export const autojoinAction = (joindata) => async(dispatch) => {
             type:AUTOJOIN_SUCCESS,
             payload:data
         })
+
+        alert("Auto join successfull")
     } catch (error) {
         dispatch({
             type:AUTOJOIN_FAIL,
@@ -58,21 +61,20 @@ export const autojoinAction = (joindata) => async(dispatch) => {
 }
 
 
-export const groupjoinAction = (groupjoindata) => async(dispatch) => {
+export const groupjoinAction = (groupjoindata,setSelectedCustomer) => async(dispatch) => {
     try {
         dispatch({type:GROUP_JOIN_REQ})
 
-        const {data} = await api.post(`/api/queue/groupJoinQueue`, {
-            salonId:3,
-            groupInfo:groupjoindata
-        })
+        const {data} = await api.post(`/api/queue/groupJoinQueue`, groupjoindata)
 
-        localStorage.clear();
 
         dispatch({
             type:GROUP_JOIN_SUCCESS,
             payload:data
         })
+
+        alert("Group join successfull")
+        setSelectedCustomer([])
         
     } catch (error) {
         dispatch({

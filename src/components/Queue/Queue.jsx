@@ -56,6 +56,7 @@ const Queue = () => {
                         }
 
                     </div>
+
                     <div><p><Link to="/queue/autoqueservices">Auto Join</Link></p></div>
 
                     {/* <div><p style={{ marginLeft: "10px" }}><Link to="/queue/mycustomer">My Customers</Link></p></div> */}

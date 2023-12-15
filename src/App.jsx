@@ -82,13 +82,13 @@ const App = () => {
           } />
 
           <Route path="/adminaccountdetail" element={<Auth><AdminAccountDetail /></Auth>} />
-          <Route path="/barberaccountdetail" element={<BarberAuth><BarberAccountDetail/></BarberAuth>}/>
+          <Route path="/barberaccountdetail" element={<BarberAuth><BarberAccountDetail /></BarberAuth>} />
 
           <Route path='/barber-dashboard' element={
 
             <Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}>
               <BarberAuth>
-              <DashboardPage />
+                <DashboardPage />
               </BarberAuth>
             </Suspense>
           } />
@@ -96,12 +96,12 @@ const App = () => {
 
           <Route path='/barber-resetpassword' element={
             <Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}>
-              <BarberResetPassword/>
+              <BarberResetPassword />
             </Suspense>
           } />
           <Route path="/barber-resetpassword/:token" element={
             <Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}>
-              <BarberResetNewPassword/>
+              <BarberResetNewPassword />
             </Suspense>
           } />
 
@@ -223,13 +223,13 @@ const App = () => {
 
           } />
 
-          <Route path="/queue/barberservices/:barberid/:barbername" element={
+          {/* <Route path="/queue/barberservices/:barberid/:barbername" element={
 
             <Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}>
               <Auth><QueuebarberServices /></Auth>
             </Suspense>
 
-          } />
+          } /> */}
 
           <Route path="/queue/selectservices" element={
 
@@ -239,11 +239,6 @@ const App = () => {
 
           } />
 
-          <Route path="/queue/group/customers" element={<Auth><GroupJoinCustomer /></Auth>} />
-          <Route path="/queue/group/barberlist" element={<Auth><QueueGroupBarberList /></Auth>} />
-          <Route path="/queue/group/barberservices/:barberid/:barbername" element={<Auth><QueueGroupBarberServices /></Auth>} />
-
-
           <Route path="/queue/selectservicebarber/:serviceid" element={
 
             <Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}>
@@ -251,6 +246,10 @@ const App = () => {
             </Suspense>
 
           } />
+
+          <Route path="/queue/group/customers" element={<Auth><GroupJoinCustomer /></Auth>} />
+          <Route path="/queue/group/barberlist" element={<Auth><QueueGroupBarberList /></Auth>} />
+          <Route path="/queue/group/barberservices/:barberid/:barbername" element={<Auth><QueueGroupBarberServices /></Auth>} />
 
           <Route path="/queue/autoqueservices" element={
 
