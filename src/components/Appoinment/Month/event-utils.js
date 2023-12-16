@@ -6,14 +6,14 @@ export const INITIAL_EVENTS = [
     id: createEventId(),
     title: 'Appoinment 1',
     start: todayStr + 'T09:0:00',
-    end: todayStr + 'T10:00:00',
+    // end: todayStr + 'T10:00:00',
     color:"#7EC8E3" //sky blue
   },
   {
     id: createEventId(),
     title: 'Appoinment 2',
     start: todayStr + 'T09:00:00',
-    end: todayStr + 'T10:00:00',
+    // end: todayStr + 'T10:00:00',
     color:"#FA8128" //light orange
   },
   {

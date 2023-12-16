@@ -19,8 +19,10 @@ const Queue = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(queueListAction(salonId))
-    }, [dispatch])
+        if(salonId){
+            dispatch(queueListAction(Number(salonId)))
+        }   
+    }, [dispatch,salonId])
 
     const queueList = useSelector(state => state.queueList)
 
@@ -43,7 +45,14 @@ const Queue = () => {
                 <p>Select Your Joins</p>
 
                 <div className='joins'>
-                    <Link to="/queue/group/customers">Group Join</Link>
+                    <Link to="/queue/group/customers"
+                    style={{
+                        background:"#fff",
+                        padding:"10px 12px",
+                        borderRadius:"10px",
+                        boxShadow:"0px 0px 2px rgba(0,0,0,0.4)"
+                    }}
+                    >Group Join</Link>
 
                     <div>
                         <p onClick={() => setSingleDrop((prev) => !prev)}>Single Join</p>
@@ -66,7 +75,6 @@ const Queue = () => {
                     <p>Queue List</p>
 
                     <div className='que-lst-head'>
-                        <p>User Name</p>
                         <p>Name</p>
                         <p>JoinedQ</p>
                         <p>JoinedQType</p>
@@ -79,7 +87,6 @@ const Queue = () => {
                     {
                         queueList?.response?.map((c) => (
                             <div className='que-lst-content' key={c._id}>
-                                <p>{c.userName}</p>
                                 <p>{c.name}</p>
                                 <p>{c.joinedQ == true ? "True" : "False"}</p>
                                 <p>{c.joinedQType}</p>

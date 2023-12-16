@@ -52,6 +52,7 @@ import BarberResetPassword from './components/admin_authentication/BarberResetPa
 import BarberResetNewPassword from './components/admin_authentication/BarberResetNewPassword';
 import BarberAuth from './components/admin_authentication/BarberAuth';
 import BarberAccountDetail from './components/admin_authentication/BarberAccountDetail';
+import CreateAppointment from './components/Appoinment/CreateAppointment/CreateAppointment';
 
 const App = () => {
 
@@ -269,6 +270,7 @@ const App = () => {
 
 
           <Route path="/appoinment" element={<Auth><Month /></Auth>} />
+          <Route path="/appoinment/createappointment" element={<Auth><CreateAppointment/></Auth>}/>
           <Route path="/appoinment/calender" element={<Auth><CalenderEvent /></Auth>} />
           <Route path="/appoinment/calender/list" element={<Auth><CalenderList /></Auth>} />
 

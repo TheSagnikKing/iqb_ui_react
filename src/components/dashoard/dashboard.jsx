@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Suspense } from 'react'
+import React, { useEffect, useState, Suspense, useMemo } from 'react'
 import './dashboard.css'
 import { IoMdAdd } from 'react-icons/io'
 import { IoNotificationsOutline } from 'react-icons/io5'
@@ -31,6 +31,15 @@ const dashboard = () => {
     const LoggedInMiddleware = useSelector(state => state.LoggedInMiddleware)
 
     const salonid = LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId;
+
+
+    const MemoizedChart = useMemo(() => {
+        return (
+            <Suspense fallback={<div>Loading...</div>}>
+                <Chart />
+            </Suspense>
+        );
+    }, []);
 
     return (
         <>
@@ -316,11 +325,7 @@ const dashboard = () => {
                                     </div>
                                 </div>
 
-                                <div>
-                                    <Suspense fallback={<div>Loading...</div>}>
-                                        <Chart />
-                                    </Suspense>
-                                </div>
+                                <div>{MemoizedChart}</div>
                             </div>
                         </div>
                     </div>

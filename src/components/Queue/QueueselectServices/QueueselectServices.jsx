@@ -107,10 +107,12 @@ const QueueselectServices = () => {
     console.log(selectedService)
 
     const searchBarber = () => {
+        const confirm = window.confirm("Are you sure ?")
+        if(confirm){
+            const serviceIds = selectedService.map(item => item.serviceId);
 
-        const serviceIds = selectedService.map(item => item.serviceId);
-
-        dispatch(getBarberByMultipleServicesAction(loggedinAdminSalonid, serviceIds))
+            dispatch(getBarberByMultipleServicesAction(loggedinAdminSalonid, serviceIds))
+        }     
     }
 
     const getBarberByMultipleServices = useSelector(state => state.getBarberByMultipleServices)

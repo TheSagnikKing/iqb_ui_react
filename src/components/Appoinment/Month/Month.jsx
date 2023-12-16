@@ -4,7 +4,7 @@ import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { INITIAL_EVENTS, createEventId } from './event-utils';
 import AdminLayout from '../../layout/Admin/AdminLayout';
 
@@ -22,6 +22,9 @@ function Month() {
         <>
         <AdminLayout/>
         <div className='calender-month'>
+
+        <Link to="/appoinment/createappointment">Create</Link>
+
             <div className='demo-app-main'>
                 <FullCalendar
                     plugins={[dayGridPlugin, interactionPlugin]}
