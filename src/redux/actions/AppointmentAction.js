@@ -12,10 +12,14 @@ export const createAppointmentAction = (appointmentData) => async(dispatch) => {
             type:CREATE_APPOINTMENT_SUCCESS,
             payload:data
         })
+
+        alert("Appintment Created Successfully")
     } catch (error) {
         dispatch({
             type:CREATE_APPOINTMENT_FAIL,
             error: error.response
         })
+
+        alert(error.response.data.message)
     }
 }

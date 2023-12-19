@@ -243,5 +243,7 @@ export const updateBarberAccountDetailsAction = (navigate,profiledata) => async 
             type: UPDATE_BARBER_ACCOUNT_DETAILS_FAIL,
             payload:error?.response?.data
         }); 
+
+        alert(error.response.data.message)
     }
 };

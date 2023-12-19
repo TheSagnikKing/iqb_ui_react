@@ -215,7 +215,7 @@ const QueueselectServices = () => {
                                     <p>{barber.email}</p>
                                     <p>{barber.name}</p>
                                     <p>{barber.userName}</p>
-                                    <p>{barber.mobileNumber}</p>
+                                    <p>{barber.barberEWT}</p>
                                     <p>{barber.isActive === true ? "Yes" : "No"}</p>
                                     <button onClick={() => barberSelectHandler(barber.name, barber.barberId)}>Select</button>
                                 </div>

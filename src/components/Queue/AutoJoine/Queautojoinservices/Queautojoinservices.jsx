@@ -90,6 +90,7 @@ import { useNavigate } from "react-router-dom"
 import AdminLayout from '../../../layout/Admin/AdminLayout'
 import { getAllSalonServicesAction } from '../../../../redux/actions/salonAction'
 import { autojoinAction } from '../../../../redux/actions/joinQueueAction'
+import { getbarberServicesbyBarberIdAction } from '../../../../redux/actions/barberAction'
 
 const Queautojoinservices = () => {
 

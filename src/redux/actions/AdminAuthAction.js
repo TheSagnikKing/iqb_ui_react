@@ -209,18 +209,22 @@ export const updateAdminAction = (profiledata) => async (dispatch) => {
         dispatch({
             type:UPDATE_ADMIN_REQ
         })
-        const { data } = await api.put(`https://iqb-backend2.onrender.com/api/admin/updateAdmin`,profiledata);
+        const { data } = await api.put(`/api/admin/updateAdminAcoountDetails`,profiledata);
 
         dispatch({
             type: UPDATE_ADMIN_SUCCESS,
             payload: data
         });
+
+        alert("Profile updated successfully")
     } catch (error) {
     
         dispatch({
             type: UPDATE_ADMIN_FAIL,
             payload:error?.response?.data
         }); 
+
+        alert(error.response.data.message)
     }
 };
 

@@ -247,7 +247,7 @@ const GroupJoinCustomer = () => {
                   <p>{barber.email}</p>
                   <p>{barber.name}</p>
                   <p>{barber.userName}</p>
-                  <p>{barber.mobileNumber}</p>
+                  <p>{barber.barberEWT}</p>
                   <p>{barber.isActive === true ? "Yes" : "No"}</p>
                   <button onClick={() => barberServiceCallHandler(barber.barberId, barber.name)}>Select</button>
                 </div>

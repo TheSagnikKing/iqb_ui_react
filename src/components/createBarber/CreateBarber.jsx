@@ -25,6 +25,8 @@ const CreateBarber = () => {
     const [salonId, setSalonId] = useState(null)
     const [barberServices, setBarberServices] = useState([])
 
+    console.log(barberServices)
+
     const LoggedInMiddleware = useSelector(state => state.LoggedInMiddleware)
   
     useEffect(() => {
@@ -89,7 +91,6 @@ const CreateBarber = () => {
 
         console.log(barberdata)
         dispatch(createBarberAction(barberdata))
-        alert("Barber created successfully")
     }
 
 

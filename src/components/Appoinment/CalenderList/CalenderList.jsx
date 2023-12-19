@@ -178,7 +178,7 @@ const List = () => {
             </div>
             <div className='list-cont'>
                 {
-                    appointmentsdata.map((app, index) => (
+                    appointmentsdata && appointmentsdata.length>0 && appointmentsdata.map((app, index) => (
                         <div className='list-content-box'>
                             <div>
                                 <div>

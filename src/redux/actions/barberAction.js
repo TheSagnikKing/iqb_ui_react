@@ -30,6 +30,8 @@ export const createBarberAction = (barberdata) => async(dispatch) => {
             type:CREATE_BARBER_SUCCESS,
             payload:data
         })
+
+        alert("Barber created successfully")
     } catch (error) {
         dispatch({
             type:CREATE_BARBER_FAIL,
@@ -48,6 +50,7 @@ export const updateBarberAction = (barberdata) => async(dispatch) => {
             type:UPDATE_BARBER_SUCCESS,
             payload:data
         })
+        alert("update barber successfully")
     } catch (error) {
         dispatch({
             type:UPDATE_BARBER_FAIL,

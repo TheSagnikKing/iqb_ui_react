@@ -118,25 +118,40 @@ const BarberDashboardComp = () => {
     const [check, setCheck] = useState(false)
 
 
-  const barberOnlinedataTrue = {
-    barberId:LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].barberId,
-    salonId: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId,
-    isOnline: true
-  }
-
-  const barberOnlinedataFalse = {
-    barberId:LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].barberId,
-    salonId: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId,
-    isOnline: false
-  }
-
-  useEffect(() => {
-    if(check){
-      dispatch(barberOnlineStatusAction(barberOnlinedataTrue))
-    }else{
-      dispatch(barberOnlineStatusAction(barberOnlinedataFalse))
+    const barberOnlinedataTrue = {
+        barberId: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].barberId,
+        salonId: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId,
+        isOnline: true
     }
-  },[check])
+
+    const barberOnlinedataFalse = {
+        barberId: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].barberId,
+        salonId: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId,
+        isOnline: false
+    }
+
+    // useEffect(() => {
+    //     if (check) {
+    //         dispatch(barberOnlineStatusAction(barberOnlinedataTrue))
+    //     } else {
+    //         dispatch(barberOnlineStatusAction(barberOnlinedataFalse))
+    //     }
+    // }, [check])
+
+    const setOnlineHandler = () => {
+        const newCheckValue = !check;
+        setCheck(newCheckValue);
+        // localStorage.setItem('barberOnline',newCheckValue)
+    
+        const barberOnlineData = {
+            barberId: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].barberId,
+            salonId: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId,
+            isOnline: newCheckValue,
+        };
+    
+        dispatch(barberOnlineStatusAction(barberOnlineData));
+    };
+    
 
     return (
         <>
@@ -203,15 +218,18 @@ const BarberDashboardComp = () => {
 
                         <div className="div_left">
                             <div className="div_left_head">
-                                <div style={{display:"flex",alignItems:"center",alignItems:"center",gap:"2rem"}}>
+                                <div style={{ display: "flex", alignItems: "center", alignItems: "center", gap: "2rem" }}>
                                     <p>Advertisement</p>
                                     {/* TOGGLE SWITCH */}
-                                    <label className="nav1toggle_switch">
+                                    <label className="nav1toggle_switch" >
                                         <input type="checkbox"
                                             value={check}
-                                            onClick={(e) => setCheck(!check)}
+                                            onClick={() => setOnlineHandler()}
                                         />
-                                        <span className="nav2slider"></span>
+                                        <span className="nav2slider"
+                                    //     style={{ backgroundColor: localStorage.getItem('barberOnline') == "true" ? 'green' : 'gray',
+                                    // }}
+                                        ></span>
                                     </label>
                                 </div>
 

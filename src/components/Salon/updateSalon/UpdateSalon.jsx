@@ -105,7 +105,7 @@ const UpdateSalon = () => {
         setServiceDesc("")
         setServicePrice("")
         setSalonEmail("")
-        alert("Salon created Successfully")
+        
     }
 
 

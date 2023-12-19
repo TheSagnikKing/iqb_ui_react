@@ -19,11 +19,10 @@ const BarberAccountDetail = () => {
 
     const submitHandler = () => {
         //email authentication  theke asbe
-        const profiledata = {email:LoggedInMiddleware?.user[0]?.email,mobileNumber,name,gender,dateOfBirth:dob,salonId:LoggedInMiddleware?.user[0]?.salonId,userName:username};
+        const profiledata = {email:LoggedInMiddleware?.user && LoggedInMiddleware?.user[0]?.email,mobileNumber,name,gender,dateOfBirth:dob,salonId:LoggedInMiddleware?.user && LoggedInMiddleware?.user[0]?.salonId,userName:username};
 
         // const profiledata = {email:"sagniknandy27@gmail.com",mobileNumber,name,gender,dateOfBirth:dob,salonId:LoggedInMiddleware?.user[0]?.salonId,userName:username};
         dispatch(updateBarberAccountDetailsAction(navigate,profiledata))
-        console.log("vsdkjjbvwkekbkjbkjb")
     }
 
     const skipHandler = () => {

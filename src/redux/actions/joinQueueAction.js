@@ -2,7 +2,7 @@ import { AUTOJOIN_FAIL, AUTOJOIN_REQ, AUTOJOIN_SUCCESS, GROUP_JOIN_FAIL, GROUP_J
 
 import api from "../api/Api"
 
-export const singleJoinQueueAction = (singlejoindata) => async(dispatch) => {
+export const singleJoinQueueAction = (singlejoindata,setSelectedService) => async(dispatch) => {
     try {
         dispatch({type:SINGLE_JOINQUEUE_REQ})
 
@@ -13,11 +13,14 @@ export const singleJoinQueueAction = (singlejoindata) => async(dispatch) => {
             payload:data
         })
         alert("Joined to the queue successfully")
+        setSelectedService([])
     } catch (error) {
         dispatch({
             type:SINGLE_JOINQUEUE_FAIL,
             payload: error.response.data
         })
+
+        alert( error.response.data.message)
     }
 }
 
@@ -57,6 +60,8 @@ export const autojoinAction = (joindata) => async(dispatch) => {
             type:AUTOJOIN_FAIL,
             payload: error.response.data
         })
+
+        alert(error.response.data.message)
     }
 }
 
@@ -81,5 +86,7 @@ export const groupjoinAction = (groupjoindata,setSelectedCustomer) => async(disp
             type:GROUP_JOIN_FAIL,
             payload: error.response.data
         })
+
+        alert(error.response.data.message)
     }
 }

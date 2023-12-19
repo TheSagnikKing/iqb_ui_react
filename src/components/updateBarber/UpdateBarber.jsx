@@ -89,7 +89,6 @@ const UpdateBarber = () => {
         }
         // console.log(barberdata)
         dispatch(updateBarberAction(barberdata))
-        alert("update barber successfully")
     }
 
     const location = useLocation()

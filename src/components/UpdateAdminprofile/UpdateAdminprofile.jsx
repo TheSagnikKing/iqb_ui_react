@@ -18,10 +18,12 @@ const UpdateAdminprofile = () => {
 
     const dispatch = useDispatch()
 
+    const LoggedInMiddleware = useSelector(state => state.LoggedInMiddleware)
+
     const submitHandler = () => {
         const profiledata = {
-            email: "arghyahimanstech@gmail.com",
-            salonId: 3,
+            email: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].email,
+            salonId: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId,
             username,
             mobileNumber,
             name,
@@ -35,8 +37,6 @@ const UpdateAdminprofile = () => {
     const [setprofilepic, Setsetprofilepic] = useState("")
 
     const fileInputRef = useRef(null);
-
-    const LoggedInMiddleware = useSelector(state => state.LoggedInMiddleware)
 
     const handleEditButtonClick = (publicid, id) => {
         fileInputRef.current.click();

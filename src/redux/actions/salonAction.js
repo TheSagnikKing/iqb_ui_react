@@ -13,6 +13,7 @@ export const createSalonAction = (salondata) => async(dispatch) => {
             type:CREATE_SALON_SUCCESS,
             payload:data
         })
+        alert("Salon created Successfully")
     } catch (error) {
         dispatch({
             type:CREATE_SALON_FAIL,
@@ -49,6 +50,8 @@ export const updateSalonAction = (salondata) => async(dispatch) => {
             type:UPDATE_SALON_SUCCESS,
             payload:data
         })
+
+        alert("Salon Updated Successfully")
     } catch (error) {
         dispatch({
             type:UPDATE_SALON_FAIL,

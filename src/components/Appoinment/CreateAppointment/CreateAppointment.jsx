@@ -77,7 +77,7 @@ const CreateAppointment = () => {
             } catch (error) {
                 // Handle the error appropriately, you can log it or show a user-friendly message
                 console.error("Error fetching time slots:", error);
-                alert(error.response.data.message)
+                // alert(error.response.data.message)
             }
         };
     
@@ -97,7 +97,7 @@ const CreateAppointment = () => {
 
     const CreateAppointment = () => {
         const createAppointmentData = {
-            salonId,
+            salonId:LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId,
             barberId: selectedbarberId,
             serviceId: selectedService.map((s) => s.serviceId),
             appointmentDate: date,
@@ -126,7 +126,7 @@ const CreateAppointment = () => {
 
                 <div className='create-form'>
                     <div>
-                        <label htmlFor="">Appointment Name</label>
+                        <label htmlFor="">Service Name</label>
                         <input
                             type="text"
                             placeholder='Enter Name'

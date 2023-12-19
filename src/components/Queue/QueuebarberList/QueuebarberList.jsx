@@ -38,8 +38,7 @@ const QueuebarberList = () => {
   }
 
   const getBarberServicesBybarberId = useSelector(state => state.getBarberServicesBybarberId)
-
-
+  
   const [selectedService, setSelectedService] = useState([])
 
   const selectedServiceHandler = (ser) => {
@@ -75,7 +74,8 @@ const QueuebarberList = () => {
     const confirm = window.confirm("Are you sure ? ")
 
     if(confirm){
-      dispatch(singleJoinQueueAction(queuedata))
+      dispatch(singleJoinQueueAction(queuedata,setSelectedService))
+      setName("")
     }
 
   }
@@ -85,33 +85,6 @@ const QueuebarberList = () => {
 
       <AdminLayout />
       <div className="singlejoin-barber-quebarber-wrapper">
-        {/* <div>
-              <input
-                type="text"
-                placeholder='Search'
-              />
-              <button>src</button>
-            </div>
-
-            <div className='header-bbr'>
-              <p>Email</p>
-              <p>Name</p>
-              <p>User Name</p>
-              <p>Mobile Number</p>
-              <p>isActive</p>
-            </div>
-
-            {
-              barberList?.getAllBarbers?.map((barber) => (
-                <div className='content-bbr' key={barber._id} onClick={() => routechangeHandler(barber.barberId,barber.name)}>
-                  <p>{barber.email}</p>
-                  <p>{barber.name}</p>
-                  <p>{barber.userName}</p>
-                  <p>{barber.mobileNumber}</p>
-                  <p>{barber.isActive === true ? "Yes" : "No"}</p>
-                </div>
-              ))
-            } */}
 
         <h2>Single Join</h2>
 
@@ -138,7 +111,7 @@ const QueuebarberList = () => {
                     <p>{barber.email}</p>
                     <p>{barber.name}</p>
                     <p>{barber.userName}</p>
-                    <p>{barber.mobileNumber}</p>
+                    <p>{barber.barberEWT}</p>
                     <p>{barber.isActive === true ? "Yes" : "No"}</p>
                     <button onClick={() => barberServiceCallHandler(barber.barberId, barber.name)}>Select</button>
                   </div>
