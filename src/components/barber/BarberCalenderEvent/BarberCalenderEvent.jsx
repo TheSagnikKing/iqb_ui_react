@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import "./CalenderEvent.css";
 import { useLocation, useNavigate } from 'react-router-dom';
-import AdminLayout from '../../layout/Admin/AdminLayout';
 
 // const appoinments = [
 //     {
@@ -144,8 +142,9 @@ import AdminLayout from '../../layout/Admin/AdminLayout';
 
 import api from "../../../redux/api/Api"
 import { useSelector } from 'react-redux';
+import Layout from '../../../components/layout/Layout';
 
-const CalenderEvent = () => {
+const BarberCalenderEvent = () => {
 
     const location = useLocation()
     console.log(location.state)
@@ -153,7 +152,7 @@ const CalenderEvent = () => {
     const navigate = useNavigate()
 
     const listHandler = (date) => {
-        navigate('/appoinment/calender/list',{state:date})
+        navigate('/barber/appoinment/calender/list',{state:date})
     }
 
     const LoggedInMiddleware = useSelector(state => state.LoggedInMiddleware)
@@ -162,8 +161,9 @@ const CalenderEvent = () => {
 
     useEffect(() => {
         const apfunc = async() => {
-            const {data} = await api.post("/api/appointments/getAllAppointmentsBySalonIdAndDate",{
+            const {data} = await api.post("/api/appointments/getAllAppointmentsByBarberIdAndDate",{
                 salonId: LoggedInMiddleware?.user && LoggedInMiddleware.user[0].salonId,
+                barberId: LoggedInMiddleware?.user && LoggedInMiddleware.user[0].barberId,
                 appointmentDate: location.state
             })
             setAppointmentsdata(data?.response)
@@ -176,7 +176,7 @@ const CalenderEvent = () => {
 
     return (
         <>
-        <AdminLayout/>
+        <Layout/>
         <div className='calender-event'>
             <div className='cal-header'>
                 <h2>Today : {location.state ? location.state : "Please Select Date"}</h2>
@@ -239,5 +239,5 @@ const CalenderEvent = () => {
     );
 }
 
-export default CalenderEvent;
+export default BarberCalenderEvent;
 

@@ -1,22 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import "./Month.css"
+
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 
 import { Link, useNavigate } from 'react-router-dom';
-import AdminLayout from '../../layout/Admin/AdminLayout';
+
 
 import api from "../../../redux/api/Api"
 import { useSelector } from 'react-redux';
+import Layout from '../../../components/layout/Layout';
 
-function Month() {
+// import Layout from '../../components/barber/layout/Layout'
+
+function BarberAppointment() {
 
     const navigate = useNavigate()
 
     const handleDateSelect = (selectInfo) => {
 
-        navigate("/appoinment/calender", { state: selectInfo.dateStr })
+        navigate("/barber/appoinment/calender", { state: selectInfo.dateStr })
         // console.log(selectInfo.dateStr); // Log the selected date's start date
     };
 
@@ -26,8 +29,10 @@ function Month() {
 
     useEffect(() => {
         const apfunc = async() => {
-            const {data} = await api.post("/api/appointments/getAllAppointmentsBySalonId",{
-                salonId: LoggedInMiddleware?.user && LoggedInMiddleware.user[0].salonId
+            const {data} = await api.post("/api/appointments/getAllAppointmentsByBarberId",{
+                // salonId: LoggedInMiddleware?.user && LoggedInMiddleware.user[0].salonId
+                salonId: LoggedInMiddleware?.user && LoggedInMiddleware.user[0].salonId,
+                barberId: LoggedInMiddleware?.user && LoggedInMiddleware.user[0].barberId
             })
             setAppointmentData(data?.response)
         }
@@ -48,10 +53,8 @@ function Month() {
 
     return (
         <>
-            <AdminLayout />
+            <Layout/>
             <div className='calender-month'>
-
-                <Link to="/appoinment/createappointment">Create</Link>
 
                 <div className='demo-app-main'>
                     <FullCalendar
@@ -71,5 +74,5 @@ function Month() {
     );
 }
 
-export default Month;
+export default BarberAppointment;
 

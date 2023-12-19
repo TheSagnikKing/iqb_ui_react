@@ -115,9 +115,14 @@ const GroupJoinCustomer = () => {
 
   const dispatch = useDispatch()
 
+  const LoggedInMiddleware = useSelector(state => state.LoggedInMiddleware)
+  const salonId = LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId
+
   useEffect(() => {
-    dispatch(barberListAction())
-  }, [dispatch])
+    if (salonId) {
+      dispatch(barberListAction(salonId))
+    }
+  }, [dispatch, salonId])
 
   const barberList = useSelector(state => state.barberList)
 
@@ -155,8 +160,6 @@ const GroupJoinCustomer = () => {
     setSelectedService(deleteService)
   }
 
-  const LoggedInMiddleware = useSelector(state => state.LoggedInMiddleware)
-
   const [selectedCustomer, setSelectedCustomer] = useState([])
 
   const addCustomerHandler = () => {
@@ -191,15 +194,15 @@ const GroupJoinCustomer = () => {
   const joinqueueHandler = () => {
     const queuedata = {
       salonId: LoggedInMiddleware?.user && LoggedInMiddleware.user[0].salonId,
-      groupInfo:selectedCustomer
+      groupInfo: selectedCustomer
     }
 
     console.log(queuedata)
 
     const confirm = window.confirm("Are you sure ?")
 
-    if(confirm){
-      dispatch(groupjoinAction(queuedata,setSelectedCustomer))
+    if (confirm) {
+      dispatch(groupjoinAction(queuedata, setSelectedCustomer))
     }
 
     // console.log(queuedata)

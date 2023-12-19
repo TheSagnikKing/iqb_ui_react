@@ -15,7 +15,7 @@ export const menudata = [
     id: 1,
     menu_logo: <RiDashboardFill />,
     menu_title: "Dashboard",
-    menu_link: "/dashboard",
+    menu_link: "/barber-dashboard",
     category: [
       {
         id: 1,
@@ -75,10 +75,26 @@ export const menudata = [
     id: 5,
     menu_logo: <MdQueue />,
     menu_title: "Queue",
-    menu_link: "/queue",
+    menu_link: "/barber/queuelist",
     category: [
       {
         id: 5,
+        list_logo: <BsCheckCircle />,
+        list: "List",
+        message_logo: <TbMessageCircle />,
+        message_title: "Send mail / Notification"
+      }
+    ]
+  },
+
+  {
+    id: 6,
+    menu_logo: <MdQueue />,
+    menu_title: "Appoinment",
+    menu_link: "/barber/appoinment",
+    category: [
+      {
+        id: 8,
         list_logo: <BsCheckCircle />,
         list: "List",
         message_logo: <TbMessageCircle />,

@@ -11,9 +11,15 @@ const QueuebarberList = () => {
 
   const dispatch = useDispatch()
 
+  const LoggedInMiddleware = useSelector(state => state.LoggedInMiddleware)
+
+  const salonId = LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId
+
   useEffect(() => {
-    dispatch(barberListAction())
-  }, [dispatch])
+    if(salonId){
+      dispatch(barberListAction(salonId))
+  }
+  }, [dispatch,salonId])
 
   const barberList = useSelector(state => state.barberList)
 
@@ -52,8 +58,6 @@ const QueuebarberList = () => {
   }
 
   console.log(selectedService)
-
-  const LoggedInMiddleware = useSelector(state => state.LoggedInMiddleware)
 
   const joinqueueHandler = () => {
     const queuedata = {

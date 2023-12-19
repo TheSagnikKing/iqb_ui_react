@@ -41,15 +41,6 @@
     margin-top: 20px;
 }
 
-.create-form>div:nth-child(3)>div{
-    background-color: #f1f6fc;
-    width: 85%;
-    height: 180px;
-    padding: 10px;
-    border-radius: 6px;
-    overflow-y: scroll;
-}
-
 .create-form>div:nth-child(4)>div{
     background-color: #f1f6fc;
     width: 85%;
@@ -75,4 +66,30 @@
     padding: 10px;
     border-radius: 6px;
     overflow-y: scroll;
+}
+
+.create-form>div:nth-child(7)>div{
+    background-color: #f1f6fc;
+    width: 85%;
+    height: 180px;
+    padding: 10px;
+    border-radius: 6px;
+    overflow-y: scroll;
+}
+
+.timeslot{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 4px;
+    border-radius: 4px;
+    box-shadow: 0px 0px 4px rgba(0,0,0,0.4);
+}
+
+.timeslot>button{
+    padding: 3px 10px;
+    cursor: pointer;
 }

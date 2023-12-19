@@ -14,7 +14,7 @@ export const barbermenudata = [
     id: 1,
     menu_logo: <RiDashboardFill />,
     menu_title: "Dashboard",
-    menu_link: "/dashboard",
+    menu_link: "/barber-dashboard",
     category: [
       {
         id: 1,

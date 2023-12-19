@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Header.css'
 import Menu from './Menu2.jsx'
 import { menudata } from '../../data'
@@ -13,7 +13,8 @@ import { BiLogOutCircle } from "react-icons/bi"
 import { RiAccountCircleFill } from "react-icons/ri"
 import { useNavigate } from 'react-router-dom'
 import { BarberLogoutAction } from '../../../redux/actions/BarberAuthAction.js'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { barberOnlineStatusAction } from '../../../redux/actions/barberAction.js'
 
 
 const Header = ({ title }) => {
@@ -25,9 +26,9 @@ const Header = ({ title }) => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  const logoutHandler = async() => {
+  const logoutHandler = async () => {
     dispatch(BarberLogoutAction(navigate))
-}
+  }
 
   return (
     <>
@@ -132,7 +133,7 @@ const Header = ({ title }) => {
                   </div>
 
                   <div>
-                    <div><RiAccountCircleFill/></div>
+                    <div><RiAccountCircleFill /></div>
                     <p>My Account</p>
                   </div>
 

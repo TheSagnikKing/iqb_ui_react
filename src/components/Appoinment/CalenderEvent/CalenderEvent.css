@@ -92,10 +92,11 @@
   .appoin{
     width: 380px;
     height: 100px;
-    margin-inline: 5px;
-    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-bottom: 15px;
     padding:10px;
     border-radius: 5px;
+    box-shadow: 0px 0px 7px rgba(0,0,0,0.3) !important;
   }
 
   .appoin>p:nth-child(1){

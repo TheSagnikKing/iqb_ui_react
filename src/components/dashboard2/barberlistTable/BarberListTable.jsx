@@ -41,7 +41,7 @@ const BarberListTable = () => {
             //Salon Id dynamic thakbe
         
             setLoading(true)
-            const { data } = await api.post(`/api/barber/getAllBarberBySalonId?salonId=${salonId}`)
+            const { data } = await api.post(`/api/barber/getAllBarberBySalonId?salonId=${Number(salonId)}`)
             setBarbersList(data)
             setCurrentPage(data.currentPage)
             setTotalPages(data.totalPages)
@@ -53,7 +53,7 @@ const BarberListTable = () => {
         return () => {
             abortController.abort();
         };
-    }, [])
+    }, [salonId])
 
     const searchHandler = async () => {
         if (search === "") {

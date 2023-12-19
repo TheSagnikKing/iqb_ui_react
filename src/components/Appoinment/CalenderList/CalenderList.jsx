@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "./CalenderList.css"
 import { useLocation } from 'react-router-dom'
 import AdminLayout from '../../layout/Admin/AdminLayout'
+import { useSelector } from 'react-redux'
 
 const appoinments = [
     {
@@ -142,10 +143,31 @@ const appoinments = [
     }
 ]
 
+import api from "../../../redux/api/Api"
+
 const List = () => {
 
     const location = useLocation()
     console.log(location.state)
+
+
+    const LoggedInMiddleware = useSelector(state => state.LoggedInMiddleware)
+
+    const [appointmentsdata, setAppointmentsdata] = useState([])
+
+    useEffect(() => {
+        const apfunc = async() => {
+            const {data} = await api.post("/api/appointments/getAllAppointmentsBySalonIdAndDate",{
+                salonId: LoggedInMiddleware?.user && LoggedInMiddleware.user[0].salonId,
+                appointmentDate: location.state
+            })
+            setAppointmentsdata(data?.response)
+        }
+
+        apfunc();
+    },[LoggedInMiddleware?.user,location.state])
+
+    console.log(appointmentsdata)
 
     return (
         <>
@@ -156,7 +178,7 @@ const List = () => {
             </div>
             <div className='list-cont'>
                 {
-                    appoinments.map((app, index) => (
+                    appointmentsdata.map((app, index) => (
                         <div className='list-content-box'>
                             <div>
                                 <div>
@@ -166,11 +188,11 @@ const List = () => {
                             </div>
                             <div>
                                 {
-                                    app.event ? app.event.map((evt, ind) => (
+                                    app.appointments ? app.appointments.map((evt, ind) => (
                                         <div>
                                             <div style={{
-                                                background: evt.background,
-                                            }}></div><p>Event {evt.event}</p>
+                                                // background: evt.background,
+                                            }}></div><p>Appointment {evt.appointmentName} {` (${evt.startTime}-${evt.endTime})`}</p>
                                         </div>
                                     )) : <p className='noappoin2'>No Appoinments</p>
                                 }

@@ -53,6 +53,10 @@ import BarberResetNewPassword from './components/admin_authentication/BarberRese
 import BarberAuth from './components/admin_authentication/BarberAuth';
 import BarberAccountDetail from './components/admin_authentication/BarberAccountDetail';
 import CreateAppointment from './components/Appoinment/CreateAppointment/CreateAppointment';
+import BarberAppointment from './components/barber/BarberAppointment/BarberAppointment';
+import BarberCalenderEvent from './components/barber/BarberCalenderEvent/BarberCalenderEvent';
+import BarberCalenderList from './components/barber/BarberCalenderList/BarberCalenderList';
+import BarberQueLists from './components/barber/BarberQueLists/BarberQueLists';
 
 const App = () => {
 
@@ -151,13 +155,13 @@ const App = () => {
 
 
           {/* //BarberDashboard */}
-          <Route path="/barberdashboard" element={
+          {/* <Route path="/barberdashboard" element={
 
             <Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}>
               <Auth><BarberDashboardPage /></Auth>
             </Suspense>
 
-          } />
+          } /> */}
 
 
           {/* Admin Signin */}
@@ -268,6 +272,11 @@ const App = () => {
 
           } />
 
+          <Route path='/barber/appoinment' element={<BarberAuth><BarberAppointment/></BarberAuth>}/> 
+          <Route path="/barber/appoinment/calender" element={<BarberAuth><BarberCalenderEvent /></BarberAuth>} />
+          <Route path="/barber/appoinment/calender/list" element={<BarberAuth><BarberCalenderList /></BarberAuth>} />
+
+          <Route path="/barber/queuelist" element={<BarberAuth><BarberQueLists/></BarberAuth>}/> 
 
           <Route path="/appoinment" element={<Auth><Month /></Auth>} />
           <Route path="/appoinment/createappointment" element={<Auth><CreateAppointment/></Auth>}/>
