@@ -340,36 +340,3 @@
     font-size: 16px;
     cursor: pointer;
 }
-
-
-.nav2slider {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    border-radius: 34px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-.nav2slider:before {
-    position: absolute;
-    content: "";
-    height: 12px;
-    width: 12px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
-    border-radius: 50%;
-    transition: transform 0.3s;
-  }
-  
-  input:checked + .nav2slider {
-    background-color:#4CBB17;
-  }
-  
-  input:checked + .nav2slider:before {
-    transform: translateX(15px);
-  }

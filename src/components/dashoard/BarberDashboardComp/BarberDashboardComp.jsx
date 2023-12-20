@@ -130,19 +130,14 @@ const BarberDashboardComp = () => {
         isOnline: false
     }
 
-    // useEffect(() => {
-    //     if (check) {
-    //         dispatch(barberOnlineStatusAction(barberOnlinedataTrue))
-    //     } else {
-    //         dispatch(barberOnlineStatusAction(barberOnlinedataFalse))
-    //     }
-    // }, [check])
+    useEffect(() => {
+        setCheck(LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].isOnline)
+    }, [LoggedInMiddleware?.user])
 
     const setOnlineHandler = () => {
         const newCheckValue = !check;
         setCheck(newCheckValue);
-        // localStorage.setItem('barberOnline',newCheckValue)
-    
+
         const barberOnlineData = {
             barberId: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].barberId,
             salonId: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId,
@@ -218,17 +213,20 @@ const BarberDashboardComp = () => {
 
                         <div className="div_left">
                             <div className="div_left_head">
-                                <div style={{ display: "flex", alignItems: "center", alignItems: "center", gap: "2rem" }}>
+                                <div style={{ display: "flex", alignItems: "center", gap: "2rem" }}>
                                     <p>Advertisement</p>
                                     {/* TOGGLE SWITCH */}
-                                    <label className="nav1toggle_switch" >
+                                    <label className="nav2toggle_switch" >
                                         <input type="checkbox"
                                             value={check}
                                             onClick={() => setOnlineHandler()}
+                                            
                                         />
-                                        <span className="nav2slider"
-                                    //     style={{ backgroundColor: localStorage.getItem('barberOnline') == "true" ? 'green' : 'gray',
-                                    // }}
+                                        {/* <span className="nav2slider"></span> */}
+                                        <span className={`nav2slider ${check ? 'checked' : ''}`}
+                                        style={{
+                                            background:check ? "#4CBB17" : ""
+                                        }}
                                         ></span>
                                     </label>
                                 </div>

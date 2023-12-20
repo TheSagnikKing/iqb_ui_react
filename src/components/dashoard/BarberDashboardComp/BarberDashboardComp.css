@@ -50,3 +50,54 @@
     align-items: center;
     gap: 2rem;
 }
+
+
+
+/* TOGGLE_SWITCH_CSS_STYLING */
+
+.nav2toggle_switch {
+    position: relative;
+    display: inline-block;
+    width: 35px;
+    height: 20px;
+  }
+  
+.nav2toggle_switch input {
+    display: none;
+}
+  
+.nav2slider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    border-radius: 34px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+.nav2slider:before {
+    position: absolute;
+    content: "";
+    height: 12px;
+    width: 12px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    border-radius: 50%;
+    transition: transform 0.3s;
+  }
+
+
+  .nav2slider::before {
+    content: ''; 
+    display: inline-block;  
+    transform: translateX(0);
+  }
+  
+  .nav2slider.checked::before {
+    transform: translateX(15px);
+  }
+  
