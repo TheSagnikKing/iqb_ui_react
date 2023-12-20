@@ -1,4 +1,4 @@
-import { CONNECT_BARBER_SALON_FAIL, CONNECT_BARBER_SALON_REQ, CONNECT_BARBER_SALON_SUCCESS, CREATE_SALON_FAIL, CREATE_SALON_REQ, CREATE_SALON_SUCCESS, DELETE_SALON_FAIL, DELETE_SALON_REQ, DELETE_SALON_SUCCESS, GET_ALL_SALON_SERVICES_FAIL, GET_ALL_SALON_SERVICES_REQ, GET_ALL_SALON_SERVICES_SUCCESS, GET_SALONLIST_FAIL, GET_SALONLIST_REQ, GET_SALONLIST_SUCCESS, UPDATE_SALON_FAIL, UPDATE_SALON_REQ, UPDATE_SALON_SUCCESS } from "../constants/salonConstants"
+import { CONNECT_BARBER_SALON_FAIL, CONNECT_BARBER_SALON_REQ, CONNECT_BARBER_SALON_SUCCESS, CREATE_SALON_FAIL, CREATE_SALON_REQ, CREATE_SALON_SUCCESS, DELETE_SALON_FAIL, DELETE_SALON_REQ, DELETE_SALON_SUCCESS, GET_ALL_SALON_SERVICES_FAIL, GET_ALL_SALON_SERVICES_REQ, GET_ALL_SALON_SERVICES_SUCCESS, GET_SALONLIST_FAIL, GET_SALONLIST_REQ, GET_SALONLIST_SUCCESS, SALON_SETTINGS_FAIL, SALON_SETTINGS_REQ, SALON_SETTINGS_SUCCESS, UPDATE_SALON_FAIL, UPDATE_SALON_REQ, UPDATE_SALON_SUCCESS } from "../constants/salonConstants"
 
 import api from "../api/Api"
 
@@ -112,6 +112,27 @@ export const connectSalonBarberAction = (barberData) => async(dispatch) => {
     } catch (error) {
         dispatch({
             type:CONNECT_BARBER_SALON_FAIL,
+            payload: error.response.data
+        })
+    }
+}
+
+
+export const salonSettingsAction = (salonsettingsData) => async(dispatch) => {
+    try {
+        dispatch({type:SALON_SETTINGS_REQ})
+
+        const {data} = await api.post(`/api/salonSettings/createSalonSettings`, salonsettingsData)
+
+        window.alert("Salon Settings is successfully Added")
+
+        dispatch({
+            type:SALON_SETTINGS_SUCCESS,
+            payload:data
+        })
+    } catch (error) {
+        dispatch({
+            type:SALON_SETTINGS_FAIL,
             payload: error.response.data
         })
     }

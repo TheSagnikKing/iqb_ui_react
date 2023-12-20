@@ -57,6 +57,7 @@ import BarberAppointment from './components/barber/BarberAppointment/BarberAppoi
 import BarberCalenderEvent from './components/barber/BarberCalenderEvent/BarberCalenderEvent';
 import BarberCalenderList from './components/barber/BarberCalenderList/BarberCalenderList';
 import BarberQueLists from './components/barber/BarberQueLists/BarberQueLists';
+import SalonSettings from './components/Salon/SalonSettings/SalonSettings';
 
 const App = () => {
 
@@ -203,6 +204,8 @@ const App = () => {
             </Suspense>
 
           } />
+
+          <Route path="/salon/salonsettings" element={<Auth><SalonSettings/></Auth>}/>
 
           <Route path="/salon/updateSalon" element={
 

@@ -125,7 +125,11 @@ const SalonList = () => {
                                 <button className='del-bbr' onClick={() => deleteSalonHandler(salon.salonId)}><MdDelete /></button>
 
                                 <Link to="#">
-                                    <RiSettings3Fill />
+                                    <Link to="/salon/salonsettings"
+                                    style={{
+                                        display:"flex",justifyContent:"center",alignItems:"center"
+                                    }}
+                                    > <RiSettings3Fill /></Link>
                                 </Link>
 
                             </div>
