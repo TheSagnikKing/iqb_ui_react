@@ -117,19 +117,6 @@ const BarberDashboardComp = () => {
 
     const [check, setCheck] = useState(false)
 
-
-    const barberOnlinedataTrue = {
-        barberId: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].barberId,
-        salonId: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId,
-        isOnline: true
-    }
-
-    const barberOnlinedataFalse = {
-        barberId: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].barberId,
-        salonId: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId,
-        isOnline: false
-    }
-
     useEffect(() => {
         setCheck(LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].isOnline)
     }, [LoggedInMiddleware?.user])
