@@ -241,6 +241,16 @@ const GroupJoinCustomer = () => {
           </div>
 
           <div className='barber-single-join-dropdown-list'>
+
+            <div className='barber-single-join-content-bbr'>
+              <p>Email</p>
+              <p>Name</p>
+              <p>User Name</p>
+              <p>Barber EWT</p>
+              <p>Active</p>
+              <p>Action</p>
+            </div>
+
             {
               barberList ? barberList?.getAllBarbers?.map((barber) => (
                 <div className='barber-single-join-content-bbr' key={barber._id}>
@@ -283,6 +293,14 @@ const GroupJoinCustomer = () => {
 
           <p>Your Selected Services</p>
           <div className='barber-single-join-services'>
+
+            <div className='barber-single-join-quebarberserv-content'>
+              <p>Service ID</p>
+              <p>Service Name</p>
+              <p>Service Code</p>
+              <p>BarberService EWT</p>
+              <p>Action</p>
+            </div>
             {
               selectedService && selectedService.length > 0 ? selectedService.map((b, index) => (
                 <div className='barber-single-join-quebarberserv-content' key={b._id}>

@@ -36,8 +36,6 @@ const BarberDashboardComp = () => {
 
     const salonid = LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId;
 
-
-
     //List of Salons when barber is not connected
 
     const [connectedSalonData, setConnectedSalonData] = useState([])

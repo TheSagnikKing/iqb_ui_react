@@ -16,15 +16,15 @@ const QueuebarberList = () => {
   const salonId = LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId
 
   useEffect(() => {
-    if(salonId){
+    if (salonId) {
       dispatch(barberListAction(salonId))
-  }
-  }, [dispatch,salonId])
+    }
+  }, [dispatch, salonId])
 
   const barberList = useSelector(state => state.barberList)
 
-  const [selectedbarberId,setSelectedBarberid] = useState(null)
-  const [selectedbarberName,setSelectedBarberName] = useState("")
+  const [selectedbarberId, setSelectedBarberid] = useState(null)
+  const [selectedbarberName, setSelectedBarberName] = useState("")
   const [name, setName] = useState("")
 
   const barberServiceCallHandler = (barberId, name) => {
@@ -38,7 +38,7 @@ const QueuebarberList = () => {
   }
 
   const getBarberServicesBybarberId = useSelector(state => state.getBarberServicesBybarberId)
-  
+
   const [selectedService, setSelectedService] = useState([])
 
   const selectedServiceHandler = (ser) => {
@@ -73,8 +73,8 @@ const QueuebarberList = () => {
 
     const confirm = window.confirm("Are you sure ? ")
 
-    if(confirm){
-      dispatch(singleJoinQueueAction(queuedata,setSelectedService))
+    if (confirm) {
+      dispatch(singleJoinQueueAction(queuedata, setSelectedService))
       setName("")
     }
 
@@ -104,23 +104,31 @@ const QueuebarberList = () => {
             {/* <button onClick={() => setBarberDrop(!barberDrop)}>drop</button> */}
           </div>
 
-            <div className='barber-single-join-dropdown-list'>
-              {
-                barberList ? barberList?.getAllBarbers?.map((barber) => (
-                  <div className='barber-single-join-content-bbr' key={barber._id}>
-                    <p>{barber.email}</p>
-                    <p>{barber.name}</p>
-                    <p>{barber.userName}</p>
-                    <p>{barber.barberEWT}</p>
-                    <p>{barber.isActive === true ? "Yes" : "No"}</p>
-                    <button onClick={() => barberServiceCallHandler(barber.barberId, barber.name)}>Select</button>
-                  </div>
-
-
-                )) : <p>No Barber Present</p>
-              }
+          <div className='barber-single-join-dropdown-list'>
+            <div className='barber-single-join-content-bbr'>
+              <p>Email</p>
+              <p>Name</p>
+              <p>UserName</p>
+              <p>Barber EWT</p>
+              <p>Active</p>
+              <p>Action</p>
             </div>
-   
+            {
+              barberList ? barberList?.getAllBarbers?.map((barber) => (
+                <div className='barber-single-join-content-bbr' key={barber._id}>
+                  <p>{barber.email}</p>
+                  <p>{barber.name}</p>
+                  <p>{barber.userName}</p>
+                  <p>{barber.barberEWT}</p>
+                  <p>{barber.isActive === true ? "Yes" : "No"}</p>
+                  <button onClick={() => barberServiceCallHandler(barber.barberId, barber.name)}>Select</button>
+                </div>
+
+
+              )) : <p>No Barber Present</p>
+            }
+          </div>
+
           <p>Choose Barber Services</p>
           <div className='barber-single-join-services'>
             <div className='barber-single-join-quebarberserv-content'>
@@ -147,6 +155,13 @@ const QueuebarberList = () => {
 
           <p>Your Selected Services</p>
           <div className='barber-single-join-services'>
+            <div className='barber-single-join-quebarberserv-content'>
+              <p>Service Id</p>
+              <p>Service Name</p>
+              <p>Service Code</p>
+              <p>BarberService EWT</p>
+              <p>Action</p>
+            </div>
             {
               selectedService && selectedService.length > 0 ? selectedService.map((b, index) => (
                 <div className='barber-single-join-quebarberserv-content' key={b._id}>

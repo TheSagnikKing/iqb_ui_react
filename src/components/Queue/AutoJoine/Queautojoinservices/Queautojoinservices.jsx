@@ -7,40 +7,40 @@
 
 // const Queautojoinservices = () => {
 
-    // const LoggedInMiddleware = useSelector(state => state.LoggedInMiddleware)
+// const LoggedInMiddleware = useSelector(state => state.LoggedInMiddleware)
 
-    // const currentAdminSalonId = LoggedInMiddleware?.user && LoggedInMiddleware.user[0].salonId
+// const currentAdminSalonId = LoggedInMiddleware?.user && LoggedInMiddleware.user[0].salonId
 
 //     const dispatch = useDispatch()
 
-    // useEffect(() => {
-    //     if (currentAdminSalonId) {
-    //         dispatch(getAllSalonServicesAction(currentAdminSalonId))
-    //     }
-    // }, [dispatch, currentAdminSalonId])
+// useEffect(() => {
+//     if (currentAdminSalonId) {
+//         dispatch(getAllSalonServicesAction(currentAdminSalonId))
+//     }
+// }, [dispatch, currentAdminSalonId])
 
-    // const getAllSalonServices = useSelector(state => state.getAllSalonServices)
+// const getAllSalonServices = useSelector(state => state.getAllSalonServices)
 
 
 //     const autojoinHandler = (serviceId,serviceName,serviceEWT) => {
-        // const joindata = {
-        //     userName: "Arghya",
-        //     name: "Arghya Ghosh",
-        //     joinedQType: "Auto-Join",
-        //     methodUsed: "Walk-In",
-        //     salonId: LoggedInMiddleware?.user && LoggedInMiddleware.user[0].salonId,
-        //     services: [
-        //         {
-        //             serviceId: serviceId,
-        //             barberServiceEWT: Number(serviceEWT),
-        //             serviceName: serviceName
-        //         }
-        //     ],
-        //     isOnline: true
-        // }
+// const joindata = {
+//     userName: "Arghya",
+//     name: "Arghya Ghosh",
+//     joinedQType: "Auto-Join",
+//     methodUsed: "Walk-In",
+//     salonId: LoggedInMiddleware?.user && LoggedInMiddleware.user[0].salonId,
+//     services: [
+//         {
+//             serviceId: serviceId,
+//             barberServiceEWT: Number(serviceEWT),
+//             serviceName: serviceName
+//         }
+//     ],
+//     isOnline: true
+// }
 
-        // dispatch(autojoinAction(joindata))
-        // alert("Auto join successful")
+// dispatch(autojoinAction(joindata))
+// alert("Auto join successful")
 
 //     }
 
@@ -103,15 +103,15 @@ const Queautojoinservices = () => {
 
   useEffect(() => {
     if (currentAdminSalonId) {
-        dispatch(getAllSalonServicesAction(currentAdminSalonId))
+      dispatch(getAllSalonServicesAction(currentAdminSalonId))
     }
-}, [dispatch, currentAdminSalonId])
+  }, [dispatch, currentAdminSalonId])
 
-const getAllSalonServices = useSelector(state => state.getAllSalonServices)
+  const getAllSalonServices = useSelector(state => state.getAllSalonServices)
 
 
-  const [selectedbarberId,setSelectedBarberid] = useState(null)
-  const [selectedbarberName,setSelectedBarberName] = useState("")
+  const [selectedbarberId, setSelectedBarberid] = useState(null)
+  const [selectedbarberName, setSelectedBarberName] = useState("")
   const [name, setName] = useState("")
 
   const barberServiceCallHandler = (barberId, name) => {
@@ -133,7 +133,7 @@ const getAllSalonServices = useSelector(state => state.getAllSalonServices)
     const servicepresent = selectedService.find((s) => s._id === ser._id)
 
     if (!servicepresent) {
-      const serviceWithEWT = { ...ser,barberServiceEWT: Number(ser.serviceEWT) };
+      const serviceWithEWT = { ...ser, barberServiceEWT: Number(ser.serviceEWT) };
 
       setSelectedService([...selectedService, serviceWithEWT]);
     }
@@ -148,19 +148,19 @@ const getAllSalonServices = useSelector(state => state.getAllSalonServices)
 
   const joinqueueHandler = () => {
     const joindata = {
-        name,
-        joinedQType: "Auto-Join",
-        methodUsed: "Walk-In",
-        salonId: LoggedInMiddleware?.user && LoggedInMiddleware.user[0].salonId,
-        services:selectedService,
-        isOnline: true
+      name,
+      joinedQType: "Auto-Join",
+      methodUsed: "Walk-In",
+      salonId: LoggedInMiddleware?.user && LoggedInMiddleware.user[0].salonId,
+      services: selectedService,
+      isOnline: true
     }
     console.log(joindata)
 
     const confirm = window.confirm("Are you Sure ? ")
 
-    if(confirm){
-        dispatch(autojoinAction(joindata))
+    if (confirm) {
+      dispatch(autojoinAction(joindata))
     }
   }
 
@@ -209,6 +209,15 @@ const getAllSalonServices = useSelector(state => state.getAllSalonServices)
 
           <p>Your Selected Services</p>
           <div className='barber-single-join-services'>
+
+            <div className='barber-single-join-quebarberserv-content'>
+              <p>Service Id</p>
+              <p>Service Name</p>
+              <p>Service Code</p>
+              <p>Barber Service EWT</p>
+              <p>Action</p>
+            </div>
+
             {
               selectedService && selectedService.length > 0 ? selectedService.map((b, index) => (
                 <div className='barber-single-join-quebarberserv-content' key={b._id}>

@@ -30,6 +30,8 @@ const Header = ({ title }) => {
     dispatch(BarberLogoutAction(navigate))
   }
 
+  const LoggedInMiddleware = useSelector(state => state.LoggedInMiddleware)
+
   return (
     <>
       <section className="nav1">
@@ -116,8 +118,8 @@ const Header = ({ title }) => {
               </div>
 
               <div className="nav1profile_detail">
-                <b>Kunal Jasuja</b>
-                <p>Owner</p>
+                <b>{LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].name}</b>
+                <p>Barber</p>
               </div>
 
               <div style={{ cursor: "pointer" }} className="nav1right_dropdown"
@@ -137,9 +139,9 @@ const Header = ({ title }) => {
                     <p>My Account</p>
                   </div>
 
-                  <div>
+                  <div onClick={logoutHandler}>
                     <div><BiLogOutCircle /></div>
-                    <p onClick={logoutHandler}>Logout</p>
+                    <p>Logout</p>
                   </div>
                 </div>
               }

@@ -13,7 +13,7 @@ import { BiLogOutCircle } from "react-icons/bi"
 import { RiAccountCircleFill } from "react-icons/ri"
 import { Link, useNavigate } from 'react-router-dom'
 import { logout } from '../../../../redux/actions/userAction'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { AdminLogoutAction } from '../../../../redux/actions/AdminAuthAction'
 
 
@@ -30,6 +30,8 @@ const AdminHeader = ({ title }) => {
   const logoutHandler = async() => {
       dispatch(AdminLogoutAction(navigate))
   }
+  
+  const LoggedInMiddleware = useSelector(state => state.LoggedInMiddleware)
 
   return (
     <>
@@ -117,8 +119,8 @@ const AdminHeader = ({ title }) => {
               </div>
 
               <div className="nav1profile_detail">
-                <b>Kunal Jasuja</b>
-                <p>Owner</p>
+                <b>{LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].name}</b>
+                <p>Admin</p>
               </div>
 
               <div style={{ cursor: "pointer" }} className="nav1right_dropdown"
@@ -143,9 +145,9 @@ const AdminHeader = ({ title }) => {
                     <Link to="/admin/updateprofile">Update Profile</Link>
                   </div>
 
-                  <div>
+                  <div onClick={logoutHandler}> 
                     <div><BiLogOutCircle /></div>
-                    <p onClick={logoutHandler}>Logout</p>
+                    <p>Logout</p>
                   </div>
                 </div>
               }

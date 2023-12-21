@@ -108,11 +108,11 @@ const QueueselectServices = () => {
 
     const searchBarber = () => {
         const confirm = window.confirm("Are you sure ?")
-        if(confirm){
+        if (confirm) {
             const serviceIds = selectedService.map(item => item.serviceId);
 
             dispatch(getBarberByMultipleServicesAction(loggedinAdminSalonid, serviceIds))
-        }     
+        }
     }
 
     const getBarberByMultipleServices = useSelector(state => state.getBarberByMultipleServices)
@@ -173,8 +173,15 @@ const QueueselectServices = () => {
                         <p>Choose Services</p>
                         {/* <button onClick={() => setServiceDrop(!serviceDrop)}>drop</button> */}
                     </div>
-                    
+
                     <div className='barber-single-join-dropdown-list'>
+                        <div className='barber-single-join-quebarberserv-content'>
+                            <p>Service Id</p>
+                            <p>Service Name</p>
+                            <p>Service Code</p>
+                            <p>Service EWT</p>
+                            <p>Action</p>
+                        </div>
                         {
                             getAllSalonServices ? getAllSalonServices?.response?.map((b, index) => (
                                 <div className='barber-single-join-quebarberserv-content' key={b._id}>
@@ -190,6 +197,13 @@ const QueueselectServices = () => {
 
                     <p>Your Selected Services</p>
                     <div className='barber-single-join-services'>
+                        <div className='barber-single-join-quebarberserv-content'>
+                            <p>Service Id</p>
+                            <p>Service Name</p>
+                            <p>Service Code</p>
+                            <p>Service EWT</p>
+                            <p>Action</p>
+                        </div>
                         {
                             selectedService && selectedService.length > 0 ? selectedService.map((b, index) => (
                                 <div className='barber-single-join-quebarberserv-content' key={b._id}>
@@ -208,6 +222,15 @@ const QueueselectServices = () => {
 
                     <p>Choose Barber </p>
                     <div className='barber-single-join-services'>
+
+                        <div className='barber-single-join-content-bbr'>
+                            <p>Email</p>
+                            <p>Name</p>
+                            <p>User Name</p>
+                            <p>Barber EWT</p>
+                            <p>Active</p>
+                            <p>Action</p>
+                        </div>
 
                         {
                             getBarberByMultipleServices && getBarberByMultipleServices?.response?.length > 0 ? getBarberByMultipleServices?.response?.map((barber) => (
