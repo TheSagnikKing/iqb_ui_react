@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./SalonSettings.css"
 import AdminLayout from '../../layout/Admin/AdminLayout'
 import { useDispatch, useSelector } from 'react-redux'
-import { salonSettingsAction } from '../../../redux/actions/salonAction'
+import { salonSettingsUpdateAction } from '../../../redux/actions/salonAction'
+
+import api from "../../../redux/api/Api"
 
 const SalonSettings = () => {
     const [startTime,setStartTime] = useState("")
@@ -23,9 +25,25 @@ const SalonSettings = () => {
 
         console.log(settingdata)
 
-        dispatch(salonSettingsAction(settingdata))
+        dispatch(salonSettingsUpdateAction(settingdata))
 
     }
+
+    useEffect(() => {
+        const getsalonfnc = async() => {
+            const {data} = await api.post("/api/salonSettings/getSalonSettings", {
+                    salonId: 4
+                    // Add other data properties as needed
+            })
+
+            console.log(data)
+            setStartTime(data?.response?.appointmentSettings?.appointmentStartTime)
+            setEndTime(data?.response?.appointmentSettings?.appointmentEndTime)
+        }
+        getsalonfnc()
+
+       
+    },[])
 
     return (
         <>

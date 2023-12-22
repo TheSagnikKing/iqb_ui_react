@@ -63,6 +63,9 @@ const CreateSalon = () => {
     const [servicePrice, setServicePrice] = useState("")
     const [serviceEWT, setServiceEWT] = useState(null)
 
+    const [startTime,setStartTime] = useState("")
+    const [endTime, setEndTime] = useState("")
+
     const dispatch = useDispatch()
 
     //post images to both db and cloud
@@ -124,7 +127,7 @@ const CreateSalon = () => {
                     longitude: Number(longitude),
                     latitude: Number(latitude)
                 }
-            }, country, postCode, contactTel, salonType, webLink, services, image
+            }, country, postCode, contactTel, salonType, webLink, services, image, appointmentSettings : {startTime, endTime}
         }
 
         console.log(salonData)
@@ -147,6 +150,8 @@ const CreateSalon = () => {
         setServiceDesc("")
         setServicePrice("")
         setSalonEmail("")
+        setEndTime("")
+        setStartTime("")
     }
 
 
@@ -292,13 +297,35 @@ const CreateSalon = () => {
                                 onChange={(e) => setCountry(e.target.value)}
                             />
                         </div>
-
+                        
                         <div>
                             <label htmlFor="">Postal Code</label>
                             <input
                                 type="text"
                                 value={postCode}
                                 onChange={(e) => setPostCode(e.target.value)}
+                            />
+                        </div>
+
+                        <h4>Appointment Settings</h4>
+
+                        <div>
+                            <label htmlFor="">Start Time</label>
+                            <input
+                                type="text"
+                                value={startTime}
+                                placeholder='00:00'
+                                onChange={(e) => setStartTime(e.target.value)}
+                            />
+                        </div>
+
+                        <div>
+                            <label htmlFor="">End Time</label>
+                            <input
+                                type="text"
+                                value={endTime}
+                                placeholder='00:00'
+                                onChange={(e) => setEndTime(e.target.value)}
                             />
                         </div>
 
@@ -314,6 +341,8 @@ const CreateSalon = () => {
                                 onChange={(e) => setContactTel(e.target.value)}
                             />
                         </div>
+
+                       
 
                         <div>
                             <div>

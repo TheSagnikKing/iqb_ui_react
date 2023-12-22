@@ -651,3 +651,42 @@
 .nosalon>a:hover{
     box-shadow: 0px 0px 4px rgba(0,0,0,0.8);
 }
+
+
+.dashboard-quelist-content-head{
+    height: 45px;
+    background-color: #f1f6fc;
+    border-radius: 5px;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    align-items: center;
+    font-size: 10px;
+    padding-inline: 10px;
+    margin-bottom: 15px;
+}
+
+.dashboard-quelist-content{
+    height: 45px;
+    background-color: #f1f6fc;
+    border-radius: 5px;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    padding-inline: 10px;
+    margin-bottom: 10px;
+}
+
+.appoin-content-head,.appoin-content-div{
+    height: 45px;
+    background-color: #f1f6fc;
+    border-radius: 5px;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    padding-inline: 10px;
+    margin-bottom: 10px;
+}

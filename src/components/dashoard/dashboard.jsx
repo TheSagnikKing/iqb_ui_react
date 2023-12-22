@@ -13,7 +13,10 @@ import { reports } from '../data'
 
 import Calender from '../calender/Calender'
 import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { queueListAction } from '../../redux/actions/joinQueueAction'
+
+import api from "../../redux/api/Api"
 
 const dashboard = () => {
 
@@ -40,6 +43,47 @@ const dashboard = () => {
             </Suspense>
         );
     }, []);
+
+    const dispatch = useDispatch()
+
+    const salonId = LoggedInMiddleware?.user && LoggedInMiddleware.user[0].salonId;
+
+    useEffect(() => {
+        if (salonId) {
+            dispatch(queueListAction(Number(salonId)))
+        }
+    }, [dispatch, salonId])
+
+    const queueList = useSelector(state => state.queueList)
+
+    const formatDate = (date) => {
+        const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+        const formattedDate = date.toLocaleDateString(undefined, options);
+
+        // Extract components and rearrange them
+        const [month, day, year] = formattedDate.split('/');
+        return `${year}-${month}-${day}`;
+    };
+
+    const formattedDate = formatDate(currentDate);
+    console.log(formattedDate);
+
+    const [appointmentData, setAppointmentData] = useState([])
+
+    useEffect(() => {
+        const appointfnc = async () => {
+            const { data } = await api.post("/api/advertisement/getDashboardAppointmentList", {
+                salonId,
+                appointmentDate: formattedDate
+            })
+
+            setAppointmentData(data)
+        }
+
+        appointfnc()
+    }, [salonId, formattedDate])
+
+    console.log(appointmentData)
 
     return (
         <>
@@ -102,85 +146,41 @@ const dashboard = () => {
                                 <div className="btn_box">
 
                                     <div className="btn_one">
-                                        <div>
+                                        {/* <div>
                                             <IoMdAdd />
-                                        </div>
+                                        </div> */}
 
-                                        <p>Add Customers</p>
+                                        <p><Link to="/queue"
+                                            style={{
+                                                fontSize: "11px"
+                                            }}
+                                        >Add Customers</Link></p>
                                     </div>
 
 
-                                    <div className="btn_one">
+                                    {/* <div className="btn_one">
                                         <div>
                                             <FaUsers />
                                         </div>
 
                                         <p>Join Queue</p>
-                                    </div>
+                                    </div> */}
 
-                                    <div className="last_item">
+                                    {/* <div className="last_item">
                                         <BsThreeDotsVertical />
-                                    </div>
+                                    </div> */}
 
                                 </div>
-                            </div>
-
-                            <div className="div_right_middle">
-
-                                <div className="content">
-                                    <div>
-                                        <p>Kunal Jasuja</p>
-                                        <p>Contact No-9876543210</p>
-                                    </div>
-
-                                    <div>
-                                        <FiMoreHorizontal />
-                                    </div>
-
-                                    <div className="content_info">
-                                        <p>Progress</p>
-                                        <p>55%</p>
-                                    </div>
-
-                                    <div className="progress_bar">
-                                        <div>
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="content">
-                                    <div>
-                                        <p>Roy Kapoor</p>
-                                        <p>Contact No-9876543210</p>
-                                    </div>
-
-                                    <div>
-                                        <FiMoreHorizontal />
-                                    </div>
-
-                                    <div className="content_info">
-                                        <p>Progress</p>
-                                        <p>55%</p>
-                                    </div>
-
-                                    <div className="progress_bar_two">
-                                        <div>
-
-                                        </div>
-                                    </div>
-                                </div>
-
                             </div>
 
                             <div className="div_right_third">
-                                <div>
-                                    <p>Join Queue</p>
-                                    <span>{"(10)"}</span>
-                                </div>
 
                                 <div>
-                                    <p>See All</p>
+                                    <p style={{
+                                        marginTop: "10px"
+                                    }}><Link to="/queue" style={{
+                                        fontSize: "11px"
+                                    }}>See All</Link></p>
                                     <div>
                                         <BiChevronRight />
                                     </div>
@@ -188,69 +188,31 @@ const dashboard = () => {
 
                             </div>
 
-                            <div className="div_right_fourth">
 
-                                <div>
-                                    <div className="checkbox"
-                                        style={{ backgroundColor: checkbox ? "#2164f3" : "", border: checkbox ? "none" : "1px solid rgba(0,0,0,0.4)" }}
-                                        onClick={checkboxhandler}
-                                    >
-                                        <BsCheckLg />
-                                    </div>
+                            <div className='dashboard-quelist'
 
-                                    <p>Riya Roy</p>
+                                style={{
+                                    overflow: "scroll",
+                                    height: "350px"
+                                }}>
+                                <div className='dashboard-quelist-content-head'>
+                                    <p>Customer Name</p>
+                                    <p>Barber Name</p>
+                                    <p>Queue Position</p>
                                 </div>
 
-                                <p>JLDF13463</p>
-
-                                <div>
-                                    <div>
-                                        In Progress
-                                    </div>
-
-                                    <div>
-                                        <FaUserCircle />
-                                    </div>
-
-                                    <div>
-                                        <FiMoreHorizontal />
-                                    </div>
-                                </div>
-
+                                {
+                                    queueList?.response?.slice(0, 5).map((c, i) => (
+                                        <div className='dashboard-quelist-content' key={i}>
+                                            <p>{c.name}</p>
+                                            <p>{c.barberName}</p>
+                                            <p>{c.qPosition}</p>
+                                        </div>
+                                    ))
+                                }
 
                             </div>
 
-                            <div className="div_right_fifth">
-
-                                <div>
-                                    <div className="checkbox"
-                                        style={{ backgroundColor: checkbox2 ? "#2164f3" : "", border: checkbox2 ? "none" : "1px solid rgba(0,0,0,0.4)" }}
-                                        onClick={() => setCheckbox2(!checkbox2)}
-                                    >
-                                        <BsCheckLg />
-                                    </div>
-
-                                    <p>Priti Roy</p>
-                                </div>
-
-                                <p>JLDF13598</p>
-
-                                <div>
-                                    <div>
-                                        Pending
-                                    </div>
-
-                                    <div>
-                                        <FaUserCircle />
-                                    </div>
-
-                                    <div>
-                                        <FiMoreHorizontal />
-                                    </div>
-                                </div>
-
-
-                            </div>
                         </div>
                     </div>
 
@@ -273,15 +235,21 @@ const dashboard = () => {
                                 </div>
 
                                 <div className="main_right">
+                                    <div className='appoin-content-head'>
+                                        <p>Appointment Name</p>
+                                        <p>Customer Name</p>
+                                        <p>Barber Name</p>
+                                    </div>
                                     {
-                                        customerDetail.map((item) => {
-                                            return (
-                                                <div key={item.id}>
-                                                    <CustomerDetail item={item} />
-                                                </div>
-                                            )
-                                        })
+                                        appointmentData?.response?.map((ap,i) => (
+                                            <div className='appoin-content-div' key={i}>
+                                                <p>{ap.appointmentName}</p>
+                                                <p>{ap.customerName}</p>
+                                                <p>{ap.barberName}</p>
+                                            </div>
+                                        ))
                                     }
+
                                 </div>
                             </div>
                         </div>

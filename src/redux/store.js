@@ -1,7 +1,7 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import thunk from "redux-thunk";
 import { logoutReducer, newPasswordResetReducer, passwordResetEmailReducer, signinReducer, signupReducer } from "./reducers/userReducer";
-import { connectBarberSalonReducer, createSalonReducer, deleteSalonReducer, getAllSalonServicesReducer, salonListReducer, salonSettingsReducer, updateSalonReducer } from "./reducers/salonReducer";
+import { connectBarberSalonReducer, createSalonReducer, deleteSalonReducer, getAllSalonServicesReducer, salonListReducer,salonSettingsUpdateReducer, updateSalonReducer } from "./reducers/salonReducer";
 import { approveBarberReducer, barberListReducer, barberServedQueueReducer, createBarberReducer, deleteBarberReducer, getAllBarbersByServiceIdReducer, getBarberByMultipleServicesReducer, getBarberServicesBybarberIdReducer, updateBarberReducer } from "./reducers/barberReducer";
 import { autojoinReducer, groupjoinReducer, queueListReducer, singleJoinQueueReducer } from "./reducers/joinqueueReducer";
 import { AdminForgetPasswordReducer, AdminGoogleLoginReducer, AdminLoginReducer, AdminLogoutReducer, AdminRegisterReducer, AdminResetPasswordReducer, LoggedInMiddlewareReducer, LoggedOutMiddlewareReducer, updateAdminAccountDetailsReducer, updateAdminReducer } from "./reducers/AdminAuthReducer";
@@ -70,7 +70,7 @@ const rootReducer = combineReducers({
   barberOnlineStatus:barberOnlineStatusReducer,
   barberQuelist:barberQuelistReducer,
   connectBarberSalon:connectBarberSalonReducer,
-  salonSettings:salonSettingsReducer
+  salonSettingsUpdate:salonSettingsUpdateReducer
 });
 
 const initialState = {};
