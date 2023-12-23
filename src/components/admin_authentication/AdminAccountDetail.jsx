@@ -19,9 +19,9 @@ const AdminAccountDetail = () => {
 
     const submitHandler = () => {
         //email authentication  theke asbe
-        const profiledata = {email:LoggedInMiddleware?.user[0]?.email,mobileNumber,name,gender,dateOfBirth:dob,salonId:LoggedInMiddleware?.user[0]?.salonId,userName:username};
+        const profiledata = { email: LoggedInMiddleware?.user[0]?.email, mobileNumber, name, gender, dateOfBirth: dob, salonId: LoggedInMiddleware?.user[0]?.salonId, userName: username };
 
-        dispatch(updateAdminAccountDetailsAction(navigate,profiledata))
+        dispatch(updateAdminAccountDetailsAction(navigate, profiledata))
     }
 
     const skipHandler = () => {
@@ -72,12 +72,23 @@ const AdminAccountDetail = () => {
                     </div>
 
                     <div>
-                        <label htmlFor="">Gender</label>
+                        {/* <label htmlFor="">Gender</label>
                         <input
                             type="text"
                             value={gender}
                             onChange={(e) => setGender(e.target.value)}
-                        />
+                        /> */}
+
+                        <label for="gender">Gender:</label>
+
+                        <select 
+                        name="gender" 
+                        id="gender" 
+                        onChange={(e) => setGender(e.target.value)} 
+                        value={gender}>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
                     </div>
 
                     <div>

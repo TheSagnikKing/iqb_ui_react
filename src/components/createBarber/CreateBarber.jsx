@@ -54,8 +54,6 @@ const CreateBarber = () => {
         
     }, [LoggedInMiddleware?.user])
 
-    console.log(barberServices)
-
     // Use a Map to store serviceEWT for each serviceId
     const [barberserviceEWTMap, setBarberserviceEWTMap] = useState(new Map());
 
@@ -94,7 +92,7 @@ const CreateBarber = () => {
     }
 
 
-    console.log(selectedService)
+    // console.log(selectedService)
 
 
     return (
@@ -158,7 +156,7 @@ const CreateBarber = () => {
                     <div>
                         <label>Date of birth</label>
                         <input
-                            type="text"
+                            type="date"
                             placeholder='Enter Date of Birth'
                             value={dateOfBirth}
                             onChange={(e) => setDateOfBirth(e.target.value)}
@@ -204,7 +202,7 @@ const CreateBarber = () => {
                                             </div>
 
                                             <div>
-                                                <p>serviceEWT</p>
+                                                <p>Estimated Wait Time</p>
                                                 <input
                                                     type="number"
                                                     value={barberserviceEWTMap.get(ser.serviceId) || ''}
@@ -241,7 +239,7 @@ const CreateBarber = () => {
                                         </div>
 
                                         <div>
-                                            <p>serviceEWT</p>
+                                            <p>Estimated</p>
                                             <p>{ser.barberServiceEWT}</p>                               
                                         </div>
 

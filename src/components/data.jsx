@@ -201,8 +201,8 @@ export const adminmenudata = [
   {
     id: 7,
     menu_logo: <RiDashboardFill />,
-    menu_title: "Custom",
-    menu_link: "",
+    menu_title: "Advertisments",
+    menu_link: "/advertisement",
     category: [
       {
         id: 7,

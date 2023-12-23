@@ -341,4 +341,87 @@
     cursor: pointer;
 }
 
+.ad-profile-image{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px  solid rgba(0,0,0,0.4);
+    position: absolute;
+    margin-right: 20px;
+}
 
+.ad-profile-image>img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.ad-profile-image-camera>button{
+    height: 25px;
+    width: 25px;
+    background-color: #fff;
+    border-radius: 4px;
+    color: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    box-shadow: 0px 0px 4px rgba(0,0,0,0.3);
+    cursor: pointer;
+
+    position: relative;
+    top: 15px;
+    left: 10px;
+}
+
+
+
+.nav2toggle_switch {
+    position: relative;
+    display: inline-block;
+    width: 35px;
+    height: 20px;
+  }
+  
+.nav2toggle_switch input {
+    display: none;
+}
+  
+.nav2slider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    border-radius: 34px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+.nav2slider:before {
+    position: absolute;
+    content: "";
+    height: 12px;
+    width: 12px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    border-radius: 50%;
+    transition: transform 0.3s;
+  }
+
+
+  .nav2slider::before {
+    content: ''; 
+    display: inline-block;  
+    transform: translateX(0);
+  }
+  
+  .nav2slider.checked::before {
+    transform: translateX(15px);
+  }
+  

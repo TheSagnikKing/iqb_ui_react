@@ -1,12 +1,13 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import thunk from "redux-thunk";
 import { logoutReducer, newPasswordResetReducer, passwordResetEmailReducer, signinReducer, signupReducer } from "./reducers/userReducer";
-import { connectBarberSalonReducer, createSalonReducer, deleteSalonReducer, getAllSalonServicesReducer, salonListReducer,salonSettingsUpdateReducer, updateSalonReducer } from "./reducers/salonReducer";
+import { applySalonReducer, connectBarberSalonReducer, createSalonReducer, deleteSalonReducer, getAllSalonServicesReducer, salonListReducer,salonSettingsUpdateReducer, salonStatusOnlineReducer, updateSalonReducer } from "./reducers/salonReducer";
 import { approveBarberReducer, barberListReducer, barberServedQueueReducer, createBarberReducer, deleteBarberReducer, getAllBarbersByServiceIdReducer, getBarberByMultipleServicesReducer, getBarberServicesBybarberIdReducer, updateBarberReducer } from "./reducers/barberReducer";
 import { autojoinReducer, groupjoinReducer, queueListReducer, singleJoinQueueReducer } from "./reducers/joinqueueReducer";
 import { AdminForgetPasswordReducer, AdminGoogleLoginReducer, AdminLoginReducer, AdminLogoutReducer, AdminRegisterReducer, AdminResetPasswordReducer, LoggedInMiddlewareReducer, LoggedOutMiddlewareReducer, updateAdminAccountDetailsReducer, updateAdminReducer } from "./reducers/AdminAuthReducer";
 import { barberForgetPasswordReducer, barberGoogleLoginReducer, barberLoginReducer, barberLogoutReducer, barberOnlineStatusReducer, barberQuelistReducer, barberRegisterReducer, barberResetPasswordReducer, updatebarberAccountDetailsReducer, updatebarberReducer } from "./reducers/BarberAuthReducer";
 import { createAppointmentReducer } from "./reducers/AppointmentReducer";
+import { getAllAdvertisementReducer} from "./reducers/AdvertisementReducer";
 
 const rootReducer = combineReducers({
   signup:signupReducer,
@@ -70,7 +71,10 @@ const rootReducer = combineReducers({
   barberOnlineStatus:barberOnlineStatusReducer,
   barberQuelist:barberQuelistReducer,
   connectBarberSalon:connectBarberSalonReducer,
-  salonSettingsUpdate:salonSettingsUpdateReducer
+  salonSettingsUpdate:salonSettingsUpdateReducer,
+  applySalon:applySalonReducer,
+  salonStatusOnline:salonStatusOnlineReducer,
+  getAllAdvertisement:getAllAdvertisementReducer,
 });
 
 const initialState = {};

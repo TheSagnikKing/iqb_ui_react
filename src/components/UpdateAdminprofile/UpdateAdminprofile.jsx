@@ -33,40 +33,6 @@ const UpdateAdminprofile = () => {
         dispatch(updateAdminAction(profiledata))
     }
 
-
-    const [setprofilepic, Setsetprofilepic] = useState("")
-
-    const fileInputRef = useRef(null);
-
-    const handleEditButtonClick = (publicid, id) => {
-        fileInputRef.current.click();
-    };
-
-    const handleFileInputChange = async (e) => {
-        const uploadImage = e.target.files[0];
-        console.log(uploadImage)
-
-        const formData = new FormData();
-
-        formData.append('email', LoggedInMiddleware?.user[0]?.email)
-        formData.append('profile', uploadImage)
-
-        try {
-            const imageResponse = await api.post('/api/admin/uploadAdminProfilePicture', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            });
-
-            console.log('Upload success:', imageResponse.data);
-            Setsetprofilepic(imageResponse?.data?.adminImage?.profile[0]?.url)
-            alert("Image Uploaded successfully")
-        } catch (error) {
-            console.error('Image upload failed:', error);
-        }
-    };
-
-
     // console.log(LoggedInMiddleware?.user[0]?.profile[0]?.url)
 
 
@@ -94,14 +60,6 @@ const UpdateAdminprofile = () => {
                         <input
                             type="text"
                             value={LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].email}
-                        />
-                    </div>
-
-                    <div>
-                        <label htmlFor="">Salon Id</label>
-                        <input
-                            type="text"
-                            value={LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId}
                         />
                     </div>
 
@@ -148,31 +106,6 @@ const UpdateAdminprofile = () => {
                             value={dob}
                             onChange={(e) => setDob(e.target.value)}
                         />
-                    </div>
-
-                    <div className='admin-profile'>
-                        <img
-                            src={
-                                setprofilepic
-                                    ? setprofilepic
-                                    : LoggedInMiddleware?.user &&
-                                        LoggedInMiddleware.user[0]?.profile &&
-                                        LoggedInMiddleware.user[0].profile[0]?.url
-                                        ? LoggedInMiddleware.user[0].profile[0].url
-                                        : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
-                            }
-                            alt=""
-                        />
-                        <div>
-                            {/* <button onClick={() => imgDeleteHandler()}><MdDelete /></button> */}
-                            <button onClick={() => handleEditButtonClick()}><FaCamera /></button>
-                            <input
-                                type="file"
-                                ref={fileInputRef}
-                                style={{ display: 'none' }}
-                                onChange={handleFileInputChange}
-                            />
-                        </div>
                     </div>
 
                     <div className="sa-br-btn_box-up">

@@ -58,6 +58,8 @@ import BarberCalenderEvent from './components/barber/BarberCalenderEvent/BarberC
 import BarberCalenderList from './components/barber/BarberCalenderList/BarberCalenderList';
 import BarberQueLists from './components/barber/BarberQueLists/BarberQueLists';
 import SalonSettings from './components/Salon/SalonSettings/SalonSettings';
+import Map from './components/Map/Map';
+import Advertisement from './components/Advertisement/Advertisement';
 
 const App = () => {
 
@@ -325,6 +327,10 @@ const App = () => {
             </Suspense>
 
           } />
+
+          <Route path="/advertisement" element={<Auth><Advertisement/></Auth>}/>
+          
+          <Route path="/map" element={<Map/>}/>
 
         </Routes>
       </BrowserRouter>

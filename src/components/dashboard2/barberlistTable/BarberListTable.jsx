@@ -128,20 +128,22 @@ const BarberListTable = () => {
 
     const [approveBarberMap, setApproveBarberMap] = useState(new Map());
 
-    const approveHandler = (salonId, email) => {
+    const approveHandler = (salonId, email,boolean) => {
         const approvedata = {
             salonId,
             email,
-            isApproved: true
+            isApproved: boolean
         }
-        setApproveBarberMap((prevMap) => new Map([...prevMap, [`${salonId}-${email}`, true]]));
+        setApproveBarberMap((prevMap) => new Map([...prevMap, [`${salonId}-${email}`, boolean]]));
 
         dispatch(approveBarberAction(approvedata))
+        console.log(approvedata)
     }
 
     const editHandler = (barberemail) => {
         navigate("/barber/updatebarber",{state:{barberemail}})
     }
+
 
     return (
         <>
@@ -241,9 +243,9 @@ const BarberListTable = () => {
 
                             {/* Updated approval button logic */}
                             {approveBarberMap.get(`${barber.salonId}-${barber.email}`) || barber.isApproved ? (
-                                <button className='approve-bbr' style={{background:"gray"}}>Approved</button>
+                                <button className='approve-bbr' onClick={() => approveHandler(barber.salonId, barber.email,false)} style={{background:"gray"}}>Approved</button>
                             ) : (
-                                <button className='approve-bbr' onClick={() => approveHandler(barber.salonId, barber.email)}>Approve</button>
+                                <button className='approve-bbr' onClick={() => approveHandler(barber.salonId, barber.email,true)} style={{background:"white"}}>Approve</button>
                             )}
 
                             <button className='edit-bbr' onClick={() => editHandler(barber.email)}><AiFillEdit /></button>

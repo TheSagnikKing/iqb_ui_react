@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import './AdminHeader.css'
 import AdminMenu from './AdminMenu'
 import { adminmenudata } from '../../../data'
@@ -7,7 +7,7 @@ import { BsMoonStars } from 'react-icons/bs'
 import { IoIosArrowForward } from 'react-icons/io'
 import { CiSearch } from "react-icons/ci"
 import { IoNotificationsOutline } from "react-icons/io5"
-import { FaUserCircle } from "react-icons/fa"
+import { FaCamera, FaUserCircle } from "react-icons/fa"
 import { MdKeyboardArrowDown } from "react-icons/md"
 import { BiLogOutCircle } from "react-icons/bi"
 import { RiAccountCircleFill } from "react-icons/ri"
@@ -16,7 +16,8 @@ import { logout } from '../../../../redux/actions/userAction'
 import { useDispatch, useSelector } from 'react-redux'
 import { AdminLogoutAction } from '../../../../redux/actions/AdminAuthAction'
 
-
+import api from "../../../../redux/api/Api"
+import { applySalonAction, salonStatusOnlineAction } from '../../../../redux/actions/salonAction'
 
 const AdminHeader = ({ title }) => {
 
@@ -27,11 +28,87 @@ const AdminHeader = ({ title }) => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  const logoutHandler = async() => {
-      dispatch(AdminLogoutAction(navigate))
+  const logoutHandler = async () => {
+    dispatch(AdminLogoutAction(navigate))
   }
-  
+
   const LoggedInMiddleware = useSelector(state => state.LoggedInMiddleware)
+
+  const [setprofilepic, Setsetprofilepic] = useState("")
+
+  const fileInputRef = useRef(null);
+
+  const handleEditButtonClick = (publicid, id) => {
+    fileInputRef.current.click();
+  };
+
+  const handleFileInputChange = async (e) => {
+    const uploadImage = e.target.files[0];
+    console.log(uploadImage)
+
+    const formData = new FormData();
+
+    formData.append('email', LoggedInMiddleware?.user[0]?.email)
+    formData.append('profile', uploadImage)
+
+    try {
+      const imageResponse = await api.post('/api/admin/uploadAdminProfilePicture', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      console.log('Upload success:', imageResponse.data);
+      Setsetprofilepic(imageResponse?.data?.adminImage?.profile[0]?.url)
+      alert("Image Uploaded successfully")
+    } catch (error) {
+      console.error('Image upload failed:', error);
+    }
+  };
+
+  const [salonList, setSalonList] = useState([])
+
+  useEffect(() => {
+    const getSalonfnc = async () => {
+      const { data } = await api.post("/api/admin/getAllSalonsByAdmin", {
+        adminEmail: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].email
+      })
+      setSalonList(data?.salons)
+    }
+
+    getSalonfnc()
+  }, [LoggedInMiddleware?.user])
+
+  console.log("new", salonList)
+
+  const [chooseSalonId, setChooseSalonId] = useState("");
+
+  const applySalonData = {
+    salonId: Number(chooseSalonId),
+    adminEmail: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].email
+  }
+
+  const applySalonHandler = async () => {
+    dispatch(applySalonAction(applySalonData))
+  }
+
+  const [salonStatus, setSalonStatus] = useState(false);
+
+  useEffect(() => {
+    setSalonStatus(LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].isOnline)
+  }, [LoggedInMiddleware?.user])
+
+  const salonStatusHandler = () => {
+    const newCheckValue = !salonStatus;
+    setSalonStatus(newCheckValue);
+
+    const salonStatusOnlineData = {
+      salonId: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId,
+      isOnline: newCheckValue,
+    };
+
+    dispatch(salonStatusOnlineAction(salonStatusOnlineData));
+  };
 
   return (
     <>
@@ -97,9 +174,64 @@ const AdminHeader = ({ title }) => {
             <p>List</p>
             <IoIosArrowForward />
             <b style={{ color: "rgba(0,0,0,0.6)" }}>{title}</b>
+
+            {/* TOGGLE_SWITCH_CODE */}
+            {/* <label className="nav1toggle_switch">
+              <input type="checkbox"
+                value={salonStatus}
+                onClick={salonStatusHandler}
+              />
+              <span className="nav1slider"></span>
+              <span className={`nav2slider ${salonStatus ? 'checked' : ''}`}
+                style={{
+                  background: salonStatus ? "#4CBB17" : ""
+                }}
+              ></span>
+            </label> */}
+
+            {/* TOGGLE SWITCH */}
+            <label className="nav2toggle_switch" >
+              <input type="checkbox"
+                value={salonStatus}
+                onClick={() => salonStatusHandler()}
+
+              />
+              {/* <span className="nav2slider"></span> */}
+              <span className={`nav2slider ${salonStatus ? 'checked' : ''}`}
+                style={{
+                  background: salonStatus ? "#4CBB17" : ""
+                }}
+              ></span>
+            </label>
+
           </div>
 
           <div className="nav1right_right_div">
+            <div style={{
+              display: 'flex',
+              flexDirection: "column",
+              gap: "5px",
+              justifyContent: "flex-end"
+            }}>
+
+              <label for="cars">Choose Salon:</label>
+
+              <select
+                name="cars"
+                id="cars"
+                onChange={(e) => setChooseSalonId(e.target.value)}
+                value={chooseSalonId}
+              >
+                {salonList && salonList.map((s, i) => (
+                  <option value={s.salonId} key={i}>
+                    {s.salonName}
+                  </option>
+                ))}
+              </select>
+
+            </div>
+
+            <button onClick={applySalonHandler}>Apply</button>
 
             <div className="nav1search_box">
               <div>
@@ -115,7 +247,29 @@ const AdminHeader = ({ title }) => {
             {/* profile_div */}
             <div className="nav1profile">
               <div className="nav1image">
-                <FaUserCircle />
+                {/* <FaUserCircle />dsvdsv */}
+                <div className='ad-profile-image'>
+                  <img src={
+                    setprofilepic
+                      ? setprofilepic
+                      : LoggedInMiddleware?.user &&
+                        LoggedInMiddleware.user[0]?.profile &&
+                        LoggedInMiddleware.user[0].profile[0]?.url
+                        ? LoggedInMiddleware.user[0].profile[0].url
+                        : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"
+                  } alt="" />
+                </div>
+
+                <div className='ad-profile-image-camera'>
+                  {/* <button onClick={() => imgDeleteHandler()}><MdDelete /></button> */}
+                  <button onClick={() => handleEditButtonClick()}><FaCamera /></button>
+                  <input
+                    type="file"
+                    ref={fileInputRef}
+                    style={{ display: 'none' }}
+                    onChange={handleFileInputChange}
+                  />
+                </div>
               </div>
 
               <div className="nav1profile_detail">
@@ -136,16 +290,16 @@ const AdminHeader = ({ title }) => {
                   </div>
 
                   <div>
-                    <div><RiAccountCircleFill/></div>
+                    <div><RiAccountCircleFill /></div>
                     <p>My Account</p>
                   </div>
 
                   <div>
-                    <div><RiAccountCircleFill/></div>
+                    <div><RiAccountCircleFill /></div>
                     <Link to="/admin/updateprofile">Update Profile</Link>
                   </div>
 
-                  <div onClick={logoutHandler}> 
+                  <div onClick={logoutHandler}>
                     <div><BiLogOutCircle /></div>
                     <p>Logout</p>
                   </div>
@@ -156,7 +310,7 @@ const AdminHeader = ({ title }) => {
           </div>
         </div>
 
-      </section>
+      </section >
     </>
   )
 }

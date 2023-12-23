@@ -18,31 +18,10 @@ const AdminMenu = ({ menu_logo, menu_title, category, menu_link }) => {
                         {menu_logo}
                     </div>
 
-                    <p>{menu_title}</p>
+                    <Link to={`${menu_link}`}><p>{menu_title}</p></Link>
                 </div>
 
-                <div>
-                    {dropdown ? <GoTriangleUp /> : <GoTriangleDown />}
-                </div>
             </div>
-            {/* Dropdown_category */}
-            {dropdown ? (<div className="nav1-menu_category">
-                {category.map((item, i) => {
-                    return (
-                        <div key={i}>
-                            <div style={{ marginTop: "10px" }}>
-                                <div>{item.list_logo}</div>
-                                <Link to={`${menu_link}`} style={{ color: "black", textDecoration: "none" }}><p>{item.list}</p></Link>
-                            </div>
-
-                            <div>
-                                <div>{item.message_logo}</div>
-                                <p>{item.message_title}</p>
-                            </div>
-                        </div>
-                    )
-                })}
-            </div>) : null}
         </>
     )
 }

@@ -45,7 +45,6 @@ const UpdateSalon = () => {
     // ==========================================
 
     const [salonEmail, setSalonEmail] = useState("")
-    const [userName, setUsername] = useState("")
     const [salonName, setSalonName] = useState("")
     const [address, setAddress] = useState("")
     const [city, setCity] = useState("")
@@ -77,7 +76,7 @@ const UpdateSalon = () => {
 
     const submitHandler = () => {
         const salonData = {
-            adminEmail:LoggedInMiddleware?.user && LoggedInMiddleware.user[0].email , userName, salonName, salonEmail,address, city, location: {
+            adminEmail:LoggedInMiddleware?.user && LoggedInMiddleware.user[0].email , salonName, salonEmail,address, city, location: {
                 type: "Point",
                 coordinates: {
                     longitude: Number(longitude),
@@ -89,7 +88,6 @@ const UpdateSalon = () => {
 
         dispatch(updateSalonAction(salonData))
 
-        setUsername("")
         setSalonName("")
         setAddress("")
         setCity("")
@@ -317,15 +315,6 @@ const UpdateSalon = () => {
                                 type="text"
                                 value={salonEmail}
                                 onChange={(e) => setSalonEmail(e.target.value)}
-                            />
-                        </div>
-
-                        <div>
-                            <label htmlFor="">User Name</label>
-                            <input
-                                type="text"
-                                value={userName}
-                                onChange={(e) => setUsername(e.target.value)}
                             />
                         </div>
 

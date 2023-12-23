@@ -1,4 +1,4 @@
-import { CONNECT_BARBER_SALON_FAIL, CONNECT_BARBER_SALON_REQ, CONNECT_BARBER_SALON_SUCCESS, CREATE_SALON_FAIL, CREATE_SALON_REQ, CREATE_SALON_SUCCESS, DELETE_SALON_FAIL, DELETE_SALON_REQ, DELETE_SALON_SUCCESS, GET_ALL_SALON_SERVICES_FAIL, GET_ALL_SALON_SERVICES_REQ, GET_ALL_SALON_SERVICES_SUCCESS, GET_SALONLIST_FAIL, GET_SALONLIST_REQ, GET_SALONLIST_SUCCESS, SALON_SETTINGS_UPDATE_FAIL, SALON_SETTINGS_UPDATE_REQ, SALON_SETTINGS_UPDATE_SUCCESS, UPDATE_SALON_FAIL, UPDATE_SALON_REQ, UPDATE_SALON_SUCCESS } from "../constants/salonConstants"
+import { APPLY_SALON_FAIL, APPLY_SALON_REQ, APPLY_SALON_SUCCESS, CONNECT_BARBER_SALON_FAIL, CONNECT_BARBER_SALON_REQ, CONNECT_BARBER_SALON_SUCCESS, CREATE_SALON_FAIL, CREATE_SALON_REQ, CREATE_SALON_SUCCESS, DELETE_SALON_FAIL, DELETE_SALON_REQ, DELETE_SALON_SUCCESS, GET_ALL_SALON_SERVICES_FAIL, GET_ALL_SALON_SERVICES_REQ, GET_ALL_SALON_SERVICES_SUCCESS, GET_SALONLIST_FAIL, GET_SALONLIST_REQ, GET_SALONLIST_SUCCESS, SALON_ONLINE_STATUS_FAIL, SALON_ONLINE_STATUS_REQ, SALON_ONLINE_STATUS_SUCCESS, SALON_SETTINGS_UPDATE_FAIL, SALON_SETTINGS_UPDATE_REQ, SALON_SETTINGS_UPDATE_SUCCESS, UPDATE_SALON_FAIL, UPDATE_SALON_REQ, UPDATE_SALON_SUCCESS } from "../constants/salonConstants"
 
 import api from "../api/Api"
 
@@ -138,3 +138,43 @@ export const salonSettingsUpdateAction = (salonsettingsData) => async(dispatch) 
     }
 }
 
+export const applySalonAction = (applySalondata) => async(dispatch) => {
+    try {
+        dispatch({type:APPLY_SALON_REQ})
+
+        const {data} = await api.post(`/api/admin/changeDefaultSalonIdofAdmin`, applySalondata)
+
+        dispatch({
+            type:APPLY_SALON_SUCCESS,
+            payload:data
+        })
+        
+        window.location.reload()
+    } catch (error) {
+        dispatch({
+            type:APPLY_SALON_FAIL,
+            payload: error.response.data
+        })
+    }
+}
+
+
+export const salonStatusOnlineAction = (salonStatusdata) => async(dispatch) => {
+    try {
+        dispatch({type:SALON_ONLINE_STATUS_REQ})
+
+        const {data} = await api.post(`/api/salon/changeSalonOnlineStatus`, salonStatusdata)
+
+        dispatch({
+            type:SALON_ONLINE_STATUS_SUCCESS,
+            payload:data
+        })
+        
+        // window.location.reload()
+    } catch (error) {
+        dispatch({
+            type:SALON_ONLINE_STATUS_FAIL,
+            payload: error.response.data
+        })
+    }
+}

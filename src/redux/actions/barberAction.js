@@ -142,6 +142,7 @@ export const approveBarberAction = (approvedata) => async(dispatch) => {
             type:APPROVE_BARBER_SUCCESS,
             payload:data
         })
+        window.location.reload()
     } catch (error) {
         dispatch({
             type:APPROVE_BARBER_FAIL,

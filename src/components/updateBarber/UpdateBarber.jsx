@@ -166,7 +166,7 @@ const UpdateBarber = () => {
                     <div>
                         <label>Date of birth</label>
                         <input
-                            type="text"
+                            type="date"
                             placeholder='Enter Date of Birth'
                             value={dateOfBirth}
                             onChange={(e) => setDateOfBirth(e.target.value)}
@@ -212,7 +212,7 @@ const UpdateBarber = () => {
                                             </div>
 
                                             <div>
-                                                <p>serviceEWT</p>
+                                                <p>Estimated Wait Time</p>
                                                 <input
                                                     type="number"
                                                     value={  barberserviceEWTMap.get(ser.serviceId) }
@@ -251,7 +251,7 @@ const UpdateBarber = () => {
                                         </div>
 
                                         <div>
-                                            <p>serviceEWT</p>
+                                            <p>Estimated Wait Time</p>
                                             <p>{ser.barberServiceEWT}</p>                               
                                         </div>
 
