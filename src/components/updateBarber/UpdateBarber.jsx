@@ -8,7 +8,7 @@ import { MdDelete } from 'react-icons/md'
 
 import { updateBarberAction } from "../../redux/actions/barberAction"
 import AdminLayout from '../layout/Admin/AdminLayout'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 import api from "../../redux/api/Api"
 
@@ -83,12 +83,14 @@ const UpdateBarber = () => {
 
     const dispatch = useDispatch()
 
+    const navigate = useNavigate()
+
     const submitHandler = () => {
         const barberdata = {
             name, email, userName, mobileNumber, dateOfBirth, salonId, barberServices: selectedService
         }
         // console.log(barberdata)
-        dispatch(updateBarberAction(barberdata))
+        dispatch(updateBarberAction(barberdata,navigate))
     }
 
     const location = useLocation()

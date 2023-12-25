@@ -1,13 +1,13 @@
 import { GET_ALL_ADVERTISEMENT_FAIL, GET_ALL_ADVERTISEMENT_REQ, GET_ALL_ADVERTISEMENT_SUCCESS } from "../constants/AdvertisementConstant";
 
-export const getAllAdvertisementAction = (salonId) => async (dispatch) => {
+export const getAllAdvertisementAction = () => async (dispatch) => {
     try {
         dispatch({
             type:GET_ALL_ADVERTISEMENT_REQ
         })
         const { data } = await api.post(`/api/advertisement/getAdvertisements`,{salonId:3});
 
-        console.log(data)
+        console.log("adver",data)
 
         dispatch({
             type: GET_ALL_ADVERTISEMENT_SUCCESS,

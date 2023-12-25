@@ -33,8 +33,7 @@ const dashboard = () => {
 
     const LoggedInMiddleware = useSelector(state => state.LoggedInMiddleware)
 
-    const salonid = LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId;
-
+    const salonid = Number(LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId);
 
     const MemoizedChart = useMemo(() => {
         return (
@@ -85,6 +84,22 @@ const dashboard = () => {
 
     console.log(appointmentData)
 
+
+    const [advertisementList, setAdvertisementList] = useState([])
+
+    useEffect(() => {
+      const getAdvertisementData = async () => {
+        const { data } = await api.post(`/api/advertisement/getAdvertisements`, { salonId: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId });
+  
+        console.log("adver", data)
+        setAdvertisementList(data?.advertisements)
+      }
+  
+      getAdvertisementData()
+    }, [LoggedInMiddleware?.user])
+
+    console.log("dash",advertisementList)
+
     return (
         <>
             <div className="right_main_div">
@@ -103,7 +118,7 @@ const dashboard = () => {
                                             <IoMdAdd />
                                         </div>
 
-                                        <p>Add New Post</p>
+                                        <p><Link to="/advertisement">Add New Post</Link></p>
                                     </div>
 
                                     {/* <div className="btn_two">
@@ -117,24 +132,25 @@ const dashboard = () => {
                             </div>
 
                             <div className="div_left_images">
+
                                 <div className="img_one">
-                                    <img src="https://images.pexels.com/photos/1805600/pexels-photo-1805600.jpeg?cs=srgb&dl=pexels-dmitry-zvolskiy-1805600.jpg&fm=jpg" alt="" />
+                                    <img src={advertisementList[0]?.url} alt="" />
                                 </div>
 
                                 <div className="img_two">
 
                                     <div>
-                                        <img src="https://images.pexels.com/photos/1805600/pexels-photo-1805600.jpeg?cs=srgb&dl=pexels-dmitry-zvolskiy-1805600.jpg&fm=jpg" alt="" />
+                                        <img src={advertisementList[1]?.url} alt="" />
                                     </div>
 
                                     <div>
-                                        <img src="https://images.pexels.com/photos/1805600/pexels-photo-1805600.jpeg?cs=srgb&dl=pexels-dmitry-zvolskiy-1805600.jpg&fm=jpg" alt="" />
+                                        <img src={advertisementList[2]?.url} alt="" />
                                     </div>
 
                                 </div>
 
                                 <div className="img_three">
-                                    <img src="https://images.pexels.com/photos/1805600/pexels-photo-1805600.jpeg?cs=srgb&dl=pexels-dmitry-zvolskiy-1805600.jpg&fm=jpg" alt="" />
+                                    <img src={advertisementList[3]?.url} alt=""/>
                                 </div>
                             </div>
                         </div>
@@ -223,8 +239,8 @@ const dashboard = () => {
                                 <p>Calender</p>
 
                                 <div className="btn_box">
-                                    <button>Appoinments</button>
-                                    <button>Reservation</button>
+                                    <button><Link to="/appoinment">Appoinments</Link></button>
+                                    {/* <button>Reservation</button> */}
                                 </div>
                             </div>
 

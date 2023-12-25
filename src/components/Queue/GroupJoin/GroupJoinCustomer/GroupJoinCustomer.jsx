@@ -110,7 +110,6 @@ import { barberListAction, getbarberServicesbyBarberIdAction } from '../../../..
 import { groupjoinAction, singleJoinQueueAction } from '../../../../redux/actions/joinQueueAction'
 import AdminLayout from '../../../layout/Admin/AdminLayout'
 
-
 const GroupJoinCustomer = () => {
 
   const dispatch = useDispatch()
@@ -129,6 +128,7 @@ const GroupJoinCustomer = () => {
   const [selectedbarberId, setSelectedBarberid] = useState(null)
   const [selectedbarberName, setSelectedBarberName] = useState("")
   const [name, setName] = useState("")
+  const [customerEmail,setCustomerEmail] = useState("")
 
   const barberServiceCallHandler = (barberId, name) => {
     const selectbarber = window.confirm("Are you sure ?")
@@ -169,6 +169,7 @@ const GroupJoinCustomer = () => {
       const customerdata = {
         salonId: LoggedInMiddleware?.user && LoggedInMiddleware.user[0].salonId,
         name,
+        customerEmail,
         joinedQType: "Group-Join",
         methodUsed: "Walk-In",
         barberName: selectedbarberName,
@@ -190,29 +191,26 @@ const GroupJoinCustomer = () => {
     setSelectedCustomer(deleteCustomer)
   }
 
+  const navigate = useNavigate()
 
   const joinqueueHandler = () => {
-    const queuedata = {
-      salonId: LoggedInMiddleware?.user && LoggedInMiddleware.user[0].salonId,
-      groupInfo: selectedCustomer
+    if(selectedCustomer.length > 5){
+      alert("Exceed 5 customer")
+    }else{
+      const queuedata = {
+        salonId: LoggedInMiddleware?.user && LoggedInMiddleware.user[0].salonId,
+        groupInfo: selectedCustomer
+      }
+
+      console.log(queuedata)
+
+      const confirm = window.confirm("Are you sure ?")
+  
+      if (confirm) {
+        dispatch(groupjoinAction(queuedata, setSelectedCustomer,navigate))
+      }
     }
-
-    console.log(queuedata)
-
-    const confirm = window.confirm("Are you sure ?")
-
-    if (confirm) {
-      dispatch(groupjoinAction(queuedata, setSelectedCustomer))
-    }
-
-    // console.log(queuedata)
-
-    // const confirm = window.confirm("Are you sure ? ")
-
-    // if(confirm){
-    //   dispatch(singleJoinQueueAction(queuedata))
-    // }
-
+    
   }
 
   return (
@@ -232,6 +230,16 @@ const GroupJoinCustomer = () => {
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder='Enter Your Customer Name'
+            />
+          </div>
+
+          <div>
+            <p>Customer Email</p>
+            <input
+              type="text"
+              value={customerEmail}
+              onChange={(e) => setCustomerEmail(e.target.value)}
+              placeholder='Enter Your Customer Email'
             />
           </div>
 

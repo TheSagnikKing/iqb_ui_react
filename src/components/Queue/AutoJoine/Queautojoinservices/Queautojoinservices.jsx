@@ -94,7 +94,6 @@ import { getbarberServicesbyBarberIdAction } from '../../../../redux/actions/bar
 
 const Queautojoinservices = () => {
 
-
   const dispatch = useDispatch()
 
   const LoggedInMiddleware = useSelector(state => state.LoggedInMiddleware)
@@ -113,6 +112,7 @@ const Queautojoinservices = () => {
   const [selectedbarberId, setSelectedBarberid] = useState(null)
   const [selectedbarberName, setSelectedBarberName] = useState("")
   const [name, setName] = useState("")
+  const [customerEmail,setCustomerEmail] = useState("")
 
   const barberServiceCallHandler = (barberId, name) => {
     const selectbarber = window.confirm("Are you sure ?")
@@ -146,9 +146,12 @@ const Queautojoinservices = () => {
 
   console.log(selectedService)
 
+  const navigate = useNavigate()
+
   const joinqueueHandler = () => {
     const joindata = {
       name,
+      customerEmail,
       joinedQType: "Auto-Join",
       methodUsed: "Walk-In",
       salonId: LoggedInMiddleware?.user && LoggedInMiddleware.user[0].salonId,
@@ -160,7 +163,7 @@ const Queautojoinservices = () => {
     const confirm = window.confirm("Are you Sure ? ")
 
     if (confirm) {
-      dispatch(autojoinAction(joindata))
+      dispatch(autojoinAction(joindata,navigate))
     }
   }
 
@@ -180,6 +183,16 @@ const Queautojoinservices = () => {
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder='Enter Your Customer Name'
+            />
+          </div>
+
+          <div>
+            <p>Customer Email</p>
+            <input
+              type="text"
+              value={customerEmail}
+              onChange={(e) => setCustomerEmail(e.target.value)}
+              placeholder='Enter Your Customer Email'
             />
           </div>
 

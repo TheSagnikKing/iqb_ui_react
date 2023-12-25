@@ -1,0 +1,12 @@
+.edit-appointment-container{
+    width: 82% !important;
+    position: absolute;
+    top: 90px;
+    left: 265px;
+    margin-left: 35px;
+    margin-top: 30px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    padding-bottom: 40px;
+}

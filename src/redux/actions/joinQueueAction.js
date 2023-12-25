@@ -2,7 +2,7 @@ import { AUTOJOIN_FAIL, AUTOJOIN_REQ, AUTOJOIN_SUCCESS, GROUP_JOIN_FAIL, GROUP_J
 
 import api from "../api/Api"
 
-export const singleJoinQueueAction = (singlejoindata,setSelectedService) => async(dispatch) => {
+export const singleJoinQueueAction = (singlejoindata,setSelectedService,navigate) => async(dispatch) => {
     try {
         dispatch({type:SINGLE_JOINQUEUE_REQ})
 
@@ -12,8 +12,9 @@ export const singleJoinQueueAction = (singlejoindata,setSelectedService) => asyn
             type:SINGLE_JOINQUEUE_SUCCESS,
             payload:data
         })
-        alert("Joined to the queue successfully")
+
         setSelectedService([])
+        navigate("/queue")
     } catch (error) {
         dispatch({
             type:SINGLE_JOINQUEUE_FAIL,
@@ -43,7 +44,7 @@ export const queueListAction = (salonid) => async(dispatch) => {
 }
 
 
-export const autojoinAction = (joindata) => async(dispatch) => {
+export const autojoinAction = (joindata,navigate) => async(dispatch) => {
     try {
         dispatch({type:AUTOJOIN_REQ})
 
@@ -54,7 +55,7 @@ export const autojoinAction = (joindata) => async(dispatch) => {
             payload:data
         })
 
-        alert("Auto join successfull")
+        navigate("/queue")
     } catch (error) {
         dispatch({
             type:AUTOJOIN_FAIL,
@@ -66,7 +67,7 @@ export const autojoinAction = (joindata) => async(dispatch) => {
 }
 
 
-export const groupjoinAction = (groupjoindata,setSelectedCustomer) => async(dispatch) => {
+export const groupjoinAction = (groupjoindata,setSelectedCustomer,navigate) => async(dispatch) => {
     try {
         dispatch({type:GROUP_JOIN_REQ})
 
@@ -78,8 +79,8 @@ export const groupjoinAction = (groupjoindata,setSelectedCustomer) => async(disp
             payload:data
         })
 
-        alert("Group join successfull")
         setSelectedCustomer([])
+        navigate("/queue")
         
     } catch (error) {
         dispatch({

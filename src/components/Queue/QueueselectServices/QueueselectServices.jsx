@@ -120,6 +120,7 @@ const QueueselectServices = () => {
     const [currentbarbername, setCurrentBarberName] = useState("")
     const [currentbarberId, setCurrentBarberId] = useState(null)
     const [name, setName] = useState("")
+    const [customerEmail,setCustomerEmail] = useState("")
 
     const barberSelectHandler = (barbername, barberid) => {
         const confirm = window.confirm("Are you sure ?")
@@ -130,10 +131,13 @@ const QueueselectServices = () => {
         }
     }
 
+    const navigate = useNavigate()
+
     const joinqueueHandler = () => {
         const queuedata = {
             salonId: LoggedInMiddleware?.user && LoggedInMiddleware.user[0].salonId,
             name,
+            customerEmail,
             joinedQType: "Single-Join",
             methodUsed: "Walk-In",
             barberName: currentbarbername,
@@ -146,7 +150,7 @@ const QueueselectServices = () => {
         const confirm = window.confirm("Are you sure ? ")
 
         if (confirm) {
-            dispatch(singleJoinQueueAction(queuedata))
+            dispatch(singleJoinQueueAction(queuedata,navigate))
         }
     }
 
@@ -166,6 +170,16 @@ const QueueselectServices = () => {
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                             placeholder='Enter Your Customer Name'
+                        />
+                    </div>
+
+                    <div>
+                        <p>Customer Email</p>
+                        <input
+                            type="text"
+                            value={customerEmail}
+                            onChange={(e) => setCustomerEmail(e.target.value)}
+                            placeholder='Enter Your Customer Email'
                         />
                     </div>
 

@@ -5,40 +5,66 @@ import { MdEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import { useDispatch, useSelector } from 'react-redux';
 import api from "../../redux/api/Api"
-import { getAllAdvertisementAction } from '../../redux/actions/AdvertisementAction';
 
 const Advertisement = () => {
 
   const fileInputRef = useRef(null);
 
-  const handleEditButtonClick = () => {
+  const [publicid, setPublicId] = useState("")
+  const [mongoid, setMongoid] = useState("")
+
+  const handleEditButtonClick = (publicId, mongoid) => {
     fileInputRef.current.click();
+    setPublicId(publicId)
+    setMongoid(mongoid)
   };
 
+  console.log(publicid)
+  console.log(mongoid)
 
   const handleFileInputChange = async (e) => {
     const uploadImage = e.target.files[0];
     console.log(uploadImage)
 
-    // const formData = new FormData();
+    const formData = new FormData();
 
-    // formData.append('email', LoggedInMiddleware?.user[0]?.email)
-    // formData.append('profile', uploadImage)
+    formData.append('id', mongoid)
+    formData.append('advertisements', uploadImage)
+    formData.append('public_imgid', publicid)
 
-    // try {
-    //   const imageResponse = await api.post('/api/admin/uploadAdminProfilePicture', formData, {
-    //     headers: {
-    //       'Content-Type': 'multipart/form-data',
-    //     },
-    //   });
+    try {
+      const imageResponse = await api.put('/api/advertisement/updateAdvertisements', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
 
-    //   console.log('Upload success:', imageResponse.data);
-    //   Setsetprofilepic(imageResponse?.data?.adminImage?.profile[0]?.url)
-    //   alert("Image Uploaded successfully")
-    // } catch (error) {
-    //   console.error('Image upload failed:', error);
-    // }
+      console.log('update success:', imageResponse.data);
+      alert("Image Update successfully")
+      setPublicId("")
+      setMongoid("")
+      window.location.reload()
+    } catch (error) {
+      console.error('Image upload failed:', error);
+    }
   };
+
+  const handleDeleteButtonClick = async (publicid, id) => {
+    try {
+      console.log(publicid)
+      console.log(id)
+      await api.delete("/api/advertisement/deleteAdvertisements", {
+        data:{
+          public_id: publicid,
+          img_id: id
+        }
+      })
+      alert("Image deleted Successfully")
+      window.location.reload()
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
 
   const [selectedFiles, setSelectedFiles] = useState(null);
@@ -77,11 +103,19 @@ const Advertisement = () => {
     }
   };
 
-  const dispatch = useDispatch()
+  const [advertisementList, setAdvertisementList] = useState([])
 
   useEffect(() => {
-    dispatch(getAllAdvertisementAction(LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId))
-  },[LoggedInMiddleware?.user])
+    const getAdvertisementData = async () => {
+      const { data } = await api.post(`/api/advertisement/getAdvertisements`, { salonId: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId });
+
+      console.log("adver", data)
+      setAdvertisementList(data?.advertisements)
+    }
+
+    getAdvertisementData()
+  }, [LoggedInMiddleware?.user])
+
 
   return (
     <>
@@ -100,19 +134,25 @@ const Advertisement = () => {
         </div>
 
         <div className='advertisement-container'>
-          <div>
-            <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg" alt="" />
-            <div>
-              <button onClick={() => handleEditButtonClick()}><MdEdit /></button>
-              <input
-                type="file"
-                ref={fileInputRef}
-                style={{ display: 'none' }}
-                onChange={handleFileInputChange}
-              />
-              <button><MdDelete /></button>
-            </div>
-          </div>
+
+          {
+            advertisementList ? (advertisementList?.map((a, i) => (
+              <div key={i}>
+                <img src={a.url} alt="" />
+                <div>
+                  <button onClick={() => handleEditButtonClick(a.public_id, a._id)}><MdEdit /></button>
+                  <input
+                    type="file"
+                    ref={fileInputRef}
+                    style={{ display: 'none' }}
+                    onChange={handleFileInputChange}
+                  />
+                  <button onClick={() => handleDeleteButtonClick(a.public_id, a._id)}><MdDelete /></button>
+                </div>
+              </div>
+            ))) : (<p>No Images</p>)
+          }
+
 
         </div>
       </div>

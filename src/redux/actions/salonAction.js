@@ -2,7 +2,7 @@ import { APPLY_SALON_FAIL, APPLY_SALON_REQ, APPLY_SALON_SUCCESS, CONNECT_BARBER_
 
 import api from "../api/Api"
 
-export const createSalonAction = (salondata) => async(dispatch) => {
+export const createSalonAction = (salondata,navigate) => async(dispatch) => {
     try {
         // console.log(salondata)
         dispatch({type:CREATE_SALON_REQ})
@@ -13,7 +13,7 @@ export const createSalonAction = (salondata) => async(dispatch) => {
             type:CREATE_SALON_SUCCESS,
             payload:data
         })
-        alert("Salon created Successfully")
+        navigate("/salon/salonlist")
     } catch (error) {
         dispatch({
             type:CREATE_SALON_FAIL,
@@ -40,7 +40,7 @@ export const salonListAction = () => async(dispatch) => {
     }
 }
 
-export const updateSalonAction = (salondata) => async(dispatch) => {
+export const updateSalonAction = (salondata,navigate) => async(dispatch) => {
     try {
         dispatch({type:UPDATE_SALON_REQ})
 
@@ -51,7 +51,7 @@ export const updateSalonAction = (salondata) => async(dispatch) => {
             payload:data
         })
 
-        alert("Salon Updated Successfully")
+        navigate("/salon/salonlist")
     } catch (error) {
         dispatch({
             type:UPDATE_SALON_FAIL,

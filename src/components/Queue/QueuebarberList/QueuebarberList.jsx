@@ -26,6 +26,7 @@ const QueuebarberList = () => {
   const [selectedbarberId, setSelectedBarberid] = useState(null)
   const [selectedbarberName, setSelectedBarberName] = useState("")
   const [name, setName] = useState("")
+  const [customerEmail,setCustomerEmail] = useState("")
 
   const barberServiceCallHandler = (barberId, name) => {
     const selectbarber = window.confirm("Are you sure ?")
@@ -38,6 +39,8 @@ const QueuebarberList = () => {
   }
 
   const getBarberServicesBybarberId = useSelector(state => state.getBarberServicesBybarberId)
+
+  console.log(getBarberServicesBybarberId)
 
   const [selectedService, setSelectedService] = useState([])
 
@@ -58,10 +61,13 @@ const QueuebarberList = () => {
 
   console.log(selectedService)
 
+  const navigate = useNavigate()
+
   const joinqueueHandler = () => {
     const queuedata = {
       salonId: LoggedInMiddleware?.user && LoggedInMiddleware.user[0].salonId,
       name,
+      customerEmail,
       joinedQType: "Single-Join",
       methodUsed: "Walk-In",
       barberName: selectedbarberName,
@@ -74,12 +80,14 @@ const QueuebarberList = () => {
     const confirm = window.confirm("Are you sure ? ")
 
     if (confirm) {
-      dispatch(singleJoinQueueAction(queuedata, setSelectedService))
+      dispatch(singleJoinQueueAction(queuedata, setSelectedService,navigate))
       setName("")
     }
 
   }
 
+
+  console.log("sdvd",getBarberServicesBybarberId)
   return (
     <>
 
@@ -96,6 +104,16 @@ const QueuebarberList = () => {
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder='Enter Your Customer Name'
+            />
+          </div>
+
+          <div>
+            <p>Customer Email</p>
+            <input
+              type="text"
+              value={customerEmail}
+              onChange={(e) => setCustomerEmail(e.target.value)}
+              placeholder='Enter Your Customer Email'
             />
           </div>
 
@@ -134,7 +152,7 @@ const QueuebarberList = () => {
             <div className='barber-single-join-quebarberserv-content'>
               <p>Service ID</p>
               <p>Service Name</p>
-              <p>Service Code</p>
+              <p>Service Price</p>
               <p>Barber Service EWT</p>
               <p>Action</p>
             </div>
@@ -143,7 +161,7 @@ const QueuebarberList = () => {
                 <div className='barber-single-join-quebarberserv-content' key={b._id}>
                   <p>{b.serviceId}</p>
                   <p>{b.serviceName}</p>
-                  <p>{b.serviceCode}</p>
+                  <p>{b.servicePrice}</p>
                   <p>{b.barberServiceEWT}</p>
                   <button onClick={() => selectedServiceHandler(b, index)}>Add</button>
                 </div>

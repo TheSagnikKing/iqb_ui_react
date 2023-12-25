@@ -11,6 +11,7 @@ import AdminLayout from '../layout/Admin/AdminLayout'
 
 
 import api from "../../redux/api/Api"
+import { useNavigate } from 'react-router-dom'
 
 const CreateBarber = () => {
 
@@ -81,6 +82,8 @@ const CreateBarber = () => {
 
     const dispatch = useDispatch()
 
+    const navigate = useNavigate()
+
     const submitHandler = () => {
         //salonid loggin admin theke 
         const barberdata = {
@@ -88,7 +91,7 @@ const CreateBarber = () => {
         }
 
         console.log(barberdata)
-        dispatch(createBarberAction(barberdata))
+        dispatch(createBarberAction(barberdata,navigate))
     }
 
 

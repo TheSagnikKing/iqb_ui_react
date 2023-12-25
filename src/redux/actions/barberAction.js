@@ -20,7 +20,7 @@ export const barberListAction = (salonId) => async(dispatch) => {
     }
 }
 
-export const createBarberAction = (barberdata) => async(dispatch) => {
+export const createBarberAction = (barberdata,navigate) => async(dispatch) => {
     try {
         dispatch({type:CREATE_BARBER_REQ})
 
@@ -31,7 +31,7 @@ export const createBarberAction = (barberdata) => async(dispatch) => {
             payload:data
         })
 
-        alert("Barber created successfully")
+        navigate("/barber/dashboard2")
     } catch (error) {
         dispatch({
             type:CREATE_BARBER_FAIL,
@@ -40,7 +40,7 @@ export const createBarberAction = (barberdata) => async(dispatch) => {
     }
 }
 
-export const updateBarberAction = (barberdata) => async(dispatch) => {
+export const updateBarberAction = (barberdata,navigate) => async(dispatch) => {
     try {
         dispatch({type:UPDATE_BARBER_REQ})
 
@@ -50,7 +50,7 @@ export const updateBarberAction = (barberdata) => async(dispatch) => {
             type:UPDATE_BARBER_SUCCESS,
             payload:data
         })
-        alert("update barber successfully")
+        navigate("/barber/dashboard2")
     } catch (error) {
         dispatch({
             type:UPDATE_BARBER_FAIL,

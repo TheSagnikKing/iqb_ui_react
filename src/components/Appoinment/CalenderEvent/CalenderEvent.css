@@ -91,7 +91,7 @@
 
   .appoin{
     width: 380px;
-    height: 100px;
+    height: auto;
     margin-left: 10px;
     margin-bottom: 15px;
     padding:10px;
@@ -138,4 +138,31 @@
     .cal-item{
       min-width:100%;
     }
+  }
+
+
+  .app-btn-div{
+    display: flex;
+    gap: 1rem;
+    margin-block: 10px;
+  }
+
+  .app-btn-div>button:nth-child(1){
+    box-shadow:0px 0px 4px rgba(0,0,0,0.3);
+    background-color: #fff;
+    border: none;
+    border-radius: 3px;
+    padding: 5px 8px;
+    cursor: pointer;
+    color: blue;
+  }
+
+  .app-btn-div>button:nth-child(2){
+    box-shadow:0px 0px 4px rgba(0,0,0,0.3);
+    background-color: #fff;
+    border: none;
+    border-radius: 3px;
+    padding: 5px 8px;
+    cursor: pointer;
+    color: red;
   }

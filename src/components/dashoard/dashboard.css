@@ -690,3 +690,24 @@
     padding-inline: 10px;
     margin-bottom: 10px;
 }
+
+.img_three{
+    border: 1px solid rgba(0,0,0,0.2);
+    height: 55% !important;
+}
+
+.img_one{
+    border: 1px solid rgba(0,0,0,0.2);
+    height: 55% !important;
+}
+
+.img_two>div{
+    border: 1px solid rgba(0,0,0,0.2);
+    height: 31% !important;
+}
+
+.img_two>div>img{
+    height: 100%;
+    width: 100%;
+    border-radius: none !important;
+}

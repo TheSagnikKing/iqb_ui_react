@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { createSalonAction } from '../../../redux/actions/salonAction'
 import AdminLayout from '../../layout/Admin/AdminLayout'
 import api from "../../../redux/api/Api"
+import { useNavigate } from 'react-router-dom'
 
 const CreateSalon = () => {
 
@@ -117,6 +118,8 @@ const CreateSalon = () => {
 
     const LoggedInMiddleware = useSelector(state => state.LoggedInMiddleware)
 
+    const navigate = useNavigate()
+
     const submitHandler = async () => {
         const salonData = {
             //Ai admin emailer value loggin theke asbe
@@ -132,7 +135,7 @@ const CreateSalon = () => {
 
         console.log(salonData)
 
-        dispatch(createSalonAction(salonData))
+        dispatch(createSalonAction(salonData,navigate))
 
         setSalonName("")
         setAddress("")

@@ -6,6 +6,7 @@ import { barberListAction, getbarberServicesbyBarberIdAction } from '../../../re
 
 import api from "../../../redux/api/Api"
 import { createAppointmentAction } from '../../../redux/actions/AppointmentAction'
+import { useNavigate } from 'react-router-dom'
 
 const CreateAppointment = () => {
 
@@ -94,6 +95,7 @@ const CreateAppointment = () => {
         }
     }
 
+    const navigate = useNavigate()
 
     const CreateAppointment = () => {
         const createAppointmentData = {
@@ -114,7 +116,7 @@ const CreateAppointment = () => {
         const confirm = window.confirm("Are you sure ?")
 
         if (confirm) {
-            dispatch(createAppointmentAction(createAppointmentData))
+            dispatch(createAppointmentAction(createAppointmentData,navigate))
         }
     }
 
@@ -126,7 +128,7 @@ const CreateAppointment = () => {
 
                 <div className='create-form'>
                     <div>
-                        <label htmlFor="">Service Name</label>
+                        <label htmlFor="">Appointment Note</label>
                         <input
                             type="text"
                             placeholder='Enter Name'
@@ -231,7 +233,56 @@ const CreateAppointment = () => {
                         </div>
                     </div>
 
-                    <button onClick={CreateAppointment}>Create Appointment</button>
+                    <div>
+                        <h3 htmlFor="">Preview</h3>
+
+                        {/* appointmentName: appointmentName,
+            startTime: timeSlotStartTime,
+            // customerEmail: "arg@gmail.com",
+            customerName: name,
+            customerType: "Walk-In",
+            methodUsed: "App" */}
+
+                        <div>
+                            <p>Appointment Name : <b>{appointmentName}</b></p>
+                            <p>Appointment Date : <b>{date}</b></p>
+                            <p>Start Time : <b>{timeSlotStartTime}</b></p>
+                            <p>Customer Name : <b>{name}</b></p>
+                            <p>Customer Type :<b>Walk-In</b></p>
+                            <p>Method Used : <b>App</b></p>
+                            <p><b>Services :</b></p>
+                            {
+                                selectedService.map((c,i) => (
+                                    <div key={i} style={{
+                                        display:"flex",
+                                        gap:"1rem",
+                                        marginBlock:"10px",
+                                        width:"30%",
+                                        padding:"5px",
+                                        boxShadow:"0px 0px 4px rgba(0,0,0,0.4)",
+                                        borderRadius:"3px"
+                                    }}>
+                                        <p>{c.serviceName}</p>
+                                        <p>{c.barberServiceEWT}</p>
+                                        <p>{c.serviceId}</p>
+                                    </div>
+                                ))
+                            }
+                        </div>
+
+                        <button onClick={CreateAppointment} 
+                        style={{
+                            backgroundColor:"#f1f6fc",
+                            width:"50%",
+                            border:"none",
+                            cursor:"pointer",
+                            boxShadow:"0px 0px 4px rgba(0,0,0,0.4)",
+                            borderRadius:"4px",
+                            height:"35px"
+                        }}
+                        >Create Appointment</button>
+                    </div>
+
                 </div>
             </div>
         </>

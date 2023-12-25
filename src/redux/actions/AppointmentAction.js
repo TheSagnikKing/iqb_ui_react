@@ -2,7 +2,7 @@ import { CREATE_APPOINTMENT_FAIL, CREATE_APPOINTMENT_REQ, CREATE_APPOINTMENT_SUC
 
 import api from "../api/Api"
 
-export const createAppointmentAction = (appointmentData) => async(dispatch) => {
+export const createAppointmentAction = (appointmentData,navigate) => async(dispatch) => {
     try {
         dispatch({type:CREATE_APPOINTMENT_REQ})
 
@@ -13,7 +13,7 @@ export const createAppointmentAction = (appointmentData) => async(dispatch) => {
             payload:data
         })
 
-        alert("Appintment Created Successfully")
+        navigate("/appoinment")
     } catch (error) {
         dispatch({
             type:CREATE_APPOINTMENT_FAIL,

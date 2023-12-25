@@ -89,13 +89,23 @@ const AdminHeader = ({ title }) => {
   }
 
   const applySalonHandler = async () => {
-    dispatch(applySalonAction(applySalonData))
+    if (Number(chooseSalonId) == 0 || LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId == Number(chooseSalonId)) {
+
+    } else {
+      alert("New Salon Apply Successfully")
+      dispatch(applySalonAction(applySalonData))
+    }
+
   }
+
+  useEffect(() => {
+    setChooseSalonId(LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId)
+  },[LoggedInMiddleware?.user])
 
   const [salonStatus, setSalonStatus] = useState(false);
 
   useEffect(() => {
-    setSalonStatus(LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].isOnline)
+    setSalonStatus(LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonIsOnline)
   }, [LoggedInMiddleware?.user])
 
   const salonStatusHandler = () => {
@@ -175,20 +185,6 @@ const AdminHeader = ({ title }) => {
             <IoIosArrowForward />
             <b style={{ color: "rgba(0,0,0,0.6)" }}>{title}</b>
 
-            {/* TOGGLE_SWITCH_CODE */}
-            {/* <label className="nav1toggle_switch">
-              <input type="checkbox"
-                value={salonStatus}
-                onClick={salonStatusHandler}
-              />
-              <span className="nav1slider"></span>
-              <span className={`nav2slider ${salonStatus ? 'checked' : ''}`}
-                style={{
-                  background: salonStatus ? "#4CBB17" : ""
-                }}
-              ></span>
-            </label> */}
-
             {/* TOGGLE SWITCH */}
             <label className="nav2toggle_switch" >
               <input type="checkbox"
@@ -219,12 +215,15 @@ const AdminHeader = ({ title }) => {
               <select
                 name="cars"
                 id="cars"
-                onChange={(e) => setChooseSalonId(e.target.value)}
                 value={chooseSalonId}
+                onChange={(e) => setChooseSalonId(e.target.value)}
               >
                 {salonList && salonList.map((s, i) => (
-                  <option value={s.salonId} key={i}>
-                    {s.salonName}
+                  <option value={s.salonId} key={i} style={{
+                    backgroundColor: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId === s.salonId ? "green" : "",
+                    color:LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId === s.salonId ? "#fff" : "black"
+                  }}>
+                    {s.salonId}
                   </option>
                 ))}
               </select>

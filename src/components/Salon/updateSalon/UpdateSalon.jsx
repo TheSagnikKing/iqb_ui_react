@@ -4,7 +4,7 @@ import { MdKeyboardArrowDown } from "react-icons/md"
 import Layout from '../../layout/Layout'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateSalonAction } from '../../../redux/actions/salonAction'
-import { useLocation, useParams } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import AdminLayout from '../../layout/Admin/AdminLayout'
 import axios from 'axios'
 import { getSharedSalonData } from './salonId'
@@ -67,12 +67,15 @@ const UpdateSalon = () => {
     const [serviceDesc, setServiceDesc] = useState("")
     const [servicePrice, setServicePrice] = useState("")
     const [serviceEWT, setServiceEWT] = useState(null)
+    const [serviceId, setServiceId] = useState(null)
 
     const dispatch = useDispatch()
 
     const LoggedInMiddleware = useSelector(state => state.LoggedInMiddleware)
 
     const adminSalonId = LoggedInMiddleware.user && LoggedInMiddleware.user[0].salonId
+
+    const navigate = useNavigate()
 
     const submitHandler = () => {
         const salonData = {
@@ -85,36 +88,37 @@ const UpdateSalon = () => {
                 //salonId
             }, country, postCode, contactTel, salonType, webLink, services, salonId: adminSalonId
         }
+        console.log(salonData)
+        dispatch(updateSalonAction(salonData,navigate))
 
-        dispatch(updateSalonAction(salonData))
-
-        setSalonName("")
-        setAddress("")
-        setCity("")
-        setLongitude(0)
-        setLatitude(0)
-        setCountry("")
-        setPostCode("")
-        setContactTel("")
-        setSalonType("")
-        setWebLink("")
-        setServices([])
-        setServiceName("")
-        setServiceDesc("")
-        setServicePrice("")
-        setSalonEmail("")
+        // setSalonName("")
+        // setAddress("")
+        // setCity("")
+        // setLongitude(0)
+        // setLatitude(0)
+        // setCountry("")
+        // setPostCode("")
+        // setContactTel("")
+        // setSalonType("")
+        // setWebLink("")
+        // setServices([])
+        // setServiceName("")
+        // setServiceDesc("")
+        // setServicePrice("")
+        // setSalonEmail("")
         
     }
 
 
     const addServiceHandler = () => {
         setServices(prevServices => [...prevServices, {
-            serviceName, serviceDesc, servicePrice, serviceEWT
+            serviceName, serviceDesc, servicePrice, serviceEWT,serviceId
         }]);
         setServiceName("")
         setServiceDesc("")
         setServicePrice("")
         setServiceEWT(0)
+        setServiceId(0)
         console.log(services);
     }
 
@@ -126,6 +130,7 @@ const UpdateSalon = () => {
         setServiceDesc(currentService.serviceDesc)
         setServicePrice(currentService.servicePrice)
         setServiceEWT(currentService.serviceEWT)
+        setServiceId(currentService.serviceId)
 
         const updatedServices = [...services];
         updatedServices.splice(ind, 1);
@@ -134,8 +139,7 @@ const UpdateSalon = () => {
     }
 
 
-    const locationstate = useLocation()
-    const currentSalonId = locationstate?.state?.salonId
+    const currentSalonId = LoggedInMiddleware?.user && LoggedInMiddleware.user[0].salonId
 
     const [fetchimages, setFetchImages] = useState([])
 
@@ -143,27 +147,28 @@ const UpdateSalon = () => {
         const fetchAllSalons = async () => {
             const { data } = await api.get(`/api/salon/getSalonInfoBySalonId?salonId=${currentSalonId}`)
 
-            console.log(data)
+            console.log("update",data)
 
-            setFetchImages(data?.response?.salonInfo?.profile)
-            setSalonEmail(data?.response?.salonInfo?.salonEmail)
-            setUsername(data?.response?.salonInfo?.userName)
-            setSalonName(data?.response?.salonInfo?.salonName)
-            setAddress(data?.response?.salonInfo?.address)
-            setCity(data?.response?.salonInfo?.city)
-
-            setCountry(data?.response?.salonInfo?.country)
-            setPostCode(data?.response?.salonInfo?.postcode)
-            setContactTel(data?.response?.salonInfo?.contactTel)
-            // setSalonType(data?.response?.salonInfo?.adminEmail)
-            setWebLink(data?.response?.salonInfo?.webLink)
-            setPostCode(data?.response?.salonInfo?.postCode)
-            setServices(data?.response?.salonInfo?.services)
+            if(data?.response?.salonInfo){
+                setFetchImages(data?.response?.salonInfo?.profile)
+                setSalonEmail(data?.response?.salonInfo?.salonEmail)
+                setSalonName(data?.response?.salonInfo?.salonName)
+                setAddress(data?.response?.salonInfo?.address)
+                setCity(data?.response?.salonInfo?.city)
+    
+                setCountry(data?.response?.salonInfo?.country)
+                setPostCode(data?.response?.salonInfo?.postcode)
+                setContactTel(data?.response?.salonInfo?.contactTel)
+                // setSalonType(data?.response?.salonInfo?.adminEmail)
+                setWebLink(data?.response?.salonInfo?.webLink)
+                setPostCode(data?.response?.salonInfo?.postCode)
+                setServices(data?.response?.salonInfo?.services)
+            }
 
         }
 
         fetchAllSalons()
-    }, [])
+    }, [currentSalonId])
 
 
     const geolocHandler = () => {

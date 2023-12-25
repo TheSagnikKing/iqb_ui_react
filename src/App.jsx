@@ -60,6 +60,7 @@ import BarberQueLists from './components/barber/BarberQueLists/BarberQueLists';
 import SalonSettings from './components/Salon/SalonSettings/SalonSettings';
 import Map from './components/Map/Map';
 import Advertisement from './components/Advertisement/Advertisement';
+import EditAppointment from './components/Appoinment/EditAppointment/EditAppointment';
 
 const App = () => {
 
@@ -285,6 +286,7 @@ const App = () => {
 
           <Route path="/appoinment" element={<Auth><Month /></Auth>} />
           <Route path="/appoinment/createappointment" element={<Auth><CreateAppointment/></Auth>}/>
+          <Route path="/appoinment/editappointment" element={<Auth><EditAppointment/></Auth>}/>
           <Route path="/appoinment/calender" element={<Auth><CalenderEvent /></Auth>} />
           <Route path="/appoinment/calender/list" element={<Auth><CalenderList /></Auth>} />
 
