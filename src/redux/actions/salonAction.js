@@ -118,18 +118,18 @@ export const connectSalonBarberAction = (barberData) => async(dispatch) => {
 }
 
 
-export const salonSettingsUpdateAction = (salonsettingsData) => async(dispatch) => {
+export const salonSettingsUpdateAction = (salonsettingsData,navigate) => async(dispatch) => {
     try {
         dispatch({type:SALON_SETTINGS_UPDATE_REQ})
 
         const {data} = await api.put(`/api/salonSettings/updateSalonSettings`, salonsettingsData)
 
-        window.alert("Salon Settings is successfully updated")
-
         dispatch({
             type:SALON_SETTINGS_UPDATE_SUCCESS,
             payload:data
         })
+
+        navigate("/salon/salonlist")
     } catch (error) {
         dispatch({
             type:SALON_SETTINGS_UPDATE_FAIL,

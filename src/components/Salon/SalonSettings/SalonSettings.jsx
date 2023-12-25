@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { salonSettingsUpdateAction } from '../../../redux/actions/salonAction'
 
 import api from "../../../redux/api/Api"
+import { useNavigate } from 'react-router-dom'
 
 const SalonSettings = () => {
     const [startTime, setStartTime] = useState("")
@@ -13,6 +14,9 @@ const SalonSettings = () => {
     const LoggedInMiddleware = useSelector(state => state.LoggedInMiddleware)
 
     const dispatch = useDispatch()
+
+    const salonSettingsUpdate = useSelector(state => state.salonSettingsUpdate)
+    const navigate = useNavigate()
 
     const submitHandler = () => {
         const settingdata = {
@@ -25,12 +29,13 @@ const SalonSettings = () => {
 
         console.log(settingdata)
 
-        dispatch(salonSettingsUpdateAction(settingdata))
+        dispatch(salonSettingsUpdateAction(settingdata,navigate))
 
-    }
+    }   
 
     useEffect(() => {
         const getsalonfnc = async () => {
+
             const { data } = await api.post("/api/salonSettings/getSalonSettings", {
                 salonId: 4
                 // Add other data properties as needed
@@ -39,6 +44,7 @@ const SalonSettings = () => {
             console.log(data)
             setStartTime(data?.response?.appointmentSettings?.appointmentStartTime)
             setEndTime(data?.response?.appointmentSettings?.appointmentEndTime)
+
         }
         getsalonfnc()
 
@@ -122,7 +128,9 @@ const SalonSettings = () => {
                             </select>
                         </div>
 
-                        <button onClick={submitHandler}>Submit</button>
+                        <button onClick={submitHandler}>{
+                            salonSettingsUpdate?.loading == true ? <h2>Loading...</h2> : "Submit"
+                        }</button>
                     </div>
                 </div>
             </div>

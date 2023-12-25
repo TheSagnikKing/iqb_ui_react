@@ -68,15 +68,18 @@ const dashboard = () => {
     console.log(formattedDate);
 
     const [appointmentData, setAppointmentData] = useState([])
-
+    const [appointmentLoader, setAppointmentLoader] = useState(false)
+ 
     useEffect(() => {
         const appointfnc = async () => {
+            setAppointmentLoader(true)
             const { data } = await api.post("/api/advertisement/getDashboardAppointmentList", {
                 salonId,
                 appointmentDate: formattedDate
             })
 
             setAppointmentData(data)
+            setAppointmentLoader(false)
         }
 
         appointfnc()
@@ -218,7 +221,7 @@ const dashboard = () => {
                                 </div>
 
                                 {
-                                    queueList?.response?.slice(0, 5).map((c, i) => (
+                                    queueList?.loading == true ? <h1>loading...</h1> : queueList?.response?.slice(0, 5).map((c, i) => (
                                         <div className='dashboard-quelist-content' key={i}>
                                             <p>{c.name}</p>
                                             <p>{c.barberName}</p>
@@ -257,7 +260,7 @@ const dashboard = () => {
                                         <p>Barber Name</p>
                                     </div>
                                     {
-                                        appointmentData?.response?.map((ap,i) => (
+                                        appointmentLoader == true ? <h1>loading...</h1> : appointmentData?.response?.map((ap,i) => (
                                             <div className='appoin-content-div' key={i}>
                                                 <p>{ap.appointmentName}</p>
                                                 <p>{ap.customerName}</p>

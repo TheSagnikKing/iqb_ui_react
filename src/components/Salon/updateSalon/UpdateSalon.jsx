@@ -303,6 +303,7 @@ const UpdateSalon = () => {
         }
     }, [response?.salonId]);
 
+
     return (
         <>
             <AdminLayout />
@@ -535,7 +536,7 @@ const UpdateSalon = () => {
 
                         <div className="sa-br-btn_box">
                             <button onClick={submitHandler}>
-                                Update
+                                {updateSalon?.loading == true ? <h2>Loading...</h2> : "update"}
                             </button>
                         </div>
 

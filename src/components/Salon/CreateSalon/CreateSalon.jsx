@@ -137,25 +137,24 @@ const CreateSalon = () => {
 
         dispatch(createSalonAction(salonData,navigate))
 
-        setSalonName("")
-        setAddress("")
-        setCity("")
-        setLongitude(0)
-        setLatitude(0)
-        setCountry("")
-        setPostCode("")
-        setContactTel("")
-        setSalonType("")
-        setWebLink("")
-        setServices([])
-        setServiceName("")
-        setServiceDesc("")
-        setServicePrice("")
-        setSalonEmail("")
-        setEndTime("")
-        setStartTime("")
+        // setSalonName("")
+        // setAddress("")
+        // setCity("")
+        // setLongitude(0)
+        // setLatitude(0)
+        // setCountry("")
+        // setPostCode("")
+        // setContactTel("")
+        // setSalonType("")
+        // setWebLink("")
+        // setServices([])
+        // setServiceName("")
+        // setServiceDesc("")
+        // setServicePrice("")
+        // setSalonEmail("")
+        // setEndTime("")
+        // setStartTime("")
     }
-
 
     const addServiceHandler = () => {
         setServices(prevServices => [...prevServices, {
@@ -515,7 +514,7 @@ const CreateSalon = () => {
 
                         <div className="sa-br-btn_box">
                             <button onClick={submitHandler}>
-                                Submit
+                                {createSalon?.loading == true ? <h3>Loading</h3> : "Submit"}
                             </button>
                         </div>
 
