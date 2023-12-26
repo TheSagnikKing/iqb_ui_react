@@ -117,6 +117,7 @@ const UpdateBarber = () => {
 
     // console.log(barberServices)
 
+    const updateBarber = useSelector(state => state.updateBarber)
 
     return (
         <>
@@ -185,7 +186,9 @@ const UpdateBarber = () => {
                     </div>
                     <div></div>
 
-                    <button onClick={submitHandler}>Update</button>
+                    <button onClick={submitHandler}>{
+                        updateBarber?.loading == true ? <h2>Loading...</h2> : "Update"
+                    }</button>
 
                     <div>
                         <div>

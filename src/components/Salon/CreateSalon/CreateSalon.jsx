@@ -66,6 +66,7 @@ const CreateSalon = () => {
 
     const [startTime, setStartTime] = useState("")
     const [endTime, setEndTime] = useState("")
+    const [chooseIntervalTime, setChooseIntervalTime] = useState(1)
 
     const dispatch = useDispatch()
 
@@ -130,7 +131,7 @@ const CreateSalon = () => {
                     longitude: Number(longitude),
                     latitude: Number(latitude)
                 }
-            }, country, postCode, contactTel, salonType, webLink, services, image, appointmentSettings: { startTime, endTime }
+            }, country, postCode, contactTel, salonType, webLink, services, image, appointmentSettings: { startTime, endTime , intervalInMinutes:Number(chooseIntervalTime)}
         }
 
         console.log(salonData)
@@ -242,6 +243,22 @@ const CreateSalon = () => {
         generateTimeOptions();
     }, []);
 
+    const [intervalTimemin, setIntervalTimemin] = useState([])
+
+    const generateTimeIntervalInMinutes = () => {
+        const options = []
+        for(let i=1; i<=60; i++){
+            options.push(i);
+        }
+
+        setIntervalTimemin(options)
+    }
+
+    useEffect(() => {
+        generateTimeIntervalInMinutes()
+    },[])
+
+
     return (
         <>
             <AdminLayout />
@@ -333,14 +350,6 @@ const CreateSalon = () => {
                         <h4>Appointment Settings</h4>
 
                         <div>
-                            {/* <label htmlFor="">Start Time</label>
-                            <input
-                                type="text"
-                                value={startTime}
-                                placeholder='00:00'
-                                onChange={(e) => setStartTime(e.target.value)}
-                            /> */}
-
                             <label for="cars">Start Time:</label>
                             <select name="startTime" id="startTime" style={{
                                 height: "35px",
@@ -362,14 +371,6 @@ const CreateSalon = () => {
                         </div>
 
                         <div>
-                            {/* <label htmlFor="">End Time</label>
-                            <input
-                                type="text"
-                                value={endTime}
-                                placeholder='00:00'
-                                onChange={(e) => setEndTime(e.target.value)}
-                            /> */}
-
                             <label for="cars">End Time:</label>
                             <select name="endTime" id="endTime" style={{
                                 height: "35px",
@@ -383,6 +384,26 @@ const CreateSalon = () => {
                                 {timeOptions.map((option) => (
                                     <option key={option.value} value={option.value}>
                                         {option.label}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+
+                        <div>
+                            <label htmlFor="">Interval Time</label>
+
+                            <select name="endTime" id="endTime" style={{
+                                height: "35px",
+                                borderRadius: "5px",
+                                paddingInline: "10px",
+                                border: "none",
+                                backgroundColor: "#f1f6fc",
+                                fontSize: "16px"
+                            }} onChange={(e) => setChooseIntervalTime(e.target.value)}
+                                value={chooseIntervalTime}>
+                                {intervalTimemin.map((option) => (
+                                    <option key={option} value={option}>
+                                        {option} mins
                                     </option>
                                 ))}
                             </select>

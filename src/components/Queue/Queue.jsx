@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 import { queueListAction } from '../../redux/actions/joinQueueAction'
 
 import { PiQueueBold } from "react-icons/pi";
-import { barberServedQueueAction } from '../../redux/actions/barberAction'
+import { barberServedQueAction, barberServedQueueAction } from '../../redux/actions/barberAction'
 
 const Queue = () => {
 
@@ -26,17 +26,24 @@ const Queue = () => {
 
     const queueList = useSelector(state => state.queueList)
 
-    // const serverHandler = (barberId, serviceId, customerid) => {
+    const serverHandler = (barberId, serviceId, customerid) => {
 
-    //     const infodata = {
-    //         barberId,
-    //         serviceId,
-    //         _id: customerid,
-    //         salonId: salonid
-    //     }
+        const infodata = {
+            barberId,
+            serviceId,
+            _id: customerid,
+            salonId: LoggedInMiddleware?.user && LoggedInMiddleware.user[0].salonId
+        }
 
-    //     dispatch(barberServedQueueAction(infodata))
-    // }
+        console.log("cust",infodata)
+
+        const confirm = window.confirm("Are you sure ?")
+
+        if(confirm){
+            dispatch(barberServedQueAction(infodata))
+        }
+
+    }
 
     return (
         <>

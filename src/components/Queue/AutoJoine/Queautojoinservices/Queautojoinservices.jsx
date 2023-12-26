@@ -167,6 +167,8 @@ const Queautojoinservices = () => {
     }
   }
 
+  const autojoin = useSelector(state => state.autojoin)
+
   return (
     <>
 
@@ -201,7 +203,7 @@ const Queautojoinservices = () => {
             <div className='barber-single-join-quebarberserv-content'>
               <p>Service ID</p>
               <p>Service Name</p>
-              <p>Service Code</p>
+              <p>Service Price</p>
               <p>Barber Service EWT</p>
               <p>Action</p>
             </div>
@@ -210,7 +212,7 @@ const Queautojoinservices = () => {
                 <div className='barber-single-join-quebarberserv-content' key={b._id}>
                   <p>{b.serviceId}</p>
                   <p>{b.serviceName}</p>
-                  <p>{b.serviceCode}</p>
+                  <p>{b.servicePrice}</p>
                   <p>{b.serviceEWT}</p>
                   <button onClick={() => selectedServiceHandler(b, index)}>Add</button>
                 </div>
@@ -226,7 +228,7 @@ const Queautojoinservices = () => {
             <div className='barber-single-join-quebarberserv-content'>
               <p>Service Id</p>
               <p>Service Name</p>
-              <p>Service Code</p>
+              <p>Service Price</p>
               <p>Barber Service EWT</p>
               <p>Action</p>
             </div>
@@ -236,7 +238,7 @@ const Queautojoinservices = () => {
                 <div className='barber-single-join-quebarberserv-content' key={b._id}>
                   <p>{b.serviceId}</p>
                   <p>{b.serviceName}</p>
-                  <p>{b.serviceCode}</p>
+                  <p>{b.servicePrice}</p>
                   <p>{b.barberServiceEWT}</p>
                   <button onClick={() => selectedServiceDelete(b)}>Del</button>
                 </div>
@@ -244,7 +246,9 @@ const Queautojoinservices = () => {
             }
           </div>
 
-          <button onClick={joinqueueHandler}>Join Queue</button>
+          <button onClick={joinqueueHandler}>{
+            autojoin?.loading == true ? <h2>loading...</h2> : "Join Queue"
+          }</button>
         </div>
       </div>
 

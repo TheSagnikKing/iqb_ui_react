@@ -85,7 +85,7 @@ export const AdminResetPasswordReducer = (state = {}, action) => {
 export const LoggedOutMiddlewareReducer = (state = {}, action) => {
     switch (action.type) {
         case LOGGED_OUT_MIDDLEWARE_REQ:
-            return { ...state, loading: false };
+            return { ...state, loading: true };
         case LOGGED_OUT_MIDDLEWARE_SUCCESS:
             return { ...state, loading: false, ...action.payload };
         case LOGGED_OUT_MIDDLEWARE_FAIL:
@@ -98,7 +98,7 @@ export const LoggedOutMiddlewareReducer = (state = {}, action) => {
 export const LoggedInMiddlewareReducer = (state = {}, action) => {
     switch (action.type) {
         case LOGGED_IN_MIDDLEWARE_REQ:
-            return { ...state, loading: false };
+            return { ...state, loading: true };
         case LOGGED_IN_MIDDLEWARE_SUCCESS:
             return { ...state, loading: false, ...action.payload };
         case LOGGED_IN_MIDDLEWARE_FAIL:
@@ -113,7 +113,7 @@ export const LoggedInMiddlewareReducer = (state = {}, action) => {
 export const updateAdminReducer = (state = {}, action) => {
     switch (action.type) {
         case UPDATE_ADMIN_REQ:
-            return { ...state, loading: false };
+            return { ...state, loading: true };
         case UPDATE_ADMIN_SUCCESS:
             return { ...state, loading: false, ...action.payload };
         case UPDATE_ADMIN_FAIL:
@@ -127,7 +127,7 @@ export const updateAdminReducer = (state = {}, action) => {
 export const updateAdminAccountDetailsReducer = (state = {}, action) => {
     switch (action.type) {
         case UPDATE_ADMIN_ACCOUNT_DETAILS_REQ:
-            return { ...state, loading: false };
+            return { ...state, loading: true };
         case UPDATE_ADMIN_ACCOUNT_DETAILS_SUCCESS:
             return { ...state, loading: false, ...action.payload };
         case UPDATE_ADMIN_ACCOUNT_DETAILS_FAIL:

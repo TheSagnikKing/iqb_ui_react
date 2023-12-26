@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom'
 const CreateAppointment = () => {
 
     const [name, setName] = useState("")
-    const [appointmentName, setAppointmentName] = useState("")
+    const [appointmentNotes, setAppointmentNotes] = useState("")
 
     const [date, setDate] = useState(null)
 
@@ -21,10 +21,10 @@ const CreateAppointment = () => {
     const salonId = LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId
 
     useEffect(() => {
-        if(salonId){
+        if (salonId) {
             dispatch(barberListAction(salonId))
         }
-    }, [dispatch,salonId])
+    }, [dispatch, salonId])
 
     const barberList = useSelector(state => state.barberList)
 
@@ -64,26 +64,52 @@ const CreateAppointment = () => {
 
     const [timeSlotData, setTimeSlotData] = useState([])
 
-    console.log(timeSlotData)
+    // console.log(timeSlotData)
+
+    // console.log({
+    //     salonId: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId,
+    //     barberId: selectedbarberId,
+    //     date
+    // })
 
     useEffect(() => {
-        const timeslotfunc = async () => {
-            try {
-                const { data } = await api.post("/api/appointments/getEngageBarberTimeSlots", {
-                    salonId: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId,
-                    barberId: selectedbarberId,
-                    date
-                });
-                setTimeSlotData(data);
-            } catch (error) {
-                // Handle the error appropriately, you can log it or show a user-friendly message
-                console.error("Error fetching time slots:", error);
-                // alert(error.response.data.message)
-            }
-        };
-    
-        timeslotfunc();
-    }, [date, selectedbarberId,LoggedInMiddleware?.user,alert]);
+        if (date == null && selectedbarberId == null) {
+
+        } else if(date && selectedbarberId){
+            const timeslotfunc = async () => {
+                try {
+                    const { data } = await api.post("/api/appointments/getEngageBarberTimeSlots", {
+                        salonId: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId,
+                        barberId: selectedbarberId,
+                        date
+                    });
+                    setTimeSlotData(data);
+                } catch (error) {
+                    // Handle the error appropriately, you can log it or show a user-friendly message
+                    console.error("Error fetching time slots:", error);
+                    alert(error.response.data.message)
+                }
+            };
+
+            timeslotfunc();
+        }
+
+    }, [date, selectedbarberId, LoggedInMiddleware?.user,setTimeSlotData]);
+
+    // useEffect(() => {
+    //     const timeslotfunc = async () => {
+           
+    //             const { data } = await api.post("/api/appointments/getEngageBarberTimeSlots", {
+    //                 salonId: 13,
+    //                 barberId: 12,
+    //                 date:"2023-12-28"
+    //             });
+    //             setTimeSlotData(data);
+            
+    //     };
+
+    //     timeslotfunc();
+    // },[setTimeSlotData])
 
     const [timeSlotStartTime, setTimeSlotStartTime] = useState("")
 
@@ -99,11 +125,11 @@ const CreateAppointment = () => {
 
     const CreateAppointment = () => {
         const createAppointmentData = {
-            salonId:LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId,
+            salonId: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId,
             barberId: selectedbarberId,
             serviceId: selectedService.map((s) => s.serviceId),
             appointmentDate: date,
-            appointmentName: appointmentName,
+            appointmentNotes: appointmentNotes,
             startTime: timeSlotStartTime,
             // customerEmail: "arg@gmail.com",
             customerName: name,
@@ -111,14 +137,16 @@ const CreateAppointment = () => {
             methodUsed: "App"
         }
 
-        console.log(createAppointmentData)
+        // console.log(createAppointmentData)
 
         const confirm = window.confirm("Are you sure ?")
 
         if (confirm) {
-            dispatch(createAppointmentAction(createAppointmentData,navigate))
+            dispatch(createAppointmentAction(createAppointmentData, navigate))
         }
     }
+
+    const createAppointment = useSelector(state => state.createAppointment)
 
     return (
         <>
@@ -131,9 +159,9 @@ const CreateAppointment = () => {
                         <label htmlFor="">Appointment Note</label>
                         <input
                             type="text"
-                            placeholder='Enter Name'
-                            value={appointmentName}
-                            onChange={(e) => setAppointmentName(e.target.value)}
+                            placeholder='Enter Note'
+                            value={appointmentNotes}
+                            onChange={(e) => setAppointmentNotes(e.target.value)}
                         />
                     </div>
 
@@ -244,7 +272,7 @@ const CreateAppointment = () => {
             methodUsed: "App" */}
 
                         <div>
-                            <p>Appointment Name : <b>{appointmentName}</b></p>
+                            <p>Appointment Name : <b>{appointmentNotes}</b></p>
                             <p>Appointment Date : <b>{date}</b></p>
                             <p>Start Time : <b>{timeSlotStartTime}</b></p>
                             <p>Customer Name : <b>{name}</b></p>
@@ -252,15 +280,15 @@ const CreateAppointment = () => {
                             <p>Method Used : <b>App</b></p>
                             <p><b>Services :</b></p>
                             {
-                                selectedService.map((c,i) => (
+                                selectedService.map((c, i) => (
                                     <div key={i} style={{
-                                        display:"flex",
-                                        gap:"1rem",
-                                        marginBlock:"10px",
-                                        width:"30%",
-                                        padding:"5px",
-                                        boxShadow:"0px 0px 4px rgba(0,0,0,0.4)",
-                                        borderRadius:"3px"
+                                        display: "flex",
+                                        gap: "1rem",
+                                        marginBlock: "10px",
+                                        width: "30%",
+                                        padding: "5px",
+                                        boxShadow: "0px 0px 4px rgba(0,0,0,0.4)",
+                                        borderRadius: "3px"
                                     }}>
                                         <p>{c.serviceName}</p>
                                         <p>{c.barberServiceEWT}</p>
@@ -270,17 +298,19 @@ const CreateAppointment = () => {
                             }
                         </div>
 
-                        <button onClick={CreateAppointment} 
-                        style={{
-                            backgroundColor:"#f1f6fc",
-                            width:"50%",
-                            border:"none",
-                            cursor:"pointer",
-                            boxShadow:"0px 0px 4px rgba(0,0,0,0.4)",
-                            borderRadius:"4px",
-                            height:"35px"
-                        }}
-                        >Create Appointment</button>
+                        <button onClick={CreateAppointment}
+                            style={{
+                                backgroundColor: "#f1f6fc",
+                                width: "50%",
+                                border: "none",
+                                cursor: "pointer",
+                                boxShadow: "0px 0px 4px rgba(0,0,0,0.4)",
+                                borderRadius: "4px",
+                                height: "35px"
+                            }}
+                        >{
+                            createAppointment?.loading == true ? <h2>loading...</h2> : "Create Appointment"
+                        }</button>
                     </div>
 
                 </div>

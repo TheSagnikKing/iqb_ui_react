@@ -205,3 +205,24 @@ export const barberQueListAction = (barberqueuedata) => async(dispatch) => {
         })
     }
 }
+
+export const barberServedQueAction = (barberqueuedata) => async(dispatch) => {
+    try {
+        dispatch({type:BARBER_SERVED_QUEUE_REQ})
+
+        const {data} = await api.post("/api/queue/barberServedQueue",barberqueuedata)
+
+        dispatch({
+            type:BARBER_SERVED_QUEUE_SUCCESS,
+            payload:data
+        })
+
+        window.location.reload()
+    
+    } catch (error) {
+        dispatch({
+            type:BARBER_SERVED_QUEUE_FAIL,
+            error: error.response
+        })
+    }
+}

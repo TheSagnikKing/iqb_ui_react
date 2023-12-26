@@ -213,6 +213,8 @@ const GroupJoinCustomer = () => {
     
   }
 
+  const groupjoin = useSelector(state => state.groupjoin)
+
   return (
     <>
       <AdminLayout height={"200vh"} />
@@ -280,7 +282,7 @@ const GroupJoinCustomer = () => {
             <div className='barber-single-join-quebarberserv-content'>
               <p>Service ID</p>
               <p>Service Name</p>
-              <p>Service Code</p>
+              <p>Service Price</p>
               <p>Barber Service EWT</p>
               <p>Action</p>
             </div>
@@ -289,7 +291,7 @@ const GroupJoinCustomer = () => {
                 <div className='barber-single-join-quebarberserv-content' key={b._id}>
                   <p>{b.serviceId}</p>
                   <p>{b.serviceName}</p>
-                  <p>{b.serviceCode}</p>
+                  <p>{b.servicePrice}</p>
                   <p>{b.barberServiceEWT}</p>
                   <button onClick={() => selectedServiceHandler(b, index)}>Add</button>
                 </div>
@@ -305,7 +307,7 @@ const GroupJoinCustomer = () => {
             <div className='barber-single-join-quebarberserv-content'>
               <p>Service ID</p>
               <p>Service Name</p>
-              <p>Service Code</p>
+              <p>Service Price</p>
               <p>BarberService EWT</p>
               <p>Action</p>
             </div>
@@ -314,7 +316,7 @@ const GroupJoinCustomer = () => {
                 <div className='barber-single-join-quebarberserv-content' key={b._id}>
                   <p>{b.serviceId}</p>
                   <p>{b.serviceName}</p>
-                  <p>{b.serviceCode}</p>
+                  <p>{b.servicePrice}</p>
                   <p>{b.barberServiceEWT}</p>
                   <button onClick={() => selectedServiceDelete(b)}>Del</button>
                 </div>
@@ -348,7 +350,9 @@ const GroupJoinCustomer = () => {
             }
           </div>
 
-          <button onClick={joinqueueHandler}>Join Queue</button>
+          <button onClick={joinqueueHandler}>{
+            groupjoin?.loading == true ? <h2>Loading...</h2> : "Join Queue"
+          }</button>
         </div>
       </div>
 

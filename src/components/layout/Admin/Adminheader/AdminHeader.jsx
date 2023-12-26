@@ -79,7 +79,7 @@ const AdminHeader = ({ title }) => {
     getSalonfnc()
   }, [LoggedInMiddleware?.user])
 
-  console.log("new", salonList)
+  // console.log("new", salonList)
 
   const [chooseSalonId, setChooseSalonId] = useState("");
 

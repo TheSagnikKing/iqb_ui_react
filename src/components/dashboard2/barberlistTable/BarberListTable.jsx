@@ -122,7 +122,10 @@ const BarberListTable = () => {
     const dispatch = useDispatch()
 
     const deletebarberHandler = (salonId, email) => {
-        dispatch(deleteBarberAction(salonId, email))
+        const confirm = window.confirm("Are you sure ?")
+        if(confirm){
+            dispatch(deleteBarberAction(salonId, email))
+        }
     }
 
 

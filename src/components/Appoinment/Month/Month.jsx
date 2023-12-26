@@ -60,7 +60,7 @@ function Month() {
                     dateClick={handleDateSelect}
                     events={appointmentData.map((e) => (
                         {
-                            title:"Appointment Name " + e.appointmentName, date: e.appointmentDate
+                            title:e.appointmentNotes, date: e.appointmentDate
                         }
                     ))}
                     dayMaxEvents={true}

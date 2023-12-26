@@ -42,7 +42,7 @@ const UpdateAdminprofile = () => {
         setName(LoggedInMiddleware?.user && LoggedInMiddleware?.user[0]?.name)
         setGender(LoggedInMiddleware?.user && LoggedInMiddleware?.user[0]?.gender)
         setDob(LoggedInMiddleware?.user && LoggedInMiddleware?.user[0]?.dateOfBirth)
-    },[LoggedInMiddleware?.user])
+    }, [LoggedInMiddleware?.user])
 
     return (
         <>
@@ -67,7 +67,7 @@ const UpdateAdminprofile = () => {
                         <label htmlFor="">User Name</label>
                         <input
                             type="text"
-                            value={ username}
+                            value={username}
                             onChange={(e) => setUsername(e.target.value)}
                         />
                     </div>
@@ -91,12 +91,17 @@ const UpdateAdminprofile = () => {
                     </div>
 
                     <div>
-                        <label htmlFor="">Gender</label>
-                        <input
-                            type="text"
-                            value={gender}
-                            onChange={(e) => setGender(e.target.value)}
-                        />
+                        <label for="gender">Choose gender</label>
+
+                        <select 
+                        name="gender" 
+                        id="gender"
+                        value={gender}
+                        onChange={(e) => setGender(e.target.value)}
+                        >
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
                     </div>
 
                     <div>

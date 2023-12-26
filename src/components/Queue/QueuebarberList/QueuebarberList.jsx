@@ -8,7 +8,6 @@ import { singleJoinQueueAction } from '../../../redux/actions/joinQueueAction'
 
 const QueuebarberList = () => {
 
-
   const dispatch = useDispatch()
 
   const LoggedInMiddleware = useSelector(state => state.LoggedInMiddleware)
@@ -86,6 +85,7 @@ const QueuebarberList = () => {
 
   }
 
+  const singleJoinQueue = useSelector(state => state.singleJoinQueue)
 
   console.log("sdvd",getBarberServicesBybarberId)
   return (
@@ -193,7 +193,9 @@ const QueuebarberList = () => {
             }
           </div>
 
-          <button onClick={joinqueueHandler}>Join Queue</button>
+          <button onClick={joinqueueHandler}>{
+            singleJoinQueue?.loading == true ? <h2>Loading...</h2> : "Join Queue"
+          }</button>
         </div>
       </div>
 

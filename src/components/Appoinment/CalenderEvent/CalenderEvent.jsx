@@ -6,7 +6,8 @@ import AdminLayout from '../../layout/Admin/AdminLayout';
 import { MdEdit } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 import api from "../../../redux/api/Api"
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteAppointmentAction } from '../../../redux/actions/AppointmentAction';
 
 const CalenderEvent = () => {
 
@@ -40,6 +41,19 @@ const CalenderEvent = () => {
 
     const editHandler = (appointmentdata) => {
         navigate("/appoinment/editappointment", {state:appointmentdata})
+    }
+
+    const dispatch = useDispatch()
+
+    const deleteHandler = (m) => {
+        const confirm = window.confirm("Are you sure ?")
+        
+        if(confirm){
+            dispatch(deleteAppointmentAction({
+                salonId: LoggedInMiddleware?.user && LoggedInMiddleware.user[0].salonId,
+                appointmentId: m._id
+            }))
+        }
     }
 
     return (
@@ -79,10 +93,10 @@ const CalenderEvent = () => {
                                                         boxShadow: `0px 0px 8px ${m.background}`
                                                     }}>
                                                             <p>{m.startTime}-{m.endTime}</p>
-                                                            <p>Appointment : {m.appointmentName}</p>
+                                                            <p>Appointment : {m.appointmentNotes}</p>
                                                             <div className='app-btn-div'>
                                                                 <button onClick={() => editHandler(m)}><MdEdit/></button>
-                                                                <button><MdDelete/></button>
+                                                                <button onClick={() => deleteHandler(m)}><MdDelete/></button>
                                                             </div>
                                                         </div>
                                                     </div>
