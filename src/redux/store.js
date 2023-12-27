@@ -4,7 +4,7 @@ import { logoutReducer, newPasswordResetReducer, passwordResetEmailReducer, sign
 import { applySalonReducer, connectBarberSalonReducer, createSalonReducer, deleteSalonReducer, getAllSalonServicesReducer, salonListReducer,salonSettingsUpdateReducer, salonStatusOnlineReducer, updateSalonReducer } from "./reducers/salonReducer";
 import { approveBarberReducer, barberListReducer, barberServedQueueReducer, createBarberReducer, deleteBarberReducer, getAllBarbersByServiceIdReducer, getBarberByMultipleServicesReducer, getBarberServicesBybarberIdReducer, updateBarberReducer } from "./reducers/barberReducer";
 import { autojoinReducer, groupjoinReducer, queueListReducer, singleJoinQueueReducer } from "./reducers/joinqueueReducer";
-import { AdminForgetPasswordReducer, AdminGoogleLoginReducer, AdminLoginReducer, AdminLogoutReducer, AdminRegisterReducer, AdminResetPasswordReducer, LoggedInMiddlewareReducer, LoggedOutMiddlewareReducer, updateAdminAccountDetailsReducer, updateAdminReducer } from "./reducers/AdminAuthReducer";
+import { AdminForgetPasswordReducer, AdminGoogleLoginReducer, AdminLoginReducer, AdminLogoutReducer, AdminRegisterReducer, AdminResetPasswordReducer, LoggedInMiddlewareReducer, LoggedOutMiddlewareReducer, adminVerifiedStatusReducer, adminVerifyEmailReducer, updateAdminAccountDetailsReducer, updateAdminReducer } from "./reducers/AdminAuthReducer";
 import { barberForgetPasswordReducer, barberGoogleLoginReducer, barberLoginReducer, barberLogoutReducer, barberOnlineStatusReducer, barberQuelistReducer, barberRegisterReducer, barberResetPasswordReducer, barberServedQueReducer, updatebarberAccountDetailsReducer, updatebarberReducer } from "./reducers/BarberAuthReducer";
 import { createAppointmentReducer, deleteAppointmentReducer, editAppointmentReducer } from "./reducers/AppointmentReducer";
 import { getAllAdvertisementReducer} from "./reducers/AdvertisementReducer";
@@ -77,7 +77,9 @@ const rootReducer = combineReducers({
   getAllAdvertisement:getAllAdvertisementReducer,
   deleteAppointment:deleteAppointmentReducer,
   barberServedQue:barberServedQueReducer,
-  editAppointment:editAppointmentReducer
+  editAppointment:editAppointmentReducer,
+  adminVerifyEmail:adminVerifyEmailReducer,
+  adminVerifiedStatus:adminVerifiedStatusReducer
 });
 
 const initialState = {};

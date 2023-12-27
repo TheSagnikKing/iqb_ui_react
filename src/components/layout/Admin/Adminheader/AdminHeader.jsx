@@ -194,12 +194,7 @@ const AdminHeader = ({ title }) => {
 
                   <div>
                     <div><RiAccountCircleFill /></div>
-                    <p>My Account</p>
-                  </div>
-
-                  <div>
-                    <div><RiAccountCircleFill /></div>
-                    <Link to="/admin/updateprofile">Update Profile</Link>
+                    <Link to="/admin/updateprofile">My Account</Link>
                   </div>
 
                   <div onClick={logoutHandler}>

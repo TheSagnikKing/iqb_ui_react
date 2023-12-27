@@ -176,19 +176,19 @@ const SignIn = () => {
                                                 value={password}
                                                 onChange={e => setPassword(e.target.value)}
                                                 className="password"
-                                                style={{ border: error ? "1px solid red" : "" }}
+                                                // style={{ border: error ? "1px solid red" : "" }}
                                             />
                                             <div className="toggle_password" onClick={() => setVisible(!visible)}>
                                                 {visible ? <BiShow /> : <BiHide />}
                                             </div>
                                         </div>
 
-                                        <div className="error">
+                                        {/* <div className="error">
                                             <div>
                                                 <RiErrorWarningLine />
                                             </div>
                                             <p>Your password is not strong enough.Use atleast 8 charecters.</p>
-                                        </div>
+                                        </div> */}
 
                                         <div className="lg-input_container_end">
                                             <div>
@@ -261,19 +261,19 @@ const SignIn = () => {
                                                     value={barberpassword}
                                                     onChange={e => setBarberPassword(e.target.value)}
                                                     className="password"
-                                                    style={{ border: error ? "1px solid red" : "" }}
+                                                    // style={{ border: error ? "1px solid red" : "" }}
                                                 />
                                                 <div className="toggle_password" onClick={() => setBarberVisible(!barbervisible)}>
                                                     {barbervisible ? <BiShow /> : <BiHide />}
                                                 </div>
                                             </div>
 
-                                            <div className="error">
+                                            {/* <div className="error">
                                                 <div>
                                                     <RiErrorWarningLine />
                                                 </div>
                                                 <p>Your password is not strong enough.Use atleast 8 charecters.</p>
-                                            </div>
+                                            </div> */}
 
                                             <div className="lg-input_container_end">
                                                 <div>

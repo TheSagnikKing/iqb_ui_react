@@ -61,6 +61,8 @@ import SalonSettings from './components/Salon/SalonSettings/SalonSettings';
 import Map from './components/Map/Map';
 import Advertisement from './components/Advertisement/Advertisement';
 import EditAppointment from './components/Appoinment/EditAppointment/EditAppointment';
+import AdminVerifyEmail from './components/VerifyEmail/AdminVerifyEmail';
+import BarberUpdateProfile from './components/barber/BarberUpdateProfile/BarberUpdateProfile';
 
 const App = () => {
 
@@ -191,6 +193,7 @@ const App = () => {
           } />
 
           <Route path="/admin/updateprofile" element={<Auth><UpdateAdminprofile /></Auth>} />
+          <Route path="/barber/updateprofile" element={<BarberAuth><BarberUpdateProfile/></BarberAuth>}/>
 
           <Route path="/salon/createsalon" element={
 
@@ -333,6 +336,8 @@ const App = () => {
           <Route path="/advertisement" element={<Auth><Advertisement/></Auth>}/>
           
           <Route path="/map" element={<Map/>}/>
+
+          <Route path="/admin/verifyemailstatus" element={<Auth><AdminVerifyEmail/></Auth>}/>
 
         </Routes>
       </BrowserRouter>

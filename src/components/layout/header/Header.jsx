@@ -11,7 +11,7 @@ import { FaUserCircle } from "react-icons/fa"
 import { MdKeyboardArrowDown } from "react-icons/md"
 import { BiLogOutCircle } from "react-icons/bi"
 import { RiAccountCircleFill } from "react-icons/ri"
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { BarberLogoutAction } from '../../../redux/actions/BarberAuthAction.js'
 import { useDispatch, useSelector } from 'react-redux'
 import { barberOnlineStatusAction } from '../../../redux/actions/barberAction.js'
@@ -136,7 +136,7 @@ const Header = ({ title }) => {
 
                   <div>
                     <div><RiAccountCircleFill /></div>
-                    <p>My Account</p>
+                    <p><Link to="/barber/updateprofile">My Account</Link></p>
                   </div>
 
                   <div onClick={logoutHandler}>

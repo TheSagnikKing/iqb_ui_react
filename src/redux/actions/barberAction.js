@@ -217,7 +217,7 @@ export const barberServedQueAction = (barberqueuedata) => async(dispatch) => {
             payload:data
         })
 
-        window.location.reload()
+        // window.location.reload()
     
     } catch (error) {
         dispatch({

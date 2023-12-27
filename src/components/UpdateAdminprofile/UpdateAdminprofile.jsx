@@ -2,11 +2,12 @@ import React, { useEffect, useRef, useState } from 'react'
 import "./UpdateAdminprofile.css"
 import AdminLayout from '../layout/Admin/AdminLayout'
 import { useDispatch, useSelector } from 'react-redux'
-import { updateAdminAction } from '../../redux/actions/AdminAuthAction'
+import { adminVerifyEmailAction, updateAdminAction } from '../../redux/actions/AdminAuthAction'
 import { MdDelete } from 'react-icons/md'
 import { FaCamera } from "react-icons/fa";
 
 import api from "../../redux/api/Api"
+import { useNavigate } from 'react-router-dom'
 
 const UpdateAdminprofile = () => {
 
@@ -44,6 +45,17 @@ const UpdateAdminprofile = () => {
         setDob(LoggedInMiddleware?.user && LoggedInMiddleware?.user[0]?.dateOfBirth)
     }, [LoggedInMiddleware?.user])
 
+    const navigate = useNavigate()
+
+    const verifyEmailHandler = () => {
+        const confirm = window.confirm("Are you sure ?")
+        if(confirm){
+            dispatch(adminVerifyEmailAction(navigate,{
+                email:LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].email
+            }))
+        }
+    }
+
     return (
         <>
             <AdminLayout />
@@ -61,6 +73,27 @@ const UpdateAdminprofile = () => {
                             type="text"
                             value={LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].email}
                         />
+                        {
+                            LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].emailVerified ? <button 
+                            style={{
+                                background:"limegreen",
+                                color:"#fff",
+                                border:"none",
+                                boxShadow:"0px 0px 4px rgba(0,0,0,0.4)",
+                                height:"25px"
+                            }}
+                            >Email verified</button> : <button 
+                            style={{
+                                background:"crimson",
+                                color:"#fff",
+                                border:"none",
+                                boxShadow:"0px 0px 4px rgba(0,0,0,0.4)",
+                                height:"25px",
+                                cursor:"pointer"
+                            }}
+                            onClick={verifyEmailHandler}>Email Not Verified</button>
+                        }
+                        
                     </div>
 
                     <div>
