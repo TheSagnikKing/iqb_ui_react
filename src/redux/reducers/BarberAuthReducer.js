@@ -86,7 +86,7 @@ export const barberResetPasswordReducer = (state = {}, action) => {
 export const LoggedOutMiddlewareReducer = (state = {}, action) => {
     switch (action.type) {
         case LOGGED_OUT_MIDDLEWARE_REQ:
-            return { ...state, loading: true };
+            return { ...state, loading: false };
         case LOGGED_OUT_MIDDLEWARE_SUCCESS:
             return { ...state, loading: false, ...action.payload };
         case LOGGED_OUT_MIDDLEWARE_FAIL:
@@ -99,7 +99,7 @@ export const LoggedOutMiddlewareReducer = (state = {}, action) => {
 export const LoggedInMiddlewareReducer = (state = {}, action) => {
     switch (action.type) {
         case LOGGED_IN_MIDDLEWARE_REQ:
-            return { ...state, loading: true };
+            return { ...state, loading: false };
         case LOGGED_IN_MIDDLEWARE_SUCCESS:
             return { ...state, loading: false, ...action.payload };
         case LOGGED_IN_MIDDLEWARE_FAIL:

@@ -188,7 +188,7 @@ export const LoggedInMiddlewareAction = (navigate) => async (dispatch) => {
         })
         const { data } = await api.get(`/api/admin/loggedinmiddleware`);
 
-        console.log(data)
+        console.log("ascascvdffsv",data)
 
         dispatch({
             type: LOGGED_IN_MIDDLEWARE_SUCCESS,

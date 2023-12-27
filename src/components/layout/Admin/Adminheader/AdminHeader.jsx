@@ -17,7 +17,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { AdminLogoutAction } from '../../../../redux/actions/AdminAuthAction'
 
 import api from "../../../../redux/api/Api"
-import { applySalonAction, salonStatusOnlineAction } from '../../../../redux/actions/salonAction'
 
 const AdminHeader = ({ title }) => {
 
@@ -66,66 +65,14 @@ const AdminHeader = ({ title }) => {
     }
   };
 
-  const [salonList, setSalonList] = useState([])
 
-  useEffect(() => {
-    const getSalonfnc = async () => {
-      const { data } = await api.post("/api/admin/getAllSalonsByAdmin", {
-        adminEmail: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].email
-      })
-      setSalonList(data?.salons)
-    }
-
-    getSalonfnc()
-  }, [LoggedInMiddleware?.user])
-
-  // console.log("new", salonList)
-
-  const [chooseSalonId, setChooseSalonId] = useState("");
-
-  const applySalonData = {
-    salonId: Number(chooseSalonId),
-    adminEmail: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].email
-  }
-
-  const applySalonHandler = async () => {
-    if (Number(chooseSalonId) == 0 || LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId == Number(chooseSalonId)) {
-
-    } else {
-      alert("New Salon Apply Successfully")
-      dispatch(applySalonAction(applySalonData))
-    }
-
-  }
-
-  useEffect(() => {
-    setChooseSalonId(LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId)
-  },[LoggedInMiddleware?.user])
-
-  const [salonStatus, setSalonStatus] = useState(false);
-
-  useEffect(() => {
-    setSalonStatus(LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonIsOnline)
-  }, [LoggedInMiddleware?.user])
-
-  const salonStatusHandler = () => {
-    const newCheckValue = !salonStatus;
-    setSalonStatus(newCheckValue);
-
-    const salonStatusOnlineData = {
-      salonId: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId,
-      isOnline: newCheckValue,
-    };
-
-    dispatch(salonStatusOnlineAction(salonStatusOnlineData));
-  };
 
   return (
     <>
       <section className="nav1">
         <div className="nav1left">
           <div className="nav1left_header">
-            <p><span>IGB</span>iqueuebarberss</p>
+            <p><span>IQB</span>iqueuebarberss</p>
           </div>
 
           <div className="nav1wrapper">
@@ -185,52 +132,9 @@ const AdminHeader = ({ title }) => {
             <IoIosArrowForward />
             <b style={{ color: "rgba(0,0,0,0.6)" }}>{title}</b>
 
-            {/* TOGGLE SWITCH */}
-            <label className="nav2toggle_switch" >
-              <input type="checkbox"
-                value={salonStatus}
-                onClick={() => salonStatusHandler()}
-
-              />
-              {/* <span className="nav2slider"></span> */}
-              <span className={`nav2slider ${salonStatus ? 'checked' : ''}`}
-                style={{
-                  background: salonStatus ? "#4CBB17" : ""
-                }}
-              ></span>
-            </label>
-
           </div>
 
           <div className="nav1right_right_div">
-            <div style={{
-              display: 'flex',
-              flexDirection: "column",
-              gap: "5px",
-              justifyContent: "flex-end"
-            }}>
-
-              <label for="cars">Choose Salon:</label>
-
-              <select
-                name="cars"
-                id="cars"
-                value={chooseSalonId}
-                onChange={(e) => setChooseSalonId(e.target.value)}
-              >
-                {salonList && salonList.map((s, i) => (
-                  <option value={s.salonId} key={i} style={{
-                    backgroundColor: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId === s.salonId ? "green" : "",
-                    color:LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId === s.salonId ? "#fff" : "black"
-                  }}>
-                    {s.salonId}
-                  </option>
-                ))}
-              </select>
-
-            </div>
-
-            <button onClick={applySalonHandler}>Apply</button>
 
             <div className="nav1search_box">
               <div>

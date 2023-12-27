@@ -17,6 +17,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { queueListAction } from '../../redux/actions/joinQueueAction'
 
 import api from "../../redux/api/Api"
+import { applySalonAction, salonStatusOnlineAction } from '../../redux/actions/salonAction'
 
 const dashboard = () => {
 
@@ -65,11 +66,10 @@ const dashboard = () => {
     };
 
     const formattedDate = formatDate(currentDate);
-    console.log(formattedDate);
 
     const [appointmentData, setAppointmentData] = useState([])
     const [appointmentLoader, setAppointmentLoader] = useState(false)
- 
+
     useEffect(() => {
         const appointfnc = async () => {
             setAppointmentLoader(true)
@@ -85,23 +85,81 @@ const dashboard = () => {
         appointfnc()
     }, [salonId, formattedDate])
 
-    console.log(appointmentData)
-
 
     const [advertisementList, setAdvertisementList] = useState([])
 
     useEffect(() => {
-      const getAdvertisementData = async () => {
-        const { data } = await api.post(`/api/advertisement/getAdvertisements`, { salonId: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId });
-  
-        console.log("adver", data)
-        setAdvertisementList(data?.advertisements)
-      }
-  
-      getAdvertisementData()
+        const getAdvertisementData = async () => {
+            const { data } = await api.post(`/api/advertisement/getAdvertisements`, { salonId: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId });
+
+            setAdvertisementList(data?.advertisements)
+        }
+
+        getAdvertisementData()
     }, [LoggedInMiddleware?.user])
 
-    console.log("dash",advertisementList)
+    const [salonList, setSalonList] = useState([])
+    const [salonStatus, setSalonStatus] = useState(false);
+
+    useEffect(() => {
+        const getSalonfnc = async () => {
+            const { data } = await api.post("/api/admin/getAllSalonsByAdmin", {
+                adminEmail: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].email
+            })
+            setSalonList(data?.salons)
+        }
+
+        getSalonfnc()
+    }, [LoggedInMiddleware?.user])
+
+    useEffect(() => {
+        const getSalonfnc = async () => {
+            const { data } = await api.post("/api/admin/getDefaultSalonByAdmin", {
+                adminEmail: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].email
+            })
+
+            setSalonStatus(data?.response?.isOnline)
+            setChooseSalonId(data?.response?.salonId)
+        }
+
+        getSalonfnc()
+    }, [LoggedInMiddleware?.user])
+
+    console.log(salonList)
+
+    console.log("jhv", salonStatus)
+
+    const salonStatusHandler = () => {
+        const newCheckValue = !salonStatus;
+        setSalonStatus(newCheckValue);
+
+        const salonStatusOnlineData = {
+            salonId: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId,
+            isOnline: newCheckValue,
+        };
+
+        dispatch(salonStatusOnlineAction(salonStatusOnlineData));
+    };
+
+
+    const [chooseSalonId, setChooseSalonId] = useState("");
+
+    const applySalonData = {
+      salonId: Number(chooseSalonId),
+      adminEmail: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].email
+    }
+  
+    const applySalonHandler = async () => {
+      if (Number(chooseSalonId) == 0 || LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId == Number(chooseSalonId)) {
+  
+      } else {
+        const confirm = window.confirm("Are you sure ?")
+        if(confirm){
+            dispatch(applySalonAction(applySalonData))
+        }
+      }
+  
+    }
 
     return (
         <>
@@ -113,7 +171,56 @@ const dashboard = () => {
                     <div className="right_div_top">
 
                         <div className="div_left">
+                            <div style={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                                marginBottom: "20px"
+                            }}>
+                                <div style={{
+                                    display: "flex",
+                                    gap: "10px"
+                                }}>
+                                    <label for="cars">Choose Salon</label>
+
+                                    <select
+                                        name="cars"
+                                        id="cars"
+                                        value={chooseSalonId}
+                                        onChange={(e) => setChooseSalonId(e.target.value)}
+                                    >
+                                        {salonList && salonList.map((s, i) => (
+                                            <option value={s.salonId} key={i} style={{
+                                                backgroundColor: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId === s.salonId ? "green" : "",
+                                                color: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId === s.salonId ? "#fff" : "black"
+                                            }}>
+                                               {s.salonName} 
+                                            </option>
+                                        ))}
+                                    </select>
+
+                                    <button onClick={applySalonHandler}>Apply</button>
+                                </div>
+
+
+                                <label className="nav2toggle_switch" >
+                                    <input type="checkbox"
+                                        value={salonStatus}
+                                        onClick={() => salonStatusHandler()}
+
+                                    />
+                                    <span className={`nav2slider ${salonStatus ? 'checked' : ''}`}
+                                        style={{
+                                            background: salonStatus ? "#4CBB17" : ""
+                                        }}
+                                    ></span>
+                                </label>
+                            </div>
+
                             <div className="div_left_head">
+
+
+
+
                                 <p>Advertisement</p>
                                 <div className="btn_box">
                                     <div className="btn_one">
@@ -153,7 +260,7 @@ const dashboard = () => {
                                 </div>
 
                                 <div className="img_three">
-                                    <img src={advertisementList[3]?.url} alt=""/>
+                                    <img src={advertisementList[3]?.url} alt="" />
                                 </div>
                             </div>
                         </div>
@@ -260,7 +367,7 @@ const dashboard = () => {
                                         <p>Barber Name</p>
                                     </div>
                                     {
-                                        appointmentLoader == true ? <h1>loading...</h1> : appointmentData?.response?.map((ap,i) => (
+                                        appointmentLoader == true ? <h1>loading...</h1> : appointmentData?.response?.map((ap, i) => (
                                             <div className='appoin-content-div' key={i}>
                                                 <p>{ap.appointmentName}</p>
                                                 <p>{ap.customerName}</p>
