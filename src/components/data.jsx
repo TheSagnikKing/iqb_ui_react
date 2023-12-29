@@ -26,21 +26,21 @@ export const menudata = [
       }
     ]
   },
-  {
-    id: 2,
-    menu_logo: <FaCalendarAlt />,
-    menu_title: "Calender",
-    menu_link: "",
-    category: [
-      {
-        id: 2,
-        list_logo: <BsCheckCircle />,
-        list: "List",
-        message_logo: <TbMessageCircle />,
-        message_title: "Send mail / Notification"
-      }
-    ]
-  },
+  // {
+  //   id: 2,
+  //   menu_logo: <FaCalendarAlt />,
+  //   menu_title: "Calender",
+  //   menu_link: "",
+  //   category: [
+  //     {
+  //       id: 2,
+  //       list_logo: <BsCheckCircle />,
+  //       list: "List",
+  //       message_logo: <TbMessageCircle />,
+  //       message_title: "Send mail / Notification"
+  //     }
+  //   ]
+  // },
   {
     id: 3,
     menu_logo: <GiPieChart />,
@@ -122,21 +122,21 @@ export const adminmenudata = [
       }
     ]
   },
-  {
-    id: 2,
-    menu_logo: <FaCalendarAlt />,
-    menu_title: "Calender",
-    menu_link: "",
-    category: [
-      {
-        id: 2,
-        list_logo: <BsCheckCircle />,
-        list: "List",
-        message_logo: <TbMessageCircle />,
-        message_title: "Send mail / Notification"
-      }
-    ]
-  },
+  // {
+  //   id: 2,
+  //   menu_logo: <FaCalendarAlt />,
+  //   menu_title: "Calender",
+  //   menu_link: "",
+  //   category: [
+  //     {
+  //       id: 2,
+  //       list_logo: <BsCheckCircle />,
+  //       list: "List",
+  //       message_logo: <TbMessageCircle />,
+  //       message_title: "Send mail / Notification"
+  //     }
+  //   ]
+  // },
   {
     id: 3,
     menu_logo: <RiScissors2Fill />,

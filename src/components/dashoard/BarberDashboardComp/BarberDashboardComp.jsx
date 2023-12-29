@@ -196,18 +196,18 @@ const BarberDashboardComp = () => {
                 </div > : <>
                     <div className="right_div_top">
 
-                        <div className="div_left">
-                            <div className="div_left_head">
+                        {/* <div className="div_left"> */}
+                            {/* <div className="div_left_head">
                                 <div style={{ display: "flex", alignItems: "center", gap: "2rem" }}>
                                     <p>Advertisement</p>
-                                    {/* TOGGLE SWITCH */}
+                                    {/* TOGGLE SWITCH 
                                     <label className="nav2toggle_switch" >
                                         <input type="checkbox"
                                             value={check}
                                             onClick={() => setOnlineHandler()}
                                             
                                         />
-                                        {/* <span className="nav2slider"></span> */}
+                                        {/* <span className="nav2slider"></span> 
                                         <span className={`nav2slider ${check ? 'checked' : ''}`}
                                         style={{
                                             background:check ? "#4CBB17" : ""
@@ -232,11 +232,11 @@ const BarberDashboardComp = () => {
                                     </div>
 
                                     <p>Notifications</p>
-                                </div> */}
                                 </div>
-                            </div>
+                                </div>
+                            </div> */}
 
-                            <div className="div_left_images">
+                            {/* <div className="div_left_images">
                                 <div className="img_one">
                                     <img src="https://images.pexels.com/photos/1805600/pexels-photo-1805600.jpeg?cs=srgb&dl=pexels-dmitry-zvolskiy-1805600.jpg&fm=jpg" alt="" />
                                 </div>
@@ -256,8 +256,8 @@ const BarberDashboardComp = () => {
                                 <div className="img_three">
                                     <img src="https://images.pexels.com/photos/1805600/pexels-photo-1805600.jpeg?cs=srgb&dl=pexels-dmitry-zvolskiy-1805600.jpg&fm=jpg" alt="" />
                                 </div>
-                            </div>
-                        </div>
+                            </div> */}
+                        {/* </div> */}
 
                         <div className="div_right">
                             <div className="div_right_head">

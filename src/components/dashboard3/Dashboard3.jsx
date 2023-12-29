@@ -11,6 +11,8 @@ import { MdSms } from "react-icons/md";
 import { AiOutlineArrowLeft, AiOutlineArrowRight, AiOutlineSearch, AiOutlineArrowUp, AiOutlineArrowDown } from 'react-icons/ai'
 import { AiOutlineReload } from 'react-icons/ai'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
+import api from "../../redux/api/Api"
 
 const Dashboard3 = () => {
 
@@ -29,7 +31,7 @@ const Dashboard3 = () => {
 
         const getAllBarbersfunc = async () => {
             setLoading(true)
-            const { data } = await axios.get(`https://iqb-backend2.onrender.com/api/customer/getAllCustomers`)
+            const { data } = await api.get(`/api/customer/getAllCustomers`)
             setCustomersList(data)
             setCurrentPage(data.currentPage)
             setTotalPages(data.totalPages)
@@ -48,7 +50,7 @@ const Dashboard3 = () => {
 
         } else {
             setLoading(true)
-            const { data } = await axios.get(`https://iqb-backend2.onrender.com/api/customer/getAllCustomers?name=${search}&email=${search}`)
+            const { data } = await api.get(`/api/customer/getAllCustomers?name=${search}&email=${search}`)
             setCustomersList(data)
             setLoading(false)
         }
@@ -60,7 +62,7 @@ const Dashboard3 = () => {
         setLoading(true)
         setSortOrderData(sortOrder)
         setFieldData(sortField)
-        const { data } = await axios.get(`https://iqb-backend2.onrender.com/api/customer/getAllCustomers?sortField=${sortField}&sortOrder=${sortOrder}`)
+        const { data } = await api.get(`/api/customer/getAllCustomers?sortField=${sortField}&sortOrder=${sortOrder}`)
         setCustomersList(data)
         setLoading(false)
     }
@@ -70,7 +72,7 @@ const Dashboard3 = () => {
         let incpage = currentPage + 1
         if (incpage <= totalPages) {
             setLoading(true)
-            const { data } = await axios.get(`https://iqb-backend2.onrender.com/api/customer/getAllCustomers?page=${incpage}&sortField=${sortFieldData}&sortOrder=${sortOrdeData}`)
+            const { data } = await api.get(`/api/customer/getAllCustomers?page=${incpage}&sortField=${sortFieldData}&sortOrder=${sortOrdeData}`)
             setCurrentPage(data.currentPage)
             setCustomersList(data)
             setLoading(false)
@@ -83,7 +85,7 @@ const Dashboard3 = () => {
 
         if (decpage > 0) {
             setLoading(true)
-            const { data } = await axios.get(`https://iqb-backend2.onrender.com/api/customer/getAllCustomers?page=${decpage}&sortField=${sortFieldData}&sortOrder=${sortOrdeData}`)
+            const { data } = await api.get(`/api/customer/getAllCustomers?page=${decpage}&sortField=${sortFieldData}&sortOrder=${sortOrdeData}`)
             setCurrentPage(data.currentPage)
             setCustomersList(data)
             setLoading(false)
@@ -92,11 +94,16 @@ const Dashboard3 = () => {
 
     const reloadHandler = async () => {
         setLoading(true)
-        const { data } = await axios.get(`https://iqb-backend2.onrender.com/api/customer/getAllCustomers`)
+        const { data } = await api.get(`/api/customer/getAllCustomers`)
         setCustomersList(data)
         setCurrentPage(data.currentPage)
         setTotalPages(data.totalPages)
         setLoading(false)
+    }
+    const navigate = useNavigate()
+
+    const mailHandler = (customeremail) => {
+        navigate("/customer/customeremail",{state:customeremail})
     }
 
     return (
@@ -202,7 +209,7 @@ const Dashboard3 = () => {
 
                             <div className='icons-bbr'><IoIosNotifications/></div>
 
-                            <div className='icons-bbr'><IoMail/></div>
+                            <div className='icons-bbr' onClick={() => mailHandler(customer.email)}><IoMail/></div>
 
                             <div className='icons-bbr'><MdSms/></div>
 

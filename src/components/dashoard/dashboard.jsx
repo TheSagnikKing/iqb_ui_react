@@ -67,6 +67,8 @@ const dashboard = () => {
 
     const formattedDate = formatDate(currentDate);
 
+    console.log(formattedDate)
+
     const [appointmentData, setAppointmentData] = useState([])
     const [appointmentLoader, setAppointmentLoader] = useState(false)
 

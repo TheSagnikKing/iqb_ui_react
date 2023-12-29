@@ -8,6 +8,7 @@ import { AdminForgetPasswordReducer, AdminGoogleLoginReducer, AdminLoginReducer,
 import { barberForgetPasswordReducer, barberGoogleLoginReducer, barberLoginReducer, barberLogoutReducer, barberOnlineStatusReducer, barberQuelistReducer, barberRegisterReducer, barberResetPasswordReducer, barberServedQueReducer, updatebarberAccountDetailsReducer, updatebarberReducer } from "./reducers/BarberAuthReducer";
 import { createAppointmentReducer, deleteAppointmentReducer, editAppointmentReducer } from "./reducers/AppointmentReducer";
 import { getAllAdvertisementReducer} from "./reducers/AdvertisementReducer";
+import { customeremailReducer } from "./reducers/CustomerReducer";
 
 const rootReducer = combineReducers({
   signup:signupReducer,
@@ -79,7 +80,8 @@ const rootReducer = combineReducers({
   barberServedQue:barberServedQueReducer,
   editAppointment:editAppointmentReducer,
   adminVerifyEmail:adminVerifyEmailReducer,
-  adminVerifiedStatus:adminVerifiedStatusReducer
+  adminVerifiedStatus:adminVerifiedStatusReducer,
+  customeremail:customeremailReducer
 });
 
 const initialState = {};

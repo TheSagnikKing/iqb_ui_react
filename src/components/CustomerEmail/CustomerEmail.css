@@ -1,0 +1,42 @@
+.cu-br-right_main_div-1{
+    height: auto;
+    padding:2.4% 2.8%;
+    margin-left: 265px;
+    width: calc(100% - 265px);
+    position: absolute;
+    top: 90px;
+}
+
+.cu-container-mail{
+    height: 50vh;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 10px;
+    margin-top: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.cu-container-mail>div{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.cu-container-mail>div>input{
+    height: 35px;
+    padding-inline: 10px;
+}
+
+.cu-container-mail>div>textarea{
+    padding: 10px;
+}
+
+
+.cu-container-mail>button{
+    height: 35px;
+    margin-top: 50px;
+    cursor: pointer;
+}

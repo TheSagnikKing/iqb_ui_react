@@ -1,6 +1,7 @@
 import { APPLY_SALON_FAIL, APPLY_SALON_REQ, APPLY_SALON_SUCCESS, CONNECT_BARBER_SALON_FAIL, CONNECT_BARBER_SALON_REQ, CONNECT_BARBER_SALON_SUCCESS, CREATE_SALON_FAIL, CREATE_SALON_REQ, CREATE_SALON_SUCCESS, DELETE_SALON_FAIL, DELETE_SALON_REQ, DELETE_SALON_SUCCESS, GET_ALL_SALON_SERVICES_FAIL, GET_ALL_SALON_SERVICES_REQ, GET_ALL_SALON_SERVICES_SUCCESS, GET_SALONLIST_FAIL, GET_SALONLIST_REQ, GET_SALONLIST_SUCCESS, SALON_ONLINE_STATUS_FAIL, SALON_ONLINE_STATUS_REQ, SALON_ONLINE_STATUS_SUCCESS, SALON_SETTINGS_UPDATE_FAIL, SALON_SETTINGS_UPDATE_REQ, SALON_SETTINGS_UPDATE_SUCCESS, UPDATE_SALON_FAIL, UPDATE_SALON_REQ, UPDATE_SALON_SUCCESS } from "../constants/salonConstants"
 
 import api from "../api/Api"
+import { GET_BARBERLIST_SUCCESS, GET_BARBERS_BY_MULTIPLE_SERVICES_SUCCESS, GET_BARBER_SERVICES_SUCCESS } from "../constants/barberConstants"
 
 export const createSalonAction = (salondata,navigate) => async(dispatch) => {
     try {
@@ -65,6 +66,21 @@ export const getAllSalonServicesAction = (salonid) => async(dispatch) => {
         dispatch({type:GET_ALL_SALON_SERVICES_REQ})
 
         const {data} = await api.get(`/api/salon/allSalonServices?salonId=${salonid}`)
+
+        dispatch({
+            type:GET_BARBER_SERVICES_SUCCESS,
+            payload:{}
+        })
+
+        dispatch({
+            type:GET_BARBERLIST_SUCCESS,
+            payload:{}
+        })
+
+        dispatch({
+            type:GET_BARBERS_BY_MULTIPLE_SERVICES_SUCCESS,
+            payload:{}
+        })
 
         dispatch({
             type:GET_ALL_SALON_SERVICES_SUCCESS,

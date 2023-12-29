@@ -72,7 +72,7 @@ const BarberListTable = () => {
         setLoading(true)
         setSortOrderData(sortOrder)
         setFieldData(sortField)
-        const { data } = await api.post(`/api/barber/getAllBarberBySalonId?sortField=${sortField}&sortOrder=${sortOrder}`)
+        const { data } = await api.post(`/api/barber/getAllBarberBySalonId?sortField=${sortField}&sortOrder=${sortOrder}&salonId=${salonId}`)
         setBarbersList(data)
         setLoading(false)
     }
@@ -106,7 +106,7 @@ const BarberListTable = () => {
 
     const reloadHandler = async () => {
         setLoading(true)
-        const { data } = await api.post(`/api/barber/getAllBarberBySalonId`)
+        const { data } = await api.post(`/api/barber/getAllBarberBySalonId?salonId=${Number(salonId)}`)
         setBarbersList(data)
         setCurrentPage(data.currentPage)
         setTotalPages(data.totalPages)
@@ -208,8 +208,8 @@ const BarberListTable = () => {
                                 <div>
                                     <p>Email</p>
                                     <div>
-                                        <div><AiOutlineArrowUp /></div>
-                                        <div><AiOutlineArrowDown /></div>
+                                        <div onClick={() => sortHandler("email", "asc")}><AiOutlineArrowUp /></div>
+                                        <div onClick={() => sortHandler("email", "des")}><AiOutlineArrowDown /></div>
                                     </div>
                                 </div>
                                 <p>{barber.email}</p>

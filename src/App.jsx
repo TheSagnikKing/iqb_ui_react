@@ -63,6 +63,7 @@ import Advertisement from './components/Advertisement/Advertisement';
 import EditAppointment from './components/Appoinment/EditAppointment/EditAppointment';
 import AdminVerifyEmail from './components/VerifyEmail/AdminVerifyEmail';
 import BarberUpdateProfile from './components/barber/BarberUpdateProfile/BarberUpdateProfile';
+import CustomerEmail from './components/CustomerEmail/CustomerEmail';
 
 const App = () => {
 
@@ -158,6 +159,8 @@ const App = () => {
             </Suspense>
 
           } />
+
+          <Route path="/customer/customeremail" element={<Auth><CustomerEmail/></Auth>}/>
 
 
           {/* //BarberDashboard */}
