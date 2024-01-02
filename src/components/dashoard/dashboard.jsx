@@ -105,7 +105,7 @@ const dashboard = () => {
 
     useEffect(() => {
         const getSalonfnc = async () => {
-            const { data } = await api.post("/api/admin/getAllSalonsByAdmin", {
+            const { data } = await api.post("/api/admin/getAllSalonsByAdminEmail", {
                 adminEmail: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].email
             })
             setSalonList(data?.salons)
