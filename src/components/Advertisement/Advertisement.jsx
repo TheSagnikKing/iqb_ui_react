@@ -96,6 +96,7 @@ const Advertisement = () => {
         console.log('Upload success:', imageResponse.data);
         setSelectedFiles(null);
         alert("Image uploaded Successfully")
+        window.location.reload();
       } catch (error) {
         console.error('Image upload failed:', error);
         // Handle error as needed
