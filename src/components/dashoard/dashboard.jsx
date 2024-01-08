@@ -86,7 +86,7 @@ const dashboard = () => {
 
         appointfnc()
     }, [salonId, formattedDate])
-
+    console.log("ss", appointmentData)
 
     const [advertisementList, setAdvertisementList] = useState([])
 
@@ -147,20 +147,20 @@ const dashboard = () => {
     const [chooseSalonId, setChooseSalonId] = useState("");
 
     const applySalonData = {
-      salonId: Number(chooseSalonId),
-      adminEmail: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].email
+        salonId: Number(chooseSalonId),
+        adminEmail: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].email
     }
-  
+
     const applySalonHandler = async () => {
-      if (Number(chooseSalonId) == 0 || LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId == Number(chooseSalonId)) {
-  
-      } else {
-        const confirm = window.confirm("Are you sure ?")
-        if(confirm){
-            dispatch(applySalonAction(applySalonData))
+        if (Number(chooseSalonId) == 0 || LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId == Number(chooseSalonId)) {
+
+        } else {
+            const confirm = window.confirm("Are you sure ?")
+            if (confirm) {
+                dispatch(applySalonAction(applySalonData))
+            }
         }
-      }
-  
+
     }
 
     return (
@@ -195,7 +195,7 @@ const dashboard = () => {
                                                 backgroundColor: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId === s.salonId ? "green" : "",
                                                 color: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId === s.salonId ? "#fff" : "black"
                                             }}>
-                                               {s.salonName} 
+                                                {s.salonName}
                                             </option>
                                         ))}
                                     </select>
@@ -203,19 +203,26 @@ const dashboard = () => {
                                     <button onClick={applySalonHandler}>Apply</button>
                                 </div>
 
+                                <div style={{
+                                    display:"flex",
+                                    gap:"1.1rem",
+                                    alignItems:"center"
+                                }}>
+                                    <p>Offline</p>
+                                    <label className="nav2toggle_switch" >
+                                        <input type="checkbox"
+                                            value={salonStatus}
+                                            onClick={() => salonStatusHandler()}
 
-                                <label className="nav2toggle_switch" >
-                                    <input type="checkbox"
-                                        value={salonStatus}
-                                        onClick={() => salonStatusHandler()}
-
-                                    />
-                                    <span className={`nav2slider ${salonStatus ? 'checked' : ''}`}
-                                        style={{
-                                            background: salonStatus ? "#4CBB17" : ""
-                                        }}
-                                    ></span>
-                                </label>
+                                        />
+                                        <span className={`nav2slider ${salonStatus ? 'checked' : ''}`}
+                                            style={{
+                                                background: salonStatus ? "#4CBB17" : ""
+                                            }}
+                                        ></span>
+                                    </label>
+                                    <p>Online</p>
+                                </div>
                             </div>
 
                             <div className="div_left_head">

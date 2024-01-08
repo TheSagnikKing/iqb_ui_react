@@ -126,10 +126,10 @@ const AdminHeader = ({ title }) => {
 
         <div className="nav1right">
           <div className="nav1right_left_div">
-            <p>Dashboard</p>
+            {/* <p>Dashboard</p>
             <IoIosArrowForward />
             <p>List</p>
-            <IoIosArrowForward />
+            <IoIosArrowForward /> */}
             <b style={{ color: "rgba(0,0,0,0.6)" }}>{title}</b>
 
           </div>

@@ -75,7 +75,7 @@ const CreateAppointment = () => {
     useEffect(() => {
         if (date == null && selectedbarberId == null) {
 
-        } else if(date && selectedbarberId){
+        } else if (date && selectedbarberId) {
             const timeslotfunc = async () => {
                 try {
                     const { data } = await api.post("/api/appointments/getEngageBarberTimeSlots", {
@@ -94,18 +94,18 @@ const CreateAppointment = () => {
             timeslotfunc();
         }
 
-    }, [date, selectedbarberId, LoggedInMiddleware?.user,setTimeSlotData]);
+    }, [date, selectedbarberId, LoggedInMiddleware?.user, setTimeSlotData]);
 
     // useEffect(() => {
     //     const timeslotfunc = async () => {
-           
+
     //             const { data } = await api.post("/api/appointments/getEngageBarberTimeSlots", {
     //                 salonId: 13,
     //                 barberId: 12,
     //                 date:"2023-12-28"
     //             });
     //             setTimeSlotData(data);
-            
+
     //     };
 
     //     timeslotfunc();
@@ -188,12 +188,20 @@ const CreateAppointment = () => {
                         <label htmlFor="">Barber List</label>
 
                         <div>
+                            <div className='barber-single-join-content-bbr'>
+                                <p>Email</p>
+                                <p>Name</p>
+                                {/* <p>{barber.userName}</p> */}
+                                <p>Mo. Number</p>
+                                <p>Active</p>
+                                <p>Action</p>
+                            </div>
                             {
                                 barberList ? barberList?.getAllBarbers?.map((barber) => (
                                     <div className='barber-single-join-content-bbr' key={barber._id}>
                                         <p>{barber.email}</p>
                                         <p>{barber.name}</p>
-                                        <p>{barber.userName}</p>
+                                        {/* <p>{barber.userName}</p> */}
                                         <p>{barber.mobileNumber}</p>
                                         <p>{barber.isActive === true ? "Yes" : "No"}</p>
                                         <button onClick={() => barberServiceCallHandler(barber.barberId, barber.name)}>Select</button>
@@ -209,12 +217,25 @@ const CreateAppointment = () => {
                         <label htmlFor="">Choose  Services</label>
 
                         <div>
+                            <div className='barber-single-join-quebarberserv-content'
+                                style={{
+                                    fontSize: "11px",
+                                }}
+                            >
+                                {/* <p>ServiceID</p> */}
+                                <p>Service Name</p>
+                                {/* <p>Service Code</p> */}
+                                <p>Service Price</p>
+                                <p>Estimated Wait Time (mins)</p>
+                                <p>Action</p>
+                            </div>
                             {
                                 getBarberServicesBybarberId?.response?.map((b, index) => (
                                     <div className='barber-single-join-quebarberserv-content' key={b._id}>
-                                        <p>{b.serviceId}</p>
+                                        {/* <p>{b.serviceId}</p> */}
                                         <p>{b.serviceName}</p>
-                                        <p>{b.serviceCode}</p>
+                                        {/* <p>{b.serviceCode}</p> */}
+                                        <p>{b.servicePrice}</p>
                                         <p>{b.barberServiceEWT}</p>
                                         <button onClick={() => selectedServiceHandler(b, index)}>Add</button>
                                     </div>
@@ -227,12 +248,25 @@ const CreateAppointment = () => {
                         <label htmlFor="">Your Services</label>
 
                         <div>
+                            <div className='barber-single-join-quebarberserv-content'
+                            style={{
+                                fontSize:"11px"
+                            }}
+                            >
+                                {/* <p>ServiceID</p> */}
+                                <p>Service Name</p>
+                                {/* <p>Service Code</p> */}
+                                <p>Service Price</p>
+                                <p>Estimated Wait Time(mins)</p>
+                                <p>Action</p>
+                            </div>
                             {
                                 selectedService && selectedService.length > 0 ? selectedService.map((b, index) => (
                                     <div className='barber-single-join-quebarberserv-content' key={b._id}>
-                                        <p>{b.serviceId}</p>
+                                        {/* <p>{b.serviceId}</p> */}
                                         <p>{b.serviceName}</p>
-                                        <p>{b.serviceCode}</p>
+                                        {/* <p>{b.serviceCode}</p> */}
+                                        <p>{b.servicePrice}</p>
                                         <p>{b.barberServiceEWT}</p>
                                         <button onClick={() => selectedServiceDelete(b)}>Del</button>
                                     </div>
@@ -291,8 +325,9 @@ const CreateAppointment = () => {
                                         borderRadius: "3px"
                                     }}>
                                         <p>{c.serviceName}</p>
+                                        <p>{c.servicePrice}</p>
                                         <p>{c.barberServiceEWT}</p>
-                                        <p>{c.serviceId}</p>
+                                        {/* <p>{c.serviceId}</p> */}
                                     </div>
                                 ))
                             }
@@ -309,8 +344,8 @@ const CreateAppointment = () => {
                                 height: "35px"
                             }}
                         >{
-                            createAppointment?.loading == true ? <h2>loading...</h2> : "Create Appointment"
-                        }</button>
+                                createAppointment?.loading == true ? <h2>loading...</h2> : "Create Appointment"
+                            }</button>
                     </div>
 
                 </div>

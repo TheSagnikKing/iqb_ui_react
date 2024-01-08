@@ -20,7 +20,7 @@ const CreateBarber = () => {
     const [name, setName] = useState("")
     const [password,setPassword] = useState("")
     const [email, setEmail] = useState("")
-    const [userName, setUserName] = useState("")
+    const [nickName, setNickName] = useState("")
     const [mobileNumber, setMobileNumber] = useState(null)
     const [dateOfBirth, setDateOfBirth] = useState("")
     const [salonId, setSalonId] = useState(null)
@@ -87,7 +87,7 @@ const CreateBarber = () => {
     const submitHandler = () => {
         //salonid loggin admin theke 
         const barberdata = {
-            name, email, userName,password, mobileNumber, dateOfBirth, salonId:Number(LoggedInMiddleware?.user && LoggedInMiddleware.user[0].salonId), barberServices: selectedService
+            name, email, nickName,password, mobileNumber, dateOfBirth, salonId:Number(LoggedInMiddleware?.user && LoggedInMiddleware.user[0].salonId), barberServices: selectedService
         }
 
         console.log(barberdata)
@@ -138,12 +138,12 @@ const CreateBarber = () => {
                     </div>
 
                     <div>
-                        <label>User Name</label>
+                        <label>Nick Name</label>
                         <input
                             type="text"
-                            placeholder='Enter UserName'
-                            value={userName}
-                            onChange={(e) => setUserName(e.target.value)}
+                            placeholder='Enter NickName'
+                            value={nickName}
+                            onChange={(e) => setNickName(e.target.value)}
                         />
                     </div>
 
@@ -167,14 +167,16 @@ const CreateBarber = () => {
                         />
                     </div>
 
-                    <div>
+                    {/* <div>
                         <label>Salon ID</label>
                         <input
                             type="number"
                             placeholder='Enter Salon ID'
                             value={LoggedInMiddleware?.user && LoggedInMiddleware.user[0].salonId}
                         />
-                    </div>
+                    </div> */}
+
+                    <div></div>
 
                 
                     <button onClick={submitHandler}>{
@@ -208,7 +210,7 @@ const CreateBarber = () => {
                                             </div>
 
                                             <div>
-                                                <p>Estimated Wait Time</p>
+                                                <p>Estimated Wait Time (mins)</p>
                                                 <input
                                                     type="number"
                                                     value={barberserviceEWTMap.get(ser.serviceId) || ''}
@@ -245,7 +247,7 @@ const CreateBarber = () => {
                                         </div>
 
                                         <div>
-                                            <p>Estimated</p>
+                                            <p>Estimated Wait Time (mins)</p>
                                             <p>{ser.barberServiceEWT}</p>                               
                                         </div>
 

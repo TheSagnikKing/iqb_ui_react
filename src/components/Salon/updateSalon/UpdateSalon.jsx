@@ -111,6 +111,7 @@ const UpdateSalon = () => {
 
 
     const addServiceHandler = () => {
+
         setServices(prevServices => [...prevServices, {
             serviceName, serviceDesc, servicePrice, serviceEWT,serviceId
         }]);
@@ -494,7 +495,7 @@ const UpdateSalon = () => {
                             </div>
 
                             <div>
-                                <label htmlFor="">Service EWT</label>
+                                <label htmlFor="">Estimated Waiting Time(mins)</label>
                                 <input
                                     type="text"
                                     value={serviceEWT}
@@ -525,7 +526,7 @@ const UpdateSalon = () => {
                                     </div>
 
                                     <div>
-                                        <label>Service EWT</label>
+                                        <label>Estimated Wait Time(mins)</label>
                                         <label>{service.serviceEWT}</label>
                                     </div>
 

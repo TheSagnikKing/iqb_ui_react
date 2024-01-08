@@ -18,7 +18,7 @@ const UpdateBarber = () => {
 
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
-    const [userName, setUserName] = useState("")
+    const [nickName, setNickName] = useState("")
     const [mobileNumber, setMobileNumber] = useState("")
     const [dateOfBirth, setDateOfBirth] = useState("")
     const [salonId, setSalonId] = useState("")
@@ -87,7 +87,7 @@ const UpdateBarber = () => {
 
     const submitHandler = () => {
         const barberdata = {
-            name, email, userName, mobileNumber, dateOfBirth, salonId, barberServices: selectedService
+            name, email, nickName, mobileNumber, dateOfBirth, salonId, barberServices: selectedService
         }
         // console.log(barberdata)
         dispatch(updateBarberAction(barberdata,navigate))
@@ -103,10 +103,10 @@ const UpdateBarber = () => {
             console.log("scsdvsdvdsvddssd",data)
 
             setName(data?.response?.name)
-            setUserName(data?.response?.userName)
+            setNickName(data?.response?.nickName)
             setEmail(data?.response?.email)
             setMobileNumber(data?.response?.mobileNumber)
-            setDateOfBirth(data?.response?.dateOfBirth)
+            setDateOfBirth(data?.response?.dateOfBirth.split("T")[0])
             setSalonId(data?.response?.salonId)
             setSelectedService(data?.response?.barberServices)
             // setBarberServices(data?.response?.barberServices)
@@ -147,12 +147,12 @@ const UpdateBarber = () => {
                     </div>
 
                     <div>
-                        <label>User Name</label>
+                        <label>Nick Name</label>
                         <input
                             type="text"
                             placeholder='Enter UserName'
-                            value={userName}
-                            onChange={(e) => setUserName(e.target.value)}
+                            value={nickName}
+                            onChange={(e) => setNickName(e.target.value)}
                         />
                     </div>
 
@@ -176,14 +176,16 @@ const UpdateBarber = () => {
                         />
                     </div>
 
-                    <div>
+                    {/* <div>
                         <label>Salon ID</label>
                         <input
                             type="text"
                             placeholder='Enter Salon ID'
                             value={salonId}
                         />
-                    </div>
+                    </div> */}
+
+                    <div></div>
                     <div></div>
 
                     <button onClick={submitHandler}>{
@@ -217,7 +219,7 @@ const UpdateBarber = () => {
                                             </div>
 
                                             <div>
-                                                <p>Estimated Wait Time</p>
+                                                <p>Estimated Wait Time (mins)</p>
                                                 <input
                                                     type="number"
                                                     value={  barberserviceEWTMap.get(ser.serviceId) }
@@ -256,7 +258,7 @@ const UpdateBarber = () => {
                                         </div>
 
                                         <div>
-                                            <p>Estimated Wait Time</p>
+                                            <p>Estimated Wait Time (mins)</p>
                                             <p>{ser.barberServiceEWT}</p>                               
                                         </div>
 

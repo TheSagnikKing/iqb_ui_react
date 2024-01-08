@@ -11,21 +11,21 @@ import { useLocation, useNavigate } from 'react-router-dom'
 const EditAppointment = () => {
 
     const location = useLocation()
-    console.log("editApp",location?.state)
+    console.log("editApp", location?.state)
 
     useEffect(() => {
-        if(location?.state){
+        if (location?.state) {
             setAppointmentNotes(location?.state.appointmentNotes)
             setName(location?.state.customerName)
             setTimeSlotStartTime(location?.state.startTime)
-            setDate(location?.state.appointmentDate.slice(0,10))
+            setDate(location?.state.appointmentDate.slice(0, 10))
             setAppointmentId(location?.state._id)
         }
-    },[location?.state])
+    }, [location?.state])
 
     const [name, setName] = useState("")
     const [appointmentNotes, setAppointmentNotes] = useState("")
-    const [appointmentId,setAppointmentId] = useState(null);
+    const [appointmentId, setAppointmentId] = useState(null);
 
     const [date, setDate] = useState(null)
 
@@ -35,10 +35,10 @@ const EditAppointment = () => {
     const salonId = LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId
 
     useEffect(() => {
-        if(salonId){
+        if (salonId) {
             dispatch(barberListAction(salonId))
         }
-    }, [dispatch,salonId])
+    }, [dispatch, salonId])
 
     const barberList = useSelector(state => state.barberList)
 
@@ -83,7 +83,7 @@ const EditAppointment = () => {
     useEffect(() => {
         if (date == null && selectedbarberId == null) {
 
-        } else if(date && selectedbarberId){
+        } else if (date && selectedbarberId) {
             const timeslotfunc = async () => {
                 try {
                     const { data } = await api.post("/api/appointments/getEngageBarberTimeSlots", {
@@ -102,7 +102,7 @@ const EditAppointment = () => {
             timeslotfunc();
         }
 
-    }, [date, selectedbarberId, LoggedInMiddleware?.user,setTimeSlotData]);
+    }, [date, selectedbarberId, LoggedInMiddleware?.user, setTimeSlotData]);
 
     const [timeSlotStartTime, setTimeSlotStartTime] = useState("")
 
@@ -118,7 +118,7 @@ const EditAppointment = () => {
 
     const UpdateAppointment = () => {
         const editAppointmentData = {
-            salonId:LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId,
+            salonId: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId,
             barberId: selectedbarberId,
             serviceId: selectedService.map((s) => s.serviceId),
             appointmentDate: date,
@@ -127,12 +127,12 @@ const EditAppointment = () => {
             startTime: timeSlotStartTime,
         }
 
-        console.log("saas",editAppointmentData)
+        console.log("saas", editAppointmentData)
 
         const confirm = window.confirm("Are you sure ?")
 
         if (confirm) {
-            dispatch(editAppointmentAction(editAppointmentData,navigate))
+            dispatch(editAppointmentAction(editAppointmentData, navigate))
         }
     }
 
@@ -178,12 +178,20 @@ const EditAppointment = () => {
                         <label htmlFor="">Barber List</label>
 
                         <div>
+                            <div className='barber-single-join-content-bbr'>
+                                <p>Email</p>
+                                <p>Name</p>
+                                {/* <p>{barber.userName}</p> */}
+                                <p>Mo. Number</p>
+                                <p>Active</p>
+                                <p>Action</p>
+                            </div>
                             {
                                 barberList ? barberList?.getAllBarbers?.map((barber) => (
                                     <div className='barber-single-join-content-bbr' key={barber._id}>
                                         <p>{barber.email}</p>
                                         <p>{barber.name}</p>
-                                        <p>{barber.userName}</p>
+                                        {/* <p>{barber.userName}</p> */}
                                         <p>{barber.mobileNumber}</p>
                                         <p>{barber.isActive === true ? "Yes" : "No"}</p>
                                         <button onClick={() => barberServiceCallHandler(barber.barberId, barber.name)}>Select</button>
@@ -199,12 +207,25 @@ const EditAppointment = () => {
                         <label htmlFor="">Choose  Services</label>
 
                         <div>
+                            <div className='barber-single-join-quebarberserv-content'
+                                style={{
+                                    fontSize: "11px"
+                                }}
+                            >
+                                {/* <p>ServiceID</p> */}
+                                <p>ServiceName</p>
+                                {/* <p>ServiceCode</p> */}
+                                <p>Service Price</p>
+                                <p>Estimated Wait Time(mins)</p>
+                                <p>Action</p>
+                            </div>
                             {
                                 getBarberServicesBybarberId?.response?.map((b, index) => (
                                     <div className='barber-single-join-quebarberserv-content' key={b._id}>
-                                        <p>{b.serviceId}</p>
+                                        {/* <p>{b.serviceId}</p> */}
                                         <p>{b.serviceName}</p>
-                                        <p>{b.serviceCode}</p>
+                                        {/* <p>{b.serviceCode}</p> */}
+                                        <p>{b.servicePrice}</p>
                                         <p>{b.barberServiceEWT}</p>
                                         <button onClick={() => selectedServiceHandler(b, index)}>Add</button>
                                     </div>
@@ -217,12 +238,25 @@ const EditAppointment = () => {
                         <label htmlFor="">Your Services</label>
 
                         <div>
+                            <div className='barber-single-join-quebarberserv-content'
+                            style={{
+                                fontSize:"11px"
+                            }}
+                            >
+                                {/* <p>ServiceID</p> */}
+                                <p>ServiceName</p>
+                                {/* <p>ServiceCode</p> */}
+                                <p>Service Price</p>
+                                <p>Estimated Wait Time(mins)</p>
+                                <p>Action</p>
+                            </div>
                             {
                                 selectedService && selectedService.length > 0 ? selectedService.map((b, index) => (
                                     <div className='barber-single-join-quebarberserv-content' key={b._id}>
-                                        <p>{b.serviceId}</p>
+                                        {/* <p>{b.serviceId}</p> */}
                                         <p>{b.serviceName}</p>
-                                        <p>{b.serviceCode}</p>
+                                        {/* <p>{b.serviceCode}</p> */}
+                                        <p>{b.servicePrice}</p>
                                         <p>{b.barberServiceEWT}</p>
                                         <button onClick={() => selectedServiceDelete(b)}>Del</button>
                                     </div>
@@ -270,37 +304,38 @@ const EditAppointment = () => {
                             <p>Method Used : <b>App</b></p>
                             <p><b>Services :</b></p>
                             {
-                                selectedService.map((c,i) => (
+                                selectedService.map((c, i) => (
                                     <div key={i} style={{
-                                        display:"flex",
-                                        gap:"1rem",
-                                        marginBlock:"10px",
-                                        width:"30%",
-                                        padding:"5px",
-                                        boxShadow:"0px 0px 4px rgba(0,0,0,0.4)",
-                                        borderRadius:"3px"
+                                        display: "flex",
+                                        gap: "1rem",
+                                        marginBlock: "10px",
+                                        width: "30%",
+                                        padding: "5px",
+                                        boxShadow: "0px 0px 4px rgba(0,0,0,0.4)",
+                                        borderRadius: "3px"
                                     }}>
                                         <p>{c.serviceName}</p>
+                                        <p>{c.servicePrice}</p>
                                         <p>{c.barberServiceEWT}</p>
-                                        <p>{c.serviceId}</p>
+                                        {/* <p>{c.serviceId}</p> */}
                                     </div>
                                 ))
                             }
                         </div>
 
-                        <button onClick={UpdateAppointment} 
-                        style={{
-                            backgroundColor:"#f1f6fc",
-                            width:"50%",
-                            border:"none",
-                            cursor:"pointer",
-                            boxShadow:"0px 0px 4px rgba(0,0,0,0.4)",
-                            borderRadius:"4px",
-                            height:"35px"
-                        }}
+                        <button onClick={UpdateAppointment}
+                            style={{
+                                backgroundColor: "#f1f6fc",
+                                width: "50%",
+                                border: "none",
+                                cursor: "pointer",
+                                boxShadow: "0px 0px 4px rgba(0,0,0,0.4)",
+                                borderRadius: "4px",
+                                height: "35px"
+                            }}
                         >{
-                            editAppointment?.loading == true ? <h2>Loading...</h2> : "Edit Appointment"
-                        }</button>
+                                editAppointment?.loading == true ? <h2>Loading...</h2> : "Edit Appointment"
+                            }</button>
                     </div>
 
                 </div>

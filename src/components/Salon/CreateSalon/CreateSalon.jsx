@@ -158,6 +158,13 @@ const CreateSalon = () => {
     }
 
     const addServiceHandler = () => {
+
+        if (serviceName.trim() === '' || serviceDesc.trim() === '' || servicePrice.trim() === '' || serviceEWT.trim() === '') {
+            // You can handle the case when any of the fields is empty (e.g., show an error message)
+            alert("Please fill all the fields")
+            return;
+        }
+        
         setServices(prevServices => [...prevServices, {
             serviceName, serviceDesc, servicePrice, serviceEWT
         }]);
@@ -166,6 +173,8 @@ const CreateSalon = () => {
         setServicePrice("")
         setServiceEWT(0)
     }
+
+    console.log("as",services)
 
     const serviceEditHandler = (ind) => {
 
@@ -212,9 +221,6 @@ const CreateSalon = () => {
         setSalonType(selectedSalonType);
         setSalontypeDropdown(false); // Close the dropdown after selecting a salon type
     };
-
-
-
 
     const [timeOptions, setTimeOptions] = useState([]);
 
@@ -494,7 +500,7 @@ const CreateSalon = () => {
 
 
                             <div>
-                                <label htmlFor="">Service EWT</label>
+                                <label htmlFor="">Estimated Waiting Time (mins)</label>
                                 <input
                                     type="text"
                                     value={serviceEWT}
@@ -525,7 +531,7 @@ const CreateSalon = () => {
                                     </div>
 
                                     <div>
-                                        <label>Service EWT</label>
+                                        <label>Estimated Wait Time(ms)</label>
                                         <label>{service.serviceEWT}</label>
                                     </div>
 

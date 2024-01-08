@@ -64,6 +64,7 @@ import EditAppointment from './components/Appoinment/EditAppointment/EditAppoint
 import AdminVerifyEmail from './components/VerifyEmail/AdminVerifyEmail';
 import BarberUpdateProfile from './components/barber/BarberUpdateProfile/BarberUpdateProfile';
 import CustomerEmail from './components/CustomerEmail/CustomerEmail';
+import Kyosks from './components/kyosks/Kyosks';
 
 const App = () => {
 
@@ -160,7 +161,7 @@ const App = () => {
 
           } />
 
-          <Route path="/customer/customeremail" element={<Auth><CustomerEmail/></Auth>}/>
+          <Route path="/customer/customeremail" element={<Auth><CustomerEmail /></Auth>} />
 
 
           {/* //BarberDashboard */}
@@ -196,7 +197,7 @@ const App = () => {
           } />
 
           <Route path="/admin/updateprofile" element={<Auth><UpdateAdminprofile /></Auth>} />
-          <Route path="/barber/updateprofile" element={<BarberAuth><BarberUpdateProfile/></BarberAuth>}/>
+          <Route path="/barber/updateprofile" element={<BarberAuth><BarberUpdateProfile /></BarberAuth>} />
 
           <Route path="/salon/createsalon" element={
 
@@ -214,7 +215,7 @@ const App = () => {
 
           } />
 
-          <Route path="/salon/salonsettings" element={<Auth><SalonSettings/></Auth>}/>
+          <Route path="/salon/salonsettings" element={<Auth><SalonSettings /></Auth>} />
 
           <Route path="/salon/updateSalon" element={
 
@@ -239,6 +240,8 @@ const App = () => {
             </Suspense>
 
           } />
+
+          <Route path="/queue/barberlist/kyosks" element={<Auth><Kyosks/></Auth>}/>
 
           {/* <Route path="/queue/barberservices/:barberid/:barbername" element={
 
@@ -284,15 +287,15 @@ const App = () => {
 
           } />
 
-          <Route path='/barber/appoinment' element={<BarberAuth><BarberAppointment/></BarberAuth>}/> 
+          <Route path='/barber/appoinment' element={<BarberAuth><BarberAppointment /></BarberAuth>} />
           <Route path="/barber/appoinment/calender" element={<BarberAuth><BarberCalenderEvent /></BarberAuth>} />
           <Route path="/barber/appoinment/calender/list" element={<BarberAuth><BarberCalenderList /></BarberAuth>} />
 
-          <Route path="/barber/queuelist" element={<BarberAuth><BarberQueLists/></BarberAuth>}/> 
+          <Route path="/barber/queuelist" element={<BarberAuth><BarberQueLists /></BarberAuth>} />
 
           <Route path="/appoinment" element={<Auth><Month /></Auth>} />
-          <Route path="/appoinment/createappointment" element={<Auth><CreateAppointment/></Auth>}/>
-          <Route path="/appoinment/editappointment" element={<Auth><EditAppointment/></Auth>}/>
+          <Route path="/appoinment/createappointment" element={<Auth><CreateAppointment /></Auth>} />
+          <Route path="/appoinment/editappointment" element={<Auth><EditAppointment /></Auth>} />
           <Route path="/appoinment/calender" element={<Auth><CalenderEvent /></Auth>} />
           <Route path="/appoinment/calender/list" element={<Auth><CalenderList /></Auth>} />
 
@@ -336,11 +339,11 @@ const App = () => {
 
           } />
 
-          <Route path="/advertisement" element={<Auth><Advertisement/></Auth>}/>
-          
-          <Route path="/map" element={<Map/>}/>
+          <Route path="/advertisement" element={<Auth><Advertisement /></Auth>} />
 
-          <Route path="/admin/verifyemailstatus" element={<Auth><AdminVerifyEmail/></Auth>}/>
+          <Route path="/map" element={<Map />} />
+
+          <Route path="/admin/verifyemailstatus" element={<Auth><AdminVerifyEmail /></Auth>} />
 
         </Routes>
       </BrowserRouter>

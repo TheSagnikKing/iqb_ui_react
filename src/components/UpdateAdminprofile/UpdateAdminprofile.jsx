@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom'
 
 const UpdateAdminprofile = () => {
 
-    const [username, setUsername] = useState("")
+    // const [username, setUsername] = useState("")
     const [mobileNumber, setMobileNumber] = useState("")
     const [name, setName] = useState("")
     const [gender, setGender] = useState("")
@@ -25,7 +25,7 @@ const UpdateAdminprofile = () => {
         const profiledata = {
             email: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].email,
             salonId: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId,
-            username,
+            // username,
             mobileNumber,
             name,
             gender
@@ -38,11 +38,11 @@ const UpdateAdminprofile = () => {
 
 
     useEffect(() => {
-        setUsername(LoggedInMiddleware?.user && LoggedInMiddleware?.user[0]?.userName)
+        // setUsername(LoggedInMiddleware?.user && LoggedInMiddleware?.user[0]?.userName)
         setMobileNumber(LoggedInMiddleware?.user && LoggedInMiddleware?.user[0]?.mobileNumber)
         setName(LoggedInMiddleware?.user && LoggedInMiddleware?.user[0]?.name)
         setGender(LoggedInMiddleware?.user && LoggedInMiddleware?.user[0]?.gender)
-        setDob(LoggedInMiddleware?.user && LoggedInMiddleware?.user[0]?.dateOfBirth)
+        setDob(LoggedInMiddleware?.user && LoggedInMiddleware?.user[0]?.dateOfBirth.split('T')[0])
     }, [LoggedInMiddleware?.user])
 
     const navigate = useNavigate()
@@ -96,14 +96,14 @@ const UpdateAdminprofile = () => {
                         
                     </div>
 
-                    <div>
+                    {/* <div>
                         <label htmlFor="">User Name</label>
                         <input
                             type="text"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
                         />
-                    </div>
+                    </div> */}
 
                     <div>
                         <label htmlFor="">Mobile Number</label>

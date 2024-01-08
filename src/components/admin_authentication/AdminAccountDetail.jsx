@@ -44,14 +44,14 @@ const AdminAccountDetail = () => {
                         />
                     </div> */}
 
-                    <div>
+                    {/* <div>
                         <label htmlFor="">User Name</label>
                         <input
                             type="text"
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
                         />
-                    </div>
+                    </div> */}
 
                     <div>
                         <label htmlFor="">Mobile Number</label>
@@ -88,6 +88,7 @@ const AdminAccountDetail = () => {
                         value={gender}>
                             <option value="male">Male</option>
                             <option value="female">Female</option>
+                            <option value="other">Other</option>
                         </select>
                     </div>
 

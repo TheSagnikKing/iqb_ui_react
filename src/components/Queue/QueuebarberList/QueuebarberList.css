@@ -101,7 +101,7 @@
 .barber-single-join-content-bbr{
     display: grid;
     align-items: center;
-    grid-template-columns: repeat(6,1fr);
+    grid-template-columns: repeat(5,1fr);
     background-color: #fff;
     font-size: 14px;
     padding-inline: 10px;

@@ -35,6 +35,7 @@ const QueuebarberList = () => {
   const [selectedbarberName, setSelectedBarberName] = useState("")
   const [name, setName] = useState("")
   const [customerEmail, setCustomerEmail] = useState("")
+  const [customerMobile, setCustomerMobile] = useState("")
 
   const barberServiceCallHandler = (barberId, name) => {
     const selectbarber = window.confirm("Are you sure ?")
@@ -84,6 +85,7 @@ const QueuebarberList = () => {
       salonId: LoggedInMiddleware?.user && LoggedInMiddleware.user[0].salonId,
       name,
       customerEmail,
+      customerMobile,
       joinedQType: "Single-Join",
       methodUsed: "Walk-In",
       barberName: selectedbarberName,
@@ -97,7 +99,7 @@ const QueuebarberList = () => {
 
     if (confirm) {
       console.log(queuedata)
-      // dispatch(singleJoinQueueAction(queuedata, setSelectedService, navigate))
+      dispatch(singleJoinQueueAction(queuedata, setSelectedService, navigate))
       setName("")
     }
 
@@ -157,6 +159,16 @@ const QueuebarberList = () => {
             />
           </div>
 
+          <div>
+            <p>Mobile Number</p>
+            <input 
+            type="text" 
+            placeholder='Enter Customer Mobile Number'
+            value={customerMobile}
+            onChange={(e) => setCustomerMobile(e.target.value)}
+            />
+          </div>
+
 
           <div style={{
             display: "grid",
@@ -184,11 +196,15 @@ const QueuebarberList = () => {
           }}>
             <div className='barber-single-join-dropdown-list'>
 
-              <div className='barber-single-join-content-bbr'>
+              <div className='barber-single-join-content-bbr'
+              style={{
+                fontSize:"12px"
+              }}
+              >
                 <p>Email</p>
                 <p>Name</p>
-                <p>UserName</p>
-                <p>Barber EWT</p>
+                {/* <p>UserName</p> */}
+                <p>Estimated Wait Time</p>
                 <p>Active</p>
                 <p>Action</p>
               </div>
@@ -196,8 +212,8 @@ const QueuebarberList = () => {
                 barberList?.getAllBarbers?.map((barber) => (
                   <div className='barber-single-join-content-bbr' key={barber._id}>
                     <p>{barber.email}</p>
-                    <p>{barber.name}</p>
-                    <p>{barber.userName}</p>
+                    <p >{barber.name}</p>
+                    {/* <p>{barber.userName}</p> */}
                     <p>{barber.barberEWT}</p>
                     <p>{barber.isActive === true ? "Yes" : "No"}</p>
                     <button onClick={() => barberServiceCallHandler(barber.barberId, barber.name)}>Select</button>
@@ -208,7 +224,7 @@ const QueuebarberList = () => {
                   <div className='barber-single-join-content-bbr' key={barber._id}>
                     <p>{barber.email}</p>
                     <p>{barber.name}</p>
-                    <p>{barber.userName}</p>
+                    {/* <p>{barber.userName}</p> */}
                     <p>{barber.barberEWT}</p>
                     <p>{barber.isActive === true ? "Yes" : "No"}</p>
                     <button onClick={() => barberServiceCallHandler2(barber.barberId, barber.name)}>Select</button>
@@ -220,11 +236,15 @@ const QueuebarberList = () => {
             </div>
             {/* ============== */}
             <div className='barber-single-join-services'>
-            <div className='barber-single-join-quebarberserv-content'>
+            <div className='barber-single-join-quebarberserv-content'
+            style={{
+              fontSize:"12px"
+            }}
+            >
               <p>Service ID</p>
               <p>Service Name</p>
               <p>Service Price</p>
-              <p>Barber Service EWT</p>
+              <p>Estimated Wait Time</p>
               <p>Action</p>
             </div>
             {
@@ -284,11 +304,15 @@ const QueuebarberList = () => {
 
           <p>Your Selected Services</p>
           <div className='barber-single-join-services'>
-            <div className='barber-single-join-quebarberserv-content'>
+            <div className='barber-single-join-quebarberserv-content'
+            style={{
+              fontSize:"12px"
+            }}
+            >
               <p>Service Id</p>
               <p>Service Name</p>
               <p>Service Code</p>
-              <p>BarberService EWT</p>
+              <p>Estimated Wait Time</p>
               <p>Action</p>
             </div>
             {

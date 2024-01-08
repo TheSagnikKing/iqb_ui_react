@@ -113,6 +113,7 @@ const Queautojoinservices = () => {
   const [selectedbarberName, setSelectedBarberName] = useState("")
   const [name, setName] = useState("")
   const [customerEmail,setCustomerEmail] = useState("")
+  const [customerMobile, setCustomerMobile] = useState("")
 
   const barberServiceCallHandler = (barberId, name) => {
     const selectbarber = window.confirm("Are you sure ?")
@@ -152,6 +153,7 @@ const Queautojoinservices = () => {
     const joindata = {
       name,
       customerEmail,
+      customerMobile,
       joinedQType: "Auto-Join",
       methodUsed: "Walk-In",
       salonId: LoggedInMiddleware?.user && LoggedInMiddleware.user[0].salonId,
@@ -198,13 +200,23 @@ const Queautojoinservices = () => {
             />
           </div>
 
+          <div>
+            <p>Mobile Number</p>
+            <input 
+            type="text" 
+            placeholder='Enter Customer Mobile Number'
+            value={customerMobile}
+            onChange={(e) => setCustomerMobile(e.target.value)}
+            />
+          </div>
+
           <p>Choose Barber Services</p>
           <div className='barber-single-join-services'>
             <div className='barber-single-join-quebarberserv-content'>
               <p>Service ID</p>
               <p>Service Name</p>
               <p>Service Price</p>
-              <p>Barber Service EWT</p>
+              <p>Estimated Wait Time</p>
               <p>Action</p>
             </div>
             {
@@ -229,7 +241,7 @@ const Queautojoinservices = () => {
               <p>Service Id</p>
               <p>Service Name</p>
               <p>Service Price</p>
-              <p>Barber Service EWT</p>
+              <p>Estimated Wait Time</p>
               <p>Action</p>
             </div>
 

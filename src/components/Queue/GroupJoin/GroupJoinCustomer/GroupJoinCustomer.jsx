@@ -129,6 +129,7 @@ const GroupJoinCustomer = () => {
   const [selectedbarberName, setSelectedBarberName] = useState("")
   const [name, setName] = useState("")
   const [customerEmail,setCustomerEmail] = useState("")
+  const [customerMobile, setCustomerMobile] = useState("")
 
   const barberServiceCallHandler = (barberId, name) => {
     const selectbarber = window.confirm("Are you sure ?")
@@ -170,6 +171,7 @@ const GroupJoinCustomer = () => {
         salonId: LoggedInMiddleware?.user && LoggedInMiddleware.user[0].salonId,
         name,
         customerEmail,
+        customerMobile,
         joinedQType: "Group-Join",
         methodUsed: "Walk-In",
         barberName: selectedbarberName,
@@ -245,6 +247,16 @@ const GroupJoinCustomer = () => {
             />
           </div>
 
+          <div>
+            <p>Mobile Number</p>
+            <input 
+            type="text" 
+            placeholder='Enter Customer Mobile Number'
+            value={customerMobile}
+            onChange={(e) => setCustomerMobile(e.target.value)}
+            />
+          </div>
+
           <div className='barber-single-join-dropdown'>
             <p>Choose Your Barber</p>
             {/* <button onClick={() => setBarberDrop(!barberDrop)}>drop</button> */}
@@ -255,8 +267,8 @@ const GroupJoinCustomer = () => {
             <div className='barber-single-join-content-bbr'>
               <p>Email</p>
               <p>Name</p>
-              <p>User Name</p>
-              <p>Barber EWT</p>
+              {/* <p>User Name</p> */}
+              <p>Estimated Wait Time</p>
               <p>Active</p>
               <p>Action</p>
             </div>
@@ -266,7 +278,7 @@ const GroupJoinCustomer = () => {
                 <div className='barber-single-join-content-bbr' key={barber._id}>
                   <p>{barber.email}</p>
                   <p>{barber.name}</p>
-                  <p>{barber.userName}</p>
+                  {/* <p>{barber.userName}</p> */}
                   <p>{barber.barberEWT}</p>
                   <p>{barber.isActive === true ? "Yes" : "No"}</p>
                   <button onClick={() => barberServiceCallHandler(barber.barberId, barber.name)}>Select</button>
@@ -283,7 +295,7 @@ const GroupJoinCustomer = () => {
               <p>Service ID</p>
               <p>Service Name</p>
               <p>Service Price</p>
-              <p>Barber Service EWT</p>
+              <p>Estimated Wait Time</p>
               <p>Action</p>
             </div>
             {
@@ -308,7 +320,7 @@ const GroupJoinCustomer = () => {
               <p>Service ID</p>
               <p>Service Name</p>
               <p>Service Price</p>
-              <p>BarberService EWT</p>
+              <p>Estimated Wait Time</p>
               <p>Action</p>
             </div>
             {
