@@ -6,7 +6,6 @@ import { adminVerifyEmailAction, updateAdminAction } from '../../redux/actions/A
 import { MdDelete } from 'react-icons/md'
 import { FaCamera } from "react-icons/fa";
 
-import api from "../../redux/api/Api"
 import { useNavigate } from 'react-router-dom'
 
 const UpdateAdminprofile = () => {

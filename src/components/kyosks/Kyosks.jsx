@@ -29,11 +29,15 @@ const Kyosks = () => {
     const [model1, setModel1] = useState(false)
     const [model1services, setModelservices] = useState(false)
 
+    const [model2, setModel2] = useState(false)
+    const [model2barber, setModel2barber] = useState(false)
+
     const fetchAllBarbers = () => {
         const confirm = window.confirm("Are you sure?")
-
+        
         if (confirm) {
-            dispatch(barberListAction(salonId, setModel1))
+            setCurrentbarberName("")
+            dispatch(barberListAction(salonId, setModel1 ,setModel2, setModel2barber ))
         }
     }
 
@@ -44,7 +48,7 @@ const Kyosks = () => {
     const [selectedbarberName, setSelectedBarberName] = useState("")
     const [name, setName] = useState("")
     const [customerEmail, setCustomerEmail] = useState("")
-    const [customerMobile, setCustomerMobile] = useState("")
+    const [mobileNumber, setMobileNumber] = useState("")
 
     const [currentbarberName, setCurrentbarberName] = useState("")
 
@@ -61,7 +65,7 @@ const Kyosks = () => {
     }
 
     const fetchAllServices = () => {
-        dispatch(getAllSalonServicesAction(salonId))
+        dispatch(getAllSalonServicesAction(Number(salonId), setModel1, setModelservices,setCurrentbarberName,setModel2))
         setSelectedService([])
     }
 
@@ -98,21 +102,24 @@ const Kyosks = () => {
         setSelectedService(deleteService)
     }
 
-    console.log("Recent model2", selectedService)
+    // console.log("Recent model2", selectedService)
+
+    const getBarberByMultipleServices = useSelector(state => state.getBarberByMultipleServices)
 
     const navigate = useNavigate()
 
     const joinqueueHandler = () => {
+
         const queuedata = {
             salonId: LoggedInMiddleware?.user && LoggedInMiddleware.user[0].salonId,
             name,
             customerEmail,
-            customerMobile,
+            mobileNumber,
             joinedQType: "Single-Join",
             methodUsed: "Walk-In",
             barberName: selectedbarberName,
             barberId: selectedbarberId,
-            services: selectedService
+            services: selectedService 
         }
 
         // console.log(queuedata)
@@ -143,13 +150,14 @@ const Kyosks = () => {
 
     const fetchSelectedServices = () => {
         const serviceIds = selectedService.map(item => item.serviceId);
-        console.log(serviceIds, salonId)
+        // console.log(serviceIds, salonId)
 
-        dispatch(getBarberByMultipleServicesAction(salonId, serviceIds))
+        setCurrentbarberName("")
+        dispatch(getBarberByMultipleServicesAction(salonId, serviceIds,setModel2barber))
     }
 
 
-    const getBarberByMultipleServices = useSelector(state => state.getBarberByMultipleServices)
+
     // console.log("frrrr",getBarberByMultipleServices)
 
     return (
@@ -186,8 +194,8 @@ const Kyosks = () => {
                         <input
                             type="text"
                             placeholder='Enter Customer Mobile Number'
-                            value={customerMobile}
-                            onChange={(e) => setCustomerMobile(e.target.value)}
+                            value={mobileNumber}
+                            onChange={(e) => setMobileNumber(e.target.value)}
                         />
                     </div>
 
@@ -200,7 +208,7 @@ const Kyosks = () => {
                         <div className='barber-single-join-dropdown'>
                             <p>Barber Name : <b>{currentbarberName && currentbarberName}</b></p>
 
-                            <button onClick={() => fetchAllBarbers()}>Search Barber</button>
+                            <button onClick={() => fetchAllBarbers()}>Show Barber</button>
 
                         </div>
 
@@ -215,7 +223,7 @@ const Kyosks = () => {
                         {
                             model1 == true ? <div className='model1'>
 
-                                {barberList?.getAllBarbers?.map((barber) => (
+                                {barberList?.response?.map((barber) => (
                                     <div key={barber._id}>
                                         <div >
                                             <div>
@@ -341,84 +349,148 @@ const Kyosks = () => {
                     </div>
 
 
+                        {/* //model services  =============================== */} 
+                    <div className='model-container'>
+                        {
+                            model2barber == true ? <div className='model1'>
 
-                    {/* <div style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            gap: "2rem"
-          }}>
-            <div className='barber-single-join-dropdown-list'>
+                            {getBarberByMultipleServices?.response?.map((barber) => (
+                                <div key={barber._id}>
+                                    <div >
+                                        <div>
+                                            <div><img src="https://png.pngtree.com/background/20230530/original/pngtree-man-looking-for-a-good-mens-beauty-look-picture-image_2791625.jpg" alt="" /></div>
 
-              <div className='barber-single-join-content-bbr'
-              style={{
-                fontSize:"12px"
-              }}
-              >
-                <p>Email</p>
-                <p>Name</p>
-                <p>Estimated Wait Time</p>
-                <p>Active</p>
-                <p>Action</p>
-              </div>
-              {
-                barberList?.getAllBarbers?.map((barber) => (
-                  <div className='barber-single-join-content-bbr' key={barber._id}>
-                    <p>{barber.email}</p>
-                    <p >{barber.name}</p>
-                    <p>{barber.barberEWT}</p>
-                    <p>{barber.isActive === true ? "Yes" : "No"}</p>
-                    <button onClick={() => barberServiceCallHandler(barber.barberId, barber.name)}>Select</button>
-                  </div>
+                                            <div>
+                                                <h3>{barber.name}</h3>
+                                                <p>(4.5)</p>
+                                                <p>Cutting, Styling,Hair color, Hair Straightening</p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <p>Queued</p>
+                                            <h2>{barber.queueCount}</h2>
+                                        </div>
+
+                                        {currentbarberName == barber.name ? <div style={{
+                                            fontSize: "30px",
+                                            display: "flex",
+                                            justifyContent: "center",
+                                            alignItems: "center",
+                                            color: "green",
+                                            height: "30px",
+                                            width: "30px",
+                                            borderRadius: "50%",
+                                            boxShadow: "0px 0px 4px rgba(0,0,0,0.5)"
+                                        }}><TiTick /></div> : <div onClick={() => {
+                                            setCurrentbarberName(barber.name)
+                                            setSelectedBarberid(barber.barberId)
+                                        }}>
+                                            <IoIosAddCircle />
+                                        </div>}
+
+                                    </div>
+
+                                    <div>
+                                        <div>
+                                            <p>Next available position</p>
+                                            <h2>3</h2>
+                                        </div>
+                                        <div>
+                                            <p>Estimated Time</p>
+                                            <h2>{barber.barberEWT} mins</h2>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            ))}
 
 
-                )) || getBarberByMultipleServices?.response?.map((barber) => (
-                  <div className='barber-single-join-content-bbr' key={barber._id}>
-                    <p>{barber.email}</p>
-                    <p>{barber.name}</p>
-                    <p>{barber.barberEWT}</p>
-                    <p>{barber.isActive === true ? "Yes" : "No"}</p>
-                    <button onClick={() => barberServiceCallHandler2(barber.barberId, barber.name)}>Select</button>
-                  </div>
+                        </div> : <div></div>
+                        }
+
+                        {
+                            model2 == true && <div className='model2'>
+                            {
+                                getAllSalonServices?.response?.map((b, index) => (
+                                    <div key={b._id}>
+                                        <div>
+                                            <div>
+                                                <h3>{b.serviceName}</h3>
+                                                <p>(4.0) 20  reviews</p>
+                                            </div>
+
+                                            {/* <div onClick={() => selectedServiceHandler(b, index)}>
+                                                <IoIosAddCircle />
+                                            </div> */}
+
+                                            {
+                                                selectedService.includes(b) ? (
+                                                    <div className='model1-barber-icons'>
+                                                        <div style={{
+                                                            fontSize: "30px",
+                                                            display: "flex",
+                                                            justifyContent: "center",
+                                                            alignItems: "center",
+                                                            color: "green",
+                                                            height: "30px",
+                                                            width: "30px",
+                                                            borderRadius: "50%",
+                                                            boxShadow: "0px 0px 4px rgba(0,0,0,0.5)"
+
+                                                        }}><TiTick /></div>
+                                                        <div style={{
+                                                            fontSize: "30px",
+                                                            display: "flex",
+                                                            justifyContent: "center",
+                                                            alignItems: "center",
+                                                            color: "red",
+                                                            height: "30px",
+                                                            width: "30px",
+                                                            borderRadius: "50%",
+                                                            boxShadow: "0px 0px 4px rgba(0,0,0,0.5)"
+                                                        }} onClick={() => selectedServiceDelete(b)}><RxCross2 /></div>
+                                                    </div>
+                                                ) : (
+                                                    <div onClick={() => selectedServiceHandler(b)}>
+                                                        <IoIosAddCircle />
+                                                    </div>
+                                                )
+                                            }
 
 
-                )) 
-              }
-            </div>
-            <div className='barber-single-join-services'>
-            <div className='barber-single-join-quebarberserv-content'
-            style={{
-              fontSize:"12px"
-            }}
-            >
-              <p>Service ID</p>
-              <p>Service Name</p>
-              <p>Service Price</p>
-              <p>Estimated Wait Time</p>
-              <p>Action</p>
-            </div>
-            {
-              getBarberServicesBybarberId?.response?.map((b, index) => (
-                <div className='barber-single-join-quebarberserv-content' key={b._id}>
-                  <p>{b.serviceId}</p>
-                  <p>{b.serviceName}</p>
-                  <p>{b.servicePrice}</p>
-                  <p>{b.barberServiceEWT}</p>
-                  <button onClick={() => selectedServiceHandler(b, index)}>Add</button>
-                </div>
-              )) || getAllSalonServices?.response?.map((b,index) => (
-                <div className='barber-single-join-quebarberserv-content' key={b._id}>
-                  <p>{b.serviceId}</p>
-                  <p>{b.serviceName}</p>
-                  <p>{b.servicePrice}</p>
-                  <p>{b.barberServiceEWT}</p>
-                  <button onClick={() => selectedServiceHandler(b, index)}>Add</button>
-                </div>
-              ))
-            }
+                                        </div>
 
-          </div>
-          </div> */}
+                                        <div>
+                                            <div>
+                                                <p>Hair cut</p>
+                                                <p>Hair Spa</p>
+                                            </div>
 
+                                            <div>
+                                                <h2>${b.servicePrice}</h2>
+                                                <div>
+                                                    <div><FaRegClock /></div>
+                                                    <p>{b.barberServiceEWT} mins</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))
+                            }
+                            {
+                                selectedService.length > 0 && <button onClick={() => fetchSelectedServices()} className='services-search-btn' >Search</button>
+                            }
+                                
+                        </div>
+                        }
+
+
+                    </div>
+
+                    
+
+
+                    
                     <button onClick={joinqueueHandler}>{
                         singleJoinQueue?.loading == true ? <h2>Loading...</h2> : "Join Queue"
                     }</button>

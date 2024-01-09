@@ -61,7 +61,40 @@ export const updateSalonAction = (salondata,navigate) => async(dispatch) => {
     }
 }
 
-export const getAllSalonServicesAction = (salonid) => async(dispatch) => {
+export const getAllSalonServicesAction = (salonid,setModel1,setModelservices,setCurrentbarberName,setModel2) => async(dispatch) => {
+    // without kyosks
+    // try {
+    //     dispatch({type:GET_ALL_SALON_SERVICES_REQ})
+
+    //     const {data} = await api.get(`/api/salon/allSalonServices?salonId=${salonid}`)
+
+    //     dispatch({
+    //         type:GET_BARBER_SERVICES_SUCCESS,
+    //         payload:{}
+    //     })
+
+    //     dispatch({
+    //         type:GET_BARBERLIST_SUCCESS,
+    //         payload:{}
+    //     })
+
+    //     dispatch({
+    //         type:GET_BARBERS_BY_MULTIPLE_SERVICES_SUCCESS,
+    //         payload:{}
+    //     })
+
+    //     dispatch({
+    //         type:GET_ALL_SALON_SERVICES_SUCCESS,
+    //         payload:data
+    //     })
+    // } catch (error) {
+    //     dispatch({
+    //         type:GET_ALL_SALON_SERVICES_FAIL,
+    //         payload: error.response.data
+    //     })
+    // }
+
+
     try {
         dispatch({type:GET_ALL_SALON_SERVICES_REQ})
 
@@ -81,6 +114,12 @@ export const getAllSalonServicesAction = (salonid) => async(dispatch) => {
             type:GET_BARBERS_BY_MULTIPLE_SERVICES_SUCCESS,
             payload:{}
         })
+
+        setModel1(false)
+        setModelservices(false)
+        setCurrentbarberName("")
+
+        setModel2(true)
 
         dispatch({
             type:GET_ALL_SALON_SERVICES_SUCCESS,
