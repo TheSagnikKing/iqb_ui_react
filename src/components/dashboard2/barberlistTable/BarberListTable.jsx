@@ -14,6 +14,8 @@ import { approveBarberAction, deleteBarberAction } from '../../../redux/actions/
 
 import api from "../../../redux/api/Api"
 
+import { IoIosNotifications } from "react-icons/io";
+
 const BarberListTable = () => {
 
     const [barbersList, setBarbersList] = useState([])
@@ -26,8 +28,8 @@ const BarberListTable = () => {
     const [sortOrdeData, setSortOrderData] = useState("")
     const [sortFieldData, setFieldData] = useState("")
 
-    console.log(barbersList)
-    
+    // console.log(barbersList)
+
     const LoggedInMiddleware = useSelector(state => state.LoggedInMiddleware)
 
     //Salon Id dynamic thakbe
@@ -39,7 +41,7 @@ const BarberListTable = () => {
 
         const getAllBarbersfunc = async () => {
             //Salon Id dynamic thakbe
-        
+
             setLoading(true)
             const { data } = await api.post(`/api/barber/getAllBarberBySalonId?salonId=${Number(salonId)}`)
             setBarbersList(data)
@@ -123,7 +125,7 @@ const BarberListTable = () => {
 
     const deletebarberHandler = (salonId, email) => {
         const confirm = window.confirm("Are you sure ?")
-        if(confirm){
+        if (confirm) {
             dispatch(deleteBarberAction(salonId, email))
         }
     }
@@ -131,7 +133,7 @@ const BarberListTable = () => {
 
     const [approveBarberMap, setApproveBarberMap] = useState(new Map());
 
-    const approveHandler = (salonId, email,boolean) => {
+    const approveHandler = (salonId, email, boolean) => {
         const approvedata = {
             salonId,
             email,
@@ -144,7 +146,32 @@ const BarberListTable = () => {
     }
 
     const editHandler = (barberemail) => {
-        navigate("/barber/updatebarber",{state:{barberemail}})
+        navigate("/barber/updatebarber", { state: { barberemail } })
+    }
+
+
+    const [checkboxArray, setCheckboxArray] = useState([])
+
+    const setCheckboxHandler = (e, barber) => {
+        // console.log("The barber check", e.target.checked)
+        // console.log("The barber value", barber.email)
+
+        const checked = e.target.checked;
+        const newCheckboxArray = checked
+            ? [...checkboxArray, barber.email] // Add email if checked
+            : checkboxArray.filter((email) => email !== barber.email); // Remove if unchecked
+
+        setCheckboxArray(newCheckboxArray);
+    }
+
+    console.log(checkboxArray)
+
+    const notifyemailHandler = (barberemail) => {
+        navigate("/barber/dashboard2/singlenotification", { state: { barberemail } })
+    }
+    
+    const multipleemailHandler = () => {
+        navigate("/barber/dashboard2/multiplenotification", { state:  checkboxArray})
     }
 
 
@@ -152,7 +179,18 @@ const BarberListTable = () => {
         <>
             <div className="wrapper">
                 <div className="header">
-                    <p>Barbers List</p>
+                    <div>
+                        <p>Barbers List</p>
+
+                        <div className='notify-buttons'>
+                            <button 
+                            disabled={checkboxArray.length == 0 ? true : false}
+                            onClick={() => multipleemailHandler()}
+                            >Send multiple</button>
+                            {/* <button>All</button> */}
+                        </div>
+
+                    </div>
 
                     <div>
                         <button onClick={reloadHandler} className='reload'><AiOutlineReload /></button>
@@ -181,82 +219,109 @@ const BarberListTable = () => {
                 {/* Table  */}
                 <div className='table'>
                     {
-                        loading ? <div className='puff-loader-box'><PuffLoader /></div> : barbersList && barbersList.getAllBarbers ? barbersList?.getAllBarbers.map((barber, index) => <main className="barberitem" key={index}>
-                            <div>
-                                <div>
-                                    <p>Salon ID</p>
+                        loading ? <div className='puff-loader-box'><PuffLoader /></div> :
+                            barbersList && barbersList.getAllBarbers ? barbersList?.getAllBarbers.map((barber, index) =>
+                                <main className="barberitem" key={index}>
                                     <div>
-                                        <div onClick={() => sortHandler("salonId", "asc")}><AiOutlineArrowUp /></div>
-                                        <div onClick={() => sortHandler("salonId", "des")}><AiOutlineArrowDown /></div>
-                                    </div>
-                                </div>
-                                <p>{barber.salonId}</p>
-                            </div>
+                                        <input
+                                            type="checkbox"
+                                            // id={`barber-${barber.salonId}-${barber.email}`} 
+                                            onChange={(e) => setCheckboxHandler(e, barber)}
 
-                            <div>
-                                <div>
-                                    <p>Name</p>
+                                        />
+
+                                    </div>
+
                                     <div>
-                                        <div onClick={() => sortHandler("name", "asc")}><AiOutlineArrowUp /></div>
-                                        <div onClick={() => sortHandler("name", "des")}><AiOutlineArrowDown /></div>
+                                        <div>
+                                            <p>Salon ID</p>
+                                            <div>
+                                                <div onClick={() => sortHandler("salonId", "asc")}><AiOutlineArrowUp /></div>
+                                                <div onClick={() => sortHandler("salonId", "des")}><AiOutlineArrowDown /></div>
+                                            </div>
+                                        </div>
+                                        <p>{barber.salonId}</p>
                                     </div>
-                                </div>
-                                <p>{barber.name}</p>
-                            </div>
 
-                            <div>
-                                <div>
-                                    <p>Email</p>
                                     <div>
-                                        <div onClick={() => sortHandler("email", "asc")}><AiOutlineArrowUp /></div>
-                                        <div onClick={() => sortHandler("email", "des")}><AiOutlineArrowDown /></div>
+                                        <div>
+                                            <p>Name</p>
+                                            <div>
+                                                <div onClick={() => sortHandler("name", "asc")}><AiOutlineArrowUp /></div>
+                                                <div onClick={() => sortHandler("name", "des")}><AiOutlineArrowDown /></div>
+                                            </div>
+                                        </div>
+                                        <p>{barber.name}</p>
                                     </div>
-                                </div>
-                                <p>{barber.email}</p>
-                            </div>
 
-                            <div>
-                                <div>
-                                    <p>Date of Birth</p>
                                     <div>
-                                        <div><AiOutlineArrowUp /></div>
-                                        <div><AiOutlineArrowDown /></div>
+                                        <div>
+                                            <p>Email</p>
+                                            <div>
+                                                <div onClick={() => sortHandler("email", "asc")}><AiOutlineArrowUp /></div>
+                                                <div onClick={() => sortHandler("email", "des")}><AiOutlineArrowDown /></div>
+                                            </div>
+                                        </div>
+                                        <p>{barber.email}</p>
                                     </div>
-                                </div>
-                                <p>{barber.dateOfBirth}</p>
-                            </div>
 
-                            <div>
-                                <div>
-                                    <p>is Active</p>
                                     <div>
-                                        <div><AiOutlineArrowUp /></div>
-                                        <div><AiOutlineArrowDown /></div>
+                                        <div>
+                                            <p>Date of Birth</p>
+                                            <div>
+                                                <div><AiOutlineArrowUp /></div>
+                                                <div><AiOutlineArrowDown /></div>
+                                            </div>
+                                        </div>
+                                        <p>{barber.dateOfBirth}</p>
                                     </div>
-                                </div>
-                                <p>{barber.isActive ? "True" : "false"}</p>
-                            </div>
-
-                            {/* <div>
-                                <Link to="/barber/updatebarber"><AiFillEdit /></Link>
-                            </div> */}
-
-                            {/* className='approve-bbr' */}
 
 
-                            {/* Updated approval button logic */}
-                            {approveBarberMap.get(`${barber.salonId}-${barber.email}`) || barber.isApproved ? (
-                                <button className='approve-bbr' onClick={() => approveHandler(barber.salonId, barber.email,false)} style={{background:"gray"}}>Approved</button>
-                            ) : (
-                                <button className='approve-bbr' onClick={() => approveHandler(barber.salonId, barber.email,true)} style={{background:"white"}}>Approve</button>
-                            )}
+                                    <div style={{
+                                        background: "none",
+                                        boxShadow: "none",
+                                        fontSize: "12px",
+                                        width: "100%"
+                                    }}>
 
-                            <button className='edit-bbr' onClick={() => editHandler(barber.email)}><AiFillEdit /></button>
+                                        <p>is Active</p>
+
+                                        <p>{barber.isActive ? "True" : "false"}</p>
+                                    </div>
 
 
-                            <button className='del-bbr' onClick={() => deletebarberHandler(barber.salonId, barber.email)}><MdDelete /></button>
+                                    {/* Updated approval button logic */}
+                                    {approveBarberMap.get(`${barber.salonId}-${barber.email}`) || barber.isApproved ? (
+                                        <button className='approve-bbr' onClick={() => approveHandler(barber.salonId, barber.email, false)} style={{ background: "gray" }}>Approved</button>
+                                    ) : (
+                                        <button className='approve-bbr' onClick={() => approveHandler(barber.salonId, barber.email, true)} style={{ background: "white" }}>Approve</button>
+                                    )}
 
-                        </main>) : <div className='no-barber-box'><p>No Barbers Present</p></div>
+                                    <div>
+                                        <div style={{
+                                            fontSize: "14px",
+                                            color: "limegreen",
+                                            marginTop: "2px",
+                                            cursor: "pointer",
+                                            height: "35px",
+                                            width: "45px",
+                                            background: "#fff",
+                                            display: "flex",
+                                            justifyContent: "center",
+                                            alignItems: "center",
+                                            boxShadow: "0px 0px 4px rgba(0,0,0,0.5)",
+                                            borderRadius: "6px"
+                                        }}
+                                        onClick={() => notifyemailHandler(barber.email)}
+                                        ><IoIosNotifications /></div>
+                                    </div>
+
+                                    <button className='edit-bbr' onClick={() => editHandler(barber.email)}><AiFillEdit /></button>
+
+
+                                    <button className='del-bbr' onClick={() => deletebarberHandler(barber.salonId, barber.email)}><MdDelete /></button>
+
+                                </main>) : <div className='no-barber-box'><p>No Barbers Present</p></div>
                     }
                 </div>
 

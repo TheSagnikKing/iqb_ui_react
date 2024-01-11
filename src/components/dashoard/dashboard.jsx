@@ -178,7 +178,7 @@ const dashboard = () => {
                                 justifyContent: "space-between",
                                 marginBottom: "20px"
                             }}>
-                                <div style={{
+                                {/* <div style={{
                                     display: "flex",
                                     gap: "10px"
                                 }}>
@@ -201,7 +201,7 @@ const dashboard = () => {
                                     </select>
 
                                     <button onClick={applySalonHandler}>Apply</button>
-                                </div>
+                                </div> */}
 
                                 <div style={{
                                     display:"flex",

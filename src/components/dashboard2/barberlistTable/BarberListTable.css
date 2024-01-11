@@ -79,7 +79,7 @@
 .barberitem{
     background-color:#F1F6FC;
     display: grid;
-    grid-template-columns:1fr 1fr 1fr 1fr 1fr 0.5fr 0.1fr 0.1fr;
+    grid-template-columns:0.1fr 1fr 1fr 1fr 1fr 1fr 0.1fr 0.5fr 0.1fr 0.1fr;
     gap: 2.5rem;
     padding: 10px;
     border-radius: 10px;
@@ -266,4 +266,15 @@
     align-items: center;
     border-radius: 3px;
     color: red;
+}
+
+.notify-buttons{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.notify-buttons>button{
+    padding-inline: 10px;
+    cursor: pointer;
 }

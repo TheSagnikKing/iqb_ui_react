@@ -103,6 +103,21 @@ export const menudata = [
     ]
   },
 
+  {
+    id: 7,
+    menu_logo: <MdQueue />,
+    menu_title: "notification",
+    menu_link: "/barber/allnotification",
+    category: [
+      {
+        id: 8,
+        list_logo: <BsCheckCircle />,
+        list: "List",
+        message_logo: <TbMessageCircle />,
+        message_title: "Send mail / Notification"
+      }
+    ]
+  },
 ]
 
 

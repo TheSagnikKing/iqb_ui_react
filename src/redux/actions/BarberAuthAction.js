@@ -50,13 +50,13 @@ export const BarberLoginAction = (loginData,navigate) => async (dispatch) => {
     }
 };
 
-export const BarberGoogleloginAction = (token,navigate) => async (dispatch) => {
+export const BarberGoogleloginAction = (token,webFcmToken,navigate) => async (dispatch) => {
     try {
         dispatch({
             type: BARBER_GOOGLE_SIGNIN_REQ
         });
 
-        const { data } = await api.post("/api/barber/google-login",{token:token});
+        const { data } = await api.post("/api/barber/google-login",{token:token,webFcmToken:webFcmToken});
 
         console.log(data)
 

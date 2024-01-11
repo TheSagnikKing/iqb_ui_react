@@ -17,7 +17,40 @@ import { BarberGoogleloginAction, BarberLoginAction } from '../../redux/actions/
 
 //This is sign-in page not sign-up
 
+import { getMessaging, getToken } from "firebase/messaging";
+import { messaging } from '../../firebase';
+
 const SignIn = () => {
+
+    //For the notification part 
+
+    const [webFcmToken, setWebFcmToken] = useState("")
+
+    const requestPermission = async() => {
+        const permission = await Notification.requestPermission()
+    
+        if(permission == 'granted'){
+          //Generate Token
+          const token = await getToken(messaging, {
+            vapidKey: 'BEJORsiedr3Gss5oAiiNzWFpg0Zpnmt9Sw2VQe3K-GiBspoUJWyE9qzEv7ldcSkCq4d65SLL-HGt46OSzPWh550'
+          });
+          console.log('Token Gen iqb',token)
+          setWebFcmToken(token)
+    
+        }else if(permission == 'denied'){
+          alert("You denied for the notification")
+        }
+      } 
+    
+      useEffect(() => {
+        //Req user for notification permission
+        requestPermission()
+      },[])
+
+      //===========================
+
+
+
     const [check, setCheck] = useState(false)
 
     const isChecked = () => {
@@ -95,7 +128,7 @@ const SignIn = () => {
             } else if (!barberpassword) {
                 alert('Password required');
             } else {
-                const signindata = { email: barberemail, password: barberpassword }
+                const signindata = { email: barberemail, password: barberpassword ,webFcmToken}
                 console.log(signindata)
                 dispatch(BarberLoginAction(signindata, navigate))
             }
@@ -107,14 +140,12 @@ const SignIn = () => {
     //Google barber Action
     const responseBarberMessage = async (response) => {
         console.log("barber")
-        dispatch(BarberGoogleloginAction(response.credential, navigate))
+        dispatch(BarberGoogleloginAction(response.credential,webFcmToken, navigate))
     };
 
     const errorBarberMessage = (error) => {
         console.log(error);
     };
-
-
 
     return (
         <>

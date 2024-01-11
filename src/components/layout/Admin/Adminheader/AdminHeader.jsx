@@ -12,11 +12,11 @@ import { MdKeyboardArrowDown } from "react-icons/md"
 import { BiLogOutCircle } from "react-icons/bi"
 import { RiAccountCircleFill } from "react-icons/ri"
 import { Link, useNavigate } from 'react-router-dom'
-import { logout } from '../../../../redux/actions/userAction'
 import { useDispatch, useSelector } from 'react-redux'
 import { AdminLogoutAction } from '../../../../redux/actions/AdminAuthAction'
 
 import api from "../../../../redux/api/Api"
+import { applySalonAction } from '../../../../redux/actions/salonAction'
 
 const AdminHeader = ({ title }) => {
 
@@ -65,6 +65,53 @@ const AdminHeader = ({ title }) => {
     }
   };
 
+//================
+const [salonList, setSalonList] = useState([])
+
+useEffect(() => {
+  const getSalonfnc = async () => {
+      const { data } = await api.post("/api/admin/getAllSalonsByAdmin", {
+          adminEmail: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].email
+      })
+      setSalonList(data?.salons)
+  }
+
+  getSalonfnc()
+}, [LoggedInMiddleware?.user])
+
+
+
+useEffect(() => {
+  const getSalonfnc = async () => {
+      const { data } = await api.post("/api/admin/getDefaultSalonByAdmin", {
+          adminEmail: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].email
+      })
+
+      setChooseSalonId(data?.response?.salonId)
+  }
+
+  getSalonfnc()
+}, [LoggedInMiddleware?.user])
+
+
+  const [chooseSalonId, setChooseSalonId] = useState("");
+
+    const applySalonData = {
+        salonId: Number(chooseSalonId),
+        adminEmail: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].email
+    }
+
+    const applySalonHandler = async () => {
+        if (Number(chooseSalonId) == 0 || LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId == Number(chooseSalonId)) {
+
+        } else {
+            const confirm = window.confirm("Are you sure ?")
+            if (confirm) {
+                dispatch(applySalonAction(applySalonData))
+            }
+        }
+
+    }
 
 
   return (
@@ -136,10 +183,36 @@ const AdminHeader = ({ title }) => {
 
           <div className="nav1right_right_div">
 
+          <div style={{
+                                    display: "flex",
+                                    gap: "10px"
+                                }}>
+                                    <label for="cars">Choose Salon</label>
+
+                                    <select
+                                        name="cars"
+                                        id="cars"
+                                        value={chooseSalonId}
+                                        onChange={(e) => setChooseSalonId(e.target.value)}
+                                    >
+                                        {salonList && salonList.map((s, i) => (
+                                            <option value={s.salonId} key={i} style={{
+                                                backgroundColor: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId === s.salonId ? "green" : "",
+                                                color: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId === s.salonId ? "#fff" : "black"
+                                            }}>
+                                                {s.salonName}
+                                            </option>
+                                        ))}
+                                    </select>
+
+                                    <button onClick={applySalonHandler}>Apply</button>
+                                </div>
+
             <div className="nav1search_box">
               <div>
                 <CiSearch />
               </div>
+            
               <input type="text" placeholder='Search...' />
             </div>
 

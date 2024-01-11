@@ -65,6 +65,9 @@ import AdminVerifyEmail from './components/VerifyEmail/AdminVerifyEmail';
 import BarberUpdateProfile from './components/barber/BarberUpdateProfile/BarberUpdateProfile';
 import CustomerEmail from './components/CustomerEmail/CustomerEmail';
 import Kyosks from './components/kyosks/Kyosks';
+import SingleBarberNotification from './components/barber/BarberNotification/SingleBarberNotification/SingleBarberNotification';
+import MultipleBarberNotification from './components/barber/BarberNotification/MultipleBarberNotification/MultipleBarberNotification';
+import AllBarberNotification from './components/barber/BarberNotification/AllBarberNotification/AllBarberNotification';
 
 const App = () => {
 
@@ -344,6 +347,17 @@ const App = () => {
           <Route path="/map" element={<Map />} />
 
           <Route path="/admin/verifyemailstatus" element={<Auth><AdminVerifyEmail /></Auth>} />
+
+
+          {/* Notification part  */}
+
+          <Route path="/barber/dashboard2/singlenotification" element={<Auth>
+            <SingleBarberNotification/>
+          </Auth>}/>  
+
+          <Route path="/barber/dashboard2/multiplenotification" element={<Auth><MultipleBarberNotification/></Auth>}/>
+
+          <Route path="/barber/allnotification" element={<BarberAuth><AllBarberNotification/></BarberAuth>}/>
 
         </Routes>
       </BrowserRouter>
