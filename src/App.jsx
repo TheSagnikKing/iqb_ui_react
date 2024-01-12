@@ -68,6 +68,7 @@ import Kyosks from './components/kyosks/Kyosks';
 import SingleBarberNotification from './components/barber/BarberNotification/SingleBarberNotification/SingleBarberNotification';
 import MultipleBarberNotification from './components/barber/BarberNotification/MultipleBarberNotification/MultipleBarberNotification';
 import AllBarberNotification from './components/barber/BarberNotification/AllBarberNotification/AllBarberNotification';
+import BarberVerifyEmail from './components/barber/BarberverifyEmail/BarberVerifyEmail';
 
 const App = () => {
 
@@ -347,7 +348,7 @@ const App = () => {
           <Route path="/map" element={<Map />} />
 
           <Route path="/admin/verifyemailstatus" element={<Auth><AdminVerifyEmail /></Auth>} />
-
+          <Route path="/barber/verifyemailstatus" element={<BarberAuth><BarberVerifyEmail/></BarberAuth>}/>
 
           {/* Notification part  */}
 

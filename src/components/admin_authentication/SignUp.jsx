@@ -15,7 +15,41 @@ import { AdminGoogleloginAction, AdminRegisterAction } from '../../redux/actions
 import { GoogleLogin } from '@react-oauth/google'
 import { BarberGoogleloginAction, BarberRegisterAction } from '../../redux/actions/BarberAuthAction'
 
+
+import { getMessaging, getToken } from "firebase/messaging";
+import { messaging } from '../../firebase';
+
 const SignUp = () => {
+
+
+       //For the notification part 
+
+       const [webFcmToken, setWebFcmToken] = useState("")
+
+       const requestPermission = async() => {
+           const permission = await Notification.requestPermission()
+       
+           if(permission == 'granted'){
+             //Generate Token
+             const token = await getToken(messaging, {
+               vapidKey: 'BEJORsiedr3Gss5oAiiNzWFpg0Zpnmt9Sw2VQe3K-GiBspoUJWyE9qzEv7ldcSkCq4d65SLL-HGt46OSzPWh550'
+             });
+             console.log('Token Gen iqb',token)
+             setWebFcmToken(token)
+       
+           }else if(permission == 'denied'){
+             alert("You denied for the notification")
+           }
+         } 
+       
+         useEffect(() => {
+           //Req user for notification permission
+           requestPermission()
+         },[])
+   
+         //===========================
+
+
 
     const [check, setCheck] = useState(false)
 
@@ -86,7 +120,7 @@ const SignUp = () => {
             } else if (!barberpassword) {
                 alert("Password required")
             } else {
-                const signupdata = { email:barberemail, password:barberpassword }
+                const signupdata = { email:barberemail, password:barberpassword ,webFcmToken}
                 console.log(signupdata)
                 dispatch(BarberRegisterAction(signupdata, navigate))
             }

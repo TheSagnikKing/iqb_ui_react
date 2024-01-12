@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import "./AdminAccountDetail.css"
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { updateBarberAccountDetailsAction } from '../../redux/actions/BarberAuthAction'
+import { updateBarberSignupAccountDetailsAction } from '../../redux/actions/BarberAuthAction'
 
 const BarberAccountDetail = () => {
 
@@ -19,10 +19,12 @@ const BarberAccountDetail = () => {
 
     const submitHandler = () => {
         //email authentication  theke asbe
-        const profiledata = {email:LoggedInMiddleware?.user && LoggedInMiddleware?.user[0]?.email,mobileNumber,name,gender,dateOfBirth:dob,salonId:LoggedInMiddleware?.user && LoggedInMiddleware?.user[0]?.salonId,userName:username};
+        const profiledata = {email:LoggedInMiddleware?.user && LoggedInMiddleware?.user[0]?.email,mobileNumber,name,gender,dateOfBirth:dob,salonId:LoggedInMiddleware?.user && LoggedInMiddleware?.user[0]?.salonId};
 
         // const profiledata = {email:"sagniknandy27@gmail.com",mobileNumber,name,gender,dateOfBirth:dob,salonId:LoggedInMiddleware?.user[0]?.salonId,userName:username};
-        dispatch(updateBarberAccountDetailsAction(navigate,profiledata))
+        dispatch(updateBarberSignupAccountDetailsAction(navigate,profiledata))
+
+        console.log(profiledata)
     }
 
     const skipHandler = () => {
