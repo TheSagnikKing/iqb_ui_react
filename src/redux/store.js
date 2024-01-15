@@ -3,7 +3,7 @@ import thunk from "redux-thunk";
 import { logoutReducer, newPasswordResetReducer, passwordResetEmailReducer, signinReducer, signupReducer } from "./reducers/userReducer";
 import { applySalonReducer, connectBarberSalonReducer, createSalonReducer, deleteSalonReducer, getAllSalonServicesReducer, salonListReducer,salonSettingsUpdateReducer, salonStatusOnlineReducer, updateSalonReducer } from "./reducers/salonReducer";
 import { approveBarberReducer, barberListReducer, barberServedQueueReducer, createBarberReducer, deleteBarberReducer, getAllBarbersByServiceIdReducer, getBarberByMultipleServicesReducer, getBarberServicesBybarberIdReducer, updateBarberReducer } from "./reducers/barberReducer";
-import { autojoinReducer, groupjoinReducer, queueListReducer, singleJoinQueueReducer } from "./reducers/joinqueueReducer";
+import { autojoinReducer, cancelQueueReducer, groupjoinReducer, queueListReducer, singleJoinQueueReducer } from "./reducers/joinqueueReducer";
 import { AdminForgetPasswordReducer, AdminGoogleLoginReducer, AdminLoginReducer, AdminLogoutReducer, AdminRegisterReducer, AdminResetPasswordReducer, LoggedInMiddlewareReducer, LoggedOutMiddlewareReducer, adminVerifiedStatusReducer, adminVerifyEmailReducer, updateAdminAccountDetailsReducer, updateAdminReducer } from "./reducers/AdminAuthReducer";
 import { barberForgetPasswordReducer, barberGoogleLoginReducer, barberLoginReducer, barberLogoutReducer, barberOnlineStatusReducer, barberQuelistReducer, barberRegisterReducer, barberResetPasswordReducer, barberServedQueReducer, barberUpdateAccountReducer, barberVerifyEmailReducer, barberVerifyStatusReducer, updatebarberAccountDetailsReducer, updatebarberReducer } from "./reducers/BarberAuthReducer";
 import { createAppointmentReducer, deleteAppointmentReducer, editAppointmentReducer } from "./reducers/AppointmentReducer";
@@ -91,7 +91,8 @@ const rootReducer = combineReducers({
 
   barberUpdateAccount:barberUpdateAccountReducer,
   barberVerifyEmail:barberVerifyEmailReducer,
-  barberVerifyStatus:barberVerifyStatusReducer
+  barberVerifyStatus:barberVerifyStatusReducer,
+  cancelQueue:cancelQueueReducer
 });
 
 const initialState = {};

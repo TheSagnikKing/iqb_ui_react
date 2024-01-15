@@ -1,4 +1,4 @@
-import { AUTOJOIN_FAIL, AUTOJOIN_REQ, AUTOJOIN_SUCCESS,GROUP_JOIN_FAIL,GROUP_JOIN_REQ,GROUP_JOIN_SUCCESS,QUELIST_FAIL, QUELIST_REQ, QUELIST_SUCCESS, SINGLE_JOINQUEUE_FAIL, SINGLE_JOINQUEUE_REQ, SINGLE_JOINQUEUE_SUCCESS } from "../constants/joinQueueConstants"
+import { AUTOJOIN_FAIL, AUTOJOIN_REQ, AUTOJOIN_SUCCESS,CANCEL_QUEUE_FAIL,CANCEL_QUEUE_REQ,CANCEL_QUEUE_SUCCESS,GROUP_JOIN_FAIL,GROUP_JOIN_REQ,GROUP_JOIN_SUCCESS,QUELIST_FAIL, QUELIST_REQ, QUELIST_SUCCESS, SINGLE_JOINQUEUE_FAIL, SINGLE_JOINQUEUE_REQ, SINGLE_JOINQUEUE_SUCCESS } from "../constants/joinQueueConstants"
 
 export const singleJoinQueueReducer = (state = {},action) => {
     switch(action.type){
@@ -47,6 +47,19 @@ export const groupjoinReducer = (state = {},action) => {
         case GROUP_JOIN_SUCCESS:
             return {loading:false,...action.payload}
         case GROUP_JOIN_FAIL:
+            return {loading:false,error:action.payload}
+        default:
+            return state
+    }
+}
+
+export const cancelQueueReducer = (state = {},action) => {
+    switch(action.type){
+        case CANCEL_QUEUE_REQ:
+            return {loading:true}
+        case CANCEL_QUEUE_SUCCESS:
+            return {loading:false,...action.payload}
+        case CANCEL_QUEUE_FAIL:
             return {loading:false,error:action.payload}
         default:
             return state

@@ -69,6 +69,7 @@ import SingleBarberNotification from './components/barber/BarberNotification/Sin
 import MultipleBarberNotification from './components/barber/BarberNotification/MultipleBarberNotification/MultipleBarberNotification';
 import AllBarberNotification from './components/barber/BarberNotification/AllBarberNotification/AllBarberNotification';
 import BarberVerifyEmail from './components/barber/BarberverifyEmail/BarberVerifyEmail';
+import Hello from './components/Hello';
 
 const App = () => {
 
@@ -76,6 +77,8 @@ const App = () => {
     <>
       <BrowserRouter>
         <Routes>
+          <Route path="/hello" element={<Hello/>}/>
+
           <Route path="/" element={
             <Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}>
               <InitialPage />

@@ -3,8 +3,8 @@ import "./Queue.css"
 import AdminLayout from '../layout/Admin/AdminLayout'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { queueListAction } from '../../redux/actions/joinQueueAction'
-
+import { cancelQueueAtion, queueListAction } from '../../redux/actions/joinQueueAction'
+import { GiCancel } from "react-icons/gi";
 import { PiQueueBold } from "react-icons/pi";
 import { barberServedQueAction, barberServedQueueAction } from '../../redux/actions/barberAction'
 
@@ -43,6 +43,20 @@ const Queue = () => {
             dispatch(barberServedQueAction(infodata))
         }
 
+    }
+
+    const cancelHandler = (barberId, _id) => {
+        const canceldata = {
+            salonId,
+            barberId,
+            _id
+        }
+
+        const confirm = window.confirm("Are you sure ?")
+
+        if(confirm){
+            dispatch(cancelQueueAtion(canceldata))
+        }
     }
 
     return (
@@ -90,6 +104,7 @@ const Queue = () => {
                         <p>Barber Name</p>
                         <p>Q Position</p>
                         <p>Served</p>
+                        <p>Cancel</p>
                     </div>
 
                     {
@@ -103,6 +118,9 @@ const Queue = () => {
                                 <p>{c.qPosition}</p>
                                 <div className='que-serve' onClick={() => serverHandler(c.barberId, c.serviceId, c._id)}>
                                     <PiQueueBold />
+                                </div>
+                                <div className='que-cancel' onClick={() => cancelHandler(c.barberId,  c._id)}>
+                                    <GiCancel/>
                                 </div>
                             </div>
                         ))

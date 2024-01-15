@@ -1,4 +1,4 @@
-import { AUTOJOIN_FAIL, AUTOJOIN_REQ, AUTOJOIN_SUCCESS, GROUP_JOIN_FAIL, GROUP_JOIN_REQ, GROUP_JOIN_SUCCESS, QUELIST_FAIL, QUELIST_REQ, QUELIST_SUCCESS, SINGLE_JOINQUEUE_FAIL, SINGLE_JOINQUEUE_REQ, SINGLE_JOINQUEUE_SUCCESS } from "../constants/joinQueueConstants"
+import { AUTOJOIN_FAIL, AUTOJOIN_REQ, AUTOJOIN_SUCCESS, CANCEL_QUEUE_FAIL, CANCEL_QUEUE_REQ, CANCEL_QUEUE_SUCCESS, GROUP_JOIN_FAIL, GROUP_JOIN_REQ, GROUP_JOIN_SUCCESS, QUELIST_FAIL, QUELIST_REQ, QUELIST_SUCCESS, SINGLE_JOINQUEUE_FAIL, SINGLE_JOINQUEUE_REQ, SINGLE_JOINQUEUE_SUCCESS } from "../constants/joinQueueConstants"
 
 import api from "../api/Api"
 
@@ -85,6 +85,29 @@ export const groupjoinAction = (groupjoindata,setSelectedCustomer,navigate) => a
     } catch (error) {
         dispatch({
             type:GROUP_JOIN_FAIL,
+            payload: error.response.data
+        })
+
+        alert(error.response.data.message)
+    }
+}
+
+
+export const cancelQueueAtion = (canceldata) => async(dispatch) => {
+    try {
+        dispatch({type:CANCEL_QUEUE_REQ})
+
+        const {data} = await api.post(`/api/queue/cancelQ`, canceldata)
+
+        dispatch({
+            type:CANCEL_QUEUE_SUCCESS,
+            payload:data
+        })
+
+        window.location.reload()
+    } catch (error) {
+        dispatch({
+            type:CANCEL_QUEUE_FAIL,
             payload: error.response.data
         })
 

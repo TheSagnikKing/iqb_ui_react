@@ -180,6 +180,17 @@ export const LoggedOutMiddlewareAction = (navigate) => async (dispatch) => {
     }
 };
 
+// import axiosExtensions from 'axios-extensions';
+
+
+// // Create a new Axios instance with caching only for LoggedInMiddlewareAction
+// const axiosWithCaching = axiosExtensions.extend(axios.create(), {
+//     cache: {
+//       maxAge: 15 * 60 * 1000, // Cache for 15 minutes
+//     },
+//   });
+
+
 
 export const LoggedInMiddlewareAction = (navigate) => async (dispatch) => {
     try {
