@@ -46,7 +46,7 @@ const dashboard = () => {
 
     const dispatch = useDispatch()
 
-    const salonId = LoggedInMiddleware?.user && LoggedInMiddleware.user[0].salonId;
+    const salonId = Number(LoggedInMiddleware?.user && LoggedInMiddleware.user[0].salonId);
 
     useEffect(() => {
         if (salonId) {
@@ -92,7 +92,7 @@ const dashboard = () => {
 
     useEffect(() => {
         const getAdvertisementData = async () => {
-            const { data } = await api.post(`/api/advertisement/getAdvertisements`, { salonId: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId });
+            const { data } = await api.post(`/api/advertisement/getAdvertisements`, { salonId: Number(LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId) });
 
             setAdvertisementList(data?.advertisements)
         }
@@ -136,7 +136,7 @@ const dashboard = () => {
         setSalonStatus(newCheckValue);
 
         const salonStatusOnlineData = {
-            salonId: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId,
+            salonId: Number(LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId),
             isOnline: newCheckValue,
         };
 
@@ -152,7 +152,7 @@ const dashboard = () => {
     }
 
     const applySalonHandler = async () => {
-        if (Number(chooseSalonId) == 0 || LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId == Number(chooseSalonId)) {
+        if (Number(chooseSalonId) == 0 || Number(LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId) == Number(chooseSalonId)) {
 
         } else {
             const confirm = window.confirm("Are you sure ?")

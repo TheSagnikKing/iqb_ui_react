@@ -13,8 +13,8 @@ const Auth = ({ children }) => {
     }, [])
 
     useEffect(() => {
-        dispatch(LoggedInMiddlewareAction())
-    })
+        dispatch(LoggedInMiddlewareAction(navigate))
+    },[])
 
     return (
         <div>{children}</div>

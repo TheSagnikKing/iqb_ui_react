@@ -180,17 +180,6 @@ export const LoggedOutMiddlewareAction = (navigate) => async (dispatch) => {
     }
 };
 
-// import axiosExtensions from 'axios-extensions';
-
-
-// // Create a new Axios instance with caching only for LoggedInMiddlewareAction
-// const axiosWithCaching = axiosExtensions.extend(axios.create(), {
-//     cache: {
-//       maxAge: 15 * 60 * 1000, // Cache for 15 minutes
-//     },
-//   });
-
-
 
 export const LoggedInMiddlewareAction = (navigate) => async (dispatch) => {
     try {
@@ -201,10 +190,21 @@ export const LoggedInMiddlewareAction = (navigate) => async (dispatch) => {
 
         console.log("ascascvdffsv",data)
 
+        
+
         dispatch({
             type: LOGGED_IN_MIDDLEWARE_SUCCESS,
             payload: data
         });
+
+
+        // const userLoggedIn = localStorage.getItem("userLoggedIn")
+
+        // if(data && data.user && data.user[0] == null && userLoggedIn == "false"){
+        //     console.log("From Barber Auth ")
+        //     navigate("/barber-dashboard")
+        //     window.location.reload()
+        // }
     } catch (error) {
     
         dispatch({

@@ -13,7 +13,7 @@ const BarberAuth = ({ children }) => {
     }, [])
 
     useEffect(() => {
-        dispatch(BarberLoggedInMiddlewareAction())
+        dispatch(BarberLoggedInMiddlewareAction(navigate))
     })
 
     return (
