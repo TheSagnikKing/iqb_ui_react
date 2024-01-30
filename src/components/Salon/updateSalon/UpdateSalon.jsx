@@ -144,16 +144,19 @@ const UpdateSalon = () => {
 
     const currentSalonId = LoggedInMiddleware?.user && LoggedInMiddleware.user[0].salonId
 
+    const currentEditlocation = useLocation()
+    const currentEditSalonId = currentEditlocation?.state?.salonId
+
     const [fetchimages, setFetchImages] = useState([])
 
     useEffect(() => {
         const fetchAllSalons = async () => {
-            const { data } = await api.get(`/api/salon/getSalonInfoBySalonId?salonId=${currentSalonId}`)
+            const { data } = await api.get(`/api/salon/getSalonInfoBySalonId?salonId=${Number(currentEditSalonId)}`)
 
             console.log("update", data)
 
             if (data?.response?.salonInfo) {
-                setFetchImages(data?.response?.salonInfo?.profile)
+                setFetchImages(data?.response?.salonInfo?.gallery)
                 setSalonEmail(data?.response?.salonInfo?.salonEmail)
                 setSalonName(data?.response?.salonInfo?.salonName)
                 setAddress(data?.response?.salonInfo?.address)
@@ -166,6 +169,9 @@ const UpdateSalon = () => {
                 setWebLink(data?.response?.salonInfo?.webLink)
                 setPostCode(data?.response?.salonInfo?.postCode)
                 setServices(data?.response?.salonInfo?.services)
+                setCurrentSalonLogo(data?.response?.salonInfo?.salonLogo[0]?.url)
+                setCurrentSalonLogoId(data?.response?.salonInfo?.salonLogo[0]?.public_id)
+                setCurrentSalonLogoMongoId(data?.response?.salonInfo?.salonLogo[0]?._id)
             }
 
         }
@@ -243,7 +249,7 @@ const UpdateSalon = () => {
 
         formData.append('public_imgid', public_imgid);
         formData.append('id', mongoid)
-        formData.append('profile', updateImage)
+        formData.append('gallery', updateImage)
 
 
         try {
@@ -271,6 +277,15 @@ const UpdateSalon = () => {
     const updateSalon = useSelector(state => state.updateSalon)
     const { response } = updateSalon
 
+
+    const [selectedLogo, setSelectedLogo] = useState(null)
+    const [logoImage, setLogoImages] = useState([])
+
+    const handleLogoChange = (e) => {
+        setSelectedLogo(e.target.files[0])
+    }
+
+
     useEffect(() => {
         if (response?.salonId) {
             const uploadImageHandler = async () => {
@@ -281,7 +296,7 @@ const UpdateSalon = () => {
                     formData.append('salonId', SalonId);
 
                     for (const file of selectedFiles) {
-                        formData.append('profile', file);
+                        formData.append('gallery', file);
                     }
 
                     try {
@@ -304,9 +319,103 @@ const UpdateSalon = () => {
 
             uploadImageHandler();
         }
+
+
+        //For Salon Logo
+        if (currentEditSalonId) {
+            const uploadImageHandler = async () => {
+                if (selectedLogo != null) {
+                    const formData = new FormData();
+
+                    const SalonId = currentEditSalonId;
+
+                    if(SalonId){
+                        formData.append('salonId', SalonId);
+                        formData.append('salonLogo', selectedLogo);
+    
+                        try {
+                            const imageResponse = await api.post('/api/salon/uploadSalonLogo', formData, {
+                                headers: {
+                                    'Content-Type': 'multipart/form-data',
+                                },
+                            });
+    
+                            console.log('Upload success:', imageResponse.data);
+                            // setLogoImages(imageResponse.data?.StudentImage?.profile);
+                            // setSelectedLogo(null);
+                            alert("Salon Logo uploaded Successfully")
+                        } catch (error) {
+                            console.error('Image upload failed:', error);
+                            // Handle error as needed
+                        }
+                    }
+                    
+                }
+            };
+
+            uploadImageHandler();
+        }
     }, [response?.salonId]);
 
     const [isOpen, setIsOpen] = useState(false);
+
+
+    //Salon Logo 
+
+    const [currentSalonLogo, setCurrentSalonLogo] = useState("");
+    const [currentSalonLogoId, setCurrentSalonLogoId] = useState("");
+    const [currentSalonLogoMongoId, setCurrentSalonLogoMongoId] = useState("")
+    
+    const fileLogoInputRef = useRef(null);
+    
+    const handleLogoEditButtonClick = () => {
+        fileLogoInputRef.current.click();
+    };
+    
+
+    const handleLogoFileInputChange = async (e) => {
+        const updateImage = e.target.files[0];
+
+        const formData = new FormData();
+
+        formData.append('public_imgid', currentSalonLogoId);
+        formData.append('id', currentSalonLogoMongoId)
+        formData.append('salonLogo', updateImage)
+        formData.append('salonId',currentEditSalonId )
+
+
+        try {
+            const imageResponse = await api.put('/api/salon/updateSalonLogo', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+
+            console.log('Salon Logo Upload success:', imageResponse.data);
+            window.location.reload()
+        } catch (error) {
+            console.error('Image upload failed:', error);
+        }
+    };
+
+
+    const imgLogoDeleteHandler = async () => {
+        if (window.confirm("Are you sure you want to delete this Logo?")) {
+            try {
+                await api.delete("/api/salon/deleteSalonLogo", {
+                    data: {
+                        public_id: currentSalonLogoId,
+                        img_id: currentSalonLogoMongoId,
+                        salonId: currentEditSalonId
+                    }
+                })
+
+                window.location.reload()
+            } catch (error) {
+                console.log(error)
+            }
+        }
+    }
 
     return (
         <>
@@ -407,7 +516,7 @@ const UpdateSalon = () => {
                     <div className="sa-br-right">
 
                         <div>
-                            <div style={{display:"flex"}}>
+                            <div style={{ display: "flex" }}>
                                 <label htmlFor="">Salon Type</label>
                                 <button onClick={() => setSalontypeDropdown((prev) => !prev)} className='sal-drop-type'><FaArrowDown /></button>
                             </div>
@@ -446,16 +555,40 @@ const UpdateSalon = () => {
 
                         </div>
 
+                        <div>
+                            <label htmlFor="">Select Salon Logo</label>
+
+                            <input type="file" onChange={handleLogoChange} />
+
+                        </div>
+
+                        <div>
+                            <div style={{ border:"1px solid gray", width: "5.5rem", height: "5.5rem" }}>
+                                <img src={`${currentSalonLogo ? currentSalonLogo : "https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg"}`} alt="Salon Logo" style={{ width: "100%", height: "100%" }} />
+                            </div>
+
+                            <div style={{ display: "flex", gap: "1rem" }}>
+                                { currentSalonLogo && <><button className='sl-del'onClick={() => imgLogoDeleteHandler()}><MdDelete /></button>
+                                <button className='sl-ed' onClick={() => handleLogoEditButtonClick()}><MdModeEditOutline /></button>
+                                <input
+                                    type="file"
+                                    ref={fileLogoInputRef}
+                                    style={{ display: 'none' }}
+                                    onChange={handleLogoFileInputChange}
+                                /></>}
+                            </div>
+                        </div>
+
                         <div className='img-container'>
                             <button onClick={() => setIsOpen(true)} className='sal-up-seeimage'>See Images</button>
                             <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
                                 <div className='see-salonImages'>
 
                                     {
-                                        fetchimages?.map((img,i) => (
+                                        fetchimages?.map((img, i) => (
                                             <div key={i}>
                                                 <img src={img.url} alt="" />
-                                                <div style={{display:"flex"}}>
+                                                <div style={{ display: "flex" }}>
                                                     <button onClick={() => imgDeleteHandler(img.public_id, img._id)} className='sl-del'><MdDelete /></button>
                                                     <button onClick={() => handleEditButtonClick(img.public_id, img._id)} className='sl-ed'><MdModeEditOutline /></button>
                                                     <input

@@ -24,7 +24,7 @@ const SalonList = () => {
     const LoggedInMiddleware = useSelector(state => state.LoggedInMiddleware)
     const currentAdminEmail = LoggedInMiddleware?.user && LoggedInMiddleware.user[0].email
 
-    console.log(salonList)
+    console.log("Sagnik",salonList)
 
     useEffect(() => {
         //Admin emailer value loggin korar por theke asbe akhon static ache

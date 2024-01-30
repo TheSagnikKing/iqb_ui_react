@@ -125,6 +125,42 @@ const CreateSalon = () => {
 
             uploadImageHandler();
         }
+
+        //For Salon Logo
+        if (response?.salonId) {
+            const uploadImageHandler = async () => {
+                if (selectedLogo != null) {
+                    const formData = new FormData();
+
+                    const SalonId = response?.salonId;
+
+                    if(SalonId){
+                        formData.append('salonId', SalonId);
+                        formData.append('salonLogo', selectedLogo);
+    
+                        try {
+                            const imageResponse = await api.post('/api/salon/uploadSalonLogo', formData, {
+                                headers: {
+                                    'Content-Type': 'multipart/form-data',
+                                },
+                            });
+    
+                            console.log('Upload success:', imageResponse.data);
+                            // setLogoImages(imageResponse.data?.StudentImage?.profile);
+                            // setSelectedLogo(null);
+                            alert("Salon Logo uploaded Successfully")
+                        } catch (error) {
+                            console.error('Image upload failed:', error);
+                            // Handle error as needed
+                        }
+                    }
+                    
+                }
+            };
+
+            uploadImageHandler();
+        }
+
     }, [response?.salonId]);
 
     const LoggedInMiddleware = useSelector(state => state.LoggedInMiddleware)
@@ -141,12 +177,12 @@ const CreateSalon = () => {
                     longitude: Number(longitude),
                     latitude: Number(latitude)
                 }
-            }, country, postCode, contactTel, salonType, webLink, services, image, appointmentSettings: { startTime, endTime , intervalInMinutes:Number(chooseIntervalTime)}
+            }, country, postCode, contactTel, salonType, webLink, services, image, appointmentSettings: { startTime, endTime, intervalInMinutes: Number(chooseIntervalTime) }
         }
 
         console.log(salonData)
 
-        dispatch(createSalonAction(salonData,navigate))
+        dispatch(createSalonAction(salonData, navigate))
 
     }
 
@@ -157,17 +193,23 @@ const CreateSalon = () => {
             alert("Please fill all the fields")
             return;
         }
-        
+
         setServices(prevServices => [...prevServices, {
-            serviceName, serviceDesc, servicePrice, serviceEWT
+            serviceName, serviceDesc, servicePrice, serviceEWT, serviceIcon : {
+                public_id : currentPublicId,
+                url: currentImg
+            }
         }]);
         setServiceName("")
         setServiceDesc("")
         setServicePrice("")
         setServiceEWT(0)
+        setCurrentImg("")
+        setCurrentPublicId("")
+        setServiceDrop(false)
     }
 
-    console.log("as",services)
+    console.log("3333333", services)
 
     const serviceEditHandler = (ind) => {
 
@@ -178,6 +220,8 @@ const CreateSalon = () => {
         setServiceDesc(currentService.serviceDesc)
         setServicePrice(currentService.servicePrice)
         setServiceEWT(currentService.serviceEWT)
+        setCurrentImg(currentService.serviceIcon.url)
+        setCurrentPublicId(currentService.serviceIcon.public_id)
 
         const updatedServices = [...services];
         updatedServices.splice(ind, 1);
@@ -248,7 +292,7 @@ const CreateSalon = () => {
 
     const generateTimeIntervalInMinutes = () => {
         const options = []
-        for(let i=1; i<=60; i++){
+        for (let i = 1; i <= 60; i++) {
             options.push(i);
         }
 
@@ -257,7 +301,7 @@ const CreateSalon = () => {
 
     useEffect(() => {
         generateTimeIntervalInMinutes()
-    },[])
+    }, [])
 
 
     const [serviceDrop, setServiceDrop] = useState(false)
@@ -265,6 +309,12 @@ const CreateSalon = () => {
     const getAllSalonIcon = useSelector(state => state.getAllSalonIcon)
 
     const [currentImg, setCurrentImg] = useState("")
+    const [currentPublicId, setCurrentPublicId] = useState("")
+
+    const serviceIconHandler = (s) => {
+        setCurrentImg(s.url)
+        setCurrentPublicId(s.public_id)
+    } 
 
     return (
         <>
@@ -287,7 +337,7 @@ const CreateSalon = () => {
                             />
                         </div>
 
-                        
+
                         <div>
                             <label htmlFor="">Salon Name</label>
                             <input
@@ -427,7 +477,7 @@ const CreateSalon = () => {
 
 
                         <div>
-                            <div style={{display:"flex"}}>
+                            <div style={{ display: "flex" }}>
                                 <label htmlFor="">Salon Type</label>
                                 <button onClick={() => setSalontypeDropdown((prev) => !prev)} className='sal-drop-type'><FaArrowDown /></button>
                             </div>
@@ -494,7 +544,7 @@ const CreateSalon = () => {
                         <div>
                             <label htmlFor="">Select Salon Logo</label>
 
-                            <input type="file" onChange={handleLogoChange}/>
+                            <input type="file" onChange={handleLogoChange} />
                         </div>
 
 
@@ -505,34 +555,36 @@ const CreateSalon = () => {
                             <div>
                                 <div className='service-icon'>
                                     <p>Service Icon</p>
-                                    <div onClick={() => setServiceDrop(!serviceDrop)} 
-                                    style={{cursor:"pointer",background:"#fff",boxShadow:"0px 0px 4px rgba(0,0,0,0.4)",height:"2.5rem", width:"2.5rem",display:"flex",alignItems:"center",justifyContent:"center",borderRadius:"50%"}}><FaArrowDown /></div>
+                                    <div onClick={() => setServiceDrop(!serviceDrop)}
+                                        style={{ cursor: "pointer", background: "#fff", boxShadow: "0px 0px 4px rgba(0,0,0,0.4)", height: "2.5rem", width: "2.5rem", display: "flex", alignItems: "center", justifyContent: "center", borderRadius: "50%" }}><FaArrowDown /></div>
                                 </div>
 
                                 {
                                     serviceDrop && <div className='service-icon-content'>{
                                         // getAllSalonIcon?.response
                                         <div>
-                                        {
-                                            getAllSalonIcon?.response ? (
-                                                getAllSalonIcon.response.map((s) => (
-                                                    <div key={s.id} className='service-icon-content-img' onClick={() => setCurrentImg(s.url)}>
-                                                        <img src={`${s.url}`} alt="s1" />
-                                                    </div>
-                                                ))
-                                            ) : (
-                                                <h2>No Service Icon Present</h2>
-                                            )
-                                        }
+                                            {
+                                                getAllSalonIcon?.response ? (
+                                                    getAllSalonIcon.response.map((s) => (
+                                                        <div key={s.id} className='service-icon-content-img' onClick={() =>  serviceIconHandler(s) }>
+                                                            <img src={`${s.url}`} alt="s1" />
+                                                        </div>
+                                                    ))
+                                                ) : (
+                                                    <h2>No Service Icon Present</h2>
+                                                )
+                                            }
                                         </div>
-                                        
+
                                     }</div>
                                 }
 
+                                {
+                                    currentImg  && <div className='selected-serrvice-icon'>
+                                        <div><img src={`${currentImg}`} alt="" /></div>
+                                    </div>
+                                }
 
-                                <div className='selected-serrvice-icon'>
-                                    <div><img src={`${currentImg}`} alt="" /></div>        
-                                </div>
                             </div>
 
                             <div>
@@ -572,6 +624,7 @@ const CreateSalon = () => {
                                 />
                             </div>
 
+
                             <button onClick={addServiceHandler}>Add Service</button>
 
                         </div>
@@ -599,6 +652,10 @@ const CreateSalon = () => {
                                         <label>{service.serviceEWT}</label>
                                     </div>
 
+
+                                    <div>
+                                        <img src={service.serviceIcon.url} alt="sc" />
+                                    </div>
                                 </div>
                             ))}
                         </div>
