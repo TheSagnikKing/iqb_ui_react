@@ -16,6 +16,9 @@ import api from "../../../redux/api/Api"
 import Modal from '../../Modal/Modal'
 import { FaArrowDown } from 'react-icons/fa'
 
+
+import { getAllSalonIconAction } from '../../../redux/actions/salonAction'
+
 const UpdateSalon = () => {
 
     const [latitude, setLatitude] = useState(null);
@@ -79,6 +82,9 @@ const UpdateSalon = () => {
 
     const navigate = useNavigate()
 
+    const currentEditlocation = useLocation()
+    const currentEditSalonId = currentEditlocation?.state?.salonId
+
     const submitHandler = () => {
         const salonData = {
             adminEmail: LoggedInMiddleware?.user && LoggedInMiddleware.user[0].email, salonName, salonEmail, address, city, location: {
@@ -88,7 +94,7 @@ const UpdateSalon = () => {
                     latitude: Number(latitude)
                 }
                 //salonId
-            }, country, postCode, contactTel, salonType, webLink, services, salonId: adminSalonId
+            }, country, postCode, contactTel, salonType, webLink, services, salonId: Number(currentEditSalonId)
         }
         console.log(salonData)
         dispatch(updateSalonAction(salonData, navigate))
@@ -115,13 +121,19 @@ const UpdateSalon = () => {
     const addServiceHandler = () => {
 
         setServices(prevServices => [...prevServices, {
-            serviceName, serviceDesc, servicePrice, serviceEWT, serviceId
+            serviceName, serviceDesc, servicePrice, serviceEWT, serviceId, serviceIcon: {
+                public_id: currentPublicId,
+                url: currentImg
+            }
         }]);
         setServiceName("")
         setServiceDesc("")
         setServicePrice("")
         setServiceEWT(0)
         setServiceId(0)
+        setCurrentImg("")
+        setCurrentPublicId("")
+        setServiceDrop(false)
         console.log(services);
     }
 
@@ -134,6 +146,8 @@ const UpdateSalon = () => {
         setServicePrice(currentService.servicePrice)
         setServiceEWT(currentService.serviceEWT)
         setServiceId(currentService.serviceId)
+        setCurrentImg(currentService.serviceIcon.url)
+        setCurrentPublicId(currentService.serviceIcon.public_id)
 
         const updatedServices = [...services];
         updatedServices.splice(ind, 1);
@@ -144,8 +158,7 @@ const UpdateSalon = () => {
 
     const currentSalonId = LoggedInMiddleware?.user && LoggedInMiddleware.user[0].salonId
 
-    const currentEditlocation = useLocation()
-    const currentEditSalonId = currentEditlocation?.state?.salonId
+
 
     const [fetchimages, setFetchImages] = useState([])
 
@@ -292,8 +305,10 @@ const UpdateSalon = () => {
                 if (selectedFiles != null) {
                     const formData = new FormData();
 
-                    const SalonId = response?.salonId;
-                    formData.append('salonId', SalonId);
+                    const SalonId = Number(currentEditSalonId);
+                    
+                    if(SalonId){
+                        formData.append('salonId', SalonId);
 
                     for (const file of selectedFiles) {
                         formData.append('gallery', file);
@@ -314,6 +329,7 @@ const UpdateSalon = () => {
                         console.error('Image upload failed:', error);
                         // Handle error as needed
                     }
+                    }
                 }
             };
 
@@ -322,24 +338,24 @@ const UpdateSalon = () => {
 
 
         //For Salon Logo
-        if (currentEditSalonId) {
+        if (response?.salonId) {
             const uploadImageHandler = async () => {
                 if (selectedLogo != null) {
                     const formData = new FormData();
 
-                    const SalonId = currentEditSalonId;
+                    const SalonId = response?.salonId;
 
-                    if(SalonId){
+                    if (SalonId) {
                         formData.append('salonId', SalonId);
                         formData.append('salonLogo', selectedLogo);
-    
+
                         try {
                             const imageResponse = await api.post('/api/salon/uploadSalonLogo', formData, {
                                 headers: {
                                     'Content-Type': 'multipart/form-data',
                                 },
                             });
-    
+
                             console.log('Upload success:', imageResponse.data);
                             // setLogoImages(imageResponse.data?.StudentImage?.profile);
                             // setSelectedLogo(null);
@@ -349,7 +365,7 @@ const UpdateSalon = () => {
                             // Handle error as needed
                         }
                     }
-                    
+
                 }
             };
 
@@ -365,13 +381,13 @@ const UpdateSalon = () => {
     const [currentSalonLogo, setCurrentSalonLogo] = useState("");
     const [currentSalonLogoId, setCurrentSalonLogoId] = useState("");
     const [currentSalonLogoMongoId, setCurrentSalonLogoMongoId] = useState("")
-    
+
     const fileLogoInputRef = useRef(null);
-    
+
     const handleLogoEditButtonClick = () => {
         fileLogoInputRef.current.click();
     };
-    
+
 
     const handleLogoFileInputChange = async (e) => {
         const updateImage = e.target.files[0];
@@ -381,7 +397,7 @@ const UpdateSalon = () => {
         formData.append('public_imgid', currentSalonLogoId);
         formData.append('id', currentSalonLogoMongoId)
         formData.append('salonLogo', updateImage)
-        formData.append('salonId',currentEditSalonId )
+        formData.append('salonId', currentEditSalonId)
 
 
         try {
@@ -415,6 +431,24 @@ const UpdateSalon = () => {
                 console.log(error)
             }
         }
+    }
+
+
+    const [serviceDrop, setServiceDrop] = useState(false)
+
+    const getAllSalonIcon = useSelector(state => state.getAllSalonIcon)
+
+    const [currentImg, setCurrentImg] = useState("")
+    const [currentPublicId, setCurrentPublicId] = useState("")
+
+    useEffect(() => {
+        dispatch(getAllSalonIconAction())
+    }, [])
+
+
+    const serviceIconHandler = (s) => {
+        setCurrentImg(s.url)
+        setCurrentPublicId(s.public_id)
     }
 
     return (
@@ -511,10 +545,6 @@ const UpdateSalon = () => {
                             />
                         </div>
 
-                    </div>
-
-                    <div className="sa-br-right">
-
                         <div>
                             <div style={{ display: "flex" }}>
                                 <label htmlFor="">Salon Type</label>
@@ -545,6 +575,32 @@ const UpdateSalon = () => {
                         </div>
 
                         <div>
+                            <label htmlFor="">Facebook Link</label>
+                            <input
+                                type="text"
+                            />
+                        </div>
+
+
+                    </div>
+
+                    <div className="sa-br-right">
+
+                        <div>
+                            <label htmlFor="">Instagram Link</label>
+                            <input
+                                type="text"
+                            />
+                        </div>
+
+                        <div>
+                            <label htmlFor="">Twitter Link</label>
+                            <input
+                                type="text"
+                            />
+                        </div>
+
+                        <div>
                             <label htmlFor="">Select Salon Images</label>
                             {/* <input type="file" multiple onChange={handleFileChange} />
                             <label htmlFor="file" className='file'>
@@ -553,30 +609,6 @@ const UpdateSalon = () => {
                             <input type="file" multiple onChange={handleFileChange} />
 
 
-                        </div>
-
-                        <div>
-                            <label htmlFor="">Select Salon Logo</label>
-
-                            <input type="file" onChange={handleLogoChange} />
-
-                        </div>
-
-                        <div>
-                            <div style={{ border:"1px solid gray", width: "5.5rem", height: "5.5rem" }}>
-                                <img src={`${currentSalonLogo ? currentSalonLogo : "https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg"}`} alt="Salon Logo" style={{ width: "100%", height: "100%" }} />
-                            </div>
-
-                            <div style={{ display: "flex", gap: "1rem" }}>
-                                { currentSalonLogo && <><button className='sl-del'onClick={() => imgLogoDeleteHandler()}><MdDelete /></button>
-                                <button className='sl-ed' onClick={() => handleLogoEditButtonClick()}><MdModeEditOutline /></button>
-                                <input
-                                    type="file"
-                                    ref={fileLogoInputRef}
-                                    style={{ display: 'none' }}
-                                    onChange={handleLogoFileInputChange}
-                                /></>}
-                            </div>
                         </div>
 
                         <div className='img-container'>
@@ -606,8 +638,69 @@ const UpdateSalon = () => {
 
                         </div>
 
+                        <div>
+                            <label htmlFor="">Select Salon Logo</label>
+
+                            <input type="file" onChange={handleLogoChange} />
+
+                        </div>
+
+                        <div>
+                            <div style={{ border: "1px solid gray", width: "5.5rem", height: "5.5rem" }}>
+                                <img src={`${currentSalonLogo ? currentSalonLogo : "https://t4.ftcdn.net/jpg/04/73/25/49/360_F_473254957_bxG9yf4ly7OBO5I0O5KABlN930GwaMQz.jpg"}`} alt="Salon Logo" style={{ width: "100%", height: "100%" }} />
+                            </div>
+
+                            <div style={{ display: "flex", gap: "1rem" }}>
+                                {currentSalonLogo && <><button className='sl-del' onClick={() => imgLogoDeleteHandler()}><MdDelete /></button>
+                                    <button className='sl-ed' onClick={() => handleLogoEditButtonClick()}><MdModeEditOutline /></button>
+                                    <input
+                                        type="file"
+                                        ref={fileLogoInputRef}
+                                        style={{ display: 'none' }}
+                                        onChange={handleLogoFileInputChange}
+                                    /></>}
+                            </div>
+                        </div>
+
+                       
+
                         <div className='services'>
                             <label className='serv-title' style={{ marginTop: "2rem" }}>Add Your Services</label>
+
+                            <div>
+                                <div className='service-icon'>
+                                    <p>Service Icon</p>
+                                    <div onClick={() => setServiceDrop(!serviceDrop)}
+                                        style={{ cursor: "pointer", background: "#fff", boxShadow: "0px 0px 4px rgba(0,0,0,0.4)", height: "2.5rem", width: "2.5rem", display: "flex", alignItems: "center", justifyContent: "center", borderRadius: "50%" }}><FaArrowDown /></div>
+                                </div>
+
+                                {
+                                    serviceDrop && <div className='service-icon-content'>{
+                                        // getAllSalonIcon?.response
+                                        <div>
+                                            {
+                                                getAllSalonIcon?.response ? (
+                                                    getAllSalonIcon.response.map((s) => (
+                                                        <div key={s.id} className='service-icon-content-img' onClick={() => serviceIconHandler(s)}>
+                                                            <img src={`${s.url}`} alt="s1" />
+                                                        </div>
+                                                    ))
+                                                ) : (
+                                                    <h2>No Service Icon Present</h2>
+                                                )
+                                            }
+                                        </div>
+
+                                    }</div>
+                                }
+
+                                {
+                                    currentImg && <div className='selected-serrvice-icon'>
+                                        <div><img src={`${currentImg}`} alt="" /></div>
+                                    </div>
+                                }
+
+                            </div>
 
                             <div>
                                 <label htmlFor="">Service Name</label>
@@ -652,6 +745,9 @@ const UpdateSalon = () => {
                         <div className='services-data'>
                             {services.map((service, index) => (
                                 <div key={index} className='ser-table' onClick={() => serviceEditHandler(index)}>
+
+
+
                                     <div>
                                         <label>Service Name</label>
                                         <label>{service.serviceName}</label>
@@ -672,6 +768,9 @@ const UpdateSalon = () => {
                                         <label>{service.serviceEWT}</label>
                                     </div>
 
+                                    <div>
+                                        <img src={service.serviceIcon?.url} alt="sc" />
+                                    </div>
 
                                 </div>
                             ))}

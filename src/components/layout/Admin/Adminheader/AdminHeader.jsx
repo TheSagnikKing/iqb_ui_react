@@ -22,6 +22,8 @@ const AdminHeader = ({ title }) => {
 
   const [check, setCheck] = useState(false)
 
+  console.log("Mode", check)
+
   const [dropdown, setDropdown] = useState(false)
 
   const navigate = useNavigate()
@@ -121,7 +123,7 @@ const AdminHeader = ({ title }) => {
           <p><span>IQB</span>iqueuebarberss</p>
         </div>
 
-        <div className="nav1wrapper">
+        <div className={check ? "nav1wrapperdark" : "nav1wrapper"}>
 
           <div className="nav1left_menu_box">
             {adminmenudata.map((item) => {

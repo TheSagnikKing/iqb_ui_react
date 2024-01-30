@@ -37,6 +37,13 @@
     background-color: white;
   }
 
+  .nav1wrapperdark{
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    background-color: rgb(31, 29, 29);
+  }
+
 .nav1left_menu_box{
     padding: 10% 6%;
     display: flex;

@@ -9,20 +9,20 @@ const AdminMenu = ({ menu_logo, menu_title, category, menu_link }) => {
     const [dropdown, setDropdown] = useState(false)
 
     return (
-        <>
+        <Link to={`${menu_link}`} style={{color:"#000", textDecoration:"none"}}>
             <div className="nav1-menu"
                 onClick={(e) => setDropdown(!dropdown)}
             >
-                <div>
+                <div >
                     <div>
                         {menu_logo}
                     </div>
 
-                    <Link to={`${menu_link}`}><p>{menu_title}</p></Link>
+                    <h3>{menu_title}</h3>
                 </div>
 
             </div>
-        </>
+        </Link>
     )
 }
 
