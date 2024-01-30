@@ -321,7 +321,13 @@
   
   /* Create an active/current tablink class */
   .active3 {
-    background-color: #ccc;
+    background-color: blue;
+    color: #fff;
+  }
+
+  .active4 {
+    background-color: orange;
+    color: #fff;
   }
   
 .tablinks{

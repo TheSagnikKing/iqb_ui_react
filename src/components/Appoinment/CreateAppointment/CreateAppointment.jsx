@@ -5,8 +5,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { barberListAction, getbarberServicesbyBarberIdAction } from '../../../redux/actions/barberAction'
 
 import api from "../../../redux/api/Api"
-import { createAppointmentAction } from '../../../redux/actions/AppointmentAction'
+import { appoinmentBarberListAction, createAppointmentAction } from '../../../redux/actions/AppointmentAction'
 import { useNavigate } from 'react-router-dom'
+
+import Modal from "../../Modal/Modal"
+import { FaPlus } from 'react-icons/fa'
+import { MdDelete } from 'react-icons/md'
 
 const CreateAppointment = () => {
 
@@ -22,7 +26,7 @@ const CreateAppointment = () => {
 
     useEffect(() => {
         if (salonId) {
-            dispatch(barberListAction(salonId))
+            dispatch(appoinmentBarberListAction(Number(salonId)))
         }
     }, [dispatch, salonId])
 
@@ -148,15 +152,20 @@ const CreateAppointment = () => {
 
     const createAppointment = useSelector(state => state.createAppointment)
 
+    const [showpreview, setShowPreview] = useState(false)
+
+
+    const appoinmentBarberList = useSelector(state => state.appoinmentBarberList)
+
     return (
         <>
             <AdminLayout />
             <div className='create-appointment-container'>
-                <h2>Create Appointment</h2>
+                <h1 >Create Appointment</h1>
 
                 <div className='create-form'>
                     <div>
-                        <label htmlFor="">Appointment Note</label>
+                        <h2>Appointment Note</h2>
                         <input
                             type="text"
                             placeholder='Enter Note'
@@ -166,7 +175,7 @@ const CreateAppointment = () => {
                     </div>
 
                     <div>
-                        <label htmlFor="">Customer Name</label>
+                        <h2>Customer Name</h2>
                         <input
                             type="text"
                             placeholder='Enter Name'
@@ -176,7 +185,7 @@ const CreateAppointment = () => {
                     </div>
 
                     <div>
-                        <label htmlFor="">Choose Date</label>
+                        <h2>Choose Date</h2>
                         <input
                             type="date"
                             value={date}
@@ -185,26 +194,30 @@ const CreateAppointment = () => {
                     </div>
 
                     <div>
-                        <label htmlFor="">Barber List</label>
+                        <h2>Barber List</h2>
 
                         <div>
                             <div className='barber-single-join-content-bbr'>
                                 <p>Email</p>
                                 <p>Name</p>
-                                {/* <p>{barber.userName}</p> */}
                                 <p>Mo. Number</p>
                                 <p>Active</p>
                                 <p>Action</p>
                             </div>
                             {
-                                barberList ? barberList?.getAllBarbers?.map((barber) => (
+                                appoinmentBarberList  ? appoinmentBarberList?.response?.map((barber) => (
                                     <div className='barber-single-join-content-bbr' key={barber._id}>
                                         <p>{barber.email}</p>
                                         <p>{barber.name}</p>
-                                        {/* <p>{barber.userName}</p> */}
                                         <p>{barber.mobileNumber}</p>
                                         <p>{barber.isActive === true ? "Yes" : "No"}</p>
-                                        <button onClick={() => barberServiceCallHandler(barber.barberId, barber.name)}>Select</button>
+                                        <button onClick={() => barberServiceCallHandler(barber.barberId, barber.name)} style={{
+                                            height:"3rem",
+                                            border:"1px solid blue",
+                                            cursor:"pointer",
+                                            background:"#f1f6fc",
+                                            color:"blue"
+                                        }}><FaPlus /></button>
                                     </div>
 
 
@@ -214,7 +227,7 @@ const CreateAppointment = () => {
                     </div>
 
                     <div>
-                        <label htmlFor="">Choose  Services</label>
+                        <h2>Choose  Services</h2>
 
                         <div>
                             <div className='barber-single-join-quebarberserv-content'
@@ -222,9 +235,7 @@ const CreateAppointment = () => {
                                     fontSize: "11px",
                                 }}
                             >
-                                {/* <p>ServiceID</p> */}
                                 <p>Service Name</p>
-                                {/* <p>Service Code</p> */}
                                 <p>Service Price</p>
                                 <p>Estimated Wait Time (mins)</p>
                                 <p>Action</p>
@@ -232,12 +243,16 @@ const CreateAppointment = () => {
                             {
                                 getBarberServicesBybarberId?.response?.map((b, index) => (
                                     <div className='barber-single-join-quebarberserv-content' key={b._id}>
-                                        {/* <p>{b.serviceId}</p> */}
                                         <p>{b.serviceName}</p>
-                                        {/* <p>{b.serviceCode}</p> */}
                                         <p>{b.servicePrice}</p>
                                         <p>{b.barberServiceEWT}</p>
-                                        <button onClick={() => selectedServiceHandler(b, index)}>Add</button>
+                                        <button onClick={() => selectedServiceHandler(b, index)} style={{
+                                            height:"3rem",
+                                            border:"1px solid blue",
+                                            cursor:"pointer",
+                                            background:"#f1f6fc",
+                                            color:"blue"
+                                        }}><FaPlus /></button>
                                     </div>
                                 ))
                             }
@@ -249,13 +264,11 @@ const CreateAppointment = () => {
 
                         <div>
                             <div className='barber-single-join-quebarberserv-content'
-                            style={{
-                                fontSize:"11px"
-                            }}
+                                style={{
+                                    fontSize: "11px"
+                                }}
                             >
-                                {/* <p>ServiceID</p> */}
                                 <p>Service Name</p>
-                                {/* <p>Service Code</p> */}
                                 <p>Service Price</p>
                                 <p>Estimated Wait Time(mins)</p>
                                 <p>Action</p>
@@ -263,12 +276,16 @@ const CreateAppointment = () => {
                             {
                                 selectedService && selectedService.length > 0 ? selectedService.map((b, index) => (
                                     <div className='barber-single-join-quebarberserv-content' key={b._id}>
-                                        {/* <p>{b.serviceId}</p> */}
                                         <p>{b.serviceName}</p>
-                                        {/* <p>{b.serviceCode}</p> */}
                                         <p>{b.servicePrice}</p>
                                         <p>{b.barberServiceEWT}</p>
-                                        <button onClick={() => selectedServiceDelete(b)}>Del</button>
+                                        <button onClick={() => selectedServiceDelete(b)} style={{
+                                            height:"3rem",
+                                            border:"1px solid red",
+                                            cursor:"pointer",
+                                            background:"#f1f6fc",
+                                            color:"red"
+                                        }}><MdDelete /></button>
                                     </div>
                                 )) : <p>No Services Available</p>
                             }
@@ -285,7 +302,13 @@ const CreateAppointment = () => {
                                         <div key={i} className='timeslot'>
                                             <p>{t.timeInterval}</p>
                                             {
-                                                t.disabled == true ? <button>Disable</button> : <button onClick={() => selectTimeSlotfnc(t.timeInterval)}>select</button>
+                                                t.disabled == true ? <button>Disable</button> : <button onClick={() => selectTimeSlotfnc(t.timeInterval)} style={{
+                                                    height:"3rem",
+                                                    border:"1px solid blue",
+                                                    cursor:"pointer",
+                                                    background:"#f1f6fc",
+                                                    color:"blue"
+                                                }}><FaPlus /></button>
                                             }
 
                                         </div>
@@ -295,58 +318,47 @@ const CreateAppointment = () => {
                         </div>
                     </div>
 
-                    <div>
-                        <h3 htmlFor="">Preview</h3>
+                    <button onClick={() => { setShowPreview(true) }}>Preview</button>
 
-                        {/* appointmentName: appointmentName,
-            startTime: timeSlotStartTime,
-            // customerEmail: "arg@gmail.com",
-            customerName: name,
-            customerType: "Walk-In",
-            methodUsed: "App" */}
+                    <Modal isOpen={showpreview} setIsOpen={setShowPreview}>
+                        <div className='app-modal-crt'>
+                            <h1>Preview Appointment</h1>
+                            <div>
+                                <p>Appointment Name : {appointmentNotes} </p>
+                                <p>Appointment Date : {date} </p>
+                                <p>Start Time : {timeSlotStartTime}</p>
+                                <p>Customer Name : {name}</p>
+                                <p>Customer Type : Walk-In</p>
+                                <p>Method Used : App </p>
+                            </div>
 
-                        <div>
-                            <p>Appointment Name : <b>{appointmentNotes}</b></p>
-                            <p>Appointment Date : <b>{date}</b></p>
-                            <p>Start Time : <b>{timeSlotStartTime}</b></p>
-                            <p>Customer Name : <b>{name}</b></p>
-                            <p>Customer Type :<b>Walk-In</b></p>
-                            <p>Method Used : <b>App</b></p>
-                            <p><b>Services :</b></p>
-                            {
-                                selectedService.map((c, i) => (
-                                    <div key={i} style={{
-                                        display: "flex",
-                                        gap: "1rem",
-                                        marginBlock: "10px",
-                                        width: "30%",
-                                        padding: "5px",
-                                        boxShadow: "0px 0px 4px rgba(0,0,0,0.4)",
-                                        borderRadius: "3px"
-                                    }}>
-                                        <p>{c.serviceName}</p>
-                                        <p>{c.servicePrice}</p>
-                                        <p>{c.barberServiceEWT}</p>
-                                        {/* <p>{c.serviceId}</p> */}
-                                    </div>
-                                ))
-                            }
-                        </div>
+                            <h2>Your Services</h2>
 
-                        <button onClick={CreateAppointment}
-                            style={{
-                                backgroundColor: "#f1f6fc",
-                                width: "50%",
-                                border: "none",
-                                cursor: "pointer",
-                                boxShadow: "0px 0px 4px rgba(0,0,0,0.4)",
-                                borderRadius: "4px",
-                                height: "35px"
-                            }}
-                        >{
+                            <div>
+                                <div className='app-modal-crt-head'>
+                                    <p>Service Name</p>
+                                    <p>Service Price</p>
+                                    <p>Barber Service Estimated Wait Time</p>
+                                </div>
+
+                                <div className='app-modal-crt-content'>
+                                    {
+                                        selectedService.map((s, i) => (
+                                            <div key={i}>
+                                                <p>{s.serviceName}</p>
+                                                <p>{s.servicePrice}</p>
+                                                <p>{s.barberServiceEWT}</p>
+                                            </div>
+                                        ))
+                                    }
+                                </div>
+                            </div>
+
+                            <button className='app-modal-crt-button' onClick={CreateAppointment}>{
                                 createAppointment?.loading == true ? <h2>loading...</h2> : "Create Appointment"
                             }</button>
-                    </div>
+                        </div>
+                    </Modal>
 
                 </div>
             </div>

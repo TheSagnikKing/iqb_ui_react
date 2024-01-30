@@ -102,7 +102,7 @@ const Queautojoinservices = () => {
 
   useEffect(() => {
     if (currentAdminSalonId) {
-      dispatch(getAllSalonServicesAction(currentAdminSalonId))
+      dispatch(getAllSalonServicesAction(Number(currentAdminSalonId)))
     }
   }, [dispatch, currentAdminSalonId])
 
@@ -177,11 +177,11 @@ const Queautojoinservices = () => {
       <AdminLayout />
       <div className="singlejoin-barber-quebarber-wrapper">
 
-        <h2>Auto Join</h2>
+        <h1>Auto Join</h1>
 
         <div className='barber-single-join'>
           <div>
-            <p>Customer Name</p>
+            <h2>Customer Name</h2>
             <input
               type="text"
               value={name}
@@ -191,7 +191,7 @@ const Queautojoinservices = () => {
           </div>
 
           <div>
-            <p>Customer Email</p>
+            <h2>Customer Email</h2>
             <input
               type="text"
               value={customerEmail}
@@ -201,7 +201,7 @@ const Queautojoinservices = () => {
           </div>
 
           <div>
-            <p>Mobile Number</p>
+            <h2>Mobile Number</h2>
             <input 
             type="text" 
             placeholder='Enter Customer Mobile Number'
@@ -210,7 +210,7 @@ const Queautojoinservices = () => {
             />
           </div>
 
-          <p>Choose Barber Services</p>
+          <h2>Choose Barber Services</h2>
           <div className='barber-single-join-services'>
             <div className='barber-single-join-quebarberserv-content'>
               <p>Service ID</p>
@@ -234,7 +234,7 @@ const Queautojoinservices = () => {
           </div>
 
 
-          <p>Your Selected Services</p>
+          <h2>Your Selected Services</h2>
           <div className='barber-single-join-services'>
 
             <div className='barber-single-join-quebarberserv-content'>

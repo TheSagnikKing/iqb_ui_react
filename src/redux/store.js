@@ -1,12 +1,12 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 
 import { logoutReducer, newPasswordResetReducer, passwordResetEmailReducer, signinReducer, signupReducer } from "./reducers/userReducer";
-import { applySalonReducer, connectBarberSalonReducer, createSalonReducer, deleteSalonReducer, getAllSalonServicesReducer, salonListReducer,salonSettingsUpdateReducer, salonStatusOnlineReducer, updateSalonReducer } from "./reducers/salonReducer";
+import { applySalonReducer, connectBarberSalonReducer, createSalonReducer, deleteSalonReducer, getAllSalonIconReducer, getAllSalonServicesReducer, salonListReducer,salonSettingsUpdateReducer, salonStatusOnlineReducer, updateSalonReducer } from "./reducers/salonReducer";
 import { approveBarberReducer, barberListReducer, barberServedQueueReducer, createBarberReducer, deleteBarberReducer, getAllBarbersByServiceIdReducer, getBarberByMultipleServicesReducer, getBarberServicesBybarberIdReducer, updateBarberReducer } from "./reducers/barberReducer";
 import { autojoinReducer, cancelQueueReducer, groupjoinReducer, queueListReducer, singleJoinQueueReducer } from "./reducers/joinqueueReducer";
 import { AdminForgetPasswordReducer, AdminGoogleLoginReducer, AdminLoginReducer, AdminLogoutReducer, AdminRegisterReducer, AdminResetPasswordReducer, LoggedInMiddlewareReducer, LoggedOutMiddlewareReducer, adminVerifiedStatusReducer, adminVerifyEmailReducer, updateAdminAccountDetailsReducer, updateAdminReducer } from "./reducers/AdminAuthReducer";
 import { barberForgetPasswordReducer, barberGoogleLoginReducer, barberLoginReducer, barberLogoutReducer, barberOnlineStatusReducer, barberQuelistReducer, barberRegisterReducer, barberResetPasswordReducer, barberServedQueReducer, barberUpdateAccountReducer, barberVerifyEmailReducer, barberVerifyStatusReducer, updatebarberAccountDetailsReducer, updatebarberReducer } from "./reducers/BarberAuthReducer";
-import { createAppointmentReducer, deleteAppointmentReducer, editAppointmentReducer } from "./reducers/AppointmentReducer";
+import { appoinmentBarberListReducer, createAppointmentReducer, deleteAppointmentReducer, editAppointmentReducer } from "./reducers/AppointmentReducer";
 import { getAllAdvertisementReducer} from "./reducers/AdvertisementReducer";
 import { customeremailReducer } from "./reducers/CustomerReducer";
 import { getallNotificationReducer, multipleNotificationReducer, singleNotificationReducer } from "./reducers/NotificationReducer";
@@ -92,7 +92,9 @@ const rootReducer = combineReducers({
   barberUpdateAccount:barberUpdateAccountReducer,
   barberVerifyEmail:barberVerifyEmailReducer,
   barberVerifyStatus:barberVerifyStatusReducer,
-  cancelQueue:cancelQueueReducer
+  cancelQueue:cancelQueueReducer,
+  appoinmentBarberList:appoinmentBarberListReducer,
+  getAllSalonIcon:getAllSalonIconReducer
 });
 
 const initialState = {};

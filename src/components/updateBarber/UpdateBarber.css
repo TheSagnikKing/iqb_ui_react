@@ -1,4 +1,4 @@
-.upd-wrapper{
+/* .upd-wrapper{
     width: 82% !important;
     position: absolute;
     top: 90px;
@@ -137,4 +137,147 @@
     -moz-appearance: textfield;
     -webkit-appearance: textfield;
     margin: 0; 
+} */
+
+
+.upd-wrapper {
+    width: 82% !important;
+    position: absolute;
+    top: 9rem;
+    left: 26.5rem;
+    margin-left: 3.5rem;
+    margin-top: 3rem;
+}
+
+.upd-form {
+    width: 100%;
+    height: auto;
+    background-color: #fff;
+    margin-top: 3rem;
+    border-radius: 1rem;
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 8rem;
+    row-gap: 2rem;
+}
+
+.upd-form input:focus {
+    outline: none;
+    border: none;
+}
+
+.upd-form > div {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.upd-form > div > input {
+    height: 4rem;
+    padding-inline: 1rem;
+    border: none;
+    background-color: #f1f6fc;
+}
+
+.upd-form > div > label {
+    font-size: 1.4rem;
+}
+
+.upd-form > div:nth-child(9) > div:nth-child(1) {
+    background-color: #f1f6fc;
+    height: 4.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    padding-right: 3rem;
+}
+
+.upd-form > div:nth-child(9) > div:nth-child(1) > div {
+    background-color: white;
+    height: 3rem;
+    width: 3rem;
+    border-radius: 50%;
+    box-shadow: 0px 0px 0.4rem rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.barber-dropdown {
+    background-color: #f1f6fc;
+    height: 15rem;
+    padding: 2rem;
+    overflow-y: scroll;
+}
+
+.upd-form > div:nth-child(9) {
+    margin-top: 3rem;
+}
+
+.upd-form > div:nth-child(9) > p {
+    font-size: 1.4rem;
+}
+
+.barber-dropdown-select {
+    background-color: #f1f6fc;
+    height: 15rem;
+    width: 100%;
+    padding: 2rem;
+    overflow-y: scroll;
+}
+
+.upd-form > button {
+    background-color: #f1f6fc;
+    border: 0.1rem solid rgba(0, 0, 0, 0.3);
+    height: 4.5rem;
+    cursor: pointer;
+    outline: none;
+    border-radius: 0.5rem;
+}
+
+.barber-dropdown > div {
+    background-color: white;
+    padding: 0.5rem;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2rem;
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    cursor: pointer;
+}
+
+.barber-dropdown-select > div {
+    background-color: white;
+    padding: 0.5rem;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1.2rem;
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    cursor: pointer;
+}
+
+.barber-dropdown-select > div > div:nth-child(6) {
+    box-shadow: 0px 0px 0.4rem rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    height: 2.5rem;
+    width: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: red;
+    cursor: pointer;
+}
+
+.serviceEWT {
+    background-color: none;
+    border: none;
+    border-bottom: 0.1rem solid rgba(220, 92, 7, 0.5);
+    appearance: textfield;
+    -moz-appearance: textfield;
+    -webkit-appearance: textfield;
+    margin: 0;
 }

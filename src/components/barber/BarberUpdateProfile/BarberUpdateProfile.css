@@ -1,0 +1,50 @@
+.ad-profile-wrapper{
+    position: absolute;
+    top: 12rem;
+    left: 26.5rem;
+    bottom: 0;
+    right: 0;
+    background-color: #fff;
+    width: 82%;
+    margin: 0 auto;
+    border-radius: 1rem;
+    padding: 2rem;
+    height: 50vh;
+}
+
+.ad-profile-sa-br-right_main_form-update{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.ad-profile-sa-br-right_main_form-update>div{
+    display: flex;
+    flex-direction: column;
+    gap:1rem
+}
+
+.ad-profile-sa-br-right_main_form-update>div>input{
+    height: 4rem;
+    background-color: #f1f6fc;
+    padding-inline: 1rem;
+    border: none;
+    border: 1px solid black;
+}
+
+#gender{
+    height: 4rem;
+    background-color: #f1f6fc;
+    padding-inline: 1rem;
+    border: none;
+    border: 1px solid black;
+}
+
+.sa-br-btn_box-up>button {
+    height: 4rem;
+    background-color: #f1f6fc;
+    box-shadow: 0 0 0.4rem rgba(0, 0, 0, 0.3);
+    border: none;
+    cursor: pointer;
+    margin-top: 3rem;
+}

@@ -107,8 +107,6 @@ const Dashboard3 = () => {
     }
 
     return (
-        <>
-
             <div className="cst-wrapper">
                 <div className="cst-header">
                     <p>Customer List</p>
@@ -140,70 +138,68 @@ const Dashboard3 = () => {
                 {/* Table  */}
                 <div className='cst-table'>
                     {
-                        loading ? <div className='cst-puff-loader-box'><PuffLoader /></div> : customersList && customersList.getAllCustomers ? customersList?.getAllCustomers.map((customer, index) => <main className="cst-barberitem" key={index}>
-                            <div>
-                                <div>
-                                    <p>Salon ID</p>
+                        <main className="cst-barberitem" >
+                            <div><div>
+                                    <h4>Salon ID</h4>
                                     <div>
                                         <div onClick={() => sortHandler("salonId", "asc")}><AiOutlineArrowUp /></div>
                                         <div onClick={() => sortHandler("salonId", "des")}><AiOutlineArrowDown /></div>
                                     </div>
-                                </div>
-                                <p>{customer.salonId}</p>
-                            </div>
-
-                            <div>
-                                <div>
-                                    <p>Name</p>
+                                </div></div>
+                            <div><div>
+                                    <h4>Name</h4>
                                     <div>
                                         <div onClick={() => sortHandler("name", "asc")}><AiOutlineArrowUp /></div>
                                         <div onClick={() => sortHandler("name", "des")}><AiOutlineArrowDown /></div>
                                     </div>
-                                </div>
+                                </div></div>
+                            <div><div>
+                                    <h4>Email</h4>
+                                    <div>
+                                        <div><AiOutlineArrowUp /></div>
+                                        <div><AiOutlineArrowDown /></div>
+                                    </div>
+                                </div></div>
+                            <div><div>
+                                    <h4>Date of Birth</h4>
+                                    <div>
+                                        <div><AiOutlineArrowUp /></div>
+                                        <div><AiOutlineArrowDown /></div>
+                                    </div>
+                                </div></div>
+                            <div><div>
+                                    <h4>Gender</h4>
+                                    <div>
+                                        <div><AiOutlineArrowUp /></div>
+                                        <div><AiOutlineArrowDown /></div>
+                                    </div>
+                                </div></div>
+                            <div><h4>Mobile Number</h4></div>
+                        </main>
+                    }
+                    {
+                        loading ? <div className='cst-puff-loader-box'><PuffLoader /></div> : customersList && customersList.getAllCustomers ? customersList?.getAllCustomers.map((customer, index) => <main className="cst-barberitem" key={index}>
+                            <div>
+                                <p>{customer.salonId}</p>
+                            </div>
+
+                            <div>
                                 <p>{customer.name}</p>
                             </div>
 
                             <div>
-                                <div>
-                                    <p>Email</p>
-                                    <div>
-                                        <div><AiOutlineArrowUp /></div>
-                                        <div><AiOutlineArrowDown /></div>
-                                    </div>
-                                </div>
                                 <p>{customer.email}</p>
                             </div>
 
                             <div>
-                                <div>
-                                    <p>Date of Birth</p>
-                                    <div>
-                                        <div><AiOutlineArrowUp /></div>
-                                        <div><AiOutlineArrowDown /></div>
-                                    </div>
-                                </div>
                                 <p>{customer.dateOfBirth}</p>
                             </div>
 
                             <div>
-                                <div>
-                                    <p>Gender</p>
-                                    <div>
-                                        <div><AiOutlineArrowUp /></div>
-                                        <div><AiOutlineArrowDown /></div>
-                                    </div>
-                                </div>
                                 <p>{customer.gender}</p>
                             </div>
 
                             <div>
-                                <div>
-                                    <p>Mobile Number</p>
-                                    <div>
-                                        <div><AiOutlineArrowUp /></div>
-                                        <div><AiOutlineArrowDown /></div>
-                                    </div>
-                                </div>
                                 <p>{customer.mobileNumber}</p>
                             </div>
 
@@ -225,8 +221,6 @@ const Dashboard3 = () => {
                 </div>
 
             </div>
-
-        </>
     )
 }
 

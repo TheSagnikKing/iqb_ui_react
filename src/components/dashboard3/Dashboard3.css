@@ -1,4 +1,4 @@
-.cst-wrapper {
+/* .cst-wrapper {
     width: 82% !important;
     position: absolute;
     top: 90px;
@@ -143,7 +143,6 @@
 }
 
 .cst-customeritem_piece{
-    /* border: 2px solid black; */
     display: flex;
     width: 100%;
     font-size: 12px;
@@ -219,5 +218,228 @@
     align-items: center;
     box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
     border-radius: 3px;
+    cursor: pointer;
+} */
+
+
+
+.cst-wrapper {
+    width: 82% !important; /* 82px converted to rem */
+    position: absolute;
+    top: 9rem; /* 90px converted to rem */
+    left: 26.5rem; /* 265px converted to rem */
+    margin-left: 3.5rem; /* 35px converted to rem */
+    margin-top: 3rem; /* 30px converted to rem */
+}
+
+.cst-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 3rem; /* 30px converted to rem */
+}
+
+.cst-header > p {
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 1.6rem; /* 16px converted to rem */
+}
+
+.cst-header > div {
+    display: flex;
+    align-items: center;
+    gap: 0.13rem; /* 1.3px converted to rem */
+}
+
+.cst-header > div div:nth-child(1) {
+    background: white;
+    height: 3.5rem; /* 35px converted to rem */
+    border-radius: 0.4rem; /* 4px converted to rem */
+    padding-inline: 1rem; /* 10px converted to rem */
+}
+
+.cst-header > div div:nth-child(1) input {
+    background: transparent;
+    border: none;
+    height: 100%;
+    width: 100%;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.cst-header > div div:nth-child(1) input:focus {
+    border: none;
+    outline: none;
+}
+
+.cst-header > div div:nth-child(2),
+.cst-header > div div:nth-child(3) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem; /* 20px converted to rem */
+    cursor: pointer;
+}
+
+.cst-header > div div:nth-child(3) {
+    font-size: 2.2rem; /* 22px converted to rem */
+}
+
+.cst-table {
+    background: #fff;
+    height: 65vh; /* 65px converted to rem */
+    width: 100%;
+    padding: 3rem; /* 30px converted to rem */
+    border-radius: 1rem; /* 10px converted to rem */
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem; /* 16px converted to rem */
+    scroll-behavior: smooth;
+    overflow-y: scroll;
+}
+
+.cst-barberitem {
+    background-color: #F1F6FC;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 0.2fr 0.2fr 0.2fr;
+    gap: 1.3rem; /* 2px converted to rem */
+    padding: 1rem; /* 10px converted to rem */
+    border-radius: 1rem; /* 10px converted to rem */
+    font-size: 1.2rem; /* 12px converted to rem */
+}
+
+.cst-barberitem > div {
+    display: flex;
+    flex-direction: column;
+}
+
+.cst-barberitem > div > div {
+    display: flex;
+    gap: 1rem;
+    /* justify-content: space-between; */
+}
+
+.cst-barberitem > div > div > div {
+    display: flex;
+    align-items: center;
+    gap: 1rem; /* 10px converted to rem */
+}
+
+.cst-barberitem > div > div > div > div {
+    background-color: #fff;
+    cursor: pointer;
+    height: 2.5rem; /* 25px converted to rem */
+    width: 2.5rem; /* 25px converted to rem */
+    border-radius: 50%;
+    box-shadow: 0px 0px 0.4rem rgba(0, 0, 0, 0.5); /* 4px converted to rem */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cst-barber-pagination {
+    width: 100%;
+    height: 6rem; /* 60px converted to rem */
+    background-color: white;
+    margin-top: 1rem; /* 10px converted to rem */
+    padding-inline: 1rem; /* 10px converted to rem */
+    display: flex;
+    justify-content: flex-end;
+    border-radius: 0.7rem; /* 7px converted to rem */
+}
+
+.cst-barber-pagination > div {
+    display: flex;
+    align-items: center;
+    gap: 0.1rem; /* 1px converted to rem */
+}
+
+.cst-barber-pagination > div > div {
+    background-color: #fff;
+    cursor: pointer;
+    height: 3.5rem; /* 35px converted to rem */
+    width: 3.5rem; /* 35px converted to rem */
+    border-radius: 50%;
+    box-shadow: 0px 0px 0.4rem rgba(0, 0, 0, 0.5); /* 4px converted to rem */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cst-customeritem_piece {
+    /* border: 0.2rem solid black; */
+    display: flex;
+    width: 100%;
+    font-size: 1.2rem; /* 12px converted to rem */
+}
+
+.cst-customeritem_piece > div {
+    display: flex;
+    gap: 0.1rem; /* 1px converted to rem */
+    margin-left: 0.15rem; /* 1.5px converted to rem */
+}
+
+.cst-reload {
+    height: 4rem; /* 40px converted to rem */
+    width: 4rem; /* 40px converted to rem */
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0px 0px 0.4rem rgba(0, 0, 0, 0.5); /* 4px converted to rem */
+    border: none;
+    outline: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem; /* 20px converted to rem */
+}
+
+.cst-search {
+    height: 3.5rem; /* 35px converted to rem */
+    padding-inline: 1rem; /* 10px converted to rem */
+    outline: none;
+}
+
+.cst-search-btn {
+    background-color: #fff;
+    margin-left: 2rem; /* 20px converted to rem */
+    height: 3.5rem; /* 35px converted to rem */
+    width: 3.5rem; /* 35px converted to rem */
+    border-radius: 0.5rem; /*
+    border: none;
+    outline: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.1rem; /* 21px converted to rem */
+    cursor: pointer;
+    box-shadow: 0px 0px 0.4rem rgba(0, 0, 0, 0.4); /* 4px converted to rem */
+}
+
+.cst-puff-loader-box {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    padding-top: 10rem; /* 100px converted to rem */
+}
+
+.cst-no-barber-box {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.2rem; /* 22px converted to rem */
+}
+
+.icons-bbr {
+    font-size: 1.6rem; /* 16px converted to rem */
+    background-color: #fff;
+    height: 3rem; /* 30px converted to rem */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 0px 0.3rem rgba(0, 0, 0, 0.3); /* 3px converted to rem */
+    border-radius: 0.3rem; /* 3px converted to rem */
     cursor: pointer;
 }

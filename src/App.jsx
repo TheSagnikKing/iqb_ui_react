@@ -74,7 +74,6 @@ import Hello from './components/Hello';
 const App = () => {
 
   return (
-    <>
       <BrowserRouter>
         <Routes>
           <Route path="/hello" element={<Hello/>}/>
@@ -365,7 +364,6 @@ const App = () => {
 
         </Routes>
       </BrowserRouter>
-    </>
   )
 }
 

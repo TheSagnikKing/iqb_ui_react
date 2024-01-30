@@ -164,7 +164,6 @@ const dashboard = () => {
     }
 
     return (
-        <>
             <div className="right_main_div">
                 {salonid == 0 ? <div className='nosalon'>
                     <h2>No Salons. Please Create a Salon First</h2>
@@ -176,7 +175,7 @@ const dashboard = () => {
                             <div style={{
                                 display: "flex",
                                 justifyContent: "space-between",
-                                marginBottom: "20px"
+                                marginBottom: "2rem"
                             }}>
                                 {/* <div style={{
                                     display: "flex",
@@ -228,8 +227,6 @@ const dashboard = () => {
                             <div className="div_left_head">
 
 
-
-
                                 <p>Advertisement</p>
                                 <div className="btn_box">
                                     <div className="btn_one">
@@ -253,23 +250,23 @@ const dashboard = () => {
                             <div className="div_left_images">
 
                                 <div className="img_one">
-                                    <img src={advertisementList[0]?.url} alt="" />
+                                    <img src={advertisementList[0]?.url ? advertisementList[0]?.url : "https://png.pngtree.com/png-clipart/20230917/original/pngtree-no-image-available-icon-flatvector-illustration-pic-design-profile-vector-png-image_12323913.png" } alt="" />
                                 </div>
 
                                 <div className="img_two">
 
                                     <div>
-                                        <img src={advertisementList[1]?.url} alt="" />
+                                        <img src={advertisementList[1]?.url ? advertisementList[1]?.url : "https://png.pngtree.com/png-clipart/20230917/original/pngtree-no-image-available-icon-flatvector-illustration-pic-design-profile-vector-png-image_12323913.png"} alt="" />
                                     </div>
 
                                     <div>
-                                        <img src={advertisementList[2]?.url} alt="" />
+                                        <img src={advertisementList[2]?.url ? advertisementList[2]?.url : "https://png.pngtree.com/png-clipart/20230917/original/pngtree-no-image-available-icon-flatvector-illustration-pic-design-profile-vector-png-image_12323913.png"} alt="" />
                                     </div>
 
                                 </div>
 
                                 <div className="img_three">
-                                    <img src={advertisementList[3]?.url} alt="" />
+                                    <img src={advertisementList[3]?.url ? advertisementList[3]?.url : "https://png.pngtree.com/png-clipart/20230917/original/pngtree-no-image-available-icon-flatvector-illustration-pic-design-profile-vector-png-image_12323913.png"} alt="" />
                                 </div>
                             </div>
                         </div>
@@ -287,7 +284,7 @@ const dashboard = () => {
 
                                         <p><Link to="/queue"
                                             style={{
-                                                fontSize: "11px"
+                                                fontSize: "1.1rem"
                                             }}
                                         >Add Customers</Link></p>
                                     </div>
@@ -312,9 +309,9 @@ const dashboard = () => {
 
                                 <div>
                                     <p style={{
-                                        marginTop: "10px"
+                                        marginTop: "1rem"
                                     }}><Link to="/queue" style={{
-                                        fontSize: "11px"
+                                        fontSize: "1.1rem"
                                     }}>See All</Link></p>
                                     <div>
                                         <BiChevronRight />
@@ -328,7 +325,7 @@ const dashboard = () => {
 
                                 style={{
                                     overflow: "scroll",
-                                    height: "350px"
+                                    height: "35rem"
                                 }}>
                                 <div className='dashboard-quelist-content-head'>
                                     <p>Customer Name</p>
@@ -435,8 +432,6 @@ const dashboard = () => {
                 </>}
 
             </div>
-
-        </>
     )
 }
 

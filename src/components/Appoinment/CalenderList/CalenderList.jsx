@@ -144,6 +144,7 @@ const appoinments = [
 ]
 
 import api from "../../../redux/api/Api"
+import { BeatLoader, FadeLoader } from 'react-spinners'
 
 const List = () => {
 
@@ -178,7 +179,7 @@ const List = () => {
             </div>
             <div className='list-cont'>
                 {
-                    appointmentsdata && appointmentsdata.length>0 && appointmentsdata.map((app, index) => (
+                    appointmentsdata && appointmentsdata.length>0 ? appointmentsdata.map((app, index) => (
                         <div className='list-content-box'>
                             <div>
                                 <div>
@@ -205,7 +206,11 @@ const List = () => {
                                 </div> */}
                             </div>
                         </div>
-                    ))
+                    )) : <div style={{
+                        height:"100%",
+                        width:"5rem",
+                        margin:"5rem auto"
+                    }}><FadeLoader color="rgba(54, 60, 214, 1)" /></div>
                 }
 
             </div>

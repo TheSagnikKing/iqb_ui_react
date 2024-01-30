@@ -5,8 +5,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { barberListAction, getbarberServicesbyBarberIdAction } from '../../../redux/actions/barberAction'
 
 import api from "../../../redux/api/Api"
-import { createAppointmentAction, editAppointmentAction } from '../../../redux/actions/AppointmentAction'
+import { appoinmentBarberListAction, createAppointmentAction, editAppointmentAction } from '../../../redux/actions/AppointmentAction'
 import { useLocation, useNavigate } from 'react-router-dom'
+import Modal from '../../Modal/Modal'
+import { FaPlus } from 'react-icons/fa'
+import { MdDelete } from 'react-icons/md'
 
 const EditAppointment = () => {
 
@@ -36,7 +39,7 @@ const EditAppointment = () => {
 
     useEffect(() => {
         if (salonId) {
-            dispatch(barberListAction(salonId))
+            dispatch(appoinmentBarberListAction(Number(salonId)))
         }
     }, [dispatch, salonId])
 
@@ -138,15 +141,19 @@ const EditAppointment = () => {
 
     const editAppointment = useSelector(state => state.editAppointment)
 
+    const [showpreview, setShowPreview] = useState(false)
+
+    const appoinmentBarberList = useSelector(state => state.appoinmentBarberList)
+
     return (
         <>
             <AdminLayout />
             <div className='create-appointment-container'>
-                <h2>Edit Appointment</h2>
+                <h1>Edit Appointment</h1>
 
                 <div className='create-form'>
                     <div>
-                        <label htmlFor="">Appointment Note</label>
+                        <h2>Appointment Note</h2>
                         <input
                             type="text"
                             placeholder='Enter Note'
@@ -156,7 +163,7 @@ const EditAppointment = () => {
                     </div>
 
                     <div>
-                        <label htmlFor="">Customer Name</label>
+                        <h2>Customer Name</h2>
                         <input
                             type="text"
                             placeholder='Enter Name'
@@ -166,7 +173,7 @@ const EditAppointment = () => {
                     </div>
 
                     <div>
-                        <label htmlFor="">Choose Date</label>
+                        <h2>Choose Date</h2>
                         <input
                             type="date"
                             value={date}
@@ -175,26 +182,31 @@ const EditAppointment = () => {
                     </div>
 
                     <div>
-                        <label htmlFor="">Barber List</label>
+                        <h2>Barber List</h2>
 
                         <div>
                             <div className='barber-single-join-content-bbr'>
                                 <p>Email</p>
                                 <p>Name</p>
-                                {/* <p>{barber.userName}</p> */}
                                 <p>Mo. Number</p>
                                 <p>Active</p>
                                 <p>Action</p>
                             </div>
                             {
-                                barberList ? barberList?.getAllBarbers?.map((barber) => (
+                                appoinmentBarberList ? appoinmentBarberList?.response?.map((barber) => (
                                     <div className='barber-single-join-content-bbr' key={barber._id}>
                                         <p>{barber.email}</p>
                                         <p>{barber.name}</p>
                                         {/* <p>{barber.userName}</p> */}
                                         <p>{barber.mobileNumber}</p>
                                         <p>{barber.isActive === true ? "Yes" : "No"}</p>
-                                        <button onClick={() => barberServiceCallHandler(barber.barberId, barber.name)}>Select</button>
+                                        <button onClick={() => barberServiceCallHandler(barber.barberId, barber.name)} style={{
+                                            height:"3rem",
+                                            border:"1px solid blue",
+                                            cursor:"pointer",
+                                            background:"#f1f6fc",
+                                            color:"blue"
+                                        }}><FaPlus /></button>
                                     </div>
 
 
@@ -204,7 +216,7 @@ const EditAppointment = () => {
                     </div>
 
                     <div>
-                        <label htmlFor="">Choose  Services</label>
+                        <h2>Choose  Services</h2>
 
                         <div>
                             <div className='barber-single-join-quebarberserv-content'
@@ -227,7 +239,13 @@ const EditAppointment = () => {
                                         {/* <p>{b.serviceCode}</p> */}
                                         <p>{b.servicePrice}</p>
                                         <p>{b.barberServiceEWT}</p>
-                                        <button onClick={() => selectedServiceHandler(b, index)}>Add</button>
+                                        <button onClick={() => selectedServiceHandler(b, index)} style={{
+                                            height:"3rem",
+                                            border:"1px solid blue",
+                                            cursor:"pointer",
+                                            background:"#f1f6fc",
+                                            color:"blue"
+                                        }}><FaPlus /></button>
                                     </div>
                                 ))
                             }
@@ -235,7 +253,7 @@ const EditAppointment = () => {
                     </div>
 
                     <div>
-                        <label htmlFor="">Your Services</label>
+                        <h2>Your Services</h2>
 
                         <div>
                             <div className='barber-single-join-quebarberserv-content'
@@ -258,7 +276,13 @@ const EditAppointment = () => {
                                         {/* <p>{b.serviceCode}</p> */}
                                         <p>{b.servicePrice}</p>
                                         <p>{b.barberServiceEWT}</p>
-                                        <button onClick={() => selectedServiceDelete(b)}>Del</button>
+                                        <button onClick={() => selectedServiceDelete(b)} style={{
+                                            height:"3rem",
+                                            border:"1px solid red",
+                                            cursor:"pointer",
+                                            background:"#f1f6fc",
+                                            color:"red"
+                                        }}><MdDelete /></button>
                                     </div>
                                 )) : <p>No Services Available</p>
                             }
@@ -266,7 +290,7 @@ const EditAppointment = () => {
                     </div>
 
                     <div>
-                        <label htmlFor="">Choose  TimeSlots</label>
+                        <h2>Choose  TimeSlots</h2>
 
                         <div>
                             {
@@ -275,7 +299,13 @@ const EditAppointment = () => {
                                         <div key={i} className='timeslot'>
                                             <p>{t.timeInterval}</p>
                                             {
-                                                t.disabled == true ? <button>Disable</button> : <button onClick={() => selectTimeSlotfnc(t.timeInterval)}>select</button>
+                                                t.disabled == true ? <button>Disable</button> : <button onClick={() => selectTimeSlotfnc(t.timeInterval)} style={{
+                                                    height:"3rem",
+                                                    border:"1px solid blue",
+                                                    cursor:"pointer",
+                                                    background:"#f1f6fc",
+                                                    color:"blue"
+                                                }}><FaPlus /></button>
                                             }
 
                                         </div>
@@ -285,16 +315,50 @@ const EditAppointment = () => {
                         </div>
                     </div>
 
-                    <div>
+                    <button onClick={() => { setShowPreview(true) }}>Preview</button>
+
+                    <Modal isOpen={showpreview} setIsOpen={setShowPreview}>
+                        <div className='app-modal-crt'>
+                            <h1>Preview Appointment</h1>
+                            <div>
+                                <p>Appointment Name : {appointmentNotes} </p>
+                                <p>Appointment Date : {date} </p>
+                                <p>Start Time : {timeSlotStartTime}</p>
+                                <p>Customer Name : {name}</p>
+                                <p>Customer Type : Walk-In</p>
+                                <p>Method Used : App </p>
+                            </div>
+
+                            <h2>Your Services</h2>
+
+                            <div>
+                                <div className='app-modal-crt-head'>
+                                    <p>Service Name</p>
+                                    <p>Service Price</p>
+                                    <p>Barber Service Estimated Wait Time</p>
+                                </div>
+
+                                <div className='app-modal-crt-content'>
+                                    {
+                                        selectedService.map((s, i) => (
+                                            <div key={i}>
+                                                <p>{s.serviceName}</p>
+                                                <p>{s.servicePrice}</p>
+                                                <p>{s.barberServiceEWT}</p>
+                                            </div>
+                                        ))
+                                    }
+                                </div>
+                            </div>
+
+                            <button className='app-modal-crt-button' onClick={UpdateAppointment}>{
+                                editAppointment?.loading == true ? <h2>loading...</h2> : "Update Appointment"
+                            }</button>
+                        </div>
+                    </Modal>
+
+                    {/* <div>
                         <h3 htmlFor="">Preview</h3>
-
-                        {/* appointmentName: appointmentName,
-            startTime: timeSlotStartTime,
-            // customerEmail: "arg@gmail.com",
-            customerName: name,
-            customerType: "Walk-In",
-            methodUsed: "App" */}
-
                         <div>
                             <p>Appointment Name : <b>{appointmentNotes}</b></p>
                             <p>Appointment Date : <b>{date}</b></p>
@@ -317,7 +381,6 @@ const EditAppointment = () => {
                                         <p>{c.serviceName}</p>
                                         <p>{c.servicePrice}</p>
                                         <p>{c.barberServiceEWT}</p>
-                                        {/* <p>{c.serviceId}</p> */}
                                     </div>
                                 ))
                             }
@@ -336,7 +399,7 @@ const EditAppointment = () => {
                         >{
                                 editAppointment?.loading == true ? <h2>Loading...</h2> : "Edit Appointment"
                             }</button>
-                    </div>
+                    </div> */}
 
                 </div>
             </div>

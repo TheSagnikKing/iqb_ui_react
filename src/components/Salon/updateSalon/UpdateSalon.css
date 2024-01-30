@@ -1,4 +1,4 @@
-/* right_div_top styling starts */
+/* right_div_top styling starts
 
 .sa-br-right_main_div{
     height: auto;
@@ -257,4 +257,328 @@
 
 .img-container>div>div>button:nth-child(2){
     color: blue;
+} */
+
+
+/* right_div_top styling starts */
+
+.sa-br-right_main_div {
+    height: auto;
+    width: 100%;
+    padding: 2.4% 2.8%;
+    background-color: #F1F6FC;
+    margin-left: 26.5rem;
+    width: calc(100% - 26.5rem);
+    position: absolute;
+    top: 9rem;
+}
+
+.sa-br-right_main_div .sa-br-right_main_head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.sa-br-right_main_div .sa-br-right_main_head p:nth-child(1) {
+    font-weight: bold;
+    font-size: 1.8rem;
+}
+
+.sa-br-right_main_div .sa-br-right_main_head div:nth-child(2) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.sa-br-right_main_div .sa-br-right_main_head .sa-br-btn_box>div:nth-child(1) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.5rem;
+    padding: 1.1rem 1.6rem;
+    border-radius: 0.6rem;
+    background-color: white;
+    cursor: pointer;
+}
+
+.sa-br-right_main_div .sa-br-right_main_head .sa-br-btn_box>div:nth-child(1) div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sa-br-right_main_div .sa-br-right_main_head .sa-br-btn_box>div:nth-child(2) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 2.2rem;
+    cursor: pointer;
+}
+
+.sa-br-right_main_form {
+    background-color: white;
+    border-radius: 0.8rem;
+    width: 100%;
+    margin-block: 1.8rem;
+    padding: 5.3% 4.2%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3.5rem;
+}
+
+.sa-br-right_main_form .sa-br-left {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.sa-br-right_main_form .sa-br-left div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.sa-br-right_main_form .sa-br-left div input {
+    width: 100%;
+    height: 4.5rem;
+    border: none;
+    outline: none;
+    border-radius: 1rem;
+    background-color: #F1F6FC;
+    padding: 0px 1.5rem;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.sa-br-right_main_form .sa-br-left div label {
+    font-size: 1.2rem;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.sa-br-right_main_form .sa-br-right {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.sa-br-right_main_form .sa-br-right>div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.sa-br-right_main_form .sa-br-right>div label {
+    font-size: 1.2rem;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.sa-br-right_main_form .sa-br-right>div input {
+    width: 100%;
+    height: 4.5rem;
+    border: none;
+    outline: none;
+    border-radius: 1rem;
+    background-color: #F1F6FC;
+    padding: 0px 1.5rem;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.sa-br-salonid .sa-br-saloninput {
+    display: flex;
+    position: relative;
+}
+
+.sa-br-salonid .sa-br-saloninput div {
+    position: absolute;
+    top: 50%;
+    right: 1.8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateY(-50%);
+    font-size: 1.8rem;
+    color: rgba(0, 0, 0, 0.6);
+    cursor: pointer;
+}
+
+.sa-br-salonid .sa-br-saloninput input::placeholder {
+    color: rgba(0, 0, 0, 0.2);
+    font-size: 1.2rem;
+}
+
+.sa-br-right_main_form .sa-br-right .sa-br-btn_box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.sa-br-right_main_form .sa-br-right .sa-br-btn_box button:nth-child(1) {
+    padding: 1.4rem 4.5rem;
+    color: rgba(0, 0, 0, 0.6);
+    border-radius: 0.8rem;
+    background-color: #F1F6FC;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.sa-br-right_main_form .sa-br-right .sa-br-btn_box button:nth-child(2) {
+    padding: 1.4rem 4.5rem;
+    color: rgba(0, 0, 0, 0.6);
+    border-radius: 0.8rem;
+    background-color: white;
+    border: 0.1rem solid rgba(0, 0, 0, 0.6);
+    outline: none;
+    cursor: pointer;
+}
+
+.serv-title {
+    margin-bottom: 2rem;
+    font-size: 1.4rem !important;
+}
+
+.services button {
+    padding: 1.4rem 4.5rem;
+    color: rgba(0, 0, 0, 0.6);
+    border-radius: 0.8rem;
+    background-color: #F1F6FC;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border: 0.1rem solid rgba(0, 0, 0, 0.6);
+    margin-top: 2rem;
+}
+
+.services-data {
+    height: 20rem;
+    background-color: #F1F6FC;
+    border-radius: 1rem;
+    padding: 1rem;
+    overflow-y: scroll;
+}
+
+.ser-table {
+    background-color: white;
+    border-radius: 0.5rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    box-shadow: 0px 0px 0.4rem rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.ser-table>div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    align-items: center;
+}
+
+.img-container {
+    display: flex;
+    flex-direction: row !important;
+    gap: 2rem !important;
+    margin-bottom: 1rem;
+}
+
+.img-container>div {
+    height: 12rem;
+    width: 12rem;
+}
+
+.img-container>div>img {
+    width: 100%;
+    height: 100%;
+}
+
+.img-container>div>div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.img-container>div>div>button {
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0px 0px 0.6rem rgba(0, 0, 0, 0.4);
+    background-color: #fff;
+    border: none;
+    border-radius: 0.3rem;
+}
+
+.img-container>div>div>button:nth-child(1) {
+    color: red;
+}
+
+.img-container>div>div>button:nth-child(2) {
+    color: blue;
+}
+
+.see-salonImages {
+    overflow-y: scroll;
+}
+
+
+.see-salonImages>div {
+    width: 60%;
+    height: 30rem;
+    margin: 0px auto;
+    margin-bottom: 6.5rem;
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.4);
+    border-radius: 1rem;
+}
+
+.see-salonImages>div>img {
+    width: 100%;
+    height: 100%;
+    border-radius: 1rem;
+}
+
+.sl-del {
+    background-color: #fff;
+    height: 3.5rem;
+    width: 3.5rem;
+    border-radius: 5px;
+    margin-right: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: red;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.4);
+    margin-top: 10px;
+}
+
+
+.sl-ed {
+    background-color: #fff;
+    height: 3.5rem;
+    width: 3.5rem;
+    border-radius: 5px;
+    margin-right: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: blue;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.4);
+    margin-top: 10px;
+}
+
+.sal-up-seeimage{
+    height: 3.5rem;
+    width: 15rem;
+    background-color: #F1F6FC;
+    border: none;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
 }

@@ -56,16 +56,15 @@ const CalenderEvent = () => {
         }
     }
 
+    console.log(appointmentsdata)
+
     return (
         <>
             <AdminLayout />
             <div className='calender-event'>
                 <div className='cal-header'>
                     <h2>Today : {location.state ? location.state : "Please Select Date"}</h2>
-                    {/* <div>
-                    <button>{"<"}</button>
-                    <button>{">"}</button>
-                </div> */}
+
                     <div><button onClick={() => listHandler(location.state)}>{location.state ? "list" : "No List"}</button></div>
                 </div>
 
@@ -82,7 +81,7 @@ const CalenderEvent = () => {
                                                     <img src="https://img.freepik.com/free-vector/hand-drawn-side-profile-cartoon-illustration_23-2150517168.jpg?size=626&ext=jpg&ga=GA1.1.1806204793.1699434893&semt=ais" alt='j' />
                                                 </div>
 
-                                                <p>{i.barbername}</p>
+                                                <p style={{fontSize:"1.4rem"}}>{i.barbername}</p>
                                             </div>
 
                                             {
@@ -90,10 +89,12 @@ const CalenderEvent = () => {
                                                     <div key={index}
                                                     ><div className='appoin' style={{
                                                         background: m.background,
-                                                        boxShadow: `0px 0px 8px ${m.background}`
+                                                        boxShadow: `0px 0px 8px ${m.background}`,
+                                                        fontSize:"1.4rem"
                                                     }}>
                                                             <p>{m.startTime}-{m.endTime}</p>
-                                                            <p>Appointment : {m.appointmentNotes}</p>
+                                                            <p>Customer : {m.customerName}</p>
+                                                            <p style={{fontWeight:"500"}}>Services : </p>
                                                             <div className='app-btn-div'>
                                                                 <button onClick={() => editHandler(m)}><MdEdit/></button>
                                                                 <button onClick={() => deleteHandler(m)}><MdDelete/></button>
@@ -108,15 +109,15 @@ const CalenderEvent = () => {
 
                                     )
                                 }) : <p style={{
-                                    margin: "30px"
+                                    margin: "3rem"
                                 }}>No Appoinments</p>
 
                             }
                         </div>
                     </div> : <div className='cal-container'
                         style={{
-                            padding: "20px",
-                            fontSize: "20px",
+                            padding: "2rem",
+                            fontSize: "2rem",
                             fontWeight: "500"
                         }}
                     >No Data Available </div>

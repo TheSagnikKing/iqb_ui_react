@@ -136,11 +136,11 @@ const QueuebarberList = () => {
       <AdminLayout />
       <div className="singlejoin-barber-quebarber-wrapper">
 
-        <h2>Single Join</h2>
+        <h1>Single Join</h1>
 
         <div className='barber-single-join'>
           <div>
-            <p>Customer Name</p>
+            <h2>Customer Name</h2>
             <input
               type="text"
               value={name}
@@ -150,7 +150,7 @@ const QueuebarberList = () => {
           </div>
 
           <div>
-            <p>Customer Email</p>
+            <h2>Customer Email</h2>
             <input
               type="text"
               value={customerEmail}
@@ -160,7 +160,7 @@ const QueuebarberList = () => {
           </div>
 
           <div>
-            <p>Mobile Number</p>
+            <h2>Mobile Number</h2>
             <input 
             type="text" 
             placeholder='Enter Customer Mobile Number'
@@ -176,13 +176,20 @@ const QueuebarberList = () => {
             gap: "2rem"
           }}>
             <div className='barber-single-join-dropdown'>
-              <p>Choose  Barber</p>
-              {selectedService.length > 0 ?  <button onClick={() => fetchSelectedServices()}>Selected Barber</button> : <button onClick={() => fetchAllBarbers()}>Show Barbers</button>}
+              <h2>Choose  Barber</h2>
+              {selectedService.length > 0 ?  <button onClick={() => fetchSelectedServices()}>Selected Barber</button> : <button onClick={() => fetchAllBarbers()} style={{
+                background:"#f1f6fc",
+                border:"none",
+                boxShadow:"0px 0px 4px rgba(0,0,0,0.4)",
+                padding:"0.6rem",
+                borderRadius:"0.5rem",
+                cursor:"pointer"
+              }}>Show Barbers</button>}
             
             </div>
 
             <div className='barber-single-join-dropdown'>
-              <p>Choose  Services</p>
+              <h3>Choose  Services</h3>
               <button onClick={() => fetchAllServices()}>Show Services</button>
             </div>
 
@@ -302,7 +309,7 @@ const QueuebarberList = () => {
           </div> */}
 
 
-          <p>Your Selected Services</p>
+          <h2>Your Selected Services</h2>
           <div className='barber-single-join-services'>
             <div className='barber-single-join-quebarberserv-content'
             style={{

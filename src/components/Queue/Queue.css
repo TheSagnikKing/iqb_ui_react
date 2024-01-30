@@ -1,4 +1,4 @@
-.queue-wrapper{
+/* .queue-wrapper{
     width: 82% !important;
     position: absolute;
     top: 90px;
@@ -101,4 +101,106 @@
     box-shadow: 0px 0px 4px rgba(0,0,0,0.4);
     color:crimson;
     cursor: pointer;
+}
+
+ */
+
+
+ .queue-wrapper {
+    width: 82% !important; /* 82% unchanged */
+    position: absolute;
+    top: 9rem; /* 90px converted to 9rem */
+    left: 26.5rem; /* 265px converted to 26.5rem */
+    margin-left: 3.5rem; /* 35px converted to 3.5rem */
+    margin-top: 3rem; /* 30px converted to 3rem */
+}
+
+.joins {
+    background-color: none; /* No change for background-color with none */
+    margin-block: 1.5rem; /* 15px converted to 1.5rem */
+    border-radius: 1rem; /* 10px converted to 1rem */
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.joins > div {
+    position: relative;
+}
+
+.joins > div > p {
+    background-color: #fff;
+    padding: 1rem; /* 10px converted to 1rem */
+    border-radius: 0.6rem; /* 6px converted to 0.6rem */
+    box-shadow: 0px 0px 0.3rem rgba(0, 0, 0, 0.4); /* 3px converted to 0.3rem */
+    cursor: pointer;
+    font-size: 1.4rem; /* 14px converted to 1.4rem */
+}
+
+.joins-dropdown {
+    position: absolute;
+    top: 6rem; /* 60px converted to 6rem */
+    left: 0;
+    background-color: #fff;
+    width: 15rem; /* 150px converted to 15rem */
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem; /* 10px converted to 1rem */
+    border-radius: 0.4rem; /* 4px converted to 0.4rem */
+    box-shadow: 0px 0px 0.3rem rgba(0, 0, 0, 0.4); /* 3px converted to 0.3rem */
+}
+
+.queue-list-table {
+    background-color: #fff;
+    margin-top: 2rem; /* 20px converted to 2rem */
+    padding: 2rem; /* 20px converted to 2rem */
+    border-radius: 0.4rem; /* 4px converted to 0.4rem */
+    font-size: 1.4rem; /* 14px converted to 1.4rem */
+    height: 80vh;
+    overflow-y: scroll;
+}
+
+.que-lst-head,
+.que-lst-content {
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(7, 1fr);
+    background-color: #f1f6fc;
+    font-size: 1.4rem; /* 14px converted to 1.4rem */
+    height: 4.5rem; /* 45px converted to 4.5rem */
+    padding-inline: 1rem; /* 10px converted to 1rem */
+    border-radius: 0.6rem; /* 6px converted to 0.6rem */
+    margin-block: 2rem; /* 20px converted to 2rem */
+}
+
+
+.que-cancel {
+    background-color: #fff;
+    width: 3rem; /* 30px converted to 3rem */
+    height: 3rem; /* 30px converted to 3rem */
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 0px 0.4rem rgba(0, 0, 0, 0.4); /* 4px converted to 0.4rem */
+    cursor: pointer;
+    color: rgb(205, 50, 50); /* No change for color value */
+}
+
+.que-serve {
+    background-color: #fff;
+    width: 3rem; /* 30px converted to 3rem */
+    height: 3rem; /* 30px converted to 3rem */
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 0px 0.4rem rgba(0, 0, 0, 0.4); /* 4px converted to 0.4rem */
+    cursor: pointer;
+    color: limegreen; /* No change for color value */
+}
+
+input[type="text"]::placeholder {
+    font-size: 1.2rem;
 }

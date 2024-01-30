@@ -166,11 +166,11 @@ const Kyosks = () => {
             <AdminLayout />
             <div className="singlejoin-barber-quebarber-wrapper">
 
-                <h2>Single Join</h2>
+                <h1>Single Join</h1>
 
                 <div className='barber-single-join'>
                     <div>
-                        <p>Customer Name</p>
+                        <h2>Customer Name</h2>
                         <input
                             type="text"
                             value={name}
@@ -180,7 +180,7 @@ const Kyosks = () => {
                     </div>
 
                     <div>
-                        <p>Customer Email</p>
+                        <h2>Customer Email</h2>
                         <input
                             type="text"
                             value={customerEmail}
@@ -190,7 +190,7 @@ const Kyosks = () => {
                     </div>
 
                     <div>
-                        <p>Mobile Number</p>
+                        <h2>Mobile Number</h2>
                         <input
                             type="text"
                             placeholder='Enter Customer Mobile Number'
@@ -206,15 +206,29 @@ const Kyosks = () => {
                         gap: "2rem"
                     }}>
                         <div className='barber-single-join-dropdown'>
-                            <p>Barber Name : <b>{currentbarberName && currentbarberName}</b></p>
+                            <h3>Barber Name : <b>{currentbarberName && currentbarberName}</b></h3>
 
-                            <button onClick={() => fetchAllBarbers()}>Show Barber</button>
+                            <button onClick={() => fetchAllBarbers()} style={{
+                                background:"#f1f6fc",
+                                border:"none",
+                                padding:"0.8rem",
+                                cursor:"pointer",
+                                boxShadow:"0px 0px 4px rgba(0,0,0,0.4)",
+                                borderRadius:"5px"
+                            }}>Show Barber</button>
 
                         </div>
 
                         <div className='barber-single-join-dropdown'>
-                            <p>Choose  Services</p>
-                            <button onClick={() => fetchAllServices()}>Show Services</button>
+                            <h3>Choose  Services</h3>
+                            <button onClick={() => fetchAllServices()} style={{
+                                background:"#f1f6fc",
+                                border:"none",
+                                padding:"0.8rem",
+                                cursor:"pointer",
+                                boxShadow:"0px 0px 4px rgba(0,0,0,0.4)",
+                                borderRadius:"5px"
+                            }}>Show Services</button>
                         </div>
 
                     </div>

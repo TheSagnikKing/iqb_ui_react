@@ -12,6 +12,7 @@ import AdminLayout from '../layout/Admin/AdminLayout'
 
 import api from "../../redux/api/Api"
 import { useNavigate } from 'react-router-dom'
+import { FaPlus } from "react-icons/fa6";
 
 const CreateBarber = () => {
 
@@ -219,7 +220,20 @@ const CreateBarber = () => {
                                                 {/* <p>{}</p> */}
                                             </div>
 
-                                            <button onClick={() => selectedServiceHandler(ser, index)}>Add</button>
+                                            <button onClick={() => selectedServiceHandler(ser, index)} style={{
+                                                color: "blue",
+                                                width:"3.5rem",
+                                                height:"3.5rem",
+                                                margin:"auto",
+                                                display:"flex",
+                                                justifyContent:"center",
+                                                alignItems:"center",
+                                                background:"#fff",
+                                                boxShadow:"0px 0px 6px rgba(0,0,0,0.4)",
+                                                border:"none",
+                                                cursor:"pointer",
+                                                borderRadius:"50%"
+                                            }}><FaPlus /></button>
                                         </div>
                                     )) : <p>No services present</p>
                                 }
@@ -251,7 +265,20 @@ const CreateBarber = () => {
                                             <p>{ser.barberServiceEWT}</p>                               
                                         </div>
 
-                                        <div onClick={() => selectedServiceDelete(ser)}><MdDelete /></div>
+                                        <div onClick={() => selectedServiceDelete(ser)} style={{
+                                                color: "red",
+                                                width:"3.5rem",
+                                                height:"3.5rem",
+                                                margin:"auto",
+                                                display:"flex",
+                                                justifyContent:"center",
+                                                alignItems:"center",
+                                                background:"#fff",
+                                                boxShadow:"0px 0px 6px rgba(0,0,0,0.4)",
+                                                border:"none",
+                                                cursor:"pointer",
+                                                borderRadius:"1rem"
+                                            }}><MdDelete /></div>
                                     </div>
                                 )) : <p>No services present</p>
                             }

@@ -13,6 +13,8 @@ import { MdModeEditOutline } from "react-icons/md";
 import { MdDelete } from "react-icons/md";
 
 import api from "../../../redux/api/Api"
+import Modal from '../../Modal/Modal'
+import { FaArrowDown } from 'react-icons/fa'
 
 const UpdateSalon = () => {
 
@@ -79,7 +81,7 @@ const UpdateSalon = () => {
 
     const submitHandler = () => {
         const salonData = {
-            adminEmail:LoggedInMiddleware?.user && LoggedInMiddleware.user[0].email , salonName, salonEmail,address, city, location: {
+            adminEmail: LoggedInMiddleware?.user && LoggedInMiddleware.user[0].email, salonName, salonEmail, address, city, location: {
                 type: "Point",
                 coordinates: {
                     longitude: Number(longitude),
@@ -89,7 +91,7 @@ const UpdateSalon = () => {
             }, country, postCode, contactTel, salonType, webLink, services, salonId: adminSalonId
         }
         console.log(salonData)
-        dispatch(updateSalonAction(salonData,navigate))
+        dispatch(updateSalonAction(salonData, navigate))
 
         // setSalonName("")
         // setAddress("")
@@ -106,14 +108,14 @@ const UpdateSalon = () => {
         // setServiceDesc("")
         // setServicePrice("")
         // setSalonEmail("")
-        
+
     }
 
 
     const addServiceHandler = () => {
 
         setServices(prevServices => [...prevServices, {
-            serviceName, serviceDesc, servicePrice, serviceEWT,serviceId
+            serviceName, serviceDesc, servicePrice, serviceEWT, serviceId
         }]);
         setServiceName("")
         setServiceDesc("")
@@ -148,15 +150,15 @@ const UpdateSalon = () => {
         const fetchAllSalons = async () => {
             const { data } = await api.get(`/api/salon/getSalonInfoBySalonId?salonId=${currentSalonId}`)
 
-            console.log("update",data)
+            console.log("update", data)
 
-            if(data?.response?.salonInfo){
+            if (data?.response?.salonInfo) {
                 setFetchImages(data?.response?.salonInfo?.profile)
                 setSalonEmail(data?.response?.salonInfo?.salonEmail)
                 setSalonName(data?.response?.salonInfo?.salonName)
                 setAddress(data?.response?.salonInfo?.address)
                 setCity(data?.response?.salonInfo?.city)
-    
+
                 setCountry(data?.response?.salonInfo?.country)
                 setPostCode(data?.response?.salonInfo?.postcode)
                 setContactTel(data?.response?.salonInfo?.contactTel)
@@ -225,8 +227,8 @@ const UpdateSalon = () => {
 
     const fileInputRef = useRef(null);
 
-    const [public_imgid,setPublic_imgid] = useState("")
-    const [mongoid,setMongoid] = useState("")
+    const [public_imgid, setPublic_imgid] = useState("")
+    const [mongoid, setMongoid] = useState("")
 
     const handleEditButtonClick = (publicid, id) => {
         fileInputRef.current.click();
@@ -234,16 +236,16 @@ const UpdateSalon = () => {
         setMongoid(id)
     };
 
-    const handleFileInputChange = async(e) => {
+    const handleFileInputChange = async (e) => {
         const updateImage = e.target.files[0];
 
         const formData = new FormData();
 
         formData.append('public_imgid', public_imgid);
-        formData.append('id',mongoid)
-        formData.append('profile',updateImage)
+        formData.append('id', mongoid)
+        formData.append('profile', updateImage)
 
-        
+
         try {
             const imageResponse = await api.put('/api/salon/updateSalonImages', formData, {
                 headers: {
@@ -304,6 +306,7 @@ const UpdateSalon = () => {
         }
     }, [response?.salonId]);
 
+    const [isOpen, setIsOpen] = useState(false);
 
     return (
         <>
@@ -370,7 +373,7 @@ const UpdateSalon = () => {
                             />
                         </div>
 
-                        <button onClick={geolocHandler}>Get Geolocation</button>
+                        <button onClick={geolocHandler} className='geo-sal'>Get Geolocation</button>
 
                         <div>
                             <label htmlFor="">Country</label>
@@ -404,13 +407,13 @@ const UpdateSalon = () => {
                     <div className="sa-br-right">
 
                         <div>
-                            <div>
+                            <div style={{display:"flex"}}>
                                 <label htmlFor="">Salon Type</label>
-                                <button onClick={() => setSalontypeDropdown((prev) => !prev)}>dropdown</button>
+                                <button onClick={() => setSalontypeDropdown((prev) => !prev)} className='sal-drop-type'><FaArrowDown /></button>
                             </div>
 
                             {
-                                salontypeDropdown && <div>
+                                salontypeDropdown && <div className='sal-drop-type-p'>
                                     <p onClick={() => handleSalonTypeClick('Salon Type 1')}>Salon Type 1</p>
                                     <p onClick={() => handleSalonTypeClick('Salon Type 2')}>Salon Type 2</p>
                                     <p onClick={() => handleSalonTypeClick('Salon Type 3')}>Salon Type 3</p>
@@ -438,34 +441,40 @@ const UpdateSalon = () => {
                             <label htmlFor="file" className='file'>
                                 Choose a Photo
                             </label> */}
-                           <input type="file" multiple onChange={handleFileChange} />
+                            <input type="file" multiple onChange={handleFileChange} />
 
 
                         </div>
 
                         <div className='img-container'>
-                            {
-                                fetchimages?.map((img) => (
-                                    <div>
-                                        <img src={img.url} alt="" />
-                                        <div>
-                                            <button onClick={() => imgDeleteHandler(img.public_id, img._id)}><MdDelete /></button>
-                                            <button onClick={() => handleEditButtonClick(img.public_id, img._id)}><MdModeEditOutline /></button>
-                                            <input
-                                                type="file"
-                                                ref={fileInputRef}
-                                                style={{ display: 'none' }}
-                                                onChange={handleFileInputChange}
-                                            />
-                                        </div>
-                                    </div>
-                                ))
-                            }
+                            <button onClick={() => setIsOpen(true)} className='sal-up-seeimage'>See Images</button>
+                            <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
+                                <div className='see-salonImages'>
+
+                                    {
+                                        fetchimages?.map((img,i) => (
+                                            <div key={i}>
+                                                <img src={img.url} alt="" />
+                                                <div style={{display:"flex"}}>
+                                                    <button onClick={() => imgDeleteHandler(img.public_id, img._id)} className='sl-del'><MdDelete /></button>
+                                                    <button onClick={() => handleEditButtonClick(img.public_id, img._id)} className='sl-ed'><MdModeEditOutline /></button>
+                                                    <input
+                                                        type="file"
+                                                        ref={fileInputRef}
+                                                        style={{ display: 'none' }}
+                                                        onChange={handleFileInputChange}
+                                                    />
+                                                </div>
+                                            </div>
+                                        ))
+                                    }
+                                </div></Modal>
+
 
                         </div>
 
                         <div className='services'>
-                            <label className='serv-title' style={{ marginTop: "20px" }}>Add Your Services</label>
+                            <label className='serv-title' style={{ marginTop: "2rem" }}>Add Your Services</label>
 
                             <div>
                                 <label htmlFor="">Service Name</label>

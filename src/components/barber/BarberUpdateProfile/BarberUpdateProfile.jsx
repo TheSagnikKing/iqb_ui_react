@@ -58,16 +58,16 @@ const BarberUpdateProfile = () => {
     <>
     <Layout/>
 
-    <div className="wrapper">
+    <div className="ad-profile-wrapper">
 
                 <div className="sa-br-right_main_head">
-                    <p>Crud</p>
+                    <h1>Update Profile</h1>
                 </div>
 
-                <div className="sa-br-right_main_form-update">
+                <div className="ad-profile-sa-br-right_main_form-update">
 
                     <div>
-                        <label htmlFor="">Email</label>
+                        <h2>Email</h2>
                         <input
                             type="text"
                             value={LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].email}
@@ -105,7 +105,7 @@ const BarberUpdateProfile = () => {
                     </div> */}
 
                     <div>
-                        <label htmlFor="">Mobile Number</label>
+                        <h2>Mobile Number</h2>
                         <input
                             type="text"
                             value={mobileNumber}
@@ -114,7 +114,7 @@ const BarberUpdateProfile = () => {
                     </div>
 
                     <div>
-                        <label htmlFor="">Name</label>
+                        <h2>Name</h2>
                         <input
                             type="text"
                             value={name}
@@ -123,7 +123,7 @@ const BarberUpdateProfile = () => {
                     </div>
 
                     <div>
-                        <label for="gender">Choose gender</label>
+                        <h2>Choose gender</h2>
 
                         <select 
                         name="gender" 
@@ -137,7 +137,7 @@ const BarberUpdateProfile = () => {
                     </div>
 
                     <div>
-                        <label htmlFor="">Date of Birth</label>
+                        <h2>Date of Birth</h2>
                         <input
                             type="date"
                             value={dob}

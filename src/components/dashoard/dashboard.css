@@ -1,4 +1,4 @@
-/* right_div_top styling starts */
+/* 
 
 .right_main_div{
     height: auto;
@@ -710,4 +710,722 @@
     height: 100%;
     width: 100%;
     border-radius: none !important;
+} */
+
+
+.right_main_div {
+    height: auto;
+    width: calc(100% - 26.5rem); /* 265px converted to rem */
+    padding: 2.4% 2.8%;
+    background-color: #F1F6FC;
+    margin-left: 26.5rem; /* 265px converted to rem */
+    position: absolute;
+    top: 9rem; /* 90px converted to rem */
 }
+
+.right_div_top {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1rem;
+    grid-template-rows: 100%;
+}
+
+.right_div_top .div_left,
+.right_div_top .div_right {
+    border-radius: 0.8rem; /* 8px converted to rem */
+    padding: 5% 4.6%;
+    background-color: white;
+}
+
+.div_left_head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 0.1rem solid #f5f5f5; /* 1px converted to rem */
+    padding-bottom: 1rem; /* 10px converted to rem */
+}
+
+.div_left_head .btn_box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.div_left_head > p {
+    font-size: 1.4rem; /* 14px converted to rem */
+    color: black;
+    font-weight: bold;
+}
+
+.div_left_head .btn_box .btn_one {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+    background-color: rgb(241, 246, 252);
+    font-size: 1rem; /* 10px converted to rem */
+    padding: 1rem; /* 10px converted to rem */
+    align-items: center;
+    border-radius: 0.8rem; /* 8px converted to rem */
+    cursor: pointer;
+}
+
+.div_left_head .btn_box .btn_one div {
+    background-color: rgb(109, 120, 131);
+    width: 2rem; /* 20px converted to rem */
+    height: 3rem; /* 30px converted to rem */
+    border-radius: 1rem; /* 10px converted to rem */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.4rem; /* 14px converted to rem */
+    color: white;
+    font-weight: bold;
+}
+
+.div_left_head .btn_box .btn_two {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+    background-color: rgb(241, 246, 252);
+    font-size: 1rem; /* 10px converted to rem */
+    padding: 1rem; /* 10px converted to rem */
+    align-items: center;
+    border-radius: 0.8rem; /* 8px converted to rem */
+    cursor: pointer;
+}
+
+.div_left_head .btn_box .btn_two div::before {
+    content: "";
+    position: absolute;
+    top: 0.8rem; /* 8px converted to rem */
+    right: 0.2rem; /* 2px converted to rem */
+    width: 0.35rem; /* 3.5px converted to rem */
+    height: 0.35rem; /* 3.5px converted to rem */
+    border-radius: 0.8rem; /* 8px converted to rem */
+    border: 0.1rem solid white; /* 1px converted to rem */
+    background-color: red;
+}
+
+.div_left_head .btn_box .btn_two div {
+    background-color: rgb(109, 120, 131);
+    width: 2rem; /* 20px converted to rem */
+    height: 3rem; /* 30px converted to rem */
+    border-radius: 1rem; /* 10px converted to rem */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.4rem; /* 14px converted to rem */
+    color: white;
+    font-weight: bold;
+    position: relative;
+}
+
+.div_left_images {
+    margin-block: 2rem; /* 20px converted to rem */
+    width: 100%;
+    height: 25vh;
+    display: grid;
+    grid-template-columns: 2.6fr 1.4fr 1fr;
+    gap: 1.2rem;
+}
+
+.div_left_images div {
+    width: 100%;
+    height: 80%;
+}
+
+.div_left_images div img {
+    width: 100%;
+    height: 100%;
+    border-radius: 0.8rem; /* 8px converted to rem */
+}
+
+.div_left_images .img_two div:nth-child(1) {
+    margin-bottom: 12.3%; /* 12.3% converted to rem */
+}
+
+.div_left_images .img_two div {
+    width: 100%;
+    height: 45%;
+}
+
+.div_left_images .img_two div img {
+    width: 100%;
+    height: 100%;
+}
+
+.div_right_head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1.5rem; /* 15px converted to rem */
+    border-bottom: 0.1rem solid #f5f5f5; /* 1px converted to rem */
+}
+
+.div_right_head > p {
+    font-size: 1.2rem; /* 12px converted to rem */
+    color: black;
+    font-weight: bold;
+}
+
+.div_right_head .btn_box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.div_right_head .btn_box .btn_one {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+    background-color: rgb(241, 246, 252);
+    font-size: 0.7rem; /* 7px converted to rem */
+    padding: 1rem; /* 10px converted to rem */
+    align-items: center;
+    border-radius: 0.8rem; /* 8px converted to rem */
+    cursor: pointer;
+}
+
+.div_right_head .btn_box .btn_one div {
+    background-color: rgb(109, 120, 131);
+    width: 1.6rem; /* 16px converted to rem */
+    height: 2.3rem; /* 23px converted to rem */
+    border-radius: 0.8rem; /* 8px converted to rem */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem; /* 10px converted to rem */
+    color: white;
+    font-weight: bold;
+}
+
+.last_item {
+    color: rgb(109, 120, 131);
+    font-size: 2.3rem; /* 23px converted to rem */
+    cursor: pointer;
+}
+
+.div_right_middle {
+    padding-block: 1.5rem; /* 15px converted to rem */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.2rem;
+}
+
+.div_right_middle .content {
+    padding: 1.5rem 0.9rem; /* 15px and 9px converted to rem */
+    background-color: #F1F6FC;
+    position: relative;
+    border-radius: 0.8rem; /* 8px converted to rem */
+}
+
+.div_right_middle .content div p:nth-child(1) {
+    font-size: 1.2rem; /* 12px converted to rem */
+    color: black;
+    font-weight: bold;
+}
+
+.div_right_middle .content div p:nth-child(2) {
+    color: rgba(0, 0, 0, 0.3);
+    font-size: 1rem; /* 10px converted to rem */
+    margin-top: 0.5rem; /* 5px converted to rem */
+}
+
+.div_right_middle .content div:nth-child(2)::after {
+    content: "";
+    top: 1.2rem; /* 12px converted to rem */
+    right: 0.9rem; /* 9px converted to rem */
+    position: absolute;
+    font-size: 1.2rem; /* 12px converted to rem */
+    cursor: pointer;
+}
+
+.div_right_middle .content .content_info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center !important;
+    margin-top: 1rem; /* 10px converted to rem */
+}
+
+.div_right_middle .content .content_info p:nth-child(1) {
+    margin-bottom: 0.5rem; /* 5px converted to rem */
+    color: rgba(0, 0, 0, 0.3);
+}
+
+.div_right_middle .content .content_info p:nth-child(2) {
+    margin-bottom: 0.5rem; /* 5px converted to rem */
+    color: black;
+}
+
+.div_right_middle .content .progress_bar {
+    margin-top: 0.5rem; /* 5px converted to rem */
+    width: 100%;
+    height: 0.5rem; /* 5px converted to rem */
+    border-radius: 1.8rem; /* 18px converted to rem */
+    background-color: #dee5ec;
+}
+
+.div_right_middle .content .progress_bar div {
+    height: 0.5rem; /* 5px converted to rem */
+    border-radius: 1.8rem; /* 18px converted to rem */
+    width: 70%;
+    background-color: #2164f3;
+}
+
+.progress_bar_two {
+    margin-top: 0.5rem; /* 5px converted to rem */
+    width: 100%;
+    height: 0.5rem; /* 5px converted to rem */
+    border-radius: 1.8rem; /* 18px converted to rem */
+    background-color: #dee5ec;
+}
+
+.progress_bar_two div {
+    height: 0.5rem; /* 5px converted to rem */
+    border-radius: 1.8rem; /* 18px converted to rem */
+    width: 35%;
+    background-color: #2164f387;
+}
+
+.div_right .div_right_third {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem; /* 10px converted to rem */
+}
+
+.div_right .div_right_third div:nth-child(1) {
+    display: flex;
+    align-items: center;
+    gap: 0.1rem;
+}
+
+.div_right .div_right_third div:nth-child(1) p {
+    font-size: 1.2rem; /* 12px converted to rem */
+    color: black;
+    font-weight: bold;
+}
+
+.div_right .div_right_third div:nth-child(1) span {
+    color: rgba(0, 0, 0, 0.3);
+    font-size: 1rem; /* 10px converted to rem */
+}
+
+.div_right .div_right_third div:nth-child(2) {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.div_right .div_right_third div:nth-child(2) p {
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 1.2rem; /* 12px converted to rem */
+}
+
+.div_right .div_right_third div:nth-child(2) div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgba(0, 0, 0, 0.3);
+}
+
+.checkbox {
+    width: 1.3rem; /* 13px converted to rem */
+    height: 1.3rem; /* 13px converted to rem */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.3rem; /* 3px converted to rem */
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+}
+
+.div_right_fourth {
+    background-color: #F1F6FC;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 4rem; /* 40px converted to rem */
+    border-radius: 0.6rem; /* 6px converted to rem */
+    padding-inline: 0.8rem; /* 8px converted to rem */
+    margin-bottom: 1rem; /* 10px converted to rem */
+}
+
+.div_right_fourth div:nth-child(1) {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.div_right_fourth div:nth-child(1) p {
+    font-size: 1rem; /* 10px converted to rem */
+    font-weight: 400;
+}
+
+.div_right_fourth > p {
+    font-size: 1rem; /* 10px converted to rem */
+    font-weight: 400;
+}
+
+.div_right_fourth div:nth-child(3) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.div_right_fourth div:nth-child(3) div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.div_right_fourth div:nth-child(3) div:nth-child(1) {
+    font-size: 1rem; /* 10px converted to rem */
+    background-color: rgba(127, 255, 212, 0.882);
+    padding: 0.6rem 1.5rem; /* 6px 15px converted to rem */
+    border-radius: 1.5rem; /* 15px converted to rem */
+}
+
+.div_right_fourth div:nth-child(3) div:nth-child(2) {
+    font-size: 1.4rem; /* 14px converted to rem */
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.div_right_fourth div:nth-child(3) div:nth-child(3) {
+    font-size: 1.2rem; /* 12px converted to rem */
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.div_right_fifth {
+    background-color: #F1F6FC;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 4rem; /* 40px converted to rem */
+    border-radius: 0.6rem; /* 6px converted to rem */
+    padding-inline: 0.8rem; /* 8px converted to rem */
+}
+
+.div_right_fifth div:nth-child(1) {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.div_right_fifth div:nth-child(1) p {
+    font-size: 1rem; /* 10px converted to rem */
+    font-weight: 400;
+}
+
+.div_right_fifth > p {
+    font-size: 1rem; /* 10px converted to rem */
+    font-weight: 400;
+}
+
+.div_right_fifth div:nth-child(3) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.div_right_fifth div:nth-child(3) div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.div_right_fifth div:nth-child(3) div:nth-child(1) {
+    font-size: 1rem; /* 10px converted to rem */
+    background-color: bisque;
+    padding: 0.6rem 1.5rem; /* 6px 15px converted to rem */
+    border-radius: 1.5rem; /* 15px converted to rem */
+}
+
+.div_right_fifth div:nth-child(3) div:nth-child(2) {
+    font-size: 1.4rem; /* 14px converted to rem */
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.div_right_fifth div:nth-child(3) div:nth-child(3) {
+    font-size: 1.2rem; /* 12px converted to rem */
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.right_div_end {
+    margin-top: 2.5rem; /* 25px converted to rem */
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1rem;
+}
+
+.right_div_end .right_div_end_left {
+    background-color: white;
+    border-radius: 0.8rem; /* 8px converted to rem */
+    padding: 3% 2.5%;
+}
+
+.right_div_end .right_div_end_left .right_div_end_head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1.5rem; /* 15px converted to rem */
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.right_div_end .right_div_end_left .right_div_end_head p {
+    font-size: 1.4rem; /* 14px converted to rem */
+    font-weight: bold;
+}
+
+.right_div_end .right_div_end_left .right_div_end_head .btn_box {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.right_div_end .right_div_end_left .right_div_end_head .btn_box button {
+    padding: 1rem 1.5rem; /* 10px and 15px converted to rem */
+    font-size: 1.2rem; /* 12px converted to rem */
+    border-radius: 0.6rem; /* 6px converted to rem */
+    border: none;
+    outline: none;
+    color: rgba(0, 0, 0, 0.7);
+    background-color: #F1F6FC;
+}
+
+.right_div_end_main {
+    height: auto;
+    width: 100%;
+    margin-top: 2rem; /* 20px converted to rem */
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 1rem;
+}
+
+.right_div_end .right_div_end_left .right_div_end_main .main_right {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    overflow: auto;
+    height: 37vh;
+}
+
+.right_div_end .right_div_end_left .right_div_end_main .main_right::-webkit-scrollbar {
+    width: 0.5rem; /* 5px converted to rem */
+}
+
+.right_div_end .right_div_end_left .right_div_end_main .main_right::-webkit-scrollbar-track {
+    background-color: white;
+}
+
+.right_div_end .right_div_end_left .right_div_end_main .main_right::-webkit-scrollbar-thumb {
+    background-color: #dde6f0;
+    border-radius: 1.5rem; /* 15px converted to rem */
+}
+
+.right_div_end_right {
+    background-color: white;
+    border-radius: 0.8rem; /* 8px converted to rem */
+    padding: 7%;
+}
+
+.right_div_end_right .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.right_div_end_right .head p {
+    font-weight: bold;
+    color: black;
+    font-size: 1.4rem; /* 14px converted to rem */
+}
+
+.right_div_end_right .head div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: rgba(0, 0, 0, 0.7);
+    cursor: pointer;
+}
+
+.reports {
+    margin-block: 8%; /* 8% margin */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.report_item {
+    height: 13rem; /* 130px converted to rem */
+    border-radius: 0.8rem; /* 8px converted to rem */
+    padding: 1.5rem; /* 15px converted to rem */
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.report_item .content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.report_item .content div {
+    border: 1px solid white;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 4.5rem; /* 45px converted to rem */
+    height: 4.5rem; /* 45px converted to rem */
+    border-radius: 50%;
+    margin: auto;
+}
+
+.report_item .content p {
+    font-size: 1.4rem; /* 14px converted to rem */
+    font-weight: bold;
+    color: white;
+}
+
+.chart {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 1rem;
+}
+
+.chart div:nth-child(1) {
+    height: 14rem; /* 140px converted to rem */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.chart div:nth-child(1) > p {
+    font-size: 1.1rem; /* 11px converted to rem */
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.chart div:nth-child(1) div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.chart div:nth-child(1) div p:nth-child(1) {
+    color: black;
+    font-size: 2.1rem; /* 21px converted to rem */
+    font-weight: bold;
+    margin-bottom: 1rem; /* 10px converted to rem */
+}
+
+.chart div:nth-child(1) div p:nth-child(2) {
+    color: rgb(56, 216, 88);
+    font-size: 1.1rem; /* 11px converted to rem */
+}
+
+.loader {
+    position: absolute;
+    top: 55%;
+    left: 55%;
+    transform: translate(-55%, -55%);
+}
+
+.nosalon > h2 {
+    margin-bottom: 3rem; /* 30px converted to rem */
+}
+
+.nosalon > a {
+    background-color: white;
+    padding: 1rem 1.2rem; /* 10px and 12px converted to rem */
+    border-radius: 0.6rem; /* 6px converted to rem */
+    font-weight: 500;
+    text-decoration: none;
+    color: black;
+    box-shadow: 0px 0px 0.4rem rgba(0, 0, 0, 0.4); /* 4px converted to rem */
+}
+
+.nosalon > a:hover {
+    box-shadow: 0px 0px 0.4rem rgba(0, 0, 0, 0.8); /* 4px converted to rem */
+}
+
+.dashboard-quelist-content-head {
+    height: 4.5rem; /* 45px converted to rem */
+    background-color: #f1f6fc;
+    border-radius: 0.5rem; /* 5px converted to rem */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    font-size: 1rem; /* 10px converted to rem */
+    padding-inline: 1rem; /* 10px converted to rem */
+    margin-bottom: 1.5rem; /* 15px converted to rem */
+}
+
+.dashboard-quelist-content {
+    height: 4.5rem; /* 45px converted to rem */
+    background-color: #f1f6fc;
+    border-radius: 0.5rem; /* 5px converted to rem */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem; /* 10px converted to rem */
+    padding-inline: 1rem; /* 10px converted to rem */
+    margin-bottom: 1rem; /* 10px converted to rem */
+}
+
+.appoin-content-head,
+.appoin-content-div {
+    height: 4.5rem; /* 45px converted to rem */
+    background-color: #f1f6fc;
+    border-radius: 0.5rem; /* 5px converted to rem */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem; /* 10px converted to rem */
+    padding-inline: 1rem; /* 10px converted to rem */
+    margin-bottom: 1rem; /* 10px converted to rem */
+}
+
+.img_three {
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    height: 30rem !important; /* 55% and 55px converted to rem */
+    border-radius: 1rem;
+}
+
+.img_one {
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    height: 30rem !important; /* 55% and 55px converted to rem */
+    border-radius: 10px;
+}
+
+.img_two{
+    height: 30rem !important;
+    width: 100% !important;
+}
+
+.img_two>div {
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    height: 47.2% !important; /* 31% and 31px converted to rem */
+    border-radius: 1rem;
+}
+
+.div_left_images .img_two div:nth-child(1) {
+    margin-bottom: 1.5rem;
+}
+
+.img_two>div>img {
+    height: 100%;
+    width: 100%;
+    border-radius: 1rem !important;
+}
+

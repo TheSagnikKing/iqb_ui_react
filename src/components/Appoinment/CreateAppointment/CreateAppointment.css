@@ -1,4 +1,4 @@
-.create-appointment-container{
+/* .create-appointment-container{
     width: 82% !important;
     position: absolute;
     top: 90px;
@@ -92,4 +92,135 @@
 .timeslot>button{
     padding: 3px 10px;
     cursor: pointer;
+} */
+
+
+.create-appointment-container {
+    width: 82% !important;
+    position: absolute;
+    top: 9rem;
+    left: 26.5rem;
+    margin-left: 3.5rem;
+    margin-top: 3rem;
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 1rem;
+    padding-bottom: 4rem;
+}
+
+.create-form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: 1rem;
+    row-gap: 1rem;
+}
+
+.create-form>div {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.create-form>div>input {
+    width: 85%;
+    height: 3.5rem;
+    padding-inline: 1rem;
+}
+
+.create-form>button {
+    height: 3.5rem;
+    width: 85%;
+    background-color: #f1f6fc;
+    border: none;
+    box-shadow: 0px 0px 0.3rem rgba(0, 0, 0, 0.3);
+    border-radius: 0.5rem;
+    cursor: pointer;
+    margin-top: 2rem;
+}
+
+.create-form>div:nth-child(4)>div,
+.create-form>div:nth-child(5)>div,
+.create-form>div:nth-child(6)>div,
+.create-form>div:nth-child(7)>div {
+    background-color: #f1f6fc;
+    width: 85%;
+    height: 18rem;
+    padding: 1rem;
+    border-radius: 0.6rem;
+    overflow-y: scroll;
+}
+
+.timeslot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border-radius: 0.4rem;
+    box-shadow: 0px 0px 0.4rem rgba(0, 0, 0, 0.4);
+}
+
+.timeslot>button {
+    padding: 0.3rem 1rem;
+    cursor: pointer;
+}
+
+
+
+
+
+.app-modal-crt {
+    font-size: 140%;
+}
+
+.app-modal-crt>div:nth-child(2) {
+    font-size: 1.8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-weight: 500;
+    margin-block: 2rem;
+}
+
+.app-modal-crt>div:nth-child(4) {
+    background-color: #fff;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.4);
+    padding: 1rem;
+    margin-block: 2rem;
+    border-radius: 5px;
+    height: 30rem;
+    overflow-y: scroll;
+}
+
+.app-modal-crt-head {
+    background-color: #f1f6fc;
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr 1fr 1fr;
+    height: 4.5rem;
+    padding-inline: 1rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+.app-modal-crt-content>div {
+    background-color: #f1f6fc;
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr 1fr 1fr;
+    height: 4.5rem;
+    padding-inline: 1rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+.app-modal-crt-button {
+    background-color: #f1f6fc;
+    width: 15rem;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0px 0px 4px rgba(0,0,0,0.4);
+    border-radius: 0.4rem ;
+    height: 3.5rem
 }

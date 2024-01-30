@@ -70,14 +70,13 @@ const SalonList = () => {
     }
     return (
         <>
-
             <AdminLayout />
             <div className="wrapper">
                 <div className="header">
                     <p>Salons List</p>
 
                     <div>
-                        <div onClick={addSalonNavigate}>
+                        <div onClick={addSalonNavigate} style={{ fontSize: "1.4rem", background: "#fff", height: "3.5rem", width: "3.5rem", display: "flex", justifyContent: "center", alignItems: "center" }}>
                             <GrAdd />
                         </div>
                     </div>
@@ -86,49 +85,80 @@ const SalonList = () => {
                 {/* Table  */}
                 <div className='table'>
                     {
+                        <div className='salon-item'>
+                            <div><h4>Salon ID</h4></div>
+                            <div><h4>Salon Code</h4></div>
+                            <div><h4>Salon Name</h4></div>
+                            <div><h4>Admin Email</h4></div>
+                            <div><h4>Address</h4></div>
+                            <div><h4>City</h4></div>
+                        </div>
+                    }
+                    {
                         loading ? <div className='salon-puff-loader-box'><PuffLoader /></div> : salonList && salonList.response ? salonList.response.map((salon, index) => (
                             <div key={index} className='salon-item'>
                                 <div>
-                                    <p>Salon ID</p>
                                     <p>{salon.salonId}</p>
                                 </div>
 
                                 <div>
-                                    <p>Salon Code</p>
                                     <p>{salon.salonCode}</p>
                                 </div>
 
                                 <div>
-                                    <p>Salon Name</p>
                                     <p>{salon.salonName}</p>
                                 </div>
 
                                 <div>
-                                    <p>Admin Email</p>
                                     <p>{salon.adminEmail}</p>
                                 </div>
 
                                 <div>
-                                    <p>Address</p>
                                     <p>{salon.address}</p>
                                 </div>
 
                                 <div>
-                                    <p>City</p>
                                     <p>{salon.city}</p>
                                 </div>
 
-                                <button onClick={() => changeRoute(salon.salonId)}>
+                                <button onClick={() => changeRoute(salon.salonId)} style={{
+                                    color: "blue",
+                                    background: "transparent",
+                                    width: "5rem",
+                                    border: "1px solid blue",
+                                    cursor: "pointer",
+                                    boxShadow: "0px 0px 4px rgba(0,0,0,0.4)",
+                                    borderRadius: "5px",
+                                    fontSize: "1.4rem"
+                                }}>
                                     <AiFillEdit />
                                 </button>
 
-                                <button className='del-bbr' onClick={() => deleteSalonHandler(salon.salonId)}><MdDelete /></button>
+                                <button className='del-bbr' onClick={() => deleteSalonHandler(salon.salonId)} style={{
+                                    color: "red",
+                                    background: "transparent",
+                                    width: "5rem",
+                                    border: "1px solid red",
+                                    cursor: "pointer",
+                                    boxShadow: "0px 0px 4px rgba(0,0,0,0.4)",
+                                    borderRadius: "5px",
+                                    fontSize: "1.4rem"
+                                }}><MdDelete /></button>
 
                                 <Link to="#">
                                     <Link to="/salon/salonsettings"
-                                    style={{
-                                        display:"flex",justifyContent:"center",alignItems:"center"
-                                    }}
+                                        style={{
+                                            display: "flex", justifyContent: "center", alignItems: "center",
+                                            color: "purple",
+                                            background: "transparent",
+                                            width: "5rem",
+                                            border: "1px solid purple",
+                                            cursor: "pointer",
+                                            boxShadow: "0px 0px 4px rgba(0,0,0,0.4)",
+                                            borderRadius: "5px",
+                                            fontSize: "1.4rem",
+                                            padding:"0.8rem"
+                                        }}
                                     > <RiSettings3Fill /></Link>
                                 </Link>
 

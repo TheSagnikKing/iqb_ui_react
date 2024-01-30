@@ -1,4 +1,4 @@
-import { CREATE_APPOINTMENT_FAIL, CREATE_APPOINTMENT_REQ, CREATE_APPOINTMENT_SUCCESS, DELETE_APPOINTMENT_FAIL, DELETE_APPOINTMENT_REQ, DELETE_APPOINTMENT_SUCCESS, EDIT_APPOINTMENT_FAIL, EDIT_APPOINTMENT_REQ, EDIT_APPOINTMENT_SUCCESS } from "../constants/AppointmentConstants"
+import { CREATE_APPOINTMENT_BARBERLIST_FAIL, CREATE_APPOINTMENT_BARBERLIST_REQ, CREATE_APPOINTMENT_BARBERLIST_SUCCESS, CREATE_APPOINTMENT_FAIL, CREATE_APPOINTMENT_REQ, CREATE_APPOINTMENT_SUCCESS, DELETE_APPOINTMENT_FAIL, DELETE_APPOINTMENT_REQ, DELETE_APPOINTMENT_SUCCESS, EDIT_APPOINTMENT_FAIL, EDIT_APPOINTMENT_REQ, EDIT_APPOINTMENT_SUCCESS } from "../constants/AppointmentConstants"
 
 import api from "../api/Api"
 
@@ -67,5 +67,26 @@ export const editAppointmentAction = (appointmentData,navigate) => async(dispatc
         })
 
         alert(error.response.data.message)
+    }
+}
+
+
+export const appoinmentBarberListAction = (salonId) => async(dispatch) => {
+    try {
+        dispatch({type:CREATE_APPOINTMENT_BARBERLIST_REQ})
+
+        const {data} = await api.post(`/api/queue/getAvailableBarbersForQ?salonId=${salonId}`)
+
+
+        dispatch({
+            type:CREATE_APPOINTMENT_BARBERLIST_SUCCESS,
+            payload:data
+        })
+
+    } catch (error) {
+        dispatch({
+            type:CREATE_APPOINTMENT_BARBERLIST_FAIL,
+            error: error.response
+        })
     }
 }

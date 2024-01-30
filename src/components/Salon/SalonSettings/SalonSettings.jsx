@@ -89,7 +89,7 @@ const SalonSettings = () => {
                     <div>
 
                         <div>
-                            <label for="cars">Start Time:</label>
+                            <h2>Start Time:</h2>
                             <select name="startTime" id="startTime" style={{
                                 height: "35px",
                                 borderRadius: "5px",
@@ -110,7 +110,48 @@ const SalonSettings = () => {
                         </div>
 
                         <div>
-                            <label for="cars">End Time:</label>
+                            <h2>End Time:</h2>
+                            <select name="endTime" id="endTime" style={{
+                                height: "35px",
+                                borderRadius: "5px",
+                                paddingInline: "10px",
+                                border: "none",
+                                backgroundColor: "#f1f6fc",
+                                fontSize: "16px"
+                            }} onChange={(e) => setEndTime(e.target.value)}
+                                value={endTime}>
+                                {timeOptions.map((option) => (
+                                    <option key={option.value} value={option.value}>
+                                        {option.label}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+
+
+                        <div>
+                            <h2>Appointment Start Time:</h2>
+                            <select name="startTime" id="startTime" style={{
+                                height: "35px",
+                                borderRadius: "5px",
+                                paddingInline: "10px",
+                                border: "none",
+                                backgroundColor: "#f1f6fc",
+                                fontSize: "16px"
+                            }}
+                                onChange={(e) => setStartTime(e.target.value)}
+                                value={startTime}
+                            >
+                                {timeOptions.map((option) => (
+                                    <option key={option.value} value={option.value}>
+                                        {option.label}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+
+                        <div>
+                            <h2>Appointment End Time:</h2>
                             <select name="endTime" id="endTime" style={{
                                 height: "35px",
                                 borderRadius: "5px",

@@ -123,14 +123,22 @@ const Advertisement = () => {
       <AdminLayout />
       <div className="sa-br-right_main_div">
         <div className='advertisement-header'>
-          <p>Advertisement</p>
+          <h2>Advertisement</h2>
           <div>
             <input
               type='file'
               multiple onChange={(e) => setSelectedFiles(e.target.files)}
             />
 
-            <button onClick={uploadImageHandler}>Upload Image</button>
+            <button onClick={uploadImageHandler} style={{
+              height:"3.5rem",
+              width:"10rem",
+              background:"#f1f6fc",
+              boxShadow:"0px 0px 6px rgba(0,0,0,0.6)",
+              cursor:"pointer",
+              borderRadius:"5px",
+              border:"none"
+            }}>Upload Image</button>
           </div>
         </div>
 
@@ -141,14 +149,14 @@ const Advertisement = () => {
               <div key={i}>
                 <img src={a.url} alt="" />
                 <div>
-                  <button onClick={() => handleEditButtonClick(a.public_id, a._id)}><MdEdit /></button>
+                  <button onClick={() => handleEditButtonClick(a.public_id, a._id)} style={{border:"none",marginRight:"1rem"}}><MdEdit /></button>
                   <input
                     type="file"
                     ref={fileInputRef}
                     style={{ display: 'none' }}
                     onChange={handleFileInputChange}
                   />
-                  <button onClick={() => handleDeleteButtonClick(a.public_id, a._id)}><MdDelete /></button>
+                  <button onClick={() => handleDeleteButtonClick(a.public_id, a._id)} style={{border:"none"}}><MdDelete /></button>
                 </div>
               </div>
             ))) : (<p>No Images</p>)

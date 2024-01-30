@@ -7,7 +7,13 @@
 }
 
 :root{
-  font-size: 62.5%;
+  font-size: 64.5%;
+}
+
+@media((min-width:0px) and (max-width:1450px)){
+  :root{
+    font-size: 46%
+  }
 }
 
 body {

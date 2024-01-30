@@ -3,10 +3,11 @@ import "./CreateSalon.css"
 import { MdKeyboardArrowDown } from "react-icons/md"
 import Layout from '../../layout/Layout'
 import { useDispatch, useSelector } from 'react-redux'
-import { createSalonAction } from '../../../redux/actions/salonAction'
+import { createSalonAction, getAllSalonIconAction } from '../../../redux/actions/salonAction'
 import AdminLayout from '../../layout/Admin/AdminLayout'
 import api from "../../../redux/api/Api"
 import { useNavigate } from 'react-router-dom'
+import { FaArrowDown } from "react-icons/fa6";
 
 const CreateSalon = () => {
 
@@ -78,6 +79,15 @@ const CreateSalon = () => {
         setSelectedFiles(e.target.files);
     };
 
+    const [selectedLogo, setSelectedLogo] = useState(null)
+    const [logoImage, setLogoImages] = useState([])
+
+    const handleLogoChange = (e) => {
+        setSelectedLogo(e.target.files[0])
+    }
+
+    console.log(selectedLogo)
+
     const createSalon = useSelector(state => state.createSalon)
     const { response } = createSalon
 
@@ -92,7 +102,7 @@ const CreateSalon = () => {
                     formData.append('salonId', SalonId);
 
                     for (const file of selectedFiles) {
-                        formData.append('profile', file);
+                        formData.append('gallery', file);
                     }
 
                     try {
@@ -138,23 +148,6 @@ const CreateSalon = () => {
 
         dispatch(createSalonAction(salonData,navigate))
 
-        // setSalonName("")
-        // setAddress("")
-        // setCity("")
-        // setLongitude(0)
-        // setLatitude(0)
-        // setCountry("")
-        // setPostCode("")
-        // setContactTel("")
-        // setSalonType("")
-        // setWebLink("")
-        // setServices([])
-        // setServiceName("")
-        // setServiceDesc("")
-        // setServicePrice("")
-        // setSalonEmail("")
-        // setEndTime("")
-        // setStartTime("")
     }
 
     const addServiceHandler = () => {
@@ -245,8 +238,10 @@ const CreateSalon = () => {
     };
 
     // Call the function to generate time options when the component mounts
+
     useEffect(() => {
         generateTimeOptions();
+        dispatch(getAllSalonIconAction())
     }, []);
 
     const [intervalTimemin, setIntervalTimemin] = useState([])
@@ -264,6 +259,12 @@ const CreateSalon = () => {
         generateTimeIntervalInMinutes()
     },[])
 
+
+    const [serviceDrop, setServiceDrop] = useState(false)
+
+    const getAllSalonIcon = useSelector(state => state.getAllSalonIcon)
+
+    const [currentImg, setCurrentImg] = useState("")
 
     return (
         <>
@@ -332,7 +333,7 @@ const CreateSalon = () => {
                             />
                         </div>
 
-                        <button onClick={geolocHandler}>Get Geolocation</button>
+                        <button onClick={geolocHandler} className='geo-sal'>Get Geolocation</button>
 
 
                         <div>
@@ -353,7 +354,7 @@ const CreateSalon = () => {
                             />
                         </div>
 
-                        <h4>Appointment Settings</h4>
+                        <h2>Appointment Settings</h2>
 
                         <div>
                             <label for="cars">Start Time:</label>
@@ -415,10 +416,6 @@ const CreateSalon = () => {
                             </select>
                         </div>
 
-                    </div>
-
-                    <div className="sa-br-right">
-
                         <div>
                             <label htmlFor="">Contact Tel</label>
                             <input
@@ -429,15 +426,14 @@ const CreateSalon = () => {
                         </div>
 
 
-
                         <div>
-                            <div>
+                            <div style={{display:"flex"}}>
                                 <label htmlFor="">Salon Type</label>
-                                <button onClick={() => setSalontypeDropdown((prev) => !prev)}>dropdown</button>
+                                <button onClick={() => setSalontypeDropdown((prev) => !prev)} className='sal-drop-type'><FaArrowDown /></button>
                             </div>
 
                             {
-                                salontypeDropdown && <div>
+                                salontypeDropdown && <div className='sal-drop-type-p'>
                                     <p onClick={() => handleSalonTypeClick('Salon Type 1')}>Salon Type 1</p>
                                     <p onClick={() => handleSalonTypeClick('Salon Type 2')}>Salon Type 2</p>
                                     <p onClick={() => handleSalonTypeClick('Salon Type 3')}>Salon Type 3</p>
@@ -449,12 +445,38 @@ const CreateSalon = () => {
                             />
                         </div>
 
+
+                    </div>
+
+                    <div className="sa-br-right">
+
                         <div>
                             <label htmlFor="">Web Link</label>
                             <input
                                 type="text"
                                 value={webLink}
                                 onChange={(e) => setWebLink(e.target.value)}
+                            />
+                        </div>
+
+                        <div>
+                            <label htmlFor="">Facebook Link</label>
+                            <input
+                                type="text"
+                            />
+                        </div>
+
+                        <div>
+                            <label htmlFor="">Instagram Link</label>
+                            <input
+                                type="text"
+                            />
+                        </div>
+
+                        <div>
+                            <label htmlFor="">Twitter Link</label>
+                            <input
+                                type="text"
                             />
                         </div>
 
@@ -468,8 +490,50 @@ const CreateSalon = () => {
 
                         </div>
 
+
+                        <div>
+                            <label htmlFor="">Select Salon Logo</label>
+
+                            <input type="file" onChange={handleLogoChange}/>
+                        </div>
+
+
+
                         <div className='services'>
                             <label className='serv-title'>Add Your Services</label>
+
+                            <div>
+                                <div className='service-icon'>
+                                    <p>Service Icon</p>
+                                    <div onClick={() => setServiceDrop(!serviceDrop)} 
+                                    style={{cursor:"pointer",background:"#fff",boxShadow:"0px 0px 4px rgba(0,0,0,0.4)",height:"2.5rem", width:"2.5rem",display:"flex",alignItems:"center",justifyContent:"center",borderRadius:"50%"}}><FaArrowDown /></div>
+                                </div>
+
+                                {
+                                    serviceDrop && <div className='service-icon-content'>{
+                                        // getAllSalonIcon?.response
+                                        <div>
+                                        {
+                                            getAllSalonIcon?.response ? (
+                                                getAllSalonIcon.response.map((s) => (
+                                                    <div key={s.id} className='service-icon-content-img' onClick={() => setCurrentImg(s.url)}>
+                                                        <img src={`${s.url}`} alt="s1" />
+                                                    </div>
+                                                ))
+                                            ) : (
+                                                <h2>No Service Icon Present</h2>
+                                            )
+                                        }
+                                        </div>
+                                        
+                                    }</div>
+                                }
+
+
+                                <div className='selected-serrvice-icon'>
+                                    <div><img src={`${currentImg}`} alt="" /></div>        
+                                </div>
+                            </div>
 
                             <div>
                                 <label htmlFor="">Service Name</label>

@@ -169,9 +169,9 @@ const BarberListTable = () => {
     const notifyemailHandler = (barberemail) => {
         navigate("/barber/dashboard2/singlenotification", { state: { barberemail } })
     }
-    
+
     const multipleemailHandler = () => {
-        navigate("/barber/dashboard2/multiplenotification", { state:  checkboxArray})
+        navigate("/barber/dashboard2/multiplenotification", { state: checkboxArray })
     }
 
 
@@ -183,9 +183,9 @@ const BarberListTable = () => {
                         <p>Barbers List</p>
 
                         <div className='notify-buttons'>
-                            <button 
-                            disabled={checkboxArray.length == 0 ? true : false}
-                            onClick={() => multipleemailHandler()}
+                            <button
+                                disabled={checkboxArray.length == 0 ? true : false}
+                                onClick={() => multipleemailHandler()}
                             >Send multiple</button>
                             {/* <button>All</button> */}
                         </div>
@@ -219,6 +219,44 @@ const BarberListTable = () => {
                 {/* Table  */}
                 <div className='table'>
                     {
+                        <main className="barberitem-head">
+                            <div><p>#</p></div>
+                            <div>
+                                <div>
+                                    <h4>Salon ID</h4>
+                                    <div>
+                                        <div onClick={() => sortHandler("salonId", "asc")}><AiOutlineArrowUp /></div>
+                                        <div onClick={() => sortHandler("salonId", "des")}><AiOutlineArrowDown /></div>
+                                    </div>
+                                </div></div>
+
+                            <div><div>
+                                <h4>Barber Name</h4>
+                                <div>
+                                    <div onClick={() => sortHandler("name", "asc")}><AiOutlineArrowUp /></div>
+                                    <div onClick={() => sortHandler("name", "des")}><AiOutlineArrowDown /></div>
+                                </div>
+                            </div></div>
+
+                            <div><div>
+                                <h4>Email</h4>
+                                <div>
+                                    <div onClick={() => sortHandler("email", "asc")}><AiOutlineArrowUp /></div>
+                                    <div onClick={() => sortHandler("email", "des")}><AiOutlineArrowDown /></div>
+                                </div>
+                            </div></div>
+
+                            <div><div>
+                                <h4>Date of Birth</h4>
+                                <div>
+                                    <div><AiOutlineArrowUp /></div>
+                                    <div><AiOutlineArrowDown /></div>
+                                </div>
+                            </div></div>
+                            <h4 className='barber-isActive'>isActive</h4>
+                        </main>
+                    }
+                    {
                         loading ? <div className='puff-loader-box'><PuffLoader /></div> :
                             barbersList && barbersList.getAllBarbers ? barbersList?.getAllBarbers.map((barber, index) =>
                                 <main className="barberitem" key={index}>
@@ -233,46 +271,22 @@ const BarberListTable = () => {
                                     </div>
 
                                     <div>
-                                        <div>
-                                            <p>Salon ID</p>
-                                            <div>
-                                                <div onClick={() => sortHandler("salonId", "asc")}><AiOutlineArrowUp /></div>
-                                                <div onClick={() => sortHandler("salonId", "des")}><AiOutlineArrowDown /></div>
-                                            </div>
-                                        </div>
+                                        
                                         <p>{barber.salonId}</p>
                                     </div>
 
                                     <div>
-                                        <div>
-                                            <p>Name</p>
-                                            <div>
-                                                <div onClick={() => sortHandler("name", "asc")}><AiOutlineArrowUp /></div>
-                                                <div onClick={() => sortHandler("name", "des")}><AiOutlineArrowDown /></div>
-                                            </div>
-                                        </div>
+                                        
                                         <p>{barber.name}</p>
                                     </div>
 
                                     <div>
-                                        <div>
-                                            <p>Email</p>
-                                            <div>
-                                                <div onClick={() => sortHandler("email", "asc")}><AiOutlineArrowUp /></div>
-                                                <div onClick={() => sortHandler("email", "des")}><AiOutlineArrowDown /></div>
-                                            </div>
-                                        </div>
+                                        
                                         <p>{barber.email}</p>
                                     </div>
 
                                     <div>
-                                        <div>
-                                            <p>Date of Birth</p>
-                                            <div>
-                                                <div><AiOutlineArrowUp /></div>
-                                                <div><AiOutlineArrowDown /></div>
-                                            </div>
-                                        </div>
+                                        
                                         <p>{barber.dateOfBirth}</p>
                                     </div>
 
@@ -280,7 +294,7 @@ const BarberListTable = () => {
                                     <div style={{
                                         background: "none",
                                         boxShadow: "none",
-                                        fontSize: "12px",
+                                        fontSize: "1.2rem",
                                         width: "100%"
                                     }}>
 
@@ -299,27 +313,27 @@ const BarberListTable = () => {
 
                                     <div>
                                         <div style={{
-                                            fontSize: "14px",
+                                            fontSize: "1.4rem",
                                             color: "limegreen",
-                                            marginTop: "2px",
+                                            marginTop: "0.2rem",
                                             cursor: "pointer",
-                                            height: "35px",
-                                            width: "45px",
+                                            height: "3.5rem",
+                                            width: "4.5rem",
                                             background: "#fff",
                                             display: "flex",
                                             justifyContent: "center",
                                             alignItems: "center",
                                             boxShadow: "0px 0px 4px rgba(0,0,0,0.5)",
-                                            borderRadius: "6px"
+                                            borderRadius: "0.6rem"
                                         }}
-                                        onClick={() => notifyemailHandler(barber.email)}
+                                            onClick={() => notifyemailHandler(barber.email)}
                                         ><IoIosNotifications /></div>
                                     </div>
 
                                     <button className='edit-bbr' onClick={() => editHandler(barber.email)}><AiFillEdit /></button>
 
 
-                                    <button className='del-bbr' onClick={() => deletebarberHandler(barber.salonId, barber.email)}><MdDelete /></button>
+                                    <button className='del-bbr' onClick={() => deletebarberHandler(barber.salonId, barber.email)} style={{color:"red"}}><MdDelete /></button>
 
                                 </main>) : <div className='no-barber-box'><p>No Barbers Present</p></div>
                     }

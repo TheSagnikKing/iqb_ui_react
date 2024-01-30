@@ -1,4 +1,4 @@
-.cs-gj-quebarber-wrapper{
+/* .cs-gj-quebarber-wrapper{
     width: 82% !important;
     position: absolute;
     top: 90px;
@@ -32,6 +32,47 @@
     border: none;
     padding-inline: 10px;
     width: 300px;
+    background-color: orangered;
+    color: #fff;
+    cursor: pointer;
+} */
+
+
+
+.cs-gj-quebarber-wrapper {
+    width: 82% !important;
+    position: absolute;
+    top: 9rem;
+    left: 26.5rem;
+    margin-left: 3.5rem;
+    margin-top: 3rem;
+    background: #fff;
+    height: 80vh;
+    padding: 2rem;
+}
+
+.cs-gj-quebarber-wrapper > div {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-block: 2rem;
+}
+
+.cs-gj-quebarber-wrapper > div > input {
+    height: 4rem;
+    border-radius: 0.3rem;
+    border: 0.1rem solid rgba(0, 0, 0, 0.6);
+    padding-inline: 1rem;
+    width: 30rem;
+}
+
+.cs-gj-quebarber-wrapper > button {
+    height: 4rem;
+    border-radius: 0.3rem;
+    box-shadow: 0px 0px 0.4rem rgba(0, 0, 0, 0.3);
+    border: none;
+    padding-inline: 1rem;
+    width: 30rem;
     background-color: orangered;
     color: #fff;
     cursor: pointer;

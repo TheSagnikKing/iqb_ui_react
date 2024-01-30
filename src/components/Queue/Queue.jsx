@@ -63,7 +63,7 @@ const Queue = () => {
         <>
             <AdminLayout />
             <div className='queue-wrapper'>
-                <p>Select Your Joins</p>
+                <h2>Select Your Joins</h2>
 
                 <div className='joins'>
                     <Link to="/queue/group/customers"
@@ -71,7 +71,8 @@ const Queue = () => {
                         background:"#fff",
                         padding:"10px 12px",
                         borderRadius:"10px",
-                        boxShadow:"0px 0px 2px rgba(0,0,0,0.4)"
+                        boxShadow:"0px 0px 2px rgba(0,0,0,0.4)",
+                        fontSize:"1.4rem"
                     }}
                     >Group Join</Link>
 
@@ -86,7 +87,7 @@ const Queue = () => {
                         }
 
                     </div> */}
-                    <div><p><Link to="/queue/barberlist">Select Barber</Link></p></div>
+                    <div><p><Link to="/queue/barberlist/kyosks">Select Barber</Link></p></div>
 
                     <div><p><Link to="/queue/autoqueservices">Auto Join</Link></p></div>
 
@@ -97,14 +98,14 @@ const Queue = () => {
                     <p>Queue List</p>
 
                     <div className='que-lst-head'>
-                        <p>Name</p>
+                        <h4>Name</h4>
                         {/* <p>JoinedQ</p> */}
                         {/* <p>JoinedQType</p> */}
-                        <p>TimeJoinedQ</p>
-                        <p>Barber Name</p>
-                        <p>Q Position</p>
-                        <p>Served</p>
-                        <p>Cancel</p>
+                        <h4>TimeJoinedQ</h4>
+                        <h4>Barber Name</h4>
+                        <h4>Q Position</h4>
+                        <h4>Served</h4>
+                        <h4>Cancel</h4>
                     </div>
 
                     {

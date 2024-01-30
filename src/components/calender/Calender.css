@@ -1,4 +1,4 @@
-.calender-box{
+/* .calender-box{
     height: auto;
     background-color: white;
     box-shadow: 0px 0px 6px rgba(0,0,0,0.2);
@@ -52,4 +52,58 @@
 }
 
 
+ */
+
+
+ .calender-box {
+    height: auto;
+    background-color: white;
+    box-shadow: 0px 0px 0.6rem rgba(0, 0, 0, 0.2); /* 6px converted to rem */
+    border-radius: 1rem; /* 10px converted to rem */
+    font-size: 1.2rem; /* 12px converted to rem */
+}
+
+.calender-header {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 0.2rem; /* 2px converted to rem */
+    padding: 0.5rem 1rem 0 1rem; /* 5px, 10px, 0px, 10px converted to rem */
+}
+
+.calender-header>div {
+    height: 4.4rem; /* 44px converted to rem */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.calender-header>div:nth-child(1) {
+    grid-column: span 5;
+    justify-content: flex-start;
+    font-size: 2rem; /* 20px converted to rem */
+    font-weight: bolder;
+}
+
+.calender-header>div:nth-child(1):hover {
+    background: white;
+    border-radius: 0;
+}
+
+.calender-header>div:nth-child(2),
+.calender-header>div:nth-child(3) {
+    font-size: 2.2rem; /* 22px converted to rem */
+}
+
+.calender-header>div:nth-child(2):hover,
+.calender-header>div:nth-child(3):hover {
+    border-radius: 50%;
+    background-color: #efefef;
+}
+
+.next-month {
+    color: rgba(165, 42, 42, 0.492);
+}
 

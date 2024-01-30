@@ -148,7 +148,6 @@ const SignIn = () => {
     };
 
     return (
-        <>
             <main className="signup">
                 <div className="left">
                     <img src="https://img.freepik.com/free-vector/computer-login-concept-illustration_114360-7962.jpg?w=2000"
@@ -163,12 +162,14 @@ const SignIn = () => {
                             <button
                                 className={`tablinks ${activeTab === 'Admin' && 'active3'}`}
                                 onClick={(e) => handleTabClick(e, 'Admin')}
+                            
                             >
                                 Admin
                             </button>
                             <button
-                                className={`tablinks ${activeTab === 'Barber' && 'active3'}`}
+                                className={`tablinks ${activeTab === 'Barber' && 'active4'}`}
                                 onClick={(e) => handleTabClick(e, 'Barber')}
+        
                             >
                                 Barber
                             </button>
@@ -354,8 +355,6 @@ const SignIn = () => {
                     </div>
                 </div>
             </main>
-
-        </>
     )
 }
 
