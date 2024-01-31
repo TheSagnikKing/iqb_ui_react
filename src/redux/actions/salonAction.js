@@ -164,6 +164,8 @@ export const connectSalonBarberAction = (barberData) => async(dispatch) => {
             type:CONNECT_BARBER_SALON_SUCCESS,
             payload:data
         })
+
+        window.location.reload()
     } catch (error) {
         dispatch({
             type:CONNECT_BARBER_SALON_FAIL,

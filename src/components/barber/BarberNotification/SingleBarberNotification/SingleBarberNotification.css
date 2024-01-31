@@ -1,16 +1,16 @@
 .notification-container{
     width: 82% !important;
     position: absolute;
-    top: 90px;
-    left: 265px;
-    margin-left: 35px;
-    margin-top: 30px;
+    top: 9rem;
+    left: 26.5rem;
+    margin-left: 3.5rem;
+    margin-top: 3rem;
     background-color: #fff;
-    border-radius: 6px;
+    border-radius: 0.6rem;
 }
 
 .notification-container>div{
-    padding: 20px;
+    padding: 2rem;
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -23,8 +23,10 @@
 }
 
 .notification-container>div>div>input{
-    height: 35px;
-    padding-inline: 10px;
+    height: 3.5rem;
+    padding-inline: 1rem;
+    background-color: #f1f6fc;
+    border: none;
 }
 
 .notification-container>div>div>label{
@@ -32,7 +34,11 @@
 }
 
 .notification-container>div>button{
-    margin-block: 20px;
-    height: 35px;
+    margin-block: 2rem;
+    height: 3.5rem;
     cursor: pointer;
+    background-color: #f1f6fc;
+    border: none;
+    box-shadow: 0px 0px 4px rgba(0,0,0,0.4);
+    border-radius: 5px;
 }

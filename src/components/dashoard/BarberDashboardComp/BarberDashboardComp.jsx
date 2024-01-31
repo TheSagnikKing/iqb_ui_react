@@ -17,7 +17,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { connectSalonBarberAction, getAllSalonServicesAction } from '../../../redux/actions/salonAction'
 
 import api from "../../../redux/api/Api"
-import { barberOnlineStatusAction } from '../../../redux/actions/barberAction'
+import { barberAllSalonServicsAction, barberOnlineStatusAction } from '../../../redux/actions/barberAction'
 
 const BarberDashboardComp = () => {
 
@@ -61,14 +61,12 @@ const BarberDashboardComp = () => {
         const confirm = window.confirm("Are you sure ?")
         setcurrentSelectSalonId(salonid)
         if (confirm) {
-            dispatch(getAllSalonServicesAction(salonid))
+            dispatch(barberAllSalonServicsAction(salonid))
         }
     }
 
 
-    const getAllSalonServices = useSelector(state => state.getAllSalonServices)
-
-    console.log(getAllSalonServices)
+        const barberAllSalonServics = useSelector(state => state.barberAllSalonServics)
 
 
     const [selectedService, setSelectedService] = useState([])
@@ -88,20 +86,25 @@ const BarberDashboardComp = () => {
         setSelectedService(deleteService)
     }
 
-    console.log(selectedService)
+    console.log("se",selectedService)
 
     const connectSalonHandler = () => {
         // connectSalonBarberAction
 
-        const barberSalonData = {
-            email: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].email,
-            salonId: currentSelectSalonId,
-            barberServices: selectedService
+        if(currentSelectSalonId && selectedService.length > 0){
+            const barberSalonData = {
+                email: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].email,
+                salonId: currentSelectSalonId,
+                barberServices: selectedService
+            }
+    
+            console.log(barberSalonData)
+    
+            dispatch(connectSalonBarberAction(barberSalonData))
+        }else{
+            alert("Please Select Salon and Services")
         }
 
-        console.log(barberSalonData)
-
-        dispatch(connectSalonBarberAction(barberSalonData))
     }
 
 
@@ -134,20 +137,26 @@ const BarberDashboardComp = () => {
     
 
     return (
-        <>
             <div className="right_main_div">
                 {salonid == 0 ? <div className='connectSalon'>
-                    <h2>Connect Salon Barber Please</h2>
+                    <h1>Connect Salon Barber Please</h1>
                     <div>
                         <div>
-                            <label htmlFor="">List of Salons</label>
+                            <h2>List of Salons</h2>
                             <div>
                                 {
                                     connectedSalonData && connectedSalonData?.response && connectedSalonData?.response.length > 0 ? (connectedSalonData?.response?.map((s) => (
                                         <div className='barber-salonlist-cnt'>
                                             <p>SalonId {s.salonId}</p>
                                             <p>{s.salonName}</p>
-                                            <button onClick={() => selectSalonServices(s.salonId)}>Select Salon</button>
+                                            <button onClick={() => selectSalonServices(s.salonId)} style={{
+                                                border:"1px solid blue",
+                                                background:"#fff",
+                                                width:"10rem",
+                                                color:"blue",
+                                                boxShadow:"0px 0px 4px blue",
+                                                cursor:"pointer"
+                                            }}>+</button>
                                         </div>
                                     ))) : (<p>No Salon Data</p>)
                                 }
@@ -156,16 +165,23 @@ const BarberDashboardComp = () => {
                         </div>
 
                         <div>
-                            <label htmlFor="">List of Services</label>
+                            <h2>List of Services</h2>
                             <div>
                                 {
-                                    getAllSalonServices ? getAllSalonServices?.response?.map((b, index) => (
-                                        <div className='barber-single-join-quebarberserv-content' key={b._id}>
+                                    barberAllSalonServics ? barberAllSalonServics?.response?.map((b, index) => (
+                                        <div className='barber-single-join-quebarberserv-content' key={b._id} style={{fontSize:"1.2rem"}}>
                                             <p>{b.serviceId}</p>
                                             <p>{b.serviceName}</p>
                                             <p>{b.serviceCode}</p>
                                             <p>{b.serviceEWT}</p>
-                                            <button onClick={() => selectedServiceHandler(b, index)}>Add</button>
+                                            <button onClick={() => selectedServiceHandler(b, index)} style={{
+                                                color:"limegreen",
+                                                border:"1px solid limegreen",
+                                                background:"#fff",
+                                                boxShadow:"0px 0px 4px limegreen",
+                                                width:"10rem",
+                                                cursor:"pointer"
+                                            }}>+</button>
                                         </div>
                                     )) : <p>No Services Present</p>
                                 }
@@ -173,16 +189,23 @@ const BarberDashboardComp = () => {
                         </div>
 
                         <div>
-                            <label htmlFor="">Barber Selected Services</label>
+                            <h2>Barber Selected Services</h2>
                             <div>
                                 {
                                     selectedService && selectedService.length > 0 ? selectedService.map((b, index) => (
-                                        <div className='barber-single-join-quebarberserv-content' key={b._id}>
+                                        <div className='barber-single-join-quebarberserv-content' key={b._id} style={{fontSize:"1.2rem"}}>
                                             <p>{b.serviceId}</p>
                                             <p>{b.serviceName}</p>
                                             <p>{b.serviceCode}</p>
                                             <p>{b.serviceEWT}</p>
-                                            <button onClick={() => selectedServiceDelete(b)}>Del</button>
+                                            <button onClick={() => selectedServiceDelete(b)} style={{
+                                                color:"red",
+                                                border:"1px solid red",
+                                                background:"#fff",
+                                                boxShadow:"0px 0px 4px red",
+                                                width:"10rem",
+                                                cursor:"pointer"
+                                            }}>-</button>
                                         </div>
                                     )) : <p>No Services Available</p>
                                 }
@@ -196,18 +219,18 @@ const BarberDashboardComp = () => {
                 </div > : <>
                     <div className="right_div_top">
 
-                        {/* <div className="div_left"> */}
-                            {/* <div className="div_left_head">
+                        <div className="div_left">
+                            <div className="div_left_head">
                                 <div style={{ display: "flex", alignItems: "center", gap: "2rem" }}>
                                     <p>Advertisement</p>
-                                    {/* TOGGLE SWITCH 
+                          
                                     <label className="nav2toggle_switch" >
                                         <input type="checkbox"
                                             value={check}
                                             onClick={() => setOnlineHandler()}
                                             
                                         />
-                                        {/* <span className="nav2slider"></span> 
+                                        <span className="nav2slider"></span> 
                                         <span className={`nav2slider ${check ? 'checked' : ''}`}
                                         style={{
                                             background:check ? "#4CBB17" : ""
@@ -218,13 +241,13 @@ const BarberDashboardComp = () => {
 
 
                                 <div className="btn_box">
-                                    <div className="btn_one">
+                                    {/* <div className="btn_one">
                                         <div>
                                             <IoMdAdd />
                                         </div>
 
                                         <p>Add New Post</p>
-                                    </div>
+                                    </div> */}
 
                                     {/* <div className="btn_two">
                                     <div>
@@ -232,11 +255,11 @@ const BarberDashboardComp = () => {
                                     </div>
 
                                     <p>Notifications</p>
+                                </div> */}
                                 </div>
-                                </div>
-                            </div> */}
+                            </div>
 
-                            {/* <div className="div_left_images">
+                             <div className="div_left_images">
                                 <div className="img_one">
                                     <img src="https://images.pexels.com/photos/1805600/pexels-photo-1805600.jpeg?cs=srgb&dl=pexels-dmitry-zvolskiy-1805600.jpg&fm=jpg" alt="" />
                                 </div>
@@ -256,8 +279,8 @@ const BarberDashboardComp = () => {
                                 <div className="img_three">
                                     <img src="https://images.pexels.com/photos/1805600/pexels-photo-1805600.jpeg?cs=srgb&dl=pexels-dmitry-zvolskiy-1805600.jpg&fm=jpg" alt="" />
                                 </div>
-                            </div> */}
-                        {/* </div> */}
+                            </div> 
+                        </div>
 
                         <div className="div_right">
                             <div className="div_right_head">
@@ -496,8 +519,6 @@ const BarberDashboardComp = () => {
                 </>}
 
             </div>
-
-        </>
     )
 }
 

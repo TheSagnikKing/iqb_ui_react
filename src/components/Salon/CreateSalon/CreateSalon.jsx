@@ -477,7 +477,7 @@ const CreateSalon = () => {
 
 
                         <div>
-                            <div style={{ display: "flex" }}>
+                            <div style={{ display: "flex",flexDirection:"row" }}>
                                 <label htmlFor="">Salon Type</label>
                                 <button onClick={() => setSalontypeDropdown((prev) => !prev)} className='sal-drop-type'><FaArrowDown /></button>
                             </div>

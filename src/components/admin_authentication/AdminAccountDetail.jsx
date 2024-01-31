@@ -29,11 +29,9 @@ const AdminAccountDetail = () => {
     }
 
     return (
-        <>
-
             <div className='admin_account_detail_container'>
                 <div>
-                    <h2>Fill Your Admin Account Details</h2>
+                    <h1>Fill Your Admin Account Details</h1>
                 </div>
                 <div className='admin_account_detail'>
 
@@ -54,18 +52,20 @@ const AdminAccountDetail = () => {
                     </div> */}
 
                     <div>
-                        <label htmlFor="">Mobile Number</label>
+                        <h2>Mobile Number</h2>
                         <input
                             type="text"
+                            placeholder='Enter Mobile Number'
                             value={mobileNumber}
                             onChange={(e) => setMobileNumber(e.target.value)}
                         />
                     </div>
 
                     <div>
-                        <label htmlFor="">Name</label>
+                        <h2>Name</h2>
                         <input
                             type="text"
+                            placeholder='Enter Your Name'
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                         />
@@ -79,7 +79,7 @@ const AdminAccountDetail = () => {
                             onChange={(e) => setGender(e.target.value)}
                         /> */}
 
-                        <label for="gender">Gender:</label>
+                        <h2>Gender:</h2>
 
                         <select 
                         name="gender" 
@@ -93,7 +93,7 @@ const AdminAccountDetail = () => {
                     </div>
 
                     <div>
-                        <label htmlFor="">Date of Birth</label>
+                        <h2>Date of Birth</h2>
                         <input
                             type="date"
                             value={dob}
@@ -107,11 +107,13 @@ const AdminAccountDetail = () => {
                         </button>
                     </div>
 
-                    <button className='skip' onClick={skipHandler}>Skip</button>
+                    <button className='skip' onClick={skipHandler} style={{
+                        marginTop:"1rem",
+                        height:"3.5rem",
+                    }}>Skip</button>
                 </div>
 
             </div>
-        </>
     )
 }
 

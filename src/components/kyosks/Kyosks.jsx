@@ -424,6 +424,9 @@ const Kyosks = () => {
 
                         {
                             model2 == true && <div className='model2'>
+                                 {
+                                selectedService.length > 0 && <button onClick={() => fetchSelectedServices()} className='services-search-btn' >Search</button>
+                            }
                             {
                                 getAllSalonServices?.response?.map((b, index) => (
                                     <div key={b._id}>
@@ -491,9 +494,7 @@ const Kyosks = () => {
                                     </div>
                                 ))
                             }
-                            {
-                                selectedService.length > 0 && <button onClick={() => fetchSelectedServices()} className='services-search-btn' >Search</button>
-                            }
+                           
                                 
                         </div>
                         }

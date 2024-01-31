@@ -120,6 +120,12 @@ const UpdateSalon = () => {
 
     const addServiceHandler = () => {
 
+        if (serviceName.trim() === '' || serviceDesc.trim() === '' || servicePrice.trim() === '' || serviceEWT.trim() === '') {
+            // You can handle the case when any of the fields is empty (e.g., show an error message)
+            alert("Please fill all the fields")
+            return;
+        }
+
         setServices(prevServices => [...prevServices, {
             serviceName, serviceDesc, servicePrice, serviceEWT, serviceId, serviceIcon: {
                 public_id: currentPublicId,
@@ -546,7 +552,7 @@ const UpdateSalon = () => {
                         </div>
 
                         <div>
-                            <div style={{ display: "flex" }}>
+                            <div style={{ display: "flex", flexDirection:"row" }}>
                                 <label htmlFor="">Salon Type</label>
                                 <button onClick={() => setSalontypeDropdown((prev) => !prev)} className='sal-drop-type'><FaArrowDown /></button>
                             </div>

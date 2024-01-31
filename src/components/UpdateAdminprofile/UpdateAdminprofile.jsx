@@ -79,7 +79,7 @@ const UpdateAdminprofile = () => {
                                 color:"#fff",
                                 border:"none",
                                 boxShadow:"0px 0px 4px rgba(0,0,0,0.4)",
-                                height:"25px"
+                                height:"3.5rem"
                             }}
                             >Email verified</button> : <button 
                             style={{
@@ -87,7 +87,7 @@ const UpdateAdminprofile = () => {
                                 color:"#fff",
                                 border:"none",
                                 boxShadow:"0px 0px 4px rgba(0,0,0,0.4)",
-                                height:"25px",
+                                height:"3.5rem",
                                 cursor:"pointer"
                             }}
                             onClick={verifyEmailHandler}>Email Not Verified</button>

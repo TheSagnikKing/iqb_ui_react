@@ -1,19 +1,19 @@
 .admin_account_detail_container{
     width: 65%;
-    height: 80vh;
+    height: 45vh;
     background: #fff;
     margin: auto;
-    margin-top: 50px;
+    margin-top: 10rem;
     box-shadow: 0px 0px 6px rgba(0,0,0,0.4);
     border-radius: 10px;
-    padding: 20px;
+    padding: 2rem;
 }
 
 .admin_account_detail{
     display: grid;
     grid-template-columns: repeat(2,1fr);
     gap: 2rem;
-    margin-top: 20px;
+    margin-top: 2rem;
 }
 
 .admin_account_detail>div{
@@ -23,15 +23,31 @@
 }
 
 .admin_account_detail>div>input{
-    height: 35px;
+    height: 3.5rem;
+    background-color: #f1f6fc;
+    border: none;
+    box-shadow: 0px 0px 4px rgba(0,0,0,0.4);
+    padding-inline: 1rem;
 }
 
 .skip{
     background:white;
     box-shadow: 0px 0px 6px rgba(0,0,0,0.4);
     border: none;
-    height: 30px;
+    height: 3rem;
     cursor: pointer;
     width: 45%;
     border-radius: 4px;
+}
+
+.sa-br-btn_box>button{
+    height: 3.5rem;
+    background-color: plum;
+    margin-top: 1rem;
+    border: none;
+    color: black;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0px 0px 4px rgba(0,0,0,0.4);
 }

@@ -38,7 +38,7 @@ const SingleBarberNotification = () => {
         <div>
           <h1>Single Notification</h1>
           <div>
-            <label htmlFor="">Title</label>
+            <h2>Title</h2>
             <input 
             type="text" 
             value={title}
@@ -46,7 +46,7 @@ const SingleBarberNotification = () => {
             />
           </div>
           <div>
-            <label htmlFor="">Body</label>
+            <h2>Body</h2>
             <input 
             type="text" 
             value={body}

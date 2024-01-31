@@ -90,7 +90,7 @@ import { useNavigate } from "react-router-dom"
 import AdminLayout from '../../../layout/Admin/AdminLayout'
 import { getAllSalonServicesAction } from '../../../../redux/actions/salonAction'
 import { autojoinAction } from '../../../../redux/actions/joinQueueAction'
-import { getbarberServicesbyBarberIdAction } from '../../../../redux/actions/barberAction'
+import { barberAllSalonServicsAction, getbarberServicesbyBarberIdAction } from '../../../../redux/actions/barberAction'
 
 const Queautojoinservices = () => {
 
@@ -102,11 +102,13 @@ const Queautojoinservices = () => {
 
   useEffect(() => {
     if (currentAdminSalonId) {
-      dispatch(getAllSalonServicesAction(Number(currentAdminSalonId)))
+      dispatch(barberAllSalonServicsAction(Number(currentAdminSalonId)))
     }
   }, [dispatch, currentAdminSalonId])
 
-  const getAllSalonServices = useSelector(state => state.getAllSalonServices)
+  const barberAllSalonServics = useSelector(state => state.barberAllSalonServics)
+
+  console.log("Auto ", barberAllSalonServics)
 
 
   const [selectedbarberId, setSelectedBarberid] = useState(null)
@@ -220,13 +222,19 @@ const Queautojoinservices = () => {
               <p>Action</p>
             </div>
             {
-              getAllSalonServices?.response?.map((b, index) => (
+              barberAllSalonServics?.response?.map((b, index) => (
                 <div className='barber-single-join-quebarberserv-content' key={b._id}>
                   <p>{b.serviceId}</p>
                   <p>{b.serviceName}</p>
                   <p>{b.servicePrice}</p>
                   <p>{b.serviceEWT}</p>
-                  <button onClick={() => selectedServiceHandler(b, index)}>Add</button>
+                  <button onClick={() => selectedServiceHandler(b, index)} style={{
+                    border:"1px solid blue",
+                    background:"#fff",
+                    color:"blue",
+                    boxShadow:"0px 0px 4px blue",
+                    cursor:"pointer"
+                  }}>+</button>
                 </div>
               ))
             }
@@ -252,7 +260,13 @@ const Queautojoinservices = () => {
                   <p>{b.serviceName}</p>
                   <p>{b.servicePrice}</p>
                   <p>{b.barberServiceEWT}</p>
-                  <button onClick={() => selectedServiceDelete(b)}>Del</button>
+                  <button onClick={() => selectedServiceDelete(b)} style={{
+                    border:"1px solid red",
+                    background:"#fff",
+                    color:"red",
+                    boxShadow:"0px 0px 4px red",
+                    cursor:"pointer"
+                  }}>-</button>
                 </div>
               )) : <p>No Services Available</p>
             }

@@ -140,7 +140,6 @@ const SignUp = () => {
     };
 
     return (
-        <>
             <main className="signup">
                 <div className="left">
                     <img src="https://img.freepik.com/free-vector/computer-login-concept-illustration_114360-7962.jpg?w=2000"
@@ -158,7 +157,7 @@ const SignUp = () => {
                                 Admin
                             </button>
                             <button
-                                className={`tablinks ${activeTab === 'Barber' && 'active3'}`}
+                                className={`tablinks ${activeTab === 'Barber' && 'active4'}`}
                                 onClick={(e) => handleTabClick(e, 'Barber')}
                             >
                                 Barber
@@ -196,19 +195,19 @@ const SignUp = () => {
                                             value={password}
                                             onChange={e => setPassword(e.target.value)}
                                             className="password"
-                                            style={{ border: error ? "1px solid red" : "" }}
+                                            // style={{ border: error ? "1px solid red" : "" }}
                                         />
                                         <div className="toggle_password" onClick={() => setVisible(!visible)}>
                                             {visible ? <BiShow /> : <BiHide />}
                                         </div>
                                     </div>
 
-                                    <div className="error">
+                                    {/* <div className="error">
                                         <div>
                                             <RiErrorWarningLine />
                                         </div>
                                         <p>Your password is not strong enough.Use atleast 8 charecters.</p>
-                                    </div>
+                                    </div> */}
 
                                     <div className="input_container_end">
 
@@ -276,19 +275,19 @@ const SignUp = () => {
                                             value={barberpassword}
                                             onChange={e => setBarberPassword(e.target.value)}
                                             className="password"
-                                            style={{ border: error ? "1px solid red" : "" }}
+                                            // style={{ border: error ? "1px solid red" : "" }}
                                         />
                                         <div className="toggle_password" onClick={() => setBarberVisible(!barbervisible)}>
                                             {barbervisible ? <BiShow /> : <BiHide />}
                                         </div>
                                     </div>
 
-                                    <div className="error">
+                                    {/* <div className="error">
                                         <div>
                                             <RiErrorWarningLine />
                                         </div>
                                         <p>Your password is not strong enough.Use atleast 8 charecters.</p>
-                                    </div>
+                                    </div> */}
 
                                     <div className="input_container_end">
 
@@ -337,7 +336,6 @@ const SignUp = () => {
                     </div>
                 </div>
             </main>
-        </>
     )
 }
 

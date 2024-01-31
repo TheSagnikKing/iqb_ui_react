@@ -162,6 +162,9 @@
     border: none;
     outline: none;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .sa-br-right_main_form .sa-br-right .sa-br-btn_box button:nth-child(2){

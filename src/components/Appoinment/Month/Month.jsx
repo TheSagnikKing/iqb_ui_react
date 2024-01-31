@@ -58,7 +58,7 @@ function Month() {
                     plugins={[dayGridPlugin, interactionPlugin]}
                     initialView='dayGridMonth'
                     dateClick={handleDateSelect}
-                    events={appointmentData.map((e) => (
+                    events={appointmentData?.map((e) => (
                         {
                             title:e.appointmentNotes, date: e.appointmentDate
                         }

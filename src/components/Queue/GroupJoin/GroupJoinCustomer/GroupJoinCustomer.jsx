@@ -106,9 +106,10 @@ import "../QueuebarberList/QueuebarberList.css"
 import { useSelector, useDispatch } from 'react-redux'
 
 import { useNavigate } from "react-router-dom"
-import { barberListAction, getbarberServicesbyBarberIdAction } from '../../../../redux/actions/barberAction'
+import { barberListAction, getbarberServicesbyBarberIdAction, groupBarberServicesByBarberIdAction } from '../../../../redux/actions/barberAction'
 import { groupjoinAction, singleJoinQueueAction } from '../../../../redux/actions/joinQueueAction'
 import AdminLayout from '../../../layout/Admin/AdminLayout'
+import { appoinmentBarberListAction } from '../../../../redux/actions/AppointmentAction'
 
 const GroupJoinCustomer = () => {
 
@@ -119,11 +120,11 @@ const GroupJoinCustomer = () => {
 
   useEffect(() => {
     if (salonId) {
-      dispatch(barberListAction(salonId))
+      dispatch(appoinmentBarberListAction(salonId))
     }
   }, [dispatch, salonId])
 
-  const barberList = useSelector(state => state.barberList)
+  const appoinmentBarberList = useSelector(state => state.appoinmentBarberList)
 
   const [selectedbarberId, setSelectedBarberid] = useState(null)
   const [selectedbarberName, setSelectedBarberName] = useState("")
@@ -136,12 +137,14 @@ const GroupJoinCustomer = () => {
     if (selectbarber) {
       setSelectedBarberid(Number(barberId))
       setSelectedBarberName(name)
-      dispatch(getbarberServicesbyBarberIdAction(Number(barberId)))
+      dispatch(groupBarberServicesByBarberIdAction(Number(barberId)))
     }
 
   }
 
-  const getBarberServicesBybarberId = useSelector(state => state.getBarberServicesBybarberId)
+  const groupBarberServicesByBarberId = useSelector(state => state.groupBarberServicesByBarberId)
+
+  console.log("new", groupBarberServicesByBarberId)
 
 
   const [selectedService, setSelectedService] = useState([])
@@ -224,11 +227,11 @@ const GroupJoinCustomer = () => {
         style={{ height: "140vh" }}
       >
 
-        <h2>Group Join</h2>
+        <h1>Group Join</h1>
 
         <div className='barber-single-join'>
           <div>
-            <p>Customer Name</p>
+            <h2>Customer Name</h2>
             <input
               type="text"
               value={name}
@@ -238,7 +241,7 @@ const GroupJoinCustomer = () => {
           </div>
 
           <div>
-            <p>Customer Email</p>
+            <h2>Customer Email</h2>
             <input
               type="text"
               value={customerEmail}
@@ -248,7 +251,7 @@ const GroupJoinCustomer = () => {
           </div>
 
           <div>
-            <p>Mobile Number</p>
+            <h2>Mobile Number</h2>
             <input 
             type="text" 
             placeholder='Enter Customer Mobile Number'
@@ -258,7 +261,7 @@ const GroupJoinCustomer = () => {
           </div>
 
           <div className='barber-single-join-dropdown'>
-            <p>Choose Your Barber</p>
+            <h2>Choose Your Barber</h2>
             {/* <button onClick={() => setBarberDrop(!barberDrop)}>drop</button> */}
           </div>
 
@@ -274,14 +277,20 @@ const GroupJoinCustomer = () => {
             </div>
 
             {
-              barberList ? barberList?.getAllBarbers?.map((barber) => (
+              appoinmentBarberList ? appoinmentBarberList?.response?.map((barber) => (
                 <div className='barber-single-join-content-bbr' key={barber._id}>
                   <p>{barber.email}</p>
                   <p>{barber.name}</p>
                   {/* <p>{barber.userName}</p> */}
                   <p>{barber.barberEWT}</p>
                   <p>{barber.isActive === true ? "Yes" : "No"}</p>
-                  <button onClick={() => barberServiceCallHandler(barber.barberId, barber.name)}>Select</button>
+                  <button onClick={() => barberServiceCallHandler(barber.barberId, barber.name)} style={{
+                    border:"1px solid blue",
+                    color:"blue",
+                    background:"#fff",
+                    boxShadow:"0px 0px 4px blue",
+                    cursor:"pointer"
+                  }}>+</button>
                 </div>
 
 
@@ -289,7 +298,7 @@ const GroupJoinCustomer = () => {
             }
           </div>
 
-          <p>Choose Barber Services</p>
+          <h2>Choose Barber Services</h2>
           <div className='barber-single-join-services'>
             <div className='barber-single-join-quebarberserv-content'>
               <p>Service ID</p>
@@ -299,13 +308,19 @@ const GroupJoinCustomer = () => {
               <p>Action</p>
             </div>
             {
-              getBarberServicesBybarberId?.response?.map((b, index) => (
+              groupBarberServicesByBarberId?.response?.map((b, index) => (
                 <div className='barber-single-join-quebarberserv-content' key={b._id}>
                   <p>{b.serviceId}</p>
                   <p>{b.serviceName}</p>
                   <p>{b.servicePrice}</p>
                   <p>{b.barberServiceEWT}</p>
-                  <button onClick={() => selectedServiceHandler(b, index)}>Add</button>
+                  <button onClick={() => selectedServiceHandler(b, index)} style={{
+                    border:"1px solid blue",
+                    color:"blue",
+                    background:"#fff",
+                    boxShadow:"0px 0px 4px blue",
+                    cursor:"pointer"
+                  }}>+</button>
                 </div>
               ))
             }
@@ -313,7 +328,7 @@ const GroupJoinCustomer = () => {
           </div>
 
 
-          <p>Your Selected Services</p>
+          <h2>Your Selected Services</h2>
           <div className='barber-single-join-services'>
 
             <div className='barber-single-join-quebarberserv-content'>
@@ -330,7 +345,13 @@ const GroupJoinCustomer = () => {
                   <p>{b.serviceName}</p>
                   <p>{b.servicePrice}</p>
                   <p>{b.barberServiceEWT}</p>
-                  <button onClick={() => selectedServiceDelete(b)}>Del</button>
+                  <button onClick={() => selectedServiceDelete(b)} style={{
+                    border:"1px solid red",
+                    color:"red",
+                    background:"#fff",
+                    boxShadow:"0px 0px 4px red",
+                    cursor:"pointer"
+                  }}>-</button>
                 </div>
               )) : <p>No Services Available</p>
             }
@@ -338,7 +359,7 @@ const GroupJoinCustomer = () => {
 
           <button onClick={addCustomerHandler}>Add Customer</button>
 
-          <p>Customers</p>
+          <h2>Customers</h2>
           <div className='barber-single-join-services'>
             <div className='barber-single-join-quebarberserv-content-ggp'>
               <p>Customer Name</p>
@@ -356,7 +377,13 @@ const GroupJoinCustomer = () => {
                   <p>{cus.joinedQType}</p>
                   <p>{cus.methodUsed}</p>
                   <p>{cus.services.length}</p>
-                  <button onClick={() => selectedCustomerDelete(cus)}>Del</button>
+                  <button onClick={() => selectedCustomerDelete(cus)} style={{
+                    border:"1px solid red",
+                    color:"red",
+                    background:"#fff",
+                    boxShadow:"0px 0px 4px red",
+                    cursor:"pointer"
+                  }}>-</button>
                 </div>
               ))) : (<p>No Customers</p>)
             }

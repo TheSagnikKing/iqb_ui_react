@@ -75,12 +75,24 @@ const BarberAccountDetail = () => {
                     </div>
 
                     <div>
-                        <label htmlFor="">Gender</label>
+                        {/* <label htmlFor="">Gender</label>
                         <input
                             type="text"
                             value={gender}
                             onChange={(e) => setGender(e.target.value)}
-                        />
+                        /> */}
+
+                        <h2>Gender:</h2>
+
+                        <select 
+                        name="gender" 
+                        id="gender" 
+                        onChange={(e) => setGender(e.target.value)} 
+                        value={gender}>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
                     </div>
 
                     <div>

@@ -36,7 +36,7 @@ const BarberListTable = () => {
     const salonId = LoggedInMiddleware?.user && LoggedInMiddleware.user[0].salonId;
 
     useEffect(() => {
-        const abortController = new AbortController();
+        // const abortController = new AbortController();
 
 
         const getAllBarbersfunc = async () => {
@@ -52,10 +52,10 @@ const BarberListTable = () => {
         getAllBarbersfunc()
 
 
-        return () => {
-            abortController.abort();
-        };
-    }, [salonId])
+        // return () => {
+        //     abortController.abort();
+        // };
+    }, [Number(salonId)])
 
     const searchHandler = async () => {
         if (search === "") {
@@ -176,16 +176,24 @@ const BarberListTable = () => {
 
 
     return (
-        <>
             <div className="wrapper">
                 <div className="header">
                     <div>
-                        <p>Barbers List</p>
+                        <h2>Barbers List</h2>
 
                         <div className='notify-buttons'>
                             <button
                                 disabled={checkboxArray.length == 0 ? true : false}
                                 onClick={() => multipleemailHandler()}
+                                style={{
+                                    background:"#fff",
+                                    boxShadow:"0px 0px 4px rgba(0,0,0,0.6)",
+                                    border:"none",
+                                    borderRadius:"5px",
+                                    height:"3rem",
+                                    marginLeft:"1rem"
+
+                                }}
                             >Send multiple</button>
                             {/* <button>All</button> */}
                         </div>
@@ -193,7 +201,7 @@ const BarberListTable = () => {
                     </div>
 
                     <div>
-                        <button onClick={reloadHandler} className='reload'><AiOutlineReload /></button>
+                        <button onClick={reloadHandler} className='reload' style={{marginRight:"1rem"}}><AiOutlineReload /></button>
                         <div>
                             <input
                                 className='search'
@@ -347,9 +355,6 @@ const BarberListTable = () => {
                 </div>
 
             </div>
-
-
-        </>
     )
 }
 
