@@ -59,7 +59,10 @@ import BarberCalenderList from './components/barber/BarberCalenderList/BarberCal
 import BarberQueLists from './components/barber/BarberQueLists/BarberQueLists';
 import SalonSettings from './components/Salon/SalonSettings/SalonSettings';
 import Map from './components/Map/Map';
-import Advertisement from './components/Advertisement/Advertisement';
+
+
+const Advertisement = React.lazy(() => import("./components/Advertisement/Advertisement"))
+
 import EditAppointment from './components/Appoinment/EditAppointment/EditAppointment';
 import AdminVerifyEmail from './components/VerifyEmail/AdminVerifyEmail';
 import BarberUpdateProfile from './components/barber/BarberUpdateProfile/BarberUpdateProfile';
@@ -345,7 +348,7 @@ const App = () => {
 
           } />
 
-          <Route path="/advertisement" element={<Auth><Advertisement /></Auth>} />
+          <Route path="/advertisement" element={<Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}><Auth><Advertisement /></Auth></Suspense>} />
 
           <Route path="/map" element={<Map />} />
 
