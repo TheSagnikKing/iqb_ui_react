@@ -351,7 +351,7 @@ const EditAppointment = () => {
                                 </div>
                             </div>
 
-                            <button className='app-modal-crt-button' onClick={UpdateAppointment}>{
+                            <button className='app-modal-crt-button' onClick={UpdateAppointment} style={{fontSize:"1.2rem"}}>{
                                 editAppointment?.loading == true ? <h2>loading...</h2> : "Update Appointment"
                             }</button>
                         </div>

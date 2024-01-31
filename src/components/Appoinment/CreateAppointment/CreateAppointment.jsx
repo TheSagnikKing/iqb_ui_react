@@ -354,7 +354,7 @@ const CreateAppointment = () => {
                                 </div>
                             </div>
 
-                            <button className='app-modal-crt-button' onClick={CreateAppointment}>{
+                            <button className='app-modal-crt-button' onClick={CreateAppointment} style={{fontSize:"1.2rem"}}>{
                                 createAppointment?.loading == true ? <h2>loading...</h2> : "Create Appointment"
                             }</button>
                         </div>

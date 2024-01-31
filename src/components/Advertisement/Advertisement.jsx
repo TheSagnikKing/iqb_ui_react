@@ -137,7 +137,8 @@ const Advertisement = () => {
               boxShadow:"0px 0px 6px rgba(0,0,0,0.6)",
               cursor:"pointer",
               borderRadius:"5px",
-              border:"none"
+              border:"none",
+              fontSize:"1.2rem"
             }}>Upload Image</button>
           </div>
         </div>
