@@ -75,8 +75,12 @@ const Advertisement = () => {
 
   console.log(LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId)
 
+
+  const [advertisementLoader, setAdvertisementLoader] = useState(false)
+
   const uploadImageHandler = async () => {
     if (selectedFiles != null) {
+      setAdvertisementLoader(true)
       const formData = new FormData();
 
       const SalonId = Number(LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId)
@@ -99,6 +103,7 @@ const Advertisement = () => {
         window.location.reload();
       } catch (error) {
         console.error('Image upload failed:', error);
+        setAdvertisementLoader(false)
         // Handle error as needed
       }
     }
@@ -139,7 +144,7 @@ const Advertisement = () => {
               borderRadius:"5px",
               border:"none",
               fontSize:"1.2rem"
-            }}>Upload Image</button>
+            }}>{advertisementLoader ? <h2>Loading</h2> : "Upload Image"}</button>
           </div>
         </div>
 

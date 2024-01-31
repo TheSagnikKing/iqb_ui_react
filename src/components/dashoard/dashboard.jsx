@@ -230,9 +230,9 @@ const dashboard = () => {
                                 <p>Advertisement</p>
                                 <div className="btn_box">
                                     <div className="btn_one">
-                                        <div>
+                                        {/* <div>
                                             <IoMdAdd />
-                                        </div>
+                                        </div> */}
 
                                         <p><Link to="/advertisement">Add New Post</Link></p>
                                     </div>
@@ -250,13 +250,13 @@ const dashboard = () => {
                             <div className="div_left_images">
 
                                 <div className="img_one">
-                                    <img src={advertisementList[0]?.url ? advertisementList[0]?.url : "https://png.pngtree.com/png-clipart/20230917/original/pngtree-no-image-available-icon-flatvector-illustration-pic-design-profile-vector-png-image_12323913.png" } alt="" />
+                                    <img src={advertisementList ? advertisementList[0]?.url : "https://png.pngtree.com/png-clipart/20230917/original/pngtree-no-image-available-icon-flatvector-illustration-pic-design-profile-vector-png-image_12323913.png" } alt="" />
                                 </div>
 
                                 <div className="img_two">
 
                                     <div>
-                                        <img src={advertisementList[1]?.url ? advertisementList[1]?.url : "https://png.pngtree.com/png-clipart/20230917/original/pngtree-no-image-available-icon-flatvector-illustration-pic-design-profile-vector-png-image_12323913.png"} alt="" />
+                                        <img src={advertisementList ? advertisementList[1]?.url : "https://png.pngtree.com/png-clipart/20230917/original/pngtree-no-image-available-icon-flatvector-illustration-pic-design-profile-vector-png-image_12323913.png"} alt="" />
                                     </div>
 
                                     <div>
