@@ -94,7 +94,7 @@ const CalenderEvent = () => {
                                                     }}>
                                                             <p>{m.startTime}-{m.endTime}</p>
                                                             <p>Customer : {m.customerName}</p>
-                                                            <p style={{fontWeight:"500"}}>Services : </p>
+                                                            <p style={{fontWeight:"500"}}>Services : {m}</p>
                                                             <div className='app-btn-div'>
                                                                 <button onClick={() => editHandler(m)}><MdEdit/></button>
                                                                 <button onClick={() => deleteHandler(m)}><MdDelete/></button>

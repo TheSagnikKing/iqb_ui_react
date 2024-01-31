@@ -120,9 +120,14 @@ const UpdateSalon = () => {
 
     const addServiceHandler = () => {
 
-        if (serviceName.trim() === '' || serviceDesc.trim() === '' || servicePrice.trim() === '' || serviceEWT.trim() === '') {
-            // You can handle the case when any of the fields is empty (e.g., show an error message)
-            alert("Please fill all the fields")
+        // if (serviceName.trim() === '' || serviceDesc.trim() === '' || servicePrice.trim() === '' || serviceEWT.trim() === '') {
+        //     // You can handle the case when any of the fields is empty (e.g., show an error message)
+        //     alert("Please fill all the fields")
+        //     return;
+        // }
+
+        if(!serviceName || !serviceDesc || !servicePrice || !serviceEWT){
+            alert("Please fill all the field")
             return;
         }
 
