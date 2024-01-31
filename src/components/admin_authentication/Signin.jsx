@@ -12,13 +12,14 @@ import { Link, useNavigate } from 'react-router-dom'
 import { GoogleLogin } from '@react-oauth/google';
 
 import { AdminLoginAction, AdminGoogleloginAction } from '../../redux/actions/AdminAuthAction'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { BarberGoogleloginAction, BarberLoginAction } from '../../redux/actions/BarberAuthAction'
 
 //This is sign-in page not sign-up
 
 import { getMessaging, getToken } from "firebase/messaging";
 import { messaging } from '../../firebase';
+import ClipLoader from 'react-spinners/ClipLoader'
 
 const SignIn = () => {
 
@@ -147,6 +148,14 @@ const SignIn = () => {
         console.log(error);
     };
 
+
+    const AdminLogin = useSelector(state => state.AdminLogin)
+    const {loading} = AdminLogin
+
+    const BarberLogin = useSelector(state => state.BarberLogin)
+    const { loading: barberLoading } = BarberLogin;
+
+
     return (
             <main className="signup">
                 <div className="left">
@@ -237,7 +246,7 @@ const SignIn = () => {
 
                                     <button className="divthree"
                                         onClick={adminsubmitHandler}
-                                    >Sign In </button>
+                                    >{loading ? <div><ClipLoader color="#fff"/></div> : "Sign In"} </button>
 
                                     <div className="divfour">
                                         <div>
@@ -322,7 +331,7 @@ const SignIn = () => {
 
                                         <button className="divthree"
                                             onClick={barbersubmitHandler}
-                                        >Sign In</button>
+                                        >{barberLoading ? <div><ClipLoader color="#fff"/></div> : "Sign In"}</button>
 
                                         <div className="divfour">
                                             <div>

@@ -10,7 +10,7 @@ import { BiHide } from 'react-icons/bi'
 import { RiErrorWarningLine } from 'react-icons/ri'
 
 import { Link, useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { AdminGoogleloginAction, AdminRegisterAction } from '../../redux/actions/AdminAuthAction'
 import { GoogleLogin } from '@react-oauth/google'
 import { BarberGoogleloginAction, BarberRegisterAction } from '../../redux/actions/BarberAuthAction'
@@ -18,6 +18,8 @@ import { BarberGoogleloginAction, BarberRegisterAction } from '../../redux/actio
 
 import { getMessaging, getToken } from "firebase/messaging";
 import { messaging } from '../../firebase';
+import { ClipLoader } from 'react-spinners'
+
 
 const SignUp = () => {
 
@@ -138,6 +140,12 @@ const SignUp = () => {
     const errorBarberMessage = (error) => {
         console.log(error);
     };
+    
+    const AdminRegister = useSelector(state => state.AdminRegister)
+    const {loading} = AdminRegister
+
+    const BarberRegister = useSelector(state => state.BarberRegister)
+    const {loading:BarberLoading} = BarberRegister
 
     return (
             <main className="signup">
@@ -223,7 +231,7 @@ const SignUp = () => {
 
                                 <button className="divthree"
                                     onClick={submitHandler}
-                                >Sign Up</button>
+                                >{loading ? <div><ClipLoader color="#fff"/></div> : "Sign Up"}</button>
 
                                 <div className="divfour">
                                     <div>
@@ -303,7 +311,7 @@ const SignUp = () => {
 
                                 <button className="divthree"
                                     onClick={barbersubmitHandler}
-                                >Sign Up</button>
+                                >{BarberLoading ? <div><ClipLoader color="#fff"/></div> : "Sign Up"}</button>
 
                                 <div className="divfour">
                                     <div>
