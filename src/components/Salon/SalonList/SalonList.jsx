@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import "./SalonList.css"
 import { useDispatch, useSelector } from 'react-redux'
 import { GrAdd } from 'react-icons/gr'
@@ -26,12 +26,19 @@ const SalonList = () => {
 
     console.log("Sagnik",salonList)
 
+    const controllerRef = useRef(new AbortController());
+
     useEffect(() => {
         //Admin emailer value loggin korar por theke asbe akhon static ache
         const fetchSalons = async () => {
             try {
+
+                const controller = new AbortController();
+                controllerRef.current = controller;
+
+
                 // arghyahimanstech@gmail.com 
-                const { data } = await api.get(`https://iqb-backend2.onrender.com/api/salon/getAllSalonsByAdminEmail?adminEmail=${currentAdminEmail} `)
+                const { data } = await api.get(`https://iqb-backend2.onrender.com/api/salon/getAllSalonsByAdminEmail?adminEmail=${currentAdminEmail} `,{ signal: controller.signal })
                 setSalonList(data)
                 setLoading(false)
             } catch (error) {
@@ -44,9 +51,12 @@ const SalonList = () => {
 
         fetchSalons()
 
+        return () => {
+            controllerRef.current.abort();
+        };
+
     }, [currentAdminEmail])
 
-    // console.log(salonList)
 
     const navigate = useNavigate()
 

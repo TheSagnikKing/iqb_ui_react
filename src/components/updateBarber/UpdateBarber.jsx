@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import "./UpdateBarber.css"
 import Layout from '../layout/Layout'
 import { useDispatch, useSelector } from 'react-redux'
@@ -86,12 +86,24 @@ const UpdateBarber = () => {
 
     const navigate = useNavigate()
 
+    const controllerRef = useRef(null);
+
     const submitHandler = () => {
+
+        if (controllerRef.current) {
+            controllerRef.current.abort(); // Abort previous request if it exists
+        }
+
+        const newController = new AbortController();
+        controllerRef.current = newController;
+
+        const signal = newController.signal;
+
         const barberdata = {
             name, email, nickName, mobileNumber, dateOfBirth, salonId, barberServices: selectedService
         }
         // console.log(barberdata)
-        dispatch(updateBarberAction(barberdata,navigate))
+        dispatch(updateBarberAction(barberdata,navigate,signal))
     }
 
     const location = useLocation()
@@ -189,9 +201,11 @@ const UpdateBarber = () => {
                     <div></div>
                     <div></div>
 
-                    <button onClick={submitHandler}>{
-                        updateBarber?.loading == true ? <h2>Loading...</h2> : "Update"
-                    }</button>
+                    <button onClick={submitHandler}>Update</button>
+
+                    {/* { updateBarber?.loading == true ? <button>Loading...</button> : <button onClick={submitHandler}>
+                         Update
+                    </button>} */}
 
                     <div>
                         <div>

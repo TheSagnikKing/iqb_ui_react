@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Suspense, useMemo } from 'react'
+import React, { useEffect, useState, Suspense, useMemo, useRef } from 'react'
 import './dashboard.css'
 import { IoMdAdd } from 'react-icons/io'
 import { IoNotificationsOutline } from 'react-icons/io5'
@@ -19,7 +19,7 @@ import { queueListAction } from '../../redux/actions/joinQueueAction'
 import api from "../../redux/api/Api"
 import { applySalonAction, salonStatusOnlineAction } from '../../redux/actions/salonAction'
 
-const dashboard = () => {
+const Dashboard = () => {
 
     const [checkbox, setCheckbox] = useState(false)
     const [checkbox2, setCheckbox2] = useState(false)
@@ -67,7 +67,7 @@ const dashboard = () => {
 
     const formattedDate = formatDate(currentDate);
 
-    console.log(formattedDate)
+    // console.log(formattedDate)
 
     const [appointmentData, setAppointmentData] = useState([])
     const [appointmentLoader, setAppointmentLoader] = useState(false)
@@ -86,19 +86,57 @@ const dashboard = () => {
 
         appointfnc()
     }, [salonId, formattedDate])
-    console.log("ss", appointmentData)
+    // console.log("ss", appointmentData)
 
     const [advertisementList, setAdvertisementList] = useState([])
 
+    // useEffect(() => {
+    //     const getAdvertisementData = async () => {
+    //         const { data } = await api.post(`/api/advertisement/getAdvertisements`, { salonId: Number(LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId) })
+
+    //         setAdvertisementList(data?.advertisements)
+    //     }
+
+    //     getAdvertisementData()
+    // }, [LoggedInMiddleware?.user])
+
+
+    const controllerRef = useRef(new AbortController());
+
     useEffect(() => {
         const getAdvertisementData = async () => {
-            const { data } = await api.post(`/api/advertisement/getAdvertisements`, { salonId: Number(LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId) });
+          try {
 
-            setAdvertisementList(data?.advertisements)
+            const controller = new AbortController();
+            controllerRef.current = controller;
+
+
+            const { data } = await api.post(
+              `/api/advertisement/getAdvertisements`,
+              { salonId: Number(LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId) },
+              { signal: controller.signal }
+            );
+      
+            setAdvertisementList(data?.advertisements);
+          } catch (error) {
+            if(error.name === 'AbortError'){
+                console.log('Advertisement Request Cancelled')
+            }else{
+            // Handle the error here, e.g., log it or show a user-friendly message
+            console.error('Error fetching advertisement data:', error);
+            }
+
+          }
+        };
+      
+        getAdvertisementData();
+      
+        return () => {
+            controllerRef.current.abort();
         }
-
-        getAdvertisementData()
-    }, [LoggedInMiddleware?.user])
+        
+      }, [LoggedInMiddleware?.user]);
+      
 
     const [salonList, setSalonList] = useState([])
     const [salonStatus, setSalonStatus] = useState(false);
@@ -127,9 +165,9 @@ const dashboard = () => {
         getSalonfnc()
     }, [LoggedInMiddleware?.user])
 
-    console.log(salonList)
+    // console.log(salonList)
 
-    console.log("jhv", salonStatus)
+    // console.log("jhv", salonStatus)
 
     const salonStatusHandler = () => {
         const newCheckValue = !salonStatus;
@@ -435,4 +473,4 @@ const dashboard = () => {
     )
 }
 
-export default dashboard
+export default Dashboard

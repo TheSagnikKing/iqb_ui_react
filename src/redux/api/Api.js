@@ -49,3 +49,59 @@ axiosPrivate.interceptors.response.use(
 
 export default axiosPrivate;
 
+
+// import axios from 'axios';
+
+// const BASE_URL = 'https://iqb-backend2.onrender.com';
+
+// export const axiosPrivate = axios.create({
+//     baseURL: BASE_URL,
+//     headers: { 'Content-Type': 'application/json' },
+//     withCredentials: true
+// });
+
+// const useRefreshToken = async (signal) => {
+//     try {
+//         // Send a request to your server to refresh the token using the HTTP-only cookie
+//         await axios.post(
+//             "https://iqb-backend2.onrender.com/api/admin/refresh-token",
+//             {},
+//             { withCredentials: true, signal }
+//         );
+//     } catch (error) {
+//         console.log(error);
+//     }
+// }
+
+// axiosPrivate.interceptors.request.use(
+//     config => {
+//         // Attach the AbortSignal to the request configuration
+//         config.signal = config.signal || new AbortController().signal;
+//         return config;
+//     },
+//     error => Promise.reject(error)
+// );
+
+// axiosPrivate.interceptors.response.use(
+//     response => response,
+//     async (error) => {
+//         const prevRequest = error?.config;
+//         if (error?.response?.status === 500 && !prevRequest?.sent) {
+//             prevRequest.sent = true;
+//             try {
+//                 await useRefreshToken(prevRequest.signal);
+
+//                 // Retry the original request with the updated signal
+//                 return axios(prevRequest);
+//             } catch (refreshError) {
+//                 // Handle refresh token error, e.g., log it or redirect to login
+//                 return Promise.reject(refreshError);
+//             }
+//         }
+//         return Promise.reject(error);
+//     }
+// );
+
+// export default axiosPrivate;
+
+

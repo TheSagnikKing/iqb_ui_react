@@ -51,11 +51,11 @@ export const createBarberAction = (barberdata,navigate) => async(dispatch) => {
     }
 }
 
-export const updateBarberAction = (barberdata,navigate) => async(dispatch) => {
+export const updateBarberAction = (barberdata,navigate,signal) => async(dispatch) => {
     try {
         dispatch({type:UPDATE_BARBER_REQ})
 
-        const {data} = await api.put("/api/barber/updateBarberByAdmin",barberdata)
+        const {data} = await api.put("/api/barber/updateBarberByAdmin",barberdata ,{signal})
 
         dispatch({
             type:UPDATE_BARBER_SUCCESS,
@@ -63,10 +63,15 @@ export const updateBarberAction = (barberdata,navigate) => async(dispatch) => {
         })
         navigate("/barber/dashboard2")
     } catch (error) {
-        dispatch({
-            type:UPDATE_BARBER_FAIL,
-            payload: error.response.data
-        })
+        if (error.name === 'AbortError' || error.code === 'ECONNABORTED') {
+            console.log("Request Canceled");
+        } else {
+            dispatch({
+                type: UPDATE_BARBER_FAIL,
+                payload: error.response.data
+            });
+        }
+        
     }
 }
 
