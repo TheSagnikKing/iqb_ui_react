@@ -90,16 +90,6 @@ const Dashboard = () => {
 
     const [advertisementList, setAdvertisementList] = useState([])
 
-    // useEffect(() => {
-    //     const getAdvertisementData = async () => {
-    //         const { data } = await api.post(`/api/advertisement/getAdvertisements`, { salonId: Number(LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId) })
-
-    //         setAdvertisementList(data?.advertisements)
-    //     }
-
-    //     getAdvertisementData()
-    // }, [LoggedInMiddleware?.user])
-
 
     const controllerRef = useRef(new AbortController());
 
@@ -134,35 +124,79 @@ const Dashboard = () => {
         return () => {
             controllerRef.current.abort();
         }
-        
+
       }, [LoggedInMiddleware?.user]);
       
 
     const [salonList, setSalonList] = useState([])
     const [salonStatus, setSalonStatus] = useState(false);
 
+
+    const SalonListControllerRef = useRef(new AbortController())
+
     useEffect(() => {
         const getSalonfnc = async () => {
-            const { data } = await api.post("/api/admin/getAllSalonsByAdmin", {
-                adminEmail: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].email
-            })
-            setSalonList(data?.salons)
+            try {
+
+
+                const controller = new AbortController()
+                SalonListControllerRef.current = controller
+
+                const { data } = await api.post("/api/admin/getAllSalonsByAdmin", {
+                    adminEmail: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].email
+                },{ signal: controller.signal })
+                setSalonList(data?.salons)
+            } catch (error) {
+                if(error.name === 'AbortError'){
+                    console.log('Advertisement Request Cancelled')
+                }else{
+                // Handle the error here, e.g., log it or show a user-friendly message
+                console.error('Error fetching advertisement data:', error);
+                }
+            }
+           
         }
 
         getSalonfnc()
+
+        return () => {
+            SalonListControllerRef.current.abort();
+        }
+
+
     }, [LoggedInMiddleware?.user])
 
+    const defaultSalonControllerRef = useRef(new AbortController());
+
     useEffect(() => {
         const getSalonfnc = async () => {
-            const { data } = await api.post("/api/admin/getDefaultSalonByAdmin", {
-                adminEmail: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].email
-            })
+            try {
 
-            setSalonStatus(data?.response?.isOnline)
-            setChooseSalonId(data?.response?.salonId)
+                const controller = new AbortController()
+                defaultSalonControllerRef.current = controller
+                
+                const { data } = await api.post("/api/admin/getDefaultSalonByAdmin", {
+                    adminEmail: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].email
+                },{ signal: controller.signal })
+    
+                setSalonStatus(data?.response?.isOnline)
+                setChooseSalonId(data?.response?.salonId)
+            } catch (error) {
+                if(error.name === 'AbortError'){
+                    console.log('Advertisement Request Cancelled')
+                }else{
+                // Handle the error here, e.g., log it or show a user-friendly message
+                console.error('Error fetching advertisement data:', error);
+                }
+            }
+            
         }
 
         getSalonfnc()
+
+        return () => {
+            defaultSalonControllerRef.current.abort();
+        }
     }, [LoggedInMiddleware?.user])
 
     // console.log(salonList)
