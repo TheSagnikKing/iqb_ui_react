@@ -36,7 +36,7 @@ const CalenderEvent = () => {
         apfunc();
     }, [LoggedInMiddleware?.user, location.state])
 
-    console.log(appointmentsdata)
+    console.log("App",appointmentsdata)
 
 
     const editHandler = (appointmentdata) => {
@@ -94,7 +94,8 @@ const CalenderEvent = () => {
                                                     }}>
                                                             <p>{m.startTime}-{m.endTime}</p>
                                                             <p>Customer : {m.customerName}</p>
-                                                            <p style={{fontWeight:"500"}}>Services : {m}</p>
+                                                            {/* <p style={{fontWeight:"500"}}>Services : {m.barberServices.forEach((s) => s.serviceName)}</p> */}
+                                                            {console.log(m)}
                                                             <div className='app-btn-div'>
                                                                 <button onClick={() => editHandler(m)}><MdEdit/></button>
                                                                 <button onClick={() => deleteHandler(m)}><MdDelete/></button>

@@ -88,7 +88,7 @@ const CreateBarber = () => {
     const submitHandler = () => {
         //salonid loggin admin theke 
         const barberdata = {
-            name, email, nickName,password, mobileNumber, dateOfBirth, salonId:Number(LoggedInMiddleware?.user && LoggedInMiddleware.user[0].salonId), barberServices: selectedService
+            name, email, nickName, mobileNumber, dateOfBirth, salonId:Number(LoggedInMiddleware?.user && LoggedInMiddleware.user[0].salonId), barberServices: selectedService
         }
 
         console.log(barberdata)
@@ -128,17 +128,7 @@ const CreateBarber = () => {
                         />
                     </div>
 
-                    <div>
-                    <label>Password</label>
-                        <input
-                            type="text"
-                            placeholder='Enter Password'
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
-                    </div>
-
-                    <div>
+                     <div>
                         <label>Nick Name</label>
                         <input
                             type="text"
@@ -147,6 +137,8 @@ const CreateBarber = () => {
                             onChange={(e) => setNickName(e.target.value)}
                         />
                     </div>
+
+                   <div></div>
 
                     <div>
                         <label>Mobile Number</label>
