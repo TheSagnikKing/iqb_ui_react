@@ -2,7 +2,7 @@ import { ADMIN_FORGET_PASSWORD_FAIL, ADMIN_FORGET_PASSWORD_REQ, ADMIN_FORGET_PAS
 
 import api from "../api/Api"
 import axios from "axios";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 
 export const AdminRegisterAction = (signupData,navigate) => async (dispatch) => {
     try {
@@ -285,9 +285,9 @@ export const adminVerifyEmailAction = (navigate,verifyemail) => async (dispatch)
             type: ADMIN_VERIFY_EMAIL_FAIL,
             payload:error?.response?.data
         }); 
-        toast.error(adminLoginError?.message, {
-            position: "top-right"
-        });
+        // toast.error(adminLoginError?.message, {
+        //     position: "top-right"
+        // });
     }
 };
 
