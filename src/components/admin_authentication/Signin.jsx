@@ -14,7 +14,8 @@ import { GoogleLogin } from '@react-oauth/google';
 import { AdminLoginAction, AdminGoogleloginAction } from '../../redux/actions/AdminAuthAction'
 import { useDispatch, useSelector } from 'react-redux'
 import { BarberGoogleloginAction, BarberLoginAction } from '../../redux/actions/BarberAuthAction'
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 //This is sign-in page not sign-up
 
@@ -151,7 +152,13 @@ const SignIn = () => {
 
 
     const AdminLogin = useSelector(state => state.AdminLogin)
-    const {loading} = AdminLogin
+    const {loading,error:adminLoginError} = AdminLogin
+//  console.log(adminLoginError,'pppppop');
+    if(adminLoginError){
+        toast.error(adminLoginError?.message, {
+            position: "top-right"
+        });
+    }
 
     const BarberLogin = useSelector(state => state.BarberLogin)
     const { loading: barberLoading } = BarberLogin;
@@ -216,6 +223,7 @@ const SignIn = () => {
                                                 type={visible ? "text" : "password"}
                                                 placeholder='Password'
                                                 value={password}
+                                                
                                                 onChange={e => setPassword(e.target.value)}
                                                 className="password"
                                                 // style={{ border: error ? "1px solid red" : "" }}
@@ -364,6 +372,7 @@ const SignIn = () => {
 
                     </div>
                 </div>
+                <ToastContainer />
             </main>
     )
 }

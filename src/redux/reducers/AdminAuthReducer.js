@@ -14,9 +14,10 @@ export const AdminRegisterReducer = (state = {}, action) => {
 };
 
 export const AdminLoginReducer = (state = {}, action) => {
+    // console.log(action,state,'ppppppp');
     switch (action.type) {
         case ADMIN_SIGNIN_REQ:
-            return { ...state, loading: true };
+            return { ...state, loading: true,error:undefined };
         case ADMIN_SIGNIN_SUCCESS:
             return { ...state, loading: false, ...action.payload };
         case ADMIN_SIGNIN_FAIL:

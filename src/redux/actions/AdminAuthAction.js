@@ -43,9 +43,10 @@ export const AdminLoginAction = (loginData,navigate) => async (dispatch) => {
 
         navigate("/admin-dashboard")
     } catch (error) {
+        console.log(error,'errrrrrrrrr');
 
         dispatch({
-            type: LOGIN_FAIL,
+            type: ADMIN_SIGNIN_FAIL,
             payload:error.response.data
         });
     }
