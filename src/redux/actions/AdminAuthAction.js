@@ -167,6 +167,8 @@ export const LoggedOutMiddlewareAction = (navigate) => async (dispatch) => {
             payload: data
         });
     } catch (error) {
+
+        console.log("EROOOOOOOOOOOOOOOOO",error)
     
         dispatch({
             type: LOGGED_OUT_MIDDLEWARE_FAIL,
@@ -206,7 +208,8 @@ export const LoggedInMiddlewareAction = (navigate) => async (dispatch) => {
         //     window.location.reload()
         // }
     } catch (error) {
-    
+        console.log("EROOOOOOOOOOOOOOOOO",error)
+        
         dispatch({
             type: LOGGED_IN_MIDDLEWARE_FAIL,
             payload:error?.response?.data

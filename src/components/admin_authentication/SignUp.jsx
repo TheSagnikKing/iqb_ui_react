@@ -16,40 +16,40 @@ import { GoogleLogin } from '@react-oauth/google'
 import { BarberGoogleloginAction, BarberRegisterAction } from '../../redux/actions/BarberAuthAction'
 
 
-import { getMessaging, getToken } from "firebase/messaging";
-import { messaging } from '../../firebase';
+// import { getMessaging, getToken } from "firebase/messaging";
+// import { messaging } from '../../firebase';
 import { ClipLoader } from 'react-spinners'
 
 
 const SignUp = () => {
 
 
-       //For the notification part 
+    //    //For the notification part 
 
-       const [webFcmToken, setWebFcmToken] = useState("")
+    //    const [webFcmToken, setWebFcmToken] = useState("")
 
-       const requestPermission = async() => {
-           const permission = await Notification.requestPermission()
+    //    const requestPermission = async() => {
+    //        const permission = await Notification.requestPermission()
        
-           if(permission == 'granted'){
-             //Generate Token
-             const token = await getToken(messaging, {
-               vapidKey: 'BEJORsiedr3Gss5oAiiNzWFpg0Zpnmt9Sw2VQe3K-GiBspoUJWyE9qzEv7ldcSkCq4d65SLL-HGt46OSzPWh550'
-             });
-             console.log('Token Gen iqb',token)
-             setWebFcmToken(token)
+    //        if(permission == 'granted'){
+    //          //Generate Token
+    //          const token = await getToken(messaging, {
+    //            vapidKey: 'BEJORsiedr3Gss5oAiiNzWFpg0Zpnmt9Sw2VQe3K-GiBspoUJWyE9qzEv7ldcSkCq4d65SLL-HGt46OSzPWh550'
+    //          });
+    //          console.log('Token Gen iqb',token)
+    //          setWebFcmToken(token)
        
-           }else if(permission == 'denied'){
-             alert("You denied for the notification")
-           }
-         } 
+    //        }else if(permission == 'denied'){
+    //          alert("You denied for the notification")
+    //        }
+    //      } 
        
-         useEffect(() => {
-           //Req user for notification permission
-           requestPermission()
-         },[])
+    //      useEffect(() => {
+    //        //Req user for notification permission
+    //        requestPermission()
+    //      },[])
    
-         //===========================
+    //      //===========================
 
 
 
@@ -122,7 +122,7 @@ const SignUp = () => {
             } else if (!barberpassword) {
                 alert("Password required")
             } else {
-                const signupdata = { email:barberemail, password:barberpassword ,webFcmToken}
+                const signupdata = { email:barberemail, password:barberpassword }
                 console.log(signupdata)
                 dispatch(BarberRegisterAction(signupdata, navigate))
             }
@@ -131,7 +131,7 @@ const SignUp = () => {
         }
     }
 
-    //Google barber Action
+    // Google barber Action
     const responseBarberMessage = async (response) => {
         console.log("barber")
         dispatch(BarberGoogleloginAction(response.credential, navigate))

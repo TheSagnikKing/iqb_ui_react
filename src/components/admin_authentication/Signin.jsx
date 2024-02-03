@@ -26,30 +26,30 @@ const SignIn = () => {
 
     //For the notification part 
 
-    const [webFcmToken, setWebFcmToken] = useState("")
+    // const [webFcmToken, setWebFcmToken] = useState("")
 
-    const requestPermission = async() => {
-        const permission = await Notification.requestPermission()
+    // const requestPermission = async() => {
+    //     const permission = await Notification.requestPermission()
     
-        if(permission == 'granted'){
-          //Generate Token
-          const token = await getToken(messaging, {
-            vapidKey: 'BEJORsiedr3Gss5oAiiNzWFpg0Zpnmt9Sw2VQe3K-GiBspoUJWyE9qzEv7ldcSkCq4d65SLL-HGt46OSzPWh550'
-          });
-          console.log('Token Gen iqb',token)
-          setWebFcmToken(token)
+    //     if(permission == 'granted'){
+    //       //Generate Token
+    //       const token = await getToken(messaging, {
+    //         vapidKey: 'BEJORsiedr3Gss5oAiiNzWFpg0Zpnmt9Sw2VQe3K-GiBspoUJWyE9qzEv7ldcSkCq4d65SLL-HGt46OSzPWh550'
+    //       });
+    //       console.log('Token Gen iqb',token)
+    //       setWebFcmToken(token)
     
-        }else if(permission == 'denied'){
-          alert("You denied for the notification")
-        }
-      } 
+    //     }else if(permission == 'denied'){
+    //       alert("You denied for the notification")
+    //     }
+    //   } 
     
-      useEffect(() => {
-        //Req user for notification permission
-        requestPermission()
-      },[])
+    //   useEffect(() => {
+    //     //Req user for notification permission
+    //     requestPermission()
+    //   },[])
 
-      //===========================
+    //   //===========================
 
 
 
@@ -130,7 +130,7 @@ const SignIn = () => {
             } else if (!barberpassword) {
                 alert('Password required');
             } else {
-                const signindata = { email: barberemail, password: barberpassword ,webFcmToken}
+                const signindata = { email: barberemail, password: barberpassword}
                 console.log(signindata)
                 dispatch(BarberLoginAction(signindata, navigate))
             }
@@ -142,7 +142,7 @@ const SignIn = () => {
     //Google barber Action
     const responseBarberMessage = async (response) => {
         console.log("barber")
-        dispatch(BarberGoogleloginAction(response.credential,webFcmToken, navigate))
+        dispatch(BarberGoogleloginAction(response.credential, navigate))
     };
 
     const errorBarberMessage = (error) => {
