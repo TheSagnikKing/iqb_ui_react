@@ -56,7 +56,7 @@ const CalenderEvent = () => {
         }
     }
 
-    console.log(appointmentsdata)
+    console.log("AppointmentData",appointmentsdata)
 
     return (
         <>

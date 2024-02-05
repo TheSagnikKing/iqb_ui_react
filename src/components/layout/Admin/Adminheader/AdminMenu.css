@@ -80,3 +80,10 @@
     font-size: 1.2rem; /* 12px / 10 = 1.2rem */
     color: rgba(0, 0, 0, 0.3);
 }
+
+
+@media((min-width:0px) and (max-width:400px)){
+    .nav1-menu>div>h3{
+        display: none ;
+    }
+  }

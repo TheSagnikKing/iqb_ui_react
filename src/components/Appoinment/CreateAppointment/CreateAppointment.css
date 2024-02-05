@@ -1,100 +1,3 @@
-/* .create-appointment-container{
-    width: 82% !important;
-    position: absolute;
-    top: 90px;
-    left: 265px;
-    margin-left: 35px;
-    margin-top: 30px;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    padding-bottom: 40px;
-}
-
-.create-form{
-    display:grid;
-    grid-template-columns: repeat(2,1fr);
-    margin-top: 10px;
-    row-gap: 1rem;
-}
-
-.create-form>div{
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.create-form>div>input{
-    width: 85%;
-    height: 35px;
-    padding-inline: 10px;
-}
-
-.create-form>button{
-    height: 35px;
-    width: 85%;
-    background-color: #f1f6fc;
-    border: none;
-    box-shadow: 0px 0px 3px rgba(0,0,0,0.3);
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 20px;
-}
-
-.create-form>div:nth-child(4)>div{
-    background-color: #f1f6fc;
-    width: 85%;
-    height: 180px;
-    padding: 10px;
-    border-radius: 6px;
-    overflow-y: scroll;
-}
-
-.create-form>div:nth-child(5)>div{
-    background-color: #f1f6fc;
-    width: 85%;
-    height: 180px;
-    padding: 10px;
-    border-radius: 6px;
-    overflow-y: scroll;
-}
-
-.create-form>div:nth-child(6)>div{
-    background-color: #f1f6fc;
-    width: 85%;
-    height: 180px;
-    padding: 10px;
-    border-radius: 6px;
-    overflow-y: scroll;
-}
-
-.create-form>div:nth-child(7)>div{
-    background-color: #f1f6fc;
-    width: 85%;
-    height: 180px;
-    padding: 10px;
-    border-radius: 6px;
-    overflow-y: scroll;
-}
-
-.timeslot{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #fff;
-    margin-bottom: 10px;
-    padding: 10px;
-    border-radius: 4px;
-    border-radius: 4px;
-    box-shadow: 0px 0px 4px rgba(0,0,0,0.4);
-}
-
-.timeslot>button{
-    padding: 3px 10px;
-    cursor: pointer;
-} */
-
-
 .create-appointment-container {
     width: 82% !important;
     position: absolute;
@@ -223,4 +126,52 @@
     box-shadow: 0px 0px 4px rgba(0,0,0,0.4);
     border-radius: 0.4rem ;
     height: 3.5rem
+}
+
+@media((min-width:0px) and (max-width:400px)){
+    .create-appointment-container {
+        width: 82% !important;
+        position: absolute;
+        top: 9rem;
+        left: 6rem;
+        margin-left: 1.5rem;
+        margin-top: 3rem;
+        background-color: #fff;
+        padding: 2rem;
+        border-radius: 1rem;
+        padding-bottom: 4rem;
+    }
+
+    .create-form{
+        grid-template-columns: 1fr;
+    }
+
+    .create-form>div>input{
+        width: 40rem !important;
+    }
+
+    .barber-single-join-content-bbr{
+        width: 180%;
+        grid-template-columns: 22rem 10rem 10rem 10rem 10rem 10rem;
+    }
+
+    .barber-single-join-quebarberserv-content{
+        width: 180%;
+        grid-template-columns: 15rem 10rem 24rem 10rem ;
+        gap: 2rem;
+    }
+    
+    .create-form>button{
+        width: 100%;
+    }
+
+    .app-modal-crt-head{
+        width: 180%;
+        grid-template-columns: 20rem 20rem 30rem;
+    }
+    
+    .app-modal-crt-content{
+        width: 180%;
+        grid-template-columns: 20rem 20rem 30rem;
+    }
 }

@@ -364,3 +364,25 @@
     height: 15px;
     width: 15px;
   }
+
+  @media((min-width:0px) and (max-width:400px)){
+    .right_inner_container{
+        width: 80% !important;
+    }
+
+    .divfive{
+        width: 80% !important;
+    }
+
+    .signup{
+        grid-template-columns: 1fr;
+    }
+
+    .left{
+        order: 2;
+    }
+
+    .right{
+        margin-block: 2rem;
+    }
+  }

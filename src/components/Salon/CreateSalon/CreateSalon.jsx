@@ -409,33 +409,35 @@ const CreateSalon = () => {
                         <div>
                             <label for="cars">Start Time:</label>
                             <select name="startTime" id="startTime" style={{
-                                height: "35px",
-                                borderRadius: "5px",
-                                paddingInline: "10px",
+                                height: "3.5rem",
+                                borderRadius: "0.5rem",
+                                paddingInline: "1rem",
                                 border: "none",
                                 backgroundColor: "#f1f6fc",
-                                fontSize: "16px"
+                                fontSize: "1.6rem"
                             }}
                                 onChange={(e) => setStartTime(e.target.value)}
                                 value={startTime}
-                            >
+                            >   
+    
                                 {timeOptions.map((option) => (
                                     <option key={option.value} value={option.value}>
                                         {option.label}
                                     </option>
                                 ))}
+                       
                             </select>
                         </div>
 
                         <div>
                             <label for="cars">End Time:</label>
                             <select name="endTime" id="endTime" style={{
-                                height: "35px",
-                                borderRadius: "5px",
-                                paddingInline: "10px",
+                                height: "3.5rem",
+                                borderRadius: "0.5rem",
+                                paddingInline: "1rem",
                                 border: "none",
                                 backgroundColor: "#f1f6fc",
-                                fontSize: "16px"
+                                fontSize: "1.6rem"
                             }} onChange={(e) => setEndTime(e.target.value)}
                                 value={endTime}>
                                 {timeOptions.map((option) => (
@@ -450,12 +452,12 @@ const CreateSalon = () => {
                             <label htmlFor="">Interval Time</label>
 
                             <select name="endTime" id="endTime" style={{
-                                height: "35px",
-                                borderRadius: "5px",
-                                paddingInline: "10px",
+                                height: "3.5rem",
+                                borderRadius: "0.5rem",
+                                paddingInline: "1rem",
                                 border: "none",
                                 backgroundColor: "#f1f6fc",
-                                fontSize: "16px"
+                                fontSize: "1.6rem"
                             }} onChange={(e) => setChooseIntervalTime(e.target.value)}
                                 value={chooseIntervalTime}>
                                 {intervalTimemin.map((option) => (
@@ -553,7 +555,7 @@ const CreateSalon = () => {
                             <label className='serv-title'>Add Your Services</label>
 
                             <div>
-                                <div className='service-icon'>
+                                <div className='service-icon' >
                                     <p>Service Icon</p>
                                     <div onClick={() => setServiceDrop(!serviceDrop)}
                                         style={{ cursor: "pointer", background: "#fff", boxShadow: "0px 0px 4px rgba(0,0,0,0.4)", height: "2.5rem", width: "2.5rem", display: "flex", alignItems: "center", justifyContent: "center", borderRadius: "50%" }}><FaArrowDown /></div>

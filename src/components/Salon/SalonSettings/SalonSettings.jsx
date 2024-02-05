@@ -37,7 +37,7 @@ const SalonSettings = () => {
         const getsalonfnc = async () => {
 
             const { data } = await api.post("/api/salonSettings/getSalonSettings", {
-                salonId: 4
+                salonId: LoggedInMiddleware?.user && LoggedInMiddleware.user[0].salonId
                 // Add other data properties as needed
             })
 
@@ -49,7 +49,7 @@ const SalonSettings = () => {
         getsalonfnc()
 
 
-    }, [])
+    }, [LoggedInMiddleware?.user])
 
 
     const [timeOptions, setTimeOptions] = useState([]);
@@ -91,12 +91,12 @@ const SalonSettings = () => {
                         <div>
                             <h2>Start Time:</h2>
                             <select name="startTime" id="startTime" style={{
-                                height: "35px",
-                                borderRadius: "5px",
-                                paddingInline: "10px",
+                                height: "3.5rem",
+                                borderRadius: "0.5rem",
+                                paddingInline: "1rem",
                                 border: "none",
                                 backgroundColor: "#f1f6fc",
-                                fontSize: "16px"
+                                fontSize: "1.6rem"
                             }}
                                 onChange={(e) => setStartTime(e.target.value)}
                                 value={startTime}
@@ -112,12 +112,12 @@ const SalonSettings = () => {
                         <div>
                             <h2>End Time:</h2>
                             <select name="endTime" id="endTime" style={{
-                                height: "35px",
-                                borderRadius: "5px",
-                                paddingInline: "10px",
+                                height: "3.5rem",
+                                borderRadius: "0.5rem",
+                                paddingInline: "1rem",
                                 border: "none",
                                 backgroundColor: "#f1f6fc",
-                                fontSize: "16px"
+                                fontSize: "1.6rem"
                             }} onChange={(e) => setEndTime(e.target.value)}
                                 value={endTime}>
                                 {timeOptions.map((option) => (
@@ -132,12 +132,12 @@ const SalonSettings = () => {
                         <div>
                             <h2>Appointment Start Time:</h2>
                             <select name="startTime" id="startTime" style={{
-                                height: "35px",
-                                borderRadius: "5px",
-                                paddingInline: "10px",
+                                height: "3.5rem",
+                                borderRadius: "0.5rem",
+                                paddingInline: "1rem",
                                 border: "none",
                                 backgroundColor: "#f1f6fc",
-                                fontSize: "16px"
+                                fontSize: "1.6rem"
                             }}
                                 onChange={(e) => setStartTime(e.target.value)}
                                 value={startTime}
@@ -153,12 +153,12 @@ const SalonSettings = () => {
                         <div>
                             <h2>Appointment End Time:</h2>
                             <select name="endTime" id="endTime" style={{
-                                height: "35px",
-                                borderRadius: "5px",
-                                paddingInline: "10px",
+                                height: "3.5rem",
+                                borderRadius: "0.5rem",
+                                paddingInline: "1rem",
                                 border: "none",
                                 backgroundColor: "#f1f6fc",
-                                fontSize: "16px"
+                                fontSize: "1.6rem"
                             }} onChange={(e) => setEndTime(e.target.value)}
                                 value={endTime}>
                                 {timeOptions.map((option) => (

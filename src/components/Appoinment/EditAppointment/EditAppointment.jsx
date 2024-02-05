@@ -184,7 +184,7 @@ const EditAppointment = () => {
                     <div>
                         <h2>Barber List</h2>
 
-                        <div>
+                        <div style={{overflowY:"scroll",width:"40rem"}}>
                             <div className='barber-single-join-content-bbr'>
                                 <p>Email</p>
                                 <p>Name</p>
@@ -218,7 +218,7 @@ const EditAppointment = () => {
                     <div>
                         <h2>Choose  Services</h2>
 
-                        <div>
+                        <div style={{overflowY:"scroll",width:"40rem"}}>
                             <div className='barber-single-join-quebarberserv-content'
                                 style={{
                                     fontSize: "11px"
@@ -255,7 +255,7 @@ const EditAppointment = () => {
                     <div>
                         <h2>Your Services</h2>
 
-                        <div>
+                        <div style={{overflowY:"scroll",width:"40rem"}}>
                             <div className='barber-single-join-quebarberserv-content'
                             style={{
                                 fontSize:"11px"
@@ -292,7 +292,7 @@ const EditAppointment = () => {
                     <div>
                         <h2>Choose  TimeSlots</h2>
 
-                        <div>
+                        <div style={{overflowY:"scroll",width:"40rem"}}>
                             {
                                 timeSlotData?.timeSlots && timeSlotData?.timeSlots.length > 0 ? (timeSlotData?.timeSlots.map((t, i) => (
                                     <>

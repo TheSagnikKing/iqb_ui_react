@@ -10,3 +10,10 @@
     border-radius: 10px;
     padding-bottom: 40px;
 }
+
+
+@media((min-width:0px) and (max-width:400px)){
+    .edit-appointment-container{
+        left: 6rem;
+    }
+}

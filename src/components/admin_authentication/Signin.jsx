@@ -157,6 +157,8 @@ const SignIn = () => {
     const { loading: barberLoading } = BarberLogin;
 
 
+
+
     return (
             <main className="signup">
                 <div className="left">
@@ -265,7 +267,7 @@ const SignIn = () => {
                                             onError={errorMessage}
                                             size='large'
                                             shape='circle'
-                                            width={400}
+                                            width={310}
                                             logo_alignment='left'
                                             text='continue_with'
                                         />
@@ -350,7 +352,7 @@ const SignIn = () => {
                                                 onError={errorBarberMessage}
                                                 size='large'
                                                 shape='circle'
-                                                width={400}
+                                                width={310}
                                                 logo_alignment='left'
                                                 text='continue_with'
                                             />

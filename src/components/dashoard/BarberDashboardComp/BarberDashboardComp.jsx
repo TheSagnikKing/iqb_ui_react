@@ -134,7 +134,8 @@ const BarberDashboardComp = () => {
     
         dispatch(barberOnlineStatusAction(barberOnlineData));
     };
-    
+
+    const connectBarberSalon = useSelector(state => state.connectBarberSalon)
 
     return (
             <div className="right_main_div">
@@ -211,8 +212,11 @@ const BarberDashboardComp = () => {
                                 }
                             </div>
                         </div>
-
-                        <button onClick={connectSalonHandler}>Connect Salon</button>
+                        
+                        {
+                            connectBarberSalon?.loading == true ? <button style={{fontWeight:"500"}}>Loading</button> : <button onClick={connectSalonHandler}>Connect Salon</button>
+                        }
+                        
                     </div>
 
                     {/* <Link to="/salon/createsalon">Create Salon</Link> */}

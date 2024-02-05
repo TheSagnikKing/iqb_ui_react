@@ -6,7 +6,7 @@ const AdminLayout = ({children,title}) => {
   return (
     <>
     <AdminHeader title={title}/>
-    <main>{children}</main>
+    {/* <main>{children}</main> */}
     </>
   )
 }

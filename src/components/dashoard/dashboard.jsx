@@ -358,7 +358,7 @@ const Dashboard = () => {
                                             style={{
                                                 fontSize: "1.1rem"
                                             }}
-                                        >Add Customers</Link></p>
+                                        >Add Customer</Link></p>
                                     </div>
 
 

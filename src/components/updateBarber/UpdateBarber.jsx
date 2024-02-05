@@ -136,7 +136,7 @@ const UpdateBarber = () => {
         <>
             <AdminLayout />
             <div className='upd-wrapper'>
-                <p>Update Barber</p>
+                <h2>Update Barber</h2>
 
                 <div className='upd-form'>
                     <div>
@@ -201,16 +201,16 @@ const UpdateBarber = () => {
                     <div></div>
                     <div></div>
 
-                    <button onClick={submitHandler}>Update</button>
-
+                    
+                    
                     {/* { updateBarber?.loading == true ? <button>Loading...</button> : <button onClick={submitHandler}>
                          Update
                     </button>} */}
 
                     <div>
-                        <div>
-                            <label>Services</label>
-                            <div onClick={() => setDropdown(!dropdown)}><BiDownArrowAlt /></div>
+                        <div style={{display:"flex", justifyContent:"space-between", paddingInline:"1rem"}}>
+                            <h2>Services</h2>
+                            <div onClick={() => setDropdown(!dropdown)} style={{fontSize:"bold",fontSize:"1.8rem"}}><BiDownArrowAlt /></div>
                         </div>
 
                         {
@@ -240,6 +240,7 @@ const UpdateBarber = () => {
                                                     value={  barberserviceEWTMap.get(ser.serviceId) }
                                                     onChange={(e) => updateServiceEWT(ser.serviceId, e.target.value)}
                                                     className='serviceEWT'
+                                                    style={{width:"5rem"}}
                                                 />
                                                 {/* <p>{}</p> */}
                                             </div>
@@ -312,7 +313,7 @@ const UpdateBarber = () => {
 
                     </div>
 
-
+                    {updateBarber?.loading == true ? <button style={{fontWeight:"500"}}>Loader</button> : <button onClick={submitHandler}>Update</button>}
 
                 </div>
             </div>

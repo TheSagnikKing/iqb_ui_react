@@ -40,3 +40,17 @@
     border-radius: 50%;
     border: none;
 }
+
+@media((min-width:0px) and (max-width:400px)){
+    .main-modal-container{
+        height:330vh;
+    }
+
+    .modal-content{
+        left: 1.5rem;
+    }
+
+    .see-salonImages>div{
+        width: 100%;
+    }
+}

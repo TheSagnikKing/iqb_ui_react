@@ -128,3 +128,27 @@
     color: red;
     cursor: pointer;
 }
+
+@media((min-width:0px) and (max-width:400px)){
+    .crt-wrapper{
+        width: 82% !important;
+        position: absolute;
+        top: 9rem;
+        left: 6rem;
+        margin-left: 1.5rem;
+        margin-top: 3rem;
+    }
+
+    .crt-form{
+        grid-template-columns: 1fr;
+    }
+
+    .barber-dropdown{
+        width: 40rem;
+    }
+
+    .barber-dropdown>div{
+        width: 50rem;
+        grid-template-columns: 10rem 10rem 10rem 10rem  10rem;
+    }
+}

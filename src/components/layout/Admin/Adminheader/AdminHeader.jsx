@@ -115,6 +115,7 @@ const AdminHeader = ({ title }) => {
 
   }
 
+  const applySalon = useSelector(state => state.applySalon)
 
   return (
     <section className="nav1">
@@ -206,15 +207,27 @@ const AdminHeader = ({ title }) => {
               ))}
             </select>
 
-            <button onClick={applySalonHandler} style={{
-              height:"2.5rem",
-              width:"6rem",
-              background:"#f1f6fc",
-              boxShadow:"0px 0px 4px rgba(0,0,0,0.3)",
-              cursor:"pointer",
-              borderRadius:"5px",
-              border:"none"
-            }}>Apply</button>
+            {
+              applySalon?.loading == true ? <button style={{
+                height:"2.5rem",
+                width:"6rem",
+                background:"#f1f6fc",
+                boxShadow:"0px 0px 4px rgba(0,0,0,0.3)",
+                cursor:"pointer",
+                borderRadius:"5px",
+                border:"none",
+                fontWeight:"500"
+              }}>Loading</button> : <button onClick={applySalonHandler} style={{
+                height:"2.5rem",
+                width:"6rem",
+                background:"#f1f6fc",
+                boxShadow:"0px 0px 4px rgba(0,0,0,0.3)",
+                cursor:"pointer",
+                borderRadius:"5px",
+                border:"none"
+              }}>Apply</button>
+            }
+            
           </div>
 
           <div className="nav1search_box">
@@ -256,6 +269,8 @@ const AdminHeader = ({ title }) => {
                 />
               </div>
             </div>
+
+
 
             <div className="nav1profile_detail">
               <b>{LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].name}</b>

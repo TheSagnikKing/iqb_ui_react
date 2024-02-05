@@ -16,7 +16,7 @@ const AdminMenu = ({ menu_logo, menu_title, category, menu_link }) => {
                         {menu_logo}
                     </div>
 
-                    <h3>{menu_title}</h3>
+                    <h3 >{menu_title}</h3>
                 </div>
 
             </div>

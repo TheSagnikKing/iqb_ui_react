@@ -112,26 +112,21 @@ const Dashboard3 = () => {
                     <p>Customer List</p>
 
                     <div>
-                        <button onClick={reloadHandler} className='cst-reload'><AiOutlineReload /></button>
+                        {/* <button onClick={reloadHandler} className='cst-reload'><AiOutlineReload /></button> */}
+                        <button></button>
                         <div>
-                            <input
+                            {/* <input
                                 className='cst-search'
                                 type="text"
                                 placeholder='Search'
                                 value={search}
                                 onChange={(e) => setSearch(e.target.value)}
-                            />
+                            /> */}
+                         
 
-                            <button onClick={searchHandler} className='cst-search-btn'><AiOutlineSearch /></button>
+                            <button onClick={searchHandler} className='cst-search-btn' style={{border:"none"}}><AiOutlineSearch /></button>
                         </div>
 
-                        {/* <div >
-                                    <GrAdd />
-                                </div> */}
-                        {/* 
-                                <div>
-                                    <BsThreeDotsVertical />
-                                </div> */}
                     </div>
                 </div>
 
@@ -214,7 +209,7 @@ const Dashboard3 = () => {
                 </div>
 
                 <div className='cst-barber-pagination'>
-                    <div>
+                    <div style={{display:"flex" , gap:"1.5rem"}}>
                         <div onClick={PrevHandler}><AiOutlineArrowLeft /></div>
                         <div onClick={NextHandler}><AiOutlineArrowRight /></div>
                     </div>

@@ -121,7 +121,7 @@ const CreateBarber = () => {
                     <div>
                         <label>Email</label>
                         <input
-                            type="email"
+                            type="text"
                             placeholder='Enter Email'
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
@@ -172,14 +172,12 @@ const CreateBarber = () => {
                     <div></div>
 
                 
-                    <button onClick={submitHandler}>{
-                        createBarber?.loading == true ? <h2>Loading...</h2> : "Create"
-                    }</button>
+                    
 
                     <div>
-                        <div>
-                            <label>Services</label>
-                            <div onClick={() => setDropdown(!dropdown)}><BiDownArrowAlt /></div>
+                        <div style={{display:"flex", justifyContent:"space-between",paddingInline:"1rem"}}>
+                            <h2>Services</h2>
+                            <div onClick={() => setDropdown(!dropdown)} style={{fontWeight:"bolder",fontSize:"1.8rem"}}><BiDownArrowAlt /></div>
                         </div>
 
                         {
@@ -208,6 +206,7 @@ const CreateBarber = () => {
                                                     type="number"
                                                     value={barberserviceEWTMap.get(ser.serviceId) || ''}
                                                     onChange={(e) => updateServiceEWT(ser.serviceId, e.target.value)}
+                                                    style={{width:"5rem"}}
                                                 />
                                                 {/* <p>{}</p> */}
                                             </div>
@@ -280,7 +279,9 @@ const CreateBarber = () => {
                     </div>
 
 
-
+                    <button onClick={submitHandler}>{
+                        createBarber?.loading == true ? <h2>Loading...</h2> : "Create"
+                    }</button>
                 </div>
             </div>
 

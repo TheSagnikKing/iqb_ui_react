@@ -1,208 +1,140 @@
-/* .calender-month{
-    width: 82% !important;
-    position: absolute;
-    top: 90px;
-    left: 265px;
-    margin-left: 35px;
-    margin-top: 30px;
-
-    background: #fff;
-    padding: 20px;
+.calender-month {
+  width: 82% !important;
+  position: absolute;
+  top: 9rem;
+  left: 26.5rem;
+  margin-left: 3.5rem;
+  margin-top: 3rem;
+  background: #fff;
+  height: auto !important;
+  padding: 2rem;
 }
-.fc .fc-scrollgrid{
+
+.fc .fc-scrollgrid {
+  background-color: #fff;
+  /* box-shadow: 0px 0px 1rem rgba(0,0,0,0.3); */
+}
+
+.fc-theme-standard td {
+  border: 0.1rem solid rgba(0, 0, 0, 0.1) !important;
+}
+
+tr {
+  background-color: white;
+}
+
+.fc-daygrid-day-frame {
+  background-color: white;
+}
+
+.fc .fc-daygrid-day-frame {
+  padding-inline: 1rem;
+  padding-top: 1rem;
+  cursor: pointer;
+  height: 8rem !important;
+}
+
+.fc .fc-daygrid-day-frame:hover {
+  background-color: #e8eaed;
+}
+
+.fc-direction-ltr .fc-daygrid-event .fc-event-time {
+  margin-right: 0.3rem;
+  width: 4.5rem;
+  margin-left: 0.5rem;
+}
+
+.fc .fc-button-primary {
+  background-color: #28292a;
+  border-radius: 0.3rem;
+  /* box-shadow: 0px 0px 0.4rem #28292a; */
+}
+
+.fc .fc-button-group {
+  gap: 1rem;
+}
+
+@media ((min-width: 0px) and (max-width: 40rem)) {
+  :root {
+    font-size: 0.8rem;
+  }
+
+  .fc .fc-toolbar {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.05rem;
+  }
+}
+
+@media ((min-width: 40rem) and (max-width: 192rem)) {
+  :root {
+    font-size: 100%;
+  }
+
+  .fc .fc-scrollgrid {
+    background-color: #fff;
+    /* box-shadow: 0px 0px 0.6rem rgba(0,0,0,0.3); */
+    border-radius: 0.4rem;
+    width: 100% !important;
+    height: 66vh !important;
+    margin: auto;
+  }
+
+  .fc-scrollgrid-sync-table {
+    width: 100% !important;
+    /* height: 8rem !important; */
+  }
+
+  .fc-col-header {
+    width: 100% !important;
+  }
+
+  .fc .fc-toolbar.fc-header-toolbar {
+    width: 100%;
+    margin: 0rem auto 2rem auto;
+  }
+
+  .fc-view {
+    width: 100%;
+    margin: auto;
     background-color: #fff;
   }
-  
-  .fc-theme-standard td{
-    border: 1px solid rgba(0,0,0,0.1) !important;
-  }
-  
-  tr{
-    background-color: white;
-  }
-  
-  .fc-daygrid-day-frame{
-    background-color: white;
-  }
-  
-  .fc .fc-daygrid-day-frame {
-    padding-inline: 10px;
-    padding-top: 10px;
-    cursor: pointer;
-  }
-  
-  .fc .fc-daygrid-day-frame:hover{
-    background-color:#e8eaed;
-  }
-  
-  .fc-direction-ltr .fc-daygrid-event .fc-event-time {
-    margin-right: 3px;
-    width: 45px;
-    margin-left: 5px;
-  }
-  
-  .fc .fc-button-primary {
-    background-color:#28292a;
-    border-radius: 3px;
-  }
-  
-  .fc .fc-button-group {
-    gap: 10px;
-  }
-  @media((min-width:0px) and (max-width:400px)){
-    :root{
-      font-size: 8px;
-    }
-  
-    .fc .fc-toolbar {
-      display: flex;
-      align-items: flex-start;
-      flex-direction: column;
-      gap: 0.5rem;
-  }
-  }
-  
-  @media((min-width:400px) and (max-width:1920px)){
-    :root{
-      font-size: 100%;
-    }
 
-    .fc .fc-scrollgrid{
-      background-color: #fff;
-      border-radius:4px;
-      width: 100% !important;
-      height: 80vh !important;
-      margin: auto;
-    }
-    
-    .fc-scrollgrid-sync-table{
-      width:100% !important;
-    }
-    
-    .fc-col-header{
-      width: 100% !important;
-    }
-  
-    .fc .fc-toolbar.fc-header-toolbar {
-      width: 100%;
-      margin: 0px auto 20px auto;
-    }
-  
-    .fc-view{
-      width: 100%;
-      margin: auto;
-      background-color: #fff;
-    }
-  
-    .fc .fc-view-harness{
-      height: 80vh !important;
-    }
-  } */
+  .fc .fc-view-harness {
+    height: 80vh !important;
+  }
+}
 
+@media((min-width:0px) and (max-width:400px)) {
   .calender-month {
     width: 82% !important;
     position: absolute;
     top: 9rem;
-    left: 26.5rem;
-    margin-left: 3.5rem;
+    left: 6rem;
+    margin-left: 1.5rem;
     margin-top: 3rem;
     background: #fff;
-    height: auto !important;
+    height: 70vh !important;
     padding: 2rem;
-}
+  }
 
-.fc .fc-scrollgrid {
-    background-color: #fff;
-    /* box-shadow: 0px 0px 1rem rgba(0,0,0,0.3); */
-}
+  .calender-month>a{
+    color: black;
+    font-weight: 500;
+    font-size: 1.3rem;
+    background-color: #f1f6fc;
+    padding: 0.8rem 1.5rem;
+    margin-bottom: 1.5rem !important;
+    box-shadow: 0px 0px 4px  rgba(0, 0, 0, 0.5);
+    text-decoration: none;
+  }
 
-.fc-theme-standard td {
-    border: 0.1rem solid rgba(0,0,0,0.1) !important;
-}
+  .demo-app-main{
+    margin-top: 2rem;
+  }
 
-tr {
-    background-color: white;
-}
-
-.fc-daygrid-day-frame {
-    background-color: white;
-}
-
-.fc .fc-daygrid-day-frame {
-    padding-inline: 1rem;
-    padding-top: 1rem;
-    cursor: pointer;
-    height: 8rem !important;
-}
-
-.fc .fc-daygrid-day-frame:hover {
-    background-color: #e8eaed;
-}
-
-.fc-direction-ltr .fc-daygrid-event .fc-event-time {
-    margin-right: 0.3rem;
-    width: 4.5rem;
-    margin-left: 0.5rem;
-}
-
-.fc .fc-button-primary {
-    background-color: #28292a;
-    border-radius: 0.3rem;
-    /* box-shadow: 0px 0px 0.4rem #28292a; */
-}
-
-.fc .fc-button-group {
-    gap: 1rem;
-}
-
-@media ((min-width: 0px) and (max-width: 40rem)) {
-    :root {
-        font-size: 0.8rem;
-    }
-
-    .fc .fc-toolbar {
-        display: flex;
-        align-items: flex-start;
-        flex-direction: column;
-        gap: 0.05rem;
-    }
-}
-
-@media ((min-width: 40rem) and (max-width: 192rem)) {
-    :root {
-        font-size: 100%;
-    }
-
-    .fc .fc-scrollgrid {
-        background-color: #fff;
-        /* box-shadow: 0px 0px 0.6rem rgba(0,0,0,0.3); */
-        border-radius: 0.4rem;
-        width: 100% !important;
-        height: 66vh !important;
-        margin: auto;
-    }
-
-    .fc-scrollgrid-sync-table {
-        width: 100% !important;
-        /* height: 8rem !important; */
-    }
-
-    .fc-col-header {
-        width: 100% !important;
-    }
-
-    .fc .fc-toolbar.fc-header-toolbar {
-        width: 100%;
-        margin: 0rem auto 2rem auto;
-    }
-
-    .fc-view {
-        width: 100%;
-        margin: auto;
-        background-color: #fff;
-    }
-
-    .fc .fc-view-harness {
-        height: 80vh !important;
-    }
+  .fc .fc-scrollgrid{
+    height: 48vh;
+  }
 }

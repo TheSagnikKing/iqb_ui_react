@@ -249,7 +249,7 @@ const SignUp = () => {
                                         onError={errorMessage}
                                         size='large'
                                         shape='circle'
-                                        width={400}
+                                        width={310}
                                         logo_alignment='left'
                                         text='continue_with'
                                     />
@@ -329,7 +329,7 @@ const SignUp = () => {
                                         onError={errorBarberMessage}
                                         size='large'
                                         shape='circle'
-                                        width={400}
+                                        width={310}
                                         logo_alignment='left'
                                         text='continue_with'
                                     />
