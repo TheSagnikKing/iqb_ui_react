@@ -121,7 +121,7 @@ const AdminHeader = ({ title }) => {
     <section className="nav1">
       <div className="nav1left">
         <div className="nav1left_header">
-          <p><span>IQB</span>iqueuebarberss</p>
+          <span>IQB</span>&nbsp;<span>iqueuebarbers</span>
         </div>
 
         <div className={check ? "nav1wrapperdark" : "nav1wrapper"}>
@@ -196,6 +196,7 @@ const AdminHeader = ({ title }) => {
               id="cars"
               value={chooseSalonId}
               onChange={(e) => setChooseSalonId(e.target.value)}
+              style={{fontSize:"1rem"}}
             >
               {salonList?.map((s, i) => (
                 <option value={s.salonId} key={i} style={{
@@ -224,7 +225,9 @@ const AdminHeader = ({ title }) => {
                 boxShadow:"0px 0px 4px rgba(0,0,0,0.3)",
                 cursor:"pointer",
                 borderRadius:"5px",
-                border:"none"
+                border:"none",
+                marginRight:"1rem",
+                fontSize:"1rem"
               }}>Apply</button>
             }
             

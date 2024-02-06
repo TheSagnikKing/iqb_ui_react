@@ -48,3 +48,24 @@
     cursor: pointer;
     margin-top: 3rem;
 }
+
+@media((min-width:0px) and (max-width:400px)){
+    .ad-profile-wrapper{
+        position: absolute;
+        top: 12rem;
+        left: 6rem !important;
+        bottom: 0;
+        right: 0;
+        background-color: #fff;
+        width: 82%;
+        margin: 0 auto;
+        border-radius: 1rem;
+        padding: 2rem;
+        height: auto !important;
+    }
+
+    .ad-profile-sa-br-right_main_form-update{
+        grid-template-columns: 1fr !important;
+    }
+    
+}

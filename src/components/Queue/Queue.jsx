@@ -63,14 +63,14 @@ const Queue = () => {
         <>
             <AdminLayout />
             <div className='queue-wrapper'>
-                <h2>Select Your Joins</h2>
+                <h1>Select Your Joins</h1>
 
                 <div className='joins'>
                     <Link to="/queue/group/customers"
                     style={{
                         background:"#fff",
-                        padding:"10px 12px",
-                        borderRadius:"10px",
+                        padding:"1rem 1rem",
+                        borderRadius:"3px",
                         boxShadow:"0px 0px 2px rgba(0,0,0,0.4)",
                         fontSize:"1.4rem"
                     }}
@@ -95,7 +95,7 @@ const Queue = () => {
                 </div>
 
                 <div className='queue-list-table'>
-                    <p>Queue List</p>
+                    <h3>Queue List</h3>
 
                     <div className='que-lst-head'>
                         <h4>Name</h4>
@@ -112,8 +112,6 @@ const Queue = () => {
                         queueList?.response?.map((c) => (
                             <div className='que-lst-content' key={c._id}>
                                 <p>{c.name}</p>
-                                {/* <p>{c.joinedQ == true ? "True" : "False"}</p> */}
-                                {/* <p>{c.joinedQType}</p> */}
                                 <p>{c.timeJoinedQ}</p>
                                 <p>{c.barberName}</p>
                                 <p>{c.qPosition}</p>
@@ -126,7 +124,6 @@ const Queue = () => {
                             </div>
                         ))
                     }
-
 
                 </div>
             </div>

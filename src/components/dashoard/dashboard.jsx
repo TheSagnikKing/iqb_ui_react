@@ -288,7 +288,8 @@ const Dashboard = () => {
                                         />
                                         <span className={`nav2slider ${salonStatus ? 'checked' : ''}`}
                                             style={{
-                                                background: salonStatus ? "#4CBB17" : ""
+                                                background: salonStatus ? "#4CBB17" : "",
+                                                width:"4rem"
                                             }}
                                         ></span>
                                     </label>

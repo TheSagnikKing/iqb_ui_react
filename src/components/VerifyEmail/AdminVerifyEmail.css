@@ -29,3 +29,10 @@
     border: none;
     border-radius: 5px;
 }
+
+
+@media((min-width:0px) and (max-width:400px)){
+    .verify-email{
+        width: 95%;
+    }
+}

@@ -144,7 +144,7 @@ const BarberDashboardComp = () => {
                     <div>
                         <div>
                             <h2>List of Salons</h2>
-                            <div>
+                            <div style={{overflowX:"scroll"}}>
                                 {
                                     connectedSalonData && connectedSalonData?.response && connectedSalonData?.response.length > 0 ? (connectedSalonData?.response?.map((s) => (
                                         <div className='barber-salonlist-cnt'>
@@ -445,9 +445,9 @@ const BarberDashboardComp = () => {
                         </div>
                     </div>
 
-                    <div className="right_div_end">
+                    <div className="right_div_end" >
 
-                        <div className="right_div_end_left">
+                        <div className="right_div_end_left" style={{marginTop:"5rem"}}>
                             <div className="right_div_end_head">
                                 <p>Calender</p>
 

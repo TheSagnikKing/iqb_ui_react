@@ -41,7 +41,7 @@ const UpdateAdminprofile = () => {
         setMobileNumber(LoggedInMiddleware?.user && LoggedInMiddleware?.user[0]?.mobileNumber)
         setName(LoggedInMiddleware?.user && LoggedInMiddleware?.user[0]?.name)
         setGender(LoggedInMiddleware?.user && LoggedInMiddleware?.user[0]?.gender)
-        setDob(LoggedInMiddleware?.user && LoggedInMiddleware?.user[0]?.dateOfBirth.split('T')[0])
+        // setDob(LoggedInMiddleware?.user && LoggedInMiddleware?.user[0]?.dateOfBirth.split('T')[0]) // split method ta disturb korche
     }, [LoggedInMiddleware?.user])
 
     const navigate = useNavigate()

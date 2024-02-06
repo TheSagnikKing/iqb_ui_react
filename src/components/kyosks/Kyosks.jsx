@@ -200,11 +200,7 @@ const Kyosks = () => {
                     </div>
 
 
-                    <div style={{
-                        display: "grid",
-                        gridTemplateColumns: "1fr 1fr",
-                        gap: "2rem"
-                    }}>
+                    <div  className='mobile-kyosk-cont'>
                         <div className='barber-single-join-dropdown'>
                             <h3>Barber Name : <b>{currentbarberName && currentbarberName}</b></h3>
 
@@ -214,7 +210,8 @@ const Kyosks = () => {
                                 padding:"0.8rem",
                                 cursor:"pointer",
                                 boxShadow:"0px 0px 4px rgba(0,0,0,0.4)",
-                                borderRadius:"5px"
+                                borderRadius:"5px",
+                                fontSize:"1rem"
                             }}>Show Barber</button>
 
                         </div>
@@ -227,7 +224,9 @@ const Kyosks = () => {
                                 padding:"0.8rem",
                                 cursor:"pointer",
                                 boxShadow:"0px 0px 4px rgba(0,0,0,0.4)",
-                                borderRadius:"5px"
+                                borderRadius:"5px",
+                                 fontSize:"1rem",
+                                 width:"10rem"
                             }}>Show Services</button>
                         </div>
 
@@ -255,13 +254,13 @@ const Kyosks = () => {
                                             </div>
 
                                             {currentbarberName == barber.name ? <div style={{
-                                                fontSize: "30px",
+                                                fontSize: "3rem",
                                                 display: "flex",
                                                 justifyContent: "center",
                                                 alignItems: "center",
                                                 color: "green",
-                                                height: "30px",
-                                                width: "30px",
+                                                height: "3rem",
+                                                width: "3rem",
                                                 borderRadius: "50%",
                                                 boxShadow: "0px 0px 4px rgba(0,0,0,0.5)"
                                             }}><TiTick /></div> : <div onClick={() => barberServiceCallHandler(barber.barberId, barber.name)}>
@@ -307,25 +306,25 @@ const Kyosks = () => {
                                                     selectedService.includes(b) ? (
                                                         <div className='model1-barber-icons'>
                                                             <div style={{
-                                                                fontSize: "30px",
+                                                                fontSize: "3rem",
                                                                 display: "flex",
                                                                 justifyContent: "center",
                                                                 alignItems: "center",
                                                                 color: "green",
-                                                                height: "30px",
-                                                                width: "30px",
+                                                                height: "3rem",
+                                                                width: "3rem",
                                                                 borderRadius: "50%",
                                                                 boxShadow: "0px 0px 4px rgba(0,0,0,0.5)"
 
                                                             }}><TiTick /></div>
                                                             <div style={{
-                                                                fontSize: "30px",
+                                                                fontSize: "3rem",
                                                                 display: "flex",
                                                                 justifyContent: "center",
                                                                 alignItems: "center",
                                                                 color: "red",
-                                                                height: "30px",
-                                                                width: "30px",
+                                                                height: "3rem",
+                                                                width: "3rem",
                                                                 borderRadius: "50%",
                                                                 boxShadow: "0px 0px 4px rgba(0,0,0,0.5)"
                                                             }} onClick={() => selectedServiceDelete(b)}><RxCross2 /></div>
@@ -386,13 +385,13 @@ const Kyosks = () => {
                                         </div>
 
                                         {currentbarberName == barber.name ? <div style={{
-                                            fontSize: "30px",
+                                            fontSize: "3rem",
                                             display: "flex",
                                             justifyContent: "center",
                                             alignItems: "center",
                                             color: "green",
-                                            height: "30px",
-                                            width: "30px",
+                                            height: "3rem",
+                                            width: "3rem",
                                             borderRadius: "50%",
                                             boxShadow: "0px 0px 4px rgba(0,0,0,0.5)"
                                         }}><TiTick /></div> : <div onClick={() => {
@@ -444,25 +443,25 @@ const Kyosks = () => {
                                                 selectedService.includes(b) ? (
                                                     <div className='model1-barber-icons'>
                                                         <div style={{
-                                                            fontSize: "30px",
+                                                            fontSize: "3rem",
                                                             display: "flex",
                                                             justifyContent: "center",
                                                             alignItems: "center",
                                                             color: "green",
-                                                            height: "30px",
-                                                            width: "30px",
+                                                            height: "3rem",
+                                                            width: "3rem",
                                                             borderRadius: "50%",
                                                             boxShadow: "0px 0px 4px rgba(0,0,0,0.5)"
 
                                                         }}><TiTick /></div>
                                                         <div style={{
-                                                            fontSize: "30px",
+                                                            fontSize: "3rem",
                                                             display: "flex",
                                                             justifyContent: "center",
                                                             alignItems: "center",
                                                             color: "red",
-                                                            height: "30px",
-                                                            width: "30px",
+                                                            height: "3rem",
+                                                            width: "3rem",
                                                             borderRadius: "50%",
                                                             boxShadow: "0px 0px 4px rgba(0,0,0,0.5)"
                                                         }} onClick={() => selectedServiceDelete(b)}><RxCross2 /></div>

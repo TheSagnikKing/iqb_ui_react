@@ -51,3 +51,20 @@
     border-radius: 5px;
     box-shadow: 0px 0px 4px rgba(0,0,0,0.4);
 }
+
+@media((min-width:0px) and (max-width:400px)){
+    .admin_account_detail_container{
+        width: 95%;
+        height: auto;
+        background: #fff;
+        margin: auto;
+        margin-top: 10rem;
+        box-shadow: 0px 0px 6px rgba(0,0,0,0.4);
+        border-radius: 10px;
+        padding: 2rem;
+    }
+
+    .admin_account_detail{
+        grid-template-columns: 1fr;
+    }
+}

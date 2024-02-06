@@ -51,8 +51,8 @@ const BarberQueLists = () => {
 
                     <div className='que-lst-head'>
                         <p>Name</p>
-                        <p>JoinedQ</p>
-                        <p>JoinedQType</p>
+                        {/* <p>JoinedQ</p>
+                        <p>JoinedQType</p> */}
                         <p>TimeJoinedQ</p>
                         <p>Barber Name</p>
                         <p>Q Position</p>
@@ -63,8 +63,8 @@ const BarberQueLists = () => {
                         barberQuelist?.queueList?.map((c) => (
                             <div className='que-lst-content' key={c._id}>
                                 <p>{c.name}</p>
-                                <p>{c.joinedQ == true ? "True" : "False"}</p>
-                                <p>{c.joinedQType}</p>
+                                {/* <p>{c.joinedQ == true ? "True" : "False"}</p>
+                                <p>{c.joinedQType}</p> */}
                                 <p>{c.timeJoinedQ}</p>
                                 <p>{c.barberName}</p>
                                 <p>{c.qPosition}</p>
