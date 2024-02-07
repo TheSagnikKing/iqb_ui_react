@@ -193,7 +193,22 @@ const UpdateSalon = () => {
                 console.log("update", data);
     
                 if (data?.response?.salonInfo) {
-                    // Set your state values here
+                    setFetchImages(data?.response?.salonInfo?.gallery)
+                    setSalonEmail(data?.response?.salonInfo?.salonEmail)
+                    setSalonName(data?.response?.salonInfo?.salonName)
+                    setAddress(data?.response?.salonInfo?.address)
+                    setCity(data?.response?.salonInfo?.city)
+    
+                    setCountry(data?.response?.salonInfo?.country)
+                    setPostCode(data?.response?.salonInfo?.postcode)
+                    setContactTel(data?.response?.salonInfo?.contactTel)
+                    // setSalonType(data?.response?.salonInfo?.adminEmail)
+                    setWebLink(data?.response?.salonInfo?.webLink)
+                    setPostCode(data?.response?.salonInfo?.postCode)
+                    setServices(data?.response?.salonInfo?.services)
+                    setCurrentSalonLogo(data?.response?.salonInfo?.salonLogo[0]?.url)
+                    setCurrentSalonLogoId(data?.response?.salonInfo?.salonLogo[0]?.public_id)
+                    setCurrentSalonLogoMongoId(data?.response?.salonInfo?.salonLogo[0]?._id)
                 }
             } catch (error) {
                 if (error.name === 'AbortError' || error.code === 'ECONNABORTED') {
