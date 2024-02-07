@@ -173,35 +173,44 @@ const UpdateSalon = () => {
 
     const [fetchimages, setFetchImages] = useState([])
 
+    const getSalonInfoBySalonIdRef = useRef(null);
+
     useEffect(() => {
-        const fetchAllSalons = async () => {
-            const { data } = await api.get(`/api/salon/getSalonInfoBySalonId?salonId=${Number(currentEditSalonId)}`)
-
-            console.log("update", data)
-
-            if (data?.response?.salonInfo) {
-                setFetchImages(data?.response?.salonInfo?.gallery)
-                setSalonEmail(data?.response?.salonInfo?.salonEmail)
-                setSalonName(data?.response?.salonInfo?.salonName)
-                setAddress(data?.response?.salonInfo?.address)
-                setCity(data?.response?.salonInfo?.city)
-
-                setCountry(data?.response?.salonInfo?.country)
-                setPostCode(data?.response?.salonInfo?.postcode)
-                setContactTel(data?.response?.salonInfo?.contactTel)
-                // setSalonType(data?.response?.salonInfo?.adminEmail)
-                setWebLink(data?.response?.salonInfo?.webLink)
-                setPostCode(data?.response?.salonInfo?.postCode)
-                setServices(data?.response?.salonInfo?.services)
-                setCurrentSalonLogo(data?.response?.salonInfo?.salonLogo[0]?.url)
-                setCurrentSalonLogoId(data?.response?.salonInfo?.salonLogo[0]?.public_id)
-                setCurrentSalonLogoMongoId(data?.response?.salonInfo?.salonLogo[0]?._id)
-            }
-
+    
+        if (getSalonInfoBySalonIdRef.current) {
+            getSalonInfoBySalonIdRef.current.abort(); // Abort previous request if it exists
         }
-
-        fetchAllSalons()
-    }, [currentSalonId])
+    
+        const newController = new AbortController();
+        getSalonInfoBySalonIdRef.current = newController;
+    
+        const signal = newController.signal;
+    
+        const getSalonInfoBySalonId = async () => {
+            try {
+                const { data } = await api.get(`/api/salon/getSalonInfoBySalonId?salonId=${Number(currentEditSalonId)}`, { signal });
+    
+                console.log("update", data);
+    
+                if (data?.response?.salonInfo) {
+                    // Set your state values here
+                }
+            } catch (error) {
+                if (error.name === 'AbortError' || error.code === 'ECONNABORTED') {
+                    console.log("Request Canceled");
+                } else {
+                    console.log(error);
+                }
+            }
+        };
+    
+        getSalonInfoBySalonId();
+    
+        return () => {
+            getSalonInfoBySalonIdRef.current.abort();
+        };
+    }, [currentSalonId]);
+    
 
 
     const geolocHandler = () => {

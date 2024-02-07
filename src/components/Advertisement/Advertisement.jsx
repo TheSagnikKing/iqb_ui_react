@@ -111,15 +111,31 @@ const Advertisement = () => {
 
   const [advertisementList, setAdvertisementList] = useState([])
 
+  const advertisementRef = useRef(null)
+
   useEffect(() => {
+
+    if(advertisementRef.current){
+      advertisementRef.current.abort()
+    }
+
+    const newController = new AbortController()
+    advertisementRef.current = newController
+
+    const signal = newController.signal
+
     const getAdvertisementData = async () => {
-      const { data } = await api.post(`/api/advertisement/getAdvertisements`, { salonId: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId });
+      const { data } = await api.post(`/api/advertisement/getAdvertisements`, { salonId: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId },{signal});
 
       console.log("adver", data)
       setAdvertisementList(data?.advertisements)
     }
 
     getAdvertisementData()
+
+    return () => {
+      advertisementRef.current.abort()
+    }
   }, [LoggedInMiddleware?.user])
 
 

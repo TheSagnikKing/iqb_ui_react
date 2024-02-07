@@ -25,21 +25,26 @@ export const singleJoinQueueAction = (singlejoindata,setSelectedService,navigate
     }
 }
 
-export const queueListAction = (salonid) => async(dispatch) => {
+export const queueListAction = (salonid,signal) => async(dispatch) => {
     try {
         dispatch({type:QUELIST_REQ})
 
-        const {data} = await api.get(`/api/queue/getQListBySalonId?salonId=${salonid}`)
+        const {data} = await api.get(`/api/queue/getQListBySalonId?salonId=${salonid}`,{signal})
 
         dispatch({
             type:QUELIST_SUCCESS,
             payload:data
         })
     } catch (error) {
-        dispatch({
-            type:QUELIST_FAIL,
-            payload: error.response.data
-        })
+        if (error.name === 'AbortError' || error.code === 'ECONNABORTED') {
+            console.log("Request Canceled");
+        }else{
+            dispatch({
+                type:QUELIST_FAIL,
+                payload: error.response.data
+            })
+        }
+        
     }
 }
 
@@ -93,11 +98,11 @@ export const groupjoinAction = (groupjoindata,setSelectedCustomer,navigate) => a
 }
 
 
-export const cancelQueueAtion = (canceldata) => async(dispatch) => {
+export const cancelQueueAtion = (canceldata,signal) => async(dispatch) => {
     try {
         dispatch({type:CANCEL_QUEUE_REQ})
 
-        const {data} = await api.post(`/api/queue/cancelQ`, canceldata)
+        const {data} = await api.post(`/api/queue/cancelQ`, canceldata,{signal})
 
         dispatch({
             type:CANCEL_QUEUE_SUCCESS,
@@ -106,10 +111,15 @@ export const cancelQueueAtion = (canceldata) => async(dispatch) => {
 
         window.location.reload()
     } catch (error) {
-        dispatch({
-            type:CANCEL_QUEUE_FAIL,
-            payload: error.response.data
-        })
+        if (error.name === 'AbortError' || error.code === 'ECONNABORTED') {
+            console.log("Request Canceled");
+        }else{
+            dispatch({
+                type:CANCEL_QUEUE_FAIL,
+                payload: error.response.data
+            })
+        }
+        
 
         alert(error.response.data.message)
     }

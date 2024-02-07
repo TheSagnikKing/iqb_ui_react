@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 import PuffLoader from "react-spinners/PuffLoader"
 
@@ -35,26 +35,46 @@ const BarberListTable = () => {
     //Salon Id dynamic thakbe
     const salonId = LoggedInMiddleware?.user && LoggedInMiddleware.user[0].salonId;
 
+
+    const BarberListcontrollerRef = useRef(null);
+
     useEffect(() => {
-        // const abortController = new AbortController();
-
-
         const getAllBarbersfunc = async () => {
-            //Salon Id dynamic thakbe
+            try {
+                if (BarberListcontrollerRef.current) {
+                    BarberListcontrollerRef.current.abort(); // Abort previous request if it exists
+                }
+    
+                const newController = new AbortController();
+                BarberListcontrollerRef.current = newController;
+    
+                const signal = newController.signal;
+    
+                setLoading(true);
+    
+                const response = await api.post(`/api/barber/getAllBarberBySalonId?salonId=${Number(salonId)}`, {}, {signal});
+    
+                // Check if the request was not aborted
 
-            setLoading(true)
-            const { data } = await api.post(`/api/barber/getAllBarberBySalonId?salonId=${Number(salonId)}`)
-            setBarbersList(data)
-            setCurrentPage(data.currentPage)
-            setTotalPages(data.totalPages)
-            setLoading(false)
-        }
-        getAllBarbersfunc()
+                    setBarbersList(response.data);
+                    setCurrentPage(response.data.currentPage);
+                    setTotalPages(response.data.totalPages);
+                    setLoading(false);
+              
+            } catch (error) {
+                
+                    console.log(error);
+                
+            }
+        };
+    
+        getAllBarbersfunc();
 
-
-        // return () => {
-        //     abortController.abort();
-        // };
+        return () => {
+            BarberListcontrollerRef.current.abort();
+        };
+    
+  
     }, [Number(salonId)])
 
     const searchHandler = async () => {

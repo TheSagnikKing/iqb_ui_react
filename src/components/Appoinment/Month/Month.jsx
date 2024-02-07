@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import "./Month.css"
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -24,15 +24,32 @@ function Month() {
 
     const LoggedInMiddleware = useSelector(state => state.LoggedInMiddleware)
 
+    const AppointmentRef = useRef(null);
+
     useEffect(() => {
+
+        if (AppointmentRef.current) {
+            AppointmentRef.current.abort(); // Abort previous request if it exists
+        }
+
+        const newController = new AbortController();
+        AppointmentRef.current = newController;
+
+        const signal = newController.signal;
+
         const apfunc = async() => {
             const {data} = await api.post("/api/appointments/getAllAppointmentsBySalonId",{
                 salonId: LoggedInMiddleware?.user && LoggedInMiddleware.user[0].salonId
-            })
+            },{signal})
             setAppointmentData(data?.response)
         }
 
         apfunc();
+
+        return () => {
+            AppointmentRef.current.abort();
+        };
+
     },[LoggedInMiddleware?.user])
 
     console.log(appointmentData)

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import PuffLoader from "react-spinners/PuffLoader"
 
 import "./Dashboard3.css"
@@ -26,22 +26,32 @@ const Dashboard3 = () => {
     const [sortOrdeData, setSortOrderData] = useState("")
     const [sortFieldData, setFieldData] = useState("")
 
-    useEffect(() => {
-        const abortController = new AbortController();
+    const getAllCustomersRef = useRef(null);
 
-        const getAllBarbersfunc = async () => {
+    useEffect(() => {
+
+        if(getAllCustomersRef.current){
+            getAllCustomersRef.current.abort()
+        }
+
+        const newController = new AbortController();
+        getAllCustomersRef.current = newController
+
+        const signal = newController.signal;
+
+        const getAllCustomersfnc = async () => {
             setLoading(true)
-            const { data } = await api.get(`/api/customer/getAllCustomers`)
+            const { data } = await api.get(`/api/customer/getAllCustomers`,{signal})
             setCustomersList(data)
             setCurrentPage(data.currentPage)
             setTotalPages(data.totalPages)
             setLoading(false)
         }
-        getAllBarbersfunc()
+        getAllCustomersfnc()
 
 
         return () => {
-            abortController.abort();
+            getAllCustomersRef.current.abort()
         };
     }, [])
 

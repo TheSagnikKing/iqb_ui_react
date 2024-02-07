@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import "./Queue.css"
 import AdminLayout from '../layout/Admin/AdminLayout'
 import { useDispatch, useSelector } from 'react-redux'
@@ -18,15 +18,42 @@ const Queue = () => {
 
     const dispatch = useDispatch()
 
+    const queueListRef = useRef(null);
+
     useEffect(() => {
-        if(salonId){
-            dispatch(queueListAction(Number(salonId)))
-        }   
-    }, [dispatch,salonId])
+
+        if (queueListRef.current) {
+            queueListRef.current.abort(); // Abort previous request if it exists
+        }
+
+        const newController = new AbortController();
+        queueListRef.current = newController;
+
+        const signal = newController.signal;
+
+        if (salonId) {
+            dispatch(queueListAction(Number(salonId), signal))
+        }
+
+        return () => {
+            queueListRef.current.abort();
+        }
+    }, [dispatch, salonId])
 
     const queueList = useSelector(state => state.queueList)
 
+    const queueServeRef = useRef(null);
+
     const serverHandler = (barberId, serviceId, customerid) => {
+
+        if (queueServeRef.current) {
+            queueServeRef.current.abort(); // Abort previous request if it exists
+        }
+
+        const newController = new AbortController();
+        queueServeRef.current = newController;
+
+        const signal = newController.signal;
 
         const infodata = {
             barberId,
@@ -35,28 +62,31 @@ const Queue = () => {
             salonId: LoggedInMiddleware?.user && LoggedInMiddleware.user[0].salonId
         }
 
-        console.log("cust",infodata)
-
-        const confirm = window.confirm("Are you sure ?")
-
-        if(confirm){
-            dispatch(barberServedQueAction(infodata))
-        }
-
+        console.log("cust", infodata)
+        dispatch(barberServedQueAction(infodata, signal))
     }
 
+    const queueCancelRef = useRef(null);
+
     const cancelHandler = (barberId, _id) => {
+
+        if (queueCancelRef.current) {
+            queueCancelRef.current.abort(); // Abort previous request if it exists
+        }
+
+        const newController = new AbortController();
+        queueCancelRef.current = newController;
+
+        const signal = newController.signal;
+
+
         const canceldata = {
             salonId,
             barberId,
             _id
         }
 
-        const confirm = window.confirm("Are you sure ?")
-
-        if(confirm){
-            dispatch(cancelQueueAtion(canceldata))
-        }
+        dispatch(cancelQueueAtion(canceldata,signal))
     }
 
     return (
@@ -67,13 +97,13 @@ const Queue = () => {
 
                 <div className='joins'>
                     <Link to="/queue/group/customers"
-                    style={{
-                        background:"#fff",
-                        padding:"1rem 1rem",
-                        borderRadius:"3px",
-                        boxShadow:"0px 0px 2px rgba(0,0,0,0.4)",
-                        fontSize:"1.4rem"
-                    }}
+                        style={{
+                            background: "#fff",
+                            padding: "1rem 1rem",
+                            borderRadius: "3px",
+                            boxShadow: "0px 0px 2px rgba(0,0,0,0.4)",
+                            fontSize: "1.4rem"
+                        }}
                     >Group Join</Link>
 
                     {/* <div>
@@ -118,8 +148,8 @@ const Queue = () => {
                                 <div className='que-serve' onClick={() => serverHandler(c.barberId, c.serviceId, c._id)}>
                                     <PiQueueBold />
                                 </div>
-                                <div className='que-cancel' onClick={() => cancelHandler(c.barberId,  c._id)}>
-                                    <GiCancel/>
+                                <div className='que-cancel' onClick={() => cancelHandler(c.barberId, c._id)}>
+                                    <GiCancel />
                                 </div>
                             </div>
                         ))

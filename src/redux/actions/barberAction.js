@@ -229,11 +229,11 @@ export const barberQueListAction = (barberqueuedata) => async(dispatch) => {
     }
 }
 
-export const barberServedQueAction = (barberqueuedata) => async(dispatch) => {
+export const barberServedQueAction = (barberqueuedata,signal) => async(dispatch) => {
     try {
         dispatch({type:BARBER_SERVED_QUEUE_REQ})
 
-        const {data} = await api.post("/api/queue/barberServedQueue",barberqueuedata)
+        const {data} = await api.post("/api/queue/barberServedQueue",barberqueuedata,{signal})
 
         dispatch({
             type:BARBER_SERVED_QUEUE_SUCCESS,
@@ -243,10 +243,15 @@ export const barberServedQueAction = (barberqueuedata) => async(dispatch) => {
         window.location.reload()
     
     } catch (error) {
-        dispatch({
-            type:BARBER_SERVED_QUEUE_FAIL,
-            error: error.response
-        })
+        if (error.name === 'AbortError' || error.code === 'ECONNABORTED') {
+            console.log("Request Canceled");
+        }else{
+            dispatch({
+                type:BARBER_SERVED_QUEUE_FAIL,
+                error: error.response
+            })
+        }
+        
     }
 }
 

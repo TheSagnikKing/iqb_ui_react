@@ -109,9 +109,21 @@ const UpdateBarber = () => {
     const location = useLocation()
     const barberemail = location?.state?.barberemail;
 
+    const fetchdetailbarberRef = useRef(null);
+
     useEffect(() => {
+
+        if (fetchdetailbarberRef.current) {
+            fetchdetailbarberRef.current.abort(); // Abort previous request if it exists
+        }
+
+        const newController = new AbortController();
+        fetchdetailbarberRef.current = newController;
+
+        const signal = newController.signal;
+
         const fetchdetailbarber = async () => {
-            const { data } = await api.post(`/api/barber/getBarberDetailsByEmail`, { email: barberemail })
+            const { data } = await api.post(`/api/barber/getBarberDetailsByEmail`, { email: barberemail }, {signal})
             
             console.log("scsdvsdvdsvddssd",data)
 
@@ -126,6 +138,11 @@ const UpdateBarber = () => {
         }
 
         fetchdetailbarber()
+
+        return () => {
+            fetchdetailbarberRef.current.abort();
+        };
+    
     }, [])
 
     // console.log(barberServices)

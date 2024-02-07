@@ -48,9 +48,25 @@ const Dashboard = () => {
 
     const salonId = Number(LoggedInMiddleware?.user && LoggedInMiddleware.user[0].salonId);
 
+    const QueueListcontrollerRef = useRef(null);
+
     useEffect(() => {
+
+        if (QueueListcontrollerRef.current) {
+            QueueListcontrollerRef.current.abort(); // Abort previous request if it exists
+        }
+
+        const newController = new AbortController();
+        QueueListcontrollerRef.current = newController;
+
+        const signal = newController.signal;
+
         if (salonId) {
-            dispatch(queueListAction(Number(salonId)))
+            dispatch(queueListAction(Number(salonId),signal))
+        }
+
+        return () => {
+            QueueListcontrollerRef.current.abort();
         }
     }, [dispatch, salonId])
 
