@@ -68,6 +68,8 @@ function Month() {
             <AdminLayout />
             <div className='calender-month'>
 
+                <h2 style={{marginBottom:"2rem"}}>Appointment</h2>
+
                 <Link to="/appoinment/createappointment">Create</Link>
 
                 <div className='demo-app-main'>

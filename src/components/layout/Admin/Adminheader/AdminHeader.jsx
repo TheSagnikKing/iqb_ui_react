@@ -293,7 +293,7 @@ const AdminHeader = ({ title }) => {
               <p>Admin</p>
             </div>
 
-            <div style={{ cursor: "pointer" }} className="nav1right_dropdown"
+            <div style={{ cursor: "pointer",fontSize:"2.4rem" }} className="nav1right_dropdown"
               onClick={() => setDropdown(!dropdown)}>
               <MdKeyboardArrowDown />
             </div>
@@ -301,13 +301,8 @@ const AdminHeader = ({ title }) => {
             {
               dropdown && <div className="nav1right_dropdown_box">
                 <div>
-                  <div><FiSettings /></div>
-                  <p>Settings</p>
-                </div>
-
-                <div>
                   <div><RiAccountCircleFill /></div>
-                  <Link to="/admin/updateprofile">My Account</Link>
+                  <Link to="/admin/updateprofile" style={{fontSize:"2rem",textDecoration:"none"}}>My Account</Link>
                 </div>
 
                 <div onClick={logoutHandler}>

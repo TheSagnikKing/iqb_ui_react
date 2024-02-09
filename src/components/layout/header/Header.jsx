@@ -33,7 +33,6 @@ const Header = ({ title }) => {
   const LoggedInMiddleware = useSelector(state => state.LoggedInMiddleware)
 
   return (
-    <>
       <section className="nav1">
         <div className="nav1left">
           <div className="nav1left_header">
@@ -91,11 +90,11 @@ const Header = ({ title }) => {
 
         <div className="nav1right">
           <div className="nav1right_left_div">
-            <p>Dashboard</p>
+            {/* <p>Dashboard</p>
             <IoIosArrowForward />
             <p>List</p>
             <IoIosArrowForward />
-            <b style={{ color: "rgba(0,0,0,0.6)" }}>{title}</b>
+            <b style={{ color: "rgba(0,0,0,0.6)" }}>{title}</b> */}
           </div>
 
           <div className="nav1right_right_div">
@@ -129,10 +128,6 @@ const Header = ({ title }) => {
 
               {
                 dropdown && <div className="nav1right_dropdown_box">
-                  <div>
-                    <div><FiSettings /></div>
-                    <p>Settings</p>
-                  </div>
 
                   <div>
                     <div><RiAccountCircleFill /></div>
@@ -151,7 +146,6 @@ const Header = ({ title }) => {
         </div>
 
       </section>
-    </>
   )
 }
 

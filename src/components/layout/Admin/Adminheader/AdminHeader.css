@@ -479,4 +479,21 @@
     .nav1left_header>span:nth-child(2){
         display: none;
     }
+
+    .nav1profile{
+       
+    }
+
+    .nav1right_dropdown_box{
+        top: 9rem;
+        left: 0rem !important;
+        width: 95vw !important;
+        margin-left: 2rem !important;
+        gap: 2rem;
+        
+    }
+
+    .nav1right_dropdown_box>div>p{
+        font-size: 2rem !important;
+    }
   }

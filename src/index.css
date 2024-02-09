@@ -161,4 +161,9 @@ body {
     height: 85vh !important;
     overflow-y: scroll !important;
   }
+
+  .header > p,.cst-header > p,.advertisement-header>h2{
+    font-size: 1.8rem !important;
+    color: black !important;
+  }
 }

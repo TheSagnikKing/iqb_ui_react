@@ -340,3 +340,10 @@
     font-size: 16px;
     cursor: pointer;
 }
+
+
+@media((min-width:0px) and (max-width:400px)){
+    .nav2slider{
+        width:4.2rem !important
+    }
+}
