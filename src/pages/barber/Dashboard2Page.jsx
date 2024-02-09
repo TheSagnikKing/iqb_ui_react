@@ -5,7 +5,7 @@ import AdminLayout from '../../components/layout/Admin/AdminLayout'
 const dashboard2 = () => {
   return (
     <>
-    <AdminLayout title="Barber"/>
+    <AdminLayout title=""/>
     <BarberListTable/>
     </>
   )

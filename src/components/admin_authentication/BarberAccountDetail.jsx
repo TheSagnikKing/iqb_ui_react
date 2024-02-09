@@ -22,7 +22,7 @@ const BarberAccountDetail = () => {
         const profiledata = {email:LoggedInMiddleware?.user && LoggedInMiddleware?.user[0]?.email,mobileNumber,name,gender,dateOfBirth:dob,salonId:LoggedInMiddleware?.user && LoggedInMiddleware?.user[0]?.salonId};
 
         // const profiledata = {email:"sagniknandy27@gmail.com",mobileNumber,name,gender,dateOfBirth:dob,salonId:LoggedInMiddleware?.user[0]?.salonId,userName:username};
-        dispatch(updateBarberSignupAccountDetailsAction(navigate,profiledata))
+        // dispatch(updateBarberSignupAccountDetailsAction(navigate,profiledata))
 
         console.log(profiledata)
     }

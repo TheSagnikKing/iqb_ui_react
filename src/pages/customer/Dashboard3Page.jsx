@@ -6,7 +6,7 @@ const Dashboard3Page = () => {
 
   return (
      <>
-     <AdminLayout title="CustomerInformation"/>
+     <AdminLayout title=""/>
      <Dashboard3/>
      </>
   )

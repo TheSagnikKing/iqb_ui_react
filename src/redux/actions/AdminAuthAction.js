@@ -196,8 +196,6 @@ export const LoggedInMiddlewareAction = (navigate) => async (dispatch) => {
 
         console.log("ascascvdffsv",data)
 
-        
-
         dispatch({
             type: LOGGED_IN_MIDDLEWARE_SUCCESS,
             payload: data
@@ -205,18 +203,13 @@ export const LoggedInMiddlewareAction = (navigate) => async (dispatch) => {
 
     } catch (error) {
 
-        dispatch({
-            type: LOGGED_IN_MIDDLEWARE_FAIL,
-            payload:error?.response?.data
-        });
-
-
-        const userLoggedIn = localStorage.getItem("userLoggedIn")
-
-        if(error?.response?.data && error?.response?.data.user[0] == null && userLoggedIn == "false"){
-            console.log("From Admin Auth ")
+        if(error?.response?.data?.message === "You are not Authenticated Admin"){
             navigate("/barber-dashboard")
-            window.location.reload()
+        }else{
+            dispatch({
+                type: LOGGED_IN_MIDDLEWARE_FAIL,
+                payload:error?.response?.data
+            });
         }
     }
 };

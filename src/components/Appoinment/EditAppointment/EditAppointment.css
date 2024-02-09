@@ -11,9 +11,36 @@
     padding-bottom: 40px;
 }
 
+.create-form>div:nth-child(5)>div,.create-form>div:nth-child(4)>div{
+    width:85% !important
+}
+
+.create-form>div:nth-child(6)>div{
+    width:85% !important
+}
 
 @media((min-width:0px) and (max-width:400px)){
     .edit-appointment-container{
         left: 6rem;
+    }
+
+    .create-form>div:nth-child(5)>div{
+        width:65% !important
+    }
+
+    .create-form>div:nth-child(4)>div{
+        width: 53% !important;
+    }
+
+    .create-form>div:nth-child(6)>div{
+        width:53% !important
+    }
+
+    .create-form>div:nth-child(5)>div{
+        width:53% !important;
+    }
+
+    .create-form>button {
+        width: 50% !important;
     }
 }

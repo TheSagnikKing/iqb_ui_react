@@ -114,3 +114,51 @@ body {
   justify-content: center;
   align-items: center;
 }
+
+@media((min-width:0px) and (max-width:400px)){
+  .right_main_div{
+    overflow-y: scroll !important;
+    height: 92vh !important;
+  }
+
+  .nav1left{
+    height: 102vh !important;
+  }
+
+  .table{
+    height: 75vh !important;
+  }
+
+  .cst-table{
+    height:75vh !important
+  }
+
+  .advertisement-container {
+    height: 78vh !important;
+    overflow-y: scroll !important;
+  }
+
+  .queue-list-table{
+    height: 75vh !important;
+    overflow-y: scroll !important;
+  }
+
+  .calender-month{
+    height: 75vh !important;
+  }
+
+  .sa-br-right_main_form{
+    height: 85vh !important;
+    overflow-y: scroll !important;
+  }
+
+  .singlejoin-barber-quebarber-wrapper{
+    height: 85vh !important;
+    overflow-y: scroll !important;
+  }
+
+  .create-appointment-container{
+    height: 85vh !important;
+    overflow-y: scroll !important;
+  }
+}

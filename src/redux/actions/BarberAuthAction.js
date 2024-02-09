@@ -196,19 +196,14 @@ export const BarberLoggedInMiddlewareAction = (navigate) => async (dispatch) => 
 
    
     } catch (error) {
-    
-        dispatch({
-            type: LOGGED_IN_MIDDLEWARE_FAIL,
-            payload:error?.response?.data
-        });
-
-        const barberLoggedIn = localStorage.getItem("barberLoggedIn")
-
-        if(error?.response?.data && error?.response?.data.user[0] == null && barberLoggedIn == "false"){
-            console.log("From Barber Auth ")
+        if(error?.response?.data?.message === "You are not Authenticated Barber"){
             navigate("/admin-dashboard")
-            window.location.reload()
-        }
+        }else{
+            dispatch({
+                type: LOGGED_IN_MIDDLEWARE_FAIL,
+                payload:error?.response?.data
+            });
+        } 
     }
 };
 
