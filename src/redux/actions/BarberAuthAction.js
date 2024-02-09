@@ -194,13 +194,6 @@ export const BarberLoggedInMiddlewareAction = (navigate) => async (dispatch) => 
             payload: data
         });
 
-        const barberLoggedIn = localStorage.getItem("barberLoggedIn")
-
-        if(data && data.user && data.user[0] == null && barberLoggedIn == "false"){
-            console.log("From Barber Auth ")
-            navigate("/admin-dashboard")
-            window.location.reload()
-        }
    
     } catch (error) {
     
@@ -208,6 +201,14 @@ export const BarberLoggedInMiddlewareAction = (navigate) => async (dispatch) => 
             type: LOGGED_IN_MIDDLEWARE_FAIL,
             payload:error?.response?.data
         });
+
+        const barberLoggedIn = localStorage.getItem("barberLoggedIn")
+
+        if(error?.response?.data && error?.response?.data.user[0] == null && barberLoggedIn == "false"){
+            console.log("From Barber Auth ")
+            navigate("/admin-dashboard")
+            window.location.reload()
+        }
     }
 };
 

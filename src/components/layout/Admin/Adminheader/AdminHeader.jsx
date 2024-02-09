@@ -71,28 +71,9 @@ const AdminHeader = ({ title }) => {
 
   const [salonList, setSalonList] = useState([])
 
-  useEffect(() => {
-    const getSalonfnc = async () => {
-      const { data } = await api.post("/api/admin/getAllSalonsByAdmin", {
-        adminEmail: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].email
-      })
-      setSalonList(data?.salons)
-    }
-
-    getSalonfnc()
 
 
 
-    const getSalonfnc2 = async () => {
-      const { data } = await api.post("/api/admin/getDefaultSalonByAdmin", {
-        adminEmail: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].email
-      })
-
-      setChooseSalonId(data?.response?.salonId)
-    }
-
-    getSalonfnc2()
-  }, [LoggedInMiddleware?.user])
 
 
 
@@ -116,6 +97,38 @@ const AdminHeader = ({ title }) => {
   }
 
   const applySalon = useSelector(state => state.applySalon)
+
+  useEffect(() => {
+
+    if(LoggedInMiddleware?.user){
+      console.log("FROM USEEFFETC ADMIN EmAIL ",LoggedInMiddleware?.user[0].email )
+      const getSalonfnc = async () => {
+        const { data } = await api.post("/api/admin/getAllSalonsByAdmin", {
+          adminEmail: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].email
+        })
+        setSalonList(data?.salons)
+      }
+  
+      getSalonfnc()
+  
+  
+  
+      const getSalonfnc2 = async () => {
+        const { data } = await api.post("/api/admin/getDefaultSalonByAdmin", {
+          adminEmail: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].email
+        })
+  
+        setChooseSalonId(data?.response?.salonId)
+      }
+  
+      getSalonfnc2()
+    }
+    
+  }, [LoggedInMiddleware?.user])
+
+
+  console.log("Admin Header Salon List ", salonList )
+  console.log("Admin header chooseSalonId ", chooseSalonId)
 
   return (
     <section className="nav1">

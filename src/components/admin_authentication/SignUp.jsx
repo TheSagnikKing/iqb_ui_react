@@ -142,7 +142,7 @@ const SignUp = () => {
     };
     
     const AdminRegister = useSelector(state => state.AdminRegister)
-    const {loading} = AdminRegister
+    const {loading } = AdminRegister
 
     const BarberRegister = useSelector(state => state.BarberRegister)
     const {loading:BarberLoading} = BarberRegister

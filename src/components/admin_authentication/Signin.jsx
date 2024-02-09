@@ -22,6 +22,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import { getMessaging, getToken } from "firebase/messaging";
 import { messaging } from '../../firebase';
 import ClipLoader from 'react-spinners/ClipLoader'
+import { ADMIN_SIGNIN_FAIL } from '../../redux/constants/AdminAuthConstants'
+import differenceInSeconds from 'date-fns/differenceInSeconds/index.js'
+import { BARBER_SIGNIN_FAIL } from '../../redux/constants/BarberAuthConstants'
 
 const SignIn = () => {
 
@@ -153,17 +156,31 @@ const SignIn = () => {
 
     const AdminLogin = useSelector(state => state.AdminLogin)
     const {loading,error:adminLoginError} = AdminLogin
-//  console.log(adminLoginError,'pppppop');
-    if(adminLoginError){
-        toast.error(adminLoginError?.message, {
-            position: "top-right"
-        });
-    }
+
+    useEffect(() => {
+        if(adminLoginError){
+            toast.error(adminLoginError?.message, {
+                position: "top-right"
+            });
+        }
+
+    },[adminLoginError,dispatch])
 
     const BarberLogin = useSelector(state => state.BarberLogin)
-    const { loading: barberLoading } = BarberLogin;
+    const { loading: barberLoading , error:barberLoginError } = BarberLogin;
 
+    useEffect(() => {
+        if(barberLoginError){
+            toast.error(barberLoginError?.message, {
+                position: "top-right"
+            });
+        }
 
+        // dispatch({
+        //     type:BARBER_SIGNIN_FAIL,
+        //     payload:{}
+        // })
+    },[barberLoginError,dispatch])
 
 
     return (

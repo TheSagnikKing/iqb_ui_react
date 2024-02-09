@@ -44,12 +44,14 @@ export const AdminLoginAction = (loginData,navigate) => async (dispatch) => {
 
         navigate("/admin-dashboard")
     } catch (error) {
-        // console.log(error,'errrrrrrrrr');
+        console.log(error,'errrrrrrrrr');
 
         dispatch({
             type: ADMIN_SIGNIN_FAIL,
             payload:error.response.data
         });
+
+    
     }
 };
 
@@ -201,21 +203,21 @@ export const LoggedInMiddlewareAction = (navigate) => async (dispatch) => {
             payload: data
         });
 
-
-        // const userLoggedIn = localStorage.getItem("userLoggedIn")
-
-        // if(data && data.user && data.user[0] == null && userLoggedIn == "false"){
-        //     console.log("From Barber Auth ")
-        //     navigate("/barber-dashboard")
-        //     window.location.reload()
-        // }
     } catch (error) {
-        console.log("EROOOOOOOOOOOOOOOOO",error)
-        
+
         dispatch({
             type: LOGGED_IN_MIDDLEWARE_FAIL,
             payload:error?.response?.data
         });
+
+
+        const userLoggedIn = localStorage.getItem("userLoggedIn")
+
+        if(error?.response?.data && error?.response?.data.user[0] == null && userLoggedIn == "false"){
+            console.log("From Admin Auth ")
+            navigate("/barber-dashboard")
+            window.location.reload()
+        }
     }
 };
 
