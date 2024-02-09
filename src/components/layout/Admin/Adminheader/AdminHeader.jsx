@@ -202,7 +202,7 @@ const AdminHeader = ({ title }) => {
             display: "flex",
             gap: "1rem"
           }}>
-            <h2 for="cars">Choose Salon</h2>
+            <h2 for="cars" style={{fontSize:"1.2rem"}}>Choose Salon</h2>
 
             <select
               name="cars"
