@@ -314,6 +314,7 @@ const CreateSalon = () => {
     const serviceIconHandler = (s) => {
         setCurrentImg(s.url)
         setCurrentPublicId(s.public_id)
+        setServiceDrop(false)
     } 
 
     return (
@@ -481,7 +482,7 @@ const CreateSalon = () => {
                         <div>
                             <div style={{ display: "flex",flexDirection:"row" }}>
                                 <label htmlFor="">Salon Type</label>
-                                <button onClick={() => setSalontypeDropdown((prev) => !prev)} className='sal-drop-type'><FaArrowDown /></button>
+                                <button onClick={() => setSalontypeDropdown((prev) => !prev)} className='sal-drop-type'><FaArrowDown style={{fontSize:"1.2rem"}}/></button>
                             </div>
 
                             {

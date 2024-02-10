@@ -215,10 +215,6 @@ const Dashboard = () => {
         }
     }, [LoggedInMiddleware?.user])
 
-    // console.log(salonList)
-
-    // console.log("jhv", salonStatus)
-
     const salonStatusHandler = () => {
         const newCheckValue = !salonStatus;
         setSalonStatus(newCheckValue);
@@ -251,6 +247,9 @@ const Dashboard = () => {
 
     }
 
+
+    console.log("Appointmenttttttttt",appointmentData)
+
     return (
             <div className="right_main_div">
                 {salonid == 0 ? <div className='nosalon'>
@@ -265,31 +264,6 @@ const Dashboard = () => {
                                 justifyContent: "space-between",
                                 marginBottom: "2rem"
                             }}>
-                                {/* <div style={{
-                                    display: "flex",
-                                    gap: "10px"
-                                }}>
-                                    <label for="cars">Choose Salon</label>
-
-                                    <select
-                                        name="cars"
-                                        id="cars"
-                                        value={chooseSalonId}
-                                        onChange={(e) => setChooseSalonId(e.target.value)}
-                                    >
-                                        {salonList && salonList.map((s, i) => (
-                                            <option value={s.salonId} key={i} style={{
-                                                backgroundColor: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId === s.salonId ? "green" : "",
-                                                color: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId === s.salonId ? "#fff" : "black"
-                                            }}>
-                                                {s.salonName}
-                                            </option>
-                                        ))}
-                                    </select>
-
-                                    <button onClick={applySalonHandler}>Apply</button>
-                                </div> */}
-
                                 <div style={{
                                     display:"flex",
                                     gap:"1.1rem",
@@ -457,14 +431,14 @@ const Dashboard = () => {
 
                                 <div className="main_right">
                                     <div className='appoin-content-head'>
-                                        <p>Appointment Name</p>
-                                        <p>Customer Name</p>
-                                        <p>Barber Name</p>
+                                        <b>Appointment Note</b>
+                                        <b>Customer Name</b>
+                                        <b>Barber Name</b>
                                     </div>
                                     {
                                         appointmentLoader == true ? <h1>loading...</h1> : appointmentData?.response?.map((ap, i) => (
                                             <div className='appoin-content-div' key={i}>
-                                                <p>{ap.appointmentName}</p>
+                                                <p>{ap.appointmentNotes}</p>
                                                 <p>{ap.customerName}</p>
                                                 <p>{ap.barberName}</p>
                                             </div>
@@ -506,7 +480,7 @@ const Dashboard = () => {
 
                             <div className="chart">
                                 <div>
-                                    <p>Completion Rate</p>
+                                    <h2>Completion Rate</h2>
 
                                     <div>
                                         <p>95%</p>

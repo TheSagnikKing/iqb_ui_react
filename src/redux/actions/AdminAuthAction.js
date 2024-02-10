@@ -215,7 +215,7 @@ export const LoggedInMiddlewareAction = (navigate) => async (dispatch) => {
 };
 
 
-export const updateAdminAction = (profiledata) => async (dispatch) => {
+export const updateAdminAction = (profiledata,navigate) => async (dispatch) => {
     try {
         dispatch({
             type:UPDATE_ADMIN_REQ
@@ -227,7 +227,7 @@ export const updateAdminAction = (profiledata) => async (dispatch) => {
             payload: data
         });
 
-        alert("Profile updated successfully")
+        navigate("/admin-dashboard")
     } catch (error) {
     
         dispatch({
@@ -298,6 +298,7 @@ export const adminVerifiedStatusAction = (navigate,verifystatus) => async (dispa
             payload: data
         });
         navigate("/admin/updateprofile")
+        window.location.reload()
     } catch (error) {
     
         dispatch({

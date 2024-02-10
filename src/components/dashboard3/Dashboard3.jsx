@@ -165,13 +165,13 @@ const Dashboard3 = () => {
                                         <div><AiOutlineArrowDown /></div>
                                     </div>
                                 </div></div>
-                            <div><div>
+                            {/* <div><div>
                                     <h4>Date of Birth</h4>
                                     <div>
                                         <div><AiOutlineArrowUp /></div>
                                         <div><AiOutlineArrowDown /></div>
                                     </div>
-                                </div></div>
+                                </div></div> */}
                             <div><div>
                                     <h4>Gender</h4>
                                     <div>
@@ -196,9 +196,9 @@ const Dashboard3 = () => {
                                 <p>{customer.email}</p>
                             </div>
 
-                            <div>
+                            {/* <div>
                                 <p>{customer.dateOfBirth}</p>
-                            </div>
+                            </div> */}
 
                             <div>
                                 <p>{customer.gender}</p>

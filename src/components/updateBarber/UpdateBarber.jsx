@@ -227,7 +227,7 @@ const UpdateBarber = () => {
                     <div>
                         <div style={{display:"flex", justifyContent:"space-between", paddingInline:"1rem"}}>
                             <h2>Services</h2>
-                            <div onClick={() => setDropdown(!dropdown)} style={{fontSize:"bold",fontSize:"1.8rem"}}><BiDownArrowAlt /></div>
+                            <div onClick={() => setDropdown(!dropdown)} style={{fontWeight:"bolder",fontSize:"2rem",boxShadow:"0px 0px 4px rgba(0,0,0,0.4)",borderRadius:"50%",width:"3rem",height:"3rem",display:"flex",justifyContent:"center",alignItems:"center"}}><BiDownArrowAlt /></div>
                         </div>
 
                         {

@@ -148,7 +148,16 @@
     }
 
     .barber-dropdown>div{
-        width: 50rem;
-        grid-template-columns: 10rem 10rem 10rem 10rem  10rem;
+        width: 130vw;
+        grid-template-columns: 10rem 10rem 10rem 20rem  10rem;
+    }
+
+    .barber-dropdown-select {
+        width: 73vw ;
+    }
+
+    .barber-dropdown-select>div{
+        width:130vw;
+        grid-template-columns: 10rem 10rem 10rem 20rem  10rem;
     }
 }

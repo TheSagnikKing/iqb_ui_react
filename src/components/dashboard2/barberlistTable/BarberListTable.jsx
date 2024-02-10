@@ -272,146 +272,16 @@ const BarberListTable = () => {
                             </div>
                         </div></div>
 
-                        <div><div>
+                        {/* <div><div>
                             <h4>Date of Birth</h4>
                             <div>
                                 <div><AiOutlineArrowUp /></div>
                                 <div><AiOutlineArrowDown /></div>
                             </div>
-                        </div></div>
+                        </div></div> */}
                         <h4 className='barber-isActive'>isActive</h4>
                     </main>
                 }
-                {/* {
-                        loading ? <div className='puff-loader-box'><PuffLoader /></div> :
-                            barbersList && barbersList.getAllBarbers ? barbersList?.getAllBarbers.map((barber, index) =>
-                                <mai className="barberlist-barberitem" key={index}>
-                                    <div>
-                                        <input
-                                            type="checkbox"
-                                            onChange={(e) => setCheckboxHandler(e, barber)}
-
-                                        />
-
-                                    </div>
-
-                                    <div>
-                                        
-                                        <p>{barber.salonId}</p>
-                                    </div>
-
-                                    <div>
-                                        
-                                        <p>{barber.name}</p>
-                                    </div>
-
-                                    <div>
-                                        
-                                        <p>{barber.email}</p>
-                                    </div>
-
-                                    <div>
-                                        
-                                        <p>{barber.dateOfBirth}</p>
-                                    </div>
-
-
-                                    <div style={{
-                                        background: "none",
-                                        boxShadow: "none",
-                                        fontSize: "1.2rem",
-                                        width: "100%"
-                                    }}>
-
-                                        <p>is Active</p>
-
-                                        <p>{barber.isActive ? "True" : "false"}</p>
-                                    </div>
-
-
-                                    {approveBarberMap.get(`${barber.salonId}-${barber.email}`) || barber.isApproved ? (
-                                        <button className='approve-bbr' onClick={() => approveHandler(barber.salonId, barber.email, false)} style={{ background: "gray" }}>Approved</button>
-                                    ) : (
-                                        <button className='approve-bbr' onClick={() => approveHandler(barber.salonId, barber.email, true)} style={{ background: "white" }}>Approve</button>
-                                    )}
-
-                                    <div>
-                                        <div style={{
-                                            fontSize: "1.4rem",
-                                            color: "limegreen",
-                                            marginTop: "0.2rem",
-                                            cursor: "pointer",
-                                            height: "3.5rem",
-                                            width: "4.5rem",
-                                            background: "#fff",
-                                            display: "flex",
-                                            justifyContent: "center",
-                                            alignItems: "center",
-                                            boxShadow: "0px 0px 4px rgba(0,0,0,0.5)",
-                                            borderRadius: "0.6rem"
-                                        }}
-                                            onClick={() => notifyemailHandler(barber.email)}
-                                        ><IoIosNotifications /></div>
-                                    </div>
-
-                                    <button className='edit-bbr' onClick={() => editHandler(barber.email)}><AiFillEdit /></button>
-
-
-                                    <button className='del-bbr' onClick={() => deletebarberHandler(barber.salonId, barber.email)} style={{color:"red"}}><MdDelete /></button>
-
-                                </mai
-                                n>) : <div className='no-barber-box'><p>No Barbers Present</p></div>
-                    }  */}
-
-                {/* <main className="barberlist-barberitem">
-                    <div> <input
-                        type="checkbox"
-                        onChange={(e) => setCheckboxHandler(e, barber)}
-
-                    /></div>
-                    <div>
-                        <div>
-                            <h4>1</h4>
-
-                        </div></div>
-
-                    <div><div>
-                        <h4>Barber Name</h4>
-
-                    </div></div>
-
-                    <div><div>
-                        <h4>sagniknandy27@gmail.com</h4>
-
-                    </div></div>
-
-                    <div><div>
-                        <h4>2024-02-09T00:00:00.000Z</h4>
-
-                    </div></div>
-                    <h4 className='barber-isActive'>true</h4>
-
-                    <div><button style={{ background: "gray",fontSize:"1.2rem" }}>Approved</button></div>
-                    <div><div style={{
-                                        fontSize: "1.4rem",
-                                        color: "limegreen",
-                                        marginTop: "0.2rem",
-                                        cursor: "pointer",
-                                        height: "3.5rem",
-                                        width: "4.5rem",
-                                        background: "#fff",
-                                        display: "flex",
-                                        justifyContent: "center",
-                                        alignItems: "center",
-                                        boxShadow: "0px 0px 4px rgba(0,0,0,0.5)",
-                                        borderRadius: "0.6rem"
-                                    }}
-                                        
-                                    ><IoIosNotifications /></div></div>
-                    <div> <button className='edit-bbr'><AiFillEdit /></button></div>
-                    <div> <button className='del-bbr'  style={{ color: "red" }}><MdDelete /></button></div>
-                </main> */}
-
 
                 {
                     loading ? (
@@ -440,9 +310,9 @@ const BarberListTable = () => {
                                     <p>{barber.email}</p>
                                 </div>
 
-                                <div>
+                                {/* <div>
                                     <p>{barber.dateOfBirth}</p>
-                                </div>
+                                </div> */}
 
                                 <div style={{
                                     background: "none",

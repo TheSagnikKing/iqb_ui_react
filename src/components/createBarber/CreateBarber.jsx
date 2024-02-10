@@ -177,7 +177,7 @@ const CreateBarber = () => {
                     <div>
                         <div style={{display:"flex", justifyContent:"space-between",paddingInline:"1rem"}}>
                             <h2>Services</h2>
-                            <div onClick={() => setDropdown(!dropdown)} style={{fontWeight:"bolder",fontSize:"1.8rem"}}><BiDownArrowAlt /></div>
+                            <div onClick={() => setDropdown(!dropdown)} style={{fontWeight:"bolder",fontSize:"2rem",boxShadow:"0px 0px 4px rgba(0,0,0,0.4)",borderRadius:"50%",width:"3rem",height:"3rem",display:"flex",justifyContent:"center",alignItems:"center"}}><BiDownArrowAlt /></div>
                         </div>
 
                         {
@@ -206,7 +206,7 @@ const CreateBarber = () => {
                                                     type="number"
                                                     value={barberserviceEWTMap.get(ser.serviceId) || ''}
                                                     onChange={(e) => updateServiceEWT(ser.serviceId, e.target.value)}
-                                                    style={{width:"5rem"}}
+                                                    style={{width:"5rem",fontSize:"1.4rem"}}
                                                 />
                                                 {/* <p>{}</p> */}
                                             </div>

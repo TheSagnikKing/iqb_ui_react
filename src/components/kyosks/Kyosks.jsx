@@ -10,11 +10,7 @@ import { IoIosAddCircle } from "react-icons/io";
 import { FaRegClock } from "react-icons/fa";
 import { TiTick } from "react-icons/ti";
 import { RxCross2 } from "react-icons/rx";
-// import AdminLayout from '../../layout/Admin/AdminLayout'
-// import { barberListAction, getBarberByMultipleServicesAction, getbarberServicesbyBarberIdAction } from '../../../redux/actions/barberAction'
-// import { useNavigate } from "react-router-dom"
-// import { singleJoinQueueAction } from '../../../redux/actions/joinQueueAction'
-// import { getAllSalonServicesAction } from '../../../redux/actions/salonAction'
+
 
 const Kyosks = () => {
 
@@ -156,9 +152,6 @@ const Kyosks = () => {
         dispatch(getBarberByMultipleServicesAction(salonId, serviceIds,setModel2barber))
     }
 
-
-
-    // console.log("frrrr",getBarberByMultipleServices)
 
     return (
         <>

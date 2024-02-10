@@ -8,6 +8,8 @@ import { FaCamera } from "react-icons/fa";
 
 import { useNavigate } from 'react-router-dom'
 
+import ClipLoader from "react-spinners/ClipLoader";
+
 const UpdateAdminprofile = () => {
 
     // const [username, setUsername] = useState("")
@@ -19,6 +21,7 @@ const UpdateAdminprofile = () => {
     const dispatch = useDispatch()
 
     const LoggedInMiddleware = useSelector(state => state.LoggedInMiddleware)
+    const navigate = useNavigate()
 
     const submitHandler = () => {
         const profiledata = {
@@ -30,7 +33,7 @@ const UpdateAdminprofile = () => {
             gender
         }
 
-        dispatch(updateAdminAction(profiledata))
+        dispatch(updateAdminAction(profiledata,navigate))
     }
 
     // console.log(LoggedInMiddleware?.user[0]?.profile[0]?.url)
@@ -44,7 +47,6 @@ const UpdateAdminprofile = () => {
         // setDob(LoggedInMiddleware?.user && LoggedInMiddleware?.user[0]?.dateOfBirth.split('T')[0]) // split method ta disturb korche
     }, [LoggedInMiddleware?.user])
 
-    const navigate = useNavigate()
 
     const verifyEmailHandler = () => {
         const confirm = window.confirm("Are you sure ?")
@@ -54,6 +56,9 @@ const UpdateAdminprofile = () => {
             }))
         }
     }
+
+    const updateAdmin = useSelector(state => state.updateAdmin)
+    const {loading} = updateAdmin
 
     return (
         <>
@@ -138,9 +143,10 @@ const UpdateAdminprofile = () => {
                     </div>
 
                     <div className="sa-br-btn_box-up">
-                        <button onClick={submitHandler}>
+                        {loading === true ? <button><ClipLoader/></button> : <button onClick={submitHandler}>
                             Submit
-                        </button>
+                        </button>}
+                        
                     </div>
 
                 </div>

@@ -3,13 +3,14 @@ import "./AdminAccountDetail.css"
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateBarberSignupAccountDetailsAction } from '../../redux/actions/BarberAuthAction'
+import ClipLoader from "react-spinners/ClipLoader";
 
 const BarberAccountDetail = () => {
 
     const [username, setUsername] = useState("")
     const [mobileNumber, setMobileNumber] = useState("")
     const [name, setName] = useState("")
-    const [gender, setGender] = useState("")
+    const [gender, setGender] = useState("male")
     const [dob, setDob] = useState("")
 
     const navigate = useNavigate()
@@ -22,7 +23,7 @@ const BarberAccountDetail = () => {
         const profiledata = {email:LoggedInMiddleware?.user && LoggedInMiddleware?.user[0]?.email,mobileNumber,name,gender,dateOfBirth:dob,salonId:LoggedInMiddleware?.user && LoggedInMiddleware?.user[0]?.salonId};
 
         // const profiledata = {email:"sagniknandy27@gmail.com",mobileNumber,name,gender,dateOfBirth:dob,salonId:LoggedInMiddleware?.user[0]?.salonId,userName:username};
-        // dispatch(updateBarberSignupAccountDetailsAction(navigate,profiledata))
+        dispatch(updateBarberSignupAccountDetailsAction(navigate,profiledata))
 
         console.log(profiledata)
     }
@@ -31,9 +32,10 @@ const BarberAccountDetail = () => {
         navigate("/barber-dashboard")
     }
 
-    return (
-        <>
+    const barberUpdateAccount = useSelector(state => state.barberUpdateAccount)
+    const {loading} =  barberUpdateAccount
 
+    return (
             <div className='admin_account_detail_container'>
                 <div>
                     <h2>Fill Your Barber Account Details</h2>
@@ -75,24 +77,13 @@ const BarberAccountDetail = () => {
                     </div>
 
                     <div>
-                        {/* <label htmlFor="">Gender</label>
-                        <input
-                            type="text"
-                            value={gender}
-                            onChange={(e) => setGender(e.target.value)}
-                        /> */}
-
                         <h2>Gender:</h2>
 
-                        <select 
-                        name="gender" 
-                        id="gender" 
-                        onChange={(e) => setGender(e.target.value)} 
-                        value={gender}>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                            <option value="other">Other</option>
-                        </select>
+                        <select name="cars" id="cars" onChange={(e) => setGender(e.target.value)} value={gender}>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
                     </div>
 
                     <div>
@@ -105,16 +96,18 @@ const BarberAccountDetail = () => {
                     </div>
 
                     <div className="sa-br-btn_box">
-                        <button onClick={submitHandler}>
+                        {
+                            loading ? <button><ClipLoader/></button> : <button onClick={submitHandler}>
                             Submit
                         </button>
+                        }
+                        
                     </div>
 
                     <button className='skip' onClick={skipHandler}>Skip</button>
                 </div>
 
             </div>
-        </>
     )
 }
 

@@ -371,4 +371,12 @@ input[type="file"] {
 
     .service-icon-content>div:nth-child(1)>div{
     }
+
+    .ser-table{
+        width: 100vw;
+    }
+
+    .services-data{
+        width: 73vw;
+    }
 }

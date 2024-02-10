@@ -3,6 +3,7 @@ import "./AdminVerifyEmail.css"
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { adminVerifiedStatusAction } from '../../redux/actions/AdminAuthAction'
+import ClipLoader from "react-spinners/ClipLoader";
 
 const AdminVerifyEmail = () => {
 
@@ -24,8 +25,10 @@ const AdminVerifyEmail = () => {
     }
   }
 
+  const adminVerifiedStatus = useSelector(state => state.adminVerifiedStatus)
+  const {loading} = adminVerifiedStatus
+
   return (
-    <>
     <div className='verify-email'>
         <h1>Enter OTP</h1>
         <input 
@@ -33,9 +36,10 @@ const AdminVerifyEmail = () => {
         value={verifyCode}
         onChange={(e) => setverifyCode(e.target.value)}
         /><br/>
-        <button onClick={submitHandler}>Submit</button>
+        {
+          loading === true ? <button><ClipLoader/></button> : <button onClick={submitHandler}>Submit</button>
+        }
     </div>
-    </>
   )
 }
 

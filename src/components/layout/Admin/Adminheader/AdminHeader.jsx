@@ -129,7 +129,7 @@ const AdminHeader = ({ title }) => {
 
   console.log("Admin Header Salon List ", salonList )
   console.log("Admin header chooseSalonId ", chooseSalonId)
-
+  
   return (
     <section className="nav1">
       <div className="nav1left">

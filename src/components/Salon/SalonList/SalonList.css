@@ -132,7 +132,7 @@
     }
 
     .salon-item{
-        width: 220%;
-        grid-template-columns: 10rem 10rem 10rem 10rem 10rem 10rem 5rem 5rem 5rem ;
+        width: 240%;
+        grid-template-columns: 10rem 10rem 10rem 20rem 10rem 10rem 5rem 5rem 5rem ;
     }
 }

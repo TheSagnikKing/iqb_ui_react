@@ -13,7 +13,10 @@ const Advertisement = () => {
   const [publicid, setPublicId] = useState("")
   const [mongoid, setMongoid] = useState("")
 
+  const [handleEditLoader, sethandleEditLoader] = useState(false)
+
   const handleEditButtonClick = (publicId, mongoid) => {
+    
     fileInputRef.current.click();
     setPublicId(publicId)
     setMongoid(mongoid)
@@ -32,6 +35,8 @@ const Advertisement = () => {
     formData.append('advertisements', uploadImage)
     formData.append('public_imgid', publicid)
 
+    sethandleEditLoader(true)
+
     try {
       const imageResponse = await api.put('/api/advertisement/updateAdvertisements', formData, {
         headers: {
@@ -43,6 +48,7 @@ const Advertisement = () => {
       alert("Image Update successfully")
       setPublicId("")
       setMongoid("")
+      sethandleEditLoader(false)
       window.location.reload()
     } catch (error) {
       console.error('Image upload failed:', error);
@@ -160,7 +166,7 @@ const Advertisement = () => {
               borderRadius:"5px",
               border:"none",
               fontSize:"1.2rem"
-            }}>{advertisementLoader ? <h2>Loading</h2> : "Upload Image"}</button>
+            }}>{advertisementLoader ? <h2>Loading</h2> : <p style={{fontSize:"1.2rem"}}>Upload</p>}</button>
           </div>
         </div>
 
@@ -171,7 +177,7 @@ const Advertisement = () => {
               <div key={i}>
                 <img src={a.url} alt="" />
                 <div>
-                  <button onClick={() => handleEditButtonClick(a.public_id, a._id)} style={{border:"none",marginRight:"1rem"}}><MdEdit /></button>
+                  {handleEditLoader === true ? <button>Ld</button> : <button onClick={() => handleEditButtonClick(a.public_id, a._id)} style={{border:"none",marginRight:"1rem"}}><MdEdit /></button>}
                   <input
                     type="file"
                     ref={fileInputRef}
