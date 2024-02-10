@@ -78,7 +78,7 @@
 
 .nav1-menu_category>div div:nth-child(2) p {
     font-size: 1.2rem; /* 12px / 10 = 1.2rem */
-    color: rgba(0, 0, 0, 0.3);
+    /* color: rgba(0, 0, 0, 0.3); */
 }
 
 

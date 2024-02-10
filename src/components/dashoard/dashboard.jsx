@@ -427,14 +427,14 @@ const Dashboard = () => {
 
                                 <div className="main_right">
                                     <div className='appoin-content-head'>
-                                        <b>Appointment Note</b>
+                                        <b>Timeslots</b>
                                         <b>Customer Name</b>
                                         <b>Barber Name</b>
                                     </div>
                                     {
                                         appointmentLoader == true ? <h1>loading...</h1> : appointmentData?.response?.map((ap, i) => (
                                             <div className='appoin-content-div' key={i}>
-                                                <p>{ap.appointmentNotes}</p>
+                                                <p>{ap.timeSlots}</p>
                                                 <p>{ap.customerName}</p>
                                                 <p>{ap.barberName}</p>
                                             </div>

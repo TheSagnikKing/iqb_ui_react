@@ -496,4 +496,9 @@
     .nav1right_dropdown_box>div>p{
         font-size: 2rem !important;
     }
+
+    .menu-active{
+        background-color: #000 !important;
+    }
+
   }

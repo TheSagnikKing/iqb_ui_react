@@ -4,15 +4,13 @@ import { GoTriangleDown } from 'react-icons/go'
 import { GoTriangleUp } from 'react-icons/go'
 import { Link, useLocation } from 'react-router-dom'
 
-const AdminMenu = ({ menu_logo, menu_title, category, menu_link }) => {
+const AdminMenu = ({ menu_logo, menu_title, category, menu_link,menucolor }) => {
 
     return (
         <Link to={`${menu_link}`} style={{color:"#000", textDecoration:"none"}}>
-            <div className="nav1-menu"
-                
-            >
+            <div className="nav1-menu">
                 <div >
-                    <div>
+                    <div style={{color:menucolor}}>
                         {menu_logo}
                     </div>
 

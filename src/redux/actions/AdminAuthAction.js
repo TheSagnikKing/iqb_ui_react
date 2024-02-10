@@ -102,6 +102,16 @@ export const AdminLogoutAction = (navigate) => async (dispatch) => {
              type: ADMIN_LOGOUT_SUCCESS,
              payload:data
          })
+
+         dispatch({
+            type:ADMIN_SIGNIN_FAIL,
+            payload:{}
+         })
+
+         dispatch({
+            type:ADMIN_SIGNUP_FAIL,
+            payload:{}
+         })
          localStorage.setItem("userLoggedIn","false")
          navigate("/admin-signin")
     } catch (error) {

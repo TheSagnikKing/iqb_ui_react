@@ -17,6 +17,7 @@ import { AdminLogoutAction } from '../../../../redux/actions/AdminAuthAction'
 
 import api from "../../../../redux/api/Api"
 import { applySalonAction } from '../../../../redux/actions/salonAction'
+import { RxCross2, RxHamburgerMenu } from 'react-icons/rx'
 
 const AdminHeader = ({ title }) => {
 
@@ -72,11 +73,6 @@ const AdminHeader = ({ title }) => {
   const [salonList, setSalonList] = useState([])
 
 
-
-
-
-
-
   const [chooseSalonId, setChooseSalonId] = useState("");
 
   const applySalonData = {
@@ -100,47 +96,52 @@ const AdminHeader = ({ title }) => {
 
   useEffect(() => {
 
-    if(LoggedInMiddleware?.user){
-      console.log("FROM USEEFFETC ADMIN EmAIL ",LoggedInMiddleware?.user[0].email )
+    if (LoggedInMiddleware?.user) {
+      console.log("FROM USEEFFETC ADMIN EmAIL ", LoggedInMiddleware?.user[0].email)
       const getSalonfnc = async () => {
         const { data } = await api.post("/api/admin/getAllSalonsByAdmin", {
           adminEmail: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].email
         })
         setSalonList(data?.salons)
       }
-  
+
       getSalonfnc()
-  
-  
-  
+
+
+
       const getSalonfnc2 = async () => {
         const { data } = await api.post("/api/admin/getDefaultSalonByAdmin", {
           adminEmail: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].email
         })
-  
+
         setChooseSalonId(data?.response?.salonId)
       }
-  
+
       getSalonfnc2()
     }
-    
+
   }, [LoggedInMiddleware?.user])
 
 
-  console.log("Admin Header Salon List ", salonList )
+  console.log("Admin Header Salon List ", salonList)
   console.log("Admin header chooseSalonId ", chooseSalonId)
 
 
   const location = useLocation()
-  const {pathname} = location
+  const { pathname } = location
 
-  console.log("Pathname",pathname)
-  
+  console.log("Pathname", pathname)
+
+  const [expandMenu, setExpandMenu] = useState(false)
+
+  // style={{width:`${expandMenu === true ? "20rem" : ""}`}}
+
   return (
     <section className="nav1">
       <div className="nav1left">
         <div className="nav1left_header">
           <span>IQB</span>&nbsp;<span>iqueuebarbers</span>
+          {/* <button onClick={() => setExpandMenu(!expandMenu)}>{">"}</button> */}
         </div>
 
         <div className={check ? "nav1wrapperdark" : "nav1wrapper"}>
@@ -148,17 +149,51 @@ const AdminHeader = ({ title }) => {
           <div className="nav1left_menu_box">
             {adminmenudata.map((item) => {
               return (
-                <div key={item.menu_title} style={{borderRight:`4px solid ${pathname === item.menu_link ? "red" : "gray"}`}}>
+                <div key={item.menu_title} className={`${pathname === item.menu_link ? "menu-active" : "menu-inactive"}`}>
                   <AdminMenu
                     menu_logo={item.menu_logo}
                     menu_title={item.menu_title}
                     category={item.category}
                     menu_link={item.menu_link}
+                    menucolor={`${pathname === item.menu_link ? "#fff" : ""}`}
                   />
                 </div>
               )
             })}
+
+            <button onClick={() => setExpandMenu(true)} style={{background:"#fff",border:"none",boxShadow:"0px 0px 4px rgba(0,0,0,0.5)",height:"30px",fontWeight:"bold",display:"flex",justifyContent:"center",alignItems:"center"}}><RxHamburgerMenu /></button>
           </div>
+
+          {expandMenu && <div style={{
+            position: "absolute",
+            background: "#fff",
+            height: "100vh",
+            width: "30rem",
+            zIndex: "1000",
+            borderRight: "1px solid rgba(0,0,0,0.6)"
+          }}>
+            <button onClick={() => setExpandMenu(false)} style={{background:"#fff",border:"none",boxShadow:"0px 0px 4px rgba(0,0,0,0.5)",height:"30px",width:"30px",margin:"1rem 2rem 1rem auto",borderRadius:"50%",mfontWeight:"bold",display:"flex",justifyContent:"center",alignItems:"center",color:"red"}}><RxCross2 /></button>
+
+            {adminmenudata.map((item) => {
+              return (
+                <div key={item.menu_title} className={`${pathname === item.menu_link ? "menu-active" : "menu-inactive"}`} style={{ marginBottom: "2rem" }}>
+                  <Link to={`${item.menu_link}`} style={{ color: "#000", textDecoration: "none" }} >
+                    <div className="nav1-menu">
+                      <div style={{ display: "flex", alignItems: "center", gap: "2rem", width: "80%", fontSize: "1.4rem" }}>
+                        <div style={{color:`${pathname === item.menu_link ? "#fff" : ""}`}}>
+                          {item.menu_logo}
+                        </div>
+
+                        <h3 style={{ display: "block",color:`${pathname === item.menu_link ? "#fff" : ""}` }}>{item.menu_title}</h3>
+                      </div>
+
+                    </div>
+                  </Link>
+                </div>
+              )
+            })}
+
+          </div>}
 
           <div className="nav1menu_settings">
             <div style={{ borderBottom: "1px solid #f5f5f5" }}>
@@ -208,14 +243,14 @@ const AdminHeader = ({ title }) => {
             display: "flex",
             gap: "1rem"
           }}>
-            <h2 for="cars" style={{fontSize:"1.2rem"}}>Choose Salon</h2>
+            <h2 for="cars" style={{ fontSize: "1.2rem" }}>Choose Salon</h2>
 
             <select
               name="cars"
               id="cars"
               value={chooseSalonId}
               onChange={(e) => setChooseSalonId(e.target.value)}
-              style={{fontSize:"1rem"}}
+              style={{ fontSize: "1rem" }}
             >
               {salonList?.map((s, i) => (
                 <option value={s.salonId} key={i} style={{
@@ -229,27 +264,27 @@ const AdminHeader = ({ title }) => {
 
             {
               applySalon?.loading == true ? <button style={{
-                height:"2.5rem",
-                width:"6rem",
-                background:"#f1f6fc",
-                boxShadow:"0px 0px 4px rgba(0,0,0,0.3)",
-                cursor:"pointer",
-                borderRadius:"5px",
-                border:"none",
-                fontWeight:"500"
+                height: "2.5rem",
+                width: "6rem",
+                background: "#f1f6fc",
+                boxShadow: "0px 0px 4px rgba(0,0,0,0.3)",
+                cursor: "pointer",
+                borderRadius: "5px",
+                border: "none",
+                fontWeight: "500"
               }}>Loading</button> : <button onClick={applySalonHandler} style={{
-                height:"2.5rem",
-                width:"6rem",
-                background:"#f1f6fc",
-                boxShadow:"0px 0px 4px rgba(0,0,0,0.3)",
-                cursor:"pointer",
-                borderRadius:"5px",
-                border:"none",
-                marginRight:"1rem",
-                fontSize:"1rem"
+                height: "2.5rem",
+                width: "6rem",
+                background: "#f1f6fc",
+                boxShadow: "0px 0px 4px rgba(0,0,0,0.3)",
+                cursor: "pointer",
+                borderRadius: "5px",
+                border: "none",
+                marginRight: "1rem",
+                fontSize: "1rem"
               }}>Apply</button>
             }
-            
+
           </div>
 
           <div className="nav1search_box">
@@ -299,7 +334,7 @@ const AdminHeader = ({ title }) => {
               <p>Admin</p>
             </div>
 
-            <div style={{ cursor: "pointer",fontSize:"2.4rem" }} className="nav1right_dropdown"
+            <div style={{ cursor: "pointer", fontSize: "2.4rem" }} className="nav1right_dropdown"
               onClick={() => setDropdown(!dropdown)}>
               <MdKeyboardArrowDown />
             </div>
@@ -308,7 +343,7 @@ const AdminHeader = ({ title }) => {
               dropdown && <div className="nav1right_dropdown_box">
                 <div>
                   <div><RiAccountCircleFill /></div>
-                  <Link to="/admin/updateprofile" style={{fontSize:"2rem",textDecoration:"none"}}>My Account</Link>
+                  <Link to="/admin/updateprofile" style={{ fontSize: "2rem", textDecoration: "none" }}>My Account</Link>
                 </div>
 
                 <div onClick={logoutHandler}>
