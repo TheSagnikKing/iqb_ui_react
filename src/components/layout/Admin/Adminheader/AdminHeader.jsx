@@ -147,6 +147,7 @@ const AdminHeader = ({ title }) => {
         <div className={check ? "nav1wrapperdark" : "nav1wrapper"}>
 
           <div className="nav1left_menu_box">
+            <button onClick={() => setExpandMenu(true)} style={{background:"#fff",border:"none",boxShadow:"0px 0px 4px rgba(0,0,0,0.5)",height:"30px",fontWeight:"bold",display:"flex",justifyContent:"center",alignItems:"center"}}><RxHamburgerMenu /></button>
             {adminmenudata.map((item) => {
               return (
                 <div key={item.menu_title} className={`${pathname === item.menu_link ? "menu-active" : "menu-inactive"}`}>
@@ -160,18 +161,19 @@ const AdminHeader = ({ title }) => {
                 </div>
               )
             })}
-
-            <button onClick={() => setExpandMenu(true)} style={{background:"#fff",border:"none",boxShadow:"0px 0px 4px rgba(0,0,0,0.5)",height:"30px",fontWeight:"bold",display:"flex",justifyContent:"center",alignItems:"center"}}><RxHamburgerMenu /></button>
+            
           </div>
 
           {expandMenu && <div style={{
+            top:"0px",
             position: "absolute",
             background: "#fff",
-            height: "100vh",
+            height: "105vh",
             width: "30rem",
             zIndex: "1000",
-            borderRight: "1px solid rgba(0,0,0,0.6)"
-          }}>
+            borderRight: "1px solid rgba(0,0,0,0.6)",
+          }}
+          >
             <button onClick={() => setExpandMenu(false)} style={{background:"#fff",border:"none",boxShadow:"0px 0px 4px rgba(0,0,0,0.5)",height:"30px",width:"30px",margin:"1rem 2rem 1rem auto",borderRadius:"50%",mfontWeight:"bold",display:"flex",justifyContent:"center",alignItems:"center",color:"red"}}><RxCross2 /></button>
 
             {adminmenudata.map((item) => {

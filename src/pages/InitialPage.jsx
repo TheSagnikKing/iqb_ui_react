@@ -7,8 +7,7 @@ const InitialPage = () => {
     <main className='demo_menu'>
     <h1>WELCOME TO IQG BARBERS...</h1>
     <div>
-      <Link to="/admin-dashboard"><h4>Dashboard</h4></Link>
-      <Link to="/admin-signin"><h4>Admin Signin</h4></Link>
+      <Link to="/admin-signin"><h2>Admin Signin</h2></Link>
     </div>
     </main>
     </>

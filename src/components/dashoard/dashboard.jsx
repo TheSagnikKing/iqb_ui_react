@@ -62,7 +62,7 @@ const Dashboard = () => {
         const signal = newController.signal;
 
         if (salonId) {
-            dispatch(queueListAction(Number(salonId),signal))
+            dispatch(queueListAction(Number(salonId), signal))
         }
 
         return () => {
@@ -91,22 +91,22 @@ const Dashboard = () => {
     const [appointmentLoader, setAppointmentLoader] = useState(false)
 
     useEffect(() => {
-       if(currentDate){
-        const appointfnc = async () => {
-            setAppointmentLoader(true)
-            const { data } = await api.post("/api/advertisement/getDashboardAppointmentList", {
-                salonId,
-                appointmentDate: currentDate
-            })
+        if (currentDate) {
+            const appointfnc = async () => {
+                setAppointmentLoader(true)
+                const { data } = await api.post("/api/advertisement/getDashboardAppointmentList", {
+                    salonId,
+                    appointmentDate: currentDate
+                })
 
-            setAppointmentData(data)
-            setAppointmentLoader(false)
+                setAppointmentData(data)
+                setAppointmentLoader(false)
+            }
+
+            appointfnc()
         }
 
-        appointfnc()
-       }
-        
-    }, [salonId, currentDate,setAppointmentData])
+    }, [salonId, currentDate, setAppointmentData])
     // console.log("ss", appointmentData)
 
     const [advertisementList, setAdvertisementList] = useState([])
@@ -116,38 +116,38 @@ const Dashboard = () => {
 
     useEffect(() => {
         const getAdvertisementData = async () => {
-          try {
+            try {
 
-            const controller = new AbortController();
-            controllerRef.current = controller;
+                const controller = new AbortController();
+                controllerRef.current = controller;
 
 
-            const { data } = await api.post(
-              `/api/advertisement/getAdvertisements`,
-              { salonId: Number(LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId) },
-              { signal: controller.signal }
-            );
-      
-            setAdvertisementList(data?.advertisements);
-          } catch (error) {
-            if(error.name === 'AbortError'){
-                console.log('Advertisement Request Cancelled')
-            }else{
-            // Handle the error here, e.g., log it or show a user-friendly message
-            console.error('Error fetching advertisement data:', error);
+                const { data } = await api.post(
+                    `/api/advertisement/getAdvertisements`,
+                    { salonId: Number(LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId) },
+                    { signal: controller.signal }
+                );
+
+                setAdvertisementList(data?.advertisements);
+            } catch (error) {
+                if (error.name === 'AbortError') {
+                    console.log('Advertisement Request Cancelled')
+                } else {
+                    // Handle the error here, e.g., log it or show a user-friendly message
+                    console.error('Error fetching advertisement data:', error);
+                }
+
             }
-
-          }
         };
-      
+
         getAdvertisementData();
-      
+
         return () => {
             controllerRef.current.abort();
         }
 
-      }, [LoggedInMiddleware?.user]);
-      
+    }, [LoggedInMiddleware?.user]);
+
 
     const [salonList, setSalonList] = useState([])
     const [salonStatus, setSalonStatus] = useState(false);
@@ -165,17 +165,17 @@ const Dashboard = () => {
 
                 const { data } = await api.post("/api/admin/getAllSalonsByAdmin", {
                     adminEmail: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].email
-                },{ signal: controller.signal })
+                }, { signal: controller.signal })
                 setSalonList(data?.salons)
             } catch (error) {
-                if(error.name === 'AbortError'){
+                if (error.name === 'AbortError') {
                     console.log('Advertisement Request Cancelled')
-                }else{
-                // Handle the error here, e.g., log it or show a user-friendly message
-                console.error('Error fetching advertisement data:', error);
+                } else {
+                    // Handle the error here, e.g., log it or show a user-friendly message
+                    console.error('Error fetching advertisement data:', error);
                 }
             }
-           
+
         }
 
         getSalonfnc()
@@ -195,22 +195,22 @@ const Dashboard = () => {
 
                 const controller = new AbortController()
                 defaultSalonControllerRef.current = controller
-                
+
                 const { data } = await api.post("/api/admin/getDefaultSalonByAdmin", {
                     adminEmail: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].email
-                },{ signal: controller.signal })
-    
+                }, { signal: controller.signal })
+
                 setSalonStatus(data?.response?.isOnline)
                 setChooseSalonId(data?.response?.salonId)
             } catch (error) {
-                if(error.name === 'AbortError'){
+                if (error.name === 'AbortError') {
                     console.log('Advertisement Request Cancelled')
-                }else{
-                // Handle the error here, e.g., log it or show a user-friendly message
-                console.error('Error fetching advertisement data:', error);
+                } else {
+                    // Handle the error here, e.g., log it or show a user-friendly message
+                    console.error('Error fetching advertisement data:', error);
                 }
             }
-            
+
         }
 
         getSalonfnc()
@@ -253,103 +253,103 @@ const Dashboard = () => {
     }
 
 
-    console.log("Appointmenttttttttt",appointmentData)
+    console.log("Appointmenttttttttt", appointmentData)
 
     return (
-            <div className="right_main_div">
-                {salonid == 0 ? <div className='nosalon'>
-                    <h2>No Salons. Please Create a Salon First</h2>
-                    <Link to="/salon/createsalon">Create Salon</Link>
-                </div > : <>
-                    <div className="right_div_top">
-                        <div className="div_left">
+        <div className="right_main_div">
+            {salonid == 0 ? <div className='nosalon'>
+                <h2>No Salons. Please Create a Salon First</h2>
+                <Link to="/salon/createsalon">Create Salon</Link>
+            </div > : <>
+                <div className="right_div_top">
+                    <div className="div_left">
+                        <div style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            marginBottom: "2rem"
+                        }}>
                             <div style={{
                                 display: "flex",
-                                justifyContent: "space-between",
-                                marginBottom: "2rem"
+                                gap: "1.1rem",
+                                alignItems: "center"
                             }}>
-                                <div style={{
-                                    display:"flex",
-                                    gap:"1.1rem",
-                                    alignItems:"center"
-                                }}>
-                                    <p>Offline</p>
-                                    <label className="nav2toggle_switch" >
-                                        <input type="checkbox"
-                                            value={salonStatus}
-                                            onClick={() => salonStatusHandler()}
+                                <p>Offline</p>
+                                <label className="nav2toggle_switch" >
+                                    <input type="checkbox"
+                                        value={salonStatus}
+                                        onClick={() => salonStatusHandler()}
 
-                                        />
-                                        <span className={`nav2slider ${salonStatus ? 'checked' : ''}`}
-                                            style={{
-                                                background: salonStatus ? "#4CBB17" : "",
-                                                width:"4rem"
-                                            }}
-                                        ></span>
-                                    </label>
-                                    <p>Online</p>
-                                </div>
+                                    />
+                                    <span className={`nav2slider ${salonStatus ? 'checked' : ''}`}
+                                        style={{
+                                            background: salonStatus ? "#4CBB17" : "",
+                                            width: "4rem"
+                                        }}
+                                    ></span>
+                                </label>
+                                <p>Online</p>
                             </div>
+                        </div>
 
-                            <div className="div_left_head">
+                        <div className="div_left_head">
 
 
-                                <p>Advertisement</p>
-                                <div className="btn_box">
-                                    <div className="btn_one">
-                                        {/* <div>
+                            <p>Advertisement</p>
+                            <div className="btn_box">
+                                <div className="btn_one">
+                                    {/* <div>
                                             <IoMdAdd />
                                         </div> */}
 
-                                        <p><Link to="/advertisement">Add New Post</Link></p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="div_left_images">
-
-                                <div className="img_one">
-                                    <img src={advertisementList && advertisementList[0]?.url? advertisementList[0]?.url : "https://png.pngtree.com/png-clipart/20230917/original/pngtree-no-image-available-icon-flatvector-illustration-pic-design-profile-vector-png-image_12323913.png" } alt="" />
-                                </div>
-
-                                <div className="img_two">
-
-                                    <div>
-                                        <img src={advertisementList && advertisementList[1]?.url? advertisementList[1]?.url : "https://png.pngtree.com/png-clipart/20230917/original/pngtree-no-image-available-icon-flatvector-illustration-pic-design-profile-vector-png-image_12323913.png"} alt="" />
-                                    </div>
-
-                                    <div>
-                                        <img src={advertisementList[2]?.url ? advertisementList[2]?.url : "https://png.pngtree.com/png-clipart/20230917/original/pngtree-no-image-available-icon-flatvector-illustration-pic-design-profile-vector-png-image_12323913.png"} alt="" />
-                                    </div>
-
-                                </div>
-
-                                <div className="img_three">
-                                    <img src={advertisementList[3]?.url ? advertisementList[3]?.url : "https://png.pngtree.com/png-clipart/20230917/original/pngtree-no-image-available-icon-flatvector-illustration-pic-design-profile-vector-png-image_12323913.png"} alt="" />
+                                    <p><Link to="/advertisement">Add New Post</Link></p>
                                 </div>
                             </div>
                         </div>
 
-                        <div className="div_right">
-                            <div className="div_right_head">
-                                <p>Queue List</p>
+                        <div className="div_left_images">
 
-                                <div className="btn_box">
+                            <div className="img_one">
+                                <img src={advertisementList && advertisementList[0]?.url ? advertisementList[0]?.url : "https://png.pngtree.com/png-clipart/20230917/original/pngtree-no-image-available-icon-flatvector-illustration-pic-design-profile-vector-png-image_12323913.png"} alt="" />
+                            </div>
 
-                                    <div className="btn_one">
-                                        {/* <div>
+                            <div className="img_two">
+
+                                <div>
+                                    <img src={advertisementList && advertisementList[1]?.url ? advertisementList[1]?.url : "https://png.pngtree.com/png-clipart/20230917/original/pngtree-no-image-available-icon-flatvector-illustration-pic-design-profile-vector-png-image_12323913.png"} alt="" />
+                                </div>
+
+                                <div>
+                                    <img src={advertisementList[2]?.url ? advertisementList[2]?.url : "https://png.pngtree.com/png-clipart/20230917/original/pngtree-no-image-available-icon-flatvector-illustration-pic-design-profile-vector-png-image_12323913.png"} alt="" />
+                                </div>
+
+                            </div>
+
+                            <div className="img_three">
+                                <img src={advertisementList[3]?.url ? advertisementList[3]?.url : "https://png.pngtree.com/png-clipart/20230917/original/pngtree-no-image-available-icon-flatvector-illustration-pic-design-profile-vector-png-image_12323913.png"} alt="" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="div_right">
+                        <div className="div_right_head">
+                            <p>Queue List</p>
+
+                            <div className="btn_box">
+
+                                <div className="btn_one">
+                                    {/* <div>
                                             <IoMdAdd />
                                         </div> */}
 
-                                        <p><Link to="/queue"
-                                            style={{
-                                                fontSize: "1.1rem"
-                                            }}
-                                        >Add Customer</Link></p>
-                                    </div>
+                                    <p><Link to="/queue"
+                                        style={{
+                                            fontSize: "1.1rem"
+                                        }}
+                                    >Add Customer</Link></p>
+                                </div>
 
 
-                                    {/* <div className="btn_one">
+                                {/* <div className="btn_one">
                                         <div>
                                             <FaUsers />
                                         </div>
@@ -357,140 +357,147 @@ const Dashboard = () => {
                                         <p>Join Queue</p>
                                     </div> */}
 
-                                    {/* <div className="last_item">
+                                {/* <div className="last_item">
                                         <BsThreeDotsVertical />
                                     </div> */}
 
-                                </div>
                             </div>
+                        </div>
 
-                            <div className="div_right_third">
+                        <div className="div_right_third">
 
+                            <div>
+                                <p style={{
+                                    marginTop: "1rem"
+                                }}><Link to="/queue" style={{
+                                    fontSize: "1.1rem"
+                                }}>See All</Link></p>
                                 <div>
-                                    <p style={{
-                                        marginTop: "1rem"
-                                    }}><Link to="/queue" style={{
-                                        fontSize: "1.1rem"
-                                    }}>See All</Link></p>
-                                    <div>
-                                        <BiChevronRight />
-                                    </div>
+                                    <BiChevronRight />
                                 </div>
-
                             </div>
 
+                        </div>
 
-                            <div className='dashboard-quelist'
 
-                                style={{
-                                    overflow: "scroll",
-                                    height: "35rem"
-                                }}>
-                                <div className='dashboard-quelist-content-head'>
-                                    <p>Customer Name</p>
-                                    <p>Barber Name</p>
-                                    <p>Queue Position</p>
+                        <div className='dashboard-quelist'
+
+                            style={{
+                                overflow: "scroll",
+                                height: "35rem"
+                            }}>
+                            <div className='dashboard-quelist-content-head'>
+                                <p>Customer Name</p>
+                                <p>Barber Name</p>
+                                <p>Queue Position</p>
+                            </div>
+
+                            {
+                                queueList?.loading == true ? <h1>loading...</h1> : queueList?.response?.slice(0, 5).map((c, i) => (
+                                    <div className='dashboard-quelist-content' key={i}>
+                                        <p>{c.name}</p>
+                                        <p>{c.barberName}</p>
+                                        <p>{c.qPosition}</p>
+                                    </div>
+                                ))
+                            }
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div className="right_div_end">
+
+                    <div className="right_div_end_left">
+                        <div className="right_div_end_head">
+                            <p>Calender</p>
+
+                            <div className="btn_box">
+                                <button><Link to="/appoinment">Appoinments</Link></button>
+                                {/* <button>Reservation</button> */}
+                            </div>
+                        </div>
+
+
+                        <div className="right_div_end_main">
+                            <div className="main_left">
+                                <Calender value={currentDate} setCurrentDate={setCurrentDate} />
+                            </div>
+
+                            <div className="main_right">
+                                <div className='appoin-content-head'>
+                                    <b>Timeslots</b>
+                                    <b>Customer Name</b>
+                                    <b>Barber Name</b>
+                                    <b>Services</b>
                                 </div>
-
                                 {
-                                    queueList?.loading == true ? <h1>loading...</h1> : queueList?.response?.slice(0, 5).map((c, i) => (
-                                        <div className='dashboard-quelist-content' key={i}>
-                                            <p>{c.name}</p>
-                                            <p>{c.barberName}</p>
-                                            <p>{c.qPosition}</p>
+                                    appointmentLoader == true ? <h1>loading...</h1> : appointmentData?.response?.map((ap, i) => (
+                                        <div className='appoin-content-div' key={i}>
+                                            <p>{ap.timeSlots}</p>
+                                            <p>{ap.customerName}</p>
+                                            <p>{ap.barberName}</p>
+                                            <p>
+                                                {ap.appointmentServices.split(', ').map((service, index) => (
+                                                    <span key={index}>{service}  &nbsp;</span>
+                                                ))}
+                                                
+                                            </p>
                                         </div>
                                     ))
                                 }
 
                             </div>
-
                         </div>
                     </div>
 
-                    <div className="right_div_end">
-
-                        <div className="right_div_end_left">
-                            <div className="right_div_end_head">
-                                <p>Calender</p>
-
-                                <div className="btn_box">
-                                    <button><Link to="/appoinment">Appoinments</Link></button>
-                                    {/* <button>Reservation</button> */}
-                                </div>
-                            </div>
-
-
-                            <div className="right_div_end_main">
-                                <div className="main_left">
-                                    <Calender value={currentDate} setCurrentDate={setCurrentDate} />
-                                </div>
-
-                                <div className="main_right">
-                                    <div className='appoin-content-head'>
-                                        <b>Timeslots</b>
-                                        <b>Customer Name</b>
-                                        <b>Barber Name</b>
-                                    </div>
-                                    {
-                                        appointmentLoader == true ? <h1>loading...</h1> : appointmentData?.response?.map((ap, i) => (
-                                            <div className='appoin-content-div' key={i}>
-                                                <p>{ap.timeSlots}</p>
-                                                <p>{ap.customerName}</p>
-                                                <p>{ap.barberName}</p>
-                                            </div>
-                                        ))
-                                    }
-
-                                </div>
+                    <div className="right_div_end_right">
+                        <div className="head">
+                            <p>Reports</p>
+                            <div>
+                                <FiMoreHorizontal />
                             </div>
                         </div>
 
-                        <div className="right_div_end_right">
-                            <div className="head">
-                                <p>Reports</p>
-                                <div>
-                                    <FiMoreHorizontal />
-                                </div>
-                            </div>
+                        <div className="reports">
 
-                            <div className="reports">
+                            {
+                                reports.map((item) => {
+                                    return (
+                                        <div className="report_item" key={item.id}
+                                            style={{ backgroundColor: item.backgroundColor }}
+                                        >
 
-                                {
-                                    reports.map((item) => {
-                                        return (
-                                            <div className="report_item" key={item.id}
-                                                style={{ backgroundColor: item.backgroundColor }}
-                                            >
-
-                                                <div className="content">
-                                                    <div>
-                                                        {item.icon}
-                                                    </div>
-                                                    <p>{item.para}</p>
+                                            <div className="content">
+                                                <div>
+                                                    {item.icon}
                                                 </div>
+                                                <p>{item.para}</p>
                                             </div>
-                                        )
-                                    })
-                                }
-                            </div>
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
 
-                            <div className="chart">
+                        <div className="chart">
+                            <div>
+                                <h2>Completion Rate</h2>
+
                                 <div>
-                                    <h2>Completion Rate</h2>
-
-                                    <div>
-                                        <p>95%</p>
-                                        <p>+2.5%</p>
-                                    </div>
+                                    <p>95%</p>
+                                    <p>+2.5%</p>
                                 </div>
-
-                                <div>{MemoizedChart}</div>
                             </div>
+
+                            <div>{MemoizedChart}</div>
                         </div>
                     </div>
-                </>}
+                </div>
+            </>}
 
-            </div>
+        </div>
     )
 }
 

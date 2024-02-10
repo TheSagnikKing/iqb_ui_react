@@ -673,7 +673,7 @@
     background-color: #f1f6fc;
     border-radius: 0.5rem; /* 5px converted to rem */
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     align-items: center;
     justify-content: center;
     font-size: 1rem; /* 10px converted to rem */
