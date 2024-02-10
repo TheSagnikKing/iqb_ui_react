@@ -14,7 +14,8 @@ import { approveBarberAction, deleteBarberAction } from '../../../redux/actions/
 
 import api from "../../../redux/api/Api"
 
-import { IoIosNotifications } from "react-icons/io";
+import { IoIosNotifications, IoMdCheckmark } from "react-icons/io";
+import { FaXmark } from 'react-icons/fa6'
 
 const BarberListTable = () => {
 
@@ -194,6 +195,7 @@ const BarberListTable = () => {
         navigate("/barber/dashboard2/multiplenotification", { state: checkboxArray })
     }
 
+    console.log("ajshcvjhascjsac",barbersList)
 
     return (
         <div className="barberlist-wrapper">
@@ -279,7 +281,7 @@ const BarberListTable = () => {
                                 <div><AiOutlineArrowDown /></div>
                             </div>
                         </div></div> */}
-                        <h4 className='barber-isActive'>isActive</h4>
+                        <h4 className='barber-isActive'>isOnline</h4>
                     </main>
                 }
 
@@ -320,7 +322,7 @@ const BarberListTable = () => {
                                     fontSize: "1.2rem",
                                     width: "100%"
                                 }}>
-                                    <p>{barber.isActive ? "True" : "false"}</p>
+                                    <p>{barber.isOnline ? <IoMdCheckmark style={{color:"green",fontSize:"2rem",fontWeight:"bold"}} /> : <FaXmark style={{color:"red",fontSize:"2rem",fontWeight:"bold"}} />}</p>
                                 </div>
 
                                 {approveBarberMap.get(`${barber.salonId}-${barber.email}`) || barber.isApproved ? (

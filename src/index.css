@@ -144,6 +144,8 @@ body {
   }
 
   .calender-month{
+    width: 80vw !important;
+    overflow-y: scroll !important;
     height: 75vh !important;
   }
 

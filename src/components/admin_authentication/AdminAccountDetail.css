@@ -42,13 +42,13 @@
 
 .sa-br-btn_box>button{
     height: 3.5rem;
-    background-color: plum;
+    background-color: #f1f6fc;
     margin-top: 1rem;
     border: none;
     color: black;
     font-weight: 500;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 3px;
     box-shadow: 0px 0px 4px rgba(0,0,0,0.4);
 }
 
@@ -66,5 +66,34 @@
 
     .admin_account_detail{
         grid-template-columns: 1fr;
+    }
+
+    .admin_account_detail>div>input{
+        border: 1px solid black !important;
+        box-shadow: none;
+    }
+
+    .admin_account_detail>div>input::placeholder{
+        font-size: 1.6rem;
+        color: #000;
+    }
+
+    .admin_account_detail > div > input[type="date"]::placeholder {
+        font-size: 1.4rem;
+        color: #000;
+    }
+    
+
+    .admin_account_detail>div>input:focus{
+        outline: none;
+    }
+
+    .sa-br-btn_box>button{
+        height: 4rem;
+    }
+
+    .skip{
+        height: 4rem !important;
+        width: 100%;
     }
 }

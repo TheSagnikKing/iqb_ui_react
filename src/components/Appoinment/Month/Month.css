@@ -55,10 +55,6 @@ tr {
 }
 
 @media ((min-width: 0px) and (max-width: 40rem)) {
-  :root {
-    font-size: 0.8rem;
-  }
-
   .fc .fc-toolbar {
     display: flex;
     align-items: flex-start;
@@ -132,9 +128,14 @@ tr {
 
   .demo-app-main{
     margin-top: 2rem;
+    width: 86rem ;
   }
 
   .fc .fc-scrollgrid{
     height: 48vh;
+  }
+
+  .fc-theme-standard td {
+    width: 12rem;
   }
 }

@@ -63,7 +63,7 @@ const AdminAccountDetail = () => {
 
                     <h2>Gender:</h2>
 
-                    <select name="cars" id="cars" onChange={(e) => setGender(e.target.value)} value={gender}>
+                    <select name="cars" id="cars" onChange={(e) => setGender(e.target.value)} value={gender} style={{background:"#f1f6fc",border:"1px solid black"}}>
                         <option value="male">Male</option>
                         <option value="female">Female</option>
                         <option value="other">Other</option>
