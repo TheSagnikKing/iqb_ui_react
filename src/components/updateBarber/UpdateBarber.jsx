@@ -203,6 +203,7 @@ const UpdateBarber = () => {
                             placeholder='Enter Date of Birth'
                             value={dateOfBirth}
                             onChange={(e) => setDateOfBirth(e.target.value)}
+                            style={{width:"75vw"}}
                         />
                     </div>
 

@@ -231,6 +231,6 @@
 
     .cst-barberitem{
         width: 250%;
-        grid-template-columns: 6fr 4fr 4fr  4fr 4fr 1fr 1fr 1fr;
+        grid-template-columns: 3fr 4fr 4fr  4fr 4fr 1fr 1fr 1fr;
     }
 }

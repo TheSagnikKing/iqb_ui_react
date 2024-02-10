@@ -123,17 +123,9 @@ const Dashboard3 = () => {
 
                     <div>
                         {/* <button onClick={reloadHandler} className='cst-reload'><AiOutlineReload /></button> */}
-                        <button></button>
+                        <div style={{background:"#f1f6fc"}}></div>
                         <div>
-                            {/* <input
-                                className='cst-search'
-                                type="text"
-                                placeholder='Search'
-                                value={search}
-                                onChange={(e) => setSearch(e.target.value)}
-                            /> */}
                          
-
                             <button onClick={searchHandler} className='cst-search-btn' style={{border:"none"}}><AiOutlineSearch /></button>
                         </div>
 
@@ -146,38 +138,32 @@ const Dashboard3 = () => {
                         <main className="cst-barberitem" >
                             <div><div>
                                     <h4>Salon ID</h4>
-                                    <div>
+                                    {/* <div>
                                         <div onClick={() => sortHandler("salonId", "asc")}><AiOutlineArrowUp /></div>
                                         <div onClick={() => sortHandler("salonId", "des")}><AiOutlineArrowDown /></div>
-                                    </div>
+                                    </div> */}
                                 </div></div>
                             <div><div>
                                     <h4>Name</h4>
-                                    <div>
+                                    {/* <div>
                                         <div onClick={() => sortHandler("name", "asc")}><AiOutlineArrowUp /></div>
                                         <div onClick={() => sortHandler("name", "des")}><AiOutlineArrowDown /></div>
-                                    </div>
+                                    </div> */}
                                 </div></div>
                             <div><div>
                                     <h4>Email</h4>
-                                    <div>
+                                    {/* <div>
                                         <div><AiOutlineArrowUp /></div>
                                         <div><AiOutlineArrowDown /></div>
-                                    </div>
+                                    </div> */}
                                 </div></div>
-                            {/* <div><div>
-                                    <h4>Date of Birth</h4>
-                                    <div>
-                                        <div><AiOutlineArrowUp /></div>
-                                        <div><AiOutlineArrowDown /></div>
-                                    </div>
-                                </div></div> */}
+                          
                             <div><div>
                                     <h4>Gender</h4>
-                                    <div>
+                                    {/* <div>
                                         <div><AiOutlineArrowUp /></div>
                                         <div><AiOutlineArrowDown /></div>
-                                    </div>
+                                    </div> */}
                                 </div></div>
                             <div><h4>Mobile Number</h4></div>
                         </main>

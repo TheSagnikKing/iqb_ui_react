@@ -203,22 +203,22 @@ const BarberListTable = () => {
                 <div>
                     <h2>Barbers List</h2>
 
-                    {/* <div className='notify-buttons'>
+                    <div className='notify-buttons'>
                             <button
                                 disabled={checkboxArray.length == 0 ? true : false}
                                 onClick={() => multipleemailHandler()}
                                 style={{
                                     background:"#fff",
-                                    boxShadow:"0px 0px 4px rgba(0,0,0,0.6)",
-                                    border:"none",
+                                    border:"1px solid black",
                                     borderRadius:"5px",
                                     height:"3rem",
-                                    marginLeft:"1rem"
+                                    marginLeft:"1rem",
+                                    fontSize:"1.2rem"
 
                                 }}
                             >Send multiple</button>
                             
-                        </div> */}
+                        </div>
 
                 </div>
 
@@ -235,7 +235,7 @@ const BarberListTable = () => {
 
                             <button onClick={searchHandler} className='search-btn'><AiOutlineSearch /></button>
                         </div> */}
-                    <button></button>
+                    <button style={{background:"#f16fc",width:"1px",height:"1px"}}></button>
                     <div></div>
 
                     <div onClick={createBarberNavigate}>
@@ -248,39 +248,32 @@ const BarberListTable = () => {
             <div className='table'>
                 {
                     <main className="barberitem-head">
-                        <div><p>#</p></div>
+                        <div><p></p></div>
                         <div>
                             <div>
                                 <h4>Salon ID</h4>
-                                <div>
+                                {/* <div>
                                     <div onClick={() => sortHandler("salonId", "asc")}><AiOutlineArrowUp /></div>
                                     <div onClick={() => sortHandler("salonId", "des")}><AiOutlineArrowDown /></div>
-                                </div>
+                                </div> */}
                             </div></div>
 
                         <div><div>
                             <h4>Barber Name</h4>
-                            <div>
+                            {/* <div>
                                 <div onClick={() => sortHandler("name", "asc")}><AiOutlineArrowUp /></div>
                                 <div onClick={() => sortHandler("name", "des")}><AiOutlineArrowDown /></div>
-                            </div>
+                            </div> */}
                         </div></div>
 
                         <div><div>
                             <h4>Email</h4>
-                            <div>
+                            {/* <div>
                                 <div onClick={() => sortHandler("email", "asc")}><AiOutlineArrowUp /></div>
                                 <div onClick={() => sortHandler("email", "des")}><AiOutlineArrowDown /></div>
-                            </div>
+                            </div> */}
                         </div></div>
 
-                        {/* <div><div>
-                            <h4>Date of Birth</h4>
-                            <div>
-                                <div><AiOutlineArrowUp /></div>
-                                <div><AiOutlineArrowDown /></div>
-                            </div>
-                        </div></div> */}
                         <h4 className='barber-isActive'>isOnline</h4>
                     </main>
                 }
@@ -331,7 +324,7 @@ const BarberListTable = () => {
                                     <button className='approve-bbr' onClick={() => approveHandler(barber.salonId, barber.email, true)} style={{ background: "white" }}>Approve</button>
                                 )}
 
-                                <div>
+                                {/* <div>
                                     <div style={{
                                         fontSize: "1.4rem",
                                         color: "limegreen",
@@ -348,7 +341,7 @@ const BarberListTable = () => {
                                     }}
                                         onClick={() => notifyemailHandler(barber.email)}
                                     ><IoIosNotifications /></div>
-                                </div>
+                                </div> */}
 
                                 <button className='edit-bbr' onClick={() => editHandler(barber.email)}><AiFillEdit /></button>
 

@@ -332,13 +332,13 @@
 
     .barberitem-head{
         width: 230%;
-        grid-template-columns: 0.5fr 2.5fr 2.5fr 4fr  0.8fr 2fr 1fr 1fr 1fr;
+        grid-template-columns: 0.5fr 2.5fr 2.5fr 4fr  0.8fr 2fr  1fr 1fr;
         gap: 2rem;
     }
 
     .barberlist-barberitem{
         width: 230%;
-        grid-template-columns: 0.5fr 2.5fr 2.5fr 4fr  0.8fr 2fr 1fr 1fr 1fr;
+        grid-template-columns: 0.5fr 2.5fr 2.5fr 4fr  0.8fr 2fr  1fr 1fr;
         gap: 2rem;
     }
 }

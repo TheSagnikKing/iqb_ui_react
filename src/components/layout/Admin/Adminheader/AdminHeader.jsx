@@ -11,7 +11,7 @@ import { FaCamera, FaUserCircle } from "react-icons/fa"
 import { MdKeyboardArrowDown } from "react-icons/md"
 import { BiLogOutCircle } from "react-icons/bi"
 import { RiAccountCircleFill } from "react-icons/ri"
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { AdminLogoutAction } from '../../../../redux/actions/AdminAuthAction'
 
@@ -129,6 +129,12 @@ const AdminHeader = ({ title }) => {
 
   console.log("Admin Header Salon List ", salonList )
   console.log("Admin header chooseSalonId ", chooseSalonId)
+
+
+  const location = useLocation()
+  const {pathname} = location
+
+  console.log("Pathname",pathname)
   
   return (
     <section className="nav1">
@@ -142,7 +148,7 @@ const AdminHeader = ({ title }) => {
           <div className="nav1left_menu_box">
             {adminmenudata.map((item) => {
               return (
-                <div key={item.menu_title}>
+                <div key={item.menu_title} style={{borderRight:`4px solid ${pathname === item.menu_link ? "red" : "gray"}`}}>
                   <AdminMenu
                     menu_logo={item.menu_logo}
                     menu_title={item.menu_title}

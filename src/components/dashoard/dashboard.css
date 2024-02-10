@@ -725,10 +725,12 @@
     .right_div_top {
         grid-template-columns: 1fr;
         height: auto;
+        grid-template-rows: auto;
     }
 
     .div_left_images{
         grid-template-columns: 1fr;
+        height: auto;
     }
 
     .img_one,.img_three {
@@ -740,7 +742,6 @@
     }
 
     .right_div_end{
-        margin-top: 375px;
         grid-template-columns: 1fr;
     }
 
@@ -773,6 +774,10 @@
 
     .nav2toggle_switch {
         width: 4rem;
+    }
+
+    .img_two,.img_three{
+        display: none;
     }
     
 }

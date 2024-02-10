@@ -40,3 +40,10 @@
     margin-top: 50px;
     cursor: pointer;
 }
+
+@media((min-width:0px) and (max-width:400px)){
+    .cu-br-right_main_div-1{
+        margin-left: 6rem;
+        width: 88vw;
+    }
+}

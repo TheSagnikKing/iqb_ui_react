@@ -72,16 +72,18 @@ const Dashboard = () => {
 
     const queueList = useSelector(state => state.queueList)
 
-    const formatDate = (date) => {
-        const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
-        const formattedDate = date.toLocaleDateString(undefined, options);
+    // const formatDate = (date) => {
+    //     const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+    //     const formattedDate = date.toLocaleDateString(undefined, options);
 
-        // Extract components and rearrange them
-        const [month, day, year] = formattedDate.split('/');
-        return `${year}-${month}-${day}`;
-    };
+    //     // Extract components and rearrange them
+    //     const [month, day, year] = formattedDate.split('/');
+    //     return `${year}-${month}-${day}`;
+    // };
 
-    const formattedDate = formatDate(currentDate);
+    // const formattedDate = formatDate(currentDate);
+
+
 
     // console.log(formattedDate)
 
@@ -89,11 +91,12 @@ const Dashboard = () => {
     const [appointmentLoader, setAppointmentLoader] = useState(false)
 
     useEffect(() => {
+       if(currentDate){
         const appointfnc = async () => {
             setAppointmentLoader(true)
             const { data } = await api.post("/api/advertisement/getDashboardAppointmentList", {
                 salonId,
-                appointmentDate: formattedDate
+                appointmentDate: currentDate
             })
 
             setAppointmentData(data)
@@ -101,7 +104,9 @@ const Dashboard = () => {
         }
 
         appointfnc()
-    }, [salonId, formattedDate])
+       }
+        
+    }, [salonId, currentDate,setAppointmentData])
     // console.log("ss", appointmentData)
 
     const [advertisementList, setAdvertisementList] = useState([])
@@ -257,7 +262,6 @@ const Dashboard = () => {
                     <Link to="/salon/createsalon">Create Salon</Link>
                 </div > : <>
                     <div className="right_div_top">
-
                         <div className="div_left">
                             <div style={{
                                 display: "flex",
@@ -299,14 +303,6 @@ const Dashboard = () => {
 
                                         <p><Link to="/advertisement">Add New Post</Link></p>
                                     </div>
-
-                                    {/* <div className="btn_two">
-                                    <div>
-                                        <IoNotificationsOutline />
-                                    </div>
-
-                                    <p>Notifications</p>
-                                </div> */}
                                 </div>
                             </div>
 

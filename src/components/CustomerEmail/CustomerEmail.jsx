@@ -40,10 +40,10 @@ const CustomerEmail = () => {
         <>
             <AdminLayout />
             <div className="cu-br-right_main_div-1">
-                <h3>Customer Email</h3>
+                <h2>Customer Email</h2>
                 <div className='cu-container-mail'>
                     <div>
-                        <label htmlFor="">Email</label>
+                        <h2>Email</h2>
                         <input
                             type="email"
                             value={email}
@@ -52,7 +52,7 @@ const CustomerEmail = () => {
                     </div>
 
                     <div>
-                        <label htmlFor="">Subject</label>
+                        <h2>Subject</h2>
                         <input
                             type="text"
                             value={subject}
@@ -61,7 +61,7 @@ const CustomerEmail = () => {
                     </div>
 
                     <div>
-                        <label htmlFor="">Text</label>
+                        <h2>Text</h2>
                         <textarea id="w3review" name="w3review" rows="4" cols="50"
                         value={text}
                         onChange={(e) => setText(e.target.value)}
