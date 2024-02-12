@@ -66,7 +66,7 @@ const EditAppointment = () => {
     const [selectedService, setSelectedService] = useState([])
 
     const selectedServiceHandler = (ser) => {
-        const servicepresent = selectedService.find((s) => s._id === ser._id)
+        const servicepresent = selectedService.find((s) => s.serviceId === ser.serviceId)
 
         if (!servicepresent) {
             const serviceWithEWT = { ...ser };
@@ -76,7 +76,7 @@ const EditAppointment = () => {
     }
 
     const selectedServiceDelete = (ser) => {
-        const deleteService = selectedService.filter((f) => f._id !== ser._id)
+        const deleteService = selectedService.filter((f) => f.serviceId !== ser.serviceId)
         setSelectedService(deleteService)
     }
 
@@ -279,7 +279,8 @@ const EditAppointment = () => {
                                         <p>{b.serviceName}</p>
                                         {/* <p>{b.serviceCode}</p> */}
                                         <p>{b.servicePrice}</p>
-                                        <p>{b.barberServiceEWT}</p>
+                                        {/* barberServiceEWT chilo but arghya atake serviceEWT boleche korte */}
+                                        <p>{b.barberServiceEWT}</p> 
                                         <button onClick={() => selectedServiceDelete(b)} style={{
                                             width:"5rem",
                                             height:"3rem",
