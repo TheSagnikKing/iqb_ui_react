@@ -4,7 +4,10 @@ import Layout from '../../layout/Layout'
 import { adminVerifyEmailAction, updateAdminAction } from '../../../redux/actions/AdminAuthAction'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import ClipLoader from "react-spinners/ClipLoader";
 import { barberVerifyEmailAction, updateBarberAccountDetailsAction } from '../../../redux/actions/BarberAuthAction'
+import { FaCheck } from 'react-icons/fa'
+import { ImCross } from 'react-icons/im'
 
 const BarberUpdateProfile = () => {
 
@@ -17,6 +20,7 @@ const BarberUpdateProfile = () => {
       const dispatch = useDispatch()
   
       const LoggedInMiddleware = useSelector(state => state.LoggedInMiddleware)
+      const navigate = useNavigate()
   
       const submitHandler = () => {
           const profiledata = {
@@ -28,10 +32,13 @@ const BarberUpdateProfile = () => {
               gender
           }
   
-          dispatch(updateBarberAccountDetailsAction(profiledata))
+          dispatch(updateBarberAccountDetailsAction(profiledata,navigate))
       }
   
       // console.log(LoggedInMiddleware?.user[0]?.profile[0]?.url)
+
+      const barberUpdateAccount = useSelector(state => state.barberUpdateAccount)
+      const {loading} = barberUpdateAccount
   
   
       useEffect(() => {
@@ -42,7 +49,6 @@ const BarberUpdateProfile = () => {
           // setDob(LoggedInMiddleware?.user && LoggedInMiddleware?.user[0]?.dateOfBirth.split('T')[0])
       }, [LoggedInMiddleware?.user])
   
-      const navigate = useNavigate()
   
       const verifyEmailHandler = () => {
           const confirm = window.confirm("Are you sure ?")
@@ -73,24 +79,36 @@ const BarberUpdateProfile = () => {
                             value={LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].email}
                         />
                         {
-                            LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].emailVerified ? <button 
-                            style={{
+                            LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].emailVerified ? <div style={{
                                 background:"limegreen",
                                 color:"#fff",
                                 border:"none",
                                 boxShadow:"0px 0px 4px rgba(0,0,0,0.4)",
-                                height:"25px"
-                            }}
-                            >Email verified</button> : <button 
-                            style={{
+                                height:"3.5rem",
+                                paddingInline:"1rem",
+                                display:"flex",
+                                alignItems:"center",
+                                justifyContent:"space-between"
+                            }}>
+                            <p style={{color:"#fff",fontSize:"1.6rem",fontWeight:"500"}}>Email verified</p>
+                            <div style={{background:"#fff",color:"#000",fontSize:"1.4rem",width:"2.5rem",height:"2.5rem",display:"flex",justifyContent:"center",alignItems:"center",borderRadius:"50%",boxShadow:"0px 0px 6px #fff",color:"limegreen"}}><FaCheck /></div>
+                            </div> : <div
+                             style={{
                                 background:"crimson",
                                 color:"#fff",
                                 border:"none",
                                 boxShadow:"0px 0px 4px rgba(0,0,0,0.4)",
-                                height:"25px",
+                                height:"3.5rem",
+                                paddingInline:"1rem",
+                                display:"flex",
+                                alignItems:"center",
+                                justifyContent:"space-between",
                                 cursor:"pointer"
                             }}
-                            onClick={verifyEmailHandler}>Email Not Verified</button>
+                            ><p 
+                            style={{color:"#fff",fontSize:"1.6rem",fontWeight:"500"}}
+                            onClick={verifyEmailHandler}>Email Not Verified</p>
+                            <div style={{background:"#fff",color:"#000",fontSize:"1.4rem",width:"2.5rem",height:"2.5rem",display:"flex",justifyContent:"center",alignItems:"center",borderRadius:"50%",boxShadow:"0px 0px 6px #fff",color:"crimson"}}><ImCross /></div></div>
                         }
                         
                     </div>
@@ -133,6 +151,7 @@ const BarberUpdateProfile = () => {
                         >
                             <option value="male">Male</option>
                             <option value="female">Female</option>
+                            <option value="other">Other</option>
                         </select>
                     </div>
 
@@ -147,7 +166,7 @@ const BarberUpdateProfile = () => {
 
                     <div className="sa-br-btn_box-up">
                         <button onClick={submitHandler}>
-                            Submit
+                            {loading === true ? <ClipLoader/> : <p style={{fontSize:"1.2rem"}}>Submit</p>}
                         </button>
                     </div>
 

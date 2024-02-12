@@ -1,14 +1,15 @@
-import { RiDashboardFill } from 'react-icons/ri'
+import { RiApps2Fill, RiDashboardFill } from 'react-icons/ri'
 import { ImUserPlus } from 'react-icons/im'
 import { RiScissors2Fill } from 'react-icons/ri'
 import { GiPieChart } from 'react-icons/gi'
 import { FaCalendarAlt } from 'react-icons/fa'
 import { BsCheckCircle } from 'react-icons/bs'
-import { TbMessageCircle } from 'react-icons/tb'
+import { TbApiApp, TbMessageCircle } from 'react-icons/tb'
 import { VscRepoForked } from 'react-icons/vsc'
-import { SiTurborepo } from 'react-icons/si'
+import { SiAppveyor, SiNetapp, SiTurborepo } from 'react-icons/si'
 import { TbReportSearch } from 'react-icons/tb'
 import { MdQueue } from 'react-icons/md'
+import { AiOutlineDeploymentUnit } from 'react-icons/ai'
 
 export const menudata = [
   {
@@ -73,7 +74,7 @@ export const menudata = [
   },
   {
     id: 5,
-    menu_logo: <MdQueue />,
+    menu_logo: <SiNetapp />,
     menu_title: "Queue",
     menu_link: "/barber/queuelist",
     category: [
@@ -89,7 +90,7 @@ export const menudata = [
 
   {
     id: 6,
-    menu_logo: <MdQueue />,
+    menu_logo: <SiAppveyor />,
     menu_title: "Appoinment",
     menu_link: "/barber/appoinment",
     category: [
@@ -101,23 +102,7 @@ export const menudata = [
         message_title: "Send mail / Notification"
       }
     ]
-  },
-
-  {
-    id: 7,
-    menu_logo: <MdQueue />,
-    menu_title: "notification",
-    menu_link: "/barber/allnotification",
-    category: [
-      {
-        id: 8,
-        list_logo: <BsCheckCircle />,
-        list: "List",
-        message_logo: <TbMessageCircle />,
-        message_title: "Send mail / Notification"
-      }
-    ]
-  },
+  }
 ]
 
 
@@ -215,7 +200,7 @@ export const adminmenudata = [
   },
   {
     id: 7,
-    menu_logo: <RiDashboardFill />,
+    menu_logo: <TbApiApp />,
     menu_title: "Advertisments",
     menu_link: "/advertisement",
     category: [
@@ -230,7 +215,7 @@ export const adminmenudata = [
   },
   {
     id: 8,
-    menu_logo: <MdQueue />,
+    menu_logo: <SiNetapp />,
     menu_title: "Queue",
     menu_link: "/queue",
     category: [
@@ -246,7 +231,7 @@ export const adminmenudata = [
 
   {
     id: 8,
-    menu_logo: <MdQueue />,
+    menu_logo: <AiOutlineDeploymentUnit />,
     menu_title: "Appoinment",
     menu_link: "/appoinment",
     category: [

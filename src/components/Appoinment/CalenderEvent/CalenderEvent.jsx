@@ -12,7 +12,6 @@ import { deleteAppointmentAction } from '../../../redux/actions/AppointmentActio
 const CalenderEvent = () => {
 
     const location = useLocation()
-    console.log(location.state)
 
     const navigate = useNavigate()
 
@@ -35,8 +34,6 @@ const CalenderEvent = () => {
 
         apfunc();
     }, [LoggedInMiddleware?.user, location.state])
-
-    console.log("App",appointmentsdata)
 
 
     const editHandler = (appointmentdata) => {
@@ -94,7 +91,9 @@ const CalenderEvent = () => {
                                                     }}>
                                                             <p>{m.startTime}-{m.endTime}</p>
                                                             <p>Customer : {m.customerName}</p>
-                                                            <p style={{fontWeight:"500"}}>Services : </p>
+                                                            <div style={{fontWeight:"500", display:"flex",gap:"0.5rem"}}>Services : 
+                                                                {m.services.map((ap) => <p>{ap.serviceName}</p>)}
+                                                            </div>
                                                             
                                                             <div className='app-btn-div'>
                                                                 <button onClick={() => editHandler(m)}><MdEdit/></button>

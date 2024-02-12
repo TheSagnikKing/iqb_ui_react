@@ -23,7 +23,7 @@ const AdminHeader = ({ title }) => {
 
   const [check, setCheck] = useState(false)
 
-  console.log("Mode", check)
+  // console.log("Mode", check)
 
   const [dropdown, setDropdown] = useState(false)
 
@@ -46,7 +46,7 @@ const AdminHeader = ({ title }) => {
 
   const handleFileInputChange = async (e) => {
     const uploadImage = e.target.files[0];
-    console.log(uploadImage)
+    // console.log(uploadImage)
 
     const formData = new FormData();
 
@@ -97,7 +97,7 @@ const AdminHeader = ({ title }) => {
   useEffect(() => {
 
     if (LoggedInMiddleware?.user) {
-      console.log("FROM USEEFFETC ADMIN EmAIL ", LoggedInMiddleware?.user[0].email)
+      // console.log("FROM USEEFFETC ADMIN EmAIL ", LoggedInMiddleware?.user[0].email)
       const getSalonfnc = async () => {
         const { data } = await api.post("/api/admin/getAllSalonsByAdmin", {
           adminEmail: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].email
@@ -123,14 +123,14 @@ const AdminHeader = ({ title }) => {
   }, [LoggedInMiddleware?.user])
 
 
-  console.log("Admin Header Salon List ", salonList)
-  console.log("Admin header chooseSalonId ", chooseSalonId)
+  // console.log("Admin Header Salon List ", salonList)
+  // console.log("Admin header chooseSalonId ", chooseSalonId)
 
 
   const location = useLocation()
   const { pathname } = location
 
-  console.log("Pathname", pathname)
+  // console.log("Pathname", pathname)
 
   const [expandMenu, setExpandMenu] = useState(false)
 

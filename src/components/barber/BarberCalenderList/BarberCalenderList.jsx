@@ -52,7 +52,7 @@ const BarberCalenderList = () => {
                                         <div>
                                             <div style={{
                                                 // background: evt.background,
-                                            }}></div><p>Appointment {evt.appointmentName} {` (${evt.startTime}-${evt.endTime})`}</p>
+                                            }}></div><p>Appointment {evt.appointmentNotes} {` (${evt.appointmentStartTime}-${evt.appointmentEndTime})`}</p>
                                         </div>
                                     )) : <p className='noappoin2'>No Appoinments</p>
                                 }

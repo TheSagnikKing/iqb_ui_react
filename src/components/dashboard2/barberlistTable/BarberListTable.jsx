@@ -10,12 +10,16 @@ import { AiOutlineReload } from 'react-icons/ai'
 import { Link, useNavigate } from 'react-router-dom'
 
 import { MdDelete } from "react-icons/md";
-import { approveBarberAction, deleteBarberAction } from '../../../redux/actions/barberAction'
+import { approveBarberAction, barberOnlineStatusAction, deleteBarberAction } from '../../../redux/actions/barberAction'
 
 import api from "../../../redux/api/Api"
 
-import { IoIosNotifications, IoMdCheckmark } from "react-icons/io";
+import { IoIosNotifications, IoMdCheckmark, IoMdNotifications } from "react-icons/io";
 import { FaXmark } from 'react-icons/fa6'
+import { salonStatusOnlineAction } from '../../../redux/actions/salonAction'
+
+
+
 
 const BarberListTable = () => {
 
@@ -45,37 +49,36 @@ const BarberListTable = () => {
                 if (BarberListcontrollerRef.current) {
                     BarberListcontrollerRef.current.abort(); // Abort previous request if it exists
                 }
-    
+
                 const newController = new AbortController();
                 BarberListcontrollerRef.current = newController;
-    
+
                 const signal = newController.signal;
-    
+
                 setLoading(true);
-    
-                const response = await api.post(`/api/barber/getAllBarberBySalonId?salonId=${Number(salonId)}`, {}, {signal});
-    
+
+                const response = await api.post(`/api/barber/getAllBarberBySalonId?salonId=${Number(salonId)}`, {}, { signal });
+
                 // Check if the request was not aborted
 
-                    setBarbersList(response.data);
-                    setCurrentPage(response.data.currentPage);
-                    setTotalPages(response.data.totalPages);
-                    setLoading(false);
-              
+                setBarbersList(response.data);
+                setCurrentPage(response.data.currentPage);
+                setTotalPages(response.data.totalPages);
+                setLoading(false);
+
             } catch (error) {
-                
-                    console.log(error);
-                
+
+                console.log(error);
+
             }
         };
-    
+
         getAllBarbersfunc();
 
         return () => {
             BarberListcontrollerRef.current.abort();
         };
-    
-  
+
     }, [Number(salonId)])
 
     const searchHandler = async () => {
@@ -87,7 +90,6 @@ const BarberListTable = () => {
             setBarbersList(data)
             setLoading(false)
         }
-
     }
 
 
@@ -151,7 +153,6 @@ const BarberListTable = () => {
         }
     }
 
-
     const [approveBarberMap, setApproveBarberMap] = useState(new Map());
 
     const approveHandler = (salonId, email, boolean) => {
@@ -163,7 +164,6 @@ const BarberListTable = () => {
         setApproveBarberMap((prevMap) => new Map([...prevMap, [`${salonId}-${email}`, boolean]]));
 
         dispatch(approveBarberAction(approvedata))
-        console.log(approvedata)
     }
 
     const editHandler = (barberemail) => {
@@ -185,8 +185,6 @@ const BarberListTable = () => {
         setCheckboxArray(newCheckboxArray);
     }
 
-    console.log(checkboxArray)
-
     const notifyemailHandler = (barberemail) => {
         navigate("/barber/dashboard2/singlenotification", { state: { barberemail } })
     }
@@ -195,7 +193,62 @@ const BarberListTable = () => {
         navigate("/barber/dashboard2/multiplenotification", { state: checkboxArray })
     }
 
-    console.log("ajshcvjhascjsac",barbersList)
+
+    // const [check, setCheck] = useState(false)
+
+
+    // const setOnlineHandler = (currentbarberId, currentSalonId, currentisOnline) => {
+    //     const newCheckValue = !check;
+    //     setCheck(newCheckValue);
+
+    //     const barberOnlineData = {
+    //         barberId: currentbarberId,
+    //         salonId: currentSalonId,
+    //         isOnline: currentisOnline,
+    //     };
+
+    //     console.log(barberOnlineData)
+
+    //     dispatch(barberOnlineStatusAction(barberOnlineData));
+    // };
+
+
+    const [checkMap, setCheckMap] = useState(new Map());
+
+    useEffect(() => {
+        if (barbersList?.getAllBarbers) {
+            const initialCheckMap = new Map();
+            barbersList.getAllBarbers.forEach(barber => {
+                const key = `${barber.salonId}-${barber.barberId}`;
+                initialCheckMap.set(key, barber.isOnline || false);
+            });
+            setCheckMap(initialCheckMap);
+        }
+    }, [barbersList]);
+
+    const setOnlineHandler = (currentbarberId, currentSalonId) => {
+        setCheckMap((prevCheckMap) => {
+            const newCheckMap = new Map(prevCheckMap);
+            const key = `${currentSalonId}-${currentbarberId}`;
+            const newIsOnline = !newCheckMap.get(key) || false; // Toggle the value
+            newCheckMap.set(key, newIsOnline);
+            return newCheckMap;
+        });
+
+        const barberOnlineData = {
+            barberId: currentbarberId,
+            salonId: currentSalonId,
+            isOnline: !checkMap.get(`${currentSalonId}-${currentbarberId}`) || false,
+        };
+
+        console.log(barberOnlineData);
+
+        // Dispatch the action or handle the state as needed
+        dispatch(barberOnlineStatusAction(barberOnlineData));
+    };
+
+
+    console.log("Current Barber List ",barbersList)
 
     return (
         <div className="barberlist-wrapper">
@@ -204,21 +257,27 @@ const BarberListTable = () => {
                     <h2>Barbers List</h2>
 
                     <div className='notify-buttons'>
-                            <button
-                                disabled={checkboxArray.length == 0 ? true : false}
-                                onClick={() => multipleemailHandler()}
-                                style={{
-                                    background:"#fff",
-                                    border:"1px solid black",
-                                    borderRadius:"5px",
-                                    height:"3rem",
-                                    marginLeft:"1rem",
-                                    fontSize:"1.2rem"
+                        <button
+                            disabled={checkboxArray.length == 0 ? true : false}
+                            onClick={() => multipleemailHandler()}
+                            style={{
+                                background: "#fff",
+                                border: "none",
+                                borderRadius: "5px",
+                                height: "3rem",
+                                marginLeft: "1rem",
+                                fontSize: "1.8rem",
+                                boxShadow: "0px 0px 4px rgba(0,0,0,0.4)",
+                                display: "flex",
+                                justifyContent: "cenetr",
+                                alignItems: "center",
+                                color: `${checkboxArray.length === 0 ? "gray" : "red"}`
 
-                                }}
-                            >Send multiple</button>
-                            
-                        </div>
+
+                            }}
+                        ><IoMdNotifications /></button>
+
+                    </div>
 
                 </div>
 
@@ -235,7 +294,7 @@ const BarberListTable = () => {
 
                             <button onClick={searchHandler} className='search-btn'><AiOutlineSearch /></button>
                         </div> */}
-                    <button style={{background:"#f16fc",width:"1px",height:"1px"}}></button>
+                    <button style={{ background: "#f16fc", width: "1px", height: "1px" }}></button>
                     <div></div>
 
                     <div onClick={createBarberNavigate}>
@@ -315,7 +374,38 @@ const BarberListTable = () => {
                                     fontSize: "1.2rem",
                                     width: "100%"
                                 }}>
-                                    <p>{barber.isOnline ? <IoMdCheckmark style={{color:"green",fontSize:"2rem",fontWeight:"bold"}} /> : <FaXmark style={{color:"red",fontSize:"2rem",fontWeight:"bold"}} />}</p>
+                                    {/* <p>{barber.isOnline ? <IoMdCheckmark style={{color:"green",fontSize:"2rem",fontWeight:"bold"}} /> : <FaXmark style={{color:"red",fontSize:"2rem",fontWeight:"bold"}} />}</p> */}
+
+                                    {/* <label className="nav2toggle_switch" >
+                                        <input type="checkbox"
+                                            value={barber.isOnline === true ? barber.isOnline : check}
+                                            onClick={() => setOnlineHandler(barber.barberId, barber.salonId,barber.isOnline)}
+
+                                        />
+                                        <span className="nav2slider"></span>
+                                        <span className={`nav2slider ${barber.isOnline ? 'checked' : ''}`}
+                                            style={{
+                                                background: barber.isOnline ? "#4CBB17" : ""
+                                            }}
+                                        ></span>
+                                    </label> */}
+
+                                    <label className="nav2toggle_switch">
+                                        <input
+                                            type="checkbox"
+                                            checked={checkMap.get(`${barber.salonId}-${barber.barberId}`) || false}
+                                            onClick={() => setOnlineHandler(barber.barberId, barber.salonId, barber.isOnline)}
+                                        />
+                                        <span className="nav2slider"></span>
+                                        <span
+                                            className={`nav2slider ${checkMap.get(`${barber.salonId}-${barber.barberId}`) ? 'checked' : ''}`}
+                                            style={{
+                                                background: checkMap.get(`${barber.salonId}-${barber.barberId}`) ? "#4CBB17" : ""
+                                            }}
+                                        ></span>
+                                    </label>
+
+
                                 </div>
 
                                 {approveBarberMap.get(`${barber.salonId}-${barber.email}`) || barber.isApproved ? (

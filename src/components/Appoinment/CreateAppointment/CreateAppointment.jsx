@@ -212,6 +212,7 @@ const CreateAppointment = () => {
                                         <p>{barber.mobileNumber}</p>
                                         <p>{barber.isActive === true ? "Yes" : "No"}</p>
                                         <button onClick={() => barberServiceCallHandler(barber.barberId, barber.name)} style={{
+                                            width:"5rem",
                                             height:"3rem",
                                             border:"1px solid blue",
                                             cursor:"pointer",
@@ -247,6 +248,7 @@ const CreateAppointment = () => {
                                         <p>{b.servicePrice}</p>
                                         <p>{b.barberServiceEWT}</p>
                                         <button onClick={() => selectedServiceHandler(b, index)} style={{
+                                            width:"5rem",
                                             height:"3rem",
                                             border:"1px solid blue",
                                             cursor:"pointer",
@@ -280,6 +282,7 @@ const CreateAppointment = () => {
                                         <p>{b.servicePrice}</p>
                                         <p>{b.barberServiceEWT}</p>
                                         <button onClick={() => selectedServiceDelete(b)} style={{
+                                            width:"5rem",
                                             height:"3rem",
                                             border:"1px solid red",
                                             cursor:"pointer",

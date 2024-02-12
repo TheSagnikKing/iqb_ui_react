@@ -116,4 +116,12 @@
   .connectSalon>div>div>div{
     width: 40rem !important;
   }
+
+  .container{
+    width: 110vw;
+  }
+
+  .right_div_end {
+    margin-top: 0px !important;
+  }
 }

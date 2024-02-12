@@ -4,11 +4,12 @@ import AdminLayout from '../layout/Admin/AdminLayout'
 import { useDispatch, useSelector } from 'react-redux'
 import { adminVerifyEmailAction, updateAdminAction } from '../../redux/actions/AdminAuthAction'
 import { MdDelete } from 'react-icons/md'
-import { FaCamera } from "react-icons/fa";
+import { FaCamera, FaCheck } from "react-icons/fa";
 
 import { useNavigate } from 'react-router-dom'
 
 import ClipLoader from "react-spinners/ClipLoader";
+import { ImCross } from 'react-icons/im'
 
 const UpdateAdminprofile = () => {
 
@@ -78,24 +79,36 @@ const UpdateAdminprofile = () => {
                             value={LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].email}
                         />
                         {
-                            LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].emailVerified ? <button 
-                            style={{
+                            LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].emailVerified ? <div style={{
                                 background:"limegreen",
                                 color:"#fff",
                                 border:"none",
                                 boxShadow:"0px 0px 4px rgba(0,0,0,0.4)",
-                                height:"3.5rem"
-                            }}
-                            >Email verified</button> : <button 
-                            style={{
+                                height:"3.5rem",
+                                paddingInline:"1rem",
+                                display:"flex",
+                                alignItems:"center",
+                                justifyContent:"space-between"
+                            }}>
+                            <p style={{color:"#fff",fontSize:"1.6rem",fontWeight:"500"}}>Email verified</p>
+                            <div style={{background:"#fff",color:"#000",fontSize:"1.4rem",width:"2.5rem",height:"2.5rem",display:"flex",justifyContent:"center",alignItems:"center",borderRadius:"50%",boxShadow:"0px 0px 6px #fff",color:"limegreen"}}><FaCheck /></div>
+                            </div> : <div
+                             style={{
                                 background:"crimson",
                                 color:"#fff",
                                 border:"none",
                                 boxShadow:"0px 0px 4px rgba(0,0,0,0.4)",
                                 height:"3.5rem",
+                                paddingInline:"1rem",
+                                display:"flex",
+                                alignItems:"center",
+                                justifyContent:"space-between",
                                 cursor:"pointer"
                             }}
-                            onClick={verifyEmailHandler}>Email Not Verified</button>
+                            ><p 
+                            style={{color:"#fff",fontSize:"1.6rem",fontWeight:"500"}}
+                            onClick={verifyEmailHandler}>Email Not Verified</p>
+                            <div style={{background:"#fff",color:"#000",fontSize:"1.4rem",width:"2.5rem",height:"2.5rem",display:"flex",justifyContent:"center",alignItems:"center",borderRadius:"50%",boxShadow:"0px 0px 6px #fff",color:"crimson"}}><ImCross /></div></div>
                         }
                         
                     </div>

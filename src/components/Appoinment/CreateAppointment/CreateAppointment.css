@@ -158,7 +158,7 @@
 
     .barber-single-join-quebarberserv-content{
         width: 180%;
-        grid-template-columns: 15rem 10rem 24rem 10rem ;
+        grid-template-columns: 15rem 15rem 24rem 15rem !important;
         gap: 2rem;
     }
     

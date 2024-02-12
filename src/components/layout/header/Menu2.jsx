@@ -4,7 +4,7 @@ import { GoTriangleDown } from 'react-icons/go'
 import { GoTriangleUp } from 'react-icons/go'
 import { Link } from 'react-router-dom'
 
-const Menu2 = ({ menu_logo, menu_title, category, menu_link }) => {
+const Menu2 = ({ menu_logo, menu_title, category, menu_link,menucolor }) => {
 
 
 
@@ -14,7 +14,7 @@ const Menu2 = ({ menu_logo, menu_title, category, menu_link }) => {
                
             >
                 <div >
-                    <div>
+                    <div style={{color:menucolor}}>
                         {menu_logo}
                     </div>
 

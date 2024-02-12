@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { barberVerifiedStatusAction } from '../../../redux/actions/BarberAuthAction'
+import ClipLoader from "react-spinners/ClipLoader";
 
 
 const BarberVerifyEmail = () => {
@@ -24,8 +25,10 @@ const BarberVerifyEmail = () => {
     }
   }
 
+  const barberVerifyStatus = useSelector(state => state.barberVerifyStatus)
+  const {loading} = barberVerifyStatus
+
   return (
-    <>
     <div className='verify-email'>
         <h1>Enter OTP</h1>
         <input 
@@ -33,9 +36,8 @@ const BarberVerifyEmail = () => {
         value={verifyCode}
         onChange={(e) => setverifyCode(e.target.value)}
         /><br/>
-        <button onClick={submitHandler}>Submit</button>
+        <button onClick={submitHandler}>{ loading === true ? <ClipLoader/> : <p style={{fontSize:"1.2rem"}}>Submit</p>}</button>
     </div>
-    </>
   )
 }
 

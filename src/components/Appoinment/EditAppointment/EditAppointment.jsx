@@ -10,6 +10,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import Modal from '../../Modal/Modal'
 import { FaPlus } from 'react-icons/fa'
 import { MdDelete } from 'react-icons/md'
+import { ImCross } from 'react-icons/im'
 
 const EditAppointment = () => {
 
@@ -23,6 +24,7 @@ const EditAppointment = () => {
             setTimeSlotStartTime(location?.state.startTime)
             setDate(location?.state.appointmentDate.slice(0, 10))
             setAppointmentId(location?.state._id)
+            setSelectedService(location?.state.services)
         }
     }, [location?.state])
 
@@ -81,7 +83,7 @@ const EditAppointment = () => {
 
     const [timeSlotData, setTimeSlotData] = useState([])
 
-    console.log(timeSlotData)
+    // console.log(timeSlotData)
 
     useEffect(() => {
         if (date == null && selectedbarberId == null) {
@@ -201,6 +203,7 @@ const EditAppointment = () => {
                                         <p>{barber.mobileNumber}</p>
                                         <p>{barber.isActive === true ? "Yes" : "No"}</p>
                                         <button onClick={() => barberServiceCallHandler(barber.barberId, barber.name)} style={{
+                                            width:"5rem",
                                             height:"3rem",
                                             border:"1px solid blue",
                                             cursor:"pointer",
@@ -240,6 +243,7 @@ const EditAppointment = () => {
                                         <p>{b.servicePrice}</p>
                                         <p>{b.barberServiceEWT}</p>
                                         <button onClick={() => selectedServiceHandler(b, index)} style={{
+                                            width:"5rem",
                                             height:"3rem",
                                             border:"1px solid blue",
                                             cursor:"pointer",
@@ -277,6 +281,7 @@ const EditAppointment = () => {
                                         <p>{b.servicePrice}</p>
                                         <p>{b.barberServiceEWT}</p>
                                         <button onClick={() => selectedServiceDelete(b)} style={{
+                                            width:"5rem",
                                             height:"3rem",
                                             border:"1px solid red",
                                             cursor:"pointer",
@@ -299,7 +304,7 @@ const EditAppointment = () => {
                                         <div key={i} className='timeslot'>
                                             <p>{t.timeInterval}</p>
                                             {
-                                                t.disabled == true ? <button>Disable</button> : <button onClick={() => selectTimeSlotfnc(t.timeInterval)} style={{
+                                                t.disabled == true ? <button style={{color:"red",border:"none",background:"#f1f6fc",border:"1px solid red",display:"flex",justifyContent:"center",alignItems:"center",height:"3rem",width:"3.5rem"}}><ImCross /></button> : <button onClick={() => selectTimeSlotfnc(t.timeInterval)} style={{
                                                     height:"3rem",
                                                     border:"1px solid blue",
                                                     cursor:"pointer",

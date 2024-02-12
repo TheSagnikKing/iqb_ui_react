@@ -439,7 +439,7 @@ const Dashboard = () => {
                                             <p>{ap.customerName}</p>
                                             <p>{ap.barberName}</p>
                                             <p>
-                                                {ap.appointmentServices.split(', ').map((service, index) => (
+                                                {ap.appointmentServices.map((service, index) => (
                                                     <span key={index}>{service}  &nbsp;</span>
                                                 ))}
                                                 

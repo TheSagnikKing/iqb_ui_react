@@ -30,7 +30,7 @@ const Dashboard3 = () => {
 
     useEffect(() => {
 
-        if(getAllCustomersRef.current){
+        if (getAllCustomersRef.current) {
             getAllCustomersRef.current.abort()
         }
 
@@ -41,7 +41,7 @@ const Dashboard3 = () => {
 
         const getAllCustomersfnc = async () => {
             setLoading(true)
-            const { data } = await api.get(`/api/customer/getAllCustomers`,{signal})
+            const { data } = await api.get(`/api/customer/getAllCustomers`, { signal })
             setCustomersList(data)
             setCurrentPage(data.currentPage)
             setTotalPages(data.totalPages)
@@ -113,105 +113,114 @@ const Dashboard3 = () => {
     const navigate = useNavigate()
 
     const mailHandler = (customeremail) => {
-        navigate("/customer/customeremail",{state:customeremail})
+        navigate("/customer/customeremail", { state: customeremail })
     }
 
     return (
-            <div className="cst-wrapper">
-                <div className="cst-header">
-                    <p>Customer List</p>
+        <div className="cst-wrapper">
+            <div className="cst-header">
+                <p>Customer List</p>
 
+                <div>
+                    {/* <button onClick={reloadHandler} className='cst-reload'><AiOutlineReload /></button> */}
+                    <div style={{ background: "#f1f6fc" }}></div>
                     <div>
-                        {/* <button onClick={reloadHandler} className='cst-reload'><AiOutlineReload /></button> */}
-                        <div style={{background:"#f1f6fc"}}></div>
-                        <div>
-                         
-                            <button onClick={searchHandler} className='cst-search-btn' style={{border:"none"}}><AiOutlineSearch /></button>
-                        </div>
 
+                        <button onClick={searchHandler} className='cst-search-btn' style={{ border: "none" }}><AiOutlineSearch /></button>
                     </div>
-                </div>
 
-                {/* Table  */}
-                <div className='cst-table'>
-                    {
-                        <main className="cst-barberitem" >
-                            <div><div>
-                                    <h4>Salon ID</h4>
-                                    {/* <div>
+                </div>
+            </div>
+
+            {/* Table  */}
+            <div className='cst-table'>
+                {
+                    <main className="cst-barberitem" >
+                        <div><div>
+                            <h4>Salon ID</h4>
+                            {/* <div>
                                         <div onClick={() => sortHandler("salonId", "asc")}><AiOutlineArrowUp /></div>
                                         <div onClick={() => sortHandler("salonId", "des")}><AiOutlineArrowDown /></div>
                                     </div> */}
-                                </div></div>
-                            <div><div>
-                                    <h4>Name</h4>
-                                    {/* <div>
+                        </div></div>
+                        <div><div>
+                            <h4>Name</h4>
+                            {/* <div>
                                         <div onClick={() => sortHandler("name", "asc")}><AiOutlineArrowUp /></div>
                                         <div onClick={() => sortHandler("name", "des")}><AiOutlineArrowDown /></div>
                                     </div> */}
-                                </div></div>
-                            <div><div>
-                                    <h4>Email</h4>
-                                    {/* <div>
-                                        <div><AiOutlineArrowUp /></div>
-                                        <div><AiOutlineArrowDown /></div>
-                                    </div> */}
-                                </div></div>
-                          
-                            <div><div>
-                                    <h4>Gender</h4>
-                                    {/* <div>
-                                        <div><AiOutlineArrowUp /></div>
-                                        <div><AiOutlineArrowDown /></div>
-                                    </div> */}
-                                </div></div>
-                            <div><h4>Mobile Number</h4></div>
-                        </main>
-                    }
-                    {
-                        loading ? <div className='cst-puff-loader-box'><PuffLoader /></div> : customersList && customersList.getAllCustomers ? customersList?.getAllCustomers.map((customer, index) => <main className="cst-barberitem" key={index}>
-                            <div>
-                                <p>{customer.salonId}</p>
-                            </div>
-
-                            <div>
-                                <p>{customer.name}</p>
-                            </div>
-
-                            <div>
-                                <p>{customer.email}</p>
-                            </div>
-
+                        </div></div>
+                        <div><div>
+                            <h4>Email</h4>
                             {/* <div>
+                                        <div><AiOutlineArrowUp /></div>
+                                        <div><AiOutlineArrowDown /></div>
+                                    </div> */}
+                        </div></div>
+
+                        <div><div>
+                            <h4>Gender</h4>
+                            {/* <div>
+                                        <div><AiOutlineArrowUp /></div>
+                                        <div><AiOutlineArrowDown /></div>
+                                    </div> */}
+                        </div></div>
+                        <div><h4>Mobile Number</h4></div>
+
+
+                        <div className='icons-bbr'><IoIosNotifications /></div>
+
+                        <div className='icons-bbr'><IoMail /></div>
+
+                        <div className='icons-bbr'><MdSms /></div>
+
+
+                    </main>
+                }
+                {
+                    loading ? <div className='cst-puff-loader-box'><PuffLoader /></div> : customersList && customersList.getAllCustomers ? customersList?.getAllCustomers.map((customer, index) => <main className="cst-barberitem" key={index}>
+                        <div>
+                            <p>{customer.salonId}</p>
+                        </div>
+
+                        <div>
+                            <p>{customer.name}</p>
+                        </div>
+
+                        <div>
+                            <p>{customer.email}</p>
+                        </div>
+
+                        {/* <div>
                                 <p>{customer.dateOfBirth}</p>
                             </div> */}
 
-                            <div>
-                                <p>{customer.gender}</p>
-                            </div>
+                        <div>
+                            <p>{customer.gender}</p>
+                        </div>
 
-                            <div>
-                                <p>{customer.mobileNumber}</p>
-                            </div>
+                        <div>
+                            <p>{customer.mobileNumber}</p>
+                        </div>
 
-                            <div className='icons-bbr'><IoIosNotifications/></div>
+                        {/* <div className='icons-bbr'><IoIosNotifications /></div>
 
-                            <div className='icons-bbr' onClick={() => mailHandler(customer.email)}><IoMail/></div>
+                        <div className='icons-bbr' onClick={() => mailHandler(customer.email)}><IoMail /></div>
 
-                            <div className='icons-bbr'><MdSms/></div>
+                        <div className='icons-bbr'><MdSms /></div> */}
 
-                        </main>) : <div className='cst-no-barber-box'><p>No Customers Present</p></div>
-                    }
-                </div>
-
-                <div className='cst-barber-pagination'>
-                    <div style={{display:"flex" , gap:"1.5rem"}}>
-                        <div onClick={PrevHandler}><AiOutlineArrowLeft /></div>
-                        <div onClick={NextHandler}><AiOutlineArrowRight /></div>
-                    </div>
-                </div>
-
+                    </main>) : <div className='cst-no-barber-box'><p>No Customers Present</p></div>
+                }
             </div>
+
+            <div className='cst-barber-pagination'>
+                <div style={{ display: "flex", gap: "1.5rem" }}>
+                    <div onClick={PrevHandler}><AiOutlineArrowLeft /></div>
+                    <div onClick={NextHandler}><AiOutlineArrowRight /></div>
+                </div>
+            </div>
+
+        </div>
     )
 }
 

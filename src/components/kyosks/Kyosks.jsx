@@ -10,6 +10,7 @@ import { IoIosAddCircle } from "react-icons/io";
 import { FaRegClock } from "react-icons/fa";
 import { TiTick } from "react-icons/ti";
 import { RxCross2 } from "react-icons/rx";
+import ClipLoader from "react-spinners/ClipLoader";
 
 
 const Kyosks = () => {
@@ -59,6 +60,9 @@ const Kyosks = () => {
         }
 
     }
+
+
+    // console.log("currrrreeeeeennnnnttt" ,currentbarberName)
 
     const fetchAllServices = () => {
         dispatch(getAllSalonServicesAction(Number(salonId), setModel1, setModelservices,setCurrentbarberName,setModel2))
@@ -113,7 +117,7 @@ const Kyosks = () => {
             mobileNumber,
             joinedQType: "Single-Join",
             methodUsed: "Walk-In",
-            barberName: selectedbarberName,
+            barberName: selectedbarberName || currentbarberName,
             barberId: selectedbarberId,
             services: selectedService 
         }
@@ -143,13 +147,15 @@ const Kyosks = () => {
 
     }
 
+    const [fetchSelectedSearch, setfetchSelectedSearch] = useState(false)
 
     const fetchSelectedServices = () => {
+        setfetchSelectedSearch(true)
         const serviceIds = selectedService.map(item => item.serviceId);
         // console.log(serviceIds, salonId)
 
         setCurrentbarberName("")
-        dispatch(getBarberByMultipleServicesAction(salonId, serviceIds,setModel2barber))
+        dispatch(getBarberByMultipleServicesAction(salonId, serviceIds,setModel2barber,setfetchSelectedSearch))
     }
 
 
@@ -417,7 +423,7 @@ const Kyosks = () => {
                         {
                             model2 == true && <div className='model2'>
                                  {
-                                selectedService.length > 0 && <button onClick={() => fetchSelectedServices()} className='services-search-btn' >Search</button>
+                                selectedService.length > 0 && <button onClick={() => fetchSelectedServices()} className='services-search-btn' >{fetchSelectedSearch === true ? <ClipLoader/> : <p style={{fontSize:"1.3rem"}}>Search</p>}</button>
                             }
                             {
                                 getAllSalonServices?.response?.map((b, index) => (

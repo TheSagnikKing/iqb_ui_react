@@ -169,7 +169,7 @@ export const approveBarberAction = (approvedata) => async(dispatch) => {
     }
 }
 
-export const getBarberByMultipleServicesAction = (salonId,serviceIds,setModel2barber) => async(dispatch) => {
+export const getBarberByMultipleServicesAction = (salonId,serviceIds,setModel2barber,setfetchSelectedSearch) => async(dispatch) => {
     try {
         dispatch({type:GET_BARBERS_BY_MULTIPLE_SERVICES_REQ})
 
@@ -182,6 +182,7 @@ export const getBarberByMultipleServicesAction = (salonId,serviceIds,setModel2ba
         })
 
         setModel2barber(true)
+        setfetchSelectedSearch(false)
     } catch (error) {
         dispatch({
             type:GET_BARBERS_BY_MULTIPLE_SERVICES_FAIL,

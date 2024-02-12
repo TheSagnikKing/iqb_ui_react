@@ -210,8 +210,11 @@ const BarberCalenderEvent = () => {
                                                 boxShadow: `0px 0px 8px ${m.background}`
                                                 }}
                                             >
-                                                <p>{m.startTime}-{m.endTime}</p>
-                                                <p>Appointment : {m.appointmentName}</p>
+                                                <h3>{m.appointmentStartTime}-{m.appointmentEndTime}</h3>
+                                                <h3>Customer Name : {m.customerName}</h3>
+                                                <h3 style={{display:"flex",gap:"1rem"}}>Sevices : <div style={{display:"flex",gap:"0.5rem"}}>
+                                                    {m.services.map((s) => <p>{s.serviceName}</p>)}
+                                                    </div></h3>
                                             </div>
                                         )) : <p className='noappoin'>No Appoinments</p>
                                     }

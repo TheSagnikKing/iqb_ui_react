@@ -254,7 +254,7 @@ export const updateBarberSignupAccountDetailsAction = (navigate,profiledata) => 
 };
 
 
-export const updateBarberAccountDetailsAction = (profiledata) => async (dispatch) => {
+export const updateBarberAccountDetailsAction = (profiledata,navigate) => async (dispatch) => {
     try {
         dispatch({
             type: BARBER_ACCOUNT_DETAILS_REQ
@@ -266,6 +266,8 @@ export const updateBarberAccountDetailsAction = (profiledata) => async (dispatch
             type: BARBER_ACCOUNT_DETAILS_SUCCESS,
             payload: data
         });
+
+        navigate("/barber-dashboard")
 
     } catch (error) {
     
@@ -314,6 +316,7 @@ export const barberVerifiedStatusAction = (navigate,verifystatus) => async (disp
             payload: data
         });
         navigate("/barber/updateprofile")
+        window.location.reload()
     } catch (error) {
     
         dispatch({
