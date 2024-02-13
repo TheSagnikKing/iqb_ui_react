@@ -496,7 +496,7 @@ const UpdateSalon = () => {
             <div className="sa-br-right_main_div">
 
                 <div className="sa-br-right_main_head">
-                    <p>Crud</p>
+  
                 </div>
 
                 <div className="sa-br-right_main_form">
