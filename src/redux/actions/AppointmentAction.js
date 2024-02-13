@@ -1,6 +1,7 @@
 import { CREATE_APPOINTMENT_BARBERLIST_FAIL, CREATE_APPOINTMENT_BARBERLIST_REQ, CREATE_APPOINTMENT_BARBERLIST_SUCCESS, CREATE_APPOINTMENT_FAIL, CREATE_APPOINTMENT_REQ, CREATE_APPOINTMENT_SUCCESS, DELETE_APPOINTMENT_FAIL, DELETE_APPOINTMENT_REQ, DELETE_APPOINTMENT_SUCCESS, EDIT_APPOINTMENT_FAIL, EDIT_APPOINTMENT_REQ, EDIT_APPOINTMENT_SUCCESS } from "../constants/AppointmentConstants"
 
 import api from "../api/Api"
+import {  toast } from 'react-toastify';
 
 export const createAppointmentAction = (appointmentData,navigate) => async(dispatch) => {
     try {
@@ -15,12 +16,15 @@ export const createAppointmentAction = (appointmentData,navigate) => async(dispa
 
         navigate("/appoinment")
     } catch (error) {
+     
         dispatch({
             type:CREATE_APPOINTMENT_FAIL,
             error: error.response
         })
 
-        alert(error.response.data.message)
+        toast.error(error?.response?.data?.message, {
+            position: "top-right"
+        });
     }
 }
 
@@ -39,12 +43,16 @@ export const deleteAppointmentAction = (appointmentData) => async(dispatch) => {
 
         window.location.reload()
     } catch (error) {
+
         dispatch({
             type:DELETE_APPOINTMENT_FAIL,
             error: error.response
         })
 
-        alert(error.response.data.message)
+        toast.error(error?.response?.data?.message, {
+            position: "top-right"
+        });
+
     }
 }
 
@@ -61,12 +69,16 @@ export const editAppointmentAction = (appointmentData,navigate) => async(dispatc
 
         navigate("/appoinment")
     } catch (error) {
+       
         dispatch({
             type:EDIT_APPOINTMENT_FAIL,
             error: error.response
         })
 
-        alert(error.response.data.message)
+        toast.error(error?.response?.data?.message, {
+            position: "top-right"
+        });
+
     }
 }
 

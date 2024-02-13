@@ -3,6 +3,9 @@ import { BARBER_ONLINE_STATUS_FAIL, BARBER_ONLINE_STATUS_REQ, BARBER_ONLINE_STAT
 import { APPROVE_BARBER_FAIL, APPROVE_BARBER_REQ, APPROVE_BARBER_SUCCESS, BARBER_ALL_SALON_SERVICES_FAIL, BARBER_ALL_SALON_SERVICES_REQ, BARBER_ALL_SALON_SERVICES_SUCCESS, BARBER_SERVED_QUEUE_FAIL, BARBER_SERVED_QUEUE_REQ, BARBER_SERVED_QUEUE_SUCCESS, CREATE_BARBER_FAIL, CREATE_BARBER_REQ, CREATE_BARBER_SUCCESS, DELETE_BARBER_FAIL, DELETE_BARBER_REQ, DELETE_BARBER_SUCCESS, GETALLBARBERS_BYSERVICEID_FAIL, GETALLBARBERS_BYSERVICEID_REQ, GETALLBARBERS_BYSERVICEID_SUCCESS, GET_BARBERLIST_FAIL, GET_BARBERLIST_REQ, GET_BARBERLIST_SUCCESS, GET_BARBERS_BY_MULTIPLE_SERVICES_FAIL, GET_BARBERS_BY_MULTIPLE_SERVICES_REQ, GET_BARBERS_BY_MULTIPLE_SERVICES_SUCCESS, GET_BARBER_SERVICES_FAIL, GET_BARBER_SERVICES_REQ, GET_BARBER_SERVICES_SUCCESS, GROUP_BARBER_SERVICES_BARBERID_FAIL, GROUP_BARBER_SERVICES_BARBERID_REQ, GROUP_BARBER_SERVICES_BARBERID_SUCCESS, UPDATE_BARBER_FAIL, UPDATE_BARBER_REQ, UPDATE_BARBER_SUCCESS } from "../constants/barberConstants"
 import { GET_ALL_SALON_SERVICES_SUCCESS } from "../constants/salonConstants"
 
+import {  toast } from 'react-toastify';
+
+
 export const barberListAction = (salonId,setModel1,setModel2barber,setModel2) => async(dispatch) => {
     try {
         dispatch({type:GET_BARBERLIST_REQ})
@@ -44,10 +47,16 @@ export const createBarberAction = (barberdata,navigate) => async(dispatch) => {
 
         navigate("/barber/dashboard2")
     } catch (error) {
+
         dispatch({
             type:CREATE_BARBER_FAIL,
             payload: error.response.data
         })
+
+        toast.error(error?.response?.data?.message, {
+            position: "top-right"
+        });
+
     }
 }
 
@@ -66,9 +75,15 @@ export const updateBarberAction = (barberdata,navigate,signal) => async(dispatch
         if (error.name === 'AbortError' || error.code === 'ECONNABORTED') {
             console.log("Request Canceled");
         } else {
+          
+
             dispatch({
                 type: UPDATE_BARBER_FAIL,
                 payload: error.response.data
+            });
+
+            toast.error(error?.response?.data?.message, {
+                position: "top-right"
             });
         }
         
@@ -123,6 +138,8 @@ export const barberServedQueueAction = (infodata) => async(dispatch) => {
             type:BARBER_SERVED_QUEUE_SUCCESS,
             payload:data
         })
+
+        window.location.reload()
     } catch (error) {
         dispatch({
             type:BARBER_SERVED_QUEUE_FAIL,

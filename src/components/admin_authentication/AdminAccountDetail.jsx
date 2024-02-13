@@ -5,6 +5,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { updateAdminAccountDetailsAction } from '../../redux/actions/AdminAuthAction'
 import ClipLoader from "react-spinners/ClipLoader";
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const AdminAccountDetail = () => {
 
     const [username, setUsername] = useState("")
@@ -93,7 +96,7 @@ const AdminAccountDetail = () => {
                     height: "3.5rem",
                 }}>Skip</button>
             </div>
-
+            <ToastContainer />
         </div>
     )
 }

@@ -12,6 +12,9 @@ import { TiTick } from "react-icons/ti";
 import { RxCross2 } from "react-icons/rx";
 import ClipLoader from "react-spinners/ClipLoader";
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const Kyosks = () => {
 
@@ -508,6 +511,8 @@ const Kyosks = () => {
                         singleJoinQueue?.loading == true ? <h2>Loading...</h2> : "Join Queue"
                     }</button>
                 </div>
+
+                <ToastContainer />
             </div>
 
         </>

@@ -5,6 +5,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { updateBarberSignupAccountDetailsAction } from '../../redux/actions/BarberAuthAction'
 import ClipLoader from "react-spinners/ClipLoader";
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const BarberAccountDetail = () => {
 
     const [username, setUsername] = useState("")
@@ -106,7 +109,8 @@ const BarberAccountDetail = () => {
 
                     <button className='skip' onClick={skipHandler}>Skip</button>
                 </div>
-
+                
+                <ToastContainer />
             </div>
     )
 }

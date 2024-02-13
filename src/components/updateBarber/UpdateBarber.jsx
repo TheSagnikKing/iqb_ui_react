@@ -13,6 +13,9 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import api from "../../redux/api/Api"
 import { FaPlus } from 'react-icons/fa'
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const UpdateBarber = () => {
 
     const [dropdown, setDropdown] = useState(false)
@@ -334,6 +337,8 @@ const UpdateBarber = () => {
                     {updateBarber?.loading == true ? <button style={{fontWeight:"500"}}>Loader</button> : <button onClick={submitHandler}>Update</button>}
 
                 </div>
+
+                <ToastContainer />
             </div>
 
         </>

@@ -22,11 +22,18 @@ import 'react-toastify/dist/ReactToastify.css';
 import { getMessaging, getToken } from "firebase/messaging";
 import { messaging } from '../../firebase';
 import ClipLoader from 'react-spinners/ClipLoader'
-import { ADMIN_SIGNIN_FAIL } from '../../redux/constants/AdminAuthConstants'
+import { ADMIN_SIGNIN_FAIL, ADMIN_SIGNUP_FAIL } from '../../redux/constants/AdminAuthConstants'
 import differenceInSeconds from 'date-fns/differenceInSeconds/index.js'
-import { BARBER_SIGNIN_FAIL } from '../../redux/constants/BarberAuthConstants'
+import { BARBER_SIGNIN_FAIL, BARBER_SIGNUP_FAIL } from '../../redux/constants/BarberAuthConstants'
 
 const SignIn = () => {
+
+    
+    const BarberLogin = useSelector(state => state.BarberLogin)
+    const { loading: barberLoading , error:barberLoginError } = BarberLogin;
+
+    const AdminLogin = useSelector(state => state.AdminLogin)
+    const {loading,error:adminLoginError} = AdminLogin
 
     //For the notification part 
 
@@ -55,6 +62,8 @@ const SignIn = () => {
 
     //   //===========================
 
+    const navigate = useNavigate();
+    const dispatch = useDispatch()
 
 
     const [check, setCheck] = useState(false)
@@ -63,8 +72,6 @@ const SignIn = () => {
         setCheck(!check)
     }
 
-    const navigate = useNavigate();
-    const dispatch = useDispatch()
 
     const userLoggedIn = localStorage.getItem("userLoggedIn")
     const barberLoggedIn = localStorage.getItem("barberLoggedIn")
@@ -96,7 +103,7 @@ const SignIn = () => {
                 dispatch(AdminLoginAction(signindata, navigate))
             }
         } catch (error) {
-            console.log(error);
+            console.log(error?.response?.data);
         }
     }
 
@@ -153,10 +160,6 @@ const SignIn = () => {
         console.log(error);
     };
 
-
-    const AdminLogin = useSelector(state => state.AdminLogin)
-    const {loading,error:adminLoginError} = AdminLogin
-
     useEffect(() => {
         if(adminLoginError){
             toast.error(adminLoginError?.message, {
@@ -166,8 +169,6 @@ const SignIn = () => {
 
     },[adminLoginError,dispatch])
 
-    const BarberLogin = useSelector(state => state.BarberLogin)
-    const { loading: barberLoading , error:barberLoginError } = BarberLogin;
 
     useEffect(() => {
         if(barberLoginError){
@@ -181,6 +182,25 @@ const SignIn = () => {
         //     payload:{}
         // })
     },[barberLoginError,dispatch])
+
+
+    const signupRoute = () => {
+        try {
+            dispatch({
+                type: ADMIN_SIGNUP_FAIL,
+                payload: {}
+            });
+    
+            dispatch({
+                type: BARBER_SIGNUP_FAIL,
+                payload: {}
+            });
+    
+            navigate("/admin-signup");
+        } catch (error) {
+            console.error("Error navigating:", error);
+        }
+    };
 
 
     return (
@@ -300,7 +320,7 @@ const SignIn = () => {
 
                                     </div>
 
-                                    <p className="divsix">Don't have an account? <Link to="/admin-signup" className="link"><strong>Sign Up</strong></Link></p>
+                                    <p className="divsix">Don't have an account? <p onClick={signupRoute} className="link"><strong>Sign Up</strong></p></p>
                                 </> :
                                     <>
                                         <div className="divone">
@@ -383,7 +403,7 @@ const SignIn = () => {
                                             />
                                         </div>
 
-                                        <p className="divsix">Don't have an account? <Link to="/admin-signup" className="link"><strong>Sign Up</strong></Link></p></>
+                                        <p className="divsix">Don't have an account? <p onClick={signupRoute} className="link"><strong>Sign Up</strong></p></p></>
                             }
                         </div>
 

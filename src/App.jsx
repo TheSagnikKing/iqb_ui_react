@@ -74,11 +74,14 @@ import AllBarberNotification from './components/barber/BarberNotification/AllBar
 import BarberVerifyEmail from './components/barber/BarberverifyEmail/BarberVerifyEmail';
 import Hello from './components/Hello';
 
+
+
 const App = () => {
 
   return (
       <BrowserRouter>
         <Routes>
+        
           <Route path="/hello" element={<Hello/>}/>
 
           <Route path="/" element={

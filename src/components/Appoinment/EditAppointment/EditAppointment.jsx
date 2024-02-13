@@ -12,6 +12,9 @@ import { FaPlus } from 'react-icons/fa'
 import { MdDelete } from 'react-icons/md'
 import { ImCross } from 'react-icons/im'
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const EditAppointment = () => {
 
     const location = useLocation()
@@ -408,6 +411,8 @@ const EditAppointment = () => {
                     </div> */}
 
                 </div>
+
+                <ToastContainer />
             </div>
         </>
     )

@@ -18,12 +18,12 @@ import { AdminLogoutAction } from '../../../../redux/actions/AdminAuthAction'
 import api from "../../../../redux/api/Api"
 import { applySalonAction } from '../../../../redux/actions/salonAction'
 import { RxCross2, RxHamburgerMenu } from 'react-icons/rx'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AdminHeader = ({ title }) => {
 
   const [check, setCheck] = useState(false)
-
-  // console.log("Mode", check)
 
   const [dropdown, setDropdown] = useState(false)
 
@@ -93,48 +93,56 @@ const AdminHeader = ({ title }) => {
   }
 
   const applySalon = useSelector(state => state.applySalon)
+  // const { error: applySalonError } = applySalon
+
+
+  // useEffect(() => {
+  //   if (applySalonError) {
+  //     toast.error(applySalonError?.message, {
+  //       position: "top-right"
+  //     });
+  //   }
+
+  // }, [applySalonError])
 
   useEffect(() => {
-
     if (LoggedInMiddleware?.user) {
-      // console.log("FROM USEEFFETC ADMIN EmAIL ", LoggedInMiddleware?.user[0].email)
+
       const getSalonfnc = async () => {
-        const { data } = await api.post("/api/admin/getAllSalonsByAdmin", {
-          adminEmail: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].email
-        })
-        setSalonList(data?.salons)
-      }
+        try {
+          const { data } = await api.post("/api/admin/getAllSalonsByAdmin", {
+            adminEmail: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].email
+          });
+          setSalonList(data?.salons);
+        } catch (error) {
+          
+        }
+      };
 
-      getSalonfnc()
-
-
+      getSalonfnc();
 
       const getSalonfnc2 = async () => {
-        const { data } = await api.post("/api/admin/getDefaultSalonByAdmin", {
-          adminEmail: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].email
-        })
+        try {
+          const { data } = await api.post("/api/admin/getDefaultSalonByAdmin", {
+            adminEmail: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].email
+          });
+          setChooseSalonId(Number(data?.response?.salonId));
+        } catch (error) {
+          
+        }
+      };
 
-        setChooseSalonId(data?.response?.salonId)
-      }
-
-      getSalonfnc2()
+      getSalonfnc2();
     }
 
-  }, [LoggedInMiddleware?.user])
+  }, [LoggedInMiddleware?.user]);
 
-
-  // console.log("Admin Header Salon List ", salonList)
-  // console.log("Admin header chooseSalonId ", chooseSalonId)
 
 
   const location = useLocation()
   const { pathname } = location
 
-  // console.log("Pathname", pathname)
-
   const [expandMenu, setExpandMenu] = useState(false)
-
-  // style={{width:`${expandMenu === true ? "20rem" : ""}`}}
 
   return (
     <section className="nav1">
@@ -147,7 +155,7 @@ const AdminHeader = ({ title }) => {
         <div className={check ? "nav1wrapperdark" : "nav1wrapper"}>
 
           <div className="nav1left_menu_box">
-            <button onClick={() => setExpandMenu(true)} style={{background:"#fff",border:"none",boxShadow:"0px 0px 4px rgba(0,0,0,0.5)",height:"30px",fontWeight:"bold",display:"flex",justifyContent:"center",alignItems:"center"}}><RxHamburgerMenu /></button>
+            <button onClick={() => setExpandMenu(true)} style={{ background: "#fff", border: "none", boxShadow: "0px 0px 4px rgba(0,0,0,0.5)", height: "30px", fontWeight: "bold", display: "flex", justifyContent: "center", alignItems: "center" }}><RxHamburgerMenu /></button>
             {adminmenudata.map((item) => {
               return (
                 <div key={item.menu_title} className={`${pathname === item.menu_link ? "menu-active" : "menu-inactive"}`}>
@@ -161,11 +169,11 @@ const AdminHeader = ({ title }) => {
                 </div>
               )
             })}
-            
+
           </div>
 
           {expandMenu && <div style={{
-            top:"0px",
+            top: "0px",
             position: "absolute",
             background: "#fff",
             height: "105vh",
@@ -174,7 +182,7 @@ const AdminHeader = ({ title }) => {
             borderRight: "1px solid rgba(0,0,0,0.6)",
           }}
           >
-            <button onClick={() => setExpandMenu(false)} style={{background:"#fff",border:"none",boxShadow:"0px 0px 4px rgba(0,0,0,0.5)",height:"30px",width:"30px",margin:"1rem 2rem 1rem auto",borderRadius:"50%",mfontWeight:"bold",display:"flex",justifyContent:"center",alignItems:"center",color:"red"}}><RxCross2 /></button>
+            <button onClick={() => setExpandMenu(false)} style={{ background: "#fff", border: "none", boxShadow: "0px 0px 4px rgba(0,0,0,0.5)", height: "30px", width: "30px", margin: "1rem 2rem 1rem auto", borderRadius: "50%", mfontWeight: "bold", display: "flex", justifyContent: "center", alignItems: "center", color: "red" }}><RxCross2 /></button>
 
             {adminmenudata.map((item) => {
               return (
@@ -182,11 +190,11 @@ const AdminHeader = ({ title }) => {
                   <Link to={`${item.menu_link}`} style={{ color: "#000", textDecoration: "none" }} >
                     <div className="nav1-menu">
                       <div style={{ display: "flex", alignItems: "center", gap: "2rem", width: "80%", fontSize: "1.4rem" }}>
-                        <div style={{color:`${pathname === item.menu_link ? "#fff" : ""}`}}>
+                        <div style={{ color: `${pathname === item.menu_link ? "#fff" : ""}` }}>
                           {item.menu_logo}
                         </div>
 
-                        <h3 style={{ display: "block",color:`${pathname === item.menu_link ? "#fff" : ""}` }}>{item.menu_title}</h3>
+                        <h3 style={{ display: "block", color: `${pathname === item.menu_link ? "#fff" : ""}` }}>{item.menu_title}</h3>
                       </div>
 
                     </div>
@@ -357,6 +365,8 @@ const AdminHeader = ({ title }) => {
 
           </div>
         </div>
+
+       
       </div>
 
     </section >

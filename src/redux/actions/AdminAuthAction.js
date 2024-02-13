@@ -2,7 +2,7 @@ import { ADMIN_FORGET_PASSWORD_FAIL, ADMIN_FORGET_PASSWORD_REQ, ADMIN_FORGET_PAS
 
 import api from "../api/Api"
 import axios from "axios";
-// import { toast } from "react-toastify";
+import {  toast } from 'react-toastify';
 
 export const AdminRegisterAction = (signupData,navigate) => async (dispatch) => {
     try {
@@ -44,7 +44,6 @@ export const AdminLoginAction = (loginData,navigate) => async (dispatch) => {
 
         navigate("/admin-dashboard")
     } catch (error) {
-        console.log(error,'errrrrrrrrr');
 
         dispatch({
             type: ADMIN_SIGNIN_FAIL,
@@ -92,6 +91,17 @@ export const AdminGoogleloginAction = (token,navigate) => async (dispatch) => {
 export const AdminLogoutAction = (navigate) => async (dispatch) => {
 
     try {
+        
+        dispatch({
+            type:ADMIN_SIGNIN_FAIL,
+            payload:{}
+         })
+
+         dispatch({
+            type:ADMIN_SIGNUP_FAIL,
+            payload:{}
+         })
+
          dispatch({
              type: ADMIN_LOGOUT_REQ
          })
@@ -103,17 +113,10 @@ export const AdminLogoutAction = (navigate) => async (dispatch) => {
              payload:data
          })
 
-         dispatch({
-            type:ADMIN_SIGNIN_FAIL,
-            payload:{}
-         })
-
-         dispatch({
-            type:ADMIN_SIGNUP_FAIL,
-            payload:{}
-         })
          localStorage.setItem("userLoggedIn","false")
          navigate("/admin-signin")
+
+        // alert("He.lllooo")
     } catch (error) {
          dispatch({
              type: ADMIN_LOGOUT_FAIL,
@@ -239,13 +242,16 @@ export const updateAdminAction = (profiledata,navigate) => async (dispatch) => {
 
         navigate("/admin-dashboard")
     } catch (error) {
-    
+
         dispatch({
             type: UPDATE_ADMIN_FAIL,
             payload:error?.response?.data
         }); 
 
-        alert(error.response.data.message)
+        toast.error(error?.response?.data?.message, {
+            position: "top-right"
+        });
+
     }
 };
 
@@ -264,11 +270,15 @@ export const updateAdminAccountDetailsAction = (navigate,profiledata) => async (
         });
         navigate("/admin-dashboard")
     } catch (error) {
-    
+
         dispatch({
             type: UPDATE_ADMIN_ACCOUNT_DETAILS_FAIL,
             payload:error?.response?.data
         }); 
+
+        toast.error(error?.response?.data?.message, {
+            position: "top-right"
+        });
     }
 };
 

@@ -2,6 +2,8 @@ import { AUTOJOIN_FAIL, AUTOJOIN_REQ, AUTOJOIN_SUCCESS, CANCEL_QUEUE_FAIL, CANCE
 
 import api from "../api/Api"
 
+import {  toast } from 'react-toastify';
+
 export const singleJoinQueueAction = (singlejoindata,setSelectedService,navigate) => async(dispatch) => {
     try {
         dispatch({type:SINGLE_JOINQUEUE_REQ})
@@ -16,12 +18,16 @@ export const singleJoinQueueAction = (singlejoindata,setSelectedService,navigate
         setSelectedService([])
         navigate("/queue")
     } catch (error) {
+
         dispatch({
             type:SINGLE_JOINQUEUE_FAIL,
             payload: error.response.data
         })
 
-        alert( error.response.data.message)
+        toast.error(error?.response?.data?.message, {
+            position: "top-right"
+        })
+
     }
 }
 
@@ -62,12 +68,15 @@ export const autojoinAction = (joindata,navigate) => async(dispatch) => {
 
         navigate("/queue")
     } catch (error) {
+
         dispatch({
             type:AUTOJOIN_FAIL,
             payload: error.response.data
         })
 
-        alert(error.response.data.message)
+        toast.error(error?.response?.data?.message, {
+            position: "top-right"
+        })
     }
 }
 
@@ -88,12 +97,16 @@ export const groupjoinAction = (groupjoindata,setSelectedCustomer,navigate) => a
         navigate("/queue")
         
     } catch (error) {
+        
         dispatch({
             type:GROUP_JOIN_FAIL,
             payload: error.response.data
         })
 
-        alert(error.response.data.message)
+        toast.error(error?.response?.data?.message, {
+            position: "top-right"
+        })
+
     }
 }
 

@@ -111,6 +111,9 @@ import { groupjoinAction, singleJoinQueueAction } from '../../../../redux/action
 import AdminLayout from '../../../layout/Admin/AdminLayout'
 import { appoinmentBarberListAction } from '../../../../redux/actions/AppointmentAction'
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const GroupJoinCustomer = () => {
 
   const dispatch = useDispatch()
@@ -393,6 +396,8 @@ const GroupJoinCustomer = () => {
             groupjoin?.loading == true ? <h2>Loading...</h2> : "Join Queue"
           }</button>
         </div>
+
+        <ToastContainer />
       </div>
 
     </>

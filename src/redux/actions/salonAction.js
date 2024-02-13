@@ -2,6 +2,8 @@ import { APPLY_SALON_FAIL, APPLY_SALON_REQ, APPLY_SALON_SUCCESS, CONNECT_BARBER_
 
 import api from "../api/Api"
 import { GET_BARBERLIST_SUCCESS, GET_BARBERS_BY_MULTIPLE_SERVICES_SUCCESS, GET_BARBER_SERVICES_SUCCESS } from "../constants/barberConstants"
+import {  toast } from 'react-toastify';
+
 
 export const createSalonAction = (salondata,navigate) => async(dispatch) => {
     try {
@@ -17,10 +19,16 @@ export const createSalonAction = (salondata,navigate) => async(dispatch) => {
         navigate("/salon/salonlist")
         window.location.reload()
     } catch (error) {
+
         dispatch({
             type:CREATE_SALON_FAIL,
-            payload: error.response.data
+            payload: error?.response?.data
         })
+
+        toast.error(error?.response?.data?.message, {
+            position: "top-right"
+          });
+
     }
 }
 
@@ -55,10 +63,15 @@ export const updateSalonAction = (salondata,navigate) => async(dispatch) => {
 
         navigate("/salon/salonlist")
     } catch (error) {
+     
         dispatch({
             type:UPDATE_SALON_FAIL,
             payload: error.response.data
         })
+
+        toast.error(error?.response?.data?.message, {
+            position: "top-right"
+          });
     }
 }
 
@@ -189,18 +202,25 @@ export const salonSettingsUpdateAction = (salonsettingsData,navigate) => async(d
 
         navigate("/salon/salonlist")
     } catch (error) {
+
         dispatch({
             type:SALON_SETTINGS_UPDATE_FAIL,
             payload: error.response.data
         })
+
+        toast.error(error?.response?.data?.message, {
+            position: "top-right"
+        });
     }
 }
+
+
 
 export const applySalonAction = (applySalondata) => async(dispatch) => {
     try {
         dispatch({type:APPLY_SALON_REQ})
 
-        const {data} = await api.post(`/api/admin/changeDefaultSalonIdofAdmin`, applySalondata)
+        const {data} = await api.post(`/api/admin/changeDefaultSalonIdofAdmin`,applySalondata)
 
         dispatch({
             type:APPLY_SALON_SUCCESS,
@@ -213,6 +233,10 @@ export const applySalonAction = (applySalondata) => async(dispatch) => {
             type:APPLY_SALON_FAIL,
             payload: error.response.data
         })
+
+        toast.error(error?.response?.data?.message, {
+            position: "top-right"
+          });
     }
 }
 

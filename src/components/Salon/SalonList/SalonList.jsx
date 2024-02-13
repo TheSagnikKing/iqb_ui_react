@@ -15,6 +15,8 @@ import { setSharedSalonData } from '../updateSalon/salonId'
 
 import api from '../../../redux/api/Api'
 
+import { toast } from 'react-toastify';
+
 const SalonList = () => {
 
     const [search, setSearch] = useState("")
@@ -45,6 +47,10 @@ const SalonList = () => {
                 if (error?.response?.data?.message == "Refresh Token not present.Please Login Again") {
                     localStorage.setItem("userLoggedIn", "false")
                     navigate("/admin-signin")
+                }else{
+                    toast.error(error?.response?.data?.message, {
+                        position: "top-right"
+                      });
                 }
             }
         }

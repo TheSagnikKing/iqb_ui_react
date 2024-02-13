@@ -9,6 +9,9 @@ import { MdDelete } from 'react-icons/md'
 import { createBarberAction } from "../../redux/actions/barberAction"
 import AdminLayout from '../layout/Admin/AdminLayout'
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 import api from "../../redux/api/Api"
 import { useNavigate } from 'react-router-dom'
@@ -284,6 +287,8 @@ const CreateBarber = () => {
                         createBarber?.loading == true ? <h2>Loading...</h2> : "Create"
                     }</button>
                 </div>
+
+                <ToastContainer />
             </div>
 
         </>

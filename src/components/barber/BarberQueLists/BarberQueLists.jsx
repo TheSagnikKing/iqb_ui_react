@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 import { PiQueueBold } from "react-icons/pi";
 import Layout from '../../../components/layout/Layout';
-import { barberQueListAction } from '../../../redux/actions/barberAction';
+import { barberQueListAction, barberServedQueueAction } from '../../../redux/actions/barberAction';
 
 
 const BarberQueLists = () => {
@@ -29,17 +29,17 @@ const BarberQueLists = () => {
 
     const barberQuelist = useSelector(state => state.barberQuelist)
 
-    // const serverHandler = (barberId, serviceId, customerid) => {
+    const serverHandler = (barberId, serviceId, customerid) => {
 
-    //     const infodata = {
-    //         barberId,
-    //         serviceId,
-    //         _id: customerid,
-    //         salonId: salonid
-    //     }
+        const infodata = {
+            barberId,
+            serviceId,
+            _id: customerid,
+            salonId: LoggedInMiddleware?.user && LoggedInMiddleware.user[0].salonId
+        }
 
-    //     dispatch(barberServedQueueAction(infodata))
-    // }
+        dispatch(barberServedQueueAction(infodata))
+    }
 
     return (
         <>

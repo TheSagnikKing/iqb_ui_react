@@ -2,6 +2,9 @@ import {BARBER_ACCOUNT_DETAILS_FAIL, BARBER_ACCOUNT_DETAILS_REQ, BARBER_ACCOUNT_
 
 import api from "../api/Api"
 
+import {  toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 export const BarberRegisterAction = (signupData,navigate) => async (dispatch) => {
     try {
         dispatch({
@@ -243,13 +246,15 @@ export const updateBarberSignupAccountDetailsAction = (navigate,profiledata) => 
         });
         navigate("/barber-dashboard")
     } catch (error) {
+
+        toast.error(error?.response?.data?.message, {
+            position: "top-right"
+        });
     
         dispatch({
             type: BARBER_ACCOUNT_DETAILS_FAIL,
             payload:error?.response?.data
         }); 
-
-        alert(error.response.data.message)
     }
 };
 
@@ -270,13 +275,15 @@ export const updateBarberAccountDetailsAction = (profiledata,navigate) => async 
         navigate("/barber-dashboard")
 
     } catch (error) {
+
+        toast.error(error?.response?.data?.message, {
+            position: "top-right"
+        });
     
         dispatch({
             type: BARBER_ACCOUNT_DETAILS_FAIL,
             payload:error?.response?.data
         }); 
-
-        alert(error.response.data.message)
     }
 };
 

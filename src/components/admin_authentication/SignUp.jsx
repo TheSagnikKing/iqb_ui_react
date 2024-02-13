@@ -15,43 +15,23 @@ import { AdminGoogleloginAction, AdminRegisterAction } from '../../redux/actions
 import { GoogleLogin } from '@react-oauth/google'
 import { BarberGoogleloginAction, BarberRegisterAction } from '../../redux/actions/BarberAuthAction'
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // import { getMessaging, getToken } from "firebase/messaging";
 // import { messaging } from '../../firebase';
 import { ClipLoader } from 'react-spinners'
+import { ADMIN_SIGNIN_FAIL } from '../../redux/constants/AdminAuthConstants'
+import { BARBER_SIGNIN_FAIL } from '../../redux/constants/BarberAuthConstants'
 
 
 const SignUp = () => {
 
+    const AdminRegister = useSelector(state => state.AdminRegister)
+    const {loading } = AdminRegister
 
-    //    //For the notification part 
-
-    //    const [webFcmToken, setWebFcmToken] = useState("")
-
-    //    const requestPermission = async() => {
-    //        const permission = await Notification.requestPermission()
-       
-    //        if(permission == 'granted'){
-    //          //Generate Token
-    //          const token = await getToken(messaging, {
-    //            vapidKey: 'BEJORsiedr3Gss5oAiiNzWFpg0Zpnmt9Sw2VQe3K-GiBspoUJWyE9qzEv7ldcSkCq4d65SLL-HGt46OSzPWh550'
-    //          });
-    //          console.log('Token Gen iqb',token)
-    //          setWebFcmToken(token)
-       
-    //        }else if(permission == 'denied'){
-    //          alert("You denied for the notification")
-    //        }
-    //      } 
-       
-    //      useEffect(() => {
-    //        //Req user for notification permission
-    //        requestPermission()
-    //      },[])
-   
-    //      //===========================
-
-
+    const BarberRegister = useSelector(state => state.BarberRegister)
+    const {loading:BarberLoading} = BarberRegister
 
     const [check, setCheck] = useState(false)
 
@@ -90,9 +70,20 @@ const SignUp = () => {
                 dispatch(AdminRegisterAction(signupdata, navigate))
             }
         } catch (error) {
-            console.log(error.message)
+            console.log(error)
         }
     }
+
+    const {error:AdminSignupError} = AdminRegister
+
+    useEffect(() => {
+        if(AdminSignupError){
+            toast.error(AdminSignupError?.message, {
+                position: "top-right"
+            });
+        }
+
+    },[AdminSignupError])
 
     const [activeTab, setActiveTab] = useState("Admin")
 
@@ -115,6 +106,9 @@ const SignUp = () => {
     const [barberemail, setBarberEmail] = useState("")
     const [barbervisible, setBarberVisible] = useState(false)
 
+
+    const {error:BarberRegisterError} = BarberRegister
+
     const barbersubmitHandler = () => {
         try {
             if (!barberemail) {
@@ -131,6 +125,15 @@ const SignUp = () => {
         }
     }
 
+    useEffect(() => {
+        if(BarberRegisterError){
+            toast.error(BarberRegisterError?.message, {
+                position: "top-right"
+            });
+        }
+
+    },[BarberRegisterError])
+
     // Google barber Action
     const responseBarberMessage = async (response) => {
         console.log("barber")
@@ -141,11 +144,25 @@ const SignUp = () => {
         console.log(error);
     };
     
-    const AdminRegister = useSelector(state => state.AdminRegister)
-    const {loading } = AdminRegister
 
-    const BarberRegister = useSelector(state => state.BarberRegister)
-    const {loading:BarberLoading} = BarberRegister
+    const signinRoute = () => {
+        try {
+            dispatch({
+                type: ADMIN_SIGNIN_FAIL,
+                payload: {}
+            });
+    
+            dispatch({
+                type: BARBER_SIGNIN_FAIL,
+                payload: {}
+            });
+    
+            navigate("/admin-signin");
+        } catch (error) {
+            console.error("Error navigating:", error);
+        }
+    };
+    
 
     return (
             <main className="signup">
@@ -255,7 +272,7 @@ const SignUp = () => {
                                     />
                                 </div>
 
-                                <p className="divsix">Already have an account? <Link to="/admin-signin" className="link"><strong>Log In</strong></Link> </p>
+                                <p className="divsix">Already have an account? <p onClick={signinRoute} className="link"><strong>Log In</strong></p> </p>
                             </> : <>
                                 <div className="divone">
                                     <h1>Sign Up Barber for an Account</h1>
@@ -335,7 +352,7 @@ const SignUp = () => {
                                     />
                                 </div>
 
-                                <p className="divsix">Already have an account? <Link to="/admin-signin" className="link"><strong>Log In</strong></Link> </p>
+                                <p className="divsix">Already have an account? <p onClick={signinRoute} className="link"><strong>Log In</strong></p> </p>
                             </>
                         }
                         {/* Tab-Content end ===== */}
@@ -343,6 +360,7 @@ const SignUp = () => {
 
                     </div>
                 </div>
+                <ToastContainer />
             </main>
     )
 }

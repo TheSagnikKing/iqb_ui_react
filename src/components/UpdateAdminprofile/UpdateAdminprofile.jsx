@@ -11,6 +11,9 @@ import { useNavigate } from 'react-router-dom'
 import ClipLoader from "react-spinners/ClipLoader";
 import { ImCross } from 'react-icons/im'
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const UpdateAdminprofile = () => {
 
     // const [username, setUsername] = useState("")
@@ -163,6 +166,8 @@ const UpdateAdminprofile = () => {
                     </div>
 
                 </div>
+
+                <ToastContainer />
             </div>
         </>
     )

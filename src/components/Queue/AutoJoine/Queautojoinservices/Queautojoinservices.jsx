@@ -92,6 +92,9 @@ import { getAllSalonServicesAction } from '../../../../redux/actions/salonAction
 import { autojoinAction } from '../../../../redux/actions/joinQueueAction'
 import { barberAllSalonServicsAction, getbarberServicesbyBarberIdAction } from '../../../../redux/actions/barberAction'
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const Queautojoinservices = () => {
 
   const dispatch = useDispatch()
@@ -276,8 +279,9 @@ const Queautojoinservices = () => {
             autojoin?.loading == true ? <h2>loading...</h2> : "Join Queue"
           }</button>
         </div>
-      </div>
+        <ToastContainer />
 
+      </div>
     </>
   )
 }

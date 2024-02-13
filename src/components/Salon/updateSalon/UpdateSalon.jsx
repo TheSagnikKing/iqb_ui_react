@@ -19,6 +19,9 @@ import { FaArrowDown } from 'react-icons/fa'
 
 import { getAllSalonIconAction } from '../../../redux/actions/salonAction'
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const UpdateSalon = () => {
 
     const [latitude, setLatitude] = useState(null);
@@ -820,6 +823,8 @@ const UpdateSalon = () => {
 
                     </div>
                 </div>
+
+                <ToastContainer />
             </div>
         </>
     )

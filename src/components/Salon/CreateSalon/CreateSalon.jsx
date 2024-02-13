@@ -9,6 +9,9 @@ import api from "../../../redux/api/Api"
 import { useNavigate } from 'react-router-dom'
 import { FaArrowDown } from "react-icons/fa6";
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const CreateSalon = () => {
 
     const [latitude, setLatitude] = useState(null);
@@ -671,6 +674,8 @@ const CreateSalon = () => {
 
                     </div>
                 </div>
+
+                <ToastContainer />
             </div>
         </>
     )

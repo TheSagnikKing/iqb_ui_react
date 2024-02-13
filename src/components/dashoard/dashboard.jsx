@@ -19,7 +19,20 @@ import { queueListAction } from '../../redux/actions/joinQueueAction'
 import api from "../../redux/api/Api"
 import { applySalonAction, salonStatusOnlineAction } from '../../redux/actions/salonAction'
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const Dashboard = () => {
+
+    const LoggedInMiddleware = useSelector(state => state.LoggedInMiddleware)
+
+    const salonid = Number(LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId);
+
+    const dispatch = useDispatch()
+
+    const salonId = Number(LoggedInMiddleware?.user && LoggedInMiddleware.user[0].salonId);
+
+    const QueueListcontrollerRef = useRef(null);
 
     const [checkbox, setCheckbox] = useState(false)
     const [checkbox2, setCheckbox2] = useState(false)
@@ -32,10 +45,6 @@ const Dashboard = () => {
         setCheckbox(!checkbox)
     }
 
-    const LoggedInMiddleware = useSelector(state => state.LoggedInMiddleware)
-
-    const salonid = Number(LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId);
-
     const MemoizedChart = useMemo(() => {
         return (
             <Suspense fallback={<div>Loading...</div>}>
@@ -44,11 +53,6 @@ const Dashboard = () => {
         );
     }, []);
 
-    const dispatch = useDispatch()
-
-    const salonId = Number(LoggedInMiddleware?.user && LoggedInMiddleware.user[0].salonId);
-
-    const QueueListcontrollerRef = useRef(null);
 
     useEffect(() => {
 
@@ -72,47 +76,40 @@ const Dashboard = () => {
 
     const queueList = useSelector(state => state.queueList)
 
-    // const formatDate = (date) => {
-    //     const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
-    //     const formattedDate = date.toLocaleDateString(undefined, options);
-
-    //     // Extract components and rearrange them
-    //     const [month, day, year] = formattedDate.split('/');
-    //     return `${year}-${month}-${day}`;
-    // };
-
-    // const formattedDate = formatDate(currentDate);
-
-
-
-    // console.log(formattedDate)
-
     const [appointmentData, setAppointmentData] = useState([])
     const [appointmentLoader, setAppointmentLoader] = useState(false)
 
     useEffect(() => {
-        if (currentDate) {
-            const appointfnc = async () => {
-                setAppointmentLoader(true)
-                const { data } = await api.post("/api/advertisement/getDashboardAppointmentList", {
-                    salonId,
-                    appointmentDate: currentDate
-                })
 
-                setAppointmentData(data)
-                setAppointmentLoader(false)
+            if (currentDate) {
+                try {
+                    const appointfnc = async () => {
+                        setAppointmentLoader(true)
+                        const { data } = await api.post("/api/advertisement/getDashboardAppointmentList", {
+                            salonId,
+                            appointmentDate: currentDate
+                        })
+        
+                        setAppointmentData(data)
+                        setAppointmentLoader(false)
+                    }
+        
+                    appointfnc()
+                } catch (error) {
+                    console.log(error?.response?.data?.message)
+                }
+                
             }
+        
+    }, [salonId, currentDate, setAppointmentData, setAppointmentLoader])
 
-            appointfnc()
-        }
-
-    }, [salonId, currentDate, setAppointmentData])
-    // console.log("ss", appointmentData)
 
     const [advertisementList, setAdvertisementList] = useState([])
 
 
     const controllerRef = useRef(new AbortController());
+
+    // const [getAdvertisementError, setGetAdvertisementError] = useState("")
 
     useEffect(() => {
         const getAdvertisementData = async () => {
@@ -120,7 +117,6 @@ const Dashboard = () => {
 
                 const controller = new AbortController();
                 controllerRef.current = controller;
-
 
                 const { data } = await api.post(
                     `/api/advertisement/getAdvertisements`,
@@ -134,7 +130,8 @@ const Dashboard = () => {
                     console.log('Advertisement Request Cancelled')
                 } else {
                     // Handle the error here, e.g., log it or show a user-friendly message
-                    console.error('Error fetching advertisement data:', error);
+                    // console.error('Error fetching advertisement data:', error);
+                    
                 }
 
             }
@@ -158,8 +155,6 @@ const Dashboard = () => {
     useEffect(() => {
         const getSalonfnc = async () => {
             try {
-
-
                 const controller = new AbortController()
                 SalonListControllerRef.current = controller
 
@@ -172,7 +167,7 @@ const Dashboard = () => {
                     console.log('Advertisement Request Cancelled')
                 } else {
                     // Handle the error here, e.g., log it or show a user-friendly message
-                    console.error('Error fetching advertisement data:', error);
+                    
                 }
             }
 
@@ -207,7 +202,7 @@ const Dashboard = () => {
                     console.log('Advertisement Request Cancelled')
                 } else {
                     // Handle the error here, e.g., log it or show a user-friendly message
-                    console.error('Error fetching advertisement data:', error);
+                   
                 }
             }
 
@@ -253,7 +248,7 @@ const Dashboard = () => {
     }
 
 
-    console.log("Appointmenttttttttt", appointmentData)
+    // console.log("Appointmenttttttttt", appointmentData)
 
     return (
         <div className="right_main_div">
@@ -348,19 +343,6 @@ const Dashboard = () => {
                                     >Add Customer</Link></p>
                                 </div>
 
-
-                                {/* <div className="btn_one">
-                                        <div>
-                                            <FaUsers />
-                                        </div>
-
-                                        <p>Join Queue</p>
-                                    </div> */}
-
-                                {/* <div className="last_item">
-                                        <BsThreeDotsVertical />
-                                    </div> */}
-
                             </div>
                         </div>
 
@@ -393,13 +375,13 @@ const Dashboard = () => {
                             </div>
 
                             {
-                                queueList?.loading == true ? <h1>loading...</h1> : queueList?.response?.slice(0, 5).map((c, i) => (
+                                queueList?.loading == true ? <h1>loading...</h1> : queueList?.response?.length > 0 ? queueList?.response?.slice(0, 5).map((c, i) => (
                                     <div className='dashboard-quelist-content' key={i}>
                                         <p>{c.name}</p>
                                         <p>{c.barberName}</p>
                                         <p>{c.qPosition}</p>
                                     </div>
-                                ))
+                                )) : <h2>No QueueList Available</h2>
                             }
 
                         </div>
@@ -433,7 +415,7 @@ const Dashboard = () => {
                                     <b>Services</b>
                                 </div>
                                 {
-                                    appointmentLoader == true ? <h1>loading...</h1> : appointmentData?.response?.map((ap, i) => (
+                                    appointmentLoader == true ? <h1>loading...</h1> :  appointmentData?.response?.length > 0 ? appointmentData?.response?.map((ap, i) => (
                                         <div className='appoin-content-div' key={i}>
                                             <p>{ap.timeSlots}</p>
                                             <p>{ap.customerName}</p>
@@ -445,7 +427,7 @@ const Dashboard = () => {
                                                 
                                             </p>
                                         </div>
-                                    ))
+                                    )) : <h2>No Appointments Present</h2>
                                 }
 
                             </div>
@@ -496,7 +478,7 @@ const Dashboard = () => {
                     </div>
                 </div>
             </>}
-
+            <ToastContainer />
         </div>
     )
 }

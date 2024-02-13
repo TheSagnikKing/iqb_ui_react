@@ -9,6 +9,9 @@ import { barberVerifyEmailAction, updateBarberAccountDetailsAction } from '../..
 import { FaCheck } from 'react-icons/fa'
 import { ImCross } from 'react-icons/im'
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const BarberUpdateProfile = () => {
 
       // const [username, setUsername] = useState("")
@@ -171,6 +174,8 @@ const BarberUpdateProfile = () => {
                     </div>
 
                 </div>
+
+                <ToastContainer />
             </div>
     </>
   )

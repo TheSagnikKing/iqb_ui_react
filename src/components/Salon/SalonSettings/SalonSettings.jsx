@@ -7,6 +7,9 @@ import { salonSettingsUpdateAction } from '../../../redux/actions/salonAction'
 import api from "../../../redux/api/Api"
 import { useNavigate } from 'react-router-dom'
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const SalonSettings = () => {
     const [startTime, setStartTime] = useState("")
     const [endTime, setEndTime] = useState("")
@@ -174,6 +177,8 @@ const SalonSettings = () => {
                         }</button>
                     </div>
                 </div>
+
+                <ToastContainer />
             </div>
         </>
     )
