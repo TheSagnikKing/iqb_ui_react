@@ -69,6 +69,11 @@ const UpdateSalon = () => {
     const [contactTel, setContactTel] = useState("")
     const [salonType, setSalonType] = useState("")
     const [webLink, setWebLink] = useState("")
+    const [fbLink, setFbLink] = useState("")
+    const [twitterLink, setTwitterLink] = useState("")
+    const [instraLink, setInstraLink] = useState("")
+
+
     const [services, setServices] = useState([])
 
     const [serviceName, setServiceName] = useState("")
@@ -87,39 +92,6 @@ const UpdateSalon = () => {
 
     const currentEditlocation = useLocation()
     const currentEditSalonId = currentEditlocation?.state?.salonId
-
-    const submitHandler = () => {
-        const salonData = {
-            adminEmail: LoggedInMiddleware?.user && LoggedInMiddleware.user[0].email, salonName, salonEmail, address, city, location: {
-                type: "Point",
-                coordinates: {
-                    longitude: Number(longitude),
-                    latitude: Number(latitude)
-                }
-                //salonId
-            }, country, postCode, contactTel, salonType, webLink, services, salonId: Number(currentEditSalonId)
-        }
-        console.log(salonData)
-        dispatch(updateSalonAction(salonData, navigate))
-
-        // setSalonName("")
-        // setAddress("")
-        // setCity("")
-        // setLongitude(0)
-        // setLatitude(0)
-        // setCountry("")
-        // setPostCode("")
-        // setContactTel("")
-        // setSalonType("")
-        // setWebLink("")
-        // setServices([])
-        // setServiceName("")
-        // setServiceDesc("")
-        // setServicePrice("")
-        // setSalonEmail("")
-
-    }
-
 
     const addServiceHandler = () => {
 
@@ -207,11 +179,16 @@ const UpdateSalon = () => {
                     setContactTel(data?.response?.salonInfo?.contactTel)
                     // setSalonType(data?.response?.salonInfo?.adminEmail)
                     setWebLink(data?.response?.salonInfo?.webLink)
+                    setFbLink(data?.response?.salonInfo?.fbLink)
+                    setInstraLink(data?.response?.salonInfo?.instraLink)
+                    setTwitterLink(data?.response?.salonInfo?.twitterLink)
+
                     setPostCode(data?.response?.salonInfo?.postCode)
                     setServices(data?.response?.salonInfo?.services)
                     setCurrentSalonLogo(data?.response?.salonInfo?.salonLogo[0]?.url)
                     setCurrentSalonLogoId(data?.response?.salonInfo?.salonLogo[0]?.public_id)
                     setCurrentSalonLogoMongoId(data?.response?.salonInfo?.salonLogo[0]?._id)
+                    setSalonType(data?.response?.salonInfo?.salonType)
                 }
             } catch (error) {
                 if (error.name === 'AbortError' || error.code === 'ECONNABORTED') {
@@ -490,6 +467,40 @@ const UpdateSalon = () => {
         setServiceDrop(false)
     }
 
+
+    
+    const submitHandler = () => {
+        const salonData = {
+            adminEmail: LoggedInMiddleware?.user && LoggedInMiddleware.user[0].email, salonName, salonEmail, address, city, location: {
+                type: "Point",
+                coordinates: {
+                    longitude: Number(longitude),
+                    latitude: Number(latitude)
+                }
+                //salonId
+            }, country, postCode, contactTel, salonType, webLink,fbLink,instraLink,twitterLink, services, salonId: Number(currentEditSalonId)
+        }
+        console.log(salonData)
+        dispatch(updateSalonAction(salonData, navigate))
+
+        // setSalonName("")
+        // setAddress("")
+        // setCity("")
+        // setLongitude(0)
+        // setLatitude(0)
+        // setCountry("")
+        // setPostCode("")
+        // setContactTel("")
+        // setSalonType("")
+        // setWebLink("")
+        // setServices([])
+        // setServiceName("")
+        // setServiceDesc("")
+        // setServicePrice("")
+        // setSalonEmail("")
+
+    }
+
     return (
         <>
             <AdminLayout />
@@ -617,6 +628,8 @@ const UpdateSalon = () => {
                             <label htmlFor="">Facebook Link</label>
                             <input
                                 type="text"
+                                value={fbLink}
+                                onChange={(e) => setFbLink(e.target.value)}
                             />
                         </div>
 
@@ -629,6 +642,8 @@ const UpdateSalon = () => {
                             <label htmlFor="">Instagram Link</label>
                             <input
                                 type="text"
+                                value={instraLink}
+                                onChange={(e) => setInstraLink(e.target.value)}
                             />
                         </div>
 
@@ -636,6 +651,8 @@ const UpdateSalon = () => {
                             <label htmlFor="">Twitter Link</label>
                             <input
                                 type="text"
+                                value={twitterLink}
+                                onChange={(e) => setTwitterLink(e.target.value)}
                             />
                         </div>
 

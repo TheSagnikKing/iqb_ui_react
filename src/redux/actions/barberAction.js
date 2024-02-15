@@ -31,6 +31,10 @@ export const barberListAction = (salonId,setModel1,setModel2barber,setModel2) =>
             type:GET_BARBERLIST_FAIL,
             error: error.response
         })
+
+        toast.error(error?.response?.data?.message, {
+            position: "top-right"
+        });
     }
 }
 
@@ -107,6 +111,10 @@ export const getbarberServicesbyBarberIdAction = (barberId,setModelservices) => 
             type:GET_BARBER_SERVICES_FAIL,
             payload: error.response.data
         })
+
+        toast.error(error?.response?.data?.message, {
+            position: "top-right"
+        });
     }
 }
 
@@ -206,7 +214,10 @@ export const getBarberByMultipleServicesAction = (salonId,serviceIds,setModel2ba
             payload: error.response.data
         })
 
-        console.log(error)
+        toast.error(error?.response?.data?.message, {
+            position: "top-right"
+        })
+        setfetchSelectedSearch(false)
     }
 }
 

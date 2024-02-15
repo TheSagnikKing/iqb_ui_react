@@ -132,7 +132,6 @@ const Kyosks = () => {
         if (confirm) {
             console.log(queuedata)
             dispatch(singleJoinQueueAction(queuedata, setSelectedService, navigate))
-            setName("")
         }
 
     }
@@ -238,7 +237,7 @@ const Kyosks = () => {
                         {
                             model1 == true ? <div className='model1'>
 
-                                {barberList?.response?.map((barber) => (
+                                {barberList?.response?.length > 0 ? barberList?.response?.map((barber) => (
                                     <div key={barber._id}>
                                         <div >
                                             <div>
@@ -283,7 +282,7 @@ const Kyosks = () => {
                                         </div>
 
                                     </div>
-                                ))}
+                                )) : <h1>No barber Available or Barber is not Online</h1>}
 
 
                             </div> : <div></div>

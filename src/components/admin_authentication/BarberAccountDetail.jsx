@@ -10,7 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const BarberAccountDetail = () => {
 
-    const [username, setUsername] = useState("")
+    const [nickName, setNickName] = useState("")
     const [mobileNumber, setMobileNumber] = useState("")
     const [name, setName] = useState("")
     const [gender, setGender] = useState("male")
@@ -23,7 +23,7 @@ const BarberAccountDetail = () => {
 
     const submitHandler = () => {
         //email authentication  theke asbe
-        const profiledata = {email:LoggedInMiddleware?.user && LoggedInMiddleware?.user[0]?.email,mobileNumber,name,gender,dateOfBirth:dob,salonId:LoggedInMiddleware?.user && LoggedInMiddleware?.user[0]?.salonId};
+        const profiledata = {email:LoggedInMiddleware?.user && LoggedInMiddleware?.user[0]?.email,mobileNumber,name,gender,dateOfBirth:dob,salonId:LoggedInMiddleware?.user && LoggedInMiddleware?.user[0]?.salonId,nickName};
 
         // const profiledata = {email:"sagniknandy27@gmail.com",mobileNumber,name,gender,dateOfBirth:dob,salonId:LoggedInMiddleware?.user[0]?.salonId,userName:username};
         dispatch(updateBarberSignupAccountDetailsAction(navigate,profiledata))
@@ -41,7 +41,7 @@ const BarberAccountDetail = () => {
     return (
             <div className='admin_account_detail_container'>
                 <div>
-                    <h2>Fill Your Barber Account Details</h2>
+                    <h1>Fill Your Barber Account Details</h1>
                 </div>
                 <div className='admin_account_detail'>
 
@@ -53,16 +53,16 @@ const BarberAccountDetail = () => {
                     </div> */}
 
                     <div>
-                        <label htmlFor="">User Name</label>
+                        <h2 htmlFor="">Nick Name</h2>
                         <input
                             type="text"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
+                            value={nickName}
+                            onChange={(e) => setNickName(e.target.value)}
                         />
                     </div>
 
                     <div>
-                        <label htmlFor="">Mobile Number</label>
+                        <h2 htmlFor="">Mobile Number</h2>
                         <input
                             type="text"
                             value={mobileNumber}
@@ -71,7 +71,7 @@ const BarberAccountDetail = () => {
                     </div>
 
                     <div>
-                        <label htmlFor="">Name</label>
+                        <h2 htmlFor="">Name</h2>
                         <input
                             type="text"
                             value={name}
@@ -90,7 +90,7 @@ const BarberAccountDetail = () => {
                     </div>
 
                     <div>
-                        <label htmlFor="">Date of Birth</label>
+                        <h2 htmlFor="">Date of Birth</h2>
                         <input
                             type="date"
                             value={dob}

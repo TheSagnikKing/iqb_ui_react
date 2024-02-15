@@ -144,6 +144,10 @@ export const getAllSalonServicesAction = (salonid,setModel1,setModelservices,set
             type:GET_ALL_SALON_SERVICES_FAIL,
             payload: error.response.data
         })
+
+        toast.error(error?.response?.data?.message, {
+            position: "top-right"
+        });
     }
 }
 

@@ -32,30 +32,33 @@ const SalonList = () => {
 
     useEffect(() => {
         //Admin emailer value loggin korar por theke asbe akhon static ache
-        const fetchSalons = async () => {
-            try {
-
-                const controller = new AbortController();
-                controllerRef.current = controller;
-
-
-                // arghyahimanstech@gmail.com 
-                const { data } = await api.get(`https://iqb-backend2.onrender.com/api/salon/getAllSalonsByAdminEmail?adminEmail=${currentAdminEmail} `,{ signal: controller.signal })
-                setSalonList(data)
-                setLoading(false)
-            } catch (error) {
-                if (error?.response?.data?.message == "Refresh Token not present.Please Login Again") {
-                    localStorage.setItem("userLoggedIn", "false")
-                    navigate("/admin-signin")
-                }else{
-                    toast.error(error?.response?.data?.message, {
-                        position: "top-right"
-                      });
+        if(currentAdminEmail){
+            const fetchSalons = async () => {
+                try {
+    
+                    const controller = new AbortController();
+                    controllerRef.current = controller;
+    
+    
+                    // arghyahimanstech@gmail.com 
+                    const { data } = await api.get(`https://iqb-backend2.onrender.com/api/salon/getAllSalonsByAdminEmail?adminEmail=${currentAdminEmail} `,{ signal: controller.signal })
+                    setSalonList(data)
+                    setLoading(false)
+                } catch (error) {
+                    if (error?.response?.data?.message == "Refresh Token not present.Please Login Again") {
+                        localStorage.setItem("userLoggedIn", "false")
+                        navigate("/admin-signin")
+                    }else{
+                        toast.error(error?.response?.data?.message, {
+                            position: "top-right"
+                          });
+                    }
                 }
             }
+    
+            fetchSalons()
         }
-
-        fetchSalons()
+        
 
         return () => {
             controllerRef.current.abort();

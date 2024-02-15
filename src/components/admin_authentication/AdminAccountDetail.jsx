@@ -23,7 +23,7 @@ const AdminAccountDetail = () => {
 
     const submitHandler = () => {
         //email authentication  theke asbe
-        const profiledata = { email: LoggedInMiddleware?.user[0]?.email, mobileNumber, name, gender, dateOfBirth: dob, salonId: LoggedInMiddleware?.user[0]?.salonId, userName: username };
+        const profiledata = { email: LoggedInMiddleware?.user[0]?.email, mobileNumber, name, gender, dateOfBirth: dob, salonId: LoggedInMiddleware?.user[0]?.salonId};
 
         dispatch(updateAdminAccountDetailsAction(navigate, profiledata))
     }

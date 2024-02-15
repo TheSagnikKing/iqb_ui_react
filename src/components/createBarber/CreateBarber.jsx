@@ -91,7 +91,9 @@ const CreateBarber = () => {
     const submitHandler = () => {
         //salonid loggin admin theke 
         const barberdata = {
-            name, email, nickName, mobileNumber, dateOfBirth, salonId:Number(LoggedInMiddleware?.user && LoggedInMiddleware.user[0].salonId), barberServices: selectedService
+            name, email, nickName, mobileNumber, dateOfBirth, 
+            salonId:Number(LoggedInMiddleware?.user && LoggedInMiddleware.user[0].salonId), 
+            barberServices: selectedService
         }
 
         console.log(barberdata)

@@ -61,6 +61,10 @@ const CreateSalon = () => {
     const [contactTel, setContactTel] = useState("")
     const [salonType, setSalonType] = useState("")
     const [webLink, setWebLink] = useState("")
+    const [fbLink, setFbLink] = useState("")
+    const [twitterLink, setTwitterLink] = useState("")
+    const [instraLink, setInstraLink] = useState("")
+
     const [services, setServices] = useState([])
 
     const [serviceName, setServiceName] = useState("")
@@ -71,6 +75,7 @@ const CreateSalon = () => {
     const [startTime, setStartTime] = useState("")
     const [endTime, setEndTime] = useState("")
     const [chooseIntervalTime, setChooseIntervalTime] = useState(1)
+    
 
     const dispatch = useDispatch()
 
@@ -180,7 +185,8 @@ const CreateSalon = () => {
                     longitude: Number(longitude),
                     latitude: Number(latitude)
                 }
-            }, country, postCode, contactTel, salonType, webLink, services, image, appointmentSettings: { startTime, endTime, intervalInMinutes: Number(chooseIntervalTime) }
+            }, country, postCode, contactTel, salonType, webLink,fbLink,instraLink,twitterLink, services, image, 
+            appointmentSettings: { startTime, endTime, intervalInMinutes: Number(chooseIntervalTime) }
         }
 
         console.log(salonData)
@@ -519,6 +525,8 @@ const CreateSalon = () => {
                             <label htmlFor="">Facebook Link</label>
                             <input
                                 type="text"
+                                value={fbLink}
+                                onChange={(e) => setFbLink(e.target.value)}
                             />
                         </div>
 
@@ -526,6 +534,8 @@ const CreateSalon = () => {
                             <label htmlFor="">Instagram Link</label>
                             <input
                                 type="text"
+                                value={instraLink}
+                                onChange={(e) => setInstraLink(e.target.value)}
                             />
                         </div>
 
@@ -533,6 +543,8 @@ const CreateSalon = () => {
                             <label htmlFor="">Twitter Link</label>
                             <input
                                 type="text"
+                                value={twitterLink}
+                                onChange={(e) => setTwitterLink(e.target.value)}
                             />
                         </div>
 

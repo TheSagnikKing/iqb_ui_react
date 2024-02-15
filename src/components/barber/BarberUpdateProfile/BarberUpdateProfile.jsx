@@ -19,6 +19,7 @@ const BarberUpdateProfile = () => {
       const [name, setName] = useState("")
       const [gender, setGender] = useState("")
       const [dob, setDob] = useState("")
+      const [nickName,setNickName] = useState("")
   
       const dispatch = useDispatch()
   
@@ -29,7 +30,7 @@ const BarberUpdateProfile = () => {
           const profiledata = {
               email: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].email,
               salonId: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId,
-              // username,
+              nickName,
               mobileNumber,
               name,
               gender
@@ -45,7 +46,7 @@ const BarberUpdateProfile = () => {
   
   
       useEffect(() => {
-          // setUsername(LoggedInMiddleware?.user && LoggedInMiddleware?.user[0]?.userName)
+          setNickName(LoggedInMiddleware?.user && LoggedInMiddleware?.user[0]?.nickName)
           setMobileNumber(LoggedInMiddleware?.user && LoggedInMiddleware?.user[0]?.mobileNumber)
           setName(LoggedInMiddleware?.user && LoggedInMiddleware?.user[0]?.name)
           setGender(LoggedInMiddleware?.user && LoggedInMiddleware?.user[0]?.gender)
@@ -116,14 +117,14 @@ const BarberUpdateProfile = () => {
                         
                     </div>
 
-                    {/* <div>
-                        <label htmlFor="">User Name</label>
+                    <div>
+                        <h2 htmlFor="">Nick Name</h2>
                         <input
                             type="text"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
+                            value={nickName}
+                            onChange={(e) => setNickName(e.target.value)}
                         />
-                    </div> */}
+                    </div>
 
                     <div>
                         <h2>Mobile Number</h2>
