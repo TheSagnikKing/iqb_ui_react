@@ -70,9 +70,9 @@ function Month() {
 
                 <h2 style={{marginBottom:"2rem"}}>Appointment</h2>
 
-                <Link to="/appoinment/createappointment">Create</Link>
+                <Link to="/appoinment/createappointment" style={{background:"#f1f6fc", border:"1px solid black",color:"black", fontSize:"1.4rem",padding:"0.8rem 1.2rem"}}>Create</Link>
 
-                <div className='demo-app-main'>
+                <div className='demo-app-main' style={{marginTop:"2rem"}}>
                     <FullCalendar
                     plugins={[dayGridPlugin, interactionPlugin]}
                     initialView='dayGridMonth'

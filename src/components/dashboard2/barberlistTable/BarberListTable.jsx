@@ -297,7 +297,7 @@ const BarberListTable = () => {
                     <button style={{ background: "#f16fc", width: "1px", height: "1px" }}></button>
                     <div></div>
 
-                    <div onClick={createBarberNavigate}>
+                    <div onClick={createBarberNavigate} style={{cursor:"point"}}>
                         <GrAdd />
                     </div>
                 </div>

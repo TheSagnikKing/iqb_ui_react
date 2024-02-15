@@ -110,7 +110,7 @@ const CreateBarber = () => {
 
             <AdminLayout />
             <div className='crt-wrapper'>
-                <p>Create Barber</p>
+                <h1>Create Barber</h1>
 
                 <div className='crt-form'>
                     <div>
@@ -237,7 +237,7 @@ const CreateBarber = () => {
                             </div>
                         }
 
-                        <p>Your Services</p>
+                        <h2>Your Services</h2>
                         <div className='barber-dropdown-select'>
                             {
                                 selectedService ? selectedService.map((ser, index) => (

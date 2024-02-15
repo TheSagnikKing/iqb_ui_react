@@ -75,7 +75,7 @@
 .cst-barberitem {
     background-color: #F1F6FC;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 0.2fr 0.2fr 0.2fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 0.2fr 0.2fr 0.2fr;
     gap: 1.3rem; /* 2px converted to rem */
     padding: 1rem; /* 10px converted to rem */
     border-radius: 1rem; /* 10px converted to rem */
