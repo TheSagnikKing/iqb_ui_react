@@ -11,7 +11,7 @@ export const AdminRegisterAction = (signupData,navigate) => async (dispatch) => 
         });
 
         const { data } = await api.post("/api/admin/register", signupData);
-
+        
         dispatch({
             type: ADMIN_SIGNUP_SUCCESS,
             payload: data
@@ -264,10 +264,13 @@ export const updateAdminAccountDetailsAction = (navigate,profiledata) => async (
         const { data } = await api.put(`https://iqb-backend2.onrender.com/api/admin/updateAdminAcoountDetails`,profiledata);
 
         console.log(data)
+
         dispatch({
             type: UPDATE_ADMIN_ACCOUNT_DETAILS_SUCCESS,
             payload: data
         });
+
+        localStorage.setItem("userLoggedIn","true")
         navigate("/admin-dashboard")
     } catch (error) {
 

@@ -21,7 +21,6 @@ const BarberResetPassword = () => {
     }
 
     return (
-        <>
             <main className="resetpassword">
                 <div className="left">
                     <img src="https://img.freepik.com/free-vector/computer-login-concept-illustration_114360-7962.jpg?w=2000"
@@ -60,7 +59,6 @@ const BarberResetPassword = () => {
                     </div>
                 </div>
             </main>
-        </>
     )
 }
 

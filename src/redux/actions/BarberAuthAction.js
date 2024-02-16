@@ -244,6 +244,8 @@ export const updateBarberSignupAccountDetailsAction = (navigate,profiledata) => 
             type: BARBER_ACCOUNT_DETAILS_SUCCESS,
             payload: data
         });
+
+        localStorage.setItem("barberLoggedIn","true")
         navigate("/barber-dashboard")
     } catch (error) {
 

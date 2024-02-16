@@ -29,6 +29,7 @@ const AdminAccountDetail = () => {
     }
 
     const skipHandler = () => {
+        localStorage.setItem("userLoggedIn","true")
         navigate("/admin-dashboard")
     }
 

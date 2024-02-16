@@ -32,6 +32,7 @@ const BarberAccountDetail = () => {
     }
 
     const skipHandler = () => {
+        localStorage.setItem("barberLoggedIn","true")
         navigate("/barber-dashboard")
     }
 
