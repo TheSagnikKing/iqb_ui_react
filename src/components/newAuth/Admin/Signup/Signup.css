@@ -6,10 +6,6 @@
     background-color: white;
 }
 
-.right_inner_container {
-    width: 400px !important;
-}
-
 .left{
     border-right: 1px solid rgba(128, 128, 128, 0.485);
     width: 100%;
@@ -19,10 +15,6 @@
 .left img{
     height: 100%;
     width: 100%;
-}
-
-.divsix{
-    margin-top: 10px;
 }
 
 .right{
@@ -35,7 +27,7 @@
 
 .right_inner_container{
     height: auto;
-    width: 45%;
+    width: 400px !important;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
@@ -46,7 +38,6 @@
     flex-direction: column;
     gap: .7rem;
 }
-
 
 .input_container{
     position: relative;
@@ -155,7 +146,6 @@
 
 
 .divthree{
-    width: 100%;
     height: 50px;
     background-color: black;
     color: white;
@@ -163,7 +153,6 @@
     border: none;
     outline: none;
     cursor: pointer;
-    margin-bottom: 10px;
 }
 .divfour{
     display: flex;
@@ -187,7 +176,6 @@
     display: flex;
     justify-content: space-between;
     gap: 1rem;
-    margin-top: 10px;
 }
 
 .divfive div:nth-child(1){
@@ -294,8 +282,6 @@
 }
 
 
-/* tab  */
-/* Style the tab */
 .tab {
     overflow: hidden;
     border: 1px solid #ccc;
@@ -321,13 +307,7 @@
   
   /* Create an active/current tablink class */
   .active3 {
-    background-color: blue;
-    color: #fff;
-  }
-
-  .active4 {
-    background-color: orange;
-    color: #fff;
+    background-color: #ccc;
   }
   
 .tablinks{
@@ -365,6 +345,17 @@
     width: 15px;
   }
 
+  .active3 {
+    background-color: blue;
+    color: #fff;
+  }
+
+  .active4 {
+    background-color: orange;
+    color: #fff;
+  }
+
+
   @media((min-width:0px) and (max-width:400px)){
     .right_inner_container{
         width: 80% !important;
@@ -375,7 +366,6 @@
     }
 
     .signup{
-        display: grid !important;
         grid-template-columns: 1fr !important;
     }
 

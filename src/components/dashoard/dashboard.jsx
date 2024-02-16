@@ -24,6 +24,9 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const Dashboard = () => {
 
+    const LoggedOutMiddleware = useSelector(state => state.LoggedOutMiddleware)
+    const { error } = LoggedOutMiddleware
+
     const LoggedInMiddleware = useSelector(state => state.LoggedInMiddleware)
 
     const salonid = Number(LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId);
@@ -81,26 +84,26 @@ const Dashboard = () => {
 
     useEffect(() => {
 
-            if (currentDate) {
-                try {
-                    const appointfnc = async () => {
-                        setAppointmentLoader(true)
-                        const { data } = await api.post("/api/advertisement/getDashboardAppointmentList", {
-                            salonId,
-                            appointmentDate: currentDate
-                        })
-        
-                        setAppointmentData(data)
-                        setAppointmentLoader(false)
-                    }
-        
-                    appointfnc()
-                } catch (error) {
-                    console.log(error?.response?.data?.message)
+        if (currentDate) {
+            try {
+                const appointfnc = async () => {
+                    setAppointmentLoader(true)
+                    const { data } = await api.post("/api/advertisement/getDashboardAppointmentList", {
+                        salonId,
+                        appointmentDate: currentDate
+                    })
+
+                    setAppointmentData(data)
+                    setAppointmentLoader(false)
                 }
-                
+
+                appointfnc()
+            } catch (error) {
+                console.log(error?.response?.data?.message)
             }
-        
+
+        }
+
     }, [salonId, currentDate, setAppointmentData, setAppointmentLoader])
 
 
@@ -131,7 +134,7 @@ const Dashboard = () => {
                 } else {
                     // Handle the error here, e.g., log it or show a user-friendly message
                     // console.error('Error fetching advertisement data:', error);
-                    
+
                 }
 
             }
@@ -167,7 +170,7 @@ const Dashboard = () => {
                     console.log('Advertisement Request Cancelled')
                 } else {
                     // Handle the error here, e.g., log it or show a user-friendly message
-                    
+
                 }
             }
 
@@ -202,7 +205,7 @@ const Dashboard = () => {
                     console.log('Advertisement Request Cancelled')
                 } else {
                     // Handle the error here, e.g., log it or show a user-friendly message
-                   
+
                 }
             }
 
@@ -251,235 +254,235 @@ const Dashboard = () => {
     // console.log("Appointmenttttttttt", appointmentData)
 
     return (
-        <div className="right_main_div">
-            {salonid == 0 ? <div className='nosalon'>
-                <h2>No Salons. Please Create a Salon First</h2>
-                <Link to="/salon/createsalon">Create Salon</Link>
-            </div > : <>
-                <div className="right_div_top">
-                    <div className="div_left">
-                        <div style={{
-                            display: "flex",
-                            justifyContent: "space-between",
-                            marginBottom: "2rem"
-                        }}>
+            <div className="right_main_div">
+                {salonid == 0 ? <div className='nosalon'>
+                    <h2>No Salons. Please Create a Salon First</h2>
+                    <Link to="/salon/createsalon">Create Salon</Link>
+                </div > : <>
+                    <div className="right_div_top">
+                        <div className="div_left">
                             <div style={{
                                 display: "flex",
-                                gap: "1.1rem",
-                                alignItems: "center"
+                                justifyContent: "space-between",
+                                marginBottom: "2rem"
                             }}>
-                                <p>Offline</p>
-                                <label className="nav2toggle_switch" >
-                                    <input type="checkbox"
-                                        value={salonStatus}
-                                        onClick={() => salonStatusHandler()}
+                                <div style={{
+                                    display: "flex",
+                                    gap: "1.1rem",
+                                    alignItems: "center"
+                                }}>
+                                    <p>Offline</p>
+                                    <label className="nav2toggle_switch" >
+                                        <input type="checkbox"
+                                            value={salonStatus}
+                                            onClick={() => salonStatusHandler()}
 
-                                    />
-                                    <span className={`nav2slider ${salonStatus ? 'checked' : ''}`}
-                                        style={{
-                                            background: salonStatus ? "#4CBB17" : "",
-                                            width: "4rem"
-                                        }}
-                                    ></span>
-                                </label>
-                                <p>Online</p>
-                            </div>
-                        </div>
-
-                        <div className="div_left_head">
-
-
-                            <p>Advertisement</p>
-                            <div className="btn_box">
-                                <div className="btn_one">
-                                    {/* <div>
-                                            <IoMdAdd />
-                                        </div> */}
-
-                                    <p><Link to="/advertisement">Add New Post</Link></p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="div_left_images">
-
-                            <div className="img_one">
-                                <img src={advertisementList && advertisementList[0]?.url ? advertisementList[0]?.url : "https://png.pngtree.com/png-clipart/20230917/original/pngtree-no-image-available-icon-flatvector-illustration-pic-design-profile-vector-png-image_12323913.png"} alt="" />
-                            </div>
-
-                            <div className="img_two">
-
-                                <div>
-                                    <img src={advertisementList && advertisementList[1]?.url ? advertisementList[1]?.url : "https://png.pngtree.com/png-clipart/20230917/original/pngtree-no-image-available-icon-flatvector-illustration-pic-design-profile-vector-png-image_12323913.png"} alt="" />
-                                </div>
-
-                                <div>
-                                    <img src={advertisementList[2]?.url ? advertisementList[2]?.url : "https://png.pngtree.com/png-clipart/20230917/original/pngtree-no-image-available-icon-flatvector-illustration-pic-design-profile-vector-png-image_12323913.png"} alt="" />
-                                </div>
-
-                            </div>
-
-                            <div className="img_three">
-                                <img src={advertisementList[3]?.url ? advertisementList[3]?.url : "https://png.pngtree.com/png-clipart/20230917/original/pngtree-no-image-available-icon-flatvector-illustration-pic-design-profile-vector-png-image_12323913.png"} alt="" />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="div_right">
-                        <div className="div_right_head">
-                            <p>Queue List</p>
-
-                            <div className="btn_box">
-
-                                <div className="btn_one">
-                                    {/* <div>
-                                            <IoMdAdd />
-                                        </div> */}
-
-                                    <p><Link to="/queue"
-                                        style={{
-                                            fontSize: "1.1rem"
-                                        }}
-                                    >Add Customer</Link></p>
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div className="div_right_third">
-
-                            <div>
-                                <p style={{
-                                    marginTop: "1rem"
-                                }}><Link to="/queue" style={{
-                                    fontSize: "1.1rem"
-                                }}>See All</Link></p>
-                                <div>
-                                    <BiChevronRight />
+                                        />
+                                        <span className={`nav2slider ${salonStatus ? 'checked' : ''}`}
+                                            style={{
+                                                background: salonStatus ? "#4CBB17" : "",
+                                                width: "4rem"
+                                            }}
+                                        ></span>
+                                    </label>
+                                    <p>Online</p>
                                 </div>
                             </div>
 
-                        </div>
+                            <div className="div_left_head">
 
 
-                        <div className='dashboard-quelist'
+                                <p>Advertisement</p>
+                                <div className="btn_box">
+                                    <div className="btn_one">
+                                        {/* <div>
+                                        <IoMdAdd />
+                                    </div> */}
 
-                            style={{
-                                overflow: "scroll",
-                                height: "35rem"
-                            }}>
-                            <div className='dashboard-quelist-content-head'>
-                                <p>Customer Name</p>
-                                <p>Barber Name</p>
-                                <p>Queue Position</p>
-                            </div>
-
-                            {
-                                queueList?.loading == true ? <h1>loading...</h1> : queueList?.response?.length > 0 ? queueList?.response?.slice(0, 5).map((c, i) => (
-                                    <div className='dashboard-quelist-content' key={i}>
-                                        <p>{c.name}</p>
-                                        <p>{c.barberName}</p>
-                                        <p>{c.qPosition}</p>
+                                        <p><Link to="/advertisement">Add New Post</Link></p>
                                     </div>
-                                )) : <h2>No QueueList Available</h2>
-                            }
-
-                        </div>
-
-                    </div>
-                </div>
-
-                <div className="right_div_end">
-
-                    <div className="right_div_end_left">
-                        <div className="right_div_end_head">
-                            <p>Calender</p>
-
-                            <div className="btn_box">
-                                <button><Link to="/appoinment">Appoinments</Link></button>
-                                {/* <button>Reservation</button> */}
-                            </div>
-                        </div>
-
-
-                        <div className="right_div_end_main">
-                            <div className="main_left">
-                                <Calender value={currentDate} setCurrentDate={setCurrentDate} />
-                            </div>
-
-                            <div className="main_right">
-                                <div className='appoin-content-head'>
-                                    <b>Timeslots</b>
-                                    <b>Customer Name</b>
-                                    <b>Barber Name</b>
-                                    <b>Services</b>
                                 </div>
+                            </div>
+
+                            <div className="div_left_images">
+
+                                <div className="img_one">
+                                    <img src={advertisementList && advertisementList[0]?.url ? advertisementList[0]?.url : "https://png.pngtree.com/png-clipart/20230917/original/pngtree-no-image-available-icon-flatvector-illustration-pic-design-profile-vector-png-image_12323913.png"} alt="" />
+                                </div>
+
+                                <div className="img_two">
+
+                                    <div>
+                                        <img src={advertisementList && advertisementList[1]?.url ? advertisementList[1]?.url : "https://png.pngtree.com/png-clipart/20230917/original/pngtree-no-image-available-icon-flatvector-illustration-pic-design-profile-vector-png-image_12323913.png"} alt="" />
+                                    </div>
+
+                                    <div>
+                                        <img src={advertisementList[2]?.url ? advertisementList[2]?.url : "https://png.pngtree.com/png-clipart/20230917/original/pngtree-no-image-available-icon-flatvector-illustration-pic-design-profile-vector-png-image_12323913.png"} alt="" />
+                                    </div>
+
+                                </div>
+
+                                <div className="img_three">
+                                    <img src={advertisementList[3]?.url ? advertisementList[3]?.url : "https://png.pngtree.com/png-clipart/20230917/original/pngtree-no-image-available-icon-flatvector-illustration-pic-design-profile-vector-png-image_12323913.png"} alt="" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="div_right">
+                            <div className="div_right_head">
+                                <p>Queue List</p>
+
+                                <div className="btn_box">
+
+                                    <div className="btn_one">
+                                        {/* <div>
+                                        <IoMdAdd />
+                                    </div> */}
+
+                                        <p><Link to="/queue"
+                                            style={{
+                                                fontSize: "1.1rem"
+                                            }}
+                                        >Add Customer</Link></p>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div className="div_right_third">
+
+                                <div>
+                                    <p style={{
+                                        marginTop: "1rem"
+                                    }}><Link to="/queue" style={{
+                                        fontSize: "1.1rem"
+                                    }}>See All</Link></p>
+                                    <div>
+                                        <BiChevronRight />
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <div className='dashboard-quelist'
+
+                                style={{
+                                    overflow: "scroll",
+                                    height: "35rem"
+                                }}>
+                                <div className='dashboard-quelist-content-head'>
+                                    <p>Customer Name</p>
+                                    <p>Barber Name</p>
+                                    <p>Queue Position</p>
+                                </div>
+
                                 {
-                                    appointmentLoader == true ? <h1>loading...</h1> :  appointmentData?.response?.length > 0 ? appointmentData?.response?.map((ap, i) => (
-                                        <div className='appoin-content-div' key={i}>
-                                            <p>{ap.timeSlots}</p>
-                                            <p>{ap.customerName}</p>
-                                            <p>{ap.barberName}</p>
-                                            <p>
-                                                {ap.appointmentServices.map((service, index) => (
-                                                    <span key={index}>{service}  &nbsp;</span>
-                                                ))}
-                                                
-                                            </p>
+                                    queueList?.loading == true ? <h1>loading...</h1> : queueList?.response?.length > 0 ? queueList?.response?.slice(0, 5).map((c, i) => (
+                                        <div className='dashboard-quelist-content' key={i}>
+                                            <p>{c.name}</p>
+                                            <p>{c.barberName}</p>
+                                            <p>{c.qPosition}</p>
                                         </div>
-                                    )) : <h2>No Appointments Present</h2>
+                                    )) : <h2>No QueueList Available</h2>
                                 }
 
                             </div>
+
                         </div>
                     </div>
 
-                    <div className="right_div_end_right">
-                        <div className="head">
-                            <p>Reports</p>
-                            <div>
-                                <FiMoreHorizontal />
-                            </div>
-                        </div>
+                    <div className="right_div_end">
 
-                        <div className="reports">
+                        <div className="right_div_end_left">
+                            <div className="right_div_end_head">
+                                <p>Calender</p>
 
-                            {
-                                reports.map((item) => {
-                                    return (
-                                        <div className="report_item" key={item.id}
-                                            style={{ backgroundColor: item.backgroundColor }}
-                                        >
-
-                                            <div className="content">
-                                                <div>
-                                                    {item.icon}
-                                                </div>
-                                                <p>{item.para}</p>
-                                            </div>
-                                        </div>
-                                    )
-                                })
-                            }
-                        </div>
-
-                        <div className="chart">
-                            <div>
-                                <h2>Completion Rate</h2>
-
-                                <div>
-                                    <p>95%</p>
-                                    <p>+2.5%</p>
+                                <div className="btn_box">
+                                    <button><Link to="/appoinment">Appoinments</Link></button>
+                                    {/* <button>Reservation</button> */}
                                 </div>
                             </div>
 
-                            <div>{MemoizedChart}</div>
+
+                            <div className="right_div_end_main">
+                                <div className="main_left">
+                                    <Calender value={currentDate} setCurrentDate={setCurrentDate} />
+                                </div>
+
+                                <div className="main_right">
+                                    <div className='appoin-content-head'>
+                                        <b>Timeslots</b>
+                                        <b>Customer Name</b>
+                                        <b>Barber Name</b>
+                                        <b>Services</b>
+                                    </div>
+                                    {
+                                        appointmentLoader == true ? <h1>loading...</h1> : appointmentData?.response?.length > 0 ? appointmentData?.response?.map((ap, i) => (
+                                            <div className='appoin-content-div' key={i}>
+                                                <p>{ap.timeSlots}</p>
+                                                <p>{ap.customerName}</p>
+                                                <p>{ap.barberName}</p>
+                                                <p>
+                                                    {ap.appointmentServices.map((service, index) => (
+                                                        <span key={index}>{service}  &nbsp;</span>
+                                                    ))}
+
+                                                </p>
+                                            </div>
+                                        )) : <h2>No Appointments Present</h2>
+                                    }
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="right_div_end_right">
+                            <div className="head">
+                                <p>Reports</p>
+                                <div>
+                                    <FiMoreHorizontal />
+                                </div>
+                            </div>
+
+                            <div className="reports">
+
+                                {
+                                    reports.map((item) => {
+                                        return (
+                                            <div className="report_item" key={item.id}
+                                                style={{ backgroundColor: item.backgroundColor }}
+                                            >
+
+                                                <div className="content">
+                                                    <div>
+                                                        {item.icon}
+                                                    </div>
+                                                    <p>{item.para}</p>
+                                                </div>
+                                            </div>
+                                        )
+                                    })
+                                }
+                            </div>
+
+                            <div className="chart">
+                                <div>
+                                    <h2>Completion Rate</h2>
+
+                                    <div>
+                                        <p>95%</p>
+                                        <p>+2.5%</p>
+                                    </div>
+                                </div>
+
+                                <div>{MemoizedChart}</div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </>}
-            <ToastContainer />
-        </div>
+                </>}
+                <ToastContainer />
+            </div>
     )
 }
 

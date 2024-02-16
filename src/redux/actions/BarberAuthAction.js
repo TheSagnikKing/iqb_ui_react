@@ -101,7 +101,7 @@ export const BarberLogoutAction = (navigate) => async (dispatch) => {
              payload:data
          })
          localStorage.setItem("barberLoggedIn","false")
-         navigate("/admin-signin")
+         navigate("/barber-signin")
     } catch (error) {
          dispatch({
              type: BARBER_LOGOUT_FAIL,
@@ -177,7 +177,7 @@ export const BarberLoggedOutMiddlewareAction = (navigate) => async (dispatch) =>
 
         if(error?.response?.data?.message == "Refresh Token not present.Please Login Again"){
             localStorage.setItem("barberLoggedIn", "false")
-            navigate("/admin-signin")
+            navigate("/barber-signin")
         }
     }
 };
