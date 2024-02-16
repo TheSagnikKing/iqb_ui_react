@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import "./Signup.css"
 import { toast, ToastContainer } from 'react-toastify'
 import { ADMIN_SIGNIN_FAIL } from '../../../../redux/constants/AdminAuthConstants';
 import { BARBER_SIGNIN_FAIL } from '../../../../redux/constants/BarberAuthConstants';
@@ -190,6 +191,7 @@ const Signup = () => {
                     <p className="divsix">Already have an account? <p onClick={signinRoute} className="link"><strong>Log In</strong></p> </p>
                 </div>
             </div>
+            <ToastContainer />
         </main>
     )
 }
