@@ -10,6 +10,7 @@ import { appoinmentBarberListReducer, createAppointmentReducer, deleteAppointmen
 import { getAllAdvertisementReducer} from "./reducers/AdvertisementReducer";
 import { customeremailReducer } from "./reducers/CustomerReducer";
 import { getallNotificationReducer, multipleNotificationReducer, singleNotificationReducer } from "./reducers/NotificationReducer";
+import { colorReducer } from "./reducers/colorReducer";
 
 const rootReducer = combineReducers({
   signup:signupReducer,
@@ -96,7 +97,8 @@ const rootReducer = combineReducers({
   appoinmentBarberList:appoinmentBarberListReducer,
   getAllSalonIcon:getAllSalonIconReducer,
   barberAllSalonServics:barberAllSalonServicsReducer,
-  groupBarberServicesByBarberId:groupBarberServicesByBarberIdReducer
+  groupBarberServicesByBarberId:groupBarberServicesByBarberIdReducer,
+  color:colorReducer
 });
 
 const initialState = {};

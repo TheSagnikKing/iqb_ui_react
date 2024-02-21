@@ -7,8 +7,8 @@ import { BsMoonStars } from 'react-icons/bs'
 import { IoIosArrowForward } from 'react-icons/io'
 import { CiSearch } from "react-icons/ci"
 import { IoNotificationsOutline } from "react-icons/io5"
-import { FaCamera, FaUserCircle } from "react-icons/fa"
-import { MdKeyboardArrowDown } from "react-icons/md"
+import { FaCamera, FaMoon, FaUserCircle } from "react-icons/fa"
+import { MdKeyboardArrowDown, MdOutlineWbSunny } from "react-icons/md"
 import { BiLogOutCircle } from "react-icons/bi"
 import { RiAccountCircleFill } from "react-icons/ri"
 import { Link, useLocation, useNavigate } from 'react-router-dom'
@@ -20,15 +20,73 @@ import { applySalonAction } from '../../../../redux/actions/salonAction'
 import { RxCross2, RxHamburgerMenu } from 'react-icons/rx'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { DARK_MODE_OFF, DARK_MODE_ON } from '../../../../redux/actions/colorAction'
+import { darkmodeSelector } from '../../../../redux/reducers/colorReducer'
 
 const AdminHeader = ({ title }) => {
 
-  const [check, setCheck] = useState(false)
-
-  const [dropdown, setDropdown] = useState(false)
-
   const navigate = useNavigate()
   const dispatch = useDispatch()
+
+  const [check, setCheck] = useState(true);
+
+  // const colorHandler = () => {
+  //   setCheck((prev) => {
+  //     const newCheck = !prev; // Toggle the value
+  //     if (newCheck) {
+  //       dispatch({ type: DARK_MODE_ON });
+  //       localStorage.setItem("dark", "On");
+  //     } else {
+  //       dispatch({ type: DARK_MODE_OFF });
+  //       localStorage.setItem("dark", "Off");
+  //     }
+  //     return newCheck; // Return the new value for the state
+  //   });
+  // };
+
+
+  const darkHandler = () => {
+    setCheck(true)
+    dispatch({ type: DARK_MODE_ON });
+    localStorage.setItem("dark", "On");
+  }
+
+  const lightHandler = () => {
+    setCheck(false)
+    dispatch({ type: DARK_MODE_OFF });
+    localStorage.setItem("dark", "Off");
+  }
+
+  // const colorHandler = () => {
+  //   const newCheck = !check; // Toggle the value
+  //   setCheck(newCheck);
+
+  //   if (newCheck) {
+  //     dispatch({ type: DARK_MODE_ON });
+  //   localStorage.setItem("dark", "On");
+  //   } else {
+  //     dispatch({ type: DARK_MODE_OFF });
+  //     localStorage.setItem("dark", "Off");
+  //   }
+  // };
+
+
+  // const darkMode = localStorage.getItem("dark")
+  const darkMode = useSelector(darkmodeSelector)
+
+  console.log(darkMode)
+
+  useEffect(() => {
+    if (localStorage.getItem("dark") === "On") {
+      setCheck(true)
+    } else {
+      setCheck(false)
+    }
+  }, [])
+
+  console.log("Check refresh ", check)
+
+  const [dropdown, setDropdown] = useState(false)
 
   const logoutHandler = async () => {
     dispatch(AdminLogoutAction(navigate))
@@ -115,7 +173,7 @@ const AdminHeader = ({ title }) => {
           });
           setSalonList(data?.salons);
         } catch (error) {
-          
+
         }
       };
 
@@ -128,7 +186,7 @@ const AdminHeader = ({ title }) => {
           });
           setChooseSalonId(Number(data?.response?.salonId));
         } catch (error) {
-          
+
         }
       };
 
@@ -144,15 +202,23 @@ const AdminHeader = ({ title }) => {
 
   const [expandMenu, setExpandMenu] = useState(false)
 
+  // useEffect(() => {
+  //   const storedDarkMode = localStorage.getItem("dark");
+
+  //   if(storedDarkMode){
+  //     dispatch({type:DARK_MODE_ON})
+  //   }
+  // }, [dispatch]);
+
   return (
     <section className="nav1">
-      <div className="nav1left">
+      <div className="nav1left" style={{background: darkMode === "On" ? "black" : "white"}}>
         <div className="nav1left_header">
           <span>IQB</span>&nbsp;<span>iqueuebarbers</span>
           {/* <button onClick={() => setExpandMenu(!expandMenu)}>{">"}</button> */}
         </div>
 
-        <div className={check ? "nav1wrapperdark" : "nav1wrapper"}>
+        <div className={darkMode === "On" ? "nav1wrapperdark" : "nav1wrapper"}>
 
           <div className="nav1left_menu_box">
             <button onClick={() => setExpandMenu(true)} style={{ background: "#fff", border: "none", boxShadow: "0px 0px 4px rgba(0,0,0,0.5)", height: "30px", fontWeight: "bold", display: "flex", justifyContent: "center", alignItems: "center" }}><RxHamburgerMenu /></button>
@@ -214,22 +280,33 @@ const AdminHeader = ({ title }) => {
 
             </div>
 
-            <div>
-              <div className="nav1menu_settings_item">
-                <div><BsMoonStars /></div>
-                <p>Dark Mode</p>
+            <div className='colormode'>
+              <div className="nav1menu_settings_item" style={{cursor:"pointer"}} onClick={darkHandler}>
+                <div style={{fontSize:"2rem",color:"black",color:check === true ? "black" : "black",background:check === true && "white",height:"3.2rem",width:"3.2rem",borderRadius:"50%",boxShadow:"0px 0px 4px white"}}><FaMoon /></div>
+                {/* <p style={{fontSize:"1.2rem", color:"black",color:check === true ? "white" : "black"}}>Dark Mode</p> */}
+              </div>
+              
+              <div className="nav1menu_settings_item" style={{cursor:"pointer"}} onClick={lightHandler}>
+                <div style={{fontSize:"2rem", color:check === false ? "white" : "white",background:check === false && "black",height:"3.2rem",width:"3.2rem",borderRadius:"50%"}}><MdOutlineWbSunny /></div>
+                {/* <p style={{fontSize:"1.2rem", color:check === false ? "white" : "white"}}>Light Mode</p> */}
               </div>
 
-              <div className="nav1toggle_switch2">
-                {/* TOGGLE_SWITCH_CODE */}
+
+              {/* <div className="nav1toggle_switch2">
                 <label className="nav1toggle_switch">
                   <input type="checkbox"
                     value={check}
-                    onClick={(e) => setCheck(!check)}
+                    onClick={colorHandler}
                   />
-                  <span className="nav1slider"></span>
+                  <span
+                    className={`nav1slider ${check ? 'checked' : ''}`}
+                    style={{
+                      background: check ? "#4CBB17" : "",
+                      width: "4rem"
+                    }}
+                  ></span>
                 </label>
-              </div>
+              </div> */}
 
             </div>
           </div>
@@ -366,7 +443,7 @@ const AdminHeader = ({ title }) => {
           </div>
         </div>
 
-       
+
       </div>
 
     </section >

@@ -326,10 +326,12 @@ const CreateSalon = () => {
         setServiceDrop(false)
     } 
 
+    const darkMode = useSelector(state => state.color.darkmode)
+
     return (
         <>
             <AdminLayout />
-            <div className="sa-br-right_main_div">
+            <div className={`sa-br-right_main_div ${darkMode === "On" ? "sa-br-right_main_div_dark" : ""}`}>
 
                 <div className="sa-br-right_main_head">
                     <p>Crud</p>

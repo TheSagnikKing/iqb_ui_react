@@ -41,7 +41,6 @@
     display: flex;
     flex-direction: column;
     gap: 3rem;
-    background-color: rgb(31, 29, 29);
   }
 
 .nav1left_menu_box{
@@ -129,13 +128,21 @@
   }
   
   input:checked + .nav1slider {
-    background-color: #2196F3;
+    background-color: #4CBB17;
   }
   
   input:checked + .nav1slider:before {
     transform: translateX(15px);
   }
 
+
+  .checked {
+    transform: translateX(15px);
+}
+
+.colormode{
+    display: flex;
+}
 
   /* DASHBOARD_RIGHT_PART_STYLING_STARTS */
 

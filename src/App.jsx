@@ -80,12 +80,18 @@ import Signup from './components/newAuth/Admin/Signup/Signup';
 
 import BarberSignin from "./components/newAuth/Barber/Signin/Signin"
 import BarberSignup from "./components/newAuth/Barber/Signup/Signup"
+import { useSelector } from 'react-redux';
 
+  
 
 const App = () => {
+  const darkMode = useSelector(state => state.color.darkmode)
+
+  console.log("Darkmode dashboard",darkMode)
 
   return (
     <BrowserRouter>
+    <div style={{background:darkMode === "On" ? "var(--dark-primary-color)" : "var(--light-primary-color)"}}>
       <Routes>
 
         <Route path="/hello" element={<Hello />} />
@@ -389,6 +395,7 @@ const App = () => {
         <Route path="/barber/allnotification" element={<BarberAuth><AllBarberNotification /></BarberAuth>} />
 
       </Routes>
+      </div>
     </BrowserRouter>
   )
 }

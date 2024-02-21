@@ -8,6 +8,10 @@
 
 :root{
   font-size: 62.5%;
+  --dark-primary-color:#2c2e36;
+  --dark-secondary-color:black;
+  --light-primary-color: #f1f6fc;
+  --light-secondary-color: #fff
 }
 
 @media((min-width:0px) and (max-width:1450px)){
@@ -16,9 +20,9 @@
   }
 }
 
-body {
+/* body {
   background-color: #F1F6FC;
-}
+} */
 
 .demo_menu {
   padding: 3rem;

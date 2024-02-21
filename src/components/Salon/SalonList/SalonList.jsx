@@ -87,12 +87,15 @@ const SalonList = () => {
     const changeRoute = (salonID) => {
         navigate(`/salon/updatesalon`, { state: { salonId: salonID } })
     }
+
+    const darkMode = useSelector(state => state.color.darkmode)
+
     return (
         <>
             <AdminLayout />
-            <div className="wrapper">
+            <div className={`wrapper`}>
                 <div className="header">
-                    <p>Salons List</p>
+                    <p style={{color:darkMode === "On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Salons List</p>
 
                     <div>
                         <div onClick={addSalonNavigate} style={{ fontSize: "1.4rem", background: "#fff", height: "3.5rem", width: "3.5rem", display: "flex", justifyContent: "center", alignItems: "center" }}>
@@ -102,9 +105,9 @@ const SalonList = () => {
                 </div>
 
                 {/* Table  */}
-                <div className='table'>
+                <div className={`table ${darkMode === "On" ? "table_dark" : ""}`}>
                     {
-                        <div className='salon-item'>
+                        <div className={`salon-item ${darkMode === "On" ? "salon-item_dark" : ""}`}>
                             <div><h4>Salon ID</h4></div>
                             <div><h4>Salon Code</h4></div>
                             <div><h4>Salon Name</h4></div>
@@ -115,7 +118,7 @@ const SalonList = () => {
                     }
                     {
                         loading ? <div className='salon-puff-loader-box'><PuffLoader /></div> : salonList && salonList.response ? salonList.response.map((salon, index) => (
-                            <div key={index} className='salon-item'>
+                            <div key={index} className={`salon-item ${darkMode === "On" ? "salon-item_dark" : ""}`}>
                                 <div>
                                     <p>{salon.salonId}</p>
                                 </div>

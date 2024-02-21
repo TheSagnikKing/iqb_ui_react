@@ -63,6 +63,10 @@
     font-size: 1.2rem; /* 12px converted to rem */
 }
 
+.calender-box_dark{
+    background-color: var(--dark-primary-color)!important;
+}
+
 .calender-header {
     display: grid;
     grid-template-columns: repeat(7, 1fr);

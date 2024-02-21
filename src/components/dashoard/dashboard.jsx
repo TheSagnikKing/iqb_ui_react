@@ -21,6 +21,7 @@ import { applySalonAction, salonStatusOnlineAction } from '../../redux/actions/s
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { darkmodeSelector } from '../../redux/reducers/colorReducer'
 
 const Dashboard = () => {
 
@@ -253,6 +254,9 @@ const Dashboard = () => {
 
     // console.log("Appointmenttttttttt", appointmentData)
 
+    const darkMode = useSelector(state => state.color.darkmode)
+
+
     return (
             <div className="right_main_div">
                 {salonid == 0 ? <div className='nosalon'>
@@ -260,7 +264,7 @@ const Dashboard = () => {
                     <Link to="/salon/createsalon">Create Salon</Link>
                 </div > : <>
                     <div className="right_div_top">
-                        <div className="div_left">
+                        <div className={`div_left ${darkMode === "On" ? "div_left_dark" : ""}`}>
                             <div style={{
                                 display: "flex",
                                 justifyContent: "space-between",
@@ -289,7 +293,7 @@ const Dashboard = () => {
                                 </div>
                             </div>
 
-                            <div className="div_left_head">
+                            <div className={`div_left_head ${darkMode === "On" ? "div_left_head_dark" : ""}`}>
 
 
                                 <p>Advertisement</p>
@@ -328,8 +332,8 @@ const Dashboard = () => {
                             </div>
                         </div>
 
-                        <div className="div_right">
-                            <div className="div_right_head">
+                        <div className={`div_right ${darkMode === "On" ? "div_right_dark" : ""}`}>
+                            <div className={`div_right_head ${darkMode === "On" ? "div_right_head_dark" : ""}`}>
                                 <p>Queue List</p>
 
                                 <div className="btn_box">
@@ -371,7 +375,7 @@ const Dashboard = () => {
                                     overflow: "scroll",
                                     height: "35rem"
                                 }}>
-                                <div className='dashboard-quelist-content-head'>
+                                <div className={`dashboard-quelist-content-head ${darkMode === "On" ? "dashboard-quelist-content-head_dark" : "" }`}>
                                     <p>Customer Name</p>
                                     <p>Barber Name</p>
                                     <p>Queue Position</p>
@@ -394,7 +398,7 @@ const Dashboard = () => {
 
                     <div className="right_div_end">
 
-                        <div className="right_div_end_left">
+                        <div className={`right_div_end_left ${darkMode === "On" ? "right_div_end_left_dark" : ""}`}>
                             <div className="right_div_end_head">
                                 <p>Calender</p>
 
@@ -411,7 +415,7 @@ const Dashboard = () => {
                                 </div>
 
                                 <div className="main_right">
-                                    <div className='appoin-content-head'>
+                                    <div className={`appoin-content-head ${darkMode === "On" ? "appoin-content-head_dark" : ""}`}>
                                         <b>Timeslots</b>
                                         <b>Customer Name</b>
                                         <b>Barber Name</b>
@@ -419,7 +423,7 @@ const Dashboard = () => {
                                     </div>
                                     {
                                         appointmentLoader == true ? <h1>loading...</h1> : appointmentData?.response?.length > 0 ? appointmentData?.response?.map((ap, i) => (
-                                            <div className='appoin-content-div' key={i}>
+                                            <div className={`appoin-content-div ${darkMode === "On" ? "appoin-content-div_dark" : ""}`} key={i}>
                                                 <p>{ap.timeSlots}</p>
                                                 <p>{ap.customerName}</p>
                                                 <p>{ap.barberName}</p>
@@ -437,9 +441,9 @@ const Dashboard = () => {
                             </div>
                         </div>
 
-                        <div className="right_div_end_right">
+                        <div className={`right_div_end_right ${darkMode === "On" ? "right_div_end_right_dark" : ""}`}>
                             <div className="head">
-                                <p>Reports</p>
+                                <p style={{color:darkMode === "On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Reports</p>
                                 <div>
                                     <FiMoreHorizontal />
                                 </div>
@@ -468,11 +472,11 @@ const Dashboard = () => {
 
                             <div className="chart">
                                 <div>
-                                    <h2>Completion Rate</h2>
+                                    <h2 style={{color:darkMode === "On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Completion Rate</h2>
 
                                     <div>
-                                        <p>95%</p>
-                                        <p>+2.5%</p>
+                                        <p style={{color:darkMode === "On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>95%</p>
+                                        <p style={{color:darkMode === "On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>+2.5%</p>
                                     </div>
                                 </div>
 

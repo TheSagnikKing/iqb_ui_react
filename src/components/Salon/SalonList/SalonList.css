@@ -116,6 +116,19 @@
     cursor: pointer;
 }
 
+/* DARK MODE */
+
+.table_dark{
+    background-color: var(--dark-secondary-color);
+}
+
+.salon-item_dark{
+    background-color: var(--dark-primary-color);
+}
+
+.salon-item_dark h4,p{
+    color:var(--light-secondary-color)
+}
 
 @media((min-width:0px) and (max-width:400px)){
     .wrapper{
