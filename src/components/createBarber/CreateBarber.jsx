@@ -105,14 +105,21 @@ const CreateBarber = () => {
 
     const createBarber = useSelector(state => state.createBarber)
 
+
+    const darkMode = useSelector(state => state.color.darkmode)
+
+    console.log("Darkmode dashboard", darkMode)
+
+    const currentMode = darkMode === "On"
+
     return (
         <>
 
             <AdminLayout />
             <div className='crt-wrapper'>
-                <h1>Create Barber</h1>
+                <h1 style={{color:currentMode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Create Barber</h1>
 
-                <div className='crt-form'>
+                <div className={`crt-form ${currentMode ? "crt-form_dark" : ""}`}>
                     <div>
                         <label>Name</label>
                         <input
@@ -182,12 +189,12 @@ const CreateBarber = () => {
 
                     <div>
                         <div style={{display:"flex", justifyContent:"space-between",paddingInline:"1rem"}}>
-                            <h2>Services</h2>
-                            <div onClick={() => setDropdown(!dropdown)} style={{fontWeight:"bolder",fontSize:"2rem",boxShadow:"0px 0px 4px rgba(0,0,0,0.4)",borderRadius:"50%",width:"3rem",height:"3rem",display:"flex",justifyContent:"center",alignItems:"center"}}><BiDownArrowAlt /></div>
+                            <h2 style={{color:currentMode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Services</h2>
+                            <div onClick={() => setDropdown(!dropdown)} style={{fontWeight:"bolder",fontSize:"2rem",boxShadow:currentMode ? "0px 0px 4px var(--light-secondary-color)" : "0px 0px 4px rgba(0,0,0,0.4)",borderRadius:"50%",width:"3rem",height:"3rem",display:"flex",justifyContent:"center",alignItems:"center",color:currentMode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}><BiDownArrowAlt /></div>
                         </div>
 
                         {
-                            dropdown && <div className='barber-dropdown'>
+                            dropdown && <div className={`barber-dropdown ${currentMode ? "barber-dropdown_dark" : ""}`}>
                                 {
                                     barberServices && barberServices?.response ? barberServices.response.map((ser, index) => (
                                         <div key={index} >
@@ -237,8 +244,10 @@ const CreateBarber = () => {
                             </div>
                         }
 
-                        <h2>Your Services</h2>
-                        <div className='barber-dropdown-select'>
+                        <h2 style={{
+                            color:currentMode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"
+                        }}>Your Services</h2>
+                        <div className={`barber-dropdown-select ${currentMode ? "barber-dropdonw-select_dark" : ""}`}>
                             {
                                 selectedService ? selectedService.map((ser, index) => (
                                     <div key={index}>
@@ -285,7 +294,12 @@ const CreateBarber = () => {
                     </div>
 
 
-                    <button onClick={submitHandler}>{
+                    <button onClick={submitHandler} 
+                    style={{
+                        background:currentMode ? "var(--dark-primary-color)" : "var(--light-tertiary-color)",
+                        color:currentMode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"
+                    }}
+                    >{
                         createBarber?.loading == true ? <h2>Loading...</h2> : "Create"
                     }</button>
                 </div>

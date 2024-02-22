@@ -18,9 +18,6 @@ import { IoIosNotifications, IoMdCheckmark, IoMdNotifications } from "react-icon
 import { FaXmark } from 'react-icons/fa6'
 import { salonStatusOnlineAction } from '../../../redux/actions/salonAction'
 
-
-
-
 const BarberListTable = () => {
 
     const [barbersList, setBarbersList] = useState([])
@@ -248,13 +245,19 @@ const BarberListTable = () => {
     };
 
 
-    console.log("Current Barber List ",barbersList)
+    console.log("Current Barber List ", barbersList)
+
+    const darkMode = useSelector(state => state.color.darkmode)
+
+    console.log("Darkmode dashboard", darkMode)
+
+    const currentMode = darkMode === "On"
 
     return (
-        <div className="barberlist-wrapper">
+        <div className={`barberlist-wrapper ${currentMode ? "barberlist-wrapper_dark" : ""}`}>
             <div className="barberlist-header">
                 <div>
-                    <h2>Barbers List</h2>
+                    <h2 style={{ color: currentMode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)" }}>Barbers List</h2>
 
                     <div className='notify-buttons'>
                         <button
@@ -297,16 +300,16 @@ const BarberListTable = () => {
                     <button style={{ background: "#f16fc", width: "1px", height: "1px" }}></button>
                     <div></div>
 
-                    <div onClick={createBarberNavigate} style={{cursor:"point"}}>
-                        <GrAdd />
+                    <div onClick={createBarberNavigate} style={{ cursor: "point"}}>
+                        <GrAdd/>
                     </div>
                 </div>
             </div>
 
             {/* Table  */}
-            <div className='table'>
+            <div className={`table ${currentMode ? "table_dark" : ""}`}>
                 {
-                    <main className="barberitem-head">
+                    <main className={`barberitem-head ${currentMode ? "barberitem-head_dark" : ""}`}>
                         <div><p></p></div>
                         <div>
                             <div>
@@ -344,7 +347,7 @@ const BarberListTable = () => {
                         </div>
                     ) : barbersList && barbersList.getAllBarbers ? (
                         barbersList?.getAllBarbers.map((barber, index) => (
-                            <main className="barberlist-barberitem" key={index}>
+                            <main className={`barberlist-barberitem ${currentMode ? "barberlist-barberitem_dark" : ""}`} key={index}>
                                 <div>
                                     <input
                                         type="checkbox"
@@ -353,15 +356,15 @@ const BarberListTable = () => {
                                 </div>
 
                                 <div>
-                                    <p>{barber.salonId}</p>
+                                    <p className={`barberlist-barberitem_text ${currentMode ? "barberlist-barberitem_text_dark" : ""}`}>{barber.salonId}</p>
                                 </div>
 
                                 <div>
-                                    <p>{barber.name}</p>
+                                    <p className={`barberlist-barberitem_text ${currentMode ? "barberlist-barberitem_text_dark" : ""}`}>{barber.name}</p>
                                 </div>
 
                                 <div>
-                                    <p>{barber.email}</p>
+                                    <p className={`barberlist-barberitem_text ${currentMode ? "barberlist-barberitem_text_dark" : ""}`}>{barber.email}</p>
                                 </div>
 
                                 {/* <div>
@@ -440,7 +443,7 @@ const BarberListTable = () => {
                         ))
                     ) : (
                         <div className='no-barber-box'>
-                            <p>No Barbers Present</p>
+                            <p className={`barberlist-barberitem_text ${currentMode ? "barberlist-barberitem_text_dark" : ""}`}>No Barbers Present</p>
                         </div>
                     )
                 }

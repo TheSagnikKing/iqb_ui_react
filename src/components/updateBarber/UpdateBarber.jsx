@@ -152,13 +152,21 @@ const UpdateBarber = () => {
 
     const updateBarber = useSelector(state => state.updateBarber)
 
+    const darkMode = useSelector(state => state.color.darkmode)
+
+    console.log("Darkmode dashboard",darkMode)
+
+    const currentmode = darkMode === "On"
+
     return (
         <>
             <AdminLayout />
             <div className='upd-wrapper'>
-                <h2>Update Barber</h2>
+                <h2 style={{
+                    color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"
+                }}>Update Barber</h2>
 
-                <div className='upd-form'>
+                <div className={`upd-form ${currentmode ? "upd-form_dark" : ""}`}>
                     <div>
                         <label>Name</label>
                         <input
@@ -231,11 +239,11 @@ const UpdateBarber = () => {
                     <div>
                         <div style={{display:"flex", justifyContent:"space-between", paddingInline:"1rem"}}>
                             <h1>Services</h1>
-                            <div onClick={() => setDropdown(!dropdown)} style={{fontWeight:"bolder",fontSize:"2rem",boxShadow:"0px 0px 4px rgba(0,0,0,0.4)",borderRadius:"50%",width:"3rem",height:"3rem",display:"flex",justifyContent:"center",alignItems:"center"}}><BiDownArrowAlt /></div>
+                            <div onClick={() => setDropdown(!dropdown)} style={{fontWeight:"bolder",fontSize:"2rem",boxShadow:currentmode ? "0px 0px 4px var(--light-secondary-color)" : "0px 0px 4px rgba(0,0,0,0.4)",borderRadius:"50%",width:"3rem",height:"3rem",display:"flex",justifyContent:"center",alignItems:"center"}}><BiDownArrowAlt /></div>
                         </div>
 
                         {
-                            dropdown && <div className='barber-dropdown'>
+                            dropdown && <div className={`barber-dropdown ${currentmode ? "barber-dropdown_dark" : ""}`}>
                                 {
                                     barberServices?.response && barberServices?.response?.length > 0 ? barberServices?.response.map((ser, index) => (
                                         <div key={index} >
@@ -288,7 +296,7 @@ const UpdateBarber = () => {
                         }
 
                         <h2>Your Services</h2>
-                        <div className='barber-dropdown-select'>
+                        <div className={`barber-dropdown-select ${currentmode ? "barber-dropdown-select_dark" : ""}`}>
                             {
                                 selectedService ? selectedService.map((ser, index) => (
                                     <div key={index}>
@@ -334,7 +342,12 @@ const UpdateBarber = () => {
 
                     </div>
 
-                    {updateBarber?.loading == true ? <button style={{fontWeight:"500"}}>Loader</button> : <button onClick={submitHandler}>Update</button>}
+                    {updateBarber?.loading == true ? <button style={{fontWeight:"500"}}>Loader</button> : <button onClick={submitHandler}
+                    style={{
+                        background:currentmode ? "var(--dark-primary-color)" : "var(--light-tertiary-color)",
+                        color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"
+                    }}
+                    >Update</button>}
 
                 </div>
 

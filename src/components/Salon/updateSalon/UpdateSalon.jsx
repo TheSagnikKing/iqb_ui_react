@@ -101,7 +101,7 @@ const UpdateSalon = () => {
         //     return;
         // }
 
-        if(!serviceName || !serviceDesc || !servicePrice || !serviceEWT){
+        if (!serviceName || !serviceDesc || !servicePrice || !serviceEWT) {
             alert("Please fill all the field")
             return;
         }
@@ -151,29 +151,29 @@ const UpdateSalon = () => {
     const getSalonInfoBySalonIdRef = useRef(null);
 
     useEffect(() => {
-    
+
         if (getSalonInfoBySalonIdRef.current) {
             getSalonInfoBySalonIdRef.current.abort(); // Abort previous request if it exists
         }
-    
+
         const newController = new AbortController();
         getSalonInfoBySalonIdRef.current = newController;
-    
+
         const signal = newController.signal;
-    
+
         const getSalonInfoBySalonId = async () => {
             try {
                 const { data } = await api.get(`/api/salon/getSalonInfoBySalonId?salonId=${Number(currentEditSalonId)}`, { signal });
-    
+
                 console.log("update", data);
-    
+
                 if (data?.response?.salonInfo) {
                     setFetchImages(data?.response?.salonInfo?.gallery)
                     setSalonEmail(data?.response?.salonInfo?.salonEmail)
                     setSalonName(data?.response?.salonInfo?.salonName)
                     setAddress(data?.response?.salonInfo?.address)
                     setCity(data?.response?.salonInfo?.city)
-    
+
                     setCountry(data?.response?.salonInfo?.country)
                     setPostCode(data?.response?.salonInfo?.postcode)
                     setContactTel(data?.response?.salonInfo?.contactTel)
@@ -198,14 +198,14 @@ const UpdateSalon = () => {
                 }
             }
         };
-    
+
         getSalonInfoBySalonId();
-    
+
         return () => {
             getSalonInfoBySalonIdRef.current.abort();
         };
     }, [currentSalonId]);
-    
+
 
 
     const geolocHandler = () => {
@@ -321,29 +321,29 @@ const UpdateSalon = () => {
                     const formData = new FormData();
 
                     const SalonId = Number(currentEditSalonId);
-                    
-                    if(SalonId){
+
+                    if (SalonId) {
                         formData.append('salonId', SalonId);
 
-                    for (const file of selectedFiles) {
-                        formData.append('gallery', file);
-                    }
+                        for (const file of selectedFiles) {
+                            formData.append('gallery', file);
+                        }
 
-                    try {
-                        const imageResponse = await api.post('/api/salon/uploadMoreImages', formData, {
-                            headers: {
-                                'Content-Type': 'multipart/form-data',
-                            },
-                        });
+                        try {
+                            const imageResponse = await api.post('/api/salon/uploadMoreImages', formData, {
+                                headers: {
+                                    'Content-Type': 'multipart/form-data',
+                                },
+                            });
 
-                        console.log('Upload success:', imageResponse.data);
-                        // setImages(imageResponse.data?.StudentImage?.profile);
-                        setSelectedFiles(null);
-                        alert("Image uploaded Successfully")
-                    } catch (error) {
-                        console.error('Image upload failed:', error);
-                        // Handle error as needed
-                    }
+                            console.log('Upload success:', imageResponse.data);
+                            // setImages(imageResponse.data?.StudentImage?.profile);
+                            setSelectedFiles(null);
+                            alert("Image uploaded Successfully")
+                        } catch (error) {
+                            console.error('Image upload failed:', error);
+                            // Handle error as needed
+                        }
                     }
                 }
             };
@@ -468,7 +468,7 @@ const UpdateSalon = () => {
     }
 
 
-    
+
     const submitHandler = () => {
         const salonData = {
             adminEmail: LoggedInMiddleware?.user && LoggedInMiddleware.user[0].email, salonName, salonEmail, address, city, location: {
@@ -478,7 +478,7 @@ const UpdateSalon = () => {
                     latitude: Number(latitude)
                 }
                 //salonId
-            }, country, postCode, contactTel, salonType, webLink,fbLink,instraLink,twitterLink, services, salonId: Number(currentEditSalonId)
+            }, country, postCode, contactTel, salonType, webLink, fbLink, instraLink, twitterLink, services, salonId: Number(currentEditSalonId)
         }
         console.log(salonData)
         dispatch(updateSalonAction(salonData, navigate))
@@ -501,16 +501,22 @@ const UpdateSalon = () => {
 
     }
 
+    const darkMode = useSelector(state => state.color.darkmode)
+
+    console.log("Darkmode dashboard", darkMode)
+
     return (
         <>
             <AdminLayout />
-            <div className="sa-br-right_main_div">
+            <div className={`sa-br-right_main_div ${darkMode === "On" ? "sa-br-right_main_div_dark" : ""}`}>
 
                 <div className="sa-br-right_main_head">
-  
+                    <h1 
+                    style={{color:darkMode === "On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}
+                    >Update</h1>
                 </div>
 
-                <div className="sa-br-right_main_form">
+                <div className={`sa-br-right_main_form ${darkMode === "On" ? "sa-br-right_main_form_dark" : ""}`}>
                     <div className="sa-br-left">
                         <div>
                             <label htmlFor="">Salon Email</label>
@@ -566,7 +572,7 @@ const UpdateSalon = () => {
                             />
                         </div>
 
-                        <button onClick={geolocHandler} className='geo-sal'>Get Geolocation</button>
+                        <button onClick={geolocHandler} className={`geo-sal ${darkMode === "On" ? "geo-sal_dark" : ""}`}>Get Geolocation</button>
 
                         <div>
                             <label htmlFor="">Country</label>
@@ -596,9 +602,9 @@ const UpdateSalon = () => {
                         </div>
 
                         <div>
-                            <div style={{ display: "flex", flexDirection:"row" }}>
+                            <div style={{ display: "flex", flexDirection: "row" }}>
                                 <label htmlFor="">Salon Type</label>
-                                <button onClick={() => setSalontypeDropdown((prev) => !prev)} className='sal-drop-type'><FaArrowDown style={{fontSize:"1.2rem"}}/></button>
+                                <button onClick={() => setSalontypeDropdown((prev) => !prev)} className='sal-drop-type'><FaArrowDown style={{ fontSize: "1.2rem" }} /></button>
                             </div>
 
                             {
@@ -718,7 +724,7 @@ const UpdateSalon = () => {
                             </div>
                         </div>
 
-                       
+
 
                         <div className='services'>
                             <label className='serv-title' style={{ marginTop: "2rem" }}>Add Your Services</label>
@@ -731,7 +737,7 @@ const UpdateSalon = () => {
                                 </div>
 
                                 {
-                                    serviceDrop && <div className='service-icon-content'>{
+                                    serviceDrop && <div className={`service-icon-content ${darkMode === "On" ? "service-icon-content_dark" : ""}`}>{
                                         // getAllSalonIcon?.response
                                         <div>
                                             {
@@ -794,13 +800,18 @@ const UpdateSalon = () => {
                                 />
                             </div>
 
-                            <button onClick={addServiceHandler}>Add Service</button>
+                            <button onClick={addServiceHandler}
+                            style={{
+                                background:darkMode === "On" ? "var(--dark-primary-color)" : "var(--light-tertiary-color)",
+                                color: darkMode === "On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"
+                            }}
+                            >Add Service</button>
 
                         </div>
 
-                        <div className='services-data'>
+                        <div className={`services-data ${darkMode === "On" ? "services-data_dark" : ""}`}>
                             {services.map((service, index) => (
-                                <div key={index} className='ser-table' onClick={() => serviceEditHandler(index)}>
+                                <div key={index} className={`ser-table ${darkMode === "On" ? "ser-table_dark" : ""}`} onClick={() => serviceEditHandler(index)}>
 
 
 
@@ -833,7 +844,12 @@ const UpdateSalon = () => {
                         </div>
 
                         <div className="sa-br-btn_box">
-                            <button onClick={submitHandler}>
+                            <button onClick={submitHandler}
+                            style={{
+                                background: darkMode === "On" ? "var(--dark-primary-color)" : "var(--light-tertiary-color)",
+                                color: darkMode === "On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"
+                            }}
+                            >
                                 {updateSalon?.loading == true ? <h2>Loading...</h2> : "update"}
                             </button>
                         </div>

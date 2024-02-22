@@ -138,6 +138,31 @@
     margin: 0;
 }
 
+/* DARK MODE */
+
+.upd-form_dark{
+    background-color: var(--dark-secondary-color) !important;
+    color: var(--light-secondary-color) !important; 
+}
+
+.upd-form_dark input{
+    background-color: var(--dark-primary-color) !important;
+    color: var(--light-secondary-color) !important;
+}
+
+.upd-form_dark input::placeholder{
+    color: var(--light-secondary-color) !important;
+}
+
+.barber-dropdown-select_dark{
+    background-color: var(--dark-primary-color) !important;
+}
+
+.barber-dropdown-select_dark>div{
+    background-color: var(--dark-secondary-color) !important;
+    color: var(--light-secondary-color) !important; 
+}
+
 @media((min-width:0px) and (max-width:400px)){
     .upd-wrapper {
         width: 82% !important;

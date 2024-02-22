@@ -349,6 +349,36 @@ input[type="file"] {
     background-color: var(--dark-primary-color) !important;
 }
 
+.sa-br-right_main_form_dark{
+    background-color: var(--dark-secondary-color) !important;
+}
+
+.sa-br-right_main_form_dark label{
+    color: var(--light-secondary-color) !important;
+}
+
+.sa-br-right_main_form_dark input{
+    background-color: var(--dark-primary-color) !important;
+    color: var(--light-secondary-color) !important;
+}
+
+.geo-sal_dark{
+    background-color: var(--dark-primary-color) !important;
+    color: var(--light-secondary-color) !important;
+}
+
+.service-icon-content_dark{
+    background-color: var(--dark-primary-color) !important;
+}
+
+.ser-table_dark{
+    background-color: var(--dark-secondary-color) !important;   
+}
+
+.services-data_dark{
+    background-color: var(--dark-primary-color) !important;
+}
+
 @media((min-width:0px) and (max-width:400px)) {
     .sa-br-right_main_div {
         height: auto;

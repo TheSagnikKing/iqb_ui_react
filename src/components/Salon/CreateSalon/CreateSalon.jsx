@@ -334,10 +334,10 @@ const CreateSalon = () => {
             <div className={`sa-br-right_main_div ${darkMode === "On" ? "sa-br-right_main_div_dark" : ""}`}>
 
                 <div className="sa-br-right_main_head">
-                    <p>Crud</p>
+                    <p style={{color:darkMode === "On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Create</p>
                 </div>
 
-                <div className="sa-br-right_main_form">
+                <div className={`sa-br-right_main_form ${darkMode === "On" ? "sa-br-right_main_form_dark" : ""}`}>
                     <div className="sa-br-left">
 
                         <div>
@@ -395,8 +395,7 @@ const CreateSalon = () => {
                             />
                         </div>
 
-                        <button onClick={geolocHandler} className='geo-sal'>Get Geolocation</button>
-
+                        <button onClick={geolocHandler} className={`geo-sal ${darkMode === "On" ? 'geo-sal_dark' : ""}`}>Get Geolocation</button>
 
                         <div>
                             <label htmlFor="">Country</label>
@@ -425,8 +424,9 @@ const CreateSalon = () => {
                                 borderRadius: "0.5rem",
                                 paddingInline: "1rem",
                                 border: "none",
-                                backgroundColor: "#f1f6fc",
-                                fontSize: "1.6rem"
+                                backgroundColor: darkMode === "On" ? "var(--dark-primary-color)" : "#f1f6fc",
+                                fontSize: "1.6rem",
+                                color: darkMode === "On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"
                             }}
                                 onChange={(e) => setStartTime(e.target.value)}
                                 value={startTime}
@@ -448,8 +448,9 @@ const CreateSalon = () => {
                                 borderRadius: "0.5rem",
                                 paddingInline: "1rem",
                                 border: "none",
-                                backgroundColor: "#f1f6fc",
-                                fontSize: "1.6rem"
+                                backgroundColor: darkMode === "On" ? "var(--dark-primary-color)" : "#f1f6fc",
+                                fontSize: "1.6rem",
+                                color: darkMode === "On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"
                             }} onChange={(e) => setEndTime(e.target.value)}
                                 value={endTime}>
                                 {timeOptions.map((option) => (
@@ -468,8 +469,9 @@ const CreateSalon = () => {
                                 borderRadius: "0.5rem",
                                 paddingInline: "1rem",
                                 border: "none",
-                                backgroundColor: "#f1f6fc",
-                                fontSize: "1.6rem"
+                                backgroundColor: darkMode === "On" ? "var(--dark-primary-color)" : "#f1f6fc",
+                                fontSize: "1.6rem",
+                                color: darkMode === "On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"
                             }} onChange={(e) => setChooseIntervalTime(e.target.value)}
                                 value={chooseIntervalTime}>
                                 {intervalTimemin.map((option) => (
@@ -580,7 +582,7 @@ const CreateSalon = () => {
                                 </div>
 
                                 {
-                                    serviceDrop && <div className='service-icon-content'>{
+                                    serviceDrop && <div className={`service-icon-content ${darkMode === "On" ? "service-icon-content_dark" : ""}`}>{
                                         // getAllSalonIcon?.response
                                         <div>
                                             {
@@ -645,13 +647,18 @@ const CreateSalon = () => {
                             </div>
 
 
-                            <button onClick={addServiceHandler}>Add Service</button>
+                            <button onClick={addServiceHandler} 
+                            style={{
+                                background:darkMode === "On" ? "var(--dark-primary-color)" : "var(--light-tertiary-color)",
+                                color:darkMode === "On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"
+                            }}
+                            >Add Service</button>
 
                         </div>
 
-                        <div className='services-data'>
+                        <div className={`services-data ${darkMode === "On" ? "services-data_dark" : ""}`}>
                             {services.map((service, index) => (
-                                <div key={index} className='ser-table' onClick={() => serviceEditHandler(index)}>
+                                <div key={index} className={`ser-table ${darkMode === "On" ? "ser-table_dark" : ""}`} onClick={() => serviceEditHandler(index)}>
                                     <div>
                                         <label>Service Name</label>
                                         <label>{service.serviceName}</label>
@@ -680,8 +687,13 @@ const CreateSalon = () => {
                             ))}
                         </div>
 
-                        <div className="sa-br-btn_box">
-                            <button onClick={submitHandler}>
+                        <div className={`sa-br-btn_box`}>
+                            <button onClick={submitHandler}
+                            style={{
+                                background:darkMode === "On" ? "var(--dark-primary-color)" : "var(--light-tertiary-color)",
+                                color: darkMode === "On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"
+                            }}
+                            >
                                 {createSalon?.loading == true ? <h3>Loading</h3> : "Submit"}
                             </button>
                         </div>

@@ -309,6 +309,34 @@
         margin: 0px auto
     }
 
+
+    /* DARK MODE  */
+
+    .table_dark{
+        background-color: var(--dark-secondary-color) !important;
+    }
+
+    .barberitem-head_dark{
+        background-color: var(--dark-primary-color) !important;
+    }
+
+    .barberitem-head_dark h4{
+        color: var(--light-secondary-color) !important;
+    }
+
+    .barberlist-barberitem_dark{
+        background-color: var(--dark-primary-color) !important;
+    }
+
+    .barberlist-barberitem_text{
+        color: black;
+        font-weight: 500;
+    }
+
+    .barberlist-barberitem_text_dark{
+        color:var(--light-secondary-color)
+    }
+
 @media((min-width:0px) and (max-width:400px)){
     .barberlist-wrapper {
         width: calc(100% - 7rem) !important; 

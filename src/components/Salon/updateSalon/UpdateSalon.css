@@ -582,3 +582,18 @@
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.4);
     cursor: pointer;
 }
+
+
+/* DARK MODE  */
+
+.sa-br-right_main_div_dark{
+    background-color: var(--dark-primary-color) !important;
+}
+
+.sa-br-right_main_form_dark{
+    background-color: var(--dark-secondary-color) !important;
+}
+
+.geo-sal_dark{
+    background-color: var(--dark-primary-color) !important;
+}

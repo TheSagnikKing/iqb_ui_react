@@ -11,7 +11,8 @@
   --dark-primary-color:#2c2e36;
   --dark-secondary-color:black;
   --light-primary-color: #f1f6fc;
-  --light-secondary-color: #fff
+  --light-secondary-color: #fff;
+  --light-tertiary-color: #f1f6fc;
 }
 
 @media((min-width:0px) and (max-width:1450px)){

@@ -13,6 +13,7 @@ import { AiOutlineReload } from 'react-icons/ai'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 import api from "../../redux/api/Api"
+import { useSelector } from 'react-redux';
 
 const Dashboard3 = () => {
 
@@ -116,14 +117,20 @@ const Dashboard3 = () => {
         navigate("/customer/customeremail", { state: customeremail })
     }
 
+    const darkMode = useSelector(state => state.color.darkmode)
+
+    console.log("Darkmode dashboard",darkMode)
+
+    const currentmode = darkMode === "On"
+
     return (
         <div className="cst-wrapper">
             <div className="cst-header">
-                <p>Customer List</p>
+                <p style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Customer List</p>
 
                 <div>
                     {/* <button onClick={reloadHandler} className='cst-reload'><AiOutlineReload /></button> */}
-                    <div style={{ background: "#f1f6fc" }}></div>
+                    <div style={{ background: "#f1f6fc",display:"none" }}></div>
                     <div>
 
                         <button onClick={searchHandler} className='cst-search-btn' style={{ border: "none" }}><AiOutlineSearch /></button>
