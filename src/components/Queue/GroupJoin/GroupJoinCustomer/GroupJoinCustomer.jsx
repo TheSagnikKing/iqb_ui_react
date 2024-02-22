@@ -223,16 +223,26 @@ const GroupJoinCustomer = () => {
 
   const groupjoin = useSelector(state => state.groupjoin)
 
+  const darkMode = useSelector(state => state.color.darkmode)
+
+  console.log("Darkmode dashboard",darkMode)
+
+  const currentmode = darkMode === "On"
+
   return (
     <>
       <AdminLayout height={"200vh"} />
       <div className="singlejoin-barber-quebarber-wrapper"
-        style={{ height: "140vh" }}
+        style={{ height: "140vh",
+        background:currentmode ? "var(--dark-secondary-color)" : "var(--light-secondary-color)"
+        }}
       >
 
-        <h1>Group Join</h1>
+        <h1 style={{
+          color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"
+        }}>Group Join</h1>
 
-        <div className='barber-single-join'>
+        <div className={`barber-single-join ${currentmode ? "barber-single-join_dark" : ""}`}>
           <div>
             <h2>Customer Name</h2>
             <input
@@ -268,9 +278,9 @@ const GroupJoinCustomer = () => {
             {/* <button onClick={() => setBarberDrop(!barberDrop)}>drop</button> */}
           </div>
 
-          <div className='barber-single-join-dropdown-list'>
+          <div className={`barber-single-join-dropdown-list ${currentmode ? "barber-single-join-dropdown-list_dark" : ""}`}>
 
-            <div className='barber-single-join-content-bbr'>
+            <div className={`barber-single-join-content-bbr ${currentmode ? "barber-single-join-content-bbr_dark" : ""}`}>
               <p>Email</p>
               <p>Name</p>
               {/* <p>User Name</p> */}
@@ -281,7 +291,7 @@ const GroupJoinCustomer = () => {
 
             {
               appoinmentBarberList ? appoinmentBarberList?.response?.map((barber) => (
-                <div className='barber-single-join-content-bbr' key={barber._id}>
+                <div className={`barber-single-join-content-bbr ${currentmode ? "barber-single-join-content-bbr_dark" : ""}`} key={barber._id}>
                   <p>{barber.email}</p>
                   <p>{barber.name}</p>
                   {/* <p>{barber.userName}</p> */}
@@ -302,8 +312,8 @@ const GroupJoinCustomer = () => {
           </div>
 
           <h2>Choose Barber Services</h2>
-          <div className='barber-single-join-services'>
-            <div className='barber-single-join-quebarberserv-content'>
+          <div className={`barber-single-join-services ${currentmode ? "barber-single-join-services_dark" : ""}`}>
+            <div className={`barber-single-join-quebarberserv-content ${currentmode ? "barber-single-join-quebarberserv-content_dark" : ""}`}>
               <p>Service ID</p>
               <p>Service Name</p>
               <p>Service Price</p>
@@ -312,7 +322,7 @@ const GroupJoinCustomer = () => {
             </div>
             {
               groupBarberServicesByBarberId?.response?.map((b, index) => (
-                <div className='barber-single-join-quebarberserv-content' key={b._id}>
+                <div className={`barber-single-join-quebarberserv-content ${currentmode ? "barber-single-join-quebarberserv-content_dark" : ""}`} key={b._id}>
                   <p>{b.serviceId}</p>
                   <p>{b.serviceName}</p>
                   <p>{b.servicePrice}</p>
@@ -332,9 +342,9 @@ const GroupJoinCustomer = () => {
 
 
           <h2>Your Selected Services</h2>
-          <div className='barber-single-join-services'>
+          <div className={`barber-single-join-services ${currentmode ? "barber-single-join-services_dark" : ""}`}>
 
-            <div className='barber-single-join-quebarberserv-content'>
+            <div className={`barber-single-join-quebarberserv-content ${currentmode ? "barber-single-join-quebarberserv-content_dark" : ""}`}>
               <p>Service ID</p>
               <p>Service Name</p>
               <p>Service Price</p>
@@ -343,7 +353,7 @@ const GroupJoinCustomer = () => {
             </div>
             {
               selectedService && selectedService.length > 0 ? selectedService.map((b, index) => (
-                <div className='barber-single-join-quebarberserv-content' key={b._id}>
+                <div className={`barber-single-join-quebarberserv-content ${currentmode ? "barber-single-join-quebarberserv-content_dark" : ""}`} key={b._id}>
                   <p>{b.serviceId}</p>
                   <p>{b.serviceName}</p>
                   <p>{b.servicePrice}</p>
@@ -360,11 +370,16 @@ const GroupJoinCustomer = () => {
             }
           </div>
 
-          <button onClick={addCustomerHandler}>Add Customer</button>
+          <button onClick={addCustomerHandler}
+          style={{
+            background:currentmode ? "var(--dark-primary-color)" : "var(--light-tertiary-color)",
+            color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"
+          }}
+          >Add Customer</button>
 
           <h2>Customers</h2>
-          <div className='barber-single-join-services'>
-            <div className='barber-single-join-quebarberserv-content-ggp'>
+          <div className={`barber-single-join-services ${currentmode ? "barber-single-join-services_dark" : ""}`}>
+            <div className={`barber-single-join-quebarberserv-content-ggp ${currentmode ? "barber-single-join-quebarberserv-content-ggp_dark" : ""}`}>
               <p>Customer Name</p>
               <p>Barber Name</p>
               <p>Joined QType</p>
@@ -374,7 +389,7 @@ const GroupJoinCustomer = () => {
             </div>
             {
               selectedCustomer && selectedCustomer.length > 0 ? (selectedCustomer.map((cus, index) => (
-                <div className='barber-single-join-quebarberserv-content-ggp' key={index}>
+                <div className={`barber-single-join-quebarberserv-content-ggp ${currentmode ? "barber-single-join-quebarberserv-content-ggp_dark" : ""}`} key={index}>
                   <p>{cus.name}</p>
                   <p>{cus.barberName}</p>
                   <p>{cus.joinedQType}</p>
@@ -392,7 +407,12 @@ const GroupJoinCustomer = () => {
             }
           </div>
 
-          <button onClick={joinqueueHandler}>{
+          <button onClick={joinqueueHandler}
+          style={{
+            background:currentmode ? "var(--dark-primary-color)" : "var(--light-primary-color)",
+            color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"
+          }}
+          >{
             groupjoin?.loading == true ? <h2>Loading...</h2> : "Join Queue"
           }</button>
         </div>

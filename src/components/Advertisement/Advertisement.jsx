@@ -145,12 +145,18 @@ const Advertisement = () => {
   }, [LoggedInMiddleware?.user])
 
 
+  const darkMode = useSelector(state => state.color.darkmode)
+
+  console.log("Darkmode dashboard",darkMode)
+
+  const currentmode = darkMode === "On" 
+
   return (
     <>
       <AdminLayout />
-      <div className="sa-br-right_main_div">
+      <div className={`sa-br-right_main_div ${currentmode ? "sa-br-right_main_div_dark" : ""}`}>
         <div className='advertisement-header'>
-          <h2>Advertisement</h2>
+          <h2 style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Advertisement</h2>
           <div>
             <input
               type='file'
@@ -165,16 +171,18 @@ const Advertisement = () => {
               cursor:"pointer",
               borderRadius:"5px",
               border:"none",
-              fontSize:"1.2rem"
-            }}>{advertisementLoader ? <h2>Loading</h2> : <p style={{fontSize:"1.2rem"}}>Upload</p>}</button>
+              fontSize:"1.2rem",
+              color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)",
+              backgroundColor:currentmode ? "var(--dark-secondary-color)" : "var(--light-secondary-color)"
+            }}>{advertisementLoader ? <h2>Loading</h2> : <p style={{fontSize:"1.2rem",color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)", }}>Upload</p>}</button>
           </div>
         </div>
 
-        <div className='advertisement-container'>
+        <div className={`advertisement-container ${currentmode ? "advertisement-container_dark" : ""}`}>
 
           {
             advertisementList ? (advertisementList?.map((a, i) => (
-              <div key={i}>
+              <div key={i} style={{boxShadow:"0px 0px 6px white"}}>
                 <img src={a.url} alt="" />
                 <div>
                   {handleEditLoader === true ? <button>Ld</button> : <button onClick={() => handleEditButtonClick(a.public_id, a._id)} style={{border:"none",marginRight:"1rem"}}><MdEdit /></button>}

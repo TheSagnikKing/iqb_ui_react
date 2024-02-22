@@ -133,16 +133,16 @@ const Dashboard3 = () => {
                     <div style={{ background: "#f1f6fc",display:"none" }}></div>
                     <div>
 
-                        <button onClick={searchHandler} className='cst-search-btn' style={{ border: "none" }}><AiOutlineSearch /></button>
+                        <button onClick={searchHandler} className='cst-search-btn' style={{ border: "none", background:currentmode ? "var(--dark-secondary-color)" : "var(--light-secondary-color)" , color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}><AiOutlineSearch /></button>
                     </div>
 
                 </div>
             </div>
 
             {/* Table  */}
-            <div className='cst-table'>
+            <div className={`cst-table ${currentmode ? "cst-table_dark" : ""}`}>
                 {
-                    <main className="cst-barberitem" >
+                    <main className={`cst-barberitem ${currentmode ? "cst-barberitem_dark" : ""}`}>
                         <div><div>
                             <h4>Salon ID</h4>
                             {/* <div>
@@ -185,7 +185,7 @@ const Dashboard3 = () => {
                     </main>
                 }
                 {
-                    loading ? <div className='cst-puff-loader-box'><PuffLoader /></div> : customersList && customersList.getAllCustomers ? customersList?.getAllCustomers.map((customer, index) => <main className="cst-barberitem" key={index}>
+                    loading ? <div className='cst-puff-loader-box'><PuffLoader /></div> : customersList && customersList.getAllCustomers ? customersList?.getAllCustomers.map((customer, index) => <main className={`cst-barberitem ${currentmode ? "cst-barberitem_dark" : ""}`} key={index}>
                         <div>
                             <p>{customer.salonId}</p>
                         </div>
@@ -220,7 +220,7 @@ const Dashboard3 = () => {
                 }
             </div>
 
-            <div className='cst-barber-pagination'>
+            <div className={`cst-barber-pagination ${currentmode ? "cst-barber-pagination" : ""}`}>
                 <div style={{ display: "flex", gap: "1.5rem" }}>
                     <div onClick={PrevHandler}><AiOutlineArrowLeft /></div>
                     <div onClick={NextHandler}><AiOutlineArrowRight /></div>

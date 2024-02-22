@@ -170,6 +170,35 @@
     gap: 2rem !important;
 }
 
+
+/* DARK MODE  */
+
+.singlejoin-barber-quebarber-wrapper_dark{
+    background-color: var(--dark-secondary-color);
+    color:var(--light-secondary-color)
+}
+
+.barber-single-join_dark input{
+    background-color: var(--dark-primary-color);
+    color:var(--light-secondary-color)
+}
+
+.barber-single-join_dark input::placeholder{
+    color:var(--light-secondary-color)
+}
+
+.model1_dark{
+    background-color: var(--dark-primary-color);
+}
+
+.model2_dark{
+    background-color: var(--dark-primary-color);
+}
+
+.services-search-btn_dark{
+    background-color: var(--dark-secondary-color);
+}
+
 @media((min-width:0px) and (max-width:400px)){
     .singlejoin-barber-quebarber-wrapper {
         width: 82% !important;

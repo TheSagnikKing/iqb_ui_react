@@ -219,6 +219,36 @@
     cursor: pointer;
 }
 
+/* DARK MODE  */
+
+.cst-table_dark{
+    background-color: var(--dark-secondary-color);
+}
+
+.cst-barberitem_dark{
+    background-color: var(--dark-primary-color);
+}
+
+.cst-barberitem_dark h4{
+    color:var(--light-secondary-color)
+}
+
+.cst-barberitem_dark{
+    background-color: var(--dark-primary-color);
+}
+
+.cst-barberitem p{
+    color: var(--dark-secondary-color) !important;
+}
+
+.cst-barberitem_dark p{
+    color: var(--light-secondary-color) !important;
+}
+
+.cst-barber-pagination{
+    background-color: var(--dark-secondary-color);
+}
+
 @media((min-width:0px) and (max-width:400px)){
     .cst-wrapper {
         width: calc(100% - 8rem) !important; /* 82px converted to rem */

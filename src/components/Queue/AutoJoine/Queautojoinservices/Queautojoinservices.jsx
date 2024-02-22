@@ -176,15 +176,21 @@ const Queautojoinservices = () => {
 
   const autojoin = useSelector(state => state.autojoin)
 
+  const darkMode = useSelector(state => state.color.darkmode)
+
+  console.log("Darkmode dashboard",darkMode)
+
+  const currentmode = darkMode === "On"
+
   return (
     <>
 
       <AdminLayout />
-      <div className="singlejoin-barber-quebarber-wrapper">
+      <div className={`singlejoin-barber-quebarber-wrapper ${currentmode ? "singlejoin-barber-quebarber-wrapper_dark" : ""}`}>
 
         <h1>Auto Join</h1>
 
-        <div className='barber-single-join'>
+        <div className={`barber-single-join ${currentmode ? "barber-single-join_dark" : ""}`}>
           <div>
             <h2>Customer Name</h2>
             <input
@@ -216,8 +222,8 @@ const Queautojoinservices = () => {
           </div>
 
           <h2>Choose Barber Services</h2>
-          <div className='barber-single-join-services'>
-            <div className='barber-single-join-quebarberserv-content'>
+          <div className={`barber-single-join-services ${currentmode ? 'barber-single-join-services_dark' : ""}`}>
+            <div className={`barber-single-join-quebarberserv-content ${currentmode ? "barber-single-join-quebarberserv-content_dark" : ""}`}>
               <p>Service ID</p>
               <p>Service Name</p>
               <p>Service Price</p>
@@ -226,7 +232,7 @@ const Queautojoinservices = () => {
             </div>
             {
               barberAllSalonServics?.response?.map((b, index) => (
-                <div className='barber-single-join-quebarberserv-content' key={b._id}>
+                <div className={`barber-single-join-quebarberserv-content ${currentmode ? "barber-single-join-quebarberserv-content_dark" : ""}`} key={b._id}>
                   <p>{b.serviceId}</p>
                   <p>{b.serviceName}</p>
                   <p>{b.servicePrice}</p>
@@ -246,9 +252,9 @@ const Queautojoinservices = () => {
 
 
           <h2>Your Selected Services</h2>
-          <div className='barber-single-join-services'>
+          <div className={`barber-single-join-services ${currentmode ? "barber-single-join-services_dark" : ""}`}>
 
-            <div className='barber-single-join-quebarberserv-content'>
+            <div className={`barber-single-join-quebarberserv-content ${currentmode ? "barber-single-join-quebarberserv-content_dark" : ""}`}>
               <p>Service Id</p>
               <p>Service Name</p>
               <p>Service Price</p>
@@ -258,7 +264,7 @@ const Queautojoinservices = () => {
 
             {
               selectedService && selectedService.length > 0 ? selectedService.map((b, index) => (
-                <div className='barber-single-join-quebarberserv-content' key={b._id}>
+                <div className={`barber-single-join-quebarberserv-content ${currentmode ? "barber-single-join-quebarberserv-content_dark" : ""}`} key={b._id}>
                   <p>{b.serviceId}</p>
                   <p>{b.serviceName}</p>
                   <p>{b.servicePrice}</p>
@@ -275,7 +281,12 @@ const Queautojoinservices = () => {
             }
           </div>
 
-          <button onClick={joinqueueHandler}>{
+          <button onClick={joinqueueHandler}
+          style={{
+            background:currentmode ? "var(--dark-primary-color)" : "var(--light-primary-color)",
+            color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"
+          }}
+          >{
             autojoin?.loading == true ? <h2>loading...</h2> : "Join Queue"
           }</button>
         </div>

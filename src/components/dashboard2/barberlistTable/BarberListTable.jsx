@@ -450,7 +450,7 @@ const BarberListTable = () => {
 
             </div>
 
-            <div className='barberlist-barber-pagination'>
+            <div className={`barberlist-barber-pagination ${currentMode ? "barberlist-barber-pagination_dark" : ""}`}>
                 <div>
                     <div onClick={PrevHandler}><AiOutlineArrowLeft /></div>
                     <div onClick={NextHandler}><AiOutlineArrowRight /></div>

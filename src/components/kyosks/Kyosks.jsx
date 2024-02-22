@@ -34,10 +34,10 @@ const Kyosks = () => {
 
     const fetchAllBarbers = () => {
         const confirm = window.confirm("Are you sure?")
-        
+
         if (confirm) {
             setCurrentbarberName("")
-            dispatch(barberListAction(salonId, setModel1 ,setModel2, setModel2barber ))
+            dispatch(barberListAction(salonId, setModel1, setModel2, setModel2barber))
         }
     }
 
@@ -68,7 +68,7 @@ const Kyosks = () => {
     // console.log("currrrreeeeeennnnnttt" ,currentbarberName)
 
     const fetchAllServices = () => {
-        dispatch(getAllSalonServicesAction(Number(salonId), setModel1, setModelservices,setCurrentbarberName,setModel2))
+        dispatch(getAllSalonServicesAction(Number(salonId), setModel1, setModelservices, setCurrentbarberName, setModel2))
         setSelectedService([])
     }
 
@@ -122,7 +122,7 @@ const Kyosks = () => {
             methodUsed: "Walk-In",
             barberName: selectedbarberName || currentbarberName,
             barberId: selectedbarberId,
-            services: selectedService 
+            services: selectedService
         }
 
         // console.log(queuedata)
@@ -157,19 +157,24 @@ const Kyosks = () => {
         // console.log(serviceIds, salonId)
 
         setCurrentbarberName("")
-        dispatch(getBarberByMultipleServicesAction(salonId, serviceIds,setModel2barber,setfetchSelectedSearch))
+        dispatch(getBarberByMultipleServicesAction(salonId, serviceIds, setModel2barber, setfetchSelectedSearch))
     }
 
+    const darkMode = useSelector(state => state.color.darkmode)
+
+    console.log("Darkmode dashboard", darkMode)
+
+    const currentmode = darkMode === "On"
 
     return (
         <>
 
             <AdminLayout />
-            <div className="singlejoin-barber-quebarber-wrapper">
+            <div className={`singlejoin-barber-quebarber-wrapper ${currentmode ? "singlejoin-barber-quebarber-wrapper_dark" : ""}`}>
 
                 <h1>Single Join</h1>
 
-                <div className='barber-single-join'>
+                <div className={`barber-single-join ${currentmode ? "barber-single-join_dark" : ""}`}>
                     <div>
                         <h2>Customer Name</h2>
                         <input
@@ -201,18 +206,19 @@ const Kyosks = () => {
                     </div>
 
 
-                    <div  className='mobile-kyosk-cont'>
+                    <div className='mobile-kyosk-cont'>
                         <div className='barber-single-join-dropdown'>
                             <h3>Barber Name : <b>{currentbarberName && currentbarberName}</b></h3>
 
                             <button onClick={() => fetchAllBarbers()} style={{
-                                background:"#f1f6fc",
-                                border:"none",
-                                padding:"0.8rem",
-                                cursor:"pointer",
-                                boxShadow:"0px 0px 4px rgba(0,0,0,0.4)",
-                                borderRadius:"5px",
-                                fontSize:"1rem"
+                                background: currentmode ? "var(--dark-primary-color)" : "var(--light-tertiary-color)",
+                                color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)",
+                                border: "none",
+                                padding: "0.8rem",
+                                cursor: "pointer",
+                                boxShadow: "0px 0px 4px rgba(0,0,0,0.4)",
+                                borderRadius: "5px",
+                                fontSize: "1rem"
                             }}>Show Barber</button>
 
                         </div>
@@ -220,14 +226,15 @@ const Kyosks = () => {
                         <div className='barber-single-join-dropdown'>
                             <h3>Choose  Services</h3>
                             <button onClick={() => fetchAllServices()} style={{
-                                background:"#f1f6fc",
-                                border:"none",
-                                padding:"0.8rem",
-                                cursor:"pointer",
-                                boxShadow:"0px 0px 4px rgba(0,0,0,0.4)",
-                                borderRadius:"5px",
-                                 fontSize:"1rem",
-                                 width:"10rem"
+                                background: currentmode ? "var(--dark-primary-color)" : "var(--light-tertiary-color)",
+                                color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)",
+                                border: "none",
+                                padding: "0.8rem",
+                                cursor: "pointer",
+                                boxShadow: "0px 0px 4px rgba(0,0,0,0.4)",
+                                borderRadius: "5px",
+                                fontSize: "1rem",
+                                width: "10rem"
                             }}>Show Services</button>
                         </div>
 
@@ -235,22 +242,25 @@ const Kyosks = () => {
 
                     <div className='model-container'>
                         {
-                            model1 == true ? <div className='model1'>
+                            model1 == true ? <div className={`model1 ${currentmode ? "model1_dark" : ""}`}>
 
                                 {barberList?.response?.length > 0 ? barberList?.response?.map((barber) => (
-                                    <div key={barber._id}>
+                                    <div key={barber._id} style={{
+                                        background:currentmode ? "var(--dark-secondary-color)" : "var(--light-secondary-color)",
+                                        color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"
+                                        }}>
                                         <div >
                                             <div>
                                                 <div><img src="https://png.pngtree.com/background/20230530/original/pngtree-man-looking-for-a-good-mens-beauty-look-picture-image_2791625.jpg" alt="" /></div>
 
                                                 <div>
                                                     <h3>{barber.name}</h3>
-                                                    <p>(4.5)</p>
-                                                    <p>Cutting, Styling,Hair color, Hair Straightening</p>
+                                                    <p style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>(4.5)</p>
+                                                    <p style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Cutting, Styling,Hair color, Hair Straightening</p>
                                                 </div>
                                             </div>
                                             <div>
-                                                <p>Queued</p>
+                                                <p style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Queued</p>
                                                 <h2>{barber.queueCount}</h2>
                                             </div>
 
@@ -272,11 +282,11 @@ const Kyosks = () => {
 
                                         <div>
                                             <div>
-                                                <p>Next available position</p>
+                                                <p style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Next available position</p>
                                                 <h2>3</h2>
                                             </div>
                                             <div>
-                                                <p>Estimated Time</p>
+                                                <p style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Estimated Time</p>
                                                 <h2>{barber.barberEWT} mins</h2>
                                             </div>
                                         </div>
@@ -289,14 +299,17 @@ const Kyosks = () => {
                         }
 
                         {
-                            model1services == true && <div className='model2'>
+                            model1services == true && <div className={`model2 ${currentmode ? "model2_dark" : ""}`}>
                                 {
                                     getBarberServicesBybarberId?.response?.map((b, index) => (
-                                        <div key={b._id}>
+                                        <div key={b._id} style={{
+                                            background:currentmode ? "var(--dark-secondary-color)" : "var(--light-secondary-color)",
+                                            color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"
+                                        }}>
                                             <div>
                                                 <div>
-                                                    <h3>{b.serviceName}</h3>
-                                                    <p>(4.0) 20  reviews</p>
+                                                    <h3 style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>{b.serviceName}</h3>
+                                                    <p style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>(4.0) 20  reviews</p>
                                                 </div>
 
                                                 {/* <div onClick={() => selectedServiceHandler(b, index)}>
@@ -342,15 +355,15 @@ const Kyosks = () => {
 
                                             <div>
                                                 <div>
-                                                    <p>Hair cut</p>
-                                                    <p>Hair Spa</p>
+                                                    <p style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Hair cut</p>
+                                                    <p style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Hair Spa</p>
                                                 </div>
 
                                                 <div>
-                                                    <h2>${b.servicePrice}</h2>
+                                                    <h2 style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>${b.servicePrice}</h2>
                                                     <div>
                                                         <div><FaRegClock /></div>
-                                                        <p>{b.barberServiceEWT} mins</p>
+                                                        <p style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>{b.barberServiceEWT} mins</p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -363,150 +376,162 @@ const Kyosks = () => {
                     </div>
 
 
-                        {/* //model services  =============================== */} 
+                    {/* //model services  =============================== */}
                     <div className='model-container'>
                         {
-                            model2barber == true ? <div className='model1'>
+                            model2barber == true ? <div className={`model1 ${currentmode ? "model1_dark" : ""}`}>
 
-                            {getBarberByMultipleServices?.response?.map((barber) => (
-                                <div key={barber._id}>
-                                    <div >
-                                        <div>
-                                            <div><img src="https://png.pngtree.com/background/20230530/original/pngtree-man-looking-for-a-good-mens-beauty-look-picture-image_2791625.jpg" alt="" /></div>
-
+                                {getBarberByMultipleServices?.response?.map((barber) => (
+                                    <div key={barber._id} style={{
+                                        background:currentmode ? "var(--dark-secondary-color)" : "var(--light-secondary-color)",
+                                        color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"
+                                    }}>
+                                        <div >
                                             <div>
-                                                <h3>{barber.name}</h3>
-                                                <p>(4.5)</p>
-                                                <p>Cutting, Styling,Hair color, Hair Straightening</p>
+                                                <div><img src="https://png.pngtree.com/background/20230530/original/pngtree-man-looking-for-a-good-mens-beauty-look-picture-image_2791625.jpg" alt="" /></div>
+
+                                                <div>
+                                                    <h3 style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>{barber.name}</h3>
+                                                    <p style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>(4.5)</p>
+                                                    <p style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Cutting, Styling,Hair color, Hair Straightening</p>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <p style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Queued</p>
+                                                <h2 style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>{barber.queueCount}</h2>
+                                            </div>
+
+                                            {currentbarberName == barber.name ? <div style={{
+                                                fontSize: "3rem",
+                                                display: "flex",
+                                                justifyContent: "center",
+                                                alignItems: "center",
+                                                color: "green",
+                                                height: "3rem",
+                                                width: "3rem",
+                                                borderRadius: "50%",
+                                                boxShadow: "0px 0px 4px rgba(0,0,0,0.5)"
+                                            }}><TiTick /></div> : <div onClick={() => {
+                                                setCurrentbarberName(barber.name)
+                                                setSelectedBarberid(barber.barberId)
+                                            }}>
+                                                <IoIosAddCircle />
+                                            </div>}
+
+                                        </div>
+
+                                        <div>
+                                            <div>
+                                                <p style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Next available position</p>
+                                                <h2 style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>3</h2>
+                                            </div>
+                                            <div>
+                                                <p style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Estimated Time</p>
+                                                <h2 style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>{barber.barberEWT} mins</h2>
                                             </div>
                                         </div>
-                                        <div>
-                                            <p>Queued</p>
-                                            <h2>{barber.queueCount}</h2>
-                                        </div>
-
-                                        {currentbarberName == barber.name ? <div style={{
-                                            fontSize: "3rem",
-                                            display: "flex",
-                                            justifyContent: "center",
-                                            alignItems: "center",
-                                            color: "green",
-                                            height: "3rem",
-                                            width: "3rem",
-                                            borderRadius: "50%",
-                                            boxShadow: "0px 0px 4px rgba(0,0,0,0.5)"
-                                        }}><TiTick /></div> : <div onClick={() => {
-                                            setCurrentbarberName(barber.name)
-                                            setSelectedBarberid(barber.barberId)
-                                        }}>
-                                            <IoIosAddCircle />
-                                        </div>}
 
                                     </div>
-
-                                    <div>
-                                        <div>
-                                            <p>Next available position</p>
-                                            <h2>3</h2>
-                                        </div>
-                                        <div>
-                                            <p>Estimated Time</p>
-                                            <h2>{barber.barberEWT} mins</h2>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            ))}
+                                ))}
 
 
-                        </div> : <div></div>
+                            </div> : <div></div>
                         }
 
                         {
-                            model2 == true && <div className='model2'>
-                                 {
-                                selectedService.length > 0 && <button onClick={() => fetchSelectedServices()} className='services-search-btn' >{fetchSelectedSearch === true ? <ClipLoader/> : <p style={{fontSize:"1.3rem"}}>Search</p>}</button>
-                            }
-                            {
-                                getAllSalonServices?.response?.map((b, index) => (
-                                    <div key={b._id}>
-                                        <div>
+                            model2 == true && <div className={`model2 ${currentmode ? "model2_dark" : ""}`}>
+                                {
+                                    selectedService.length > 0 && <button onClick={() => fetchSelectedServices()} className={`services-search-btn ${currentmode ? "services-search-btn_dark" : ""}`}
+                                    >{fetchSelectedSearch === true ? <ClipLoader /> : <p style={{ fontSize: "1.3rem",color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Search</p>}</button>
+                                }
+                                {
+                                    getAllSalonServices?.response?.map((b, index) => (
+                                        <div key={b._id} style={{
+                                            background:currentmode ? "var(--dark-secondary-color)" : "var(--light-secondary-color)",
+                                            color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"
+                                        }}>
                                             <div>
-                                                <h3>{b.serviceName}</h3>
-                                                <p>(4.0) 20  reviews</p>
-                                            </div>
+                                                <div>
+                                                    <h3 style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>{b.serviceName}</h3>
+                                                    <p style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>(4.0) 20  reviews</p>
+                                                </div>
 
-                                            {/* <div onClick={() => selectedServiceHandler(b, index)}>
+                                                {/* <div onClick={() => selectedServiceHandler(b, index)}>
                                                 <IoIosAddCircle />
                                             </div> */}
 
-                                            {
-                                                selectedService.includes(b) ? (
-                                                    <div className='model1-barber-icons'>
-                                                        <div style={{
-                                                            fontSize: "3rem",
-                                                            display: "flex",
-                                                            justifyContent: "center",
-                                                            alignItems: "center",
-                                                            color: "green",
-                                                            height: "3rem",
-                                                            width: "3rem",
-                                                            borderRadius: "50%",
-                                                            boxShadow: "0px 0px 4px rgba(0,0,0,0.5)"
+                                                {
+                                                    selectedService.includes(b) ? (
+                                                        <div className='model1-barber-icons'>
+                                                            <div style={{
+                                                                fontSize: "3rem",
+                                                                display: "flex",
+                                                                justifyContent: "center",
+                                                                alignItems: "center",
+                                                                color: "green",
+                                                                height: "3rem",
+                                                                width: "3rem",
+                                                                borderRadius: "50%",
+                                                                boxShadow: "0px 0px 4px rgba(0,0,0,0.5)"
 
-                                                        }}><TiTick /></div>
-                                                        <div style={{
-                                                            fontSize: "3rem",
-                                                            display: "flex",
-                                                            justifyContent: "center",
-                                                            alignItems: "center",
-                                                            color: "red",
-                                                            height: "3rem",
-                                                            width: "3rem",
-                                                            borderRadius: "50%",
-                                                            boxShadow: "0px 0px 4px rgba(0,0,0,0.5)"
-                                                        }} onClick={() => selectedServiceDelete(b)}><RxCross2 /></div>
-                                                    </div>
-                                                ) : (
-                                                    <div onClick={() => selectedServiceHandler(b)}>
-                                                        <IoIosAddCircle />
-                                                    </div>
-                                                )
-                                            }
+                                                            }}><TiTick /></div>
+                                                            <div style={{
+                                                                fontSize: "3rem",
+                                                                display: "flex",
+                                                                justifyContent: "center",
+                                                                alignItems: "center",
+                                                                color: "red",
+                                                                height: "3rem",
+                                                                width: "3rem",
+                                                                borderRadius: "50%",
+                                                                boxShadow: "0px 0px 4px rgba(0,0,0,0.5)"
+                                                            }} onClick={() => selectedServiceDelete(b)}><RxCross2 /></div>
+                                                        </div>
+                                                    ) : (
+                                                        <div onClick={() => selectedServiceHandler(b)}>
+                                                            <IoIosAddCircle />
+                                                        </div>
+                                                    )
+                                                }
 
 
-                                        </div>
-
-                                        <div>
-                                            <div>
-                                                <p>Hair cut</p>
-                                                <p>Hair Spa</p>
                                             </div>
 
                                             <div>
-                                                <h2>${b.servicePrice}</h2>
                                                 <div>
-                                                    <div><FaRegClock /></div>
-                                                    <p>{b.barberServiceEWT} mins</p>
+                                                    <p style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Hair cut</p>
+                                                    <p style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Hair Spa</p>
+                                                </div>
+
+                                                <div>
+                                                    <h2 style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>${b.servicePrice}</h2>
+                                                    <div>
+                                                        <div><FaRegClock /></div>
+                                                        <p style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>{b.barberServiceEWT} mins</p>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                ))
-                            }
-                           
-                                
-                        </div>
+                                    ))
+                                }
+
+
+                            </div>
                         }
 
 
                     </div>
 
-                    
 
 
-                    
-                    <button onClick={joinqueueHandler}>{
+
+
+                    <button onClick={joinqueueHandler}
+                    style={{
+                        background:currentmode ? "var(--dark-primary-color)" : "var(--light-tertiary-color)",
+                        color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"
+                    }}
+                    >{
                         singleJoinQueue?.loading == true ? <h2>Loading...</h2> : "Join Queue"
                     }</button>
                 </div>

@@ -97,6 +97,36 @@ input[type="text"]::placeholder {
     font-size: 1.2rem;
 }
 
+.que-lst-content p{
+    color: #000 !important;
+}
+
+/* DARK MODE  */
+
+.queue-list-table_dark{
+    background-color: var(--dark-secondary-color);
+}
+
+.queue-list-table_dark>h3{
+    color:var(--light-secondary-color)
+}
+
+.que-lst-head_dark{
+    background-color: var(--dark-primary-color);
+}
+
+.que-lst-head_dark h4{
+    color:var(--light-secondary-color)
+}
+
+.que-lst-content_dark{
+    background-color: var(--dark-primary-color);
+}
+
+.que-lst-content_dark p{
+    color:var(--light-secondary-color) !important;
+}
+
 @media((min-width:0px) and (max-width:400px)){
     .queue-wrapper {
         width: 82% !important; /* 82% unchanged */

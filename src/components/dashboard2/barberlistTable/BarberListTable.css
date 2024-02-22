@@ -337,6 +337,10 @@
         color:var(--light-secondary-color)
     }
 
+    .barberlist-barber-pagination_dark{
+        background-color: var(--dark-secondary-color);
+    }
+
 @media((min-width:0px) and (max-width:400px)){
     .barberlist-wrapper {
         width: calc(100% - 7rem) !important; 

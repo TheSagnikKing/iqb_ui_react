@@ -123,6 +123,16 @@
     align-items: center;
 }
 
+/* DARK MODE */
+
+.sa-br-right_main_div_dark{
+    background-color: var(--dark-primary-color);
+}
+
+.advertisement-container_dark{
+    background-color: var(--dark-secondary-color);
+}
+
 @media((min-width:0px) and (max-width:400px)){
     .advertisement-header{
         display: block;

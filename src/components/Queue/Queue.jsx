@@ -89,16 +89,24 @@ const Queue = () => {
         dispatch(cancelQueueAtion(canceldata,signal))
     }
 
+
+    const darkMode = useSelector(state => state.color.darkmode)
+
+    console.log("Darkmode dashboard",darkMode)
+
+    const currentmode = darkMode === "On" 
+
     return (
         <>
             <AdminLayout />
             <div className='queue-wrapper'>
-                <h1>Select Your Joins</h1>
+                <h1 style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Select Your Joins</h1>
 
                 <div className='joins'>
                     <Link to="/queue/group/customers"
                         style={{
-                            background: "#fff",
+                            background: currentmode ? "var(--dark-secondary-color)" : "var(--light-secondary-color)",
+                            color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)",
                             padding: "1rem 1rem",
                             borderRadius: "3px",
                             boxShadow: "0px 0px 2px rgba(0,0,0,0.4)",
@@ -117,17 +125,23 @@ const Queue = () => {
                         }
 
                     </div> */}
-                    <div><p><Link to="/queue/barberlist/kyosks">Select Barber</Link></p></div>
+                    <div><p style={{
+                        background: currentmode ? "var(--dark-secondary-color)" : "var(--light-secondary-color)",
+                        color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)",
+                    }}><Link to="/queue/barberlist/kyosks">Select Barber</Link></p></div>
 
-                    <div><p><Link to="/queue/autoqueservices">Auto Join</Link></p></div>
+                    <div><p style={{
+                        background: currentmode ? "var(--dark-secondary-color)" : "var(--light-secondary-color)",
+                        color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)",
+                    }}><Link to="/queue/autoqueservices">Auto Join</Link></p></div>
 
                     {/* <div><p style={{ marginLeft: "10px" }}><Link to="/queue/mycustomer">My Customers</Link></p></div> */}
                 </div>
 
-                <div className='queue-list-table'>
+                <div className={`queue-list-table ${currentmode ? "queue-list-table_dark" : ""}`}>
                     <h3>Queue List</h3>
 
-                    <div className='que-lst-head'>
+                    <div className={`que-lst-head ${currentmode ? "que-lst-head_dark" : ""}`}>
                         <h4>Name</h4>
                         {/* <p>JoinedQ</p> */}
                         {/* <p>JoinedQType</p> */}
@@ -140,7 +154,7 @@ const Queue = () => {
 
                     {
                         queueList?.response?.map((c) => (
-                            <div className='que-lst-content' key={c._id}>
+                            <div className={`que-lst-content ${currentmode ? "que-lst-content_dark" : ""}`} key={c._id}>
                                 <p>{c.name}</p>
                                 <p>{c.timeJoinedQ}</p>
                                 <p>{c.barberName}</p>
