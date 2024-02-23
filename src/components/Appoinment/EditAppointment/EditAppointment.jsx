@@ -150,13 +150,19 @@ const EditAppointment = () => {
 
     const appoinmentBarberList = useSelector(state => state.appoinmentBarberList)
 
+    const darkMode = useSelector(state => state.color.darkmode)
+
+    console.log("Darkmode dashboard", darkMode)
+
+    const currentmode = darkMode === "On"
+
     return (
         <>
             <AdminLayout />
-            <div className='create-appointment-container'>
+            <div className={`create-appointment-container ${currentmode ? "create-appointment-container_dark" : ""}`}>
                 <h1>Edit Appointment</h1>
 
-                <div className='create-form'>
+                <div className={`create-form ${currentmode ? "create-form_dark" : ""}`}>
                     <div>
                         <h2>Appointment Note</h2>
                         <input
@@ -189,8 +195,11 @@ const EditAppointment = () => {
                     <div>
                         <h2>Barber List</h2>
 
-                        <div style={{overflowY:"scroll",width:"40rem"}}>
-                            <div className='barber-single-join-content-bbr'>
+                        <div style={{
+                            overflowY: "scroll", width: "40rem",
+                            background: currentmode ? "var(--dark-primary-color)" : "var(--light-primary-color)"
+                        }}>
+                            <div className={`barber-single-join-content-bbr ${currentmode ? "barber-single-join-content-bbr_dark" : ""}`}>
                                 <p>Email</p>
                                 <p>Name</p>
                                 <p>Mo. Number</p>
@@ -199,19 +208,19 @@ const EditAppointment = () => {
                             </div>
                             {
                                 appoinmentBarberList ? appoinmentBarberList?.response?.map((barber) => (
-                                    <div className='barber-single-join-content-bbr' key={barber._id}>
+                                    <div className={`barber-single-join-content-bbr ${currentmode ? "barber-single-join-content-bbr_dark" : ""}`} key={barber._id}>
                                         <p>{barber.email}</p>
                                         <p>{barber.name}</p>
                                         {/* <p>{barber.userName}</p> */}
                                         <p>{barber.mobileNumber}</p>
                                         <p>{barber.isActive === true ? "Yes" : "No"}</p>
                                         <button onClick={() => barberServiceCallHandler(barber.barberId, barber.name)} style={{
-                                            width:"5rem",
-                                            height:"3rem",
-                                            border:"1px solid blue",
-                                            cursor:"pointer",
-                                            background:"#f1f6fc",
-                                            color:"blue"
+                                            width: "5rem",
+                                            height: "3rem",
+                                            border: "1px solid blue",
+                                            cursor: "pointer",
+                                            background: "#f1f6fc",
+                                            color: "blue"
                                         }}><FaPlus /></button>
                                     </div>
 
@@ -224,8 +233,8 @@ const EditAppointment = () => {
                     <div>
                         <h2>Choose  Services</h2>
 
-                        <div style={{overflowY:"scroll",width:"40rem"}}>
-                            <div className='barber-single-join-quebarberserv-content'
+                        <div style={{ overflowY: "scroll", width: "40rem", background: currentmode ? "var(--dark-primary-color)" : "var(--light-primary-color)" }}>
+                            <div className={`barber-single-join-quebarberserv-content ${currentmode ? "barber-single-join-quebarberserv-content_dark" : ""}`}
                                 style={{
                                     fontSize: "11px"
                                 }}
@@ -239,19 +248,19 @@ const EditAppointment = () => {
                             </div>
                             {
                                 getBarberServicesBybarberId?.response?.map((b, index) => (
-                                    <div className='barber-single-join-quebarberserv-content' key={b._id}>
+                                    <div className={`barber-single-join-quebarberserv-content ${currentmode ? "barber-single-join-quebarberserv-content_dark" : ""}`} key={b._id}>
                                         {/* <p>{b.serviceId}</p> */}
                                         <p>{b.serviceName}</p>
                                         {/* <p>{b.serviceCode}</p> */}
                                         <p>{b.servicePrice}</p>
                                         <p>{b.barberServiceEWT}</p>
                                         <button onClick={() => selectedServiceHandler(b, index)} style={{
-                                            width:"5rem",
-                                            height:"3rem",
-                                            border:"1px solid blue",
-                                            cursor:"pointer",
-                                            background:"#f1f6fc",
-                                            color:"blue"
+                                            width: "5rem",
+                                            height: "3rem",
+                                            border: "1px solid blue",
+                                            cursor: "pointer",
+                                            background: "#f1f6fc",
+                                            color: "blue"
                                         }}><FaPlus /></button>
                                     </div>
                                 ))
@@ -262,11 +271,11 @@ const EditAppointment = () => {
                     <div>
                         <h2>Your Services</h2>
 
-                        <div style={{overflowY:"scroll",width:"40rem"}}>
-                            <div className='barber-single-join-quebarberserv-content'
-                            style={{
-                                fontSize:"11px"
-                            }}
+                        <div style={{ overflowY: "scroll", width: "40rem", background: currentmode ? "var(--dark-primary-color)" : "var(--light-primary-color)" }}>
+                            <div className={`barber-single-join-quebarberserv-content ${currentmode ? "barber-single-join-quebarberserv-content_dark" : ""}`}
+                                style={{
+                                    fontSize: "11px"
+                                }}
                             >
                                 {/* <p>ServiceID</p> */}
                                 <p>ServiceName</p>
@@ -277,20 +286,20 @@ const EditAppointment = () => {
                             </div>
                             {
                                 selectedService && selectedService.length > 0 ? selectedService.map((b, index) => (
-                                    <div className='barber-single-join-quebarberserv-content' key={b._id}>
+                                    <div className={`barber-single-join-quebarberserv-content ${currentmode ? "barber-single-join-quebarberserv-content_dark" : ""}`} key={b._id}>
                                         {/* <p>{b.serviceId}</p> */}
                                         <p>{b.serviceName}</p>
                                         {/* <p>{b.serviceCode}</p> */}
                                         <p>{b.servicePrice}</p>
                                         {/* barberServiceEWT chilo but arghya atake serviceEWT boleche korte */}
-                                        <p>{b.barberServiceEWT}</p> 
+                                        <p>{b.barberServiceEWT}</p>
                                         <button onClick={() => selectedServiceDelete(b)} style={{
-                                            width:"5rem",
-                                            height:"3rem",
-                                            border:"1px solid red",
-                                            cursor:"pointer",
-                                            background:"#f1f6fc",
-                                            color:"red"
+                                            width: "5rem",
+                                            height: "3rem",
+                                            border: "1px solid red",
+                                            cursor: "pointer",
+                                            background: "#f1f6fc",
+                                            color: "red"
                                         }}><MdDelete /></button>
                                     </div>
                                 )) : <p>No Services Available</p>
@@ -301,19 +310,19 @@ const EditAppointment = () => {
                     <div>
                         <h2>Choose  TimeSlots</h2>
 
-                        <div style={{overflowY:"scroll",width:"40rem"}}>
+                        <div style={{ overflowY: "scroll", width: "40rem", background: currentmode ? "var(--dark-primary-color)" : "var(--light-primary-color)" }}>
                             {
                                 timeSlotData?.timeSlots && timeSlotData?.timeSlots.length > 0 ? (timeSlotData?.timeSlots.map((t, i) => (
                                     <>
-                                        <div key={i} className='timeslot'>
+                                        <div key={i} className={`timeslot ${currentmode ? "timeslot_dark" : ""}`}>
                                             <p>{t.timeInterval}</p>
                                             {
-                                                t.disabled == true ? <button style={{color:"red",border:"none",background:"#f1f6fc",border:"1px solid red",display:"flex",justifyContent:"center",alignItems:"center",height:"3rem",width:"3.5rem"}}><ImCross /></button> : <button onClick={() => selectTimeSlotfnc(t.timeInterval)} style={{
-                                                    height:"3rem",
-                                                    border:"1px solid blue",
-                                                    cursor:"pointer",
-                                                    background:"#f1f6fc",
-                                                    color:"blue"
+                                                t.disabled == true ? <button style={{ color: "red", border: "none", background: "#f1f6fc", border: "1px solid red", display: "flex", justifyContent: "center", alignItems: "center", height: "3rem", width: "3.5rem" }}><ImCross /></button> : <button onClick={() => selectTimeSlotfnc(t.timeInterval)} style={{
+                                                    height: "3rem",
+                                                    border: "1px solid blue",
+                                                    cursor: "pointer",
+                                                    background: "#f1f6fc",
+                                                    color: "blue"
                                                 }}><FaPlus /></button>
                                             }
 
@@ -324,10 +333,15 @@ const EditAppointment = () => {
                         </div>
                     </div>
 
-                    <button onClick={() => { setShowPreview(true) }}>Preview</button>
+                    <button onClick={() => { setShowPreview(true) }}
+                        style={{
+                            background: currentmode ? "var(--dark-primary-color)" : "var(--light-primary-color)",
+                            color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"
+                        }}
+                    >Preview</button>
 
                     <Modal isOpen={showpreview} setIsOpen={setShowPreview}>
-                        <div className='app-modal-crt'>
+                        <div className={`app-modal-crt ${currentmode ? "app-modal-crt_dark" : ""}`}>
                             <h1>Preview Appointment</h1>
                             <div>
                                 <p>Appointment Name : {appointmentNotes} </p>
@@ -340,14 +354,16 @@ const EditAppointment = () => {
 
                             <h2>Your Services</h2>
 
-                            <div>
-                                <div className='app-modal-crt-head'>
+                            <div style={{
+                                background: currentmode ? "var(--dark-primary-color)" : "var(--light-primary-color)"
+                            }}>
+                                <div className={`app-modal-crt-head ${currentmode ? "app-modal-crt-head_dark" : ""}`}>
                                     <p>Service Name</p>
                                     <p>Service Price</p>
                                     <p>Barber Service Estimated Wait Time</p>
                                 </div>
 
-                                <div className='app-modal-crt-content'>
+                                <div className={`app-modal-crt-content ${currentmode ? "app-modal-crt-content_dark" : ""}`}>
                                     {
                                         selectedService.map((s, i) => (
                                             <div key={i}>
@@ -360,9 +376,13 @@ const EditAppointment = () => {
                                 </div>
                             </div>
 
-                            <button className='app-modal-crt-button' onClick={UpdateAppointment} style={{fontSize:"1.2rem"}}>{
-                                editAppointment?.loading == true ? <h2>loading...</h2> : "Update Appointment"
-                            }</button>
+                            <button className='app-modal-crt-button' onClick={UpdateAppointment} style={{
+                                background: currentmode ? "var(--dark-primary-color)" : "var(--light-primary-color)",
+                                color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)",
+                                fontSize: "1.2rem"
+                            }}>{
+                                    editAppointment?.loading == true ? <h2>loading...</h2> : "Update Appointment"
+                                }</button>
                         </div>
                     </Modal>
 

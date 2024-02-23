@@ -764,6 +764,20 @@
     color: var(--light-secondary-color) !important;
 }
 
+.dashboard-quelist-content_dark{
+    background-color: var(--dark-primary-color);
+}
+
+.dashboard-quelist-content_dark p{
+    color: var(--light-secondary-color) !important;
+    font-weight: 500;
+}
+
+.dashboard-quelist-content p{
+    color: var(--dark-secondary-color);
+    font-weight: 500;
+}
+
 @media((min-width:0px) and (max-width:400px)){
     .right_main_div{
         width: calc(100% - 6rem);

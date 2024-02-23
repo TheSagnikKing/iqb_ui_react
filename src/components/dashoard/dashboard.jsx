@@ -383,7 +383,7 @@ const Dashboard = () => {
 
                                 {
                                     queueList?.loading == true ? <h1>loading...</h1> : queueList?.response?.length > 0 ? queueList?.response?.slice(0, 5).map((c, i) => (
-                                        <div className='dashboard-quelist-content' key={i}>
+                                        <div className={`dashboard-quelist-content ${darkMode === "On" ? "dashboard-quelist-content_dark" : ""}`} key={i}>
                                             <p>{c.name}</p>
                                             <p>{c.barberName}</p>
                                             <p>{c.qPosition}</p>

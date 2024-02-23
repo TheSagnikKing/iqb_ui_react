@@ -3,6 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './Modal.css';
 import { MdClose } from "react-icons/md";
+import { useSelector } from 'react-redux';
 
 
 const Modal = ({ isOpen, setIsOpen, children }) => {
@@ -16,10 +17,16 @@ const Modal = ({ isOpen, setIsOpen, children }) => {
 
   }
 
+  const darkMode = useSelector(state => state.color.darkmode)
+
+  console.log("Darkmode dashboard",darkMode)
+
+  const currentmode = darkMode === "On"
+
   return ReactDOM.createPortal(
-    <div className="main-modal-container">
+    <div className={`main-modal-container ${currentmode ? "main-modal-container_dark" : ""}`}>
       <div>
-        <div className="modal-content"><button onClick={closeModal} className='main-modal-close'><MdClose /></button>
+        <div className={`modal-content ${currentmode ? "modal-content_dark" : ""}`}><button onClick={closeModal} className='main-modal-close'><MdClose /></button>
           {children}
         </div>
       </div>

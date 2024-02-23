@@ -151,6 +151,42 @@
     color:var(--light-tertiary-color)
 }
 
+.barber-single-join-content-bbr_dark p{
+    color:var(--light-secondary-color) !important
+}
+
+.barber-single-join-content-bbr p{
+    color:var(--dark-secondary-color)
+}
+
+.timeslot_dark{
+    background-color: var(--dark-secondary-color);
+}
+
+.timeslot_dark p{
+    color: var(--light-secondary-color) !important
+}
+
+.timeslot p{
+    color: var(--dark-secondary-color)
+}
+
+.app-modal-crt div p{
+    color:var(--dark-secondary-color)
+}
+
+.app-modal-crt_dark div p{
+    color:var(--light-secondary-color)
+}
+
+.app-modal-crt-head_dark{
+    background-color: var(--dark-secondary-color);
+}
+
+.app-modal-crt-content_dark div{
+    background-color: var(--dark-secondary-color) !important;
+}
+
 @media((min-width:0px) and (max-width:400px)){
     .create-appointment-container {
         width: 82% !important;

@@ -206,8 +206,9 @@ const CreateAppointment = () => {
                     <div>
                         <h2>Barber List</h2>
 
-                        <div style={{ overflowY: "scroll", width: "40rem",
-                            // back
+                        <div style={{
+                            overflowY: "scroll", width: "40rem",
+                            background: currentmode ? "var(--dark-primary-color)" : "var(--light-primary-color)"
                         }}>
                             <div className={`barber-single-join-content-bbr ${currentmode ? "barber-single-join-content-bbr_dark" : ""}`}>
                                 <p>Email</p>
@@ -218,7 +219,7 @@ const CreateAppointment = () => {
                             </div>
                             {
                                 appoinmentBarberList ? appoinmentBarberList?.response?.map((barber) => (
-                                    <div className='barber-single-join-content-bbr' key={barber._id}>
+                                    <div className={`barber-single-join-content-bbr ${currentmode ? "barber-single-join-content-bbr_dark" : ""}`} key={barber._id}>
                                         <p>{barber.email}</p>
                                         <p>{barber.name}</p>
                                         <p>{barber.mobileNumber}</p>
@@ -242,8 +243,8 @@ const CreateAppointment = () => {
                     <div>
                         <h2>Choose  Services</h2>
 
-                        <div style={{ overflowY: "scroll", width: "40rem" }}>
-                            <div className='barber-single-join-quebarberserv-content'
+                        <div style={{ overflowY: "scroll", width: "40rem", background: currentmode ? "var(--dark-primary-color)" : "var(--light-primary-color)" }}>
+                            <div className={`barber-single-join-quebarberserv-content ${currentmode ? "barber-single-join-quebarberserv-content_dark" : ""}`}
                                 style={{
                                     fontSize: "11px",
                                 }}
@@ -255,7 +256,7 @@ const CreateAppointment = () => {
                             </div>
                             {
                                 getBarberServicesBybarberId?.response?.map((b, index) => (
-                                    <div className='barber-single-join-quebarberserv-content' key={b._id}>
+                                    <div className={`barber-single-join-quebarberserv-content ${currentmode ? "barber-single-join-quebarberserv-content_dark" : ""}`} key={b._id}>
                                         <p>{b.serviceName}</p>
                                         <p>{b.servicePrice}</p>
                                         <p>{b.barberServiceEWT}</p>
@@ -276,8 +277,8 @@ const CreateAppointment = () => {
                     <div>
                         <h2>Your Services</h2>
 
-                        <div style={{ overflowY: "scroll", width: "40rem" }}>
-                            <div className='barber-single-join-quebarberserv-content'
+                        <div style={{ overflowY: "scroll", width: "40rem", background: currentmode ? "var(--dark-primary-color)" : "var(--light-primary-color)" }}>
+                            <div className={`barber-single-join-quebarberserv-content ${currentmode ? "barber-single-join-quebarberserv-content_dark" : ""}`}
                                 style={{
                                     fontSize: "11px"
                                 }}
@@ -289,7 +290,7 @@ const CreateAppointment = () => {
                             </div>
                             {
                                 selectedService && selectedService.length > 0 ? selectedService.map((b, index) => (
-                                    <div className='barber-single-join-quebarberserv-content' key={b._id}>
+                                    <div className={`barber-single-join-quebarberserv-content ${currentmode ? "barber-single-join-quebarberserv-content_dark" : ""}`} key={b._id}>
                                         <p>{b.serviceName}</p>
                                         <p>{b.servicePrice}</p>
                                         <p>{b.barberServiceEWT}</p>
@@ -310,11 +311,11 @@ const CreateAppointment = () => {
                     <div>
                         <h2>Choose  TimeSlots</h2>
 
-                        <div style={{ overflowY: "scroll", width: "40rem" }}>
+                        <div style={{ overflowY: "scroll", width: "40rem", background: currentmode ? "var(--dark-primary-color)" : "var(--light-primary-color)" }}>
                             {
                                 timeSlotData?.timeSlots && timeSlotData?.timeSlots.length > 0 ? (timeSlotData?.timeSlots.map((t, i) => (
                                     <>
-                                        <div key={i} className='timeslot'>
+                                        <div key={i} className={`timeslot ${currentmode ? "timeslot_dark" : ""}`}>
                                             <p>{t.timeInterval}</p>
                                             {
                                                 t.disabled == true ? <button>Disable</button> : <button onClick={() => selectTimeSlotfnc(t.timeInterval)} style={{
@@ -333,10 +334,15 @@ const CreateAppointment = () => {
                         </div>
                     </div>
 
-                    <button onClick={() => { setShowPreview(true) }}>Preview</button>
+                    <button onClick={() => { setShowPreview(true) }}
+                    style={{
+                        background:currentmode ? "var(--dark-primary-color)" : "var(--light-primary-color)",
+                        color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"
+                    }}
+                    >Preview</button>
 
                     <Modal isOpen={showpreview} setIsOpen={setShowPreview}>
-                        <div className='app-modal-crt'>
+                        <div className={`app-modal-crt ${currentmode ? "app-modal-crt_dark" : ""}`}>
                             <h1>Preview Appointment</h1>
                             <div>
                                 <p>Appointment Name : {appointmentNotes} </p>
@@ -349,14 +355,16 @@ const CreateAppointment = () => {
 
                             <h2>Your Services</h2>
 
-                            <div style={{ overflowY: "scroll", width: '45rem' }}>
-                                <div className='app-modal-crt-head'>
+                            <div style={{ overflowY: "scroll", width: '45rem',
+                                background: currentmode ? "var(--dark-primary-color)" : "var(--light-primary-color)"
+                                }}>
+                                <div className={`app-modal-crt-head ${currentmode ? "app-modal-crt-head_dark" : "" }`}>
                                     <p>Service Name</p>
                                     <p>Service Price</p>
                                     <p>Barber Service Estimated Wait Time</p>
                                 </div>
 
-                                <div className='app-modal-crt-content'>
+                                <div className={`app-modal-crt-content ${currentmode ? "app-modal-crt-content_dark" : ""}`}>
                                     {
                                         selectedService.map((s, i) => (
                                             <div key={i}>
@@ -369,9 +377,18 @@ const CreateAppointment = () => {
                                 </div>
                             </div>
 
-                            <button className='app-modal-crt-button' onClick={CreateAppointment} style={{ fontSize: "1.2rem" }}>{
-                                createAppointment?.loading == true ? <h2>loading...</h2> : "Create Appointment"
-                            }</button>
+
+
+
+                            {createAppointment?.loading == true ? <button style={{
+                                background: currentmode ? "var(--dark-primary-color)" : "var(--light-tertiary-color)",
+                                color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"
+                            }} className='app-modal-crt-button'>Loading</button> : <button style={{
+                                background: currentmode ? "var(--dark-primary-color)" : "var(--light-tertiary-color)",
+                                color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)",
+                                fontSize: "1.2rem"
+                            }} className='app-modal-crt-button' onClick={CreateAppointment}>Create Appointment</button>
+                            }
                         </div>
                     </Modal>
 
