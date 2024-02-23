@@ -20,7 +20,7 @@ function Month() {
         // console.log(selectInfo.dateStr); // Log the selected date's start date
     };
 
-    const [appointmentData,setAppointmentData] = useState([])
+    const [appointmentData, setAppointmentData] = useState([])
 
     const LoggedInMiddleware = useSelector(state => state.LoggedInMiddleware)
 
@@ -37,10 +37,10 @@ function Month() {
 
         const signal = newController.signal;
 
-        const apfunc = async() => {
-            const {data} = await api.post("/api/appointments/getAllAppointmentsBySalonId",{
+        const apfunc = async () => {
+            const { data } = await api.post("/api/appointments/getAllAppointmentsBySalonId", {
                 salonId: LoggedInMiddleware?.user && LoggedInMiddleware.user[0].salonId
-            },{signal})
+            }, { signal })
             setAppointmentData(data?.response)
         }
 
@@ -50,7 +50,7 @@ function Month() {
             AppointmentRef.current.abort();
         };
 
-    },[LoggedInMiddleware?.user])
+    }, [LoggedInMiddleware?.user])
 
     console.log(appointmentData)
 
@@ -63,27 +63,37 @@ function Month() {
     //     { title: 'event Sagnik', date: '2023-12-22',color:"orange" }
     //   ]
 
+
+    const darkMode = useSelector(state => state.color.darkmode)
+
+    console.log("Darkmode dashboard", darkMode)
+
+    const currentmode = darkMode === "On"
+
     return (
         <>
             <AdminLayout />
-            <div className='calender-month'>
+            <div className={`calender-month ${currentmode ? "calender-month_dark" : ""}`}>
 
-                <h2 style={{marginBottom:"2rem"}}>Appointment</h2>
+                <h2 style={{ marginBottom: "2rem" }}>Appointment</h2>
 
-                <Link to="/appoinment/createappointment" style={{background:"#f1f6fc", border:"1px solid black",color:"black", fontSize:"1.4rem",padding:"0.8rem 1.2rem"}}>Create</Link>
+                <Link to="/appoinment/createappointment" style={{ background:currentmode ? "var(--dark-primary-color)" : "var(--light-primary-color)", border: "1px solid black",
+                 color: currentmode ? "var(--dark-secondary-color)" : "var(--light-secondary-color)", fontSize: "1.4rem", 
+                 padding: "0.8rem 1.2rem",
+                  }}>Create</Link>
 
-                <div className='demo-app-main' style={{marginTop:"2rem"}}>
+                <div className='demo-app-main' style={{ marginTop: "2rem" }}>
                     <FullCalendar
-                    plugins={[dayGridPlugin, interactionPlugin]}
-                    initialView='dayGridMonth'
-                    dateClick={handleDateSelect}
-                    events={appointmentData?.map((e) => (
-                        {
-                            title:e.appointmentNotes, date: e.appointmentDate
-                        }
-                    ))}
-                    dayMaxEvents={true}
-                />
+                        plugins={[dayGridPlugin, interactionPlugin]}
+                        initialView='dayGridMonth'
+                        dateClick={handleDateSelect}
+                        events={appointmentData?.map((e) => (
+                            {
+                                title: e.appointmentNotes, date: e.appointmentDate
+                            }
+                        ))}
+                        dayMaxEvents={true}
+                    />
                 </div>
             </div>
         </>

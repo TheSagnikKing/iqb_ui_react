@@ -55,24 +55,30 @@ const CalenderEvent = () => {
 
     console.log("AppointmentData",appointmentsdata)
 
+    const darkMode = useSelector(state => state.color.darkmode)
+
+    console.log("Darkmode dashboard",darkMode)
+
+    const currentmode = darkMode === "On"
+
     return (
         <>
             <AdminLayout />
-            <div className='calender-event'>
+            <div className={`calender-event ${currentmode ? "calender-event_dark" : ""}`}>
                 <div className='cal-header'>
-                    <h2>Today : {location.state ? location.state : "Please Select Date"}</h2>
+                    <h2 style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Today : {location.state ? location.state : "Please Select Date"}</h2>
 
                     <div><button onClick={() => listHandler(location.state)}>{location.state ? "list" : "No List"}</button></div>
                 </div>
 
                 {
-                    location.state ? <div className='cal-container'>
-                        <div className='cal-content'>
+                    location.state ? <div className={`cal-container ${currentmode ? "cal-container_dark" : ""}`}>
+                        <div className={`cal-content ${currentmode ? "cal-content_dark" : ""}`}>
                             {
                                 appointmentsdata && appointmentsdata.length > 0 ? appointmentsdata?.map((i, u) => {
                                     return (
 
-                                        <div key={u} className='cal-item'>
+                                        <div key={u} className={`cal-item ${currentmode ? "cal-item_dark" : ""}`}>
                                             <div>
                                                 <div>
                                                     <img src="https://img.freepik.com/free-vector/hand-drawn-side-profile-cartoon-illustration_23-2150517168.jpg?size=626&ext=jpg&ga=GA1.1.1806204793.1699434893&semt=ais" alt='j' />
@@ -85,8 +91,9 @@ const CalenderEvent = () => {
                                                 i.appointments && i.appointments.length > 0 ? i.appointments.map((m, index) => (
                                                     <div key={index}
                                                     ><div className='appoin' style={{
-                                                        background: m.background,
-                                                        boxShadow: `0px 0px 8px ${m.background}`,
+                                                        background: currentmode ? "var(--dark-secondary-color)" : "var(--light-secondary-color)",
+                                                        border:currentmode && "1px solid white",
+                                                        color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)",
                                                         fontSize:"1.4rem"
                                                     }}>
                                                             <p>{m.startTime}-{m.endTime}</p>

@@ -69,10 +69,6 @@
     cursor: pointer;
 }
 
-
-
-
-
 .app-modal-crt {
     font-size: 140%;
 }
@@ -132,6 +128,28 @@
     width:90vw !important;
 }
 
+
+/* DARK MODE  */
+
+.create-appointment-container_dark{
+    background-color: var(--dark-secondary-color);
+    color: var(--light-secondary-color)
+}
+
+.create-form_dark input{
+    background-color: var(--dark-primary-color);
+    color: var(--light-secondary-color);
+    border: 1px solid var(--light-secondary-color);
+}
+
+.create-form_dark input::placeholder{
+    color: var(--light-secondary-color);
+}
+
+.barber-single-join-content-bbr_dark{
+    background-color: var(--dark-secondary-color);
+    color:var(--light-tertiary-color)
+}
 
 @media((min-width:0px) and (max-width:400px)){
     .create-appointment-container {

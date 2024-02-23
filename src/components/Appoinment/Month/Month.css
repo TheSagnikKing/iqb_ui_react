@@ -54,6 +54,23 @@ tr {
   gap: 1rem;
 }
 
+.fc th{
+  color: black !important;
+  font-weight: 500 !important;
+}
+
+.fc-theme-standard td {
+  color: black !important;
+  font-weight: 500 !important;
+}
+
+/* DARK MODE  */
+
+.calender-month_dark{
+  background-color: var(--dark-secondary-color);
+  color:var(--light-secondary-color)
+}
+
 @media ((min-width: 0px) and (max-width: 40rem)) {
   .fc .fc-toolbar {
     display: flex;

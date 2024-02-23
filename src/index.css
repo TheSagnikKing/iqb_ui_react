@@ -13,6 +13,7 @@
   --light-primary-color: #f1f6fc;
   --light-secondary-color: #fff;
   --light-tertiary-color: #f1f6fc;
+  --light-quaternary-color: #efefef;
 }
 
 @media((min-width:0px) and (max-width:1450px)){

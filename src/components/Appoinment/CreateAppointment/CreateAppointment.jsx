@@ -160,13 +160,20 @@ const CreateAppointment = () => {
 
     const appoinmentBarberList = useSelector(state => state.appoinmentBarberList)
 
+
+    const darkMode = useSelector(state => state.color.darkmode)
+
+    console.log("Darkmode dashboard", darkMode)
+
+    const currentmode = darkMode === "On"
+
     return (
         <>
             <AdminLayout />
-            <div className='create-appointment-container'>
+            <div className={`create-appointment-container ${currentmode ? "create-appointment-container_dark" : ""}`}>
                 <h1 >Create Appointment</h1>
 
-                <div className='create-form'>
+                <div className={`create-form ${currentmode ? "create-form_dark" : ""}`}>
                     <div>
                         <h2>Appointment Note</h2>
                         <input
@@ -199,8 +206,10 @@ const CreateAppointment = () => {
                     <div>
                         <h2>Barber List</h2>
 
-                        <div style={{overflowY:"scroll",width:"40rem"}}>
-                            <div className='barber-single-join-content-bbr'>
+                        <div style={{ overflowY: "scroll", width: "40rem",
+                            // back
+                        }}>
+                            <div className={`barber-single-join-content-bbr ${currentmode ? "barber-single-join-content-bbr_dark" : ""}`}>
                                 <p>Email</p>
                                 <p>Name</p>
                                 <p>Mo. Number</p>
@@ -208,19 +217,19 @@ const CreateAppointment = () => {
                                 <p>Action</p>
                             </div>
                             {
-                                appoinmentBarberList  ? appoinmentBarberList?.response?.map((barber) => (
+                                appoinmentBarberList ? appoinmentBarberList?.response?.map((barber) => (
                                     <div className='barber-single-join-content-bbr' key={barber._id}>
                                         <p>{barber.email}</p>
                                         <p>{barber.name}</p>
                                         <p>{barber.mobileNumber}</p>
                                         <p>{barber.isActive === true ? "Yes" : "No"}</p>
                                         <button onClick={() => barberServiceCallHandler(barber.barberId, barber.name)} style={{
-                                            width:"5rem",
-                                            height:"3rem",
-                                            border:"1px solid blue",
-                                            cursor:"pointer",
-                                            background:"#f1f6fc",
-                                            color:"blue"
+                                            width: "5rem",
+                                            height: "3rem",
+                                            border: "1px solid blue",
+                                            cursor: "pointer",
+                                            background: "#f1f6fc",
+                                            color: "blue"
                                         }}><FaPlus /></button>
                                     </div>
 
@@ -233,7 +242,7 @@ const CreateAppointment = () => {
                     <div>
                         <h2>Choose  Services</h2>
 
-                        <div style={{overflowY:"scroll",width:"40rem"}}>
+                        <div style={{ overflowY: "scroll", width: "40rem" }}>
                             <div className='barber-single-join-quebarberserv-content'
                                 style={{
                                     fontSize: "11px",
@@ -251,12 +260,12 @@ const CreateAppointment = () => {
                                         <p>{b.servicePrice}</p>
                                         <p>{b.barberServiceEWT}</p>
                                         <button onClick={() => selectedServiceHandler(b, index)} style={{
-                                            width:"5rem",
-                                            height:"3rem",
-                                            border:"1px solid blue",
-                                            cursor:"pointer",
-                                            background:"#f1f6fc",
-                                            color:"blue"
+                                            width: "5rem",
+                                            height: "3rem",
+                                            border: "1px solid blue",
+                                            cursor: "pointer",
+                                            background: "#f1f6fc",
+                                            color: "blue"
                                         }}><FaPlus /></button>
                                     </div>
                                 ))
@@ -267,7 +276,7 @@ const CreateAppointment = () => {
                     <div>
                         <h2>Your Services</h2>
 
-                        <div style={{overflowY:"scroll",width:"40rem"}}>
+                        <div style={{ overflowY: "scroll", width: "40rem" }}>
                             <div className='barber-single-join-quebarberserv-content'
                                 style={{
                                     fontSize: "11px"
@@ -285,12 +294,12 @@ const CreateAppointment = () => {
                                         <p>{b.servicePrice}</p>
                                         <p>{b.barberServiceEWT}</p>
                                         <button onClick={() => selectedServiceDelete(b)} style={{
-                                            width:"5rem",
-                                            height:"3rem",
-                                            border:"1px solid red",
-                                            cursor:"pointer",
-                                            background:"#f1f6fc",
-                                            color:"red"
+                                            width: "5rem",
+                                            height: "3rem",
+                                            border: "1px solid red",
+                                            cursor: "pointer",
+                                            background: "#f1f6fc",
+                                            color: "red"
                                         }}><MdDelete /></button>
                                     </div>
                                 )) : <p>No Services Available</p>
@@ -301,7 +310,7 @@ const CreateAppointment = () => {
                     <div>
                         <h2>Choose  TimeSlots</h2>
 
-                        <div style={{overflowY:"scroll",width:"40rem"}}>
+                        <div style={{ overflowY: "scroll", width: "40rem" }}>
                             {
                                 timeSlotData?.timeSlots && timeSlotData?.timeSlots.length > 0 ? (timeSlotData?.timeSlots.map((t, i) => (
                                     <>
@@ -309,11 +318,11 @@ const CreateAppointment = () => {
                                             <p>{t.timeInterval}</p>
                                             {
                                                 t.disabled == true ? <button>Disable</button> : <button onClick={() => selectTimeSlotfnc(t.timeInterval)} style={{
-                                                    height:"3rem",
-                                                    border:"1px solid blue",
-                                                    cursor:"pointer",
-                                                    background:"#f1f6fc",
-                                                    color:"blue"
+                                                    height: "3rem",
+                                                    border: "1px solid blue",
+                                                    cursor: "pointer",
+                                                    background: "#f1f6fc",
+                                                    color: "blue"
                                                 }}><FaPlus /></button>
                                             }
 
@@ -340,7 +349,7 @@ const CreateAppointment = () => {
 
                             <h2>Your Services</h2>
 
-                            <div style={{overflowY:"scroll" ,width:'45rem'}}>
+                            <div style={{ overflowY: "scroll", width: '45rem' }}>
                                 <div className='app-modal-crt-head'>
                                     <p>Service Name</p>
                                     <p>Service Price</p>
@@ -360,7 +369,7 @@ const CreateAppointment = () => {
                                 </div>
                             </div>
 
-                            <button className='app-modal-crt-button' onClick={CreateAppointment} style={{fontSize:"1.2rem"}}>{
+                            <button className='app-modal-crt-button' onClick={CreateAppointment} style={{ fontSize: "1.2rem" }}>{
                                 createAppointment?.loading == true ? <h2>loading...</h2> : "Create Appointment"
                             }</button>
                         </div>

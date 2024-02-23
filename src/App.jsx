@@ -81,6 +81,7 @@ import Signup from './components/newAuth/Admin/Signup/Signup';
 import BarberSignin from "./components/newAuth/Barber/Signin/Signin"
 import BarberSignup from "./components/newAuth/Barber/Signup/Signup"
 import { useSelector } from 'react-redux';
+import Test from './pages/Test';
 
   
 
@@ -280,6 +281,7 @@ const App = () => {
         } />
 
         <Route path="/queue/barberlist/kyosks" element={<Auth><Kyosks /></Auth>} />
+        <Route path="/map" element={<Test/>}/>
 
         {/* <Route path="/queue/barberservices/:barberid/:barbername" element={
 

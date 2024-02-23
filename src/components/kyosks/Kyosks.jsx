@@ -15,6 +15,9 @@ import ClipLoader from "react-spinners/ClipLoader";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+// In show barber first make model1 and model2 equals to false and then model1 equals to true. and after barber saelected make model2 equals to true.
+// In show service make model1 and model2 false and then model2 == true and when service get selected make model1 == true.
+// In show barber after model1 and model2 get false make selectedService and selected barber also empty string
 
 const Kyosks = () => {
 
