@@ -212,8 +212,8 @@ const AdminHeader = ({ title }) => {
 
   return (
     <section className="nav1">
-      <div className="nav1left" style={{background: darkMode === "On" ? "black" : "white"}}>
-        <div className="nav1left_header">
+      <div className="nav1left" style={{ background: darkMode === "On" ? "var(--dark-secondary-color)" : "var(--light-secondary-color)" }}>
+        <div className={`nav1left_header ${darkMode === "On" ? "nav1left_header_dark" : ""}`}>
           <span>IQB</span>&nbsp;<span>iqueuebarbers</span>
           {/* <button onClick={() => setExpandMenu(!expandMenu)}>{">"}</button> */}
         </div>
@@ -230,7 +230,7 @@ const AdminHeader = ({ title }) => {
                     menu_title={item.menu_title}
                     category={item.category}
                     menu_link={item.menu_link}
-                    menucolor={`${pathname === item.menu_link ? "#fff" : ""}`}
+                    menucolor={`${darkMode === "On" ? pathname === item.menu_link ? "red" : "var(--light-secondary-color)" : pathname === item.menu_link ? "#fff" : ""}`}
                   />
                 </div>
               )
@@ -248,7 +248,21 @@ const AdminHeader = ({ title }) => {
             borderRight: "1px solid rgba(0,0,0,0.6)",
           }}
           >
-            <button onClick={() => setExpandMenu(false)} style={{ background: "#fff", border: "none", boxShadow: "0px 0px 4px rgba(0,0,0,0.5)", height: "30px", width: "30px", margin: "1rem 2rem 1rem auto", borderRadius: "50%", mfontWeight: "bold", display: "flex", justifyContent: "center", alignItems: "center", color: "red" }}><RxCross2 /></button>
+            <div style={{display:"flex",alignItems:"center",justifyContent:"space-between"}}>
+              
+              <div className='colormode' style={{ marginTop: "2rem",display:"flex",alignItems:"center",gap:"2rem" }}>
+                <div className="nav1menu_settings_item" style={{ cursor: "pointer",boxShadow: "0px 0px 4px rgba(0,0,0,0.5)",width:"4rem",height:"4rem",marginLeft:"1rem",display:"flex",justifyContent:"center",alignItems:"center",borderRadius:"50%" }} onClick={darkHandler}>
+                  <div style={{ fontSize: "2rem", color: "black", color: check === true ? "black" : "red", background: check === true && "white", height: "100%", width: "100%", borderRadius: "50%", boxShadow: "0px 0px 4px white" }}><FaMoon /></div> 
+                </div>
+
+                <div className="nav1menu_settings_item" style={{ cursor: "pointer",boxShadow: "0px 0px 4px rgba(0,0,0,0.5)",width:"4rem",height:"4rem",display:"flex",justifyContent:"center",alignItems:"center",borderRadius:"50%" }} onClick={lightHandler}>
+                  <div style={{ fontSize: "2rem", color: check === false ? "white" : "red", background: check === false && "black", height: "3.2rem", width: "3.2rem", borderRadius: "50%" }}><MdOutlineWbSunny /></div>
+                </div>
+
+              </div>
+
+              <button onClick={() => setExpandMenu(false)} style={{ background: "#fff", border: "none", boxShadow: "0px 0px 4px rgba(0,0,0,0.5)", height: "30px", width: "30px", margin: "1rem 2rem 1rem auto", borderRadius: "50%", mfontWeight: "bold", display: "flex", justifyContent: "center", alignItems: "center", color: "red" }}><RxCross2 /></button>
+            </div>
 
             {adminmenudata.map((item) => {
               return (
@@ -272,22 +286,17 @@ const AdminHeader = ({ title }) => {
           </div>}
 
           <div className="nav1menu_settings">
-            <div style={{ borderBottom: "1px solid #f5f5f5" }}>
-              {/* <div className="menu_settings_item}>
-                <div><FiSettings /></div>
-                <p>Settings</p>
-              </div> */}
-
+            <div>
             </div>
 
-            <div className='colormode'>
-              <div className="nav1menu_settings_item" style={{cursor:"pointer"}} onClick={darkHandler}>
-                <div style={{fontSize:"2rem",color:"black",color:check === true ? "black" : "black",background:check === true && "white",height:"3.2rem",width:"3.2rem",borderRadius:"50%",boxShadow:"0px 0px 4px white"}}><FaMoon /></div>
+            <div className='colormode' style={{ marginTop: "2rem" }}>
+              <div className="nav1menu_settings_item" style={{ cursor: "pointer" }} onClick={darkHandler}>
+                <div style={{ fontSize: "2rem", color: "black", color: check === true ? "black" : "black", background: check === true && "white", height: "100%", width: "100%", borderRadius: "50%", boxShadow: "0px 0px 4px white" }}><FaMoon /></div>
                 {/* <p style={{fontSize:"1.2rem", color:"black",color:check === true ? "white" : "black"}}>Dark Mode</p> */}
               </div>
-              
-              <div className="nav1menu_settings_item" style={{cursor:"pointer"}} onClick={lightHandler}>
-                <div style={{fontSize:"2rem", color:check === false ? "white" : "white",background:check === false && "black",height:"3.2rem",width:"3.2rem",borderRadius:"50%"}}><MdOutlineWbSunny /></div>
+
+              <div className="nav1menu_settings_item" style={{ cursor: "pointer" }} onClick={lightHandler}>
+                <div style={{ fontSize: "2rem", color: check === false ? "white" : "white", background: check === false && "black", height: "3.2rem", width: "3.2rem", borderRadius: "50%" }}><MdOutlineWbSunny /></div>
                 {/* <p style={{fontSize:"1.2rem", color:check === false ? "white" : "white"}}>Light Mode</p> */}
               </div>
 
@@ -314,7 +323,7 @@ const AdminHeader = ({ title }) => {
 
       </div>
 
-      <div className="nav1right">
+      <div className={`nav1right ${darkMode === "On" ? "nav1right_dark" : ""}`}>
         <div className="nav1right_left_div">
           {/* <p>Dashboard</p>
             <IoIosArrowForward />

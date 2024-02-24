@@ -90,55 +90,6 @@
    align-items: center;
 }
 
-/* TOGGLE_SWITCH_CSS_STYLING */
-
-.nav1toggle_switch {
-    position: relative;
-    display: inline-block;
-    width: 3.5rem;
-    height: 2rem;
-  }
-  
-.nav1toggle_switch input {
-    display: none;
-}
-  
-.nav1slider {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    border-radius: 3.4rem;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-.nav1slider:before {
-    position: absolute;
-    content: "";
-    height: 1.2rem;
-    width: 1.2rem;
-    left: 0.4rem;
-    bottom: 0.4rem;
-    background-color: white;
-    border-radius: 50%;
-    transition: transform 0.3s;
-  }
-  
-  input:checked + .nav1slider {
-    background-color: #4CBB17;
-  }
-  
-  input:checked + .nav1slider:before {
-    transform: translateX(15px);
-  }
-
-
-  .checked {
-    transform: translateX(15px);
-}
 
 .colormode{
     display: flex;
@@ -452,6 +403,22 @@
     font-weight: bold;
   }
 
+
+  /* DARK MODE */
+
+  .nav1left_header_dark{
+    background-color: var(--dark-secondary-color) !important;
+  }
+
+  .nav1left_header_dark span{
+    color: var(--light-secondary-color)
+  }
+
+  .nav1right_dark{
+    background: var(--dark-secondary-color);
+    color: var(--light-secondary-color)
+  }
+
   @media((min-width:0px) and (max-width:400px)){
     .nav1left{
         width: 6rem;
@@ -507,4 +474,9 @@
     .menu-active{
         background-color: #000 !important;
     }      
+
+    .colormode{
+
+     
+    }
   }

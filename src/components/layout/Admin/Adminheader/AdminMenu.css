@@ -81,6 +81,15 @@
     /* color: rgba(0, 0, 0, 0.3); */
 }
 
+/* DARK MODE  */
+
+.nav1-menu_dark{
+    background-color: var(--dark-primary-color);
+}
+
+.nav1-menu_dark h3{
+    color: var(--light-secondary-color) !important
+}
 
 @media((min-width:0px) and (max-width:400px)){
     .nav1-menu>div>h3{

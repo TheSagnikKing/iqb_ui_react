@@ -130,6 +130,14 @@
     color:var(--light-secondary-color)
 }
 
+.salon-item p{
+    color: var(--dark-secondary-color);
+}
+
+.salon-item_dark p{
+    color: var(--light-secondary-color)
+}
+
 @media((min-width:0px) and (max-width:400px)){
     .wrapper{
         width: calc(100% - 6rem) !important; /* 82% converted to rem */
