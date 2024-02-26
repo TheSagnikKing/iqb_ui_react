@@ -100,7 +100,50 @@
   .nav2slider.checked::before {
     transform: translateX(15px);
   }
-  
+
+
+  /* DARK MODE  */
+
+  .btn_one_dark{
+    background-color: var(--dark-primary-color) !important;
+  }
+
+  .content_dark{
+    background-color: var(--dark-primary-color) !important;
+  }
+
+  .content_dark p{
+    color: var(--light-secondary-color) !important;
+  }
+
+  .div_right_third_dark p{
+    color: var(--light-secondary-color) !important
+  }
+
+  .div_right_fourth p{
+    color: var(--dark-secondary-color);
+  }
+
+  .div_right_fourth_dark{
+    background: var(--dark-primary-color); 
+  }
+
+  .div_right_fourth_dark p{
+    color: var(--light-secondary-color) !important;
+  }
+
+  .div_right_fifth_dark{
+    background: var(--dark-primary-color); 
+  }
+
+  .div_right_fifth_dark p{
+    color: var(--light-secondary-color) !important;
+  }
+
+  .btn_box_dark button{
+    background: var(--dark-primary-color) !important;
+    color: var(--light-secondary-color) !important
+  }
 
 @media((min-width:0px) and (max-width:400px)){
   .connectSalon>div{

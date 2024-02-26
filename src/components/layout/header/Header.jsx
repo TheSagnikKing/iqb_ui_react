@@ -7,8 +7,8 @@ import { BsMoonStars } from 'react-icons/bs'
 import { IoIosArrowForward } from 'react-icons/io'
 import { CiSearch } from "react-icons/ci"
 import { IoNotificationsOutline } from "react-icons/io5"
-import { FaCamera, FaUserCircle } from "react-icons/fa"
-import { MdKeyboardArrowDown } from "react-icons/md"
+import { FaCamera, FaMoon, FaUserCircle } from "react-icons/fa"
+import { MdKeyboardArrowDown, MdOutlineWbSunny } from "react-icons/md"
 import { BiLogOutCircle } from "react-icons/bi"
 import { RiAccountCircleFill } from "react-icons/ri"
 import { Link, useLocation, useNavigate } from 'react-router-dom'
@@ -17,6 +17,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { barberOnlineStatusAction } from '../../../redux/actions/barberAction.js'
 import api from "../../../redux/api/Api.js"
 import { RxCross2, RxHamburgerMenu } from 'react-icons/rx'
+import { DARK_MODE_OFF, DARK_MODE_ON } from '../../../redux/actions/colorAction.js'
 
 
 const Header = ({ title }) => {
@@ -85,14 +86,39 @@ const Header = ({ title }) => {
     navigate("/barber/allnotification")
   }
 
+
+  const darkHandler = () => {
+    setCheck(true)
+    dispatch({ type: DARK_MODE_ON });
+    localStorage.setItem("dark", "On");
+  }
+
+  const lightHandler = () => {
+    setCheck(false)
+    dispatch({ type: DARK_MODE_OFF });
+    localStorage.setItem("dark", "Off");
+  }
+
+  const darkMode = useSelector(state => state.color.darkmode)
+
+  useEffect(() => {
+    if (localStorage.getItem("dark") === "On") {
+      setCheck(true)
+    } else {
+      setCheck(false)
+    }
+  }, [])
+
+  const currentmode = darkMode === "On"
+
   return (
     <section className="nav1">
-      <div className="nav1left">
-        <div className="nav1left_header">
+      <div className={`nav1left ${currentmode && 'nav1left_dark'}`}>
+        <div className={`nav1left_header ${currentmode && 'nav1left_header_dark'}`}>
           <span>IQB</span>&nbsp;<span>iqueuebarbers</span>
         </div>
 
-        <div className="nav1wrapper">
+        <div className={`nav1wrapper ${currentmode && 'nav1wrapper_dark'}`}>
 
           <div className="nav1left_menu_box">
             <button onClick={() => setExpandMenu(true)} style={{ background: "#fff", border: "none", boxShadow: "0px 0px 4px rgba(0,0,0,0.5)", height: "30px", fontWeight: "bold", display: "flex", justifyContent: "center", alignItems: "center" }}><RxHamburgerMenu /></button>
@@ -105,7 +131,7 @@ const Header = ({ title }) => {
                     menu_title={item.menu_title}
                     category={item.category}
                     menu_link={item.menu_link}
-                    menucolor={`${pathname === item.menu_link ? "#fff" : ""}`}
+                    menucolor={`${darkMode === "On" ? pathname === item.menu_link ? "red" : "var(--light-secondary-color)" : pathname === item.menu_link ? "#fff" : ""}`}
                   />
                 </div>
               )
@@ -131,11 +157,11 @@ const Header = ({ title }) => {
                   <Link to={`${item.menu_link}`} style={{ color: "#000", textDecoration: "none" }} >
                     <div className="nav1-menu">
                       <div style={{ display: "flex", alignItems: "center", gap: "2rem", width: "80%", fontSize: "1.4rem" }}>
-                        <div style={{ color: `${pathname === item.menu_link ? "#fff" : ""}` }}>
+                        <div style={{ color: `${pathname === item.menu_link ? "#fff" : "var(--dark-secondary-color)"}` }}>
                           {item.menu_logo}
                         </div>
 
-                        <h3 style={{ display: "block", color: `${pathname === item.menu_link ? "#fff" : ""}` }}>{item.menu_title}</h3>
+                        <h3 style={{ display: "block", color: `${pathname === item.menu_link ? "#fff" : "var(--dark-secondary-color)"}` }}>{item.menu_title}</h3>
                       </div>
 
                     </div>
@@ -147,22 +173,46 @@ const Header = ({ title }) => {
           </div>}
 
           <div className="nav1menu_settings">
-            <div style={{ borderBottom: "1px solid #f5f5f5" }}>
-              {/* <div className="menu_settings_item}>
-                <div><FiSettings /></div>
-                <p>Settings</p>
+            <div></div>
+
+            <div className='colormode' style={{ marginTop: "2rem" }}>
+              <div className="nav1menu_settings_item" style={{ cursor: "pointer", width:"4.5rem"}} onClick={darkHandler}>
+                <div style={{ fontSize: "2rem", color: "black", color: check === true ? "black" : "black", background: check === true && "white", height: "100%", width: "100%", borderRadius: "50%", boxShadow: "0px 0px 4px white" }}><FaMoon /></div>
+                {/* <p style={{fontSize:"1.2rem", color:"black",color:check === true ? "white" : "black"}}>Dark Mode</p> */}
+              </div>
+
+              <div className="nav1menu_settings_item" style={{ cursor: "pointer", width:"4.5rem" }} onClick={lightHandler}>
+                <div style={{ fontSize: "2rem", color: check === false ? "white" : "white", background: check === false && "black", height: "3.2rem", width: "3.2rem", borderRadius: "50%" }}><MdOutlineWbSunny /></div>
+                {/* <p style={{fontSize:"1.2rem", color:check === false ? "white" : "white"}}>Light Mode</p> */}
+              </div>
+
+
+              {/* <div className="nav1toggle_switch2">
+                <label className="nav1toggle_switch">
+                  <input type="checkbox"
+                    value={check}
+                    onClick={colorHandler}
+                  />
+                  <span
+                    className={`nav1slider ${check ? 'checked' : ''}`}
+                    style={{
+                      background: check ? "#4CBB17" : "",
+                      width: "4rem"
+                    }}
+                  ></span>
+                </label>
               </div> */}
 
             </div>
 
-            <div>
+            {/* <div>
               <div className="nav1menu_settings_item">
                 <div><BsMoonStars /></div>
                 <p>Dark Mode</p>
               </div>
 
               <div className="nav1toggle_switch2">
-                {/* TOGGLE_SWITCH_CODE */}
+              
                 <label className="nav1toggle_switch">
                   <input type="checkbox"
                     value={check}
@@ -172,13 +222,13 @@ const Header = ({ title }) => {
                 </label>
               </div>
 
-            </div>
+            </div> */}
           </div>
         </div>
 
       </div>
 
-      <div className="nav1right">
+      <div className={`nav1right ${currentmode && 'nav1right_dark'}`}>
         <div className="nav1right_left_div">
           {/* <p>Dashboard</p>
             <IoIosArrowForward />
@@ -233,8 +283,12 @@ const Header = ({ title }) => {
             </div>
 
             <div className="nav1profile_detail">
-              <b>{LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].name}</b>
-              <p>Barber</p>
+              <b style={{
+                color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"
+              }}>{LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].name}</b>
+              <p style={{
+                color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"
+              }}>Barber</p>
             </div>
 
             <div style={{ cursor: "pointer" }} className="nav1right_dropdown"
@@ -243,11 +297,14 @@ const Header = ({ title }) => {
             </div>
 
             {
-              dropdown && <div className="nav1right_dropdown_box">
+              dropdown && <div className={`nav1right_dropdown_box ${currentmode && 'nav1right_dropdown_box_dark'}`}>
 
                 <div>
                   <div><RiAccountCircleFill /></div>
-                  <p><Link to="/barber/updateprofile">My Account</Link></p>
+                  <p><Link to="/barber/updateprofile" style={{
+                    color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)",
+                    textDecoration: "none"
+                  }}>My Account</Link></p>
                 </div>
 
                 <div onClick={logoutHandler}>

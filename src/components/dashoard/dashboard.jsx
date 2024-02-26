@@ -298,12 +298,16 @@ const Dashboard = () => {
 
                                 <p>Advertisement</p>
                                 <div className="btn_box">
-                                    <div className="btn_one">
+                                    <div className="btn_one" style={{
+                                            background:darkMode === "On" ? "var(--dark-primary-color)" : "var(--light-tertiary-color)",
+                                        }}>
                                         {/* <div>
                                         <IoMdAdd />
                                     </div> */}
 
-                                        <p><Link to="/advertisement">Add New Post</Link></p>
+                                        <p><Link to="/advertisement" style={{
+                                            color: darkMode === "On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"
+                                        }}>Add New Post</Link></p>
                                     </div>
                                 </div>
                             </div>
@@ -338,14 +342,17 @@ const Dashboard = () => {
 
                                 <div className="btn_box">
 
-                                    <div className="btn_one">
+                                    <div className="btn_one" style={{
+                                            background:darkMode === "On" ? "var(--dark-primary-color)" : "var(--light-tertiary-color)",
+                                        }}>
                                         {/* <div>
                                         <IoMdAdd />
                                     </div> */}
 
                                         <p><Link to="/queue"
                                             style={{
-                                                fontSize: "1.1rem"
+                                                fontSize: "1.1rem",
+                                                color: darkMode === "On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"
                                             }}
                                         >Add Customer</Link></p>
                                     </div>
@@ -400,10 +407,16 @@ const Dashboard = () => {
 
                         <div className={`right_div_end_left ${darkMode === "On" ? "right_div_end_left_dark" : ""}`}>
                             <div className="right_div_end_head">
-                                <p>Calender</p>
+                                <p style={{
+                                    color: darkMode === "On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"
+                                }}>Calender</p>
 
                                 <div className="btn_box">
-                                    <button><Link to="/appoinment">Appoinments</Link></button>
+                                    <button style={{
+                                            background:darkMode === "On" ? "var(--dark-primary-color)" : "var(--light-tertiary-color)",
+                                        }}><Link to="/appoinment" style={{
+                                            color: darkMode === "On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"
+                                        }}>Appoinments</Link></button>
                                     {/* <button>Reservation</button> */}
                                 </div>
                             </div>
@@ -424,17 +437,19 @@ const Dashboard = () => {
                                     {
                                         appointmentLoader == true ? <h1>loading...</h1> : appointmentData?.response?.length > 0 ? appointmentData?.response?.map((ap, i) => (
                                             <div className={`appoin-content-div ${darkMode === "On" ? "appoin-content-div_dark" : ""}`} key={i}>
-                                                <p>{ap.timeSlots}</p>
-                                                <p>{ap.customerName}</p>
-                                                <p>{ap.barberName}</p>
-                                                <p>
+                                                <p style={{ color: darkMode ==="On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>{ap.timeSlots}</p>
+                                                <p style={{ color: darkMode ==="On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>{ap.customerName}</p>
+                                                <p style={{ color: darkMode ==="On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>{ap.barberName}</p>
+                                                <p style={{ color: darkMode ==="On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>
                                                     {ap.appointmentServices.map((service, index) => (
                                                         <span key={index}>{service}  &nbsp;</span>
                                                     ))}
 
                                                 </p>
                                             </div>
-                                        )) : <h2>No Appointments Present</h2>
+                                        )) : <h2 style={{
+                                            color:darkMode === "On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"
+                                        }}>No Appointments Present</h2>
                                     }
 
                                 </div>

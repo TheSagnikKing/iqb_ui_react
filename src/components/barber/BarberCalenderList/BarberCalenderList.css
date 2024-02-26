@@ -1,0 +1,16 @@
+.calender-list_dark{
+    background-color: var(--dark-primary-color);
+    color: var(--light-secondary-color);
+}
+
+.list-cont_dark{
+    background-color: var(--dark-secondary-color);
+}
+
+.list-content-box_dark{
+    border: 1px solid var(--light-secondary-color);
+}
+
+.list-content-box_dark>div{
+    border-right: 1px solid var(--light-secondary-color);
+}

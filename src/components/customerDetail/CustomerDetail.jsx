@@ -1,42 +1,57 @@
 import React from 'react'
 import './CustomerDetail.css'
-import {IoMdNotificationsOutline} from "react-icons/io"
-import {BsThreeDotsVertical} from "react-icons/bs"
+import { IoMdNotificationsOutline } from "react-icons/io"
+import { BsThreeDotsVertical } from "react-icons/bs"
+import { useSelector } from 'react-redux'
 
-const CustomerDetail = ({item}) => {
-  return (
-    <>
-    <div className="container">
-        <div className="details">
-            <p>Customer ID</p>
-            <p>{item.customerID}</p>
-        </div>
+const CustomerDetail = ({ item }) => {
 
-        <div className="details">
-            <p>First Name</p>
-            <p>{item.firstName}</p>
-        </div>
+    const darkMode = useSelector(state => state.color.darkmode)
 
-        <div className="details">
-            <p>Last Name</p>
-            <p>{item.LastName}</p>
-        </div>
+    console.log("Darkmode dashboard", darkMode)
 
-        <button>
-            Follow Up
-        </button>
+    const currentmode = darkMode === "On"
 
-        <div className="btn_box">
-            <div>
-                <IoMdNotificationsOutline/>
+    return (
+        <div className={`container ${currentmode && 'barber_container_dark'}`}>
+            <div className="details">
+                <p>Customer ID</p>
+                <p>{item.customerID}</p>
             </div>
-            <div>
-                <BsThreeDotsVertical/>
+
+            <div className="details">
+                <p>First Name</p>
+                <p>{item.firstName}</p>
+            </div>
+
+            <div className="details">
+                <p>Last Name</p>
+                <p>{item.LastName}</p>
+            </div>
+
+            <button
+            style={{
+                background: currentmode ? "var(--dark-secondary-color)" : "var(--light-secondary-color)",
+                color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"
+            }}
+            >
+                Follow Up
+            </button>
+
+            <div className="btn_box">
+                <div>
+                    <IoMdNotificationsOutline
+                        style={{ color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)" }}
+                    />
+                </div>
+                <div>
+                    <BsThreeDotsVertical
+                        style={{ color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)" }}
+                    />
+                </div>
             </div>
         </div>
-    </div>
-    </>
-  )
+    )
 }
 
 export default CustomerDetail

@@ -49,6 +49,23 @@
     margin-top: 3rem;
 }
 
+/* DARK MODE  */
+
+.ad-profile-wrapper_dark{
+    background-color: var(--dark-secondary-color) !important;
+    color: var(--light-secondary-color)
+}
+
+.ad-profile-sa-br-right_main_form-update_dark input{
+    background-color: var(--dark-primary-color) !important;
+    color: var(--light-secondary-color) 
+}
+
+.sa-br-btn_box-up_dark button{
+    background-color: var(--dark-primary-color) !important;
+    color: var(--light-secondary-color)
+}
+
 @media((min-width:0px) and (max-width:400px)){
     .ad-profile-wrapper{
         position: absolute;

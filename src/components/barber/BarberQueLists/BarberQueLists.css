@@ -1,0 +1,15 @@
+.queue-list-table_dark{
+    background-color: var(--dark-secondary-color);
+}
+
+.que-lst-head_dark{
+    background-color: var(--dark-primary-color);
+}
+
+.que-lst-head-para{
+    color: var(--dark-secondary-color) !important;
+}
+
+.que-lst-head-para_dark{
+    color: var(--light-secondary-color) !important
+}

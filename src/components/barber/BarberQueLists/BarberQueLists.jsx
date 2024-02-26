@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-
+import './BarberQueLists.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
@@ -41,27 +41,36 @@ const BarberQueLists = () => {
         dispatch(barberServedQueueAction(infodata))
     }
 
+
+    const darkMode = useSelector(state => state.color.darkmode)
+
+    console.log("Darkmode dashboard",darkMode)
+  
+    const currentmode = darkMode === "On"
+
     return (
         <>
             <Layout />
             <div className='queue-wrapper'>
 
-                <div className='queue-list-table'>
-                    <p>Queue List</p>
+                <div className={`queue-list-table ${currentmode && 'queue-list-table_dark'}`}>
+                    <p style={{
+                        color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"
+                    }}>Queue List</p>
 
-                    <div className='que-lst-head'>
-                        <p>Name</p>
+                    <div className={`que-lst-head ${currentmode && 'que-lst-head_dark'}`}>
+                        <p className={`que-lst-head-para ${currentmode && 'que-lst-head-para_dark'}`}>Name</p>
                         {/* <p>JoinedQ</p>
                         <p>JoinedQType</p> */}
-                        <p>TimeJoinedQ</p>
-                        <p>Barber Name</p>
-                        <p>Q Position</p>
-                        <p>Served</p>
+                        <p className={`que-lst-head-para ${currentmode && 'que-lst-head-para_dark'}`}>TimeJoinedQ</p>
+                        <p className={`que-lst-head-para ${currentmode && 'que-lst-head-para_dark'}`}>Barber Name</p>
+                        <p className={`que-lst-head-para ${currentmode && 'que-lst-head-para_dark'}`}>Q Position</p>
+                        <p className={`que-lst-head-para ${currentmode && 'que-lst-head-para_dark'}`}>Served</p>
                     </div>
 
                     {
                         barberQuelist?.queueList?.map((c) => (
-                            <div className='que-lst-content' key={c._id}>
+                            <div className={`que-lst-content ${currentmode && 'que-lst-content_dark'}`} key={c._id}>
                                 <p>{c.name}</p>
                                 {/* <p>{c.joinedQ == true ? "True" : "False"}</p>
                                 <p>{c.joinedQType}</p> */}

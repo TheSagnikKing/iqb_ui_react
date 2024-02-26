@@ -128,6 +128,7 @@
   align-items: center;
 }
 
+
 @media((min-width:0px) and (max-width:400px)){
   .right_main_div{
     overflow-y: scroll !important;
@@ -179,7 +180,6 @@
 
   .header > p,.cst-header > p,.advertisement-header>h2{
     font-size: 1.8rem !important;
-    color: black !important;
   }
 
 }

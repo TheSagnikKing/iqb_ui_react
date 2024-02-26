@@ -115,7 +115,7 @@ const Signin = () => {
             <div className="right">
                 <div className="right_inner_container">
                     <div className="divone">
-                        <h1>Sign In to your Barber Account</h1>
+                        <h1 style={{color:"#000"}}>Sign In to your Barber Account</h1>
                         <p>Welcome back Barber! please enter your detail</p>
                     </div>
 

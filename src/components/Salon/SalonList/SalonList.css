@@ -138,6 +138,14 @@
     color: var(--light-secondary-color)
 }
 
+.salon-item div h4{
+    color: var(--dark-secondary-color);
+}
+
+.salon-item_dark div h4{
+    color: var(--light-secondary-color)
+}
+
 @media((min-width:0px) and (max-width:400px)){
     .wrapper{
         width: calc(100% - 6rem) !important; /* 82% converted to rem */
@@ -156,4 +164,5 @@
         width: 240%;
         grid-template-columns: 10rem 10rem 10rem 20rem 10rem 10rem 5rem 5rem 5rem ;
     }
+
 }

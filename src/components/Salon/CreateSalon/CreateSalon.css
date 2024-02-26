@@ -379,6 +379,14 @@ input[type="file"] {
     background-color: var(--dark-primary-color) !important;
 }
 
+.sal-drop-type-p p{
+    color:var(--dark-secondary-color) 
+}
+
+.sal-drop-type-p_dark p{
+    color:var(--light-secondary-color)
+}
+
 @media((min-width:0px) and (max-width:400px)) {
     .sa-br-right_main_div {
         height: auto;

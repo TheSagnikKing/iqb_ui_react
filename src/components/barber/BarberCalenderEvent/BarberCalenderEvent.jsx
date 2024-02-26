@@ -141,6 +141,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 // ]
 
 import api from "../../../redux/api/Api"
+import './BarberCalenderEvent.css'
 import { useSelector } from 'react-redux';
 import Layout from '../../../components/layout/Layout';
 
@@ -174,39 +175,45 @@ const BarberCalenderEvent = () => {
 
     console.log(appointmentsdata)
 
+    const darkMode = useSelector(state => state.color.darkmode)
+
+    const currentmode = darkMode === "On"
+
     return (
         <>
         <Layout/>
-        <div className='calender-event'>
-            <div className='cal-header'>
+        <div className={`calender-event ${currentmode && 'calender-event_dark_bbr'}`}>
+            <div className={`cal-header ${currentmode && 'cal-header_dark'}`}>
                 <h2>Today : {location.state ? location.state : "Please Select Date"}</h2>
                 {/* <div>
                     <button>{"<"}</button>
                     <button>{">"}</button>
                 </div> */}
-                <div><button onClick={() => listHandler(location.state)}>{location.state ? "list" : "No List"}</button></div>
+                <div><button onClick={() => listHandler(location.state)}
+                style={{background: currentmode && "var(--dark-secondary-color)"}}
+                >{location.state ? "list" : "No List"}</button></div>
             </div>
 
             {
-                location.state ? <div className='cal-container'>
+                location.state ? <div className={`cal-container ${currentmode && 'cal-container_dark'}`}>
                 <div className='cal-content'>
                     {
                         appointmentsdata && appointmentsdata.length > 0 ? appointmentsdata?.map((i, u) => {
                             return (
 
-                                <div key={u} className='cal-item'>
+                                <div key={u} className={`cal-item`}>
                                     <div>
-                                        <div>
-                                            <img src="https://img.freepik.com/free-vector/hand-drawn-side-profile-cartoon-illustration_23-2150517168.jpg?size=626&ext=jpg&ga=GA1.1.1806204793.1699434893&semt=ais" alt='j' />
+                                        <div style={{boxShadow:currentmode && "0px 0px 4px var(--light-primary-color)"}}>
+                                            <img src="https://img.freepik.com/free-vector/hand-drawn-side-profile-cartoon-illustration_23-2150517168.jpg?size=626&ext=jpg&ga=GA1.1.1806204793.1699434893&semt=ais" alt='j' style={{borderRadius:"50%"}}/>
                                         </div>
 
-                                        <p>{i.barbername}</p>
+                                        <p style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>{i.barbername}</p>
                                     </div>
 
                                     {
                                         i.appointments && i.appointments.length > 0 ? i.appointments.map((m, index) => (
                                             <div className='appoin' key={index}
-                                                style={{ background: m.background,
+                                                style={{ background:currentmode ? "var(--dark-primary-color)" : "var(--light-secondary-color)",
                                                 boxShadow: `0px 0px 8px ${m.background}`
                                                 }}
                                             >

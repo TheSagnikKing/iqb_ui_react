@@ -252,23 +252,23 @@ const CreateBarber = () => {
                                 selectedService ? selectedService.map((ser, index) => (
                                     <div key={index}>
                                         <div>
-                                            <p>serviceId</p>
-                                            <p>{ser.serviceId}</p>
+                                            <p style={{color: currentMode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>serviceId</p>
+                                            <p style={{color: currentMode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>{ser.serviceId}</p>
                                         </div>
 
                                         <div>
-                                            <p>serviceCode</p>
-                                            <p>{ser.serviceCode}</p>
+                                            <p style={{color: currentMode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>serviceCode</p>
+                                            <p style={{color: currentMode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>{ser.serviceCode}</p>
                                         </div>
 
                                         <div>
-                                            <p>serviceName</p>
-                                            <p>{ser.serviceName}</p>
+                                            <p style={{color: currentMode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>serviceName</p>
+                                            <p style={{color: currentMode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>{ser.serviceName}</p>
                                         </div>
 
                                         <div>
-                                            <p>Estimated Wait Time (mins)</p>
-                                            <p>{ser.barberServiceEWT}</p>                               
+                                            <p style={{color: currentMode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Estimated Wait Time (mins)</p>
+                                            <p style={{color: currentMode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>{ser.barberServiceEWT}</p>                               
                                         </div>
 
                                         <div onClick={() => selectedServiceDelete(ser)} style={{

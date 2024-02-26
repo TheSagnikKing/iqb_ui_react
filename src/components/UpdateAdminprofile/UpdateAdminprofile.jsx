@@ -37,7 +37,7 @@ const UpdateAdminprofile = () => {
             gender
         }
 
-        dispatch(updateAdminAction(profiledata,navigate))
+        dispatch(updateAdminAction(profiledata, navigate))
     }
 
     // console.log(LoggedInMiddleware?.user[0]?.profile[0]?.url)
@@ -54,70 +54,76 @@ const UpdateAdminprofile = () => {
 
     const verifyEmailHandler = () => {
         const confirm = window.confirm("Are you sure ?")
-        if(confirm){
-            dispatch(adminVerifyEmailAction(navigate,{
-                email:LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].email
+        if (confirm) {
+            dispatch(adminVerifyEmailAction(navigate, {
+                email: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].email
             }))
         }
     }
 
     const updateAdmin = useSelector(state => state.updateAdmin)
-    const {loading} = updateAdmin
+    const { loading } = updateAdmin
+
+    const darkMode = useSelector(state => state.color.darkmode)
+
+    console.log("Darkmode dashboard", darkMode)
+
+    const currentmode = darkMode === "On"
 
     return (
         <>
             <AdminLayout />
-            <div className="ad-profile-wrapper">
+            <div className={`ad-profile-wrapper ${currentmode && "ad-profile-wrapper_dark"}`}>
 
                 <div className="sa-br-right_main_head">
                     <h1>Update Profile</h1>
                 </div>
 
-                <div className="ad-profile-sa-br-right_main_form-update">
+                <div className={`ad-profile-sa-br-right_main_form-update ${currentmode && 'ad-profile-sa-br-right_main_form-update_dark'}`}>
 
                     <div>
-                        <h2>Email</h2>
+                        <h2 style={{ color: darkMode ==="On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Email</h2>
                         <input
                             type="text"
                             value={LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].email}
                         />
                         {
                             LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].emailVerified ? <div style={{
-                                background:"limegreen",
-                                color:"#fff",
-                                border:"none",
-                                boxShadow:"0px 0px 4px rgba(0,0,0,0.4)",
-                                height:"3.5rem",
-                                paddingInline:"1rem",
-                                display:"flex",
-                                alignItems:"center",
-                                justifyContent:"space-between"
+                                background: "limegreen",
+                                color: "#fff",
+                                border: "none",
+                                boxShadow: "0px 0px 4px rgba(0,0,0,0.4)",
+                                height: "3.5rem",
+                                paddingInline: "1rem",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "space-between"
                             }}>
-                            <p style={{color:"#fff",fontSize:"1.6rem",fontWeight:"500"}}>Email verified</p>
-                            <div style={{background:"#fff",color:"#000",fontSize:"1.4rem",width:"2.5rem",height:"2.5rem",display:"flex",justifyContent:"center",alignItems:"center",borderRadius:"50%",boxShadow:"0px 0px 6px #fff",color:"limegreen"}}><FaCheck /></div>
+                                <p style={{ color: "#fff", fontSize: "1.6rem", fontWeight: "500" }}>Email verified</p>
+                                <div style={{ background: "#fff", color: "#000", fontSize: "1.4rem", width: "2.5rem", height: "2.5rem", display: "flex", justifyContent: "center", alignItems: "center", borderRadius: "50%", boxShadow: "0px 0px 6px #fff", color: "limegreen" }}><FaCheck /></div>
                             </div> : <div
-                             style={{
-                                background:"crimson",
-                                color:"#fff",
-                                border:"none",
-                                boxShadow:"0px 0px 4px rgba(0,0,0,0.4)",
-                                height:"3.5rem",
-                                paddingInline:"1rem",
-                                display:"flex",
-                                alignItems:"center",
-                                justifyContent:"space-between",
-                                cursor:"pointer"
-                            }}
-                            ><p 
-                            style={{color:"#fff",fontSize:"1.6rem",fontWeight:"500"}}
-                            onClick={verifyEmailHandler}>Email Not Verified</p>
-                            <div style={{background:"#fff",color:"#000",fontSize:"1.4rem",width:"2.5rem",height:"2.5rem",display:"flex",justifyContent:"center",alignItems:"center",borderRadius:"50%",boxShadow:"0px 0px 6px #fff",color:"crimson"}}><ImCross /></div></div>
+                                style={{
+                                    background: "crimson",
+                                    color: "#fff",
+                                    border: "none",
+                                    boxShadow: "0px 0px 4px rgba(0,0,0,0.4)",
+                                    height: "3.5rem",
+                                    paddingInline: "1rem",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "space-between",
+                                    cursor: "pointer"
+                                }}
+                            ><p
+                                style={{ color: "#fff", fontSize: "1.6rem", fontWeight: "500" }}
+                                onClick={verifyEmailHandler}>Email Not Verified</p>
+                                <div style={{ background: "#fff", color: "#000", fontSize: "1.4rem", width: "2.5rem", height: "2.5rem", display: "flex", justifyContent: "center", alignItems: "center", borderRadius: "50%", boxShadow: "0px 0px 6px #fff", color: "crimson" }}><ImCross /></div></div>
                         }
-                        
+
                     </div>
 
                     <div>
-                        <h2>Mobile Number</h2>
+                        <h2 style={{ color: darkMode ==="On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Mobile Number</h2>
                         <input
                             type="text"
                             value={mobileNumber}
@@ -126,7 +132,7 @@ const UpdateAdminprofile = () => {
                     </div>
 
                     <div>
-                        <h2>Name</h2>
+                        <h2 style={{ color: darkMode ==="On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Name</h2>
                         <input
                             type="text"
                             value={name}
@@ -135,13 +141,17 @@ const UpdateAdminprofile = () => {
                     </div>
 
                     <div >
-                        <label for="gender"><h2>Choose gender</h2></label>
+                        <label for="gender"><h2 style={{ color: darkMode ==="On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Choose gender</h2></label>
 
-                        <select 
-                        name="gender" 
-                        id="gender"
-                        value={gender}
-                        onChange={(e) => setGender(e.target.value)}
+                        <select
+                            name="gender"
+                            id="gender"
+                            value={gender}
+                            onChange={(e) => setGender(e.target.value)}
+                            style={{
+                                background: currentmode && "var(--dark-primary-color)",
+                                color: currentmode && "var(--light-secondary-color)"
+                            }}
                         >
                             <option value="male">Male</option>
                             <option value="female">Female</option>
@@ -150,7 +160,7 @@ const UpdateAdminprofile = () => {
                     </div>
 
                     <div>
-                        <h2>Date of Birth</h2>
+                        <h2 style={{ color: darkMode ==="On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Date of Birth</h2>
                         <input
                             type="date"
                             value={dob}
@@ -158,11 +168,11 @@ const UpdateAdminprofile = () => {
                         />
                     </div>
 
-                    <div className="sa-br-btn_box-up">
-                        {loading === true ? <button><ClipLoader/></button> : <button onClick={submitHandler}>
+                    <div className={`sa-br-btn_box-up ${currentmode && "sa-br-btn_box-up_dark"}`}>
+                        {loading === true ? <button><ClipLoader /></button> : <button onClick={submitHandler}>
                             Submit
                         </button>}
-                        
+
                     </div>
 
                 </div>

@@ -82,11 +82,15 @@ const SalonSettings = () => {
         generateTimeOptions();
     }, []);
 
+    const darkMode = useSelector(state => state.color.darkmode)
+
+    const currentmode = darkMode === "On"
+
     return (
         <>
             <AdminLayout />
             <div className="wrapper">
-                <div className='salon-wrapper-container'>
+                <div className={`salon-wrapper-container ${currentmode && 'salon-wrapper-container_dark'}`}>
                     <h3>Salon Settings</h3>
 
                     <div>
@@ -172,7 +176,10 @@ const SalonSettings = () => {
                             </select>
                         </div>
 
-                        <button onClick={submitHandler}>{
+                        <button onClick={submitHandler} style={{
+                            background:currentmode ? "var(--dark-primary-color)" : "var(--light-primary-color)",
+                            color: currentmode ?  "var(--light-secondary-color)" : "var(--dark-secondary-color)"
+                        }}>{
                             salonSettingsUpdate?.loading == true ? <h2>Loading...</h2> : "Submit"
                         }</button>
                     </div>

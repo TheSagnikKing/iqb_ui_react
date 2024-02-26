@@ -162,6 +162,22 @@
     background-color: var(--dark-secondary-color) !important;
 }
 
+.crt-form label{
+    color: var(--dark-secondary-color);
+}
+
+.crt-form_dark label{
+    color: var(--light-secondary-color)
+}
+
+.barber-dropdown p{
+    color: var(--dark-secondary-color);
+}
+
+.barber-dropdown_dark p{
+    color: var(--light-secondary-color);
+}
+
 @media((min-width:0px) and (max-width:400px)){
     .crt-wrapper{
         width: 82% !important;

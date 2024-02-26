@@ -14,67 +14,73 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const BarberUpdateProfile = () => {
 
-      // const [username, setUsername] = useState("")
-      const [mobileNumber, setMobileNumber] = useState("")
-      const [name, setName] = useState("")
-      const [gender, setGender] = useState("")
-      const [dob, setDob] = useState("")
-      const [nickName,setNickName] = useState("")
-  
-      const dispatch = useDispatch()
-  
-      const LoggedInMiddleware = useSelector(state => state.LoggedInMiddleware)
-      const navigate = useNavigate()
-  
-      const submitHandler = () => {
-          const profiledata = {
-              email: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].email,
-              salonId: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId,
-              nickName,
-              mobileNumber,
-              name,
-              gender
-          }
-  
-          dispatch(updateBarberAccountDetailsAction(profiledata,navigate))
-      }
-  
-      // console.log(LoggedInMiddleware?.user[0]?.profile[0]?.url)
+    // const [username, setUsername] = useState("")
+    const [mobileNumber, setMobileNumber] = useState("")
+    const [name, setName] = useState("")
+    const [gender, setGender] = useState("")
+    const [dob, setDob] = useState("")
+    const [nickName, setNickName] = useState("")
 
-      const barberUpdateAccount = useSelector(state => state.barberUpdateAccount)
-      const {loading} = barberUpdateAccount
-  
-  
-      useEffect(() => {
-          setNickName(LoggedInMiddleware?.user && LoggedInMiddleware?.user[0]?.nickName)
-          setMobileNumber(LoggedInMiddleware?.user && LoggedInMiddleware?.user[0]?.mobileNumber)
-          setName(LoggedInMiddleware?.user && LoggedInMiddleware?.user[0]?.name)
-          setGender(LoggedInMiddleware?.user && LoggedInMiddleware?.user[0]?.gender)
-          // setDob(LoggedInMiddleware?.user && LoggedInMiddleware?.user[0]?.dateOfBirth.split('T')[0])
-      }, [LoggedInMiddleware?.user])
-  
-  
-      const verifyEmailHandler = () => {
-          const confirm = window.confirm("Are you sure ?")
-          if(confirm){
-              dispatch(barberVerifyEmailAction(navigate,{
-                  email:LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].email
-              }))
-          }
-      }
+    const dispatch = useDispatch()
+
+    const LoggedInMiddleware = useSelector(state => state.LoggedInMiddleware)
+    const navigate = useNavigate()
+
+    const submitHandler = () => {
+        const profiledata = {
+            email: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].email,
+            salonId: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId,
+            nickName,
+            mobileNumber,
+            name,
+            gender
+        }
+
+        dispatch(updateBarberAccountDetailsAction(profiledata, navigate))
+    }
+
+    // console.log(LoggedInMiddleware?.user[0]?.profile[0]?.url)
+
+    const barberUpdateAccount = useSelector(state => state.barberUpdateAccount)
+    const { loading } = barberUpdateAccount
 
 
-  return (
-    <>
-    <Layout/>
+    useEffect(() => {
+        setNickName(LoggedInMiddleware?.user && LoggedInMiddleware?.user[0]?.nickName)
+        setMobileNumber(LoggedInMiddleware?.user && LoggedInMiddleware?.user[0]?.mobileNumber)
+        setName(LoggedInMiddleware?.user && LoggedInMiddleware?.user[0]?.name)
+        setGender(LoggedInMiddleware?.user && LoggedInMiddleware?.user[0]?.gender)
+        // setDob(LoggedInMiddleware?.user && LoggedInMiddleware?.user[0]?.dateOfBirth.split('T')[0])
+    }, [LoggedInMiddleware?.user])
 
-    <div className="ad-profile-wrapper">
+
+    const verifyEmailHandler = () => {
+        const confirm = window.confirm("Are you sure ?")
+        if (confirm) {
+            dispatch(barberVerifyEmailAction(navigate, {
+                email: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].email
+            }))
+        }
+    }
+
+
+    const darkMode = useSelector(state => state.color.darkmode)
+
+    console.log("Darkmode dashboard", darkMode)
+
+    const currentmode = darkMode === "On"
+
+    return (
+        <>
+            <Layout />
+
+            <div className={`ad-profile-wrapper ${currentmode && 'ad-profile-wrapper_dark'}`}>
 
                 <div className="sa-br-right_main_head">
                     <h1>Update Profile</h1>
                 </div>
 
-                <div className="ad-profile-sa-br-right_main_form-update">
+                <div className={`ad-profile-sa-br-right_main_form-update ${currentmode && 'ad-profile-sa-br-right_main_form-update_dark'}`}>
 
                     <div>
                         <h2>Email</h2>
@@ -84,37 +90,37 @@ const BarberUpdateProfile = () => {
                         />
                         {
                             LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].emailVerified ? <div style={{
-                                background:"limegreen",
-                                color:"#fff",
-                                border:"none",
-                                boxShadow:"0px 0px 4px rgba(0,0,0,0.4)",
-                                height:"3.5rem",
-                                paddingInline:"1rem",
-                                display:"flex",
-                                alignItems:"center",
-                                justifyContent:"space-between"
+                                background: "limegreen",
+                                color: "#fff",
+                                border: "none",
+                                boxShadow: "0px 0px 4px rgba(0,0,0,0.4)",
+                                height: "3.5rem",
+                                paddingInline: "1rem",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "space-between"
                             }}>
-                            <p style={{color:"#fff",fontSize:"1.6rem",fontWeight:"500"}}>Email verified</p>
-                            <div style={{background:"#fff",color:"#000",fontSize:"1.4rem",width:"2.5rem",height:"2.5rem",display:"flex",justifyContent:"center",alignItems:"center",borderRadius:"50%",boxShadow:"0px 0px 6px #fff",color:"limegreen"}}><FaCheck /></div>
+                                <p style={{ color: "#fff", fontSize: "1.6rem", fontWeight: "500" }}>Email verified</p>
+                                <div style={{ background: "#fff", color: "#000", fontSize: "1.4rem", width: "2.5rem", height: "2.5rem", display: "flex", justifyContent: "center", alignItems: "center", borderRadius: "50%", boxShadow: "0px 0px 6px #fff", color: "limegreen" }}><FaCheck /></div>
                             </div> : <div
-                             style={{
-                                background:"crimson",
-                                color:"#fff",
-                                border:"none",
-                                boxShadow:"0px 0px 4px rgba(0,0,0,0.4)",
-                                height:"3.5rem",
-                                paddingInline:"1rem",
-                                display:"flex",
-                                alignItems:"center",
-                                justifyContent:"space-between",
-                                cursor:"pointer"
-                            }}
-                            ><p 
-                            style={{color:"#fff",fontSize:"1.6rem",fontWeight:"500"}}
-                            onClick={verifyEmailHandler}>Email Not Verified</p>
-                            <div style={{background:"#fff",color:"#000",fontSize:"1.4rem",width:"2.5rem",height:"2.5rem",display:"flex",justifyContent:"center",alignItems:"center",borderRadius:"50%",boxShadow:"0px 0px 6px #fff",color:"crimson"}}><ImCross /></div></div>
+                                style={{
+                                    background: "crimson",
+                                    color: "#fff",
+                                    border: "none",
+                                    boxShadow: "0px 0px 4px rgba(0,0,0,0.4)",
+                                    height: "3.5rem",
+                                    paddingInline: "1rem",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "space-between",
+                                    cursor: "pointer"
+                                }}
+                            ><p
+                                style={{ color: "#fff", fontSize: "1.6rem", fontWeight: "500" }}
+                                onClick={verifyEmailHandler}>Email Not Verified</p>
+                                <div style={{ background: "#fff", color: "#000", fontSize: "1.4rem", width: "2.5rem", height: "2.5rem", display: "flex", justifyContent: "center", alignItems: "center", borderRadius: "50%", boxShadow: "0px 0px 6px #fff", color: "crimson" }}><ImCross /></div></div>
                         }
-                        
+
                     </div>
 
                     <div>
@@ -147,11 +153,15 @@ const BarberUpdateProfile = () => {
                     <div>
                         <h2>Choose gender</h2>
 
-                        <select 
-                        name="gender" 
-                        id="gender"
-                        value={gender}
-                        onChange={(e) => setGender(e.target.value)}
+                        <select
+                            name="gender"
+                            id="gender"
+                            value={gender}
+                            onChange={(e) => setGender(e.target.value)}
+                            style={{
+                                background: currentmode ? "var(--dark-primary-color)" : "var(--light-tertiary-color)",
+                                color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"
+                            }}
                         >
                             <option value="male">Male</option>
                             <option value="female">Female</option>
@@ -168,9 +178,9 @@ const BarberUpdateProfile = () => {
                         />
                     </div>
 
-                    <div className="sa-br-btn_box-up">
+                    <div className={`sa-br-btn_box-up ${currentmode && 'sa-br-btn_box-up_dark'}`}>
                         <button onClick={submitHandler}>
-                            {loading === true ? <ClipLoader/> : <p style={{fontSize:"1.2rem"}}>Submit</p>}
+                            {loading === true ? <ClipLoader /> : <p style={{ fontSize: "1.2rem" }}>Submit</p>}
                         </button>
                     </div>
 
@@ -178,8 +188,8 @@ const BarberUpdateProfile = () => {
 
                 <ToastContainer />
             </div>
-    </>
-  )
+        </>
+    )
 }
 
 export default BarberUpdateProfile

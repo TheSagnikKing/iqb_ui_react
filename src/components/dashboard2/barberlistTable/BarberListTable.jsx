@@ -309,11 +309,11 @@ const BarberListTable = () => {
             {/* Table  */}
             <div className={`table ${currentMode ? "table_dark" : ""}`}>
                 {
-                    <main className={`barberitem-head ${currentMode ? "barberitem-head_dark" : ""}`}>
+                    <main className={`barberitem-head ${currentMode && "barberitem-head_dark"}`}>
                         <div><p></p></div>
                         <div>
                             <div>
-                                <h4>Salon ID</h4>
+                                <h4 style={{color: currentMode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Salon ID</h4>
                                 {/* <div>
                                     <div onClick={() => sortHandler("salonId", "asc")}><AiOutlineArrowUp /></div>
                                     <div onClick={() => sortHandler("salonId", "des")}><AiOutlineArrowDown /></div>
@@ -321,7 +321,7 @@ const BarberListTable = () => {
                             </div></div>
 
                         <div><div>
-                            <h4>Barber Name</h4>
+                            <h4 style={{color: currentMode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Barber Name</h4>
                             {/* <div>
                                 <div onClick={() => sortHandler("name", "asc")}><AiOutlineArrowUp /></div>
                                 <div onClick={() => sortHandler("name", "des")}><AiOutlineArrowDown /></div>
@@ -329,14 +329,14 @@ const BarberListTable = () => {
                         </div></div>
 
                         <div><div>
-                            <h4>Email</h4>
+                            <h4 style={{color: currentMode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Email</h4>
                             {/* <div>
                                 <div onClick={() => sortHandler("email", "asc")}><AiOutlineArrowUp /></div>
                                 <div onClick={() => sortHandler("email", "des")}><AiOutlineArrowDown /></div>
                             </div> */}
                         </div></div>
 
-                        <h4 className='barber-isActive'>isOnline</h4>
+                        <h4 className='barber-isActive' style={{color: currentMode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>isOnline</h4>
                     </main>
                 }
 

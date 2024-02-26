@@ -495,11 +495,11 @@ const CreateSalon = () => {
                         <div>
                             <div style={{ display: "flex",flexDirection:"row" }}>
                                 <label htmlFor="">Salon Type</label>
-                                <button onClick={() => setSalontypeDropdown((prev) => !prev)} className='sal-drop-type'><FaArrowDown style={{fontSize:"1.2rem"}}/></button>
+                                <button onClick={() => setSalontypeDropdown((prev) => !prev)} className='sal-drop-type'><FaArrowDown style={{ color: darkMode ==="On" ? "var(--dark-secondary-color)" : "var(--light-secondary-color)"}}/></button>
                             </div>
 
                             {
-                                salontypeDropdown && <div className='sal-drop-type-p'>
+                                salontypeDropdown && <div className={`sal-drop-type-p ${darkMode === "On" && 'sal-drop-type-p_dark'}`}>
                                     <p onClick={() => handleSalonTypeClick('Salon Type 1')}>Salon Type 1</p>
                                     <p onClick={() => handleSalonTypeClick('Salon Type 2')}>Salon Type 2</p>
                                     <p onClick={() => handleSalonTypeClick('Salon Type 3')}>Salon Type 3</p>
@@ -578,7 +578,9 @@ const CreateSalon = () => {
                                 <div className='service-icon' >
                                     <p>Service Icon</p>
                                     <div onClick={() => setServiceDrop(!serviceDrop)}
-                                        style={{ cursor: "pointer", background: "#fff", boxShadow: "0px 0px 4px rgba(0,0,0,0.4)", height: "2.5rem", width: "2.5rem", display: "flex", alignItems: "center", justifyContent: "center", borderRadius: "50%" }}><FaArrowDown /></div>
+                                        style={{ cursor: "pointer", background: "#fff", boxShadow: "0px 0px 4px rgba(0,0,0,0.4)", height: "2.5rem", width: "2.5rem", display: "flex", alignItems: "center", justifyContent: "center", borderRadius: "50%",
+                                        color:darkMode === "On" ? "var(--dark-secondary-color)" : "var(--light-secondary-color)"
+                                        }}><FaArrowDown /></div>
                                 </div>
 
                                 {

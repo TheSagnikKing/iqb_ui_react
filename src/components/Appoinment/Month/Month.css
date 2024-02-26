@@ -71,6 +71,10 @@ tr {
   color:var(--light-secondary-color)
 }
 
+.fc, .fc *, .fc ::after, .fc ::before{
+  color: var(--dark-secondary-color) !important;
+}
+
 @media ((min-width: 0px) and (max-width: 40rem)) {
   .fc .fc-toolbar {
     display: flex;
@@ -130,6 +134,10 @@ tr {
     background: #fff;
     height: 70vh !important;
     padding: 2rem;
+  }
+
+  .calender-month_dark{
+    background-color: var(--dark-secondary-color) !important;
   }
 
   .calender-month>a{

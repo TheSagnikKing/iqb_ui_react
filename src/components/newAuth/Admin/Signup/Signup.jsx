@@ -107,7 +107,7 @@ const Signup = () => {
             <div className="right">
                 <div className="right_inner_container">
                     <div className="divone">
-                        <h1>Sign Up Admin for an Account</h1>
+                        <h1 style={{color:"#000"}}>Sign Up Admin for an Account</h1>
                     </div>
 
                     <div className="divtwo">

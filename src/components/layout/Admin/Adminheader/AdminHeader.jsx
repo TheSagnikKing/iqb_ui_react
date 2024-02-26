@@ -248,7 +248,7 @@ const AdminHeader = ({ title }) => {
             borderRight: "1px solid rgba(0,0,0,0.6)",
           }}
           >
-            <div style={{display:"flex",alignItems:"center",justifyContent:"space-between"}}>
+            <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:"1rem"}}>
               
               <div className='colormode' style={{ marginTop: "2rem",display:"flex",alignItems:"center",gap:"2rem" }}>
                 <div className="nav1menu_settings_item" style={{ cursor: "pointer",boxShadow: "0px 0px 4px rgba(0,0,0,0.5)",width:"4rem",height:"4rem",marginLeft:"1rem",display:"flex",justifyContent:"center",alignItems:"center",borderRadius:"50%" }} onClick={darkHandler}>
@@ -270,7 +270,7 @@ const AdminHeader = ({ title }) => {
                   <Link to={`${item.menu_link}`} style={{ color: "#000", textDecoration: "none" }} >
                     <div className="nav1-menu">
                       <div style={{ display: "flex", alignItems: "center", gap: "2rem", width: "80%", fontSize: "1.4rem" }}>
-                        <div style={{ color: `${pathname === item.menu_link ? "#fff" : ""}` }}>
+                        <div style={{ color: `${pathname === item.menu_link ? "#fff" : "var(--dark-secondary-color)"}` }}>
                           {item.menu_logo}
                         </div>
 
@@ -290,12 +290,12 @@ const AdminHeader = ({ title }) => {
             </div>
 
             <div className='colormode' style={{ marginTop: "2rem" }}>
-              <div className="nav1menu_settings_item" style={{ cursor: "pointer" }} onClick={darkHandler}>
+              <div className="nav1menu_settings_item" style={{ cursor: "pointer",width:"4.5rem" }} onClick={darkHandler}>
                 <div style={{ fontSize: "2rem", color: "black", color: check === true ? "black" : "black", background: check === true && "white", height: "100%", width: "100%", borderRadius: "50%", boxShadow: "0px 0px 4px white" }}><FaMoon /></div>
                 {/* <p style={{fontSize:"1.2rem", color:"black",color:check === true ? "white" : "black"}}>Dark Mode</p> */}
               </div>
 
-              <div className="nav1menu_settings_item" style={{ cursor: "pointer" }} onClick={lightHandler}>
+              <div className="nav1menu_settings_item" style={{ cursor: "pointer",width:"4.5rem" }} onClick={lightHandler}>
                 <div style={{ fontSize: "2rem", color: check === false ? "white" : "white", background: check === false && "black", height: "3.2rem", width: "3.2rem", borderRadius: "50%" }}><MdOutlineWbSunny /></div>
                 {/* <p style={{fontSize:"1.2rem", color:check === false ? "white" : "white"}}>Light Mode</p> */}
               </div>
@@ -362,7 +362,8 @@ const AdminHeader = ({ title }) => {
               applySalon?.loading == true ? <button style={{
                 height: "2.5rem",
                 width: "6rem",
-                background: "#f1f6fc",
+                background: darkMode === "On" ? "var(--dark-primary-color)" : "var(--light-primary-color)",
+                color: darkMode === "On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)",
                 boxShadow: "0px 0px 4px rgba(0,0,0,0.3)",
                 cursor: "pointer",
                 borderRadius: "5px",
@@ -371,7 +372,8 @@ const AdminHeader = ({ title }) => {
               }}>Loading</button> : <button onClick={applySalonHandler} style={{
                 height: "2.5rem",
                 width: "6rem",
-                background: "#f1f6fc",
+                background: darkMode === "On" ? "var(--dark-primary-color)" : "var(--light-primary-color)",
+                color: darkMode === "On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)",
                 boxShadow: "0px 0px 4px rgba(0,0,0,0.3)",
                 cursor: "pointer",
                 borderRadius: "5px",
@@ -426,8 +428,8 @@ const AdminHeader = ({ title }) => {
 
 
             <div className="nav1profile_detail">
-              <b>{LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].name}</b>
-              <p>Admin</p>
+              <b style={{color: darkMode === "On" && "var(--light-secondary-color)"}}>{LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].name}</b>
+              <p style={{color: darkMode === "On" && "var(--light-secondary-color)"}}>Admin</p>
             </div>
 
             <div style={{ cursor: "pointer", fontSize: "2.4rem" }} className="nav1right_dropdown"
@@ -436,15 +438,15 @@ const AdminHeader = ({ title }) => {
             </div>
 
             {
-              dropdown && <div className="nav1right_dropdown_box">
+              dropdown && <div className={`nav1right_dropdown_box ${darkMode ==="On" && 'nav1right_dropdown_box_dark'}`}>
                 <div>
-                  <div><RiAccountCircleFill /></div>
-                  <Link to="/admin/updateprofile" style={{ fontSize: "2rem", textDecoration: "none" }}>My Account</Link>
+                  <div style={{ color: darkMode ==="On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)", textDecoration: "none" }}><RiAccountCircleFill /></div>
+                  <Link to="/admin/updateprofile" style={{ color: darkMode ==="On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)", textDecoration: "none" }}>My Account</Link>
                 </div>
 
                 <div onClick={logoutHandler}>
-                  <div><BiLogOutCircle /></div>
-                  <p>Logout</p>
+                  <div style={{ color: darkMode ==="On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)", textDecoration: "none" }}><BiLogOutCircle /></div>
+                  <p style={{ color: darkMode ==="On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)", textDecoration: "none" }}>Logout</p>
                 </div>
               </div>
             }

@@ -66,3 +66,13 @@
     border-radius: 50%;
     border: 1px solid white;
 }
+
+/* DARK MODE  */
+
+.barber_container_dark{
+    background-color: var(--dark-primary-color);
+}
+
+.barber_container_dark p{
+    color: var(--light-secondary-color) !important;
+}

@@ -44,7 +44,7 @@ const UpdateBarber = () => {
 
         if (!servicepresent) {
             const serviceWithEWT = { ...ser, barberServiceEWT: barberserviceEWTMap.get(ser.serviceId) || 0 };
-            
+
             setSelectedService([...selectedService, serviceWithEWT])
         }
     }
@@ -66,16 +66,16 @@ const UpdateBarber = () => {
                 const { data } = await api.get(`/api/salon/allSalonServices?salonId=${currentSalonId}`)
                 setBarberServices(data)
                 setError1(data.message)
-            
+
 
                 // console.log(data)
 
                 // Set initial values for barberserviceEWTMap
-            const initialBarberserviceEWTMap = new Map();
-            data?.response?.forEach((ser) => {
-                initialBarberserviceEWTMap.set(ser.serviceId, ser.serviceEWT || 0);
-            });
-            setBarberserviceEWTMap(initialBarberserviceEWTMap);
+                const initialBarberserviceEWTMap = new Map();
+                data?.response?.forEach((ser) => {
+                    initialBarberserviceEWTMap.set(ser.serviceId, ser.serviceEWT || 0);
+                });
+                setBarberserviceEWTMap(initialBarberserviceEWTMap);
             }
 
             getServices()
@@ -106,7 +106,7 @@ const UpdateBarber = () => {
             name, email, nickName, mobileNumber, dateOfBirth, salonId, barberServices: selectedService
         }
         // console.log(barberdata)
-        dispatch(updateBarberAction(barberdata,navigate,signal))
+        dispatch(updateBarberAction(barberdata, navigate, signal))
     }
 
     const location = useLocation()
@@ -126,9 +126,9 @@ const UpdateBarber = () => {
         const signal = newController.signal;
 
         const fetchdetailbarber = async () => {
-            const { data } = await api.post(`/api/barber/getBarberDetailsByEmail`, { email: barberemail }, {signal})
-            
-            console.log("scsdvsdvdsvddssd",data)
+            const { data } = await api.post(`/api/barber/getBarberDetailsByEmail`, { email: barberemail }, { signal })
+
+            console.log("scsdvsdvdsvddssd", data)
 
             setName(data?.response?.name)
             setNickName(data?.response?.nickName)
@@ -145,7 +145,7 @@ const UpdateBarber = () => {
         return () => {
             fetchdetailbarberRef.current.abort();
         };
-    
+
     }, [])
 
     // console.log(barberServices)
@@ -154,7 +154,7 @@ const UpdateBarber = () => {
 
     const darkMode = useSelector(state => state.color.darkmode)
 
-    console.log("Darkmode dashboard",darkMode)
+    console.log("Darkmode dashboard", darkMode)
 
     const currentmode = darkMode === "On"
 
@@ -163,7 +163,7 @@ const UpdateBarber = () => {
             <AdminLayout />
             <div className='upd-wrapper'>
                 <h2 style={{
-                    color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"
+                    color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"
                 }}>Update Barber</h2>
 
                 <div className={`upd-form ${currentmode ? "upd-form_dark" : ""}`}>
@@ -214,7 +214,7 @@ const UpdateBarber = () => {
                             placeholder='Enter Date of Birth'
                             value={dateOfBirth}
                             onChange={(e) => setDateOfBirth(e.target.value)}
-                            style={{width:"75vw"}}
+                            style={{ width: "75vw" }}
                         />
                     </div>
 
@@ -230,16 +230,21 @@ const UpdateBarber = () => {
                     <div></div>
                     <div></div>
 
-                    
-                    
+
+
                     {/* { updateBarber?.loading == true ? <button>Loading...</button> : <button onClick={submitHandler}>
                          Update
                     </button>} */}
 
                     <div>
-                        <div style={{display:"flex", justifyContent:"space-between", paddingInline:"1rem"}}>
-                            <h1>Services</h1>
-                            <div onClick={() => setDropdown(!dropdown)} style={{fontWeight:"bolder",fontSize:"2rem",boxShadow:currentmode ? "0px 0px 4px var(--light-secondary-color)" : "0px 0px 4px rgba(0,0,0,0.4)",borderRadius:"50%",width:"3rem",height:"3rem",display:"flex",justifyContent:"center",alignItems:"center"}}><BiDownArrowAlt /></div>
+                        <div style={{ display: "flex", justifyContent: "space-between", paddingInline: "1rem" }}>
+                            <h1 style={{
+                                color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"
+                            }}>Services</h1>
+                            <div onClick={() => setDropdown(!dropdown)} style={{
+                                fontWeight: "bolder", fontSize: "2rem", boxShadow: currentmode ? "0px 0px 4px var(--light-secondary-color)" : "0px 0px 4px rgba(0,0,0,0.4)", borderRadius: "50%", width: "3rem", height: "3rem", display: "flex", justifyContent: "center", alignItems: "center",
+                                color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"
+                            }}><BiDownArrowAlt /></div>
                         </div>
 
                         {
@@ -266,27 +271,27 @@ const UpdateBarber = () => {
                                                 <p>Estimated Wait Time (mins)</p>
                                                 <input
                                                     type="number"
-                                                    value={  barberserviceEWTMap.get(ser.serviceId) }
+                                                    value={barberserviceEWTMap.get(ser.serviceId)}
                                                     onChange={(e) => updateServiceEWT(ser.serviceId, e.target.value)}
                                                     className='serviceEWT'
-                                                    style={{width:"5rem"}}
+                                                    style={{ width: "5rem" }}
                                                 />
                                                 {/* <p>{}</p> */}
                                             </div>
 
                                             <button onClick={() => selectedServiceHandler(ser, index)} style={{
                                                 color: "blue",
-                                                width:"3.5rem",
-                                                height:"3.5rem",
-                                                margin:"auto",
-                                                display:"flex",
-                                                justifyContent:"center",
-                                                alignItems:"center",
-                                                background:"#fff",
-                                                boxShadow:"0px 0px 6px rgba(0,0,0,0.4)",
-                                                border:"none",
-                                                cursor:"pointer",
-                                                borderRadius:"50%"
+                                                width: "3.5rem",
+                                                height: "3.5rem",
+                                                margin: "auto",
+                                                display: "flex",
+                                                justifyContent: "center",
+                                                alignItems: "center",
+                                                background: "#fff",
+                                                boxShadow: "0px 0px 6px rgba(0,0,0,0.4)",
+                                                border: "none",
+                                                cursor: "pointer",
+                                                borderRadius: "50%"
                                             }}><FaPlus /></button>
                                             {/* <p>{error1 && error1}</p> */}
                                         </div>
@@ -295,45 +300,47 @@ const UpdateBarber = () => {
                             </div>
                         }
 
-                        <h2>Your Services</h2>
+                        <h2 style={{
+                                color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"
+                            }}>Your Services</h2>
                         <div className={`barber-dropdown-select ${currentmode ? "barber-dropdown-select_dark" : ""}`}>
                             {
                                 selectedService ? selectedService.map((ser, index) => (
                                     <div key={index}>
                                         <div>
-                                            <p>serviceId</p>
-                                            <p>{ser.serviceId}</p>
+                                            <p style={{color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>serviceId</p>
+                                            <p style={{color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>{ser.serviceId}</p>
                                         </div>
 
                                         <div>
-                                            <p>serviceCode</p>
-                                            <p>{ser.serviceCode}</p>
+                                            <p style={{color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>serviceCode</p>
+                                            <p style={{color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>{ser.serviceCode}</p>
                                         </div>
 
                                         <div>
-                                            <p>serviceName</p>
-                                            <p>{ser.serviceName}</p>
+                                            <p style={{color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>serviceName</p>
+                                            <p style={{color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>{ser.serviceName}</p>
                                         </div>
 
                                         <div>
-                                            <p>Estimated Wait Time (mins)</p>
-                                            <p>{ser.barberServiceEWT}</p>                               
+                                            <p style={{color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Estimated Wait Time (mins)</p>
+                                            <p style={{color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>{ser.barberServiceEWT}</p>
                                         </div>
 
                                         <div onClick={() => selectedServiceDelete(ser)} style={{
-                                                color: "red",
-                                                width:"3.5rem",
-                                                height:"3.5rem",
-                                                margin:"auto",
-                                                display:"flex",
-                                                justifyContent:"center",
-                                                alignItems:"center",
-                                                background:"#fff",
-                                                boxShadow:"0px 0px 6px rgba(0,0,0,0.4)",
-                                                border:"none",
-                                                cursor:"pointer",
-                                                borderRadius:"1rem"
-                                            }}><MdDelete /></div>
+                                            color: "red",
+                                            width: "3.5rem",
+                                            height: "3.5rem",
+                                            margin: "auto",
+                                            display: "flex",
+                                            justifyContent: "center",
+                                            alignItems: "center",
+                                            background: "#fff",
+                                            boxShadow: "0px 0px 6px rgba(0,0,0,0.4)",
+                                            border: "none",
+                                            cursor: "pointer",
+                                            borderRadius: "1rem"
+                                        }}><MdDelete /></div>
                                     </div>
                                 )) : <p>No services present</p>
                             }
@@ -342,11 +349,11 @@ const UpdateBarber = () => {
 
                     </div>
 
-                    {updateBarber?.loading == true ? <button style={{fontWeight:"500"}}>Loader</button> : <button onClick={submitHandler}
-                    style={{
-                        background:currentmode ? "var(--dark-primary-color)" : "var(--light-tertiary-color)",
-                        color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"
-                    }}
+                    {updateBarber?.loading == true ? <button style={{ fontWeight: "500" }}>Loader</button> : <button onClick={submitHandler}
+                        style={{
+                            background: currentmode ? "var(--dark-primary-color)" : "var(--light-tertiary-color)",
+                            color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"
+                        }}
                     >Update</button>}
 
                 </div>

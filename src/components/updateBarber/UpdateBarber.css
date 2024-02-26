@@ -163,6 +163,15 @@
     color: var(--light-secondary-color) !important; 
 }
 
+
+.upd-form label{
+    color:var(--dark-secondary-color)
+}
+
+.upd-form_dark label{
+    color:var(--light-secondary-color)
+}
+
 @media((min-width:0px) and (max-width:400px)){
     .upd-wrapper {
         width: 82% !important;

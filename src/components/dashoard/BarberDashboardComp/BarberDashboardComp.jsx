@@ -137,6 +137,12 @@ const BarberDashboardComp = () => {
 
     const connectBarberSalon = useSelector(state => state.connectBarberSalon)
 
+    const darkMode = useSelector(state => state.color.darkmode)
+
+    console.log("Darkmode dashboard", darkMode)
+
+    const currentmode = darkMode === "On"
+
     return (
         <div className="right_main_div">
             {salonid == 0 ? <div className='connectSalon'>
@@ -221,25 +227,25 @@ const BarberDashboardComp = () => {
 
                 {/* <Link to="/salon/createsalon">Create Salon</Link> */}
             </div > : <>
-                <div className="right_div_top">
+                <div className={`right_div_top`}>
 
-                    <div className="div_left">
-                        <div style={{display:"flex",gap:"1.5rem",alignItems:"center",marginBottom:"1.5rem"}}>
-                        <h3>Offline</h3>
-                        <label className="nav2toggle_switch" >
-                            <input type="checkbox"
-                                value={check}
-                                onClick={() => setOnlineHandler()}
+                    <div className={`div_left ${currentmode && 'div_left_dark'}`}>
+                        <div style={{ display: "flex", gap: "1.5rem", alignItems: "center", marginBottom: "1.5rem" }}>
+                            <h3>Offline</h3>
+                            <label className="nav2toggle_switch" >
+                                <input type="checkbox"
+                                    value={check}
+                                    onClick={() => setOnlineHandler()}
 
-                            />
-                            <span className="nav2slider"></span>
-                            <span className={`nav2slider ${check ? 'checked' : ''}`}
-                                style={{
-                                    background: check ? "#4CBB17" : ""
-                                }}
-                            ></span>
-                        </label>
-                        <h3>Online</h3>
+                                />
+                                <span className="nav2slider"></span>
+                                <span className={`nav2slider ${check ? 'checked' : ''}`}
+                                    style={{
+                                        background: check ? "#4CBB17" : ""
+                                    }}
+                                ></span>
+                            </label>
+                            <h3>Online</h3>
                         </div>
 
                         <div className="div_left_head">
@@ -289,39 +295,43 @@ const BarberDashboardComp = () => {
                         </div>
                     </div>
 
-                    <div className="div_right">
-                        <div className="div_right_head">
+                    <div className={`div_right ${currentmode && 'div_right_dark'}`}>
+                        <div className={`div_right_head ${currentmode && 'div_right_head_dark'}`}>
                             <p>Queue List</p>
 
-                            <div className="btn_box">
+                            <div className={`btn_box ${currentmode && 'btn_box_dark'}`}>
 
-                                <div className="btn_one">
+                                <div className={`btn_one ${currentmode && 'btn_one_dark'}`}>
                                     <div>
                                         <IoMdAdd />
                                     </div>
 
-                                    <p>Add Customers</p>
+                                    <p
+                                        style={{ color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)" }}
+                                    >Add Customers</p>
                                 </div>
 
 
-                                <div className="btn_one">
+                                <div className={`btn_one ${currentmode && 'btn_one_dark'}`}>
                                     <div>
                                         <FaUsers />
                                     </div>
 
-                                    <p>Join Queue</p>
+                                    <p
+                                        style={{ color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)" }}
+                                    >Join Queue</p>
                                 </div>
 
                                 <div className="last_item">
-                                    <BsThreeDotsVertical />
+                                    <BsThreeDotsVertical style={{color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}/>
                                 </div>
 
                             </div>
                         </div>
 
-                        <div className="div_right_middle">
+                        <div className={`div_right_middle ${currentmode && 'div_right_middle_dark'}`}>
 
-                            <div className="content">
+                            <div className={`content ${currentmode && 'content_dark'}`}>
                                 <div>
                                     <p>Kunal Jasuja</p>
                                     <p>Contact No-9876543210</p>
@@ -343,7 +353,7 @@ const BarberDashboardComp = () => {
                                 </div>
                             </div>
 
-                            <div className="content">
+                            <div className={`content ${currentmode && 'content_dark'}`}>
                                 <div>
                                     <p>Roy Kapoor</p>
                                     <p>Contact No-9876543210</p>
@@ -367,7 +377,7 @@ const BarberDashboardComp = () => {
 
                         </div>
 
-                        <div className="div_right_third">
+                        <div className={`div_right_third ${currentmode && 'div_right_third_dark'}`}>
                             <div>
                                 <p>Join Queue</p>
                                 <span>{"(10)"}</span>
@@ -382,7 +392,7 @@ const BarberDashboardComp = () => {
 
                         </div>
 
-                        <div className="div_right_fourth">
+                        <div className={`div_right_fourth ${currentmode && 'div_right_fourth_dark'}`}>
 
                             <div>
                                 <div className="checkbox"
@@ -398,23 +408,26 @@ const BarberDashboardComp = () => {
                             <p>JLDF13463</p>
 
                             <div>
-                                <div>
+                                <div style={{color:"var(--dark-secondary-color)",fontWeight:"500"}}>
                                     In Progress
                                 </div>
 
                                 <div>
-                                    <FaUserCircle />
+                                    <FaUserCircle 
+                                    style={{color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}/>
                                 </div>
 
                                 <div>
-                                    <FiMoreHorizontal />
+                                    <FiMoreHorizontal 
+                                    style={{color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}
+                                    />
                                 </div>
                             </div>
 
 
                         </div>
 
-                        <div className="div_right_fifth">
+                        <div className={`div_right_fifth ${currentmode && 'div_right_fifth_dark'}`}>
 
                             <div>
                                 <div className="checkbox"
@@ -430,16 +443,20 @@ const BarberDashboardComp = () => {
                             <p>JLDF13598</p>
 
                             <div>
-                                <div>
+                                <div style={{color:"var(--dark-secondary-color)",fontWeight:"500"}}>
                                     Pending
                                 </div>
 
                                 <div>
-                                    <FaUserCircle />
+                                    <FaUserCircle 
+                                    style={{color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}
+                                    />
                                 </div>
 
                                 <div>
-                                    <FiMoreHorizontal />
+                                    <FiMoreHorizontal 
+                                    style={{color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}
+                                    />
                                 </div>
                             </div>
 
@@ -448,13 +465,13 @@ const BarberDashboardComp = () => {
                     </div>
                 </div>
 
-                <div className="right_div_end" >
+                <div className={`right_div_end ${currentmode && 'right_div_end_dark'}`}>
 
-                    <div className="right_div_end_left" style={{ marginTop: "5rem" }}>
-                        <div className="right_div_end_head">
+                    <div className={`right_div_end_left ${currentmode && 'right_div_end_left_dark'}`}>
+                        <div className={`right_div_end_head ${currentmode && 'right_div_end_head_dark'}`}>
                             <p>Calender</p>
 
-                            <div className="btn_box">
+                            <div className={`btn_box ${currentmode && 'btn_box_dark'}`}>
                                 <button>Appoinments</button>
                                 <button>Reservation</button>
                             </div>
@@ -466,7 +483,7 @@ const BarberDashboardComp = () => {
                                 <Calender value={currentDate} setCurrentDate={setCurrentDate} />
                             </div>
 
-                            <div className="main_right">
+                            <div className={`main_right ${currentmode && 'main_right_dark'}`}>
                                 {
                                     customerDetail.map((item) => {
                                         return (
@@ -480,7 +497,7 @@ const BarberDashboardComp = () => {
                         </div>
                     </div>
 
-                    <div className="right_div_end_right">
+                    <div className={`right_div_end_right ${currentmode && 'right_div_end_right_dark'}`}>
                         <div className="head">
                             <p>Reports</p>
                             <div>
@@ -509,12 +526,12 @@ const BarberDashboardComp = () => {
                             }
                         </div>
 
-                        <div className="chart">
+                        <div className={`chart ${currentmode && 'chart_dark'}`}>
                             <div>
-                                <p>Completion Rate</p>
+                                <p style={{color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Completion Rate</p>
 
                                 <div>
-                                    <p>95%</p>
+                                    <p style={{color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>95%</p>
                                     <p>+2.5%</p>
                                 </div>
                             </div>

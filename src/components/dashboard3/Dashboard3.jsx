@@ -144,21 +144,21 @@ const Dashboard3 = () => {
                 {
                     <main className={`cst-barberitem ${currentmode ? "cst-barberitem_dark" : ""}`}>
                         <div><div>
-                            <h4>Salon ID</h4>
+                            <h4 style={{color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Salon ID</h4>
                             {/* <div>
                                         <div onClick={() => sortHandler("salonId", "asc")}><AiOutlineArrowUp /></div>
                                         <div onClick={() => sortHandler("salonId", "des")}><AiOutlineArrowDown /></div>
                                     </div> */}
                         </div></div>
                         <div><div>
-                            <h4>Name</h4>
+                            <h4 style={{color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Name</h4>
                             {/* <div>
                                         <div onClick={() => sortHandler("name", "asc")}><AiOutlineArrowUp /></div>
                                         <div onClick={() => sortHandler("name", "des")}><AiOutlineArrowDown /></div>
                                     </div> */}
                         </div></div>
                         <div><div>
-                            <h4>Email</h4>
+                            <h4 style={{color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Email</h4>
                             {/* <div>
                                         <div><AiOutlineArrowUp /></div>
                                         <div><AiOutlineArrowDown /></div>
@@ -166,7 +166,7 @@ const Dashboard3 = () => {
                         </div></div>
 
                         <div><div>
-                            <h4>Gender</h4>
+                            <h4 style={{color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Gender</h4>
                             {/* <div>
                                         <div><AiOutlineArrowUp /></div>
                                         <div><AiOutlineArrowDown /></div>
@@ -175,11 +175,17 @@ const Dashboard3 = () => {
                         <div><h4>Mobile Number</h4></div>
 
 
-                        <div className='icons-bbr'><IoIosNotifications /></div>
+                        <div className='icons-bbr'
+                        style={{background: currentmode ? "var(--dark-secondary-color)" : "var(--light-secondary-color)"}}
+                        ><IoIosNotifications style={{color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}/></div>
 
-                        <div className='icons-bbr'><IoMail /></div>
+                        <div className='icons-bbr'
+                        style={{background: currentmode ? "var(--dark-secondary-color)" : "var(--light-secondary-color)"}}
+                        ><IoMail style={{color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}/></div>
 
-                        <div className='icons-bbr'><MdSms /></div>
+                        <div className='icons-bbr'
+                        style={{background: currentmode ? "var(--dark-secondary-color)" : "var(--light-secondary-color)"}}
+                        ><MdSms style={{color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}/></div>
 
 
                     </main>

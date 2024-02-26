@@ -342,6 +342,32 @@
 }
 
 
+/* DARK MODE  */
+
+.nav1left_header_dark{
+    background: var(--dark-secondary-color);
+}
+
+.nav1wrapper_dark{
+    background: var(--dark-secondary-color) !important;
+}
+
+.nav1left_dark{
+    background: var(--dark-secondary-color) !important;
+}
+
+.nav1right_dark{
+    background-color: var(--dark-secondary-color);
+}
+
+.nav1right_dropdown_box_dark{
+    background-color: var(--dark-primary-color) !important;
+}
+
+.nav1right_dropdown_box_dark p,div{
+    color: var(--light-secondary-color)
+}
+
 @media((min-width:0px) and (max-width:400px)){
     .nav2slider{
         width:4.2rem !important

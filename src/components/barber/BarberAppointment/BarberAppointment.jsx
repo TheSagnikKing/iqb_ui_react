@@ -51,10 +51,14 @@ function BarberAppointment() {
     //     { title: 'event Sagnik', date: '2023-12-22',color:"orange" }
     //   ]
 
+    const darkMode = useSelector(state => state.color.darkmode)
+
+    const currentmode =  darkMode === "On"
+
     return (
         <>
             <Layout/>
-            <div className='calender-month'>
+            <div className={`calender-month ${currentmode && 'calender-month_dark'}`}>
 
                 <div className='demo-app-main'>
                     <FullCalendar

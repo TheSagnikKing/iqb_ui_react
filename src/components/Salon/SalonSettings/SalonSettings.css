@@ -74,3 +74,17 @@
     box-shadow: 0px 0px 0.4rem rgba(0, 0, 0, 0.5);
     cursor: pointer;
 }
+
+.salon-wrapper-container h3,h2{
+    color:var(--dark-secondary-color) !important
+}
+
+/* DARK MODE  */
+
+.salon-wrapper-container_dark{
+    background-color: var(--dark-secondary-color);
+}
+
+.salon-wrapper-container_dark h3,h2{
+    color: var(--light-secondary-color) !important;
+}
