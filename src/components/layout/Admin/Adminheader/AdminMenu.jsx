@@ -21,7 +21,7 @@ const AdminMenu = ({ menu_logo, menu_title, category, menu_link, menucolor }) =>
                         {menu_logo}
                     </div>
 
-                    <h3 >{menu_title}</h3>
+                    <h3 style={{color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>{menu_title}</h3>
                 </div>
 
             </div>

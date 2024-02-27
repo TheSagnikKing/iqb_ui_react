@@ -230,7 +230,7 @@ const AdminHeader = ({ title }) => {
                     menu_title={item.menu_title}
                     category={item.category}
                     menu_link={item.menu_link}
-                    menucolor={`${darkMode === "On" ? pathname === item.menu_link ? "red" : "var(--light-secondary-color)" : pathname === item.menu_link ? "#fff" : ""}`}
+                    menucolor={`${darkMode === "On" ? pathname === item.menu_link ? "red" : "var(--light-secondary-color)" : pathname === item.menu_link ? "red" : "var(--dark-secondary-color)"}`}
                   />
                 </div>
               )
@@ -270,11 +270,11 @@ const AdminHeader = ({ title }) => {
                   <Link to={`${item.menu_link}`} style={{ color: "#000", textDecoration: "none" }} >
                     <div className="nav1-menu">
                       <div style={{ display: "flex", alignItems: "center", gap: "2rem", width: "80%", fontSize: "1.4rem" }}>
-                        <div style={{ color: `${pathname === item.menu_link ? "#fff" : "var(--dark-secondary-color)"}` }}>
+                        <div style={{ color: darkMode === "On" ? pathname === item.menu_link ? "red" : "var(--light-secondary-color)" : pathname === item.menu_link ? "red" : "var(--dark-secondary-color)"}}>
                           {item.menu_logo}
                         </div>
 
-                        <h3 style={{ display: "block", color: `${pathname === item.menu_link ? "#fff" : ""}` }}>{item.menu_title}</h3>
+                        <h3 style={{ display: "block", color: darkMode === "On" ? pathname === item.menu_link ? "red" : "var(--light-secondary-color)" : pathname === item.menu_link ? "red" : "var(--dark-secondary-color)" }}>{item.menu_title}</h3>
                       </div>
 
                     </div>
