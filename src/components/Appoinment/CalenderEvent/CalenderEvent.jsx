@@ -96,10 +96,10 @@ const CalenderEvent = () => {
                                                         color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)",
                                                         fontSize:"1.4rem"
                                                     }}>
-                                                            <p>{m.startTime}-{m.endTime}</p>
-                                                            <p>Customer : {m.customerName}</p>
-                                                            <div style={{fontWeight:"500", display:"flex",gap:"0.5rem"}}>Services : 
-                                                                {m.services.map((ap) => <p>{ap.serviceName}</p>)}
+                                                            <p style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>{m.startTime}-{m.endTime}</p>
+                                                            <p style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Customer : {m.customerName}</p>
+                                                            <div style={{fontWeight:"500", display:"flex",gap:"0.5rem",color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Services : 
+                                                                {m.services.map((ap) => <p style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>{ap.serviceName}</p>)}
                                                             </div>
                                                             
                                                             <div className='app-btn-div'>

@@ -127,6 +127,14 @@ input[type="text"]::placeholder {
     color:var(--light-secondary-color) !important;
 }
 
+.que-lst-head h4{
+    color: var(--dark-secondary-color);
+}
+
+.que-lst-head_dark h4{
+    color: var(--light-secondary-color);
+}
+
 @media((min-width:0px) and (max-width:400px)){
     .queue-wrapper {
         width: 82% !important; /* 82% unchanged */

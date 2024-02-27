@@ -175,11 +175,11 @@ const Kyosks = () => {
             <AdminLayout />
             <div className={`singlejoin-barber-quebarber-wrapper ${currentmode ? "singlejoin-barber-quebarber-wrapper_dark" : ""}`}>
 
-                <h1>Single Join</h1>
+                <h1 style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Single Join</h1>
 
                 <div className={`barber-single-join ${currentmode ? "barber-single-join_dark" : ""}`}>
                     <div>
-                        <h2>Customer Name</h2>
+                        <h3 style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Customer Name</h3>
                         <input
                             type="text"
                             value={name}
@@ -189,7 +189,7 @@ const Kyosks = () => {
                     </div>
 
                     <div>
-                        <h2>Customer Email</h2>
+                        <h3 style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Customer Email</h3>
                         <input
                             type="text"
                             value={customerEmail}
@@ -199,7 +199,7 @@ const Kyosks = () => {
                     </div>
 
                     <div>
-                        <h2>Mobile Number</h2>
+                        <h3 style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Mobile Number</h3>
                         <input
                             type="text"
                             placeholder='Enter Customer Mobile Number'
@@ -211,7 +211,7 @@ const Kyosks = () => {
 
                     <div className='mobile-kyosk-cont'>
                         <div className='barber-single-join-dropdown'>
-                            <h3>Barber Name : <b>{currentbarberName && currentbarberName}</b></h3>
+                            <h3 style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Barber Name : <b>{currentbarberName && currentbarberName}</b></h3>
 
                             <button onClick={() => fetchAllBarbers()} style={{
                                 background: currentmode ? "var(--dark-primary-color)" : "var(--light-tertiary-color)",
@@ -227,7 +227,7 @@ const Kyosks = () => {
                         </div>
 
                         <div className='barber-single-join-dropdown'>
-                            <h3>Choose  Services</h3>
+                            <h3 style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Choose  Services</h3>
                             <button onClick={() => fetchAllServices()} style={{
                                 background: currentmode ? "var(--dark-primary-color)" : "var(--light-tertiary-color)",
                                 color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)",

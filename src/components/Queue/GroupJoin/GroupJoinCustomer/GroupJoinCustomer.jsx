@@ -244,7 +244,7 @@ const GroupJoinCustomer = () => {
 
         <div className={`barber-single-join ${currentmode ? "barber-single-join_dark" : ""}`}>
           <div>
-            <h2>Customer Name</h2>
+            <h3 style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Customer Name</h3>
             <input
               type="text"
               value={name}
@@ -254,7 +254,7 @@ const GroupJoinCustomer = () => {
           </div>
 
           <div>
-            <h2>Customer Email</h2>
+            <h3 style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Customer Email</h3>
             <input
               type="text"
               value={customerEmail}
@@ -264,7 +264,7 @@ const GroupJoinCustomer = () => {
           </div>
 
           <div>
-            <h2>Mobile Number</h2>
+            <h3 style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Mobile Number</h3>
             <input 
             type="text" 
             placeholder='Enter Customer Mobile Number'
@@ -274,7 +274,7 @@ const GroupJoinCustomer = () => {
           </div>
 
           <div className='barber-single-join-dropdown'>
-            <h2>Choose Your Barber</h2>
+            <h3 style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Choose Your Barber</h3>
             {/* <button onClick={() => setBarberDrop(!barberDrop)}>drop</button> */}
           </div>
 
@@ -307,11 +307,11 @@ const GroupJoinCustomer = () => {
                 </div>
 
 
-              )) : <p>No Barber Present</p>
+              )) : <p style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>No Barber Present</p>
             }
           </div>
 
-          <h2>Choose Barber Services</h2>
+          <h3 style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Choose Barber Services</h3>
           <div className={`barber-single-join-services ${currentmode ? "barber-single-join-services_dark" : ""}`}>
             <div className={`barber-single-join-quebarberserv-content ${currentmode ? "barber-single-join-quebarberserv-content_dark" : ""}`}>
               <p>Service ID</p>
@@ -341,7 +341,7 @@ const GroupJoinCustomer = () => {
           </div>
 
 
-          <h2>Your Selected Services</h2>
+          <h3 style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Your Selected Services</h3>
           <div className={`barber-single-join-services ${currentmode ? "barber-single-join-services_dark" : ""}`}>
 
             <div className={`barber-single-join-quebarberserv-content ${currentmode ? "barber-single-join-quebarberserv-content_dark" : ""}`}>
@@ -366,7 +366,7 @@ const GroupJoinCustomer = () => {
                     cursor:"pointer"
                   }}>-</button>
                 </div>
-              )) : <p>No Services Available</p>
+              )) : <p style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>No Services Available</p>
             }
           </div>
 
@@ -377,7 +377,7 @@ const GroupJoinCustomer = () => {
           }}
           >Add Customer</button>
 
-          <h2>Customers</h2>
+          <h3 style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Customers</h3>
           <div className={`barber-single-join-services ${currentmode ? "barber-single-join-services_dark" : ""}`}>
             <div className={`barber-single-join-quebarberserv-content-ggp ${currentmode ? "barber-single-join-quebarberserv-content-ggp_dark" : ""}`}>
               <p>Customer Name</p>
@@ -403,7 +403,7 @@ const GroupJoinCustomer = () => {
                     cursor:"pointer"
                   }}>-</button>
                 </div>
-              ))) : (<p>No Customers</p>)
+              ))) : (<p style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>No Customers</p>)
             }
           </div>
 

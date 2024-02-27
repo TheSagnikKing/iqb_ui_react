@@ -199,6 +199,7 @@
     background-color: var(--dark-secondary-color);
 }
 
+
 @media((min-width:0px) and (max-width:400px)){
     .singlejoin-barber-quebarber-wrapper {
         width: 82% !important;

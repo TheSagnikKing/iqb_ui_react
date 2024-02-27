@@ -16,6 +16,10 @@
   --light-quaternary-color: #efefef;
 }
 
+p,h1,h2,h3,h4,h5{
+  /* color: black !important; */
+}
+
 @media((min-width:0px) and (max-width:1450px)){
   :root{
     font-size: 42%
@@ -127,6 +131,7 @@
   justify-content: center;
   align-items: center;
 }
+
 
 
 @media((min-width:0px) and (max-width:400px)){

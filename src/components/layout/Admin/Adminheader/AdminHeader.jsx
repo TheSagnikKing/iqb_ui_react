@@ -339,7 +339,9 @@ const AdminHeader = ({ title }) => {
             display: "flex",
             gap: "1rem"
           }}>
-            <h2 for="cars" style={{ fontSize: "1.2rem" }}>Choose Salon</h2>
+            <h2 for="cars" style={{ 
+              fontSize: "1.2rem"
+              }}><p style={{color:darkMode === "On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Choose Salon</p></h2>
 
             <select
               name="cars"
@@ -394,7 +396,7 @@ const AdminHeader = ({ title }) => {
           </div>
 
           <div className="nav1notification">
-            <IoNotificationsOutline />
+            <IoNotificationsOutline style={{color:darkMode === "On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}/>
           </div>
 
           {/* profile_div */}
@@ -434,7 +436,7 @@ const AdminHeader = ({ title }) => {
 
             <div style={{ cursor: "pointer", fontSize: "2.4rem" }} className="nav1right_dropdown"
               onClick={() => setDropdown(!dropdown)}>
-              <MdKeyboardArrowDown />
+              <MdKeyboardArrowDown style={{color:darkMode === "On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}/>
             </div>
 
             {

@@ -78,8 +78,9 @@ function Month() {
                 <h2 style={{ marginBottom: "2rem" }}>Appointment</h2>
 
                 <Link to="/appoinment/createappointment" style={{ background:currentmode ? "var(--dark-primary-color)" : "var(--light-primary-color)", border: "1px solid black",
-                 color: currentmode ? "var(--dark-secondary-color)" : "var(--light-secondary-color)", fontSize: "1.4rem", 
+                 color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)", fontSize: "1.4rem", 
                  padding: "0.8rem 1.2rem",
+                 textDecoration: "none"
                   }}>Create</Link>
 
                 <div className='demo-app-main' style={{ marginTop: "2rem" }}>

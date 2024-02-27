@@ -11,6 +11,7 @@ import { getAllAdvertisementReducer} from "./reducers/AdvertisementReducer";
 import { customeremailReducer } from "./reducers/CustomerReducer";
 import { getallNotificationReducer, multipleNotificationReducer, singleNotificationReducer } from "./reducers/NotificationReducer";
 import { colorReducer } from "./reducers/colorReducer";
+import { cityReducers, countryReducers, getAllTimeZonesReducers } from "./reducers/CountryReducers";
 
 const rootReducer = combineReducers({
   signup:signupReducer,
@@ -98,7 +99,12 @@ const rootReducer = combineReducers({
   getAllSalonIcon:getAllSalonIconReducer,
   barberAllSalonServics:barberAllSalonServicsReducer,
   groupBarberServicesByBarberId:groupBarberServicesByBarberIdReducer,
-  color:colorReducer
+  color:colorReducer,
+
+  // country
+  country:countryReducers,
+  city:cityReducers,
+  getAllTimeZones:getAllTimeZonesReducers
 });
 
 const initialState = {};

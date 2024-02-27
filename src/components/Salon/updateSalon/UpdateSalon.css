@@ -597,3 +597,8 @@
 .geo-sal_dark{
     background-color: var(--dark-primary-color) !important;
 }
+
+.sal-up-seeimage_dark{
+    background-color: var(--dark-primary-color);
+    color: var(--light-secondary-color);
+}

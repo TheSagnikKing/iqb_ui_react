@@ -674,7 +674,7 @@ const UpdateSalon = () => {
                         </div>
 
                         <div className='img-container'>
-                            <button onClick={() => setIsOpen(true)} className='sal-up-seeimage'>See Images</button>
+                            <button onClick={() => setIsOpen(true)} className={`sal-up-seeimage ${darkMode === "On" && 'sal-up-seeimage_dark'}`}>See Images</button>
                             <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
                                 <div className='see-salonImages'>
 

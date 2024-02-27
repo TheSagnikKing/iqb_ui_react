@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import "./CreateSalon.css"
 import { MdKeyboardArrowDown } from "react-icons/md"
 import Layout from '../../layout/Layout'
@@ -11,6 +11,9 @@ import { FaArrowDown } from "react-icons/fa6";
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { getAllCitiesAction, getAllCountriesAction, getAllTimezonesAction } from '../../../redux/actions/CountryActions'
+import _ from 'lodash';
+
 
 const CreateSalon = () => {
 
@@ -75,7 +78,7 @@ const CreateSalon = () => {
     const [startTime, setStartTime] = useState("")
     const [endTime, setEndTime] = useState("")
     const [chooseIntervalTime, setChooseIntervalTime] = useState(1)
-    
+    const [timeZone, setTimezone] = useState("")
 
     const dispatch = useDispatch()
 
@@ -142,17 +145,17 @@ const CreateSalon = () => {
 
                     const SalonId = response?.salonId;
 
-                    if(SalonId){
+                    if (SalonId) {
                         formData.append('salonId', SalonId);
                         formData.append('salonLogo', selectedLogo);
-    
+
                         try {
                             const imageResponse = await api.post('/api/salon/uploadSalonLogo', formData, {
                                 headers: {
                                     'Content-Type': 'multipart/form-data',
                                 },
                             });
-    
+
                             console.log('Upload success:', imageResponse.data);
                             // setLogoImages(imageResponse.data?.StudentImage?.profile);
                             // setSelectedLogo(null);
@@ -162,7 +165,7 @@ const CreateSalon = () => {
                             // Handle error as needed
                         }
                     }
-                    
+
                 }
             };
 
@@ -185,7 +188,7 @@ const CreateSalon = () => {
                     longitude: Number(longitude),
                     latitude: Number(latitude)
                 }
-            }, country, postCode, contactTel, salonType, webLink,fbLink,instraLink,twitterLink, services, image, 
+            }, country, postCode, contactTel,timeZone, salonType, webLink, fbLink, instraLink, twitterLink, services, image,
             appointmentSettings: { startTime, endTime, intervalInMinutes: Number(chooseIntervalTime) }
         }
 
@@ -204,8 +207,8 @@ const CreateSalon = () => {
         }
 
         setServices(prevServices => [...prevServices, {
-            serviceName, serviceDesc, servicePrice, serviceEWT, serviceIcon : {
-                public_id : currentPublicId,
+            serviceName, serviceDesc, servicePrice, serviceEWT, serviceIcon: {
+                public_id: currentPublicId,
                 url: currentImg
             }
         }]);
@@ -324,9 +327,106 @@ const CreateSalon = () => {
         setCurrentImg(s.url)
         setCurrentPublicId(s.public_id)
         setServiceDrop(false)
-    } 
+    }
 
     const darkMode = useSelector(state => state.color.darkmode)
+
+    const [countrydrop, setCountryDrop] = useState(false)
+
+    const showAllcountries = () => {
+        setCountryDrop(!countrydrop)
+    }
+    const [countryTimeout, setCountryTimeout] = useState(null);
+
+    const debounceSearch = (value) => {
+        if (countryTimeout) {
+            clearTimeout(countryTimeout);
+        }
+
+        setCountry(value);
+
+        setCountryTimeout(setTimeout(() => {
+            setCountry(value);
+            dispatch(getAllCountriesAction(value));
+        }, 500));
+    };
+
+
+    const searchCountryHandler = (e) => {
+        const searchTerm = e.target.value;
+        setCountryDrop(true)
+        debounceSearch(searchTerm);
+    }
+
+    const [countrycode, setCountryCode] = useState("")
+
+    const setCountrydataHandler = (c) => {
+        setCountry(c.name)
+        setCountryCode(c.countryCode)
+        setCountryDrop(false)
+    }
+
+    const [citydrop, setCityDrop] = useState(false)
+
+    const showAllcities = () => {
+        setCityDrop(!citydrop)
+    }
+
+
+    const [cityTimeout, setCityTimeout] = useState(null);
+
+    const debounceCitySearch = (value, countrycode) => {
+        if (cityTimeout) {
+            clearTimeout(cityTimeout);
+        }
+
+        setCity(value);
+
+        setCityTimeout(setTimeout(() => {
+            setCity(value);
+            dispatch(getAllCitiesAction(value, countrycode));
+        }, 500));
+    };
+
+    const searchCityHandler = (e) => {
+        // setCityDrop(true)
+        setCity(e.target.value)
+        setCityDrop(e.target.value !== '');
+        // dispatch(getAllCitiesAction(e.target.value,countrycode))
+        debounceCitySearch(e.target.value, countrycode)
+    }
+
+    const setCitydataHandler = (c) => {
+        setCity(c.name)
+        setCityDrop(false)
+    }
+
+
+    const getAllCountries = useSelector(state => state.country)
+
+    const { loading: countryloading, response: countryresponse } = getAllCountries
+
+    const getAllCities = useSelector(state => state.city)
+
+    const { loading: cityloading, response: cityresponse } = getAllCities
+
+
+    const [timezoneDrop, setTimezoneDrop] = useState(false)
+
+    useEffect(() => {
+        if(countrycode){
+            dispatch(getAllTimezonesAction(countrycode))
+        }
+    },[countrycode,dispatch])
+
+    const getAllTimeZones = useSelector(state => state.getAllTimeZones)
+
+    const {loading:timezoneloading, response:timezoneresponse} = getAllTimeZones
+
+    const setTimezonedataHandler = (c) => {
+        setTimezone(c)
+        setTimezoneDrop(false)
+    }
 
     return (
         <>
@@ -334,7 +434,7 @@ const CreateSalon = () => {
             <div className={`sa-br-right_main_div ${darkMode === "On" ? "sa-br-right_main_div_dark" : ""}`}>
 
                 <div className="sa-br-right_main_head">
-                    <p style={{color:darkMode === "On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Create</p>
+                    <p style={{ color: darkMode === "On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)" }}>Create</p>
                 </div>
 
                 <div className={`sa-br-right_main_form ${darkMode === "On" ? "sa-br-right_main_form_dark" : ""}`}>
@@ -368,14 +468,6 @@ const CreateSalon = () => {
                             />
                         </div>
 
-                        <div>
-                            <label htmlFor="">City</label>
-                            <input
-                                type="text"
-                                value={city}
-                                onChange={(e) => setCity(e.target.value)}
-                            />
-                        </div>
 
                         <div>
                             <label htmlFor="">latitude</label>
@@ -398,13 +490,60 @@ const CreateSalon = () => {
                         <button onClick={geolocHandler} className={`geo-sal ${darkMode === "On" ? 'geo-sal_dark' : ""}`}>Get Geolocation</button>
 
                         <div>
-                            <label htmlFor="">Country</label>
+                            <div className='country-head'>
+                                <label htmlFor="country">Country </label>
+                                <button onClick={showAllcountries}><FaArrowDown /></button>
+                            </div>
+
                             <input
-                                type="text"
+                                type='text'
+                                className='country-input'
+                                placeholder='Search Country'
                                 value={country}
-                                onChange={(e) => setCountry(e.target.value)}
+                                onChange={(e) => searchCountryHandler(e)}
                             />
+
+                            {countrydrop ? (
+                                <div className={`country-list ${darkMode === "On" && "country-list_dark"}`}>
+                                    {countryloading === true ? <h3 style={{ color: darkMode === "On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)", fontSize: "1.4rem" }}>Loading Countries</h3> : countryresponse ? countryresponse?.map((c) => <h3 key={c._id} style={{ color: darkMode === "On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)", fontSize: "1.5rem", cursor: "pointer" }} onClick={() => setCountrydataHandler(c)}>{c.name}</h3>) : <h3 style={{fontSize:"1.4rem"}}>No Countries</h3>}
+                                </div>
+                            ) : null}
+
                         </div>
+
+                        <div>
+                            <div className='city-head'>
+                                <label htmlFor="city">City</label>
+                                <button onClick={showAllcities}><FaArrowDown /></button>
+                            </div>
+
+                            <input
+                                type='text'
+                                className='city-input'
+                                placeholder='Search City'
+                                value={city}
+                                onChange={(e) => searchCityHandler(e)}
+                            />
+
+                            {citydrop ? (
+                                <div className={`city-list ${darkMode === "On" && 'city-list_dark'}`}>
+                                    {cityloading === true ? <h3 style={{ color: darkMode === "On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)", fontSize: "1.4rem" }}>Loading Countries</h3> : cityresponse ? cityresponse?.map((c) => <h3 key={c._id} style={{ color: darkMode === "On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)", fontSize: "1.5rem", cursor: "pointer" }} onClick={() => setCitydataHandler(c)}>{c.name}</h3>) : <h3 style={{fontSize:"1.4rem"}}>No cities</h3>}
+                                </div>
+                            ) : null}
+
+                        </div>
+
+                        <div className='timezones'>
+                            <div className='timezone-head'>
+                                <label htmlFor="timezone">Timezone : <span style={{fontWeight:"bold",fontSize:"1.5rem"}}>{timeZone}</span></label>
+                                <button onClick={() => setTimezoneDrop(!timezoneDrop)}><FaArrowDown /></button>
+                            </div> 
+
+                            {timezoneDrop ? <div className={`timezone-list ${darkMode === "On" && 'timezone-list_dark'}`}>
+                            {timezoneloading === true ? <h3 style={{ color: darkMode === "On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)", fontSize: "1.4rem" }}>Loading Countries</h3> : timezoneresponse ? timezoneresponse?.map((c) => <h3 key={c._id} style={{ color: darkMode === "On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)", fontSize: "1.5rem", cursor: "pointer" }} onClick={() => setTimezonedataHandler(c)}>{c}</h3>) : <h3 style={{fontSize:"1.4rem"}}>No Timezones</h3>}
+                            </div> : null}
+                        </div>
+
 
                         <div>
                             <label htmlFor="">Postal Code</label>
@@ -430,14 +569,14 @@ const CreateSalon = () => {
                             }}
                                 onChange={(e) => setStartTime(e.target.value)}
                                 value={startTime}
-                            >   
-    
+                            >
+
                                 {timeOptions.map((option) => (
                                     <option key={option.value} value={option.value}>
                                         {option.label}
                                     </option>
                                 ))}
-                       
+
                             </select>
                         </div>
 
@@ -493,9 +632,9 @@ const CreateSalon = () => {
 
 
                         <div>
-                            <div style={{ display: "flex",flexDirection:"row" }}>
+                            <div style={{ display: "flex", flexDirection: "row" }}>
                                 <label htmlFor="">Salon Type</label>
-                                <button onClick={() => setSalontypeDropdown((prev) => !prev)} className='sal-drop-type'><FaArrowDown style={{ color: darkMode ==="On" ? "var(--dark-secondary-color)" : "var(--light-secondary-color)"}}/></button>
+                                <button onClick={() => setSalontypeDropdown((prev) => !prev)} className='sal-drop-type'><FaArrowDown style={{ color: darkMode === "On" && "var(--dark-secondary-color)" }} /></button>
                             </div>
 
                             {
@@ -578,9 +717,9 @@ const CreateSalon = () => {
                                 <div className='service-icon' >
                                     <p>Service Icon</p>
                                     <div onClick={() => setServiceDrop(!serviceDrop)}
-                                        style={{ cursor: "pointer", background: "#fff", boxShadow: "0px 0px 4px rgba(0,0,0,0.4)", height: "2.5rem", width: "2.5rem", display: "flex", alignItems: "center", justifyContent: "center", borderRadius: "50%",
-                                        color:darkMode === "On" ? "var(--dark-secondary-color)" : "var(--light-secondary-color)"
-                                        }}><FaArrowDown /></div>
+                                        style={{
+                                            cursor: "pointer", background: "#fff", boxShadow: "0px 0px 4px rgba(0,0,0,0.4)", height: "2.5rem", width: "2.5rem", display: "flex", alignItems: "center", justifyContent: "center", borderRadius: "50%",
+                                        }}><FaArrowDown style={{ color: "black" }} /></div>
                                 </div>
 
                                 {
@@ -590,7 +729,7 @@ const CreateSalon = () => {
                                             {
                                                 getAllSalonIcon?.response ? (
                                                     getAllSalonIcon.response.map((s) => (
-                                                        <div key={s.id} className='service-icon-content-img' onClick={() =>  serviceIconHandler(s) }>
+                                                        <div key={s.id} className='service-icon-content-img' onClick={() => serviceIconHandler(s)}>
                                                             <img src={`${s.url}`} alt="s1" />
                                                         </div>
                                                     ))
@@ -604,7 +743,7 @@ const CreateSalon = () => {
                                 }
 
                                 {
-                                    currentImg  && <div className='selected-serrvice-icon'>
+                                    currentImg && <div className='selected-serrvice-icon'>
                                         <div><img src={`${currentImg}`} alt="" /></div>
                                     </div>
                                 }
@@ -649,11 +788,11 @@ const CreateSalon = () => {
                             </div>
 
 
-                            <button onClick={addServiceHandler} 
-                            style={{
-                                background:darkMode === "On" ? "var(--dark-primary-color)" : "var(--light-tertiary-color)",
-                                color:darkMode === "On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"
-                            }}
+                            <button onClick={addServiceHandler}
+                                style={{
+                                    background: darkMode === "On" ? "var(--dark-primary-color)" : "var(--light-tertiary-color)",
+                                    color: darkMode === "On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"
+                                }}
                             >Add Service</button>
 
                         </div>
@@ -691,10 +830,10 @@ const CreateSalon = () => {
 
                         <div className={`sa-br-btn_box`}>
                             <button onClick={submitHandler}
-                            style={{
-                                background:darkMode === "On" ? "var(--dark-primary-color)" : "var(--light-tertiary-color)",
-                                color: darkMode === "On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"
-                            }}
+                                style={{
+                                    background: darkMode === "On" ? "var(--dark-primary-color)" : "var(--light-tertiary-color)",
+                                    color: darkMode === "On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"
+                                }}
                             >
                                 {createSalon?.loading == true ? <h3>Loading</h3> : "Submit"}
                             </button>

@@ -175,7 +175,7 @@ const CreateAppointment = () => {
 
                 <div className={`create-form ${currentmode ? "create-form_dark" : ""}`}>
                     <div>
-                        <h2>Appointment Note</h2>
+                        <h3 style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Appointment Note</h3>
                         <input
                             type="text"
                             placeholder='Enter Note'
@@ -185,7 +185,7 @@ const CreateAppointment = () => {
                     </div>
 
                     <div>
-                        <h2>Customer Name</h2>
+                        <h3 style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Customer Name</h3>
                         <input
                             type="text"
                             placeholder='Enter Name'
@@ -195,7 +195,7 @@ const CreateAppointment = () => {
                     </div>
 
                     <div>
-                        <h2>Choose Date</h2>
+                        <h3 style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Choose Date</h3>
                         <input
                             type="date"
                             value={date}
@@ -204,7 +204,7 @@ const CreateAppointment = () => {
                     </div>
 
                     <div>
-                        <h2>Barber List</h2>
+                        <h3 style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Barber List</h3>
 
                         <div style={{
                             overflowY: "scroll", width: "40rem",
@@ -241,7 +241,7 @@ const CreateAppointment = () => {
                     </div>
 
                     <div>
-                        <h2>Choose  Services</h2>
+                        <h3 style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Choose  Services</h3>
 
                         <div style={{ overflowY: "scroll", width: "40rem", background: currentmode ? "var(--dark-primary-color)" : "var(--light-primary-color)" }}>
                             <div className={`barber-single-join-quebarberserv-content ${currentmode ? "barber-single-join-quebarberserv-content_dark" : ""}`}
@@ -275,7 +275,7 @@ const CreateAppointment = () => {
                     </div>
 
                     <div>
-                        <h2>Your Services</h2>
+                        <h3 style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Your Services</h3>
 
                         <div style={{ overflowY: "scroll", width: "40rem", background: currentmode ? "var(--dark-primary-color)" : "var(--light-primary-color)" }}>
                             <div className={`barber-single-join-quebarberserv-content ${currentmode ? "barber-single-join-quebarberserv-content_dark" : ""}`}
@@ -303,13 +303,13 @@ const CreateAppointment = () => {
                                             color: "red"
                                         }}><MdDelete /></button>
                                     </div>
-                                )) : <p>No Services Available</p>
+                                )) : <p style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>No Services Available</p>
                             }
                         </div>
                     </div>
 
                     <div>
-                        <h2>Choose  TimeSlots</h2>
+                        <h3 style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Choose  TimeSlots</h3>
 
                         <div style={{ overflowY: "scroll", width: "40rem", background: currentmode ? "var(--dark-primary-color)" : "var(--light-primary-color)" }}>
                             {
@@ -329,7 +329,7 @@ const CreateAppointment = () => {
 
                                         </div>
                                     </>
-                                ))) : (<p>No TimeSlots</p>)
+                                ))) : (<p style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>No TimeSlots</p>)
                             }
                         </div>
                     </div>

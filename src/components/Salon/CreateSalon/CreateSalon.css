@@ -387,6 +387,114 @@ input[type="file"] {
     color:var(--light-secondary-color)
 }
 
+.country-head{
+    display: flex;
+    align-items: center;
+    flex-direction: row !important;
+    justify-content: space-between;
+}
+
+.country-list{
+    padding: 1rem;
+    height: 30rem;
+    background-color: var(--light-tertiary-color);
+    border-radius: 0.5rem;
+    overflow-y: scroll;
+}
+
+.country-list_dark{
+    background-color: var(--dark-primary-color);
+}
+
+.city-list{
+    padding: 1rem;
+}
+
+.city-list_dark{
+    background-color: var(--dark-primary-color) !important;
+}
+
+.country-input{
+    margin-block: 1rem;
+}
+
+.country-head button{
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+
+.city-head{
+    display: flex;
+    align-items: center;
+    flex-direction: row !important;
+    justify-content: space-between;
+}
+
+.city-list{
+    height: 30rem;
+    background-color: #f1f6fc;
+    border-radius: 0.5rem;
+    overflow-y: scroll;
+}
+
+.city-input{
+    margin-block: 1rem;
+}
+
+.city-head button{
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.timezone-head{
+    display: flex;
+    align-items: center;
+    flex-direction: row !important;
+    justify-content: space-between;
+}
+
+.timezone-head button{
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.timezone-list{
+    margin-top: 1rem;
+    height: 10rem;
+    background-color:var(--light-tertiary-color);
+    border-radius: 0.5rem;
+    overflow-y: scroll;
+    padding: 1rem;
+}
+
+.timezone-list_dark{
+    background-color: var(--dark-primary-color);
+}
+
+.sa-br-right_main_form{
+    height: 110vh;
+    overflow-y: scroll;
+}
+
 @media((min-width:0px) and (max-width:400px)) {
     .sa-br-right_main_div {
         height: auto;

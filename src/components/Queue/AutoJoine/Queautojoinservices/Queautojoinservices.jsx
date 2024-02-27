@@ -188,11 +188,11 @@ const Queautojoinservices = () => {
       <AdminLayout />
       <div className={`singlejoin-barber-quebarber-wrapper ${currentmode ? "singlejoin-barber-quebarber-wrapper_dark" : ""}`}>
 
-        <h1>Auto Join</h1>
+        <h1 style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Auto Join</h1>
 
         <div className={`barber-single-join ${currentmode ? "barber-single-join_dark" : ""}`}>
           <div>
-            <h2>Customer Name</h2>
+            <h3 style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Customer Name</h3>
             <input
               type="text"
               value={name}
@@ -202,7 +202,7 @@ const Queautojoinservices = () => {
           </div>
 
           <div>
-            <h2>Customer Email</h2>
+            <h3 style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Customer Email</h3>
             <input
               type="text"
               value={customerEmail}
@@ -212,7 +212,7 @@ const Queautojoinservices = () => {
           </div>
 
           <div>
-            <h2>Mobile Number</h2>
+            <h3 style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Mobile Number</h3>
             <input 
             type="text" 
             placeholder='Enter Customer Mobile Number'
@@ -221,7 +221,7 @@ const Queautojoinservices = () => {
             />
           </div>
 
-          <h2>Choose Barber Services</h2>
+          <h3 style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Choose Barber Services</h3>
           <div className={`barber-single-join-services ${currentmode ? 'barber-single-join-services_dark' : ""}`}>
             <div className={`barber-single-join-quebarberserv-content ${currentmode ? "barber-single-join-quebarberserv-content_dark" : ""}`}>
               <p>Service ID</p>
@@ -251,7 +251,7 @@ const Queautojoinservices = () => {
           </div>
 
 
-          <h2>Your Selected Services</h2>
+          <h3 style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Your Selected Services</h3>
           <div className={`barber-single-join-services ${currentmode ? "barber-single-join-services_dark" : ""}`}>
 
             <div className={`barber-single-join-quebarberserv-content ${currentmode ? "barber-single-join-quebarberserv-content_dark" : ""}`}>
@@ -277,7 +277,7 @@ const Queautojoinservices = () => {
                     cursor:"pointer"
                   }}>-</button>
                 </div>
-              )) : <p>No Services Available</p>
+              )) : <p style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>No Services Available</p>
             }
           </div>
 
