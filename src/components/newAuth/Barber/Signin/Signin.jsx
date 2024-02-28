@@ -76,7 +76,10 @@ const Signin = () => {
     useEffect(() => {
         if (barberLoginError) {
             toast.error(barberLoginError?.message, {
-                position: "top-right"
+                position: "top-right",
+                style:{
+                    background:"#000"
+                }
             });
         }
 

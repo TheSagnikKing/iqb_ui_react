@@ -65,7 +65,10 @@ const Signup = () => {
     useEffect(() => {
         if (BarberRegisterError) {
             toast.error(BarberRegisterError?.message, {
-                position: "top-right"
+                position: "top-right",
+                style:{
+                    background:"#000"
+                }
             });
         }
 

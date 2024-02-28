@@ -221,7 +221,7 @@ const AdminHeader = ({ title }) => {
         <div className={darkMode === "On" ? "nav1wrapperdark" : "nav1wrapper"}>
 
           <div className="nav1left_menu_box">
-            <button onClick={() => setExpandMenu(true)} style={{ background: "#fff", border: "none", boxShadow: "0px 0px 4px rgba(0,0,0,0.5)", height: "30px", fontWeight: "bold", display: "flex", justifyContent: "center", alignItems: "center" }}><RxHamburgerMenu /></button>
+            <button onClick={() => setExpandMenu(true)} style={{ background: "#fff", border: "none", boxShadow: "0px 0px 4px rgba(0,0,0,0.5)", height: "30px", fontWeight: "bold", display: "flex", justifyContent: "center", alignItems: "center" }} className='hamberg_menu'><RxHamburgerMenu /></button>
             {adminmenudata.map((item) => {
               return (
                 <div key={item.menu_title} className={`${pathname === item.menu_link ? "menu-active" : "menu-inactive"}`}>

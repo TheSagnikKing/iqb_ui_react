@@ -170,7 +170,8 @@ const CreateAppointment = () => {
     return (
         <>
             <AdminLayout />
-            <div className={`create-appointment-container ${currentmode ? "create-appointment-container_dark" : ""}`}>
+            <div className={`create-appointment-container ${currentmode ? "create-appointment-container_dark" : ""}`} 
+            >
                 <h1 >Create Appointment</h1>
 
                 <div className={`create-form ${currentmode ? "create-form_dark" : ""}`}>
@@ -246,7 +247,7 @@ const CreateAppointment = () => {
                         <div style={{ overflowY: "scroll", width: "40rem", background: currentmode ? "var(--dark-primary-color)" : "var(--light-primary-color)" }}>
                             <div className={`barber-single-join-quebarberserv-content ${currentmode ? "barber-single-join-quebarberserv-content_dark" : ""}`}
                                 style={{
-                                    fontSize: "11px",
+                                    fontSize: "1.1rem",
                                 }}
                             >
                                 <p>Service Name</p>

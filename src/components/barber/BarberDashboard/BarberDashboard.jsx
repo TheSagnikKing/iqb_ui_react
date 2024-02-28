@@ -31,7 +31,7 @@ const BarberDashboard = () => {
 
     return (
         <>
-        <div className="right_main_div">
+        <div className="right_main_div" >
                 <div className="right_div_top">
 
                     <div className="div_left">

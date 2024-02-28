@@ -258,9 +258,12 @@ const Dashboard = () => {
 
 
     return (
-            <div className="right_main_div">
+            <div className="right_main_div" style={{
+                background: darkMode === "On" ? "var(--dark-primary-color)" : "var(--light-primary-color)",
+                height:"140.23vh"
+                }}>
                 {salonid == 0 ? <div className='nosalon'>
-                    <h2>No Salons. Please Create a Salon First</h2>
+                    <h3 style={{color:darkMode === "On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)",marginBottom:"2rem"}}>No Salons. Please Create a Salon First</h3>
                     <Link to="/salon/createsalon">Create Salon</Link>
                 </div > : <>
                     <div className="right_div_top">
@@ -275,7 +278,7 @@ const Dashboard = () => {
                                     gap: "1.1rem",
                                     alignItems: "center"
                                 }}>
-                                    <p>Offline</p>
+                                    <p style={{color: darkMode === "On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Offline</p>
                                     <label className="nav2toggle_switch" >
                                         <input type="checkbox"
                                             value={salonStatus}
@@ -289,7 +292,7 @@ const Dashboard = () => {
                                             }}
                                         ></span>
                                     </label>
-                                    <p>Online</p>
+                                    <p style={{color: darkMode === "On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Online</p>
                                 </div>
                             </div>
 

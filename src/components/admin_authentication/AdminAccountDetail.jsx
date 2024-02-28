@@ -23,81 +23,92 @@ const AdminAccountDetail = () => {
 
     const submitHandler = () => {
         //email authentication  theke asbe
-        const profiledata = { email: LoggedInMiddleware?.user[0]?.email, mobileNumber, name, gender, dateOfBirth: dob, salonId: LoggedInMiddleware?.user[0]?.salonId};
+        const profiledata = { email: LoggedInMiddleware?.user[0]?.email, mobileNumber, name, gender, dateOfBirth: dob, salonId: LoggedInMiddleware?.user[0]?.salonId };
 
         dispatch(updateAdminAccountDetailsAction(navigate, profiledata))
     }
 
     const skipHandler = () => {
-        localStorage.setItem("userLoggedIn","true")
+        localStorage.setItem("userLoggedIn", "true")
         navigate("/admin-dashboard")
     }
 
     const updateAdminAccountDetails = useSelector(state => state.updateAdminAccountDetails)
     const { loading } = updateAdminAccountDetails
 
+    const darkMode = useSelector(state => state.color.darkmode)
+
+    console.log("Darkmode dashboard", darkMode)
+
+    const currentmode = darkMode === "On"
+
     return (
-        <div className='admin_account_detail_container'>
-            <div>
-                <h1>Fill Your Admin Account Details</h1>
+        <div className='admin_account_detail_container'
+            style={{ background: "none", padding: "10rem" }}
+        >
+
+            <div style={{ background: "#fff", padding: "2rem", borderRadius: "5px", boxShadow: "0px 0px 4px rgba(0,0,0,0.4)" }}>
+                <div>
+                    <h1 style={{ color: "#000" }}>Fill Your Admin Account Details</h1>
+                </div>
+                <div className='admin_account_detail'>
+
+                    <div>
+                        <h3 style={{ color: "#000" }}>Mobile Number</h3>
+                        <input
+                            type="text"
+                            placeholder='Enter Mobile Number'
+                            value={mobileNumber}
+                            onChange={(e) => setMobileNumber(e.target.value)}
+                        />
+                    </div>
+
+                    <div>
+                        <h3 style={{ color: "#000" }}>Name</h3>
+                        <input
+                            type="text"
+                            placeholder='Enter Your Name'
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                        />
+                    </div>
+
+                    <div>
+
+                        <h3 style={{ color: "#000" }}>Gender:</h3>
+
+                        <select name="cars" id="cars" onChange={(e) => setGender(e.target.value)} value={gender} style={{ background: "#f1f6fc", border: "1px solid black" }}>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <h3 style={{ color: "#000" }}>Date of Birth</h3>
+                        <input
+                            type="date"
+                            value={dob}
+                            onChange={(e) => setDob(e.target.value)}
+                        />
+                    </div>
+
+                    <div className="sa-br-btn_box">
+                        {
+                            loading === true ? <button><ClipLoader /></button> : <button onClick={submitHandler}>
+                                Submit
+                            </button>
+                        }
+
+                    </div>
+
+                    <button className='skip' onClick={skipHandler} style={{
+                        marginTop: "1rem",
+                        height: "3.5rem",
+                    }}>Skip</button>
+                </div>
+                <ToastContainer />
             </div>
-            <div className='admin_account_detail'>
-
-                <div>
-                    <h2>Mobile Number</h2>
-                    <input
-                        type="text"
-                        placeholder='Enter Mobile Number'
-                        value={mobileNumber}
-                        onChange={(e) => setMobileNumber(e.target.value)}
-                    />
-                </div>
-
-                <div>
-                    <h2>Name</h2>
-                    <input
-                        type="text"
-                        placeholder='Enter Your Name'
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                    />
-                </div>
-
-                <div>
-
-                    <h2>Gender:</h2>
-
-                    <select name="cars" id="cars" onChange={(e) => setGender(e.target.value)} value={gender} style={{background:"#f1f6fc",border:"1px solid black"}}>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                        <option value="other">Other</option>
-                    </select>
-                </div>
-
-                <div>
-                    <h2>Date of Birth</h2>
-                    <input
-                        type="date"
-                        value={dob}
-                        onChange={(e) => setDob(e.target.value)}
-                    />
-                </div>
-
-                <div className="sa-br-btn_box">
-                    {
-                        loading === true ? <button><ClipLoader /></button> : <button onClick={submitHandler}>
-                            Submit
-                        </button>
-                    }
-
-                </div>
-
-                <button className='skip' onClick={skipHandler} style={{
-                    marginTop: "1rem",
-                    height: "3.5rem",
-                }}>Skip</button>
-            </div>
-            <ToastContainer />
         </div>
     )
 }

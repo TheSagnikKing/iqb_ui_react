@@ -419,6 +419,10 @@
     color: var(--light-secondary-color)
   }
 
+  .hamberg_menu{
+    display: none !important;
+  }
+
   @media((min-width:0px) and (max-width:400px)){
     .nav1left{
         width: 6rem;
@@ -475,8 +479,7 @@
         background-color: #000 !important;
     }      
 
-    .colormode{
-
-     
+    .hamberg_menu{
+        display: block !important; 
     }
   }

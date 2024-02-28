@@ -132,7 +132,7 @@
 /* DARK MODE  */
 
 .create-appointment-container_dark{
-    background-color: var(--dark-secondary-color);
+    background-color: var(--dark-secondary-color) !important;
     color: var(--light-secondary-color)
 }
 
@@ -210,13 +210,13 @@
     }
 
     .barber-single-join-content-bbr{
-        width: 180%;
-        grid-template-columns: 22rem 10rem 10rem 10rem 10rem 10rem;
+        width: 250%;
+        grid-template-columns: 15rem 15rem 24rem 15rem 18rem !important;
     }
 
     .barber-single-join-quebarberserv-content{
         width: 180%;
-        grid-template-columns: 15rem 15rem 24rem 15rem !important;
+        grid-template-columns: 15rem 15rem 24rem 15rem 18rem !important;
         gap: 2rem;
     }
     

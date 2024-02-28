@@ -23,26 +23,29 @@ const BarberAccountDetail = () => {
 
     const submitHandler = () => {
         //email authentication  theke asbe
-        const profiledata = {email:LoggedInMiddleware?.user && LoggedInMiddleware?.user[0]?.email,mobileNumber,name,gender,dateOfBirth:dob,salonId:LoggedInMiddleware?.user && LoggedInMiddleware?.user[0]?.salonId,nickName};
+        const profiledata = { email: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0]?.email, mobileNumber, name, gender, dateOfBirth: dob, salonId: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0]?.salonId, nickName };
 
         // const profiledata = {email:"sagniknandy27@gmail.com",mobileNumber,name,gender,dateOfBirth:dob,salonId:LoggedInMiddleware?.user[0]?.salonId,userName:username};
-        dispatch(updateBarberSignupAccountDetailsAction(navigate,profiledata))
+        dispatch(updateBarberSignupAccountDetailsAction(navigate, profiledata))
 
         console.log(profiledata)
     }
 
     const skipHandler = () => {
-        localStorage.setItem("barberLoggedIn","true")
+        localStorage.setItem("barberLoggedIn", "true")
         navigate("/barber-dashboard")
     }
 
     const barberUpdateAccount = useSelector(state => state.barberUpdateAccount)
-    const {loading} =  barberUpdateAccount
+    const { loading } = barberUpdateAccount
 
     return (
-            <div className='admin_account_detail_container'>
+        <div className='admin_account_detail_container'
+            style={{ background: "none", padding: "10rem" }}
+        >
+            <div style={{ background: "#fff", padding: "2rem", borderRadius: "5px", boxShadow: "0px 0px 4px rgba(0,0,0,0.4)" }}>
                 <div>
-                    <h1>Fill Your Barber Account Details</h1>
+                    <h1 style={{ color: "#000" }}>Fill Your Barber Account Details</h1>
                 </div>
                 <div className='admin_account_detail'>
 
@@ -54,7 +57,7 @@ const BarberAccountDetail = () => {
                     </div> */}
 
                     <div>
-                        <h2 htmlFor="">Nick Name</h2>
+                        <h3 style={{ color: "#000" }} htmlFor="">Nick Name</h3>
                         <input
                             type="text"
                             value={nickName}
@@ -63,7 +66,7 @@ const BarberAccountDetail = () => {
                     </div>
 
                     <div>
-                        <h2 htmlFor="">Mobile Number</h2>
+                        <h3 style={{ color: "#000" }} htmlFor="">Mobile Number</h3>
                         <input
                             type="text"
                             value={mobileNumber}
@@ -72,7 +75,7 @@ const BarberAccountDetail = () => {
                     </div>
 
                     <div>
-                        <h2 htmlFor="">Name</h2>
+                        <h3 style={{ color: "#000" }} htmlFor="">Name</h3>
                         <input
                             type="text"
                             value={name}
@@ -81,17 +84,17 @@ const BarberAccountDetail = () => {
                     </div>
 
                     <div>
-                        <h2>Gender:</h2>
+                        <h3 style={{ color: "#000" }}>Gender:</h3>
 
                         <select name="cars" id="cars" onChange={(e) => setGender(e.target.value)} value={gender}>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                        <option value="other">Other</option>
-                    </select>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
                     </div>
 
                     <div>
-                        <h2 htmlFor="">Date of Birth</h2>
+                        <h3 style={{ color: "#000" }} htmlFor="">Date of Birth</h3>
                         <input
                             type="date"
                             value={dob}
@@ -101,18 +104,19 @@ const BarberAccountDetail = () => {
 
                     <div className="sa-br-btn_box">
                         {
-                            loading ? <button><ClipLoader/></button> : <button onClick={submitHandler}>
-                            Submit
-                        </button>
+                            loading ? <button><ClipLoader /></button> : <button onClick={submitHandler}>
+                                Submit
+                            </button>
                         }
-                        
+
                     </div>
 
                     <button className='skip' onClick={skipHandler}>Skip</button>
                 </div>
-                
+
                 <ToastContainer />
             </div>
+        </div>
     )
 }
 

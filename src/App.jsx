@@ -92,7 +92,8 @@ const App = () => {
 
   return (
     <BrowserRouter>
-    <div style={{background:darkMode === "On" ? "var(--dark-primary-color)" : "var(--light-primary-color)"}}>
+    <div style={{background:darkMode === "On" ? "var(--dark-primary-color)" : "var(--light-primary-color)"
+    }} className="main-outer-div">
       <Routes>
 
         <Route path="/hello" element={<Hello />} />

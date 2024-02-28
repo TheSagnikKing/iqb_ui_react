@@ -64,7 +64,10 @@ const Signup = () => {
     useEffect(() => {
         if (AdminSignupError) {
             toast.error(AdminSignupError?.message, {
-                position: "top-right"
+                position: "top-right",
+                style: {
+                    background: "#000"
+                },
             });
         }
 

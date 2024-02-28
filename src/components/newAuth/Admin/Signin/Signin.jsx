@@ -77,7 +77,10 @@ const Signin = () => {
     useEffect(() => {
         if (adminLoginError) {
             toast.error(adminLoginError?.message, {
-                position: "top-right"
+                position: "top-right",
+                style: {
+                    background: "#000"
+                },
             });
         }
 

@@ -121,7 +121,7 @@ const Header = ({ title }) => {
         <div className={`nav1wrapper ${currentmode && 'nav1wrapper_dark'}`}>
 
           <div className="nav1left_menu_box">
-            <button onClick={() => setExpandMenu(true)} style={{ background: "#fff", border: "none", boxShadow: "0px 0px 4px rgba(0,0,0,0.5)", height: "30px", fontWeight: "bold", display: "flex", justifyContent: "center", alignItems: "center" }}><RxHamburgerMenu /></button>
+            <button onClick={() => setExpandMenu(true)} style={{ background: "#fff", border: "none", boxShadow: "0px 0px 4px rgba(0,0,0,0.5)", height: "30px", fontWeight: "bold", display: "flex", justifyContent: "center", alignItems: "center" }} className='hamberg_menu'><RxHamburgerMenu /></button>
 
             {menudata.map((item) => {
               return (

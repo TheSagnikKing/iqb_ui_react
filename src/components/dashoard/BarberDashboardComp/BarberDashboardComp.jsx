@@ -144,18 +144,26 @@ const BarberDashboardComp = () => {
     const currentmode = darkMode === "On"
 
     return (
-        <div className="right_main_div">
+        <div className="right_main_div" style={{
+            background: currentmode ? "var(--dark-primary-color)" : "var(--light-primary-color)",
+            height: "140.23vh"
+        }}>
             {salonid == 0 ? <div className='connectSalon'>
-                <h1>Connect Salon Barber Please</h1>
-                <div>
+                <h1 style={{ color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)" }}>Connect Salon Barber Please</h1>
+                <div style={{ background: currentmode ? "var(--dark-secondary-color)" : "var(--light-secondary-color)" }}>
                     <div>
-                        <h2>List of Salons</h2>
-                        <div style={{ overflowX: "scroll" }}>
+                        <h3 style={{ color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)" }} >List of Salons</h3>
+                        <div style={{
+                            overflowX: "scroll",
+                            background: currentmode ? "var(--dark-primary-color)" : "var(--light-primary-color)"
+                        }}>
                             {
                                 connectedSalonData && connectedSalonData?.response && connectedSalonData?.response.length > 0 ? (connectedSalonData?.response?.map((s) => (
-                                    <div className='barber-salonlist-cnt'>
-                                        <p>SalonId {s.salonId}</p>
-                                        <p>{s.salonName}</p>
+                                    <div className='barber-salonlist-cnt'
+                                    style={{background:currentmode ? "var(--dark-secondary-color)" : "var(--light-secondary-color)"}}
+                                    >
+                                        <p style={{ color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)" }}>SalonId {s.salonId}</p>
+                                        <p style={{ color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)" }}>{s.salonName}</p>
                                         <button onClick={() => selectSalonServices(s.salonId)} style={{
                                             border: "1px solid blue",
                                             background: "#fff",
@@ -172,15 +180,20 @@ const BarberDashboardComp = () => {
                     </div>
 
                     <div>
-                        <h2>List of Services</h2>
-                        <div>
+                        <h3 style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>List of Services</h3>
+                        <div style={{
+                            background: currentmode ? "var(--dark-primary-color)" : "var(--light-primary-color)"
+                        }}>
                             {
                                 barberAllSalonServics ? barberAllSalonServics?.response?.map((b, index) => (
-                                    <div className='barber-single-join-quebarberserv-content' key={b._id} style={{ fontSize: "1.2rem" }}>
-                                        <p>{b.serviceId}</p>
-                                        <p>{b.serviceName}</p>
-                                        <p>{b.serviceCode}</p>
-                                        <p>{b.serviceEWT}</p>
+                                    <div className='barber-single-join-quebarberserv-content' key={b._id} style={{
+                                        fontSize: "1.2rem",
+                                        background: currentmode ? "var(--dark-secondary-color)" : "var(--light-secondary-color)"
+                                    }}>
+                                        <p style={{ color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)" }}>{b.serviceId}</p>
+                                        <p style={{ color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)" }}>{b.serviceName}</p>
+                                        <p style={{ color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)" }}>{b.serviceCode}</p>
+                                        <p style={{ color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)" }}>{b.serviceEWT}</p>
                                         <button onClick={() => selectedServiceHandler(b, index)} style={{
                                             color: "limegreen",
                                             border: "1px solid limegreen",
@@ -196,15 +209,19 @@ const BarberDashboardComp = () => {
                     </div>
 
                     <div>
-                        <h2>Barber Selected Services</h2>
-                        <div>
+                        <h3 style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Barber Selected Services</h3>
+                        <div  style={{
+                            background: currentmode ? "var(--dark-primary-color)" : "var(--light-primary-color)"
+                        }}>
                             {
                                 selectedService && selectedService.length > 0 ? selectedService.map((b, index) => (
-                                    <div className='barber-single-join-quebarberserv-content' key={b._id} style={{ fontSize: "1.2rem" }}>
-                                        <p>{b.serviceId}</p>
-                                        <p>{b.serviceName}</p>
-                                        <p>{b.serviceCode}</p>
-                                        <p>{b.serviceEWT}</p>
+                                    <div className='barber-single-join-quebarberserv-content' key={b._id} style={{ fontSize: "1.2rem",
+                                    background: currentmode ? "var(--dark-secondary-color)" : "var(--light-secondary-color)"
+                                    }}>
+                                        <p style={{color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>{b.serviceId}</p>
+                                        <p style={{color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>{b.serviceName}</p>
+                                        <p style={{color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>{b.serviceCode}</p>
+                                        <p style={{color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>{b.serviceEWT}</p>
                                         <button onClick={() => selectedServiceDelete(b)} style={{
                                             color: "red",
                                             border: "1px solid red",
@@ -220,7 +237,12 @@ const BarberDashboardComp = () => {
                     </div>
 
                     {
-                        connectBarberSalon?.loading == true ? <button style={{ fontWeight: "500" }}>Loading</button> : <button onClick={connectSalonHandler}>Connect Salon</button>
+                        connectBarberSalon?.loading == true ? <button style={{ fontWeight: "500" }}>Loading</button> : <button onClick={connectSalonHandler}
+                        style={{
+                            background:currentmode ? "var(--dark-primary-color)" : "var(--light-primary-color)",
+                            color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"
+                        }}
+                        >Connect Salon</button>
                     }
 
                 </div>
@@ -231,7 +253,7 @@ const BarberDashboardComp = () => {
 
                     <div className={`div_left ${currentmode && 'div_left_dark'}`}>
                         <div style={{ display: "flex", gap: "1.5rem", alignItems: "center", marginBottom: "1.5rem" }}>
-                            <h3 style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Offline</h3>
+                            <h3 style={{ color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)" }}>Offline</h3>
                             <label className="nav2toggle_switch" >
                                 <input type="checkbox"
                                     value={check}
@@ -245,7 +267,7 @@ const BarberDashboardComp = () => {
                                     }}
                                 ></span>
                             </label>
-                            <h3 style={{color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Online</h3>
+                            <h3 style={{ color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)" }}>Online</h3>
                         </div>
 
                         <div className="div_left_head">
@@ -323,7 +345,7 @@ const BarberDashboardComp = () => {
                                 </div>
 
                                 <div className="last_item">
-                                    <BsThreeDotsVertical style={{color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}/>
+                                    <BsThreeDotsVertical style={{ color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)" }} />
                                 </div>
 
                             </div>
@@ -408,18 +430,18 @@ const BarberDashboardComp = () => {
                             <p>JLDF13463</p>
 
                             <div>
-                                <div style={{color:"var(--dark-secondary-color)",fontWeight:"500"}}>
+                                <div style={{ color: "var(--dark-secondary-color)", fontWeight: "500" }}>
                                     In Progress
                                 </div>
 
                                 <div>
-                                    <FaUserCircle 
-                                    style={{color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}/>
+                                    <FaUserCircle
+                                        style={{ color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)" }} />
                                 </div>
 
                                 <div>
-                                    <FiMoreHorizontal 
-                                    style={{color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}
+                                    <FiMoreHorizontal
+                                        style={{ color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)" }}
                                     />
                                 </div>
                             </div>
@@ -437,25 +459,25 @@ const BarberDashboardComp = () => {
                                     <BsCheckLg />
                                 </div>
 
-                                <p style={{color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Priti Roy</p>
+                                <p style={{ color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)" }}>Priti Roy</p>
                             </div>
 
-                            <p style={{color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>JLDF13598</p>
+                            <p style={{ color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)" }}>JLDF13598</p>
 
                             <div>
-                                <div style={{color:"var(--dark-secondary-color)",fontWeight:"500"}}>
+                                <div style={{ color: "var(--dark-secondary-color)", fontWeight: "500" }}>
                                     Pending
                                 </div>
 
                                 <div>
-                                    <FaUserCircle 
-                                    style={{color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}
+                                    <FaUserCircle
+                                        style={{ color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)" }}
                                     />
                                 </div>
 
                                 <div>
-                                    <FiMoreHorizontal 
-                                    style={{color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}
+                                    <FiMoreHorizontal
+                                        style={{ color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)" }}
                                     />
                                 </div>
                             </div>
@@ -469,7 +491,7 @@ const BarberDashboardComp = () => {
 
                     <div className={`right_div_end_left ${currentmode && 'right_div_end_left_dark'}`}>
                         <div className={`right_div_end_head ${currentmode && 'right_div_end_head_dark'}`}>
-                            <p style={{color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Calender</p>
+                            <p style={{ color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)" }}>Calender</p>
 
                             <div className={`btn_box ${currentmode && 'btn_box_dark'}`}>
                                 <button>Appoinments</button>
@@ -528,10 +550,10 @@ const BarberDashboardComp = () => {
 
                         <div className={`chart ${currentmode && 'chart_dark'}`}>
                             <div>
-                                <p style={{color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Completion Rate</p>
+                                <p style={{ color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)" }}>Completion Rate</p>
 
                                 <div>
-                                    <p style={{color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>95%</p>
+                                    <p style={{ color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)" }}>95%</p>
                                     <p>+2.5%</p>
                                 </div>
                             </div>
