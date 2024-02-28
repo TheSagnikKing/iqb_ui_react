@@ -257,7 +257,7 @@ const BarberListTable = () => {
         <div className={`barberlist-wrapper ${currentMode ? "barberlist-wrapper_dark" : ""}`}>
             <div className="barberlist-header">
                 <div>
-                    <h2 style={{ color: currentMode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)" }}>Barbers List</h2>
+                    <h3 style={{ color: currentMode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)" }}>Barbers List</h3>
 
                     <div className='notify-buttons'>
                         <button
@@ -450,12 +450,12 @@ const BarberListTable = () => {
 
             </div>
 
-            <div className={`barberlist-barber-pagination ${currentMode ? "barberlist-barber-pagination_dark" : ""}`}>
+            {/* <div className={`barberlist-barber-pagination ${currentMode ? "barberlist-barber-pagination_dark" : ""}`}>
                 <div>
                     <div onClick={PrevHandler}><AiOutlineArrowLeft /></div>
                     <div onClick={NextHandler}><AiOutlineArrowRight /></div>
                 </div>
-            </div>
+            </div> */}
 
         </div>
     )

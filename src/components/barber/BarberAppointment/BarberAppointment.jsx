@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import './BarberAppointment.css'
 
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';

@@ -241,7 +241,7 @@ const AdminHeader = ({ title }) => {
           {expandMenu && <div style={{
             top: "0px",
             position: "absolute",
-            background: "#fff",
+            background: darkMode === "On" ? "var(--dark-secondary-color)" : "var(--light-secondary-color)",
             height: "105vh",
             width: "30rem",
             zIndex: "1000",
@@ -266,7 +266,7 @@ const AdminHeader = ({ title }) => {
 
             {adminmenudata.map((item) => {
               return (
-                <div key={item.menu_title} className={`${pathname === item.menu_link ? "menu-active" : "menu-inactive"}`} style={{ marginBottom: "2rem" }}>
+                <div key={item.menu_title} className={`${pathname === item.menu_link ? "menu-active" : "menu-inactive"}`} style={{ marginBottom: "2rem",background: darkMode === "On" && "var(--dark-primary-color)" }}>
                   <Link to={`${item.menu_link}`} style={{ color: "#000", textDecoration: "none" }} >
                     <div className="nav1-menu">
                       <div style={{ display: "flex", alignItems: "center", gap: "2rem", width: "80%", fontSize: "1.4rem" }}>

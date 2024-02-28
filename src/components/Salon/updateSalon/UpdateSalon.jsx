@@ -731,11 +731,11 @@ const UpdateSalon = () => {
 
                             <div>
                                 <div className='service-icon'>
-                                    <p>Service Icon</p>
+                                    <p style={{color:darkMode === "On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Service Icon</p>
                                     <div onClick={() => setServiceDrop(!serviceDrop)}
                                         style={{ cursor: "pointer", background: "#fff", boxShadow: "0px 0px 4px rgba(0,0,0,0.4)", height: "2.5rem", width: "2.5rem", display: "flex", alignItems: "center", justifyContent: "center", borderRadius: "50%",
                                         color:darkMode === "On" ? "var(--dark-secondary-color)" : "var(--light-secondary-color)"
-                                        }}><FaArrowDown /></div>
+                                        }}><FaArrowDown style={{color:"var(--dark-secondary-color)"}}/></div>
                                 </div>
 
                                 {

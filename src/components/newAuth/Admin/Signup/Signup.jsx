@@ -97,6 +97,19 @@ const Signup = () => {
         }
     };
 
+    const [screenwidth, setScreenWidth] = useState("")
+
+    useEffect(() => {
+        const changewidthvalue = () => {
+            setScreenWidth(window.innerWidth)
+        }
+
+        window.addEventListener('resize',changewidthvalue)
+
+        return () => {
+            window.removeEventListener('resize',changewidthvalue)
+        }
+    },[])
 
     return (
         <main className="signup">
@@ -178,7 +191,7 @@ const Signup = () => {
                             onError={errorMessage}
                             size='large'
                             shape='circle'
-                            width={310}
+                            width={screenwidth < 400 ? 300 : 400}
                             logo_alignment='left'
                             text='continue_with'
                         />

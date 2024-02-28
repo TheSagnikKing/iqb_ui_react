@@ -156,11 +156,12 @@ const Advertisement = () => {
       <AdminLayout />
       <div className={`sa-br-right_main_div ${currentmode ? "sa-br-right_main_div_dark" : ""}`}>
         <div className='advertisement-header'>
-          <h2 style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Advertisement</h2>
+          <h3 style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Advertisement</h3>
           <div>
             <input
               type='file'
               multiple onChange={(e) => setSelectedFiles(e.target.files)}
+              style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}
             />
 
             <button onClick={uploadImageHandler} style={{

@@ -245,7 +245,7 @@
     color: var(--light-secondary-color) !important;
 }
 
-.cst-barber-pagination{
+.cst-barber-pagination_dark{
     background-color: var(--dark-secondary-color);
 }
 

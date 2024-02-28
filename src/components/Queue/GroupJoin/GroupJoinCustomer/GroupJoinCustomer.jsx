@@ -291,7 +291,9 @@ const GroupJoinCustomer = () => {
 
             {
               appoinmentBarberList ? appoinmentBarberList?.response?.map((barber) => (
-                <div className={`barber-single-join-content-bbr ${currentmode ? "barber-single-join-content-bbr_dark" : ""}`} key={barber._id}>
+                <div className={`barber-single-join-content-bbr ${currentmode ? "barber-single-join-content-bbr_dark" : ""}`} key={barber._id}
+                
+                >
                   <p>{barber.email}</p>
                   <p>{barber.name}</p>
                   {/* <p>{barber.userName}</p> */}
@@ -322,7 +324,9 @@ const GroupJoinCustomer = () => {
             </div>
             {
               groupBarberServicesByBarberId?.response?.map((b, index) => (
-                <div className={`barber-single-join-quebarberserv-content ${currentmode ? "barber-single-join-quebarberserv-content_dark" : ""}`} key={b._id}>
+                <div className={`barber-single-join-quebarberserv-content ${currentmode ? "barber-single-join-quebarberserv-content_dark" : ""}`} key={b._id}
+                
+                >
                   <p>{b.serviceId}</p>
                   <p>{b.serviceName}</p>
                   <p>{b.servicePrice}</p>

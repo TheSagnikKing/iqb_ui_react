@@ -172,7 +172,7 @@ const Dashboard3 = () => {
                                         <div><AiOutlineArrowDown /></div>
                                     </div> */}
                         </div></div>
-                        <div><h4>Mobile Number</h4></div>
+                        <div><h4 style={{color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Mobile Number</h4></div>
 
 
                         <div className='icons-bbr'
@@ -226,10 +226,10 @@ const Dashboard3 = () => {
                 }
             </div>
 
-            <div className={`cst-barber-pagination ${currentmode ? "cst-barber-pagination" : ""}`}>
+            <div className={`cst-barber-pagination ${currentmode ? "cst-barber-pagination_dark" : ""}`}>
                 <div style={{ display: "flex", gap: "1.5rem" }}>
-                    <div onClick={PrevHandler}><AiOutlineArrowLeft /></div>
-                    <div onClick={NextHandler}><AiOutlineArrowRight /></div>
+                    <div onClick={PrevHandler}><AiOutlineArrowLeft style={{color:"var(--dark-secondary-color)"}}/></div>
+                    <div onClick={NextHandler}><AiOutlineArrowRight style={{color:"var(--dark-secondary-color)"}}/></div>
                 </div>
             </div>
 

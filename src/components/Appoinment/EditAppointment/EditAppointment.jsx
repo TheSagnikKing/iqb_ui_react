@@ -342,14 +342,14 @@ const EditAppointment = () => {
 
                     <Modal isOpen={showpreview} setIsOpen={setShowPreview}>
                         <div className={`app-modal-crt ${currentmode ? "app-modal-crt_dark" : ""}`}>
-                            <h1>Preview Appointment</h1>
+                            <h1 style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Preview Appointment</h1>
                             <div>
-                                <p>Appointment Name : {appointmentNotes} </p>
-                                <p>Appointment Date : {date} </p>
-                                <p>Start Time : {timeSlotStartTime}</p>
-                                <p>Customer Name : {name}</p>
-                                <p>Customer Type : Walk-In</p>
-                                <p>Method Used : App </p>
+                                <p style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Appointment Name : {appointmentNotes} </p>
+                                <p style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Appointment Date : {date} </p>
+                                <p style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Start Time : {timeSlotStartTime}</p>
+                                <p style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Customer Name : {name}</p>
+                                <p style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Customer Type : Walk-In</p>
+                                <p style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Method Used : App </p>
                             </div>
 
                             <h2>Your Services</h2>
@@ -366,7 +366,7 @@ const EditAppointment = () => {
                                 <div className={`app-modal-crt-content ${currentmode ? "app-modal-crt-content_dark" : ""}`}>
                                     {
                                         selectedService.map((s, i) => (
-                                            <div key={i}>
+                                            <div key={i} style={{background:darkMode === "On" ? "var(--dark-secondary-color)" : "var(--light-secondary-color)"}}>
                                                 <p>{s.serviceName}</p>
                                                 <p>{s.servicePrice}</p>
                                                 <p>{s.barberServiceEWT}</p>

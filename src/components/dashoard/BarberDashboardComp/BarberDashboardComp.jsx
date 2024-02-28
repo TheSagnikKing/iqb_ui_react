@@ -231,7 +231,7 @@ const BarberDashboardComp = () => {
 
                     <div className={`div_left ${currentmode && 'div_left_dark'}`}>
                         <div style={{ display: "flex", gap: "1.5rem", alignItems: "center", marginBottom: "1.5rem" }}>
-                            <h3>Offline</h3>
+                            <h3 style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Offline</h3>
                             <label className="nav2toggle_switch" >
                                 <input type="checkbox"
                                     value={check}
@@ -245,7 +245,7 @@ const BarberDashboardComp = () => {
                                     }}
                                 ></span>
                             </label>
-                            <h3>Online</h3>
+                            <h3 style={{color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Online</h3>
                         </div>
 
                         <div className="div_left_head">
@@ -437,10 +437,10 @@ const BarberDashboardComp = () => {
                                     <BsCheckLg />
                                 </div>
 
-                                <p>Priti Roy</p>
+                                <p style={{color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Priti Roy</p>
                             </div>
 
-                            <p>JLDF13598</p>
+                            <p style={{color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>JLDF13598</p>
 
                             <div>
                                 <div style={{color:"var(--dark-secondary-color)",fontWeight:"500"}}>
@@ -469,7 +469,7 @@ const BarberDashboardComp = () => {
 
                     <div className={`right_div_end_left ${currentmode && 'right_div_end_left_dark'}`}>
                         <div className={`right_div_end_head ${currentmode && 'right_div_end_head_dark'}`}>
-                            <p>Calender</p>
+                            <p style={{color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Calender</p>
 
                             <div className={`btn_box ${currentmode && 'btn_box_dark'}`}>
                                 <button>Appoinments</button>

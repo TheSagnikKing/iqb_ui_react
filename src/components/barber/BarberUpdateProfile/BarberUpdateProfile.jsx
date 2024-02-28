@@ -77,13 +77,13 @@ const BarberUpdateProfile = () => {
             <div className={`ad-profile-wrapper ${currentmode && 'ad-profile-wrapper_dark'}`}>
 
                 <div className="sa-br-right_main_head">
-                    <h1>Update Profile</h1>
+                    <h1 style={{color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Update Profile</h1>
                 </div>
 
                 <div className={`ad-profile-sa-br-right_main_form-update ${currentmode && 'ad-profile-sa-br-right_main_form-update_dark'}`}>
 
                     <div>
-                        <h2>Email</h2>
+                        <h3 style={{color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Email</h3>
                         <input
                             type="text"
                             value={LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].email}
@@ -124,7 +124,7 @@ const BarberUpdateProfile = () => {
                     </div>
 
                     <div>
-                        <h2 htmlFor="">Nick Name</h2>
+                        <h3 style={{color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}} htmlFor="">Nick Name</h3>
                         <input
                             type="text"
                             value={nickName}
@@ -133,7 +133,7 @@ const BarberUpdateProfile = () => {
                     </div>
 
                     <div>
-                        <h2>Mobile Number</h2>
+                        <h3 style={{color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Mobile Number</h3>
                         <input
                             type="text"
                             value={mobileNumber}
@@ -142,7 +142,7 @@ const BarberUpdateProfile = () => {
                     </div>
 
                     <div>
-                        <h2>Name</h2>
+                        <h3 style={{color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Name</h3>
                         <input
                             type="text"
                             value={name}
@@ -151,7 +151,7 @@ const BarberUpdateProfile = () => {
                     </div>
 
                     <div>
-                        <h2>Choose gender</h2>
+                        <h3 style={{color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Choose gender</h3>
 
                         <select
                             name="gender"
@@ -170,7 +170,7 @@ const BarberUpdateProfile = () => {
                     </div>
 
                     <div>
-                        <h2>Date of Birth</h2>
+                        <h3 style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Date of Birth</h3>
                         <input
                             type="date"
                             value={dob}
@@ -180,7 +180,7 @@ const BarberUpdateProfile = () => {
 
                     <div className={`sa-br-btn_box-up ${currentmode && 'sa-br-btn_box-up_dark'}`}>
                         <button onClick={submitHandler}>
-                            {loading === true ? <ClipLoader /> : <p style={{ fontSize: "1.2rem" }}>Submit</p>}
+                            {loading === true ? <ClipLoader /> : <p style={{ fontSize: "1.2rem",color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)" }}>Submit</p>}
                         </button>
                     </div>
 

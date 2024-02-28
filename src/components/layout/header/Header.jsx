@@ -131,7 +131,7 @@ const Header = ({ title }) => {
                     menu_title={item.menu_title}
                     category={item.category}
                     menu_link={item.menu_link}
-                    menucolor={`${darkMode === "On" ? pathname === item.menu_link ? "red" : "var(--light-secondary-color)" : pathname === item.menu_link ? "#fff" : ""}`}
+                    menucolor={`${darkMode === "On" ? pathname === item.menu_link ? "red" : "var(--light-secondary-color)" : pathname === item.menu_link ? "red" : "var(--dark-secondary-color)"}`}
                   />
                 </div>
               )
@@ -247,7 +247,7 @@ const Header = ({ title }) => {
           </div>
 
           <div className="nav1notification" style={{display:"block"}} onClick={() => notifyHandler()}>
-            <IoNotificationsOutline />
+            <IoNotificationsOutline  style={{color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}/>
           </div>
 
           {/* profile_div */}
@@ -293,7 +293,7 @@ const Header = ({ title }) => {
 
             <div style={{ cursor: "pointer" }} className="nav1right_dropdown"
               onClick={() => setDropdown(!dropdown)}>
-              <MdKeyboardArrowDown style={{ fontSize: "2rem" }} />
+              <MdKeyboardArrowDown style={{ fontSize: "2rem",color:currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)" }} />
             </div>
 
             {

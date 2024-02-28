@@ -82,7 +82,7 @@ const UpdateAdminprofile = () => {
                 <div className={`ad-profile-sa-br-right_main_form-update ${currentmode && 'ad-profile-sa-br-right_main_form-update_dark'}`}>
 
                     <div>
-                        <h2 style={{ color: darkMode ==="On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Email</h2>
+                        <h3 style={{ color: darkMode ==="On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Email</h3>
                         <input
                             type="text"
                             value={LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].email}
@@ -123,7 +123,7 @@ const UpdateAdminprofile = () => {
                     </div>
 
                     <div>
-                        <h2 style={{ color: darkMode ==="On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Mobile Number</h2>
+                        <h3 style={{ color: darkMode ==="On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Mobile Number</h3>
                         <input
                             type="text"
                             value={mobileNumber}
@@ -132,7 +132,7 @@ const UpdateAdminprofile = () => {
                     </div>
 
                     <div>
-                        <h2 style={{ color: darkMode ==="On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Name</h2>
+                        <h3 style={{ color: darkMode ==="On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Name</h3>
                         <input
                             type="text"
                             value={name}
@@ -141,7 +141,7 @@ const UpdateAdminprofile = () => {
                     </div>
 
                     <div >
-                        <label for="gender"><h2 style={{ color: darkMode ==="On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Choose gender</h2></label>
+                        <label for="gender"><h3 style={{ color: darkMode ==="On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Choose gender</h3></label>
 
                         <select
                             name="gender"
@@ -160,7 +160,7 @@ const UpdateAdminprofile = () => {
                     </div>
 
                     <div>
-                        <h2 style={{ color: darkMode ==="On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Date of Birth</h2>
+                        <h3 style={{ color: darkMode ==="On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Date of Birth</h3>
                         <input
                             type="date"
                             value={dob}
