@@ -108,6 +108,23 @@ const Signin = () => {
 
     console.log("Darkmode dashboard", darkMode)
 
+
+    const [screenwidth, setScreenWidth] = useState(window.innerWidth);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setScreenWidth(window.innerWidth);
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
+
+    console.log(screenwidth)
+
     return (
         <main className="signup">
             <div className="left">
@@ -120,7 +137,7 @@ const Signin = () => {
 
 
                     <div className="divone">
-                        <h1 style={{color:"#000"}}>Sign In to your Admin Account</h1>
+                        <h1 style={{ color: "#000" }}>Sign In to your Admin Account</h1>
                         <p>Welcome back Admin! please enter your detail</p>
                     </div>
 
@@ -194,7 +211,7 @@ const Signin = () => {
                             onError={errorMessage}
                             size='large'
                             shape='circle'
-                            width={310}
+                            width={screenwidth <= 400 ? 300 : 400}
                             logo_alignment='left'
                             text='continue_with'
                         />
