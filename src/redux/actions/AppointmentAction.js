@@ -23,7 +23,10 @@ export const createAppointmentAction = (appointmentData,navigate) => async(dispa
         })
 
         toast.error(error?.response?.data?.message, {
-            position: "top-right"
+            position: "top-right",
+            style:{
+                background:"#000"
+            }
         });
     }
 }
@@ -50,7 +53,10 @@ export const deleteAppointmentAction = (appointmentData) => async(dispatch) => {
         })
 
         toast.error(error?.response?.data?.message, {
-            position: "top-right"
+            position: "top-right",
+            style:{
+                background:"#000"
+            }
         });
 
     }
@@ -76,7 +82,10 @@ export const editAppointmentAction = (appointmentData,navigate) => async(dispatc
         })
 
         toast.error(error?.response?.data?.message, {
-            position: "top-right"
+            position: "top-right",
+            style:{
+                background:"#000"
+            }
         });
 
     }

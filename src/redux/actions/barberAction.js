@@ -33,7 +33,10 @@ export const barberListAction = (salonId,setModel1,setModel2barber,setModel2) =>
         })
 
         toast.error(error?.response?.data?.message, {
-            position: "top-right"
+            position: "top-right",
+            style:{
+                background:"#000"
+            }
         });
     }
 }
@@ -58,7 +61,10 @@ export const createBarberAction = (barberdata,navigate) => async(dispatch) => {
         })
 
         toast.error(error?.response?.data?.message, {
-            position: "top-right"
+            position: "top-right",
+            style:{
+                background:"#000"
+            }
         });
 
     }
@@ -87,7 +93,10 @@ export const updateBarberAction = (barberdata,navigate,signal) => async(dispatch
             });
 
             toast.error(error?.response?.data?.message, {
-                position: "top-right"
+                position: "top-right",
+                style:{
+                    background:"#000"
+                }
             });
         }
         
@@ -113,7 +122,10 @@ export const getbarberServicesbyBarberIdAction = (barberId,setModelservices) => 
         })
 
         toast.error(error?.response?.data?.message, {
-            position: "top-right"
+            position: "top-right",
+            style:{
+                background:"#000"
+            }
         });
     }
 }
@@ -215,7 +227,10 @@ export const getBarberByMultipleServicesAction = (salonId,serviceIds,setModel2ba
         })
 
         toast.error(error?.response?.data?.message, {
-            position: "top-right"
+            position: "top-right",
+            style:{
+                background:"#000"
+            }
         })
         setfetchSelectedSearch(false)
     }

@@ -28,6 +28,7 @@ const EditAppointment = () => {
             setDate(location?.state.appointmentDate.slice(0, 10))
             setAppointmentId(location?.state._id)
             setSelectedService(location?.state.services)
+            setSelectedBarberid(location?.state.barberId)
         }
     }, [location?.state])
 

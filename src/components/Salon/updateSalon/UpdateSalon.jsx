@@ -523,7 +523,7 @@ const UpdateSalon = () => {
                             <input
                                 type="text"
                                 value={salonEmail}
-                                onChange={(e) => setSalonEmail(e.target.value)}
+                                // onChange={(e) => setSalonEmail(e.target.value)}
                             />
                         </div>
 
@@ -541,7 +541,7 @@ const UpdateSalon = () => {
                             <input
                                 type="text"
                                 value={address}
-                                onChange={(e) => setAddress(e.target.value)}
+                                // onChange={(e) => setAddress(e.target.value)}
                             />
                         </div>
 
@@ -550,7 +550,7 @@ const UpdateSalon = () => {
                             <input
                                 type="text"
                                 value={city}
-                                onChange={(e) => setCity(e.target.value)}
+                                // onChange={(e) => setCity(e.target.value)}
                             />
                         </div>
 
@@ -559,7 +559,7 @@ const UpdateSalon = () => {
                             <input
                                 type="number"
                                 value={latitude}
-                                onChange={(e) => setLatitude(e.target.value)}
+                                // onChange={(e) => setLatitude(e.target.value)}
                             />
                         </div>
 
@@ -568,7 +568,7 @@ const UpdateSalon = () => {
                             <input
                                 type="number"
                                 value={longitude}
-                                onChange={(e) => setLongitude(e.target.value)}
+                                // onChange={(e) => setLongitude(e.target.value)}
                             />
                         </div>
 
@@ -579,7 +579,7 @@ const UpdateSalon = () => {
                             <input
                                 type="text"
                                 value={country}
-                                onChange={(e) => setCountry(e.target.value)}
+                                // onChange={(e) => setCountry(e.target.value)}
                             />
                         </div>
 
@@ -588,7 +588,7 @@ const UpdateSalon = () => {
                             <input
                                 type="text"
                                 value={postCode}
-                                onChange={(e) => setPostCode(e.target.value)}
+                                // onChange={(e) => setPostCode(e.target.value)}
                             />
                         </div>
 

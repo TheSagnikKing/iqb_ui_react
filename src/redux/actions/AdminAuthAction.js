@@ -247,7 +247,10 @@ export const updateAdminAction = (profiledata,navigate) => async (dispatch) => {
         }); 
 
         toast.error(error?.response?.data?.message, {
-            position: "top-right"
+            position: "top-right",
+            style:{
+                background:"#000"
+            }
         });
 
     }
@@ -278,7 +281,10 @@ export const updateAdminAccountDetailsAction = (navigate,profiledata) => async (
         }); 
 
         toast.error(error?.response?.data?.message, {
-            position: "top-right"
+            position: "top-right",
+            style:{
+                background:"#000"
+            }
         });
     }
 };

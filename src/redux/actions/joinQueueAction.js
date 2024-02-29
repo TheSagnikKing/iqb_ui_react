@@ -25,7 +25,10 @@ export const singleJoinQueueAction = (singlejoindata,setSelectedService,navigate
         })
 
         toast.error(error?.response?.data?.message, {
-            position: "top-right"
+            position: "top-right",
+            style:{
+                background:"#000"
+            }
         })
 
     }
@@ -75,7 +78,10 @@ export const autojoinAction = (joindata,navigate) => async(dispatch) => {
         })
 
         toast.error(error?.response?.data?.message, {
-            position: "top-right"
+            position: "top-right",
+            style:{
+                background:"#000"
+            }
         })
     }
 }
@@ -104,7 +110,10 @@ export const groupjoinAction = (groupjoindata,setSelectedCustomer,navigate) => a
         })
 
         toast.error(error?.response?.data?.message, {
-            position: "top-right"
+            position: "top-right",
+            style:{
+                background:"#000"
+            }
         })
 
     }

@@ -37,6 +37,8 @@ const CalenderEvent = () => {
 
 
     const editHandler = (appointmentdata) => {
+
+        // console.log("appointmentdata sagnik",appointmentdata)
         navigate("/appoinment/editappointment", {state:appointmentdata})
     }
 

@@ -250,7 +250,10 @@ export const updateBarberSignupAccountDetailsAction = (navigate,profiledata) => 
     } catch (error) {
 
         toast.error(error?.response?.data?.message, {
-            position: "top-right"
+            position: "top-right",
+            style:{
+                background:"#000"
+            }
         });
     
         dispatch({
@@ -279,7 +282,10 @@ export const updateBarberAccountDetailsAction = (profiledata,navigate) => async 
     } catch (error) {
 
         toast.error(error?.response?.data?.message, {
-            position: "top-right"
+            position: "top-right",
+            style:{
+                background:"#000"
+            }
         });
     
         dispatch({

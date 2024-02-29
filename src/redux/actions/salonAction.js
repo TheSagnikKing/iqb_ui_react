@@ -26,7 +26,10 @@ export const createSalonAction = (salondata,navigate) => async(dispatch) => {
         })
 
         toast.error(error?.response?.data?.message, {
-            position: "top-right"
+            position: "top-right",
+            style:{
+                background:"#131E3A"
+            }
           });
 
     }
@@ -70,7 +73,10 @@ export const updateSalonAction = (salondata,navigate) => async(dispatch) => {
         })
 
         toast.error(error?.response?.data?.message, {
-            position: "top-right"
+            position: "top-right",
+            style:{
+                background:"#000"
+            }
           });
     }
 }
@@ -146,7 +152,10 @@ export const getAllSalonServicesAction = (salonid,setModel1,setModelservices,set
         })
 
         toast.error(error?.response?.data?.message, {
-            position: "top-right"
+            position: "top-right",
+            style:{
+                background:"#000"
+            }
         });
     }
 }
@@ -213,7 +222,10 @@ export const salonSettingsUpdateAction = (salonsettingsData,navigate) => async(d
         })
 
         toast.error(error?.response?.data?.message, {
-            position: "top-right"
+            position: "top-right",
+            style:{
+                background:"#000"
+            }
         });
     }
 }
