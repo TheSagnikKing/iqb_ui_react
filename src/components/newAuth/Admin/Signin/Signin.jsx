@@ -29,18 +29,6 @@ const Signin = () => {
     }
 
 
-    const userLoggedIn = localStorage.getItem("userLoggedIn")
-    const barberLoggedIn = localStorage.getItem("barberLoggedIn")
-
-    useEffect(() => {
-        if (userLoggedIn == "true") {
-            navigate("/admin-dashboard")
-        }
-        else if (barberLoggedIn == "true") {
-            navigate("/barber-dashboard")
-        }
-    }, [navigate, userLoggedIn, barberLoggedIn])
-
     const [password, setPassword] = useState("")
     const [email, setEmail] = useState("")
     const [visible, setVisible] = useState(false)

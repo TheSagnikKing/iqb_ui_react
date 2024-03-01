@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import "./AdminAccountDetail.css"
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateAdminAccountDetailsAction } from '../../redux/actions/AdminAuthAction'
 import ClipLoader from "react-spinners/ClipLoader";
@@ -9,6 +9,9 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const AdminAccountDetail = () => {
+    
+    const location = useLocation()
+    const admindata = location?.state?.newUser
 
     const [username, setUsername] = useState("")
     const [mobileNumber, setMobileNumber] = useState("")
@@ -19,26 +22,28 @@ const AdminAccountDetail = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
-    const LoggedInMiddleware = useSelector(state => state.LoggedInMiddleware)
-
     const submitHandler = () => {
         //email authentication  theke asbe
-        const profiledata = { email: LoggedInMiddleware?.user[0]?.email, mobileNumber, name, gender, dateOfBirth: dob, salonId: LoggedInMiddleware?.user[0]?.salonId };
+        const profiledata = { email: admindata?.email, mobileNumber, name, gender, dateOfBirth: dob, salonId:admindata?.salonId };
 
         dispatch(updateAdminAccountDetailsAction(navigate, profiledata))
+
     }
 
     const skipHandler = () => {
-        localStorage.setItem("userLoggedIn", "true")
-        navigate("/admin-dashboard")
+
+        // For the skip dispatch the same action with all fields empty and say arghay to remove the field validation here
+
+        const profiledata = { email: admindata?.email, mobileNumber:"", name:"", gender:"", dateOfBirth:"", salonId:admindata?.salonId };
+
+        dispatch(updateAdminAccountDetailsAction(navigate, profiledata)) 
+
     }
 
     const updateAdminAccountDetails = useSelector(state => state.updateAdminAccountDetails)
     const { loading } = updateAdminAccountDetails
 
     const darkMode = useSelector(state => state.color.darkmode)
-
-    console.log("Darkmode dashboard", darkMode)
 
     const currentmode = darkMode === "On"
 

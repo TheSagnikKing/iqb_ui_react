@@ -9,12 +9,12 @@ const Auth = ({ children }) => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(LoggedOutMiddlewareAction(navigate))
-    }, [])
+        dispatch(LoggedInMiddlewareAction(navigate))
+    },[dispatch,navigate])
 
     useEffect(() => {
-        dispatch(LoggedInMiddlewareAction(navigate))
-    },[])
+        dispatch(LoggedOutMiddlewareAction(navigate))
+    }, [dispatch,navigate])
 
     return (
         <div>{children}</div>

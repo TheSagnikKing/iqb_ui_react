@@ -2,77 +2,78 @@ import { ADMIN_FORGET_PASSWORD_FAIL, ADMIN_FORGET_PASSWORD_REQ, ADMIN_FORGET_PAS
 
 import api from "../api/Api"
 import axios from "axios";
-import {  toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
-export const AdminRegisterAction = (signupData,navigate) => async (dispatch) => {
+export const AdminRegisterAction = (signupData, navigate) => async (dispatch) => {
     try {
         dispatch({
             type: ADMIN_SIGNUP_REQ
         });
 
         const { data } = await api.post("/api/admin/register", signupData);
-        
+
         dispatch({
             type: ADMIN_SIGNUP_SUCCESS,
             payload: data
         });
 
-        navigate("/adminaccountdetail")
+        navigate("/adminaccountdetail",{state:data})
     } catch (error) {
 
         dispatch({
             type: ADMIN_SIGNUP_FAIL,
-            payload:error.response.data
+            payload: error.response.data
         });
     }
 };
 
-export const AdminLoginAction = (loginData,navigate) => async (dispatch) => {
+export const AdminLoginAction = (loginData, navigate) => async (dispatch) => {
     try {
         dispatch({
             type: ADMIN_SIGNIN_REQ
         });
 
-        const { data } = await api.post("/api/admin/login", loginData );
-
-        localStorage.setItem("userLoggedIn","true")
+        const { data } = await api.post("/api/admin/login", loginData);
 
         dispatch({
             type: ADMIN_SIGNIN_SUCCESS,
             payload: data
         });
 
+        localStorage.setItem("userAdminLoggedIn", "true")
+        localStorage.setItem("userBarberLoggedIn", "false")
+
         navigate("/admin-dashboard")
     } catch (error) {
 
         dispatch({
             type: ADMIN_SIGNIN_FAIL,
-            payload:error.response.data
+            payload: error.response.data
         });
 
-    
+
     }
 };
 
-export const AdminGoogleloginAction = (token,navigate) => async (dispatch) => {
+export const AdminGoogleloginAction = (token, navigate) => async (dispatch) => {
     try {
         dispatch({
             type: ADMIN_GOOGLE_SIGNIN_REQ
         });
 
-        const { data } = await api.post("/api/admin/google-login",{token:token});
+        const { data } = await api.post("/api/admin/google-login", { token: token });
 
         console.log(data)
 
-        localStorage.setItem("userLoggedIn","true")
+        localStorage.setItem("userLoggedIn", "true")
 
-        if(data?.message == "Admin registered successfully"){
+        if (data?.message == "Admin registered successfully") {
             dispatch({
                 type: ADMIN_GOOGLE_SIGNUP_SUCCESS,
                 payload: data
             });
             navigate("/adminaccountdetail")
-        }else{
+        } else {
             dispatch({
                 type: ADMIN_GOOGLE_SIGNIN_SUCCESS,
                 payload: data
@@ -83,55 +84,93 @@ export const AdminGoogleloginAction = (token,navigate) => async (dispatch) => {
 
         dispatch({
             type: ADMIN_GOOGLE_SIGNIN_FAIL,
-            payload:error.response.data
+            payload: error.response.data
         });
     }
 };
 
+// export const AdminLogoutAction = (navigate) => async (dispatch) => {
+
+//     try {
+
+//         dispatch({
+//             type:ADMIN_SIGNIN_FAIL,
+//             payload:{}
+//          })
+
+//          dispatch({
+//             type:ADMIN_SIGNUP_FAIL,
+//             payload:{}
+//          })
+
+//          dispatch({
+//              type: ADMIN_LOGOUT_REQ
+//          })
+
+//          const {data} = await api.post("/api/admin/logout")
+
+//          dispatch({
+//              type: ADMIN_LOGOUT_SUCCESS,
+//              payload:data
+//          })
+
+//          localStorage.setItem("userLoggedIn","false")
+//          navigate("/admin-signin")
+
+//         // alert("He.lllooo")
+//     } catch (error) {
+//          dispatch({
+//              type: ADMIN_LOGOUT_FAIL,
+//              payload:error.response.data
+//          })
+//     }
+// }
+
+
 export const AdminLogoutAction = (navigate) => async (dispatch) => {
 
     try {
-        
+
         dispatch({
-            type:ADMIN_SIGNIN_FAIL,
-            payload:{}
-         })
+            type: ADMIN_SIGNIN_FAIL,
+            payload: {}
+        })
 
-         dispatch({
-            type:ADMIN_SIGNUP_FAIL,
-            payload:{}
-         })
+        dispatch({
+            type: ADMIN_SIGNUP_FAIL,
+            payload: {}
+        })
 
-         dispatch({
-             type: ADMIN_LOGOUT_REQ
-         })
+        dispatch({
+            type: ADMIN_LOGOUT_REQ
+        })
 
-         const {data} = await api.post("/api/admin/logout")
+        const { data } = await api.post("/api/admin/logout")
 
-         dispatch({
-             type: ADMIN_LOGOUT_SUCCESS,
-             payload:data
-         })
+        dispatch({
+            type: ADMIN_LOGOUT_SUCCESS,
+            payload: data
+        })
 
-         localStorage.setItem("userLoggedIn","false")
-         navigate("/admin-signin")
+        localStorage.setItem("userAdminLoggedIn", "false")
+        localStorage.setItem("userBarberLoggedIn", "false")
 
-        // alert("He.lllooo")
+        navigate("/admin-signin")
     } catch (error) {
-         dispatch({
-             type: ADMIN_LOGOUT_FAIL,
-             payload:error.response.data
-         })
+        dispatch({
+            type: ADMIN_LOGOUT_FAIL,
+            payload: error.response.data
+        })
     }
 }
 
-export const AdminForgetPasswordAction = (email,navigate) => async (dispatch) => {
+export const AdminForgetPasswordAction = (email, navigate) => async (dispatch) => {
     try {
         dispatch({
             type: ADMIN_FORGET_PASSWORD_REQ
         });
 
-        const { data } = await api.post("/api/admin/forget-password",{email:email});
+        const { data } = await api.post("/api/admin/forget-password", { email: email });
 
         dispatch({
             type: ADMIN_FORGET_PASSWORD_SUCCESS,
@@ -143,18 +182,18 @@ export const AdminForgetPasswordAction = (email,navigate) => async (dispatch) =>
 
         dispatch({
             type: ADMIN_FORGET_PASSWORD_FAIL,
-            payload:error.response.data
+            payload: error.response.data
         });
     }
 };
 
-export const AdminResetPasswordAction = (token,password,navigate) => async (dispatch) => {
+export const AdminResetPasswordAction = (token, password, navigate) => async (dispatch) => {
     try {
         dispatch({
             type: ADMIN_RESET_PASSWORD_REQ
         });
 
-        const { data } = await api.post(`/api/admin/reset-password/${token}`, {password:password});
+        const { data } = await api.post(`/api/admin/reset-password/${token}`, { password: password });
 
         dispatch({
             type: ADMIN_RESET_PASSWORD_SUCCESS,
@@ -166,7 +205,7 @@ export const AdminResetPasswordAction = (token,password,navigate) => async (disp
 
         dispatch({
             type: ADMIN_RESET_PASSWORD_FAIL,
-            payload:error.response.data
+            payload: error.response.data
         });
     }
 };
@@ -175,7 +214,7 @@ export const AdminResetPasswordAction = (token,password,navigate) => async (disp
 export const LoggedOutMiddlewareAction = (navigate) => async (dispatch) => {
     try {
         dispatch({
-            type:LOGGED_OUT_MIDDLEWARE_REQ
+            type: LOGGED_OUT_MIDDLEWARE_REQ
         })
         const { data } = await api.get(`/api/admin/loggedoutmiddleware`);
 
@@ -184,13 +223,13 @@ export const LoggedOutMiddlewareAction = (navigate) => async (dispatch) => {
             payload: data
         });
     } catch (error) {
-            
+
         dispatch({
             type: LOGGED_OUT_MIDDLEWARE_FAIL,
-            payload:error?.response?.data
+            payload: error?.response?.data
         });
 
-        if(error?.response?.data?.message == "Refresh Token not present.Please Login Again"){
+        if (error?.response?.data?.message == "Refresh Token not present.Please Login Again") {
             localStorage.setItem("userLoggedIn", "false")
             navigate("/admin-signin")
         }
@@ -201,11 +240,11 @@ export const LoggedOutMiddlewareAction = (navigate) => async (dispatch) => {
 export const LoggedInMiddlewareAction = (navigate) => async (dispatch) => {
     try {
         dispatch({
-            type:LOGGED_IN_MIDDLEWARE_REQ
+            type: LOGGED_IN_MIDDLEWARE_REQ
         })
         const { data } = await api.get(`/api/admin/loggedinmiddleware`);
 
-        console.log("ascascvdffsv",data)
+        console.log("ascascvdffsv", data)
 
         dispatch({
             type: LOGGED_IN_MIDDLEWARE_SUCCESS,
@@ -214,24 +253,24 @@ export const LoggedInMiddlewareAction = (navigate) => async (dispatch) => {
 
     } catch (error) {
 
-        if(error?.response?.data?.message === "You are not Authenticated Admin"){
+        if (error?.response?.data?.message === "You are not Authenticated Admin") {
             navigate("/barber-dashboard")
-        }else{
+        } else {
             dispatch({
                 type: LOGGED_IN_MIDDLEWARE_FAIL,
-                payload:error?.response?.data
+                payload: error?.response?.data
             });
         }
     }
 };
 
 
-export const updateAdminAction = (profiledata,navigate) => async (dispatch) => {
+export const updateAdminAction = (profiledata, navigate) => async (dispatch) => {
     try {
         dispatch({
-            type:UPDATE_ADMIN_REQ
+            type: UPDATE_ADMIN_REQ
         })
-        const { data } = await api.put(`/api/admin/updateAdminAcoountDetails`,profiledata);
+        const { data } = await api.put(`/api/admin/updateAdminAcoountDetails`, profiledata);
 
         dispatch({
             type: UPDATE_ADMIN_SUCCESS,
@@ -243,13 +282,13 @@ export const updateAdminAction = (profiledata,navigate) => async (dispatch) => {
 
         dispatch({
             type: UPDATE_ADMIN_FAIL,
-            payload:error?.response?.data
-        }); 
+            payload: error?.response?.data
+        });
 
         toast.error(error?.response?.data?.message, {
             position: "top-right",
-            style:{
-                background:"#000"
+            style: {
+                background: "#000"
             }
         });
 
@@ -257,12 +296,12 @@ export const updateAdminAction = (profiledata,navigate) => async (dispatch) => {
 };
 
 
-export const updateAdminAccountDetailsAction = (navigate,profiledata) => async (dispatch) => {
+export const updateAdminAccountDetailsAction = (navigate, profiledata) => async (dispatch) => {
     try {
         dispatch({
             type: UPDATE_ADMIN_ACCOUNT_DETAILS_REQ
         })
-        const { data } = await api.put(`https://iqb-backend2.onrender.com/api/admin/updateAdminAcoountDetails`,profiledata);
+        const { data } = await api.put(`https://iqb-backend2.onrender.com/api/admin/updateadmin`, profiledata);
 
         console.log(data)
 
@@ -271,30 +310,32 @@ export const updateAdminAccountDetailsAction = (navigate,profiledata) => async (
             payload: data
         });
 
-        localStorage.setItem("userLoggedIn","true")
+        localStorage.setItem("userAdminLoggedIn", "true")
+        localStorage.setItem("userBarberLoggedIn", "false")
+
         navigate("/admin-dashboard")
     } catch (error) {
 
         dispatch({
             type: UPDATE_ADMIN_ACCOUNT_DETAILS_FAIL,
-            payload:error?.response?.data
-        }); 
+            payload: error?.response?.data
+        });
 
         toast.error(error?.response?.data?.message, {
             position: "top-right",
-            style:{
-                background:"#000"
+            style: {
+                background: "#000"
             }
         });
     }
 };
 
-export const adminVerifyEmailAction = (navigate,verifyemail) => async (dispatch) => {
+export const adminVerifyEmailAction = (navigate, verifyemail) => async (dispatch) => {
     try {
         dispatch({
             type: ADMIN_VERIFY_EMAIL_REQ
         })
-        const { data } = await api.post(`https://iqb-backend2.onrender.com/api/admin/sendVerificationCodeForAdminEmail`,verifyemail);
+        const { data } = await api.post(`https://iqb-backend2.onrender.com/api/admin/sendVerificationCodeForAdminEmail`, verifyemail);
 
         dispatch({
             type: ADMIN_VERIFY_EMAIL_SUCCESS,
@@ -302,23 +343,23 @@ export const adminVerifyEmailAction = (navigate,verifyemail) => async (dispatch)
         });
         navigate("/admin/verifyemailstatus")
     } catch (error) {
-    
+
         dispatch({
             type: ADMIN_VERIFY_EMAIL_FAIL,
-            payload:error?.response?.data
-        }); 
+            payload: error?.response?.data
+        });
         // toast.error(adminLoginError?.message, {
         //     position: "top-right"
         // });
     }
 };
 
-export const adminVerifiedStatusAction = (navigate,verifystatus) => async (dispatch) => {
+export const adminVerifiedStatusAction = (navigate, verifystatus) => async (dispatch) => {
     try {
         dispatch({
             type: ADMIN_VERIFIED_STATUS_REQ
         })
-        const { data } = await api.post(`https://iqb-backend2.onrender.com/api/admin/changeEmailVerifiedStatus`,verifystatus);
+        const { data } = await api.post(`https://iqb-backend2.onrender.com/api/admin/changeEmailVerifiedStatus`, verifystatus);
 
         dispatch({
             type: ADMIN_VERIFIED_STATUS_SUCCESS,
@@ -327,10 +368,10 @@ export const adminVerifiedStatusAction = (navigate,verifystatus) => async (dispa
         navigate("/admin/updateprofile")
         window.location.reload()
     } catch (error) {
-    
+
         dispatch({
             type: ADMIN_VERIFIED_STATUS_FAIL,
-            payload:error?.response?.data
-        }); 
+            payload: error?.response?.data
+        });
     }
 };
