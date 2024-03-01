@@ -17,7 +17,7 @@ const ProtectedRoute = () => {
                 setloggindata(data);
                 dispatch({
                     type:LOGGED_IN_MIDDLEWARE_SUCCESS,
-                    payload:[data]
+                    payload:data
                 })
             } catch (error) {
                 if(error?.response?.data?.message === "UnAuthorized Admin" || error?.response?.data?.message === "Forbidden Admin"){

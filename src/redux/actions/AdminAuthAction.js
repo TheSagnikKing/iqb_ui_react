@@ -1,4 +1,4 @@
-import { ADMIN_FORGET_PASSWORD_FAIL, ADMIN_FORGET_PASSWORD_REQ, ADMIN_FORGET_PASSWORD_SUCCESS, ADMIN_GOOGLE_SIGNIN_FAIL, ADMIN_GOOGLE_SIGNIN_REQ, ADMIN_GOOGLE_SIGNIN_SUCCESS, ADMIN_GOOGLE_SIGNUP_SUCCESS, ADMIN_LOGOUT_FAIL, ADMIN_LOGOUT_REQ, ADMIN_LOGOUT_SUCCESS, ADMIN_RESET_PASSWORD_FAIL, ADMIN_RESET_PASSWORD_REQ, ADMIN_RESET_PASSWORD_SUCCESS, ADMIN_SIGNIN_FAIL, ADMIN_SIGNIN_REQ, ADMIN_SIGNIN_SUCCESS, ADMIN_SIGNUP_FAIL, ADMIN_SIGNUP_REQ, ADMIN_SIGNUP_SUCCESS, ADMIN_VERIFIED_STATUS_FAIL, ADMIN_VERIFIED_STATUS_REQ, ADMIN_VERIFIED_STATUS_SUCCESS, ADMIN_VERIFY_EMAIL_FAIL, ADMIN_VERIFY_EMAIL_REQ, ADMIN_VERIFY_EMAIL_SUCCESS, LOGGED_IN_MIDDLEWARE_FAIL, LOGGED_IN_MIDDLEWARE_REQ, LOGGED_IN_MIDDLEWARE_SUCCESS, LOGGED_OUT_MIDDLEWARE_FAIL, LOGGED_OUT_MIDDLEWARE_REQ, LOGGED_OUT_MIDDLEWARE_SUCCESS, UPDATE_ADMIN_ACCOUNT_DETAILS_FAIL, UPDATE_ADMIN_ACCOUNT_DETAILS_REQ, UPDATE_ADMIN_ACCOUNT_DETAILS_SUCCESS, UPDATE_ADMIN_FAIL, UPDATE_ADMIN_REQ, UPDATE_ADMIN_SUCCESS } from "../constants/AdminAuthConstants";
+import { ADMIN_FORGET_PASSWORD_FAIL, ADMIN_FORGET_PASSWORD_REQ, ADMIN_FORGET_PASSWORD_SUCCESS, ADMIN_GOOGLE_SIGNIN_FAIL, ADMIN_GOOGLE_SIGNIN_REQ, ADMIN_GOOGLE_SIGNIN_SUCCESS, ADMIN_GOOGLE_SIGNUP_FAIL, ADMIN_GOOGLE_SIGNUP_REQ, ADMIN_GOOGLE_SIGNUP_SUCCESS, ADMIN_LOGOUT_FAIL, ADMIN_LOGOUT_REQ, ADMIN_LOGOUT_SUCCESS, ADMIN_RESET_PASSWORD_FAIL, ADMIN_RESET_PASSWORD_REQ, ADMIN_RESET_PASSWORD_SUCCESS, ADMIN_SIGNIN_FAIL, ADMIN_SIGNIN_REQ, ADMIN_SIGNIN_SUCCESS, ADMIN_SIGNUP_FAIL, ADMIN_SIGNUP_REQ, ADMIN_SIGNUP_SUCCESS, ADMIN_VERIFIED_STATUS_FAIL, ADMIN_VERIFIED_STATUS_REQ, ADMIN_VERIFIED_STATUS_SUCCESS, ADMIN_VERIFY_EMAIL_FAIL, ADMIN_VERIFY_EMAIL_REQ, ADMIN_VERIFY_EMAIL_SUCCESS, LOGGED_IN_MIDDLEWARE_FAIL, LOGGED_IN_MIDDLEWARE_REQ, LOGGED_IN_MIDDLEWARE_SUCCESS, LOGGED_OUT_MIDDLEWARE_FAIL, LOGGED_OUT_MIDDLEWARE_REQ, LOGGED_OUT_MIDDLEWARE_SUCCESS, UPDATE_ADMIN_ACCOUNT_DETAILS_FAIL, UPDATE_ADMIN_ACCOUNT_DETAILS_REQ, UPDATE_ADMIN_ACCOUNT_DETAILS_SUCCESS, UPDATE_ADMIN_FAIL, UPDATE_ADMIN_REQ, UPDATE_ADMIN_SUCCESS } from "../constants/AdminAuthConstants";
 
 import api from "../api/Api"
 import axios from "axios";
@@ -61,25 +61,17 @@ export const AdminGoogleloginAction = (token, navigate) => async (dispatch) => {
             type: ADMIN_GOOGLE_SIGNIN_REQ
         });
 
-        const { data } = await api.post("/api/admin/google-login", { token: token });
+        const { data } = await api.post(`/api/admin/googleAdminLogin?token=${token}`);
 
-        console.log(data)
+        dispatch({
+            type: ADMIN_GOOGLE_SIGNIN_SUCCESS,
+            payload: data
+        });
 
-        localStorage.setItem("userLoggedIn", "true")
+        localStorage.setItem("userAdminLoggedIn", "true")
+        localStorage.setItem("userBarberLoggedIn", "false")
 
-        if (data?.message == "Admin registered successfully") {
-            dispatch({
-                type: ADMIN_GOOGLE_SIGNUP_SUCCESS,
-                payload: data
-            });
-            navigate("/adminaccountdetail")
-        } else {
-            dispatch({
-                type: ADMIN_GOOGLE_SIGNIN_SUCCESS,
-                payload: data
-            });
-            navigate("/admin-dashboard")
-        }
+        navigate("/admin-dashboard")
     } catch (error) {
 
         dispatch({
@@ -89,42 +81,28 @@ export const AdminGoogleloginAction = (token, navigate) => async (dispatch) => {
     }
 };
 
-// export const AdminLogoutAction = (navigate) => async (dispatch) => {
+export const AdminGoogleSignupAction = (token, navigate) => async (dispatch) => {
+    try {
+        dispatch({
+            type: ADMIN_GOOGLE_SIGNUP_REQ
+        });
 
-//     try {
+        const { data } = await api.post(`/api/admin/googleAdminSignUp?token=${token}`);
 
-//         dispatch({
-//             type:ADMIN_SIGNIN_FAIL,
-//             payload:{}
-//          })
+        dispatch({
+            type: ADMIN_GOOGLE_SIGNUP_SUCCESS,
+            payload: data
+        });
 
-//          dispatch({
-//             type:ADMIN_SIGNUP_FAIL,
-//             payload:{}
-//          })
+        navigate("/adminaccountdetail",{state:data})
+    } catch (error) {
 
-//          dispatch({
-//              type: ADMIN_LOGOUT_REQ
-//          })
-
-//          const {data} = await api.post("/api/admin/logout")
-
-//          dispatch({
-//              type: ADMIN_LOGOUT_SUCCESS,
-//              payload:data
-//          })
-
-//          localStorage.setItem("userLoggedIn","false")
-//          navigate("/admin-signin")
-
-//         // alert("He.lllooo")
-//     } catch (error) {
-//          dispatch({
-//              type: ADMIN_LOGOUT_FAIL,
-//              payload:error.response.data
-//          })
-//     }
-// }
+        dispatch({
+            type: ADMIN_GOOGLE_SIGNUP_FAIL,
+            payload: error.response.data
+        });
+    }
+};
 
 
 export const AdminLogoutAction = (navigate) => async (dispatch) => {
@@ -278,6 +256,7 @@ export const updateAdminAction = (profiledata, navigate) => async (dispatch) => 
         });
 
         navigate("/admin-dashboard")
+        window.location.reload()
     } catch (error) {
 
         dispatch({

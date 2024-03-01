@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import "./Signup.css"
-import { AdminGoogleloginAction, AdminRegisterAction } from '../../../../redux/actions/AdminAuthAction'
+import { AdminGoogleSignupAction, AdminGoogleloginAction, AdminRegisterAction } from '../../../../redux/actions/AdminAuthAction'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { AiOutlineMail } from 'react-icons/ai'
@@ -63,7 +63,8 @@ const Signup = () => {
 
     //Google Admin Action
     const responseMessage = async (response) => {
-        dispatch(AdminGoogleloginAction(response.credential, navigate))
+        console.log(response.credential)
+        dispatch(AdminGoogleSignupAction(response.credential, navigate))
     };
 
     const errorMessage = (error) => {
@@ -111,7 +112,7 @@ const Signup = () => {
             <div className="right">
                 <div className="right_inner_container">
                     <div className="divone">
-                        <h1 style={{color:"#000"}}>Sign Up Admin for an Account</h1>
+                        <h1 style={{color:"#000"}}>Sign Up Admin for an Accounts</h1>
                     </div>
 
                     <div className="divtwo">

@@ -24,8 +24,9 @@ const AdminAccountDetail = () => {
 
     const submitHandler = () => {
         //email authentication  theke asbe
-        const profiledata = { email: admindata?.email, mobileNumber, name, gender, dateOfBirth: dob, salonId:admindata?.salonId };
+        const profiledata = { email: admindata?.email, mobileNumber, name, gender, dateOfBirth: dob, salonId:admindata?.salonId, AuthType:admindata?.AuthType };
 
+        // console.log(profiledata)
         dispatch(updateAdminAccountDetailsAction(navigate, profiledata))
 
     }
