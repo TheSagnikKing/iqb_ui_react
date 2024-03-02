@@ -21,7 +21,7 @@ export const singleJoinQueueAction = (singlejoindata,setSelectedService,navigate
 
         dispatch({
             type:SINGLE_JOINQUEUE_FAIL,
-            payload: error.response.data
+            payload: error?.response?.data
         })
 
         toast.error(error?.response?.data?.message, {
@@ -50,7 +50,7 @@ export const queueListAction = (salonid,signal) => async(dispatch) => {
         }else{
             dispatch({
                 type:QUELIST_FAIL,
-                payload: error.response.data
+                payload: error?.response?.data
             })
         }
         

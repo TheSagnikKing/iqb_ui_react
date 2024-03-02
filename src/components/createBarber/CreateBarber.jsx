@@ -38,7 +38,7 @@ const CreateBarber = () => {
         try {
             const getServices = async () => {
                 //This are Salon services and salonId will be dynamic
-                const { data } = await api.get(`/api/salon/allSalonServices?salonId=${LoggedInMiddleware?.user && LoggedInMiddleware.user[0].salonId}`)
+                const { data } = await api.get(`/api/admin/allSalonServices?salonId=${LoggedInMiddleware?.user && LoggedInMiddleware.user[0].salonId}`)
                 console.log(data)
                 setBarberServices(data)
 

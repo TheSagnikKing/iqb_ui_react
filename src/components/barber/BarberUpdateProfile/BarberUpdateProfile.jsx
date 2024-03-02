@@ -103,6 +103,7 @@ const BarberUpdateProfile = () => {
                                 <p style={{ color: "#fff", fontSize: "1.6rem", fontWeight: "500" }}>Email verified</p>
                                 <div style={{ background: "#fff", color: "#000", fontSize: "1.4rem", width: "2.5rem", height: "2.5rem", display: "flex", justifyContent: "center", alignItems: "center", borderRadius: "50%", boxShadow: "0px 0px 6px #fff", color: "limegreen" }}><FaCheck /></div>
                             </div> : <div
+                                onClick={verifyEmailHandler}
                                 style={{
                                     background: "crimson",
                                     color: "#fff",
@@ -117,7 +118,7 @@ const BarberUpdateProfile = () => {
                                 }}
                             ><p
                                 style={{ color: "#fff", fontSize: "1.6rem", fontWeight: "500" }}
-                                onClick={verifyEmailHandler}>Email Not Verified</p>
+                                >Email Not Verified</p>
                                 <div style={{ background: "#fff", color: "#000", fontSize: "1.4rem", width: "2.5rem", height: "2.5rem", display: "flex", justifyContent: "center", alignItems: "center", borderRadius: "50%", boxShadow: "0px 0px 6px #fff", color: "crimson" }}><ImCross /></div></div>
                         }
 

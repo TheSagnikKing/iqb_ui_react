@@ -28,9 +28,11 @@ const BarberVerifyEmail = () => {
   const barberVerifyStatus = useSelector(state => state.barberVerifyStatus)
   const {loading} = barberVerifyStatus
 
+  const darkMode = useSelector(state => state.color.darkmode)
+
   return (
     <div className='verify-email'>
-        <h1>Enter OTP</h1>
+        <h1 style={{color:darkMode === "On" ? "var(--light-secondary-color)":"var(--dark-secondary-color)"}}>Enter OTP</h1>
         <input 
         type="number" 
         value={verifyCode}

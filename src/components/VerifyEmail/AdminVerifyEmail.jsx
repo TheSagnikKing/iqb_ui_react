@@ -28,16 +28,18 @@ const AdminVerifyEmail = () => {
   const adminVerifiedStatus = useSelector(state => state.adminVerifiedStatus)
   const {loading} = adminVerifiedStatus
 
+  const darkMode = useSelector(state => state.color.darkmode)
+
   return (
     <div className='verify-email'>
-        <h1>Enter OTP</h1>
+        <h1 style={{color:darkMode === "On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>Enter OTP</h1>
         <input 
         type="number" 
         value={verifyCode}
         onChange={(e) => setverifyCode(e.target.value)}
         /><br/>
         {
-          loading === true ? <button><ClipLoader/></button> : <button onClick={submitHandler}>Submit</button>
+          loading === true ? <button><ClipLoader/></button> : <button style={{color:darkMode === "On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}} onClick={submitHandler}>Submit</button>
         }
     </div>
   )

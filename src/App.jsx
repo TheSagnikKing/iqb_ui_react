@@ -436,7 +436,7 @@ const App = () => {
             } />
 
             <Route path="/admin/updateprofile" element={<UpdateAdminprofile />} />
-            <Route path="/admin/verifyemailstatus" element={<Auth><AdminVerifyEmail /></Auth>} />
+            <Route path="/admin/verifyemailstatus" element={<AdminVerifyEmail />} />
 
             <Route path="/salon/salonlist" element={
 

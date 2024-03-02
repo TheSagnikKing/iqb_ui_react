@@ -78,10 +78,17 @@ export const AdminGoogleloginAction = (token, navigate) => async (dispatch) => {
             type: ADMIN_GOOGLE_SIGNIN_FAIL,
             payload: error.response.data
         });
+
+        toast.error(error?.response?.data?.message, {
+            position: "top-right",
+            style: {
+                background: "#000"
+            }
+        });
     }
 };
 
-export const AdminGoogleSignupAction = (token, navigate) => async (dispatch) => {s
+export const AdminGoogleSignupAction = (token, navigate) => async (dispatch) => {
     try {
         dispatch({
             type: ADMIN_GOOGLE_SIGNUP_REQ
@@ -100,6 +107,13 @@ export const AdminGoogleSignupAction = (token, navigate) => async (dispatch) => 
         dispatch({
             type: ADMIN_GOOGLE_SIGNUP_FAIL,
             payload: error.response.data
+        });
+
+        toast.error(error?.response?.data?.message, {
+            position: "top-right",
+            style: {
+                background: "#000"
+            }
         });
     }
 };

@@ -63,7 +63,7 @@ const UpdateBarber = () => {
         try {
             const getServices = async () => {
                 //salonid will be dynamic
-                const { data } = await api.get(`/api/salon/allSalonServices?salonId=${currentSalonId}`)
+                const { data } = await api.get(`/api/admin/allSalonServices?salonId=${currentSalonId}`)
                 setBarberServices(data)
                 setError1(data.message)
 
@@ -127,7 +127,7 @@ const UpdateBarber = () => {
         const signal = newController.signal;
 
         const fetchdetailbarber = async () => {
-            const { data } = await api.post(`/api/barber/getBarberDetailsByEmail`, { email: barberemail }, { signal })
+            const { data } = await api.post(`/api/admin/getBarberDetailsByEmail`, { email: barberemail }, { signal })
 
             console.log("scsdvsdvdsvddssd", data)
 
@@ -163,9 +163,9 @@ const UpdateBarber = () => {
         <>
             <AdminLayout />
             <div className='upd-wrapper'>
-                <h2 style={{
+                <h3 style={{
                     color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"
-                }}>Update Barber</h2>
+                }}>Update Barber</h3>
 
                 <div className={`upd-form ${currentmode ? "upd-form_dark" : ""}`}>
                     <div>

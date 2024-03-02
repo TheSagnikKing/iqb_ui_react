@@ -43,7 +43,7 @@ const BarberDashboardComp = () => {
     useEffect(() => {
         if (salonid == 0) {
             const connectsalonfnc = async () => {
-                const { data } = await api.get("/api/salon/getAllSalons")
+                const { data } = await api.get("/api/barber/getAllSalons")
                 setConnectedSalonData(data)
             }
 

@@ -117,7 +117,7 @@ export const getAllSalonServicesAction = (salonid,setModel1,setModelservices,set
     try {
         dispatch({type:GET_ALL_SALON_SERVICES_REQ})
 
-        const {data} = await api.get(`/api/salon/allSalonServices?salonId=${salonid}`)
+        const {data} = await api.get(`/api/admin/allSalonServices?salonId=${salonid}`)
 
         dispatch({
             type:GET_BARBER_SERVICES_SUCCESS,

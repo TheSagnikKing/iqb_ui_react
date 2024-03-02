@@ -241,7 +241,7 @@ export const barberOnlineStatusAction = (barberOnlinedata) => async(dispatch) =>
     try {
         dispatch({type:BARBER_ONLINE_STATUS_REQ})
 
-        const {data} = await api.post("/api/barber/changeBarberOnlineStatus",barberOnlinedata)
+        const {data} = await api.post("/api/admin/changeBarberOnlineStatus",barberOnlinedata)
 
         dispatch({
             type:BARBER_ONLINE_STATUS_SUCCESS,
@@ -277,7 +277,7 @@ export const barberServedQueAction = (barberqueuedata,signal) => async(dispatch)
     try {
         dispatch({type:BARBER_SERVED_QUEUE_REQ})
 
-        const {data} = await api.post("/api/queue/barberServedQueue",barberqueuedata,{signal})
+        const {data} = await api.post("/api/admin/barberServedQueue",barberqueuedata,{signal})
 
         dispatch({
             type:BARBER_SERVED_QUEUE_SUCCESS,
@@ -304,7 +304,7 @@ export const barberAllSalonServicsAction = (salonid) => async(dispatch) => {
     try {
         dispatch({type:BARBER_ALL_SALON_SERVICES_REQ})
 
-        const {data} = await api.get(`/api/salon/allSalonServices?salonId=${salonid}`)
+        const {data} = await api.get(`/api/barber/allSalonServices?salonId=${salonid}`)
 
         dispatch({
             type:BARBER_ALL_SALON_SERVICES_SUCCESS,
