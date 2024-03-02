@@ -5,7 +5,7 @@ import { applySalonReducer, connectBarberSalonReducer, createSalonReducer, delet
 import { approveBarberReducer, barberAllSalonServicsReducer, barberListReducer, barberServedQueueReducer, createBarberReducer, deleteBarberReducer, getAllBarbersByServiceIdReducer, getBarberByMultipleServicesReducer, getBarberServicesBybarberIdReducer, groupBarberServicesByBarberIdReducer, updateBarberReducer } from "./reducers/barberReducer";
 import { autojoinReducer, cancelQueueReducer, groupjoinReducer, queueListReducer, singleJoinQueueReducer } from "./reducers/joinqueueReducer";
 import { AdminForgetPasswordReducer, AdminGoogleLoginReducer, AdminGoogleSignupReducer, AdminLoginReducer, AdminLogoutReducer, AdminRegisterReducer, AdminResetPasswordReducer, LoggedInMiddlewareReducer, LoggedOutMiddlewareReducer, adminVerifiedStatusReducer, adminVerifyEmailReducer, updateAdminAccountDetailsReducer, updateAdminReducer } from "./reducers/AdminAuthReducer";
-import { barberForgetPasswordReducer, barberGoogleLoginReducer, barberLoginReducer, barberLogoutReducer, barberOnlineStatusReducer, barberQuelistReducer, barberRegisterReducer, barberResetPasswordReducer, barberServedQueReducer, barberUpdateAccountReducer, barberVerifyEmailReducer, barberVerifyStatusReducer, updatebarberAccountDetailsReducer, updatebarberReducer } from "./reducers/BarberAuthReducer";
+import { barberForgetPasswordReducer, barberGoogleLoginReducer, barberGoogleSignupReducer, barberLoginReducer, barberLogoutReducer, barberOnlineStatusReducer, barberQuelistReducer, barberRegisterReducer, barberResetPasswordReducer, barberServedQueReducer, barberUpdateAccountReducer, barberVerifyEmailReducer, barberVerifyStatusReducer, updatebarberAccountDetailsReducer, updatebarberReducer } from "./reducers/BarberAuthReducer";
 import { appoinmentBarberListReducer, createAppointmentReducer, deleteAppointmentReducer, editAppointmentReducer } from "./reducers/AppointmentReducer";
 import { getAllAdvertisementReducer} from "./reducers/AdvertisementReducer";
 import { customeremailReducer } from "./reducers/CustomerReducer";
@@ -61,6 +61,7 @@ const rootReducer = combineReducers({
   BarberLogin:barberLoginReducer,
   BarberLogout:barberLogoutReducer,
   BarberGoogleLogin:barberGoogleLoginReducer,
+  barberGoogleSignup:barberGoogleSignupReducer,
   BarberForgetPassword:barberForgetPasswordReducer,
   BarberResetPassword:barberResetPasswordReducer,
 

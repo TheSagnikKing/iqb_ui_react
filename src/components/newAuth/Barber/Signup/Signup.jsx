@@ -5,7 +5,7 @@ import { ADMIN_SIGNIN_FAIL } from '../../../../redux/constants/AdminAuthConstant
 import { BARBER_SIGNIN_FAIL } from '../../../../redux/constants/BarberAuthConstants';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { BarberGoogleloginAction, BarberRegisterAction } from '../../../../redux/actions/BarberAuthAction';
+import { BarberGoogleSignupAction, BarberGoogleloginAction, BarberRegisterAction } from '../../../../redux/actions/BarberAuthAction';
 import { AiOutlineMail } from 'react-icons/ai';
 import { RiLockPasswordLine } from 'react-icons/ri';
 import { BiHide, BiShow } from 'react-icons/bi';
@@ -14,9 +14,6 @@ import { ClipLoader } from 'react-spinners';
 import { GoogleLogin } from '@react-oauth/google';
 
 const Signup = () => {
-
-    const userLoggedIn = localStorage.getItem("userLoggedIn")
-    const barberLoggedIn = localStorage.getItem("barberLoggedIn")
 
     const BarberRegister = useSelector(state => state.BarberRegister)
     const { loading: BarberLoading } = BarberRegister
@@ -30,14 +27,6 @@ const Signup = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
-    useEffect(() => {
-        if (userLoggedIn == "true") {
-            navigate("/admin-dashboard")
-        }
-        else if(barberLoggedIn == "true"){
-            navigate("/barber-dashboard")
-        }
-    }, [navigate, userLoggedIn,barberLoggedIn])
 
     //BARBER PART 
     const [barberpassword, setBarberPassword] = useState("")
@@ -78,7 +67,7 @@ const Signup = () => {
     // Google barber Action
     const responseBarberMessage = async (response) => {
         console.log("barber")
-        dispatch(BarberGoogleloginAction(response.credential, navigate))
+        dispatch(BarberGoogleSignupAction(response.credential, navigate))
     };
 
     const errorBarberMessage = (error) => {

@@ -81,7 +81,7 @@ export const AdminGoogleloginAction = (token, navigate) => async (dispatch) => {
     }
 };
 
-export const AdminGoogleSignupAction = (token, navigate) => async (dispatch) => {
+export const AdminGoogleSignupAction = (token, navigate) => async (dispatch) => {s
     try {
         dispatch({
             type: ADMIN_GOOGLE_SIGNUP_REQ

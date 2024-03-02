@@ -1,11 +1,11 @@
-import {BARBER_ACCOUNT_DETAILS_FAIL, BARBER_ACCOUNT_DETAILS_REQ, BARBER_ACCOUNT_DETAILS_SUCCESS, BARBER_FORGET_PASSWORD_FAIL, BARBER_FORGET_PASSWORD_REQ, BARBER_FORGET_PASSWORD_SUCCESS, BARBER_GOOGLE_SIGNIN_FAIL, BARBER_GOOGLE_SIGNIN_REQ, BARBER_GOOGLE_SIGNIN_SUCCESS, BARBER_GOOGLE_SIGNUP_SUCCESS, BARBER_LOGOUT_FAIL, BARBER_LOGOUT_REQ, BARBER_LOGOUT_SUCCESS, BARBER_RESET_PASSWORD_FAIL, BARBER_RESET_PASSWORD_REQ, BARBER_RESET_PASSWORD_SUCCESS, BARBER_SIGNIN_FAIL, BARBER_SIGNIN_REQ, BARBER_SIGNIN_SUCCESS, BARBER_SIGNUP_FAIL, BARBER_SIGNUP_REQ, BARBER_SIGNUP_SUCCESS, BARBER_VERIFIED_STATUS_FAIL, BARBER_VERIFIED_STATUS_REQ, BARBER_VERIFIED_STATUS_SUCCESS, BARBER_VERIFY_EMAIL_FAIL, BARBER_VERIFY_EMAIL_REQ, BARBER_VERIFY_EMAIL_SUCCESS, LOGGED_IN_MIDDLEWARE_FAIL, LOGGED_IN_MIDDLEWARE_REQ, LOGGED_IN_MIDDLEWARE_SUCCESS, LOGGED_OUT_MIDDLEWARE_FAIL, LOGGED_OUT_MIDDLEWARE_REQ, LOGGED_OUT_MIDDLEWARE_SUCCESS, UPDATE_BARBER_ACCOUNT_DETAILS_FAIL, UPDATE_BARBER_ACCOUNT_DETAILS_REQ, UPDATE_BARBER_ACCOUNT_DETAILS_SUCCESS, UPDATE_BARBER_FAIL, UPDATE_BARBER_REQ, UPDATE_BARBER_SUCCESS} from "../constants/BarberAuthConstants"
+import { BARBER_ACCOUNT_DETAILS_FAIL, BARBER_ACCOUNT_DETAILS_REQ, BARBER_ACCOUNT_DETAILS_SUCCESS, BARBER_FORGET_PASSWORD_FAIL, BARBER_FORGET_PASSWORD_REQ, BARBER_FORGET_PASSWORD_SUCCESS, BARBER_GOOGLE_SIGNIN_FAIL, BARBER_GOOGLE_SIGNIN_REQ, BARBER_GOOGLE_SIGNIN_SUCCESS, BARBER_GOOGLE_SIGNUP_FAIL, BARBER_GOOGLE_SIGNUP_REQ, BARBER_GOOGLE_SIGNUP_SUCCESS, BARBER_LOGOUT_FAIL, BARBER_LOGOUT_REQ, BARBER_LOGOUT_SUCCESS, BARBER_RESET_PASSWORD_FAIL, BARBER_RESET_PASSWORD_REQ, BARBER_RESET_PASSWORD_SUCCESS, BARBER_SIGNIN_FAIL, BARBER_SIGNIN_REQ, BARBER_SIGNIN_SUCCESS, BARBER_SIGNUP_FAIL, BARBER_SIGNUP_REQ, BARBER_SIGNUP_SUCCESS, BARBER_VERIFIED_STATUS_FAIL, BARBER_VERIFIED_STATUS_REQ, BARBER_VERIFIED_STATUS_SUCCESS, BARBER_VERIFY_EMAIL_FAIL, BARBER_VERIFY_EMAIL_REQ, BARBER_VERIFY_EMAIL_SUCCESS, LOGGED_IN_MIDDLEWARE_FAIL, LOGGED_IN_MIDDLEWARE_REQ, LOGGED_IN_MIDDLEWARE_SUCCESS, LOGGED_OUT_MIDDLEWARE_FAIL, LOGGED_OUT_MIDDLEWARE_REQ, LOGGED_OUT_MIDDLEWARE_SUCCESS, UPDATE_BARBER_ACCOUNT_DETAILS_FAIL, UPDATE_BARBER_ACCOUNT_DETAILS_REQ, UPDATE_BARBER_ACCOUNT_DETAILS_SUCCESS, UPDATE_BARBER_FAIL, UPDATE_BARBER_REQ, UPDATE_BARBER_SUCCESS } from "../constants/BarberAuthConstants"
 
 import api from "../api/Api"
 
-import {  toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-export const BarberRegisterAction = (signupData,navigate) => async (dispatch) => {
+export const BarberRegisterAction = (signupData, navigate) => async (dispatch) => {
     try {
         dispatch({
             type: BARBER_SIGNUP_REQ
@@ -18,105 +18,122 @@ export const BarberRegisterAction = (signupData,navigate) => async (dispatch) =>
             payload: data
         });
 
-        navigate("/barberaccountdetail")
+        navigate("/barberaccountdetail", { state: data })
     } catch (error) {
 
         dispatch({
             type: BARBER_SIGNUP_FAIL,
-            payload:error.response.data
+            payload: error.response.data
         });
     }
 };
 
-export const BarberLoginAction = (loginData,navigate) => async (dispatch) => {
+export const BarberLoginAction = (loginData, navigate) => async (dispatch) => {
     try {
         dispatch({
             type: BARBER_SIGNIN_REQ
         });
 
-        const { data } = await api.post("/api/barber/login", loginData );
-
-        localStorage.setItem("barberLoggedIn","true")
+        const { data } = await api.post("/api/barber/login", loginData);
 
         dispatch({
             type: BARBER_SIGNIN_SUCCESS,
             payload: data
         });
 
+        localStorage.setItem("userAdminLoggedIn", "false")
+        localStorage.setItem("userBarberLoggedIn", "true")
+
         navigate("/barber-dashboard")
     } catch (error) {
 
         dispatch({
             type: BARBER_SIGNIN_FAIL,
-            payload:error.response.data
+            payload: error.response.data
         });
     }
 };
 
-export const BarberGoogleloginAction = (token,navigate) => async (dispatch) => {
+export const BarberGoogleloginAction = (token, navigate) => async (dispatch) => {
     try {
         dispatch({
             type: BARBER_GOOGLE_SIGNIN_REQ
         });
 
-        const { data } = await api.post("/api/barber/google-login",{token:token});
+        const { data } = await api.post(`/api/barber/googleBarberLogin?token=${token}`);
 
         console.log(data)
 
-        localStorage.setItem("barberLoggedIn","true")
+        localStorage.setItem("userAdminLoggedIn", "false")
+        localStorage.setItem("userBarberLoggedIn", "true")
 
-        if(data?.message == "Barber registered in successfully"){
-            dispatch({
-                type: BARBER_GOOGLE_SIGNUP_SUCCESS,
-                payload: data
-            });
-            navigate("/barberaccountdetail")
-        }else{
-            dispatch({
-                type: BARBER_GOOGLE_SIGNIN_SUCCESS,
-                payload: data
-            });
-            navigate("/barber-dashboard")
-        }
+        navigate("/barber-dashboard")
+
     } catch (error) {
 
         dispatch({
             type: BARBER_GOOGLE_SIGNIN_FAIL,
-            payload:error.response.data
+            payload: error.response.data
+        });
+    }
+};
+
+export const BarberGoogleSignupAction = (token, navigate) => async (dispatch) => {
+    try {
+        dispatch({
+            type: BARBER_GOOGLE_SIGNUP_REQ
+        });
+
+        const { data } = await api.post(`/api/barber/googleBarberSignUp?token=${token}`);
+
+        dispatch({
+            type: BARBER_GOOGLE_SIGNUP_SUCCESS,
+            payload: data
+        });
+
+        navigate("/barberaccountdetail",{state:data})
+    } catch (error) {
+
+        dispatch({
+            type: BARBER_GOOGLE_SIGNUP_FAIL,
+            payload: error.response.data
         });
     }
 };
 
 export const BarberLogoutAction = (navigate) => async (dispatch) => {
-
+    
     try {
-         dispatch({
-             type: BARBER_LOGOUT_REQ
-         })
+        dispatch({
+            type: BARBER_LOGOUT_REQ
+        })
 
-         const {data} = await api.post("/api/barber/logout")
+        const { data } = await api.post("/api/barber/logout")
 
-         dispatch({
-             type: BARBER_LOGOUT_SUCCESS,
-             payload:data
-         })
-         localStorage.setItem("barberLoggedIn","false")
-         navigate("/barber-signin")
+        dispatch({
+            type: BARBER_LOGOUT_SUCCESS,
+            payload: data
+        })
+
+        localStorage.setItem("userAdminLoggedIn", "false")
+        localStorage.setItem("userBarberLoggedIn", "false")
+
+        navigate("/barber-signin")
     } catch (error) {
-         dispatch({
-             type: BARBER_LOGOUT_FAIL,
-             payload:error.response.data
-         })
+        dispatch({
+            type: BARBER_LOGOUT_FAIL,
+            payload: error.response.data
+        })
     }
 }
 
-export const BarberForgetPasswordAction = (email,navigate) => async (dispatch) => {
+export const BarberForgetPasswordAction = (email, navigate) => async (dispatch) => {
     try {
         dispatch({
             type: BARBER_FORGET_PASSWORD_REQ
         });
 
-        const { data } = await api.post("/api/barber/forget-password",{email:email});
+        const { data } = await api.post("/api/barber/forget-password", { email: email });
 
         dispatch({
             type: BARBER_FORGET_PASSWORD_SUCCESS,
@@ -128,18 +145,18 @@ export const BarberForgetPasswordAction = (email,navigate) => async (dispatch) =
 
         dispatch({
             type: BARBER_FORGET_PASSWORD_FAIL,
-            payload:error.response.data
+            payload: error.response.data
         });
     }
 };
 
-export const BarberResetPasswordAction = (token,password,navigate) => async (dispatch) => {
+export const BarberResetPasswordAction = (token, password, navigate) => async (dispatch) => {
     try {
         dispatch({
             type: BARBER_RESET_PASSWORD_REQ
         });
 
-        const { data } = await api.post(`/api/barber/reset-password/${token}`, {password:password});
+        const { data } = await api.post(`/api/barber/reset-password/${token}`, { password: password });
 
         dispatch({
             type: BARBER_RESET_PASSWORD_SUCCESS,
@@ -151,7 +168,7 @@ export const BarberResetPasswordAction = (token,password,navigate) => async (dis
 
         dispatch({
             type: BARBER_RESET_PASSWORD_FAIL,
-            payload:error.response.data
+            payload: error.response.data
         });
     }
 };
@@ -160,7 +177,7 @@ export const BarberResetPasswordAction = (token,password,navigate) => async (dis
 export const BarberLoggedOutMiddlewareAction = (navigate) => async (dispatch) => {
     try {
         dispatch({
-            type:LOGGED_OUT_MIDDLEWARE_REQ
+            type: LOGGED_OUT_MIDDLEWARE_REQ
         })
         const { data } = await api.get(`/api/barber/barberLoggedoutmiddleware`);
 
@@ -169,13 +186,13 @@ export const BarberLoggedOutMiddlewareAction = (navigate) => async (dispatch) =>
             payload: data
         });
     } catch (error) {
-    
+
         dispatch({
             type: LOGGED_OUT_MIDDLEWARE_FAIL,
-            payload:error?.response?.data
+            payload: error?.response?.data
         });
 
-        if(error?.response?.data?.message == "Refresh Token not present.Please Login Again"){
+        if (error?.response?.data?.message == "Refresh Token not present.Please Login Again") {
             localStorage.setItem("barberLoggedIn", "false")
             navigate("/barber-signin")
         }
@@ -186,27 +203,27 @@ export const BarberLoggedOutMiddlewareAction = (navigate) => async (dispatch) =>
 export const BarberLoggedInMiddlewareAction = (navigate) => async (dispatch) => {
     try {
         dispatch({
-            type:LOGGED_IN_MIDDLEWARE_REQ
+            type: LOGGED_IN_MIDDLEWARE_REQ
         })
         const { data } = await api.get(`/api/barber/barberLoggedinmiddleware`);
 
-        console.log("barber",data.user)
+        console.log("barber", data.user)
 
         dispatch({
             type: LOGGED_IN_MIDDLEWARE_SUCCESS,
             payload: data
         });
 
-   
+
     } catch (error) {
-        if(error?.response?.data?.message === "You are not Authenticated Barber"){
+        if (error?.response?.data?.message === "You are not Authenticated Barber") {
             navigate("/admin-dashboard")
-        }else{
+        } else {
             dispatch({
                 type: LOGGED_IN_MIDDLEWARE_FAIL,
-                payload:error?.response?.data
+                payload: error?.response?.data
             });
-        } 
+        }
     }
 };
 
@@ -214,30 +231,30 @@ export const BarberLoggedInMiddlewareAction = (navigate) => async (dispatch) => 
 export const updateBarberAction = (profiledata) => async (dispatch) => {
     try {
         dispatch({
-            type:UPDATE_BARBER_REQ
+            type: UPDATE_BARBER_REQ
         })
-        const { data } = await api.put(`/api/barber/updateAdmin`,profiledata);
+        const { data } = await api.put(`/api/barber/updateAdmin`, profiledata);
 
         dispatch({
             type: UPDATE_BARBER_SUCCESS,
             payload: data
         });
     } catch (error) {
-    
+
         dispatch({
             type: UPDATE_BARBER_FAIL,
-            payload:error?.response?.data
-        }); 
+            payload: error?.response?.data
+        });
     }
 };
 
 
-export const updateBarberSignupAccountDetailsAction = (navigate,profiledata) => async (dispatch) => {
+export const updateBarberSignupAccountDetailsAction = (navigate, profiledata) => async (dispatch) => {
     try {
         dispatch({
             type: BARBER_ACCOUNT_DETAILS_REQ
         })
-        const { data } = await api.put(`/api/barber/updateBarberAccountDetails`,profiledata);
+        const { data } = await api.put(`/api/barber/updateBarber`, profiledata);
 
         console.log(data)
         dispatch({
@@ -245,31 +262,33 @@ export const updateBarberSignupAccountDetailsAction = (navigate,profiledata) => 
             payload: data
         });
 
-        localStorage.setItem("barberLoggedIn","true")
+        localStorage.setItem("userAdminLoggedIn", "false")
+        localStorage.setItem("userBarberLoggedIn", "true")
+
         navigate("/barber-dashboard")
     } catch (error) {
 
         toast.error(error?.response?.data?.message, {
             position: "top-right",
-            style:{
-                background:"#000"
+            style: {
+                background: "#000"
             }
         });
-    
+
         dispatch({
             type: BARBER_ACCOUNT_DETAILS_FAIL,
-            payload:error?.response?.data
-        }); 
+            payload: error?.response?.data
+        });
     }
 };
 
 
-export const updateBarberAccountDetailsAction = (profiledata,navigate) => async (dispatch) => {
+export const updateBarberAccountDetailsAction = (profiledata, navigate) => async (dispatch) => {
     try {
         dispatch({
             type: BARBER_ACCOUNT_DETAILS_REQ
         })
-        const { data } = await api.put(`/api/barber/updateBarberAccountDetails`,profiledata);
+        const { data } = await api.put(`/api/barber/updateBarberAccountDetails`, profiledata);
 
         console.log(data)
         dispatch({
@@ -278,32 +297,33 @@ export const updateBarberAccountDetailsAction = (profiledata,navigate) => async 
         });
 
         navigate("/barber-dashboard")
+        window.location.reload()
 
     } catch (error) {
 
         toast.error(error?.response?.data?.message, {
             position: "top-right",
-            style:{
-                background:"#000"
+            style: {
+                background: "#000"
             }
         });
-    
+
         dispatch({
             type: BARBER_ACCOUNT_DETAILS_FAIL,
-            payload:error?.response?.data
-        }); 
+            payload: error?.response?.data
+        });
     }
 };
 
 
 
 
-export const barberVerifyEmailAction = (navigate,verifyemail) => async (dispatch) => {
+export const barberVerifyEmailAction = (navigate, verifyemail) => async (dispatch) => {
     try {
         dispatch({
             type: BARBER_VERIFY_EMAIL_REQ
         })
-        const { data } = await api.post(`https://iqb-backend2.onrender.com/api/barber/sendVerificationCodeForBarberEmail`,verifyemail);
+        const { data } = await api.post(`https://iqb-backend2.onrender.com/api/barber/sendVerificationCodeForBarberEmail`, verifyemail);
 
         dispatch({
             type: BARBER_VERIFY_EMAIL_SUCCESS,
@@ -311,20 +331,20 @@ export const barberVerifyEmailAction = (navigate,verifyemail) => async (dispatch
         });
         navigate("/barber/verifyemailstatus")
     } catch (error) {
-    
+
         dispatch({
             type: BARBER_VERIFY_EMAIL_FAIL,
-            payload:error?.response?.data
-        }); 
+            payload: error?.response?.data
+        });
     }
 };
 
-export const barberVerifiedStatusAction = (navigate,verifystatus) => async (dispatch) => {
+export const barberVerifiedStatusAction = (navigate, verifystatus) => async (dispatch) => {
     try {
         dispatch({
             type: BARBER_VERIFIED_STATUS_REQ
         })
-        const { data } = await api.post(`https://iqb-backend2.onrender.com/api/barber/changeBarberEmailVerifiedStatus`,verifystatus);
+        const { data } = await api.post(`https://iqb-backend2.onrender.com/api/barber/changeBarberEmailVerifiedStatus`, verifystatus);
 
         dispatch({
             type: BARBER_VERIFIED_STATUS_SUCCESS,
@@ -333,10 +353,10 @@ export const barberVerifiedStatusAction = (navigate,verifystatus) => async (disp
         navigate("/barber/updateprofile")
         window.location.reload()
     } catch (error) {
-    
+
         dispatch({
             type: BARBER_VERIFIED_STATUS_FAIL,
-            payload:error?.response?.data
-        }); 
+            payload: error?.response?.data
+        });
     }
 };

@@ -144,8 +144,6 @@ const UpdateSalon = () => {
 
     const currentSalonId = LoggedInMiddleware?.user && LoggedInMiddleware.user[0].salonId
 
-
-
     const [fetchimages, setFetchImages] = useState([])
 
     const getSalonInfoBySalonIdRef = useRef(null);
@@ -472,7 +470,6 @@ const UpdateSalon = () => {
     const submitHandler = () => {
         const salonData = {
             adminEmail: LoggedInMiddleware?.user && LoggedInMiddleware.user[0].email, salonName, salonEmail, address, city, 
-            AuthType:LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].AuthType,
             location: {
                 type: "Point",
                 coordinates: {

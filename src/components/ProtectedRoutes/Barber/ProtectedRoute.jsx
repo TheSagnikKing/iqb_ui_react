@@ -11,24 +11,24 @@ const ProtectedRoute = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        const logginadmin = async () => {
+        const logginbarber = async () => {
             try {
-                const { data } = await api.get('/api/admin/adminloggedin');
+                const { data } = await api.get('/api/barber/barberloggedin');
                 setloggindata(data);
                 dispatch({
                     type:LOGGED_IN_MIDDLEWARE_SUCCESS,
                     payload:data
                 })
             } catch (error) {
-                if(error?.response?.data?.message === "UnAuthorized Admin" || error?.response?.data?.message === "Forbidden Admin"){
-                    localStorage.setItem("userAdminLoggedIn","false")
+                if(error?.response?.data?.message === "UnAuthorized Barber" || error?.response?.data?.message === "Forbidden Barber"){
+                    localStorage.setItem("userBarberLoggedIn","false")
                     setlogginerror(error?.response?.data?.message)
                 }
                 
             }
         };
 
-        logginadmin();
+        logginbarber();
     }, [dispatch]);
 
     let content;
@@ -36,8 +36,8 @@ const ProtectedRoute = () => {
     const navigate = useNavigate()
 
     const ErrorClickedHandler = () => {
-        localStorage.setItem("userAdminLoggedIn","false")
-        navigate("/admin-signin")
+        localStorage.setItem("userBarberLoggedIn","false")
+        navigate("/barber-signin")
     }
 
     if (Object.keys(loggindata).length > 0) {

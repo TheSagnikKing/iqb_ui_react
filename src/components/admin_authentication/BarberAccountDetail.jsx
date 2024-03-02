@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import "./AdminAccountDetail.css"
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateBarberSignupAccountDetailsAction } from '../../redux/actions/BarberAuthAction'
 import ClipLoader from "react-spinners/ClipLoader";
@@ -9,6 +9,11 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const BarberAccountDetail = () => {
+
+    const location = useLocation()
+    const barberdata = location?.state?.newUser
+
+    console.log(barberdata)
 
     const [nickName, setNickName] = useState("")
     const [mobileNumber, setMobileNumber] = useState("")
@@ -23,17 +28,17 @@ const BarberAccountDetail = () => {
 
     const submitHandler = () => {
         //email authentication  theke asbe
-        const profiledata = { email: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0]?.email, mobileNumber, name, gender, dateOfBirth: dob, salonId: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0]?.salonId, nickName };
-
-        // const profiledata = {email:"sagniknandy27@gmail.com",mobileNumber,name,gender,dateOfBirth:dob,salonId:LoggedInMiddleware?.user[0]?.salonId,userName:username};
+        const profiledata = { email:barberdata?.email, mobileNumber, name, gender, dateOfBirth: dob, salonId:barberdata?.salonId, nickName };
+        
         dispatch(updateBarberSignupAccountDetailsAction(navigate, profiledata))
 
         console.log(profiledata)
     }
 
     const skipHandler = () => {
-        localStorage.setItem("barberLoggedIn", "true")
-        navigate("/barber-dashboard")
+        const profiledata = { email: barberdata?.email, mobileNumber:"", name:"", gender:"", dateOfBirth:"", salonId:barberdata?.salonId };
+
+        dispatch(updateBarberSignupAccountDetailsAction(navigate, profiledata))
     }
 
     const barberUpdateAccount = useSelector(state => state.barberUpdateAccount)

@@ -34,8 +34,7 @@ const UpdateAdminprofile = () => {
             // username,
             mobileNumber,
             name,
-            gender,
-            AuthType:LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].AuthType,
+            gender
         }
 
         console.log(profiledata)

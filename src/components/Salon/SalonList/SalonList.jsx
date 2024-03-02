@@ -41,7 +41,7 @@ const SalonList = () => {
     
     
                     // arghyahimanstech@gmail.com 
-                    const { data } = await api.get(`https://iqb-backend2.onrender.com/api/salon/getAllSalonsByAdminEmail?adminEmail=${currentAdminEmail}&AuthType=${LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].AuthType} `,{ signal: controller.signal })
+                    const { data } = await api.get(`https://iqb-backend2.onrender.com/api/salon/getAllSalonsByAdminEmail?adminEmail=${currentAdminEmail}`,{ signal: controller.signal })
                     setSalonList(data)
                     setLoading(false)
                 } catch (error) {

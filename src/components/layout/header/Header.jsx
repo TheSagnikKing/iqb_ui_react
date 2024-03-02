@@ -300,16 +300,16 @@ const Header = ({ title }) => {
               dropdown && <div className={`nav1right_dropdown_box ${currentmode && 'nav1right_dropdown_box_dark'}`}>
 
                 <div>
-                  <div><RiAccountCircleFill /></div>
-                  <p><Link to="/barber/updateprofile" style={{
+                  <div style={{ color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)" }}><RiAccountCircleFill /></div>
+                  <p ><Link to="/barber/updateprofile" style={{
                     color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)",
                     textDecoration: "none"
                   }}>My Account</Link></p>
                 </div>
 
                 <div onClick={logoutHandler}>
-                  <div><BiLogOutCircle /></div>
-                  <p>Logout</p>
+                  <div style={{ color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)" }}><BiLogOutCircle /></div>
+                  <p style={{ color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)" }}>Logout</p>
                 </div>
               </div>
             }

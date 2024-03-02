@@ -15,23 +15,11 @@ import { BARBER_SIGNUP_FAIL } from '../../../../redux/constants/BarberAuthConsta
 
 const Signin = () => {
 
-    const userLoggedIn = localStorage.getItem("userLoggedIn")
-    const barberLoggedIn = localStorage.getItem("barberLoggedIn")
-
     const BarberLogin = useSelector(state => state.BarberLogin)
     const { loading: barberLoading, error: barberLoginError } = BarberLogin;
 
     const navigate = useNavigate();
     const dispatch = useDispatch()
-
-    useEffect(() => {
-        if (userLoggedIn == "true") {
-            navigate("/admin-dashboard")
-        }
-        else if(barberLoggedIn == "true"){
-            navigate("/barber-dashboard")
-        }
-    }, [navigate, userLoggedIn,barberLoggedIn])
 
     const [check, setCheck] = useState(false)
 
