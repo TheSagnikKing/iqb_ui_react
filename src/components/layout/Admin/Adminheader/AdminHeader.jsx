@@ -109,6 +109,7 @@ const AdminHeader = ({ title }) => {
     const formData = new FormData();
 
     formData.append('email', LoggedInMiddleware?.user[0]?.email)
+    formData.append('AuthType', LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].AuthType)
     formData.append('profile', uploadImage)
 
     try {
@@ -135,7 +136,8 @@ const AdminHeader = ({ title }) => {
 
   const applySalonData = {
     salonId: Number(chooseSalonId),
-    adminEmail: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].email
+    adminEmail: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].email,
+    AuthType:LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].AuthType
   }
 
   const applySalonHandler = async () => {
@@ -169,7 +171,8 @@ const AdminHeader = ({ title }) => {
       const getSalonfnc = async () => {
         try {
           const { data } = await api.post("/api/admin/getAllSalonsByAdmin", {
-            adminEmail: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].email
+            adminEmail: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].email,
+            AuthType:LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].AuthType
           });
           setSalonList(data?.salons);
         } catch (error) {
@@ -182,7 +185,8 @@ const AdminHeader = ({ title }) => {
       const getSalonfnc2 = async () => {
         try {
           const { data } = await api.post("/api/admin/getDefaultSalonByAdmin", {
-            adminEmail: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].email
+            adminEmail: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].email,
+            AuthType:LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].AuthType
           });
           setChooseSalonId(Number(data?.response?.salonId));
         } catch (error) {

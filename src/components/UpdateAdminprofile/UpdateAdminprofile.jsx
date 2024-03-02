@@ -59,7 +59,8 @@ const UpdateAdminprofile = () => {
         const confirm = window.confirm("Are you sure ?")
         if (confirm) {
             dispatch(adminVerifyEmailAction(navigate, {
-                email: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].email
+                email: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].email,
+                AuthType:LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].AuthType
             }))
         }
     }

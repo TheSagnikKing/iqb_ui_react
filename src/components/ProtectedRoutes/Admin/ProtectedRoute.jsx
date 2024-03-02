@@ -49,8 +49,10 @@ const ProtectedRoute = () => {
         // Data is not present, render a button or any other UI element
         content = (
             <div>
-                <p>No data available</p>
-                <button onClick={ErrorClickedHandler}>{logginerror}</button>
+                <button
+                 onClick={ErrorClickedHandler}
+                 style={{padding:"0.5rem",margin:"1rem",cursor:"pointer"}}
+                 >{logginerror ? logginerror : "Loading"}</button>
             </div>
         );
     }

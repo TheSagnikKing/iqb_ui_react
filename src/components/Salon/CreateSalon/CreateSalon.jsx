@@ -181,8 +181,9 @@ const CreateSalon = () => {
     const submitHandler = async () => {
         const salonData = {
             //Ai admin emailer value loggin theke asbe
-            adminEmail: LoggedInMiddleware?.user && LoggedInMiddleware.user[0].email
-            , salonEmail, salonName, address, city, location: {
+            adminEmail: LoggedInMiddleware?.user && LoggedInMiddleware.user[0].email,
+            AuthType:LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].AuthType,
+            salonEmail, salonName, address, city, location: {
                 type: "Point",
                 coordinates: {
                     longitude: Number(longitude),

@@ -17,7 +17,6 @@ export const createSalonAction = (salondata,navigate) => async(dispatch) => {
             payload:data
         })
         navigate("/salon/salonlist")
-        window.location.reload()
     } catch (error) {
 
         dispatch({

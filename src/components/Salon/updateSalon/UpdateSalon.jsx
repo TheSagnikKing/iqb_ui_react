@@ -471,7 +471,9 @@ const UpdateSalon = () => {
 
     const submitHandler = () => {
         const salonData = {
-            adminEmail: LoggedInMiddleware?.user && LoggedInMiddleware.user[0].email, salonName, salonEmail, address, city, location: {
+            adminEmail: LoggedInMiddleware?.user && LoggedInMiddleware.user[0].email, salonName, salonEmail, address, city, 
+            AuthType:LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].AuthType,
+            location: {
                 type: "Point",
                 coordinates: {
                     longitude: Number(longitude),

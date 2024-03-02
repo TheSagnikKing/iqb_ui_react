@@ -433,7 +433,8 @@ const App = () => {
             } />
 
             <Route path="/admin/updateprofile" element={<UpdateAdminprofile />} />
-
+            <Route path="/admin/verifyemailstatus" element={<Auth><AdminVerifyEmail /></Auth>} />
+      
             <Route path="/salon/salonlist" element={
 
               <Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}>
@@ -553,6 +554,7 @@ const App = () => {
           } />
 
           <Route path="/barber/updateprofile" element={<BarberAuth><BarberUpdateProfile /></BarberAuth>} />
+          <Route path="/barber/verifyemailstatus" element={<BarberAuth><BarberVerifyEmail /></BarberAuth>} />
           <Route path="/barber/queuelist" element={<BarberAuth><BarberQueLists /></BarberAuth>} />
 
           <Route path='/barber/appoinment' element={<BarberAuth><BarberAppointment /></BarberAuth>} />

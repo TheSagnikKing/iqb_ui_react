@@ -131,7 +131,7 @@ const Advertisement = () => {
     const signal = newController.signal
 
     const getAdvertisementData = async () => {
-      const { data } = await api.post(`/api/advertisement/getAdvertisements`, { salonId: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId },{signal});
+      const { data } = await api.post(`/api/advertisement/getAdvertisements`, { salonId: LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].salonId},{signal});
 
       console.log("adver", data)
       setAdvertisementList(data?.advertisements)

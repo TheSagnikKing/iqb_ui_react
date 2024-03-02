@@ -32,7 +32,7 @@ const Queue = () => {
         const signal = newController.signal;
 
         if (salonId) {
-            dispatch(queueListAction(Number(salonId), signal))
+            dispatch(queueListAction(Number(salonId),signal))
         }
 
         return () => {

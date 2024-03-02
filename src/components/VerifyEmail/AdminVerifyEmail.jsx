@@ -20,6 +20,7 @@ const AdminVerifyEmail = () => {
     if(confirm){
       dispatch(adminVerifiedStatusAction(navigate,{
         email:LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].email,
+        AuthType:LoggedInMiddleware?.user && LoggedInMiddleware?.user[0].AuthType,
         verificationCode:verifyCode
       }))
     }

@@ -103,7 +103,8 @@ const UpdateBarber = () => {
         const signal = newController.signal;
 
         const barberdata = {
-            name, email, nickName, mobileNumber, dateOfBirth, salonId, barberServices: selectedService
+            name,
+            email, nickName, mobileNumber, dateOfBirth, salonId, barberServices: selectedService
         }
         // console.log(barberdata)
         dispatch(updateBarberAction(barberdata, navigate, signal))
