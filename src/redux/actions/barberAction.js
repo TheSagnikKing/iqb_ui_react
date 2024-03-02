@@ -241,6 +241,25 @@ export const barberOnlineStatusAction = (barberOnlinedata) => async(dispatch) =>
     try {
         dispatch({type:BARBER_ONLINE_STATUS_REQ})
 
+        const {data} = await api.post("/api/barber/changeBarberOnlineStatus",barberOnlinedata)
+
+        dispatch({
+            type:BARBER_ONLINE_STATUS_SUCCESS,
+            payload:data
+        })
+    } catch (error) {
+        dispatch({
+            type:BARBER_ONLINE_STATUS_FAIL,
+            error: error.response
+        })
+    }
+}
+
+
+export const adminOnlineStatusAction = (barberOnlinedata) => async(dispatch) => {
+    try {
+        dispatch({type:BARBER_ONLINE_STATUS_REQ})
+
         const {data} = await api.post("/api/admin/changeBarberOnlineStatus",barberOnlinedata)
 
         dispatch({
@@ -254,6 +273,7 @@ export const barberOnlineStatusAction = (barberOnlinedata) => async(dispatch) =>
         })
     }
 }
+
 
 export const barberQueListAction = (barberqueuedata) => async(dispatch) => {
     try {

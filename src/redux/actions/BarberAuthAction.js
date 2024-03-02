@@ -75,6 +75,13 @@ export const BarberGoogleloginAction = (token, navigate) => async (dispatch) => 
             type: BARBER_GOOGLE_SIGNIN_FAIL,
             payload: error.response.data
         });
+
+        toast.error(error?.response?.data?.message, {
+            position: "top-right",
+            style: {
+                background: "#000"
+            }
+        });
     }
 };
 
@@ -97,6 +104,13 @@ export const BarberGoogleSignupAction = (token, navigate) => async (dispatch) =>
         dispatch({
             type: BARBER_GOOGLE_SIGNUP_FAIL,
             payload: error.response.data
+        });
+
+        toast.error(error?.response?.data?.message, {
+            position: "top-right",
+            style: {
+                background: "#000"
+            }
         });
     }
 };

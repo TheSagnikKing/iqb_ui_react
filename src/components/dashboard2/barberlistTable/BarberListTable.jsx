@@ -10,7 +10,7 @@ import { AiOutlineReload } from 'react-icons/ai'
 import { Link, useNavigate } from 'react-router-dom'
 
 import { MdDelete } from "react-icons/md";
-import { approveBarberAction, barberOnlineStatusAction, deleteBarberAction } from '../../../redux/actions/barberAction'
+import { adminOnlineStatusAction, approveBarberAction, barberOnlineStatusAction, deleteBarberAction } from '../../../redux/actions/barberAction'
 
 import api from "../../../redux/api/Api"
 
@@ -241,7 +241,7 @@ const BarberListTable = () => {
         console.log(barberOnlineData);
 
         // Dispatch the action or handle the state as needed
-        dispatch(barberOnlineStatusAction(barberOnlineData));
+        dispatch(adminOnlineStatusAction(barberOnlineData));
     };
 
 
