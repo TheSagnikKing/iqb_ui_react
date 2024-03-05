@@ -41,7 +41,7 @@ const SalonList = () => {
     
     
                     // arghyahimanstech@gmail.com 
-                    const { data } = await api.get(`https://iqb-backend2.onrender.com/api/salon/getAllSalonsByAdminEmail?adminEmail=${currentAdminEmail}`,{ signal: controller.signal })
+                    const { data } = await api.get(`/api/salon/getAllSalonsByAdminEmail?adminEmail=${currentAdminEmail}`,{ signal: controller.signal })
                     setSalonList(data)
                     setLoading(false)
                 } catch (error) {
@@ -76,12 +76,15 @@ const SalonList = () => {
     const dispatch = useDispatch()
 
     const deleteSalonHandler = (salonId) => {
-        const isConfirmed = window.confirm("Are you sure you want to delete this salon?");
+        if(LoggedInMiddleware?.user && LoggedInMiddleware.user[0].salonId === salonId){
+            alert("You are currently in this salon")
+        }else{
+            const isConfirmed = window.confirm("Are you sure you want to delete this salon?");
 
-        if (isConfirmed) {
-            dispatch(deleteSalonAction(salonId));
+            if (isConfirmed) {
+                dispatch(deleteSalonAction(salonId));
+            }
         }
-
     }
 
     const changeRoute = (salonID) => {

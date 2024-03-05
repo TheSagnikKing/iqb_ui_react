@@ -50,7 +50,7 @@ const AdminAccountDetail = () => {
 
     return (
         <div className='admin_account_detail_container'
-            style={{ background: "none", padding: "10rem" }}
+            style={{ background: "none"}}
         >
 
             <div style={{ background: "#fff", padding: "2rem", borderRadius: "5px", boxShadow: "0px 0px 4px rgba(0,0,0,0.4)" }}>

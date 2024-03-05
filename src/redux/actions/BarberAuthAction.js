@@ -337,7 +337,7 @@ export const barberVerifyEmailAction = (navigate, verifyemail) => async (dispatc
         dispatch({
             type: BARBER_VERIFY_EMAIL_REQ
         })
-        const { data } = await api.post(`https://iqb-backend2.onrender.com/api/barber/sendVerificationCodeForBarberEmail`, verifyemail);
+        const { data } = await api.post(`/api/barber/sendVerificationCodeForBarberEmail`, verifyemail);
 
         dispatch({
             type: BARBER_VERIFY_EMAIL_SUCCESS,
@@ -358,7 +358,7 @@ export const barberVerifiedStatusAction = (navigate, verifystatus) => async (dis
         dispatch({
             type: BARBER_VERIFIED_STATUS_REQ
         })
-        const { data } = await api.post(`https://iqb-backend2.onrender.com/api/barber/changeBarberEmailVerifiedStatus`, verifystatus);
+        const { data } = await api.post(`/api/barber/changeBarberEmailVerifiedStatus`, verifystatus);
 
         dispatch({
             type: BARBER_VERIFIED_STATUS_SUCCESS,

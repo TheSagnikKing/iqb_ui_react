@@ -294,7 +294,7 @@ export const updateAdminAccountDetailsAction = (navigate, profiledata) => async 
         dispatch({
             type: UPDATE_ADMIN_ACCOUNT_DETAILS_REQ
         })
-        const { data } = await api.put(`https://iqb-backend2.onrender.com/api/admin/updateadmin`, profiledata);
+        const { data } = await api.put(`/api/admin/updateadmin`, profiledata);
 
         console.log(data)
 
@@ -328,7 +328,7 @@ export const adminVerifyEmailAction = (navigate, verifyemail) => async (dispatch
         dispatch({
             type: ADMIN_VERIFY_EMAIL_REQ
         })
-        const { data } = await api.post(`https://iqb-backend2.onrender.com/api/admin/sendVerificationCodeForAdminEmail`, verifyemail);
+        const { data } = await api.post(`/api/admin/sendVerificationCodeForAdminEmail`, verifyemail);
 
         dispatch({
             type: ADMIN_VERIFY_EMAIL_SUCCESS,
@@ -352,7 +352,7 @@ export const adminVerifiedStatusAction = (navigate, verifystatus) => async (disp
         dispatch({
             type: ADMIN_VERIFIED_STATUS_REQ
         })
-        const { data } = await api.post(`https://iqb-backend2.onrender.com/api/admin/changeEmailVerifiedStatus`, verifystatus);
+        const { data } = await api.post(`/api/admin/changeEmailVerifiedStatus`, verifystatus);
 
         dispatch({
             type: ADMIN_VERIFIED_STATUS_SUCCESS,
