@@ -234,7 +234,6 @@
     letter-spacing: .2rem;
     font-size: 16px;
     width: 20px;
-    /* caret-color: transparent; */
 }
 
 .password::placeholder{
@@ -288,7 +287,6 @@
     background-color: #f1f1f1;
   }
   
-  /* Style the buttons inside the tab */
   .tab button {
     background-color: inherit;
     float: left;
@@ -300,12 +298,10 @@
     font-size: 17px;
   }
   
-  /* Change background color of buttons on hover */
   .tab button:hover {
     background-color: #ddd;
   }
   
-  /* Create an active/current tablink class */
   .active3 {
     background-color: #ccc;
   }
@@ -318,10 +314,8 @@
     border: none;
 }
 
-  /* Style the tab content */
   .tabcontent {
     display: none;
-    /* padding: 6px 12px; */
     border: 1px solid #ccc;
     border-top: none;
   }
