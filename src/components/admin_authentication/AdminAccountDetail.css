@@ -58,14 +58,13 @@
 
 @media((min-width:0px) and (max-width:1200px)){
     .admin_account_detail_container{
-        width: 95%;
+        width: 95% !important;
         height: auto;
-        background: #f00c0c !important;
         margin: auto;
-        margin-top: 10rem;
         box-shadow: 0px 0px 6px rgba(0,0,0,0.4);
         border-radius: 10px;
         padding: 0rem !important;
+        margin-top: 10rem !important;
     }
 
     .admin_account_detail{
