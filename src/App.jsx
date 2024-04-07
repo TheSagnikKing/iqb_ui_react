@@ -500,7 +500,11 @@ const App = () => {
 
             } />
 
-            <Route path="/advertisement" element={<Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}><Advertisement /></Suspense>} />
+            <Route path="/advertisement" element={
+            <Suspense fallback={<div className='lazy-loader'><BeatLoader color="rgba(54, 60, 214, 1)" /></div>}>
+              <Advertisement />
+            </Suspense>} 
+            />
 
             <Route path="/queue" element={
 
