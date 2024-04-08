@@ -776,7 +776,7 @@ const CreateSalon = () => {
                             </div>
 
                             <div className='service_type_label'>
-                                <label htmlFor="">Service Type <span style={{ fontWeight: "50" }}>{vipService ? "Vip" : "Regular"}</span></label>
+                                <label htmlFor="">Service Type <span style={{ fontWeight: "bold" }}>&nbsp;{vipService ? "Vip" : "Regular"}</span></label>
                                 <div onClick={() => setShowvipService((prev) => !prev)}><FaArrowDown /></div>
                             </div>
 

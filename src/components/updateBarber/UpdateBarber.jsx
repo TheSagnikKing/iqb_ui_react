@@ -269,6 +269,11 @@ const UpdateBarber = () => {
                                             </div>
 
                                             <div>
+                                                <p>service Type</p>
+                                                <p>{ser.vipService ? "Vip" : "Regualr"}</p>
+                                            </div>
+
+                                            <div>
                                                 <p>Estimated Wait Time (mins)</p>
                                                 <input
                                                     type="number"
@@ -321,6 +326,11 @@ const UpdateBarber = () => {
                                         <div>
                                             <p style={{color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>serviceName</p>
                                             <p style={{color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>{ser.serviceName}</p>
+                                        </div>
+
+                                        <div>
+                                            <p style={{color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>serviceType</p>
+                                            <p style={{color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>{ser.vipService ? "Vip" : "Regular"}</p>
                                         </div>
 
                                         <div>
