@@ -74,6 +74,8 @@ const CreateSalon = () => {
     const [serviceDesc, setServiceDesc] = useState("")
     const [servicePrice, setServicePrice] = useState("")
     const [serviceEWT, setServiceEWT] = useState(null)
+    const [vipService, setVipService] = useState(false)
+    const [showvipService, setShowvipService] = useState(false)
 
     const [startTime, setStartTime] = useState("")
     const [endTime, setEndTime] = useState("")
@@ -188,7 +190,7 @@ const CreateSalon = () => {
                     longitude: Number(longitude),
                     latitude: Number(latitude)
                 }
-            }, country, postCode, contactTel,timeZone, salonType, webLink, fbLink, instraLink, twitterLink, services, image,
+            }, country, postCode, contactTel, timeZone, salonType, webLink, fbLink, instraLink, twitterLink, services, image,
             appointmentSettings: { startTime, endTime, intervalInMinutes: Number(chooseIntervalTime) }
         }
 
@@ -207,13 +209,14 @@ const CreateSalon = () => {
         }
 
         setServices(prevServices => [...prevServices, {
-            serviceName, serviceDesc, servicePrice, serviceEWT, serviceIcon: {
+            serviceName, serviceDesc, servicePrice, serviceEWT, vipService, serviceIcon: {
                 public_id: currentPublicId,
                 url: currentImg
             }
         }]);
         setServiceName("")
         setServiceDesc("")
+        setVipService(false)
         setServicePrice("")
         setServiceEWT(0)
         setCurrentImg("")
@@ -221,12 +224,9 @@ const CreateSalon = () => {
         setServiceDrop(false)
     }
 
-    console.log("3333333", services)
-
     const serviceEditHandler = (ind) => {
 
         const currentService = services[ind];
-        console.log(currentService)
 
         setServiceName(currentService.serviceName)
         setServiceDesc(currentService.serviceDesc)
@@ -234,6 +234,8 @@ const CreateSalon = () => {
         setServiceEWT(currentService.serviceEWT)
         setCurrentImg(currentService.serviceIcon.url)
         setCurrentPublicId(currentService.serviceIcon.public_id)
+        console.log("CurrentService ",currentService)
+        setVipService(currentService.vipService)
 
         const updatedServices = [...services];
         updatedServices.splice(ind, 1);
@@ -414,18 +416,23 @@ const CreateSalon = () => {
     const [timezoneDrop, setTimezoneDrop] = useState(false)
 
     useEffect(() => {
-        if(countrycode){
+        if (countrycode) {
             dispatch(getAllTimezonesAction(countrycode))
         }
-    },[countrycode,dispatch])
+    }, [countrycode, dispatch])
 
     const getAllTimeZones = useSelector(state => state.getAllTimeZones)
 
-    const {loading:timezoneloading, response:timezoneresponse} = getAllTimeZones
+    const { loading: timezoneloading, response: timezoneresponse } = getAllTimeZones
 
     const setTimezonedataHandler = (c) => {
         setTimezone(c)
         setTimezoneDrop(false)
+    }
+
+    const setServiceHandler = (value) => {
+        setVipService(value)
+        setShowvipService(false)
     }
 
     return (
@@ -505,7 +512,7 @@ const CreateSalon = () => {
 
                             {countrydrop ? (
                                 <div className={`country-list ${darkMode === "On" && "country-list_dark"}`}>
-                                    {countryloading === true ? <h3 style={{ color: darkMode === "On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)", fontSize: "1.4rem" }}>Loading Countries</h3> : countryresponse ? countryresponse?.map((c) => <h3 key={c._id} style={{ color: darkMode === "On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)", fontSize: "1.5rem", cursor: "pointer" }} onClick={() => setCountrydataHandler(c)}>{c.name}</h3>) : <h3 style={{fontSize:"1.4rem"}}>No Countries</h3>}
+                                    {countryloading === true ? <h3 style={{ color: darkMode === "On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)", fontSize: "1.4rem" }}>Loading Countries</h3> : countryresponse ? countryresponse?.map((c) => <h3 key={c._id} style={{ color: darkMode === "On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)", fontSize: "1.5rem", cursor: "pointer" }} onClick={() => setCountrydataHandler(c)}>{c.name}</h3>) : <h3 style={{ fontSize: "1.4rem" }}>No Countries</h3>}
                                 </div>
                             ) : null}
 
@@ -527,7 +534,7 @@ const CreateSalon = () => {
 
                             {citydrop ? (
                                 <div className={`city-list ${darkMode === "On" && 'city-list_dark'}`}>
-                                    {cityloading === true ? <h3 style={{ color: darkMode === "On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)", fontSize: "1.4rem" }}>Loading Countries</h3> : cityresponse ? cityresponse?.map((c) => <h3 key={c._id} style={{ color: darkMode === "On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)", fontSize: "1.5rem", cursor: "pointer" }} onClick={() => setCitydataHandler(c)}>{c.name}</h3>) : <h3 style={{fontSize:"1.4rem"}}>No cities</h3>}
+                                    {cityloading === true ? <h3 style={{ color: darkMode === "On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)", fontSize: "1.4rem" }}>Loading Countries</h3> : cityresponse ? cityresponse?.map((c) => <h3 key={c._id} style={{ color: darkMode === "On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)", fontSize: "1.5rem", cursor: "pointer" }} onClick={() => setCitydataHandler(c)}>{c.name}</h3>) : <h3 style={{ fontSize: "1.4rem" }}>No cities</h3>}
                                 </div>
                             ) : null}
 
@@ -535,12 +542,12 @@ const CreateSalon = () => {
 
                         <div className='timezones'>
                             <div className='timezone-head'>
-                                <label htmlFor="timezone">Timezone : <span style={{fontWeight:"bold",fontSize:"1.5rem"}}>{timeZone}</span></label>
+                                <label htmlFor="timezone">Timezone : <span style={{ fontWeight: "bold", fontSize: "1.5rem" }}>{timeZone}</span></label>
                                 <button onClick={() => setTimezoneDrop(!timezoneDrop)}><FaArrowDown /></button>
-                            </div> 
+                            </div>
 
                             {timezoneDrop ? <div className={`timezone-list ${darkMode === "On" && 'timezone-list_dark'}`}>
-                            {timezoneloading === true ? <h3 style={{ color: darkMode === "On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)", fontSize: "1.4rem" }}>Loading Countries</h3> : timezoneresponse ? timezoneresponse?.map((c) => <h3 key={c._id} style={{ color: darkMode === "On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)", fontSize: "1.5rem", cursor: "pointer" }} onClick={() => setTimezonedataHandler(c)}>{c}</h3>) : <h3 style={{fontSize:"1.4rem"}}>No Timezones</h3>}
+                                {timezoneloading === true ? <h3 style={{ color: darkMode === "On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)", fontSize: "1.4rem" }}>Loading Countries</h3> : timezoneresponse ? timezoneresponse?.map((c) => <h3 key={c._id} style={{ color: darkMode === "On" ? "var(--light-secondary-color)" : "var(--dark-secondary-color)", fontSize: "1.5rem", cursor: "pointer" }} onClick={() => setTimezonedataHandler(c)}>{c}</h3>) : <h3 style={{ fontSize: "1.4rem" }}>No Timezones</h3>}
                             </div> : null}
                         </div>
 
@@ -768,6 +775,18 @@ const CreateSalon = () => {
                                 />
                             </div>
 
+                            <div className='service_type_label'>
+                                <label htmlFor="">Service Type <span style={{ fontWeight: "50" }}>{vipService ? "Vip" : "Regular"}</span></label>
+                                <div onClick={() => setShowvipService((prev) => !prev)}><FaArrowDown /></div>
+                            </div>
+
+                            {
+                                showvipService && <div className='service_type_dropdown'>
+                                    <p onClick={() => setServiceHandler(false)}>Regular</p>
+                                    <p onClick={() => setServiceHandler(true)}>Vip</p>
+                                </div>
+                            }
+
                             <div>
                                 <label htmlFor="">Service Price</label>
                                 <input
@@ -811,12 +830,17 @@ const CreateSalon = () => {
                                     </div>
 
                                     <div>
+                                        <label>Service Type</label>
+                                        <label>{service.vipService ? "Vip" : "Regular"}</label>
+                                    </div>
+
+                                    <div>
                                         <label>Service Price</label>
                                         <label>{service.servicePrice}</label>
                                     </div>
 
                                     <div>
-                                        <label>Estimated Wait Time(ms)</label>
+                                        <label>Estimated Time(ms)</label>
                                         <label>{service.serviceEWT}</label>
                                     </div>
 
@@ -824,6 +848,7 @@ const CreateSalon = () => {
                                     <div>
                                         <img src={service.serviceIcon.url} alt="sc" />
                                     </div>
+
                                 </div>
                             ))}
                         </div>

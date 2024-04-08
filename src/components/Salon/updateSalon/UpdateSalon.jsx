@@ -82,6 +82,9 @@ const UpdateSalon = () => {
     const [serviceEWT, setServiceEWT] = useState(null)
     const [serviceId, setServiceId] = useState(null)
 
+    const [vipService, setVipService] = useState(false)
+    const [showvipService, setShowvipService] = useState(false)
+
     const dispatch = useDispatch()
 
     const LoggedInMiddleware = useSelector(state => state.LoggedInMiddleware)
@@ -107,13 +110,14 @@ const UpdateSalon = () => {
         }
 
         setServices(prevServices => [...prevServices, {
-            serviceName, serviceDesc, servicePrice, serviceEWT, serviceId, serviceIcon: {
+            serviceName, serviceDesc, servicePrice, serviceEWT, serviceId, vipService, serviceIcon: {
                 public_id: currentPublicId,
                 url: currentImg
             }
         }]);
         setServiceName("")
         setServiceDesc("")
+        setVipService(false)
         setServicePrice("")
         setServiceEWT(0)
         setServiceId(0)
@@ -134,6 +138,7 @@ const UpdateSalon = () => {
         setServiceId(currentService.serviceId)
         setCurrentImg(currentService.serviceIcon.url)
         setCurrentPublicId(currentService.serviceIcon.public_id)
+        setVipService(currentService.vipService)
 
         const updatedServices = [...services];
         updatedServices.splice(ind, 1);
@@ -504,6 +509,11 @@ const UpdateSalon = () => {
 
     console.log("Darkmode dashboard", darkMode)
 
+    const setServiceHandler = (value) => {
+        setVipService(value)
+        setShowvipService(false)
+    }
+
     return (
         <>
             <AdminLayout />
@@ -783,6 +793,19 @@ const UpdateSalon = () => {
                                 />
                             </div>
 
+                            <div className='service_type_label'>
+                                <label htmlFor="">Service Type <span style={{ fontWeight: "50" }}>{vipService ? "Vip" : "Regular"}</span></label>
+                                <div onClick={() => setShowvipService((prev) => !prev)}><FaArrowDown /></div>
+                            </div>
+
+                            {
+                                showvipService && <div className='service_type_dropdown'>
+                                    <p onClick={() => setServiceHandler(false)}>Regular</p>
+                                    <p onClick={() => setServiceHandler(true)}>Vip</p>
+                                </div>
+                            }
+
+
                             <div>
                                 <label htmlFor="">Service Price</label>
                                 <input
@@ -827,12 +850,17 @@ const UpdateSalon = () => {
                                     </div>
 
                                     <div>
+                                        <label>Service Type</label>
+                                        <label>{service.vipService ? "Vip" : "Regular"}</label>
+                                    </div>
+
+                                    <div>
                                         <label>Service Price</label>
                                         <label>{service.servicePrice}</label>
                                     </div>
 
                                     <div>
-                                        <label>Estimated Wait Time(mins)</label>
+                                        <label>Estimated Time(mins)</label>
                                         <label>{service.serviceEWT}</label>
                                     </div>
 

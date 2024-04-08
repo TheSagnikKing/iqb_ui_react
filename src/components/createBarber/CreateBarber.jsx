@@ -70,6 +70,7 @@ const CreateBarber = () => {
     const [selectedService, setSelectedService] = useState([])
 
     const selectedServiceHandler = (ser) => {
+        console.log("services ",ser)
         const servicepresent = selectedService.find((s) => s._id === ser._id)
 
         if (!servicepresent) {
@@ -214,6 +215,11 @@ const CreateBarber = () => {
                                             </div>
 
                                             <div>
+                                                <p>Service Type</p>
+                                                <p>{ser.vipService ? "Vip" : "Regular"}</p>
+                                            </div>
+
+                                            <div>
                                                 <p>Estimated Wait Time (mins)</p>
                                                 <input
                                                     type="number"
@@ -264,6 +270,11 @@ const CreateBarber = () => {
                                         <div>
                                             <p style={{color: currentMode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>serviceName</p>
                                             <p style={{color: currentMode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>{ser.serviceName}</p>
+                                        </div>
+                                        
+                                        <div>
+                                            <p style={{color: currentMode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>service Type</p>
+                                            <p style={{color: currentMode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>{ser.vipService ? "Vip" : "Regular"}</p>
                                         </div>
 
                                         <div>

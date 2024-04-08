@@ -188,10 +188,12 @@ const BarberDashboardComp = () => {
                                 barberAllSalonServics ? barberAllSalonServics?.response?.map((b, index) => (
                                     <div className='barber-single-join-quebarberserv-content' key={b._id} style={{
                                         fontSize: "1.2rem",
-                                        background: currentmode ? "var(--dark-secondary-color)" : "var(--light-secondary-color)"
+                                        background: currentmode ? "var(--dark-secondary-color)" : "var(--light-secondary-color)",
+                                        gridTemplateColumns: "repeat(6, 1fr)"
                                     }}>
                                         <p style={{ color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)" }}>{b.serviceId}</p>
                                         <p style={{ color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)" }}>{b.serviceName}</p>
+                                        <p style={{ color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)" }}>{b.vipService ? "Vip" : "Regular"}</p>
                                         <p style={{ color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)" }}>{b.serviceCode}</p>
                                         <p style={{ color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)" }}>{b.serviceEWT}</p>
                                         <button onClick={() => selectedServiceHandler(b, index)} style={{
@@ -216,10 +218,12 @@ const BarberDashboardComp = () => {
                             {
                                 selectedService && selectedService.length > 0 ? selectedService.map((b, index) => (
                                     <div className='barber-single-join-quebarberserv-content' key={b._id} style={{ fontSize: "1.2rem",
-                                    background: currentmode ? "var(--dark-secondary-color)" : "var(--light-secondary-color)"
+                                    background: currentmode ? "var(--dark-secondary-color)" : "var(--light-secondary-color)",
+                                    gridTemplateColumns: "repeat(6,1fr)"
                                     }}>
                                         <p style={{color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>{b.serviceId}</p>
                                         <p style={{color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>{b.serviceName}</p>
+                                        <p style={{color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>{b.vipService ? "Vip" : "Regular"}</p>
                                         <p style={{color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>{b.serviceCode}</p>
                                         <p style={{color: currentmode ? "var(--light-secondary-color)" : "var(--dark-secondary-color)"}}>{b.serviceEWT}</p>
                                         <button onClick={() => selectedServiceDelete(b)} style={{

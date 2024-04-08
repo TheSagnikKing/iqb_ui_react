@@ -167,4 +167,9 @@
   .right_div_end {
     margin-top: 0px !important;
   }
+
+  .barber-single-join-quebarberserv-content{
+    width: 200vw !important;
+    grid-template-columns: 15rem 15rem  15rem 24rem 15rem 18rem !important;
+  }
 }
